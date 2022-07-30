@@ -13,6 +13,82 @@
 		C54BE4B42894866C0060A066 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4A22894866A0060A066 /* ContentView.swift */; };
 		C54BE4B52894866C0060A066 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C54BE4A32894866C0060A066 /* Assets.xcassets */; };
 		C54BE4B62894866C0060A066 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C54BE4A32894866C0060A066 /* Assets.xcassets */; };
+		C54BE4C928958F820060A066 /* Transformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4C128958F820060A066 /* Transformable.swift */; };
+		C54BE4CA28958F820060A066 /* Transformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4C128958F820060A066 /* Transformable.swift */; };
+		C54BE4CB28958F820060A066 /* Serialized.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4C228958F820060A066 /* Serialized.swift */; };
+		C54BE4CC28958F820060A066 /* Serialized.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4C228958F820060A066 /* Serialized.swift */; };
+		C54BE4CD28958F820060A066 /* DecodableProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4C328958F820060A066 /* DecodableProperty.swift */; };
+		C54BE4CE28958F820060A066 /* DecodableProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4C328958F820060A066 /* DecodableProperty.swift */; };
+		C54BE4CF28958F820060A066 /* SerializableDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4C428958F820060A066 /* SerializableDecodable.swift */; };
+		C54BE4D028958F820060A066 /* SerializableDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4C428958F820060A066 /* SerializableDecodable.swift */; };
+		C54BE4D128958F820060A066 /* SerializedCodingKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4C528958F820060A066 /* SerializedCodingKeys.swift */; };
+		C54BE4D228958F820060A066 /* SerializedCodingKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4C528958F820060A066 /* SerializedCodingKeys.swift */; };
+		C54BE4D328958F820060A066 /* EncodableProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4C628958F820060A066 /* EncodableProperty.swift */; };
+		C54BE4D428958F820060A066 /* EncodableProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4C628958F820060A066 /* EncodableProperty.swift */; };
+		C54BE4D528958F820060A066 /* SerializableEncodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4C728958F820060A066 /* SerializableEncodable.swift */; };
+		C54BE4D628958F820060A066 /* SerializableEncodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4C728958F820060A066 /* SerializableEncodable.swift */; };
+		C54BE4D728958F820060A066 /* SerializedTransformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4C828958F820060A066 /* SerializedTransformable.swift */; };
+		C54BE4D828958F820060A066 /* SerializedTransformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4C828958F820060A066 /* SerializedTransformable.swift */; };
+		C54BE4DF28958F910060A066 /* Primitive.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4DA28958F910060A066 /* Primitive.swift */; };
+		C54BE4E028958F910060A066 /* Primitive.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4DA28958F910060A066 /* Primitive.swift */; };
+		C54BE4E128958F910060A066 /* CycleBreaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4DB28958F910060A066 /* CycleBreaker.swift */; };
+		C54BE4E228958F910060A066 /* CycleBreaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4DB28958F910060A066 /* CycleBreaker.swift */; };
+		C54BE4E328958F910060A066 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4DC28958F910060A066 /* Box.swift */; };
+		C54BE4E428958F910060A066 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4DC28958F910060A066 /* Box.swift */; };
+		C54BE4E528958F910060A066 /* CyclicEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4DD28958F910060A066 /* CyclicEncoder.swift */; };
+		C54BE4E628958F910060A066 /* CyclicEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4DD28958F910060A066 /* CyclicEncoder.swift */; };
+		C54BE4E728958F910060A066 /* CyclicDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4DE28958F910060A066 /* CyclicDecoder.swift */; };
+		C54BE4E828958F910060A066 /* CyclicDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4DE28958F910060A066 /* CyclicDecoder.swift */; };
+		C54BE4EC28958FC70060A066 /* PersistentMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4EB28958FC70060A066 /* PersistentMemory.swift */; };
+		C54BE4ED28958FC70060A066 /* PersistentMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4EB28958FC70060A066 /* PersistentMemory.swift */; };
+		C54BE4F1289591320060A066 /* ObservedChangeReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4EF289591320060A066 /* ObservedChangeReceiver.swift */; };
+		C54BE4F2289591320060A066 /* ObservedChangeReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4EF289591320060A066 /* ObservedChangeReceiver.swift */; };
+		C54BE4F3289591320060A066 /* Observed.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4F0289591320060A066 /* Observed.swift */; };
+		C54BE4F4289591320060A066 /* Observed.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4F0289591320060A066 /* Observed.swift */; };
+		C54BE4FB289591440060A066 /* CGRect+Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4F6289591440060A066 /* CGRect+Functions.swift */; };
+		C54BE4FC289591440060A066 /* CGRect+Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4F6289591440060A066 /* CGRect+Functions.swift */; };
+		C54BE4FD289591440060A066 /* View+offset.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4F7289591440060A066 /* View+offset.swift */; };
+		C54BE4FE289591440060A066 /* View+offset.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4F7289591440060A066 /* View+offset.swift */; };
+		C54BE4FF289591440060A066 /* CGPoint+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4F8289591440060A066 /* CGPoint+Operators.swift */; };
+		C54BE500289591440060A066 /* CGPoint+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4F8289591440060A066 /* CGPoint+Operators.swift */; };
+		C54BE501289591440060A066 /* CGSize+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4F9289591440060A066 /* CGSize+Operators.swift */; };
+		C54BE502289591440060A066 /* CGSize+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4F9289591440060A066 /* CGSize+Operators.swift */; };
+		C54BE503289591440060A066 /* CGFloat+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4FA289591440060A066 /* CGFloat+Operators.swift */; };
+		C54BE504289591440060A066 /* CGFloat+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4FA289591440060A066 /* CGFloat+Operators.swift */; };
+		C54BE508289591530060A066 /* Set+asArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE506289591530060A066 /* Set+asArray.swift */; };
+		C54BE509289591530060A066 /* Set+asArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE506289591530060A066 /* Set+asArray.swift */; };
+		C54BE50A289591530060A066 /* Array+asSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE507289591530060A066 /* Array+asSet.swift */; };
+		C54BE50B289591530060A066 /* Array+asSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE507289591530060A066 /* Array+asSet.swift */; };
+		C54BE50E289591700060A066 /* MeasureSizeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE50D289591700060A066 /* MeasureSizeModifier.swift */; };
+		C54BE50F289591700060A066 /* MeasureSizeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE50D289591700060A066 /* MeasureSizeModifier.swift */; };
+		C54BE514289591840060A066 /* InjectedPropertyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE511289591840060A066 /* InjectedPropertyWrapper.swift */; };
+		C54BE515289591840060A066 /* InjectedPropertyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE511289591840060A066 /* InjectedPropertyWrapper.swift */; };
+		C54BE516289591840060A066 /* InjectionKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE512289591840060A066 /* InjectionKey.swift */; };
+		C54BE517289591840060A066 /* InjectionKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE512289591840060A066 /* InjectionKey.swift */; };
+		C54BE518289591840060A066 /* Injector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE513289591840060A066 /* Injector.swift */; };
+		C54BE519289591840060A066 /* Injector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE513289591840060A066 /* Injector.swift */; };
+		C54BE528289591950060A066 /* FetchedObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE51B289591950060A066 /* FetchedObjects.swift */; };
+		C54BE529289591950060A066 /* FetchedObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE51B289591950060A066 /* FetchedObjects.swift */; };
+		C54BE52A289591950060A066 /* DataFieldKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE51D289591950060A066 /* DataFieldKey.swift */; };
+		C54BE52B289591950060A066 /* DataFieldKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE51D289591950060A066 /* DataFieldKey.swift */; };
+		C54BE52C289591950060A066 /* PersistentCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE51F289591950060A066 /* PersistentCodable.swift */; };
+		C54BE52D289591950060A066 /* PersistentCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE51F289591950060A066 /* PersistentCodable.swift */; };
+		C54BE52E289591950060A066 /* PersistentValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE520289591950060A066 /* PersistentValue.swift */; };
+		C54BE52F289591950060A066 /* PersistentValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE520289591950060A066 /* PersistentValue.swift */; };
+		C54BE530289591950060A066 /* PersistentRelation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE521289591950060A066 /* PersistentRelation.swift */; };
+		C54BE531289591950060A066 /* PersistentRelation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE521289591950060A066 /* PersistentRelation.swift */; };
+		C54BE532289591950060A066 /* PersistentTransformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE522289591950060A066 /* PersistentTransformable.swift */; };
+		C54BE533289591950060A066 /* PersistentTransformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE522289591950060A066 /* PersistentTransformable.swift */; };
+		C54BE534289591950060A066 /* PersistentRawRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE523289591950060A066 /* PersistentRawRepresentable.swift */; };
+		C54BE535289591950060A066 /* PersistentRawRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE523289591950060A066 /* PersistentRawRepresentable.swift */; };
+		C54BE536289591950060A066 /* CustomTransformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE524289591950060A066 /* CustomTransformable.swift */; };
+		C54BE537289591950060A066 /* CustomTransformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE524289591950060A066 /* CustomTransformable.swift */; };
+		C54BE538289591950060A066 /* ManagedObjectContextChanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE525289591950060A066 /* ManagedObjectContextChanges.swift */; };
+		C54BE539289591950060A066 /* ManagedObjectContextChanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE525289591950060A066 /* ManagedObjectContextChanges.swift */; };
+		C54BE53A289591950060A066 /* NSManagedObjectContext+saveChanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE526289591950060A066 /* NSManagedObjectContext+saveChanges.swift */; };
+		C54BE53B289591950060A066 /* NSManagedObjectContext+saveChanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE526289591950060A066 /* NSManagedObjectContext+saveChanges.swift */; };
+		C54BE53C289591950060A066 /* NSPredicate+operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE527289591950060A066 /* NSPredicate+operators.swift */; };
+		C54BE53D289591950060A066 /* NSPredicate+operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE527289591950060A066 /* NSPredicate+operators.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +98,44 @@
 		C54BE4A82894866C0060A066 /* Hippocampus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hippocampus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C54BE4AE2894866C0060A066 /* Hippocampus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hippocampus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C54BE4B02894866C0060A066 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		C54BE4C128958F820060A066 /* Transformable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transformable.swift; sourceTree = "<group>"; };
+		C54BE4C228958F820060A066 /* Serialized.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serialized.swift; sourceTree = "<group>"; };
+		C54BE4C328958F820060A066 /* DecodableProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodableProperty.swift; sourceTree = "<group>"; };
+		C54BE4C428958F820060A066 /* SerializableDecodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerializableDecodable.swift; sourceTree = "<group>"; };
+		C54BE4C528958F820060A066 /* SerializedCodingKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerializedCodingKeys.swift; sourceTree = "<group>"; };
+		C54BE4C628958F820060A066 /* EncodableProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncodableProperty.swift; sourceTree = "<group>"; };
+		C54BE4C728958F820060A066 /* SerializableEncodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerializableEncodable.swift; sourceTree = "<group>"; };
+		C54BE4C828958F820060A066 /* SerializedTransformable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerializedTransformable.swift; sourceTree = "<group>"; };
+		C54BE4DA28958F910060A066 /* Primitive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Primitive.swift; sourceTree = "<group>"; };
+		C54BE4DB28958F910060A066 /* CycleBreaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CycleBreaker.swift; sourceTree = "<group>"; };
+		C54BE4DC28958F910060A066 /* Box.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
+		C54BE4DD28958F910060A066 /* CyclicEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CyclicEncoder.swift; sourceTree = "<group>"; };
+		C54BE4DE28958F910060A066 /* CyclicDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CyclicDecoder.swift; sourceTree = "<group>"; };
+		C54BE4EB28958FC70060A066 /* PersistentMemory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentMemory.swift; sourceTree = "<group>"; };
+		C54BE4EF289591320060A066 /* ObservedChangeReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservedChangeReceiver.swift; sourceTree = "<group>"; };
+		C54BE4F0289591320060A066 /* Observed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observed.swift; sourceTree = "<group>"; };
+		C54BE4F6289591440060A066 /* CGRect+Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+Functions.swift"; sourceTree = "<group>"; };
+		C54BE4F7289591440060A066 /* View+offset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+offset.swift"; sourceTree = "<group>"; };
+		C54BE4F8289591440060A066 /* CGPoint+Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Operators.swift"; sourceTree = "<group>"; };
+		C54BE4F9289591440060A066 /* CGSize+Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGSize+Operators.swift"; sourceTree = "<group>"; };
+		C54BE4FA289591440060A066 /* CGFloat+Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+Operators.swift"; sourceTree = "<group>"; };
+		C54BE506289591530060A066 /* Set+asArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Set+asArray.swift"; sourceTree = "<group>"; };
+		C54BE507289591530060A066 /* Array+asSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+asSet.swift"; sourceTree = "<group>"; };
+		C54BE50D289591700060A066 /* MeasureSizeModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasureSizeModifier.swift; sourceTree = "<group>"; };
+		C54BE511289591840060A066 /* InjectedPropertyWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InjectedPropertyWrapper.swift; sourceTree = "<group>"; };
+		C54BE512289591840060A066 /* InjectionKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InjectionKey.swift; sourceTree = "<group>"; };
+		C54BE513289591840060A066 /* Injector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Injector.swift; sourceTree = "<group>"; };
+		C54BE51B289591950060A066 /* FetchedObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedObjects.swift; sourceTree = "<group>"; };
+		C54BE51D289591950060A066 /* DataFieldKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataFieldKey.swift; sourceTree = "<group>"; };
+		C54BE51F289591950060A066 /* PersistentCodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentCodable.swift; sourceTree = "<group>"; };
+		C54BE520289591950060A066 /* PersistentValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentValue.swift; sourceTree = "<group>"; };
+		C54BE521289591950060A066 /* PersistentRelation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentRelation.swift; sourceTree = "<group>"; };
+		C54BE522289591950060A066 /* PersistentTransformable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentTransformable.swift; sourceTree = "<group>"; };
+		C54BE523289591950060A066 /* PersistentRawRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentRawRepresentable.swift; sourceTree = "<group>"; };
+		C54BE524289591950060A066 /* CustomTransformable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTransformable.swift; sourceTree = "<group>"; };
+		C54BE525289591950060A066 /* ManagedObjectContextChanges.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObjectContextChanges.swift; sourceTree = "<group>"; };
+		C54BE526289591950060A066 /* NSManagedObjectContext+saveChanges.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+saveChanges.swift"; sourceTree = "<group>"; };
+		C54BE527289591950060A066 /* NSPredicate+operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSPredicate+operators.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +159,7 @@
 		C54BE49B289486690060A066 = {
 			isa = PBXGroup;
 			children = (
+				C54BE4BF28958F470060A066 /* Framework */,
 				C54BE4A02894866A0060A066 /* Shared */,
 				C54BE4AF2894866C0060A066 /* macOS */,
 				C54BE4A92894866C0060A066 /* Products */,
@@ -76,6 +191,147 @@
 				C54BE4B02894866C0060A066 /* macOS.entitlements */,
 			);
 			path = macOS;
+			sourceTree = "<group>";
+		};
+		C54BE4BF28958F470060A066 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				C54BE51A289591950060A066 /* Core Data Technical */,
+				C54BE510289591830060A066 /* Dependency Injection */,
+				C54BE50C289591700060A066 /* SwiftUI Technical */,
+				C54BE505289591530060A066 /* Extensions */,
+				C54BE4F5289591440060A066 /* Core Graphics Technical */,
+				C54BE4EE289591320060A066 /* Model Observation */,
+				C54BE4EA28958FAD0060A066 /* Persistence */,
+			);
+			path = Framework;
+			sourceTree = "<group>";
+		};
+		C54BE4C028958F820060A066 /* SerializedSwift */ = {
+			isa = PBXGroup;
+			children = (
+				C54BE4C128958F820060A066 /* Transformable.swift */,
+				C54BE4C228958F820060A066 /* Serialized.swift */,
+				C54BE4C328958F820060A066 /* DecodableProperty.swift */,
+				C54BE4C428958F820060A066 /* SerializableDecodable.swift */,
+				C54BE4C528958F820060A066 /* SerializedCodingKeys.swift */,
+				C54BE4C628958F820060A066 /* EncodableProperty.swift */,
+				C54BE4C728958F820060A066 /* SerializableEncodable.swift */,
+				C54BE4C828958F820060A066 /* SerializedTransformable.swift */,
+			);
+			path = SerializedSwift;
+			sourceTree = "<group>";
+		};
+		C54BE4D928958F910060A066 /* CyclicCoding */ = {
+			isa = PBXGroup;
+			children = (
+				C54BE4DA28958F910060A066 /* Primitive.swift */,
+				C54BE4DB28958F910060A066 /* CycleBreaker.swift */,
+				C54BE4DC28958F910060A066 /* Box.swift */,
+				C54BE4DD28958F910060A066 /* CyclicEncoder.swift */,
+				C54BE4DE28958F910060A066 /* CyclicDecoder.swift */,
+			);
+			path = CyclicCoding;
+			sourceTree = "<group>";
+		};
+		C54BE4E928958F970060A066 /* Serialization */ = {
+			isa = PBXGroup;
+			children = (
+				C54BE4C028958F820060A066 /* SerializedSwift */,
+				C54BE4D928958F910060A066 /* CyclicCoding */,
+			);
+			path = Serialization;
+			sourceTree = "<group>";
+		};
+		C54BE4EA28958FAD0060A066 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				C54BE4E928958F970060A066 /* Serialization */,
+				C54BE4EB28958FC70060A066 /* PersistentMemory.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		C54BE4EE289591320060A066 /* Model Observation */ = {
+			isa = PBXGroup;
+			children = (
+				C54BE4EF289591320060A066 /* ObservedChangeReceiver.swift */,
+				C54BE4F0289591320060A066 /* Observed.swift */,
+			);
+			path = "Model Observation";
+			sourceTree = "<group>";
+		};
+		C54BE4F5289591440060A066 /* Core Graphics Technical */ = {
+			isa = PBXGroup;
+			children = (
+				C54BE4F6289591440060A066 /* CGRect+Functions.swift */,
+				C54BE4F7289591440060A066 /* View+offset.swift */,
+				C54BE4F8289591440060A066 /* CGPoint+Operators.swift */,
+				C54BE4F9289591440060A066 /* CGSize+Operators.swift */,
+				C54BE4FA289591440060A066 /* CGFloat+Operators.swift */,
+			);
+			path = "Core Graphics Technical";
+			sourceTree = "<group>";
+		};
+		C54BE505289591530060A066 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C54BE506289591530060A066 /* Set+asArray.swift */,
+				C54BE507289591530060A066 /* Array+asSet.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C54BE50C289591700060A066 /* SwiftUI Technical */ = {
+			isa = PBXGroup;
+			children = (
+				C54BE50D289591700060A066 /* MeasureSizeModifier.swift */,
+			);
+			path = "SwiftUI Technical";
+			sourceTree = "<group>";
+		};
+		C54BE510289591830060A066 /* Dependency Injection */ = {
+			isa = PBXGroup;
+			children = (
+				C54BE511289591840060A066 /* InjectedPropertyWrapper.swift */,
+				C54BE512289591840060A066 /* InjectionKey.swift */,
+				C54BE513289591840060A066 /* Injector.swift */,
+			);
+			path = "Dependency Injection";
+			sourceTree = "<group>";
+		};
+		C54BE51A289591950060A066 /* Core Data Technical */ = {
+			isa = PBXGroup;
+			children = (
+				C54BE51B289591950060A066 /* FetchedObjects.swift */,
+				C54BE51C289591950060A066 /* Object Properties */,
+				C54BE525289591950060A066 /* ManagedObjectContextChanges.swift */,
+				C54BE526289591950060A066 /* NSManagedObjectContext+saveChanges.swift */,
+				C54BE527289591950060A066 /* NSPredicate+operators.swift */,
+			);
+			path = "Core Data Technical";
+			sourceTree = "<group>";
+		};
+		C54BE51C289591950060A066 /* Object Properties */ = {
+			isa = PBXGroup;
+			children = (
+				C54BE51D289591950060A066 /* DataFieldKey.swift */,
+				C54BE51E289591950060A066 /* Property Wrappers */,
+				C54BE524289591950060A066 /* CustomTransformable.swift */,
+			);
+			path = "Object Properties";
+			sourceTree = "<group>";
+		};
+		C54BE51E289591950060A066 /* Property Wrappers */ = {
+			isa = PBXGroup;
+			children = (
+				C54BE51F289591950060A066 /* PersistentCodable.swift */,
+				C54BE520289591950060A066 /* PersistentValue.swift */,
+				C54BE521289591950060A066 /* PersistentRelation.swift */,
+				C54BE522289591950060A066 /* PersistentTransformable.swift */,
+				C54BE523289591950060A066 /* PersistentRawRepresentable.swift */,
+			);
+			path = "Property Wrappers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -176,8 +432,46 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C54BE52A289591950060A066 /* DataFieldKey.swift in Sources */,
+				C54BE4D728958F820060A066 /* SerializedTransformable.swift in Sources */,
+				C54BE52E289591950060A066 /* PersistentValue.swift in Sources */,
+				C54BE4F3289591320060A066 /* Observed.swift in Sources */,
+				C54BE4F1289591320060A066 /* ObservedChangeReceiver.swift in Sources */,
+				C54BE532289591950060A066 /* PersistentTransformable.swift in Sources */,
+				C54BE503289591440060A066 /* CGFloat+Operators.swift in Sources */,
+				C54BE4E128958F910060A066 /* CycleBreaker.swift in Sources */,
 				C54BE4B32894866C0060A066 /* ContentView.swift in Sources */,
+				C54BE4D128958F820060A066 /* SerializedCodingKeys.swift in Sources */,
+				C54BE53C289591950060A066 /* NSPredicate+operators.swift in Sources */,
+				C54BE4DF28958F910060A066 /* Primitive.swift in Sources */,
+				C54BE528289591950060A066 /* FetchedObjects.swift in Sources */,
+				C54BE50E289591700060A066 /* MeasureSizeModifier.swift in Sources */,
+				C54BE4FF289591440060A066 /* CGPoint+Operators.swift in Sources */,
+				C54BE4C928958F820060A066 /* Transformable.swift in Sources */,
+				C54BE52C289591950060A066 /* PersistentCodable.swift in Sources */,
+				C54BE4FB289591440060A066 /* CGRect+Functions.swift in Sources */,
+				C54BE4E328958F910060A066 /* Box.swift in Sources */,
+				C54BE538289591950060A066 /* ManagedObjectContextChanges.swift in Sources */,
+				C54BE50A289591530060A066 /* Array+asSet.swift in Sources */,
+				C54BE536289591950060A066 /* CustomTransformable.swift in Sources */,
+				C54BE514289591840060A066 /* InjectedPropertyWrapper.swift in Sources */,
+				C54BE4CF28958F820060A066 /* SerializableDecodable.swift in Sources */,
+				C54BE530289591950060A066 /* PersistentRelation.swift in Sources */,
+				C54BE4D328958F820060A066 /* EncodableProperty.swift in Sources */,
+				C54BE508289591530060A066 /* Set+asArray.swift in Sources */,
+				C54BE534289591950060A066 /* PersistentRawRepresentable.swift in Sources */,
+				C54BE4D528958F820060A066 /* SerializableEncodable.swift in Sources */,
 				C54BE4B12894866C0060A066 /* HippocampusApp.swift in Sources */,
+				C54BE4CB28958F820060A066 /* Serialized.swift in Sources */,
+				C54BE501289591440060A066 /* CGSize+Operators.swift in Sources */,
+				C54BE4CD28958F820060A066 /* DecodableProperty.swift in Sources */,
+				C54BE4E728958F910060A066 /* CyclicDecoder.swift in Sources */,
+				C54BE53A289591950060A066 /* NSManagedObjectContext+saveChanges.swift in Sources */,
+				C54BE4FD289591440060A066 /* View+offset.swift in Sources */,
+				C54BE516289591840060A066 /* InjectionKey.swift in Sources */,
+				C54BE518289591840060A066 /* Injector.swift in Sources */,
+				C54BE4EC28958FC70060A066 /* PersistentMemory.swift in Sources */,
+				C54BE4E528958F910060A066 /* CyclicEncoder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,8 +479,46 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C54BE52B289591950060A066 /* DataFieldKey.swift in Sources */,
+				C54BE4D828958F820060A066 /* SerializedTransformable.swift in Sources */,
+				C54BE52F289591950060A066 /* PersistentValue.swift in Sources */,
+				C54BE4F4289591320060A066 /* Observed.swift in Sources */,
+				C54BE4F2289591320060A066 /* ObservedChangeReceiver.swift in Sources */,
+				C54BE533289591950060A066 /* PersistentTransformable.swift in Sources */,
+				C54BE504289591440060A066 /* CGFloat+Operators.swift in Sources */,
+				C54BE4E228958F910060A066 /* CycleBreaker.swift in Sources */,
 				C54BE4B42894866C0060A066 /* ContentView.swift in Sources */,
+				C54BE4D228958F820060A066 /* SerializedCodingKeys.swift in Sources */,
+				C54BE53D289591950060A066 /* NSPredicate+operators.swift in Sources */,
+				C54BE4E028958F910060A066 /* Primitive.swift in Sources */,
+				C54BE529289591950060A066 /* FetchedObjects.swift in Sources */,
+				C54BE50F289591700060A066 /* MeasureSizeModifier.swift in Sources */,
+				C54BE500289591440060A066 /* CGPoint+Operators.swift in Sources */,
+				C54BE4CA28958F820060A066 /* Transformable.swift in Sources */,
+				C54BE52D289591950060A066 /* PersistentCodable.swift in Sources */,
+				C54BE4FC289591440060A066 /* CGRect+Functions.swift in Sources */,
+				C54BE4E428958F910060A066 /* Box.swift in Sources */,
+				C54BE539289591950060A066 /* ManagedObjectContextChanges.swift in Sources */,
+				C54BE50B289591530060A066 /* Array+asSet.swift in Sources */,
+				C54BE537289591950060A066 /* CustomTransformable.swift in Sources */,
+				C54BE515289591840060A066 /* InjectedPropertyWrapper.swift in Sources */,
+				C54BE4D028958F820060A066 /* SerializableDecodable.swift in Sources */,
+				C54BE531289591950060A066 /* PersistentRelation.swift in Sources */,
+				C54BE4D428958F820060A066 /* EncodableProperty.swift in Sources */,
+				C54BE509289591530060A066 /* Set+asArray.swift in Sources */,
+				C54BE535289591950060A066 /* PersistentRawRepresentable.swift in Sources */,
+				C54BE4D628958F820060A066 /* SerializableEncodable.swift in Sources */,
 				C54BE4B22894866C0060A066 /* HippocampusApp.swift in Sources */,
+				C54BE4CC28958F820060A066 /* Serialized.swift in Sources */,
+				C54BE502289591440060A066 /* CGSize+Operators.swift in Sources */,
+				C54BE4CE28958F820060A066 /* DecodableProperty.swift in Sources */,
+				C54BE4E828958F910060A066 /* CyclicDecoder.swift in Sources */,
+				C54BE53B289591950060A066 /* NSManagedObjectContext+saveChanges.swift in Sources */,
+				C54BE4FE289591440060A066 /* View+offset.swift in Sources */,
+				C54BE517289591840060A066 /* InjectionKey.swift in Sources */,
+				C54BE519289591840060A066 /* Injector.swift in Sources */,
+				C54BE4ED28958FC70060A066 /* PersistentMemory.swift in Sources */,
+				C54BE4E628958F910060A066 /* CyclicEncoder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
