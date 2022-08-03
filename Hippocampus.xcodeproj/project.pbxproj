@@ -39,8 +39,8 @@
 		C54BE4E628958F910060A066 /* CyclicEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4DD28958F910060A066 /* CyclicEncoder.swift */; };
 		C54BE4E728958F910060A066 /* CyclicDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4DE28958F910060A066 /* CyclicDecoder.swift */; };
 		C54BE4E828958F910060A066 /* CyclicDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4DE28958F910060A066 /* CyclicDecoder.swift */; };
-		C54BE4EC28958FC70060A066 /* PersistentMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4EB28958FC70060A066 /* PersistentMemory.swift */; };
-		C54BE4ED28958FC70060A066 /* PersistentMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4EB28958FC70060A066 /* PersistentMemory.swift */; };
+		C54BE4EC28958FC70060A066 /* PersistentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4EB28958FC70060A066 /* PersistentData.swift */; };
+		C54BE4ED28958FC70060A066 /* PersistentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4EB28958FC70060A066 /* PersistentData.swift */; };
 		C54BE4F1289591320060A066 /* ObservedChangeReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4EF289591320060A066 /* ObservedChangeReceiver.swift */; };
 		C54BE4F2289591320060A066 /* ObservedChangeReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4EF289591320060A066 /* ObservedChangeReceiver.swift */; };
 		C54BE4F3289591320060A066 /* Observed.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4F0289591320060A066 /* Observed.swift */; };
@@ -67,28 +67,32 @@
 		C54BE517289591840060A066 /* InjectionKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE512289591840060A066 /* InjectionKey.swift */; };
 		C54BE518289591840060A066 /* Injector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE513289591840060A066 /* Injector.swift */; };
 		C54BE519289591840060A066 /* Injector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE513289591840060A066 /* Injector.swift */; };
-		C54BE528289591950060A066 /* FetchedObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE51B289591950060A066 /* FetchedObjects.swift */; };
-		C54BE529289591950060A066 /* FetchedObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE51B289591950060A066 /* FetchedObjects.swift */; };
-		C54BE52A289591950060A066 /* DataFieldKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE51D289591950060A066 /* DataFieldKey.swift */; };
-		C54BE52B289591950060A066 /* DataFieldKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE51D289591950060A066 /* DataFieldKey.swift */; };
-		C54BE52C289591950060A066 /* PersistentCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE51F289591950060A066 /* PersistentCodable.swift */; };
-		C54BE52D289591950060A066 /* PersistentCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE51F289591950060A066 /* PersistentCodable.swift */; };
-		C54BE52E289591950060A066 /* PersistentValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE520289591950060A066 /* PersistentValue.swift */; };
-		C54BE52F289591950060A066 /* PersistentValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE520289591950060A066 /* PersistentValue.swift */; };
-		C54BE530289591950060A066 /* PersistentRelation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE521289591950060A066 /* PersistentRelation.swift */; };
-		C54BE531289591950060A066 /* PersistentRelation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE521289591950060A066 /* PersistentRelation.swift */; };
-		C54BE532289591950060A066 /* PersistentTransformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE522289591950060A066 /* PersistentTransformable.swift */; };
-		C54BE533289591950060A066 /* PersistentTransformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE522289591950060A066 /* PersistentTransformable.swift */; };
-		C54BE534289591950060A066 /* PersistentRawRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE523289591950060A066 /* PersistentRawRepresentable.swift */; };
-		C54BE535289591950060A066 /* PersistentRawRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE523289591950060A066 /* PersistentRawRepresentable.swift */; };
-		C54BE536289591950060A066 /* CustomTransformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE524289591950060A066 /* CustomTransformable.swift */; };
-		C54BE537289591950060A066 /* CustomTransformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE524289591950060A066 /* CustomTransformable.swift */; };
-		C54BE538289591950060A066 /* ManagedObjectContextChanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE525289591950060A066 /* ManagedObjectContextChanges.swift */; };
-		C54BE539289591950060A066 /* ManagedObjectContextChanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE525289591950060A066 /* ManagedObjectContextChanges.swift */; };
-		C54BE53A289591950060A066 /* NSManagedObjectContext+saveChanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE526289591950060A066 /* NSManagedObjectContext+saveChanges.swift */; };
-		C54BE53B289591950060A066 /* NSManagedObjectContext+saveChanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE526289591950060A066 /* NSManagedObjectContext+saveChanges.swift */; };
 		C54BE53C289591950060A066 /* NSPredicate+operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE527289591950060A066 /* NSPredicate+operators.swift */; };
 		C54BE53D289591950060A066 /* NSPredicate+operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE527289591950060A066 /* NSPredicate+operators.swift */; };
+		C54BE5402895C46C0060A066 /* Brain.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE53F2895C46C0060A066 /* Brain.swift */; };
+		C54BE5412895C46C0060A066 /* Brain.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE53F2895C46C0060A066 /* Brain.swift */; };
+		C54BE5432895DB180060A066 /* Brain.Synapse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE5422895DB180060A066 /* Brain.Synapse.swift */; };
+		C54BE5442895DB180060A066 /* Brain.Synapse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE5422895DB180060A066 /* Brain.Synapse.swift */; };
+		C54BE5462895DB3C0060A066 /* Brain.Neuron.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE5452895DB3B0060A066 /* Brain.Neuron.swift */; };
+		C54BE5472895DB3C0060A066 /* Brain.Neuron.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE5452895DB3B0060A066 /* Brain.Neuron.swift */; };
+		C54BE54A2895DCEA0060A066 /* Brain.Area.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE5492895DCEA0060A066 /* Brain.Area.swift */; };
+		C54BE54B2895DCEA0060A066 /* Brain.Area.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE5492895DCEA0060A066 /* Brain.Area.swift */; };
+		C54BE54D289602980060A066 /* Consciousness.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE54C289602980060A066 /* Consciousness.swift */; };
+		C54BE54E289602980060A066 /* Consciousness.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE54C289602980060A066 /* Consciousness.swift */; };
+		C54BE55128960EF10060A066 /* SelectAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE55028960EF10060A066 /* SelectAreaView.swift */; };
+		C54BE55228960EF10060A066 /* SelectAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE55028960EF10060A066 /* SelectAreaView.swift */; };
+		C54BE554289610A00060A066 /* ShowAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE553289610A00060A066 /* ShowAreaView.swift */; };
+		C54BE555289610A00060A066 /* ShowAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE553289610A00060A066 /* ShowAreaView.swift */; };
+		C54BE55A289698990060A066 /* View+If.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE559289698990060A066 /* View+If.swift */; };
+		C54BE55B289698990060A066 /* View+If.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE559289698990060A066 /* View+If.swift */; };
+		C54BE56028986F540060A066 /* Consciousness+preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE55F28986F540060A066 /* Consciousness+preview.swift */; };
+		C54BE56128986F540060A066 /* Consciousness+preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE55F28986F540060A066 /* Consciousness+preview.swift */; };
+		C54BE566289884CE0060A066 /* Brain.Aspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE565289884CE0060A066 /* Brain.Aspect.swift */; };
+		C54BE567289884CE0060A066 /* Brain.Aspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE565289884CE0060A066 /* Brain.Aspect.swift */; };
+		C54BE5692898852E0060A066 /* Brain.Perspective.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE5682898852E0060A066 /* Brain.Perspective.swift */; };
+		C54BE56A2898852E0060A066 /* Brain.Perspective.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE5682898852E0060A066 /* Brain.Perspective.swift */; };
+		C54BE56C289889EB0060A066 /* Brain.Information.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE56B289889EB0060A066 /* Brain.Information.swift */; };
+		C54BE56D289889EB0060A066 /* Brain.Information.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE56B289889EB0060A066 /* Brain.Information.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -111,7 +115,7 @@
 		C54BE4DC28958F910060A066 /* Box.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
 		C54BE4DD28958F910060A066 /* CyclicEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CyclicEncoder.swift; sourceTree = "<group>"; };
 		C54BE4DE28958F910060A066 /* CyclicDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CyclicDecoder.swift; sourceTree = "<group>"; };
-		C54BE4EB28958FC70060A066 /* PersistentMemory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentMemory.swift; sourceTree = "<group>"; };
+		C54BE4EB28958FC70060A066 /* PersistentData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentData.swift; sourceTree = "<group>"; };
 		C54BE4EF289591320060A066 /* ObservedChangeReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservedChangeReceiver.swift; sourceTree = "<group>"; };
 		C54BE4F0289591320060A066 /* Observed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observed.swift; sourceTree = "<group>"; };
 		C54BE4F6289591440060A066 /* CGRect+Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+Functions.swift"; sourceTree = "<group>"; };
@@ -125,17 +129,22 @@
 		C54BE511289591840060A066 /* InjectedPropertyWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InjectedPropertyWrapper.swift; sourceTree = "<group>"; };
 		C54BE512289591840060A066 /* InjectionKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InjectionKey.swift; sourceTree = "<group>"; };
 		C54BE513289591840060A066 /* Injector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Injector.swift; sourceTree = "<group>"; };
-		C54BE51B289591950060A066 /* FetchedObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedObjects.swift; sourceTree = "<group>"; };
-		C54BE51D289591950060A066 /* DataFieldKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataFieldKey.swift; sourceTree = "<group>"; };
-		C54BE51F289591950060A066 /* PersistentCodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentCodable.swift; sourceTree = "<group>"; };
-		C54BE520289591950060A066 /* PersistentValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentValue.swift; sourceTree = "<group>"; };
-		C54BE521289591950060A066 /* PersistentRelation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentRelation.swift; sourceTree = "<group>"; };
-		C54BE522289591950060A066 /* PersistentTransformable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentTransformable.swift; sourceTree = "<group>"; };
-		C54BE523289591950060A066 /* PersistentRawRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentRawRepresentable.swift; sourceTree = "<group>"; };
-		C54BE524289591950060A066 /* CustomTransformable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTransformable.swift; sourceTree = "<group>"; };
-		C54BE525289591950060A066 /* ManagedObjectContextChanges.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObjectContextChanges.swift; sourceTree = "<group>"; };
-		C54BE526289591950060A066 /* NSManagedObjectContext+saveChanges.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+saveChanges.swift"; sourceTree = "<group>"; };
 		C54BE527289591950060A066 /* NSPredicate+operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSPredicate+operators.swift"; sourceTree = "<group>"; };
+		C54BE53F2895C46C0060A066 /* Brain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brain.swift; sourceTree = "<group>"; };
+		C54BE5422895DB180060A066 /* Brain.Synapse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brain.Synapse.swift; sourceTree = "<group>"; };
+		C54BE5452895DB3B0060A066 /* Brain.Neuron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brain.Neuron.swift; sourceTree = "<group>"; };
+		C54BE5492895DCEA0060A066 /* Brain.Area.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brain.Area.swift; sourceTree = "<group>"; };
+		C54BE54C289602980060A066 /* Consciousness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consciousness.swift; sourceTree = "<group>"; };
+		C54BE55028960EF10060A066 /* SelectAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAreaView.swift; sourceTree = "<group>"; };
+		C54BE553289610A00060A066 /* ShowAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAreaView.swift; sourceTree = "<group>"; };
+		C54BE556289616680060A066 /* Hippocampus (iOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Hippocampus (iOS).entitlements"; sourceTree = "<group>"; };
+		C54BE557289617140060A066 /* Hippocampus--macOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Hippocampus--macOS--Info.plist"; sourceTree = "<group>"; };
+		C54BE558289618300060A066 /* Hippocampus--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Hippocampus--iOS--Info.plist"; sourceTree = "<group>"; };
+		C54BE559289698990060A066 /* View+If.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+If.swift"; sourceTree = "<group>"; };
+		C54BE55F28986F540060A066 /* Consciousness+preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Consciousness+preview.swift"; sourceTree = "<group>"; };
+		C54BE565289884CE0060A066 /* Brain.Aspect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brain.Aspect.swift; sourceTree = "<group>"; };
+		C54BE5682898852E0060A066 /* Brain.Perspective.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brain.Perspective.swift; sourceTree = "<group>"; };
+		C54BE56B289889EB0060A066 /* Brain.Information.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brain.Information.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +168,9 @@
 		C54BE49B289486690060A066 = {
 			isa = PBXGroup;
 			children = (
+				C54BE558289618300060A066 /* Hippocampus--iOS--Info.plist */,
+				C54BE557289617140060A066 /* Hippocampus--macOS--Info.plist */,
+				C54BE556289616680060A066 /* Hippocampus (iOS).entitlements */,
 				C54BE4BF28958F470060A066 /* Framework */,
 				C54BE4A02894866A0060A066 /* Shared */,
 				C54BE4AF2894866C0060A066 /* macOS */,
@@ -169,8 +181,8 @@
 		C54BE4A02894866A0060A066 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				C54BE4A12894866A0060A066 /* HippocampusApp.swift */,
-				C54BE4A22894866A0060A066 /* ContentView.swift */,
+				C54BE5482895DCD50060A066 /* App Layer */,
+				C54BE53E2895C4500060A066 /* Brain Layer */,
 				C54BE4A32894866C0060A066 /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -196,7 +208,6 @@
 		C54BE4BF28958F470060A066 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
-				C54BE51A289591950060A066 /* Core Data Technical */,
 				C54BE510289591830060A066 /* Dependency Injection */,
 				C54BE50C289591700060A066 /* SwiftUI Technical */,
 				C54BE505289591530060A066 /* Extensions */,
@@ -247,7 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				C54BE4E928958F970060A066 /* Serialization */,
-				C54BE4EB28958FC70060A066 /* PersistentMemory.swift */,
+				C54BE4EB28958FC70060A066 /* PersistentData.swift */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -276,6 +287,7 @@
 		C54BE505289591530060A066 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				C54BE527289591950060A066 /* NSPredicate+operators.swift */,
 				C54BE506289591530060A066 /* Set+asArray.swift */,
 				C54BE507289591530060A066 /* Array+asSet.swift */,
 			);
@@ -286,6 +298,7 @@
 			isa = PBXGroup;
 			children = (
 				C54BE50D289591700060A066 /* MeasureSizeModifier.swift */,
+				C54BE559289698990060A066 /* View+If.swift */,
 			);
 			path = "SwiftUI Technical";
 			sourceTree = "<group>";
@@ -300,38 +313,31 @@
 			path = "Dependency Injection";
 			sourceTree = "<group>";
 		};
-		C54BE51A289591950060A066 /* Core Data Technical */ = {
+		C54BE53E2895C4500060A066 /* Brain Layer */ = {
 			isa = PBXGroup;
 			children = (
-				C54BE51B289591950060A066 /* FetchedObjects.swift */,
-				C54BE51C289591950060A066 /* Object Properties */,
-				C54BE525289591950060A066 /* ManagedObjectContextChanges.swift */,
-				C54BE526289591950060A066 /* NSManagedObjectContext+saveChanges.swift */,
-				C54BE527289591950060A066 /* NSPredicate+operators.swift */,
+				C54BE53F2895C46C0060A066 /* Brain.swift */,
+				C54BE565289884CE0060A066 /* Brain.Aspect.swift */,
+				C54BE56B289889EB0060A066 /* Brain.Information.swift */,
+				C54BE5682898852E0060A066 /* Brain.Perspective.swift */,
+				C54BE5492895DCEA0060A066 /* Brain.Area.swift */,
+				C54BE5422895DB180060A066 /* Brain.Synapse.swift */,
+				C54BE5452895DB3B0060A066 /* Brain.Neuron.swift */,
 			);
-			path = "Core Data Technical";
+			path = "Brain Layer";
 			sourceTree = "<group>";
 		};
-		C54BE51C289591950060A066 /* Object Properties */ = {
+		C54BE5482895DCD50060A066 /* App Layer */ = {
 			isa = PBXGroup;
 			children = (
-				C54BE51D289591950060A066 /* DataFieldKey.swift */,
-				C54BE51E289591950060A066 /* Property Wrappers */,
-				C54BE524289591950060A066 /* CustomTransformable.swift */,
+				C54BE54C289602980060A066 /* Consciousness.swift */,
+				C54BE55F28986F540060A066 /* Consciousness+preview.swift */,
+				C54BE4A12894866A0060A066 /* HippocampusApp.swift */,
+				C54BE4A22894866A0060A066 /* ContentView.swift */,
+				C54BE55028960EF10060A066 /* SelectAreaView.swift */,
+				C54BE553289610A00060A066 /* ShowAreaView.swift */,
 			);
-			path = "Object Properties";
-			sourceTree = "<group>";
-		};
-		C54BE51E289591950060A066 /* Property Wrappers */ = {
-			isa = PBXGroup;
-			children = (
-				C54BE51F289591950060A066 /* PersistentCodable.swift */,
-				C54BE520289591950060A066 /* PersistentValue.swift */,
-				C54BE521289591950060A066 /* PersistentRelation.swift */,
-				C54BE522289591950060A066 /* PersistentTransformable.swift */,
-				C54BE523289591950060A066 /* PersistentRawRepresentable.swift */,
-			);
-			path = "Property Wrappers";
+			path = "App Layer";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -432,46 +438,48 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C54BE52A289591950060A066 /* DataFieldKey.swift in Sources */,
 				C54BE4D728958F820060A066 /* SerializedTransformable.swift in Sources */,
-				C54BE52E289591950060A066 /* PersistentValue.swift in Sources */,
+				C54BE554289610A00060A066 /* ShowAreaView.swift in Sources */,
 				C54BE4F3289591320060A066 /* Observed.swift in Sources */,
 				C54BE4F1289591320060A066 /* ObservedChangeReceiver.swift in Sources */,
-				C54BE532289591950060A066 /* PersistentTransformable.swift in Sources */,
 				C54BE503289591440060A066 /* CGFloat+Operators.swift in Sources */,
 				C54BE4E128958F910060A066 /* CycleBreaker.swift in Sources */,
 				C54BE4B32894866C0060A066 /* ContentView.swift in Sources */,
 				C54BE4D128958F820060A066 /* SerializedCodingKeys.swift in Sources */,
 				C54BE53C289591950060A066 /* NSPredicate+operators.swift in Sources */,
 				C54BE4DF28958F910060A066 /* Primitive.swift in Sources */,
-				C54BE528289591950060A066 /* FetchedObjects.swift in Sources */,
+				C54BE5462895DB3C0060A066 /* Brain.Neuron.swift in Sources */,
 				C54BE50E289591700060A066 /* MeasureSizeModifier.swift in Sources */,
+				C54BE56C289889EB0060A066 /* Brain.Information.swift in Sources */,
 				C54BE4FF289591440060A066 /* CGPoint+Operators.swift in Sources */,
+				C54BE54D289602980060A066 /* Consciousness.swift in Sources */,
+				C54BE55128960EF10060A066 /* SelectAreaView.swift in Sources */,
+				C54BE5432895DB180060A066 /* Brain.Synapse.swift in Sources */,
 				C54BE4C928958F820060A066 /* Transformable.swift in Sources */,
-				C54BE52C289591950060A066 /* PersistentCodable.swift in Sources */,
+				C54BE5692898852E0060A066 /* Brain.Perspective.swift in Sources */,
 				C54BE4FB289591440060A066 /* CGRect+Functions.swift in Sources */,
 				C54BE4E328958F910060A066 /* Box.swift in Sources */,
-				C54BE538289591950060A066 /* ManagedObjectContextChanges.swift in Sources */,
 				C54BE50A289591530060A066 /* Array+asSet.swift in Sources */,
-				C54BE536289591950060A066 /* CustomTransformable.swift in Sources */,
 				C54BE514289591840060A066 /* InjectedPropertyWrapper.swift in Sources */,
 				C54BE4CF28958F820060A066 /* SerializableDecodable.swift in Sources */,
-				C54BE530289591950060A066 /* PersistentRelation.swift in Sources */,
 				C54BE4D328958F820060A066 /* EncodableProperty.swift in Sources */,
+				C54BE566289884CE0060A066 /* Brain.Aspect.swift in Sources */,
 				C54BE508289591530060A066 /* Set+asArray.swift in Sources */,
-				C54BE534289591950060A066 /* PersistentRawRepresentable.swift in Sources */,
 				C54BE4D528958F820060A066 /* SerializableEncodable.swift in Sources */,
 				C54BE4B12894866C0060A066 /* HippocampusApp.swift in Sources */,
 				C54BE4CB28958F820060A066 /* Serialized.swift in Sources */,
+				C54BE5402895C46C0060A066 /* Brain.swift in Sources */,
+				C54BE56028986F540060A066 /* Consciousness+preview.swift in Sources */,
 				C54BE501289591440060A066 /* CGSize+Operators.swift in Sources */,
 				C54BE4CD28958F820060A066 /* DecodableProperty.swift in Sources */,
 				C54BE4E728958F910060A066 /* CyclicDecoder.swift in Sources */,
-				C54BE53A289591950060A066 /* NSManagedObjectContext+saveChanges.swift in Sources */,
+				C54BE54A2895DCEA0060A066 /* Brain.Area.swift in Sources */,
 				C54BE4FD289591440060A066 /* View+offset.swift in Sources */,
 				C54BE516289591840060A066 /* InjectionKey.swift in Sources */,
 				C54BE518289591840060A066 /* Injector.swift in Sources */,
-				C54BE4EC28958FC70060A066 /* PersistentMemory.swift in Sources */,
+				C54BE4EC28958FC70060A066 /* PersistentData.swift in Sources */,
 				C54BE4E528958F910060A066 /* CyclicEncoder.swift in Sources */,
+				C54BE55A289698990060A066 /* View+If.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,46 +487,48 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C54BE52B289591950060A066 /* DataFieldKey.swift in Sources */,
 				C54BE4D828958F820060A066 /* SerializedTransformable.swift in Sources */,
-				C54BE52F289591950060A066 /* PersistentValue.swift in Sources */,
+				C54BE555289610A00060A066 /* ShowAreaView.swift in Sources */,
 				C54BE4F4289591320060A066 /* Observed.swift in Sources */,
 				C54BE4F2289591320060A066 /* ObservedChangeReceiver.swift in Sources */,
-				C54BE533289591950060A066 /* PersistentTransformable.swift in Sources */,
 				C54BE504289591440060A066 /* CGFloat+Operators.swift in Sources */,
 				C54BE4E228958F910060A066 /* CycleBreaker.swift in Sources */,
 				C54BE4B42894866C0060A066 /* ContentView.swift in Sources */,
 				C54BE4D228958F820060A066 /* SerializedCodingKeys.swift in Sources */,
 				C54BE53D289591950060A066 /* NSPredicate+operators.swift in Sources */,
 				C54BE4E028958F910060A066 /* Primitive.swift in Sources */,
-				C54BE529289591950060A066 /* FetchedObjects.swift in Sources */,
+				C54BE5472895DB3C0060A066 /* Brain.Neuron.swift in Sources */,
 				C54BE50F289591700060A066 /* MeasureSizeModifier.swift in Sources */,
+				C54BE56D289889EB0060A066 /* Brain.Information.swift in Sources */,
 				C54BE500289591440060A066 /* CGPoint+Operators.swift in Sources */,
+				C54BE54E289602980060A066 /* Consciousness.swift in Sources */,
+				C54BE55228960EF10060A066 /* SelectAreaView.swift in Sources */,
+				C54BE5442895DB180060A066 /* Brain.Synapse.swift in Sources */,
 				C54BE4CA28958F820060A066 /* Transformable.swift in Sources */,
-				C54BE52D289591950060A066 /* PersistentCodable.swift in Sources */,
+				C54BE56A2898852E0060A066 /* Brain.Perspective.swift in Sources */,
 				C54BE4FC289591440060A066 /* CGRect+Functions.swift in Sources */,
 				C54BE4E428958F910060A066 /* Box.swift in Sources */,
-				C54BE539289591950060A066 /* ManagedObjectContextChanges.swift in Sources */,
 				C54BE50B289591530060A066 /* Array+asSet.swift in Sources */,
-				C54BE537289591950060A066 /* CustomTransformable.swift in Sources */,
 				C54BE515289591840060A066 /* InjectedPropertyWrapper.swift in Sources */,
 				C54BE4D028958F820060A066 /* SerializableDecodable.swift in Sources */,
-				C54BE531289591950060A066 /* PersistentRelation.swift in Sources */,
 				C54BE4D428958F820060A066 /* EncodableProperty.swift in Sources */,
+				C54BE567289884CE0060A066 /* Brain.Aspect.swift in Sources */,
 				C54BE509289591530060A066 /* Set+asArray.swift in Sources */,
-				C54BE535289591950060A066 /* PersistentRawRepresentable.swift in Sources */,
 				C54BE4D628958F820060A066 /* SerializableEncodable.swift in Sources */,
 				C54BE4B22894866C0060A066 /* HippocampusApp.swift in Sources */,
 				C54BE4CC28958F820060A066 /* Serialized.swift in Sources */,
+				C54BE5412895C46C0060A066 /* Brain.swift in Sources */,
+				C54BE56128986F540060A066 /* Consciousness+preview.swift in Sources */,
 				C54BE502289591440060A066 /* CGSize+Operators.swift in Sources */,
 				C54BE4CE28958F820060A066 /* DecodableProperty.swift in Sources */,
 				C54BE4E828958F910060A066 /* CyclicDecoder.swift in Sources */,
-				C54BE53B289591950060A066 /* NSManagedObjectContext+saveChanges.swift in Sources */,
+				C54BE54B2895DCEA0060A066 /* Brain.Area.swift in Sources */,
 				C54BE4FE289591440060A066 /* View+offset.swift in Sources */,
 				C54BE517289591840060A066 /* InjectionKey.swift in Sources */,
 				C54BE519289591840060A066 /* Injector.swift in Sources */,
-				C54BE4ED28958FC70060A066 /* PersistentMemory.swift in Sources */,
+				C54BE4ED28958FC70060A066 /* PersistentData.swift in Sources */,
 				C54BE4E628958F910060A066 /* CyclicEncoder.swift in Sources */,
+				C54BE55B289698990060A066 /* View+If.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -639,11 +649,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Hippocampus (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6Z37VA2PZL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Hippocampus--iOS--Info.plist";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -669,11 +682,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Hippocampus (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6Z37VA2PZL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Hippocampus--iOS--Info.plist";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -703,11 +719,13 @@
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 6Z37VA2PZL;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Hippocampus--macOS--Info.plist";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -731,11 +749,13 @@
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 6Z37VA2PZL;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Hippocampus--macOS--Info.plist";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

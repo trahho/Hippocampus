@@ -30,7 +30,7 @@ class Observed<Value: ObservableObject> {
     ///
     /// - Parameters:
     ///     - wrappedValue: The declared value
-    @inlinable public init(wrappedValue thunk: @autoclosure @escaping () -> Value) {
+    @inlinable public init(wrappedValue thunk: @autoclosure @escaping Initializer) {
         initialValue = thunk
     }
 

@@ -8,12 +8,17 @@
 import Combine
 import Foundation
 
-class PersistentMemory<Content: Serializable>: ObservableObject {
-    static var containerUrl: URL {
-        FileManager.default.url(forUbiquityContainerIdentifier: nil)!
-            .appendingPathComponent("Documents")
+extension URL {
+    var isVirtual: Bool {
+        scheme == "virtual"
     }
 
+    static func virtual() -> URL {
+        URL(string: "virtual:///")!
+    }
+}
+
+class PersistentData<Content: Serializable>: ObservableObject {
     let url: URL
     private var currentTimestamp: Date = .distantPast
     private let metadataQuery = NSMetadataQuery()
@@ -38,7 +43,7 @@ class PersistentMemory<Content: Serializable>: ObservableObject {
     }
 
     func commit() {
-        guard let data = encode() else { return }
+        guard let data = encode(), !url.isVirtual else { return }
 
         metadataQuery.stop()
         let directory = url.deletingLastPathComponent()
@@ -59,6 +64,7 @@ class PersistentMemory<Content: Serializable>: ObservableObject {
     }
 
     func refresh() {
+        guard !url.isVirtual else { return }
         guard let modificationDate = try? FileManager.default.attributesOfItem(atPath: url.path)[.modificationDate] as? Date,
               modificationDate > currentTimestamp,
               let data = try? Data(contentsOf: url, options: [.uncached])
@@ -69,6 +75,8 @@ class PersistentMemory<Content: Serializable>: ObservableObject {
     }
 
     fileprivate func observeChanges() {
+        guard !url.isVirtual else { return }
+
         let names: [NSNotification.Name] = [.NSMetadataQueryDidFinishGathering, .NSMetadataQueryDidUpdate]
         let publishers = names.map { NotificationCenter.default.publisher(for: $0) }
 
@@ -84,7 +92,17 @@ class PersistentMemory<Content: Serializable>: ObservableObject {
             }
 
         metadataQuery.notificationBatchingInterval = 1
-        metadataQuery.searchScopes = [NSMetadataQueryUbiquitousDocumentsScope]
+        if let containerUrl = FileManager.default.url(forUbiquityContainerIdentifier: nil), url.path.starts(with: containerUrl.path) {
+            metadataQuery.searchScopes = [NSMetadataQueryUbiquitousDocumentsScope]
+        } else {
+            #if os(iOS)
+            metadataQuery.searchScopes = [NSMetadataQueryAccessibleUbiquitousExternalDocumentsScope]
+            #endif
+            #if os(macOS)
+            metadataQuery.searchScopes = [NSMetadataQueryLocalComputerScope]
+            #endif
+        }
+
         metadataQuery.predicate = NSPredicate(format: "%K == %@", NSMetadataItemPathKey, url.path)
         metadataQuery.start()
     }

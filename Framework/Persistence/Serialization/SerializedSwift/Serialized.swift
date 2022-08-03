@@ -54,6 +54,21 @@ public final class Serialized<T> {
         }
     }
     
+//    public static subscript<EnclosingSelf>(
+//        _enclosingInstance instance: EnclosingSelf,
+//        wrapped _: ReferenceWritableKeyPath<EnclosingSelf, T>,
+//        storage storageKeyPath: ReferenceWritableKeyPath<EnclosingSelf, Serialized>
+//    ) -> T {
+//        get {
+//            let storage = instance[keyPath: storageKeyPath]
+//            return storage._wrappedValue(T.self)
+//        }
+//        set {
+//            let storage = instance[keyPath: storageKeyPath]
+//            storage._value = newValue
+//        }
+//    }
+    
     /// Defualt init for Serialized wrapper
     /// - Parameters:
     ///   - key: The JSON decoding key to be used. If `nil` (or not passed), the property name gets used for decoding
