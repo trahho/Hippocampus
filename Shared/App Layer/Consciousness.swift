@@ -11,31 +11,45 @@ import Foundation
 class Consciousness: ObservableObject {
     private var cancellable: AnyCancellable?
 
-    private(set) var area: Brain.Area? {
+    private var persistentMemory: PersistentData<Memory>?{
         willSet {
             objectWillChange.send()
         }
         didSet {
-            cancellable = area?.objectWillChange.sink(receiveValue: {
+            cancellable = persistentMemory?.objectWillChange.sink(receiveValue: {
                 self.objectWillChange.send()
             })
         }
     }
 
+    
+    var memory: Memory {
+        persistentMemory!.content
+    }
+
     var isEmpty: Bool {
-        area == nil
+        persistentMemory == nil
     }
 
-    func openArea(url: URL) {
-        area = Brain.Area(location: url)
+    private func persistentUrl(url: URL) -> URL {
+        url.appendingPathComponent("memory." + HippocampusApp.persistentExtension)
     }
 
-    func createArea(name: String, local: Bool) {
-        area = Brain.Area(location: HippocampusApp.areaUrl(name: name, local: local))
-        area?.persist()
+    func openMemory(url: URL) {
+        persistentMemory = PersistentData<Memory>.init(url: persistentUrl(url: url), content: Memory())
     }
 
-    func showArea(area: Brain.Area) {
-        self.area = area
+    func createMemory(name: String, local: Bool) {
+        let url = HippocampusApp.memoryUrl(name: name, local: local)
+        persistentMemory = PersistentData<Memory>.init(url: persistentUrl(url: url), content: Memory())
+        persistentMemory!.commit()
+    }
+
+    func fleetingMemory(_ memory: Memory) {
+        persistentMemory = PersistentData<Memory>.init(url: URL.virtual(), content: memory)
+    }
+    
+    func commit() {
+        persistentMemory?.commit()
     }
 }

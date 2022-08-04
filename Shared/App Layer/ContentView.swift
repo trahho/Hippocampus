@@ -12,10 +12,10 @@ struct ContentView: View {
 
     var body: some View {
         if consciousness.isEmpty {
-            SelectAreaView()
+            SelectMemoryView()
                 .frame(minWidth: 400, minHeight: 600, alignment: .topLeading)
         } else {
-            ShowAreaView()
+            ShowConsciousnessView()
                 .frame(minWidth: 1200, minHeight: 800, alignment: .topLeading)
         }
     }

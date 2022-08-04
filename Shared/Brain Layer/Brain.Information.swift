@@ -9,7 +9,7 @@ import Foundation
 
 extension Brain {
     class Information: Serializable, Identifiable {
-        @Serialized var id: UUID = .init()
+//        @Serialized var id: UUID = .init()
         @Serialized var perspectives: Set<Perspective> = []
         @Serialized var aspects: [Aspect : Codable]
         

@@ -6,14 +6,14 @@
 	<array>
 		<dict>
 			<key>CFBundleTypeName</key>
-			<string>Hippocampus Brain Area</string>
+			<string>Hippocampus Memory</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>LSHandlerRank</key>
 			<string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>de.kuehnerleben.Hippocampus.brainarea</string>
+				<string>de.kuehnerleben.Hippocampus.memory</string>
 			</array>
 			<key>LSTypeIsPackage</key>
 			<true/>
@@ -41,20 +41,20 @@
 				<string>com.apple.package</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Hippocampus Brain Area</string>
+			<string>Hippocampus Memory</string>
 			<key>UTTypeIcons</key>
 			<dict/>
 			<key>UTTypeIdentifier</key>
-			<string>de.kuehnerleben.Hippocampus.brainarea</string>
+			<string>de.kuehnerleben.Hippocampus.memory</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
 				<array>
-					<string>brainarea</string>
+					<string>memory</string>
 				</array>
 				<key>public.mime-type</key>
 				<array>
-					<string>application/brainarea</string>
+					<string>application/memory</string>
 				</array>
 			</dict>
 		</dict>

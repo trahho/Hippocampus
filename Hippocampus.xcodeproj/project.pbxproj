@@ -75,14 +75,14 @@
 		C54BE5442895DB180060A066 /* Brain.Synapse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE5422895DB180060A066 /* Brain.Synapse.swift */; };
 		C54BE5462895DB3C0060A066 /* Brain.Neuron.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE5452895DB3B0060A066 /* Brain.Neuron.swift */; };
 		C54BE5472895DB3C0060A066 /* Brain.Neuron.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE5452895DB3B0060A066 /* Brain.Neuron.swift */; };
-		C54BE54A2895DCEA0060A066 /* Brain.Area.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE5492895DCEA0060A066 /* Brain.Area.swift */; };
-		C54BE54B2895DCEA0060A066 /* Brain.Area.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE5492895DCEA0060A066 /* Brain.Area.swift */; };
+		C54BE54A2895DCEA0060A066 /* Consciousness.Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE5492895DCEA0060A066 /* Consciousness.Memory.swift */; };
+		C54BE54B2895DCEA0060A066 /* Consciousness.Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE5492895DCEA0060A066 /* Consciousness.Memory.swift */; };
 		C54BE54D289602980060A066 /* Consciousness.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE54C289602980060A066 /* Consciousness.swift */; };
 		C54BE54E289602980060A066 /* Consciousness.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE54C289602980060A066 /* Consciousness.swift */; };
-		C54BE55128960EF10060A066 /* SelectAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE55028960EF10060A066 /* SelectAreaView.swift */; };
-		C54BE55228960EF10060A066 /* SelectAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE55028960EF10060A066 /* SelectAreaView.swift */; };
-		C54BE554289610A00060A066 /* ShowAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE553289610A00060A066 /* ShowAreaView.swift */; };
-		C54BE555289610A00060A066 /* ShowAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE553289610A00060A066 /* ShowAreaView.swift */; };
+		C54BE55128960EF10060A066 /* SelectMemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE55028960EF10060A066 /* SelectMemoryView.swift */; };
+		C54BE55228960EF10060A066 /* SelectMemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE55028960EF10060A066 /* SelectMemoryView.swift */; };
+		C54BE554289610A00060A066 /* ShowMemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE553289610A00060A066 /* ShowMemoryView.swift */; };
+		C54BE555289610A00060A066 /* ShowMemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE553289610A00060A066 /* ShowMemoryView.swift */; };
 		C54BE55A289698990060A066 /* View+If.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE559289698990060A066 /* View+If.swift */; };
 		C54BE55B289698990060A066 /* View+If.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE559289698990060A066 /* View+If.swift */; };
 		C54BE56028986F540060A066 /* Consciousness+preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE55F28986F540060A066 /* Consciousness+preview.swift */; };
@@ -133,10 +133,10 @@
 		C54BE53F2895C46C0060A066 /* Brain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brain.swift; sourceTree = "<group>"; };
 		C54BE5422895DB180060A066 /* Brain.Synapse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brain.Synapse.swift; sourceTree = "<group>"; };
 		C54BE5452895DB3B0060A066 /* Brain.Neuron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brain.Neuron.swift; sourceTree = "<group>"; };
-		C54BE5492895DCEA0060A066 /* Brain.Area.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brain.Area.swift; sourceTree = "<group>"; };
+		C54BE5492895DCEA0060A066 /* Consciousness.Memory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consciousness.Memory.swift; sourceTree = "<group>"; };
 		C54BE54C289602980060A066 /* Consciousness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consciousness.swift; sourceTree = "<group>"; };
-		C54BE55028960EF10060A066 /* SelectAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAreaView.swift; sourceTree = "<group>"; };
-		C54BE553289610A00060A066 /* ShowAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAreaView.swift; sourceTree = "<group>"; };
+		C54BE55028960EF10060A066 /* SelectMemoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMemoryView.swift; sourceTree = "<group>"; };
+		C54BE553289610A00060A066 /* ShowMemoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowMemoryView.swift; sourceTree = "<group>"; };
 		C54BE556289616680060A066 /* Hippocampus (iOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Hippocampus (iOS).entitlements"; sourceTree = "<group>"; };
 		C54BE557289617140060A066 /* Hippocampus--macOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Hippocampus--macOS--Info.plist"; sourceTree = "<group>"; };
 		C54BE558289618300060A066 /* Hippocampus--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Hippocampus--iOS--Info.plist"; sourceTree = "<group>"; };
@@ -317,12 +317,11 @@
 			isa = PBXGroup;
 			children = (
 				C54BE53F2895C46C0060A066 /* Brain.swift */,
-				C54BE565289884CE0060A066 /* Brain.Aspect.swift */,
 				C54BE56B289889EB0060A066 /* Brain.Information.swift */,
 				C54BE5682898852E0060A066 /* Brain.Perspective.swift */,
-				C54BE5492895DCEA0060A066 /* Brain.Area.swift */,
-				C54BE5422895DB180060A066 /* Brain.Synapse.swift */,
+				C54BE565289884CE0060A066 /* Brain.Aspect.swift */,
 				C54BE5452895DB3B0060A066 /* Brain.Neuron.swift */,
+				C54BE5422895DB180060A066 /* Brain.Synapse.swift */,
 			);
 			path = "Brain Layer";
 			sourceTree = "<group>";
@@ -331,11 +330,12 @@
 			isa = PBXGroup;
 			children = (
 				C54BE54C289602980060A066 /* Consciousness.swift */,
+				C54BE5492895DCEA0060A066 /* Consciousness.Memory.swift */,
 				C54BE55F28986F540060A066 /* Consciousness+preview.swift */,
 				C54BE4A12894866A0060A066 /* HippocampusApp.swift */,
 				C54BE4A22894866A0060A066 /* ContentView.swift */,
-				C54BE55028960EF10060A066 /* SelectAreaView.swift */,
-				C54BE553289610A00060A066 /* ShowAreaView.swift */,
+				C54BE55028960EF10060A066 /* SelectMemoryView.swift */,
+				C54BE553289610A00060A066 /* ShowMemoryView.swift */,
 			);
 			path = "App Layer";
 			sourceTree = "<group>";
@@ -439,7 +439,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C54BE4D728958F820060A066 /* SerializedTransformable.swift in Sources */,
-				C54BE554289610A00060A066 /* ShowAreaView.swift in Sources */,
+				C54BE554289610A00060A066 /* ShowMemoryView.swift in Sources */,
 				C54BE4F3289591320060A066 /* Observed.swift in Sources */,
 				C54BE4F1289591320060A066 /* ObservedChangeReceiver.swift in Sources */,
 				C54BE503289591440060A066 /* CGFloat+Operators.swift in Sources */,
@@ -453,7 +453,7 @@
 				C54BE56C289889EB0060A066 /* Brain.Information.swift in Sources */,
 				C54BE4FF289591440060A066 /* CGPoint+Operators.swift in Sources */,
 				C54BE54D289602980060A066 /* Consciousness.swift in Sources */,
-				C54BE55128960EF10060A066 /* SelectAreaView.swift in Sources */,
+				C54BE55128960EF10060A066 /* SelectMemoryView.swift in Sources */,
 				C54BE5432895DB180060A066 /* Brain.Synapse.swift in Sources */,
 				C54BE4C928958F820060A066 /* Transformable.swift in Sources */,
 				C54BE5692898852E0060A066 /* Brain.Perspective.swift in Sources */,
@@ -473,7 +473,7 @@
 				C54BE501289591440060A066 /* CGSize+Operators.swift in Sources */,
 				C54BE4CD28958F820060A066 /* DecodableProperty.swift in Sources */,
 				C54BE4E728958F910060A066 /* CyclicDecoder.swift in Sources */,
-				C54BE54A2895DCEA0060A066 /* Brain.Area.swift in Sources */,
+				C54BE54A2895DCEA0060A066 /* Consciousness.Memory.swift in Sources */,
 				C54BE4FD289591440060A066 /* View+offset.swift in Sources */,
 				C54BE516289591840060A066 /* InjectionKey.swift in Sources */,
 				C54BE518289591840060A066 /* Injector.swift in Sources */,
@@ -488,7 +488,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C54BE4D828958F820060A066 /* SerializedTransformable.swift in Sources */,
-				C54BE555289610A00060A066 /* ShowAreaView.swift in Sources */,
+				C54BE555289610A00060A066 /* ShowMemoryView.swift in Sources */,
 				C54BE4F4289591320060A066 /* Observed.swift in Sources */,
 				C54BE4F2289591320060A066 /* ObservedChangeReceiver.swift in Sources */,
 				C54BE504289591440060A066 /* CGFloat+Operators.swift in Sources */,
@@ -502,7 +502,7 @@
 				C54BE56D289889EB0060A066 /* Brain.Information.swift in Sources */,
 				C54BE500289591440060A066 /* CGPoint+Operators.swift in Sources */,
 				C54BE54E289602980060A066 /* Consciousness.swift in Sources */,
-				C54BE55228960EF10060A066 /* SelectAreaView.swift in Sources */,
+				C54BE55228960EF10060A066 /* SelectMemoryView.swift in Sources */,
 				C54BE5442895DB180060A066 /* Brain.Synapse.swift in Sources */,
 				C54BE4CA28958F820060A066 /* Transformable.swift in Sources */,
 				C54BE56A2898852E0060A066 /* Brain.Perspective.swift in Sources */,
@@ -522,7 +522,7 @@
 				C54BE502289591440060A066 /* CGSize+Operators.swift in Sources */,
 				C54BE4CE28958F820060A066 /* DecodableProperty.swift in Sources */,
 				C54BE4E828958F910060A066 /* CyclicDecoder.swift in Sources */,
-				C54BE54B2895DCEA0060A066 /* Brain.Area.swift in Sources */,
+				C54BE54B2895DCEA0060A066 /* Consciousness.Memory.swift in Sources */,
 				C54BE4FE289591440060A066 /* View+offset.swift in Sources */,
 				C54BE517289591840060A066 /* InjectionKey.swift in Sources */,
 				C54BE519289591840060A066 /* Injector.swift in Sources */,
@@ -651,7 +651,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Hippocampus (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 6Z37VA2PZL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -684,7 +684,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Hippocampus (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 6Z37VA2PZL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -719,7 +719,7 @@
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 6Z37VA2PZL;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -749,7 +749,7 @@
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 6Z37VA2PZL;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;

@@ -34,6 +34,10 @@ class Observed<Value: ObservableObject> {
         initialValue = thunk
     }
 
+//    @inlinable public init(wrappedValue thunk: @autoclosure @escaping () -> Serialized<Value>) {
+//        initialValue = thunk
+//    }
+
     /// Initializes the property wrapper with a value from the `Injector`.
     ///
     /// - Parameters:

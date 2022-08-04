@@ -20,22 +20,23 @@ struct HippocampusApp: App {
         return documentsDirectory.appendingPathComponent("Hippocampus")
     }
 
-    static func areaUrl(name: String, local: Bool) -> URL {
+    static func memoryUrl(name: String, local: Bool) -> URL {
         let containerURL = local ? HippocampusApp.localContainerUrl : HippocampusApp.iCloudContainerUrl
-        let areaURL = containerURL.appendingPathComponent("\(name).\(HippocampusApp.brainareaExtension)")
+        let areaURL = containerURL.appendingPathComponent("\(name).\(HippocampusApp.memoryExtension)")
         return areaURL
     }
 
-    static let brainareaExtension = "brainarea"
     static let memoryExtension = "memory"
+    static let persistentExtension = "persistent"
 
-    @ObservedObject var consciousness: Consciousness =  Consciousness.preview1
+    @ObservedObject var consciousness: Consciousness =  // Consciousness.preview1
+    Consciousness()
 
     var body: some Scene {
         WindowGroup {
                 ContentView()
             .environmentObject(consciousness)
-            .onOpenURL { consciousness.openArea(url: $0) }
+            .onOpenURL { consciousness.openMemory(url: $0) }
         }
     }
 }

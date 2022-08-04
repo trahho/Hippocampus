@@ -14,28 +14,42 @@ public typealias Serializable = SerializableEncodable & SerializableDecodable & 
 /// Property wrapper for Serializable (Encodable + Decodable) properties.
 /// The Object itself must conform to Serializable (or SerializableEncodable / SerializableDecodable)
 /// Default value is by default nil. Can be used directly without arguments
-public final class Serialized<T> {
+public class Serialized<T>: ObservableObject {
     var key: String?
     var alternateKey: String?
-    
-    private var _value: T?
-    
+    var cancellable: AnyCancellable?
+
+    @Published private var _value: T?
+
     @available(*, unavailable, message: "This property wrapper can only be applied to classes")
     public var wrappedValue: T {
         get { fatalError() }
         set { fatalError() }
     }
-    
+
     /// Wrapped value getter for optionals
-    private func _wrappedValue<U>(_ type: U.Type) -> U? where U: ExpressibleByNilLiteral {
+    private func _wrappedValue<U>(_: U.Type) -> U? where U: ExpressibleByNilLiteral {
         return _value as? U
     }
-    
+
     /// Wrapped value getter for non-optionals
-    private func _wrappedValue<U>(_ type: U.Type) -> U {
+    private func _wrappedValue<U>(_: U.Type) -> U {
         return _value as! U
     }
-    
+
+//    /// Register Observation
+//    private func registerObservation<Observed, Observer>(o) where U: ObservableObject {
+//        let observed = _value as! U
+//        cancellable = observed.objectWillChange.sink(receiveValue: { _ in
+//            if let publisher = instance.objectWillChange as? Combine.ObservableObjectPublisher {
+//                publisher.send()
+//            }
+//        })
+//    }
+
+    /// Ignore Observation
+    private func registerObservation<U>(_: U.Type, instance: U) {}
+
     public static subscript<EnclosingSelf: ObservableObject>(
         _enclosingInstance instance: EnclosingSelf,
         wrapped _: ReferenceWritableKeyPath<EnclosingSelf, T>,
@@ -51,24 +65,10 @@ public final class Serialized<T> {
                 publisher.send()
             }
             storage._value = newValue
+//            storage.registerObservation(instance)
         }
     }
-    
-//    public static subscript<EnclosingSelf>(
-//        _enclosingInstance instance: EnclosingSelf,
-//        wrapped _: ReferenceWritableKeyPath<EnclosingSelf, T>,
-//        storage storageKeyPath: ReferenceWritableKeyPath<EnclosingSelf, Serialized>
-//    ) -> T {
-//        get {
-//            let storage = instance[keyPath: storageKeyPath]
-//            return storage._wrappedValue(T.self)
-//        }
-//        set {
-//            let storage = instance[keyPath: storageKeyPath]
-//            storage._value = newValue
-//        }
-//    }
-    
+
     /// Defualt init for Serialized wrapper
     /// - Parameters:
     ///   - key: The JSON decoding key to be used. If `nil` (or not passed), the property name gets used for decoding
@@ -79,7 +79,7 @@ public final class Serialized<T> {
         self.alternateKey = alternateKey
         self._value = wrappedValue()
     }
-    
+
     public init(_ key: String? = nil, alternateKey: String? = nil) {
         self.key = key
         self.alternateKey = alternateKey
