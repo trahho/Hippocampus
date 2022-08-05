@@ -7,23 +7,29 @@
 
 import Foundation
 
-class Brain: Serializable {
-    @Serialized private (set) var neurons: [Neuron] = []
-    @Serialized var synapses: [Synapse] = []
-    required init() {}
-    
-    func createNeuron() -> Neuron{
-        let neuron = Neuron()
-        neurons.append(neuron)
-        return neuron
+class Brain: Serializable, ObservableObject {
+    @Serialized private var informationId: Int = 1
+    @PublishedSerialized private(set) var neurons: [Int: Neuron] = [:]
+    @PublishedSerialized private(set) var synapses: [Int: Synapse] = [:]
+
+    let staticPerspective: [Perspective] = buildPerspectives {
+        Perspective("Hallo") {
+            Aspect("Welt", .text)
+            Aspect("Sonnenuntergang", .drawing)
+        }
     }
-    
+
+    required init() {}
+
+    func add(neuron: Neuron) {
+        if neuron.id == 0 {
+            neuron.setId(informationId ++)
+        }
+    }
+
     func createSynapse(pre: Neuron, post: Neuron) -> Synapse {
         let synapse = Synapse(pre: pre, post: post)
         synapses.append(synapse)
         return synapse
     }
 }
-
-
-

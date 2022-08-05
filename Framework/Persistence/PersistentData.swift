@@ -18,18 +18,22 @@ extension URL {
     }
 }
 
-class PersistentData<Content: Serializable>: ObservableObject {
+class PersistentData<Content>: ObservableObject where Content: Serializable, Content: ObservableObject {
     let url: URL
     private var currentTimestamp: Date = .distantPast
     private let metadataQuery = NSMetadataQuery()
     private var querySubscriber: AnyCancellable?
+    private var contentSubscriber: AnyCancellable?
 
-    @Observed private var _content: Content
+    private var _content: Content
     var content: Content {
         get { _content }
         set {
             objectWillChange.send()
             _content = newValue
+            contentSubscriber = _content.objectWillChange.sink { _ in
+                self.objectWillChange.send()
+            }
         }
     }
 
@@ -74,7 +78,7 @@ class PersistentData<Content: Serializable>: ObservableObject {
         currentTimestamp = modificationDate
     }
 
-    fileprivate func observeChanges() {
+    fileprivate func setupMetadataQuery() {
         guard !url.isVirtual else { return }
 
         let names: [NSNotification.Name] = [.NSMetadataQueryDidFinishGathering, .NSMetadataQueryDidUpdate]
@@ -86,7 +90,7 @@ class PersistentData<Content: Serializable>: ObservableObject {
                 guard let query = notification.object as? NSMetadataQuery, query === self.metadataQuery else { return }
                 query.disableUpdates()
                 let modificationDate = try? FileManager.default.attributesOfItem(atPath: self.url.path)[.modificationDate] as? Date
-                print("MD: \(modificationDate ?? Date.distantPast), CTS: \(currentTimestamp)")
+//                print("MD: \(modificationDate ?? Date.distantPast), CTS: \(currentTimestamp)")
                 self.refresh()
                 query.enableUpdates()
             }
@@ -110,7 +114,7 @@ class PersistentData<Content: Serializable>: ObservableObject {
     init(url: URL, content: Content) {
         self.url = url
         self._content = content
-        observeChanges()
+        setupMetadataQuery()
     }
 
     deinit {

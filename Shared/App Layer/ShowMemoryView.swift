@@ -9,9 +9,15 @@ import SwiftUI
 
 struct ShowConsciousnessView: View {
     @EnvironmentObject var consciousness: Consciousness
+    
+    var brain: Brain {
+        consciousness.memory.brain
+    }
 
     var body: some View {
-        ShowMemoryView(brain: consciousness.memory.brain)
+        List(brain.neurons) { neuron in
+            Text("\(neuron.id.hashValue)")
+        }
         Button("Add") {
             _ = consciousness.memory.brain.createNeuron()
             consciousness.commit()
@@ -24,7 +30,7 @@ struct ShowMemoryView: View {
 
     var body: some View {
         List(brain.neurons) { neuron in
-            Text("\(neuron.id.uuidString)")
+            Text("\(neuron.id.hashValue)")
         }
     }
 }

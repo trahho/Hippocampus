@@ -9,8 +9,8 @@ import Foundation
 
 extension Brain {
     class Synapse: Information {
-        @Serialized var pre: Neuron
-        @Serialized var post: Neuron
+        @PublishedSerialized var pre: Neuron
+        @PublishedSerialized var post: Neuron
 
         required init() {}
 

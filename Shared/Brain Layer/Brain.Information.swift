@@ -8,11 +8,14 @@
 import Foundation
 
 extension Brain {
-    class Information: Serializable, Identifiable {
-//        @Serialized var id: UUID = .init()
-        @Serialized var perspectives: Set<Perspective> = []
-        @Serialized var aspects: [Aspect : Codable]
-        
+    class Information: Serializable, ObservableObject, IdentifiableObject {
+        typealias ID = Int64
+
+        @Serialized var id: ID
+
+        @PublishedSerialized private(set) var perspectives: Set<Perspective> = []
+        @PublishedSerialized private(set) var aspects: [Aspect.ID: Codable] = [:]
+
         required init() {}
     }
 }

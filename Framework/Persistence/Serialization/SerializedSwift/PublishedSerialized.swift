@@ -5,38 +5,55 @@
 //  Created by Dejan Skledar on 07/09/2020.
 //
 
+import Combine
 import Foundation
-
-public typealias Serializable = SerializableEncodable & SerializableDecodable
 
 @propertyWrapper
 /// Property wrapper for Serializable (Encodable + Decodable) properties.
 /// The Object itself must conform to Serializable (or SerializableEncodable / SerializableDecodable)
 /// Default value is by default nil. Can be used directly without arguments
-public final class Serialized<T> {
+public class PublishedSerialized<T> {
     var key: String?
     var alternateKey: String?
-    
-    private var _value: T?
-    
+    var cancellable: AnyCancellable?
+
+    @Published private var _value: T?
+
+    @available(*, unavailable, message: "This property wrapper can only be applied to classes")
+    public var wrappedValue: T {
+        get { fatalError() }
+        set { fatalError() }
+    }
+
     /// Wrapped value getter for optionals
-    private func _wrappedValue<U>(_ type: U.Type) -> U? where U: ExpressibleByNilLiteral {
+    private func _wrappedValue<U>(_: U.Type) -> U? where U: ExpressibleByNilLiteral {
         return _value as? U
     }
-    
+
     /// Wrapped value getter for non-optionals
-    private func _wrappedValue<U>(_ type: U.Type) -> U {
+    private func _wrappedValue<U>(_: U.Type) -> U {
         return _value as! U
     }
-    
-    public var wrappedValue: T {
+
+    public static subscript<EnclosingSelf: ObservableObject>(
+        _enclosingInstance instance: EnclosingSelf,
+        wrapped _: ReferenceWritableKeyPath<EnclosingSelf, T>,
+        storage storageKeyPath: ReferenceWritableKeyPath<EnclosingSelf, PublishedSerialized>
+    ) -> T {
         get {
-            return _wrappedValue(T.self)
-        } set {
-            _value = newValue
+            let storage = instance[keyPath: storageKeyPath]
+            return storage._wrappedValue(T.self)
+        }
+        set {
+            let storage = instance[keyPath: storageKeyPath]
+            if let publisher = instance.objectWillChange as? Combine.ObservableObjectPublisher {
+                publisher.send()
+            }
+            storage._value = newValue
+//            storage.registerObservation(instance)
         }
     }
-    
+
     /// Defualt init for Serialized wrapper
     /// - Parameters:
     ///   - key: The JSON decoding key to be used. If `nil` (or not passed), the property name gets used for decoding
@@ -56,8 +73,7 @@ public final class Serialized<T> {
 }
 
 /// Encodable support
-extension Serialized: EncodableProperty where T: Encodable {
-    
+extension PublishedSerialized: EncodableProperty where T: Encodable {
     /// Basic property encoding with the key (if present), or propertyName if key not present
     /// - Parameters:
     ///   - container: The default container
@@ -65,13 +81,12 @@ extension Serialized: EncodableProperty where T: Encodable {
     /// - Throws: Throws JSON encoding errorj
     public func encodeValue(from container: inout EncodeContainer, propertyName: String) throws {
         let codingKey = SerializedCodingKeys(key: key ?? propertyName)
-        try container.encodeIfPresent(wrappedValue, forKey: codingKey)
+        try container.encodeIfPresent(_wrappedValue(T.self), forKey: codingKey)
     }
 }
 
 /// Decodable support
-extension Serialized: DecodableProperty where T: Decodable {
-    
+extension PublishedSerialized: DecodableProperty where T: Decodable {
     /// Adding the DecodableProperty support for Serialized annotated objects, where the Object conforms to Decodable
     /// - Parameters:
     ///   - container: The decoding container
@@ -81,12 +96,12 @@ extension Serialized: DecodableProperty where T: Decodable {
         let codingKey = SerializedCodingKeys(key: key ?? propertyName)
 
         if let value = try? container.decodeIfPresent(T.self, forKey: codingKey) {
-            wrappedValue = value
+            _value = value
         } else {
             guard let altKey = alternateKey else { return }
             let altCodingKey = SerializedCodingKeys(key: altKey)
             if let value = try? container.decodeIfPresent(T.self, forKey: altCodingKey) {
-                wrappedValue = value
+                _value = value
             }
         }
     }

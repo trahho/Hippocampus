@@ -11,7 +11,7 @@ import Foundation
 class Consciousness: ObservableObject {
     private var cancellable: AnyCancellable?
 
-    private var persistentMemory: PersistentData<Memory>?{
+    private var persistentMemory: PersistentData<Brain>?{
         willSet {
             objectWillChange.send()
         }
@@ -23,7 +23,7 @@ class Consciousness: ObservableObject {
     }
 
     
-    var memory: Memory {
+    var memory: Brain {
         persistentMemory!.content
     }
 
@@ -53,3 +53,5 @@ class Consciousness: ObservableObject {
         persistentMemory?.commit()
     }
 }
+
+

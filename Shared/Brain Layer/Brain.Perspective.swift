@@ -8,21 +8,19 @@
 import Foundation
 
 extension Brain {
-    class Perspective: Serializable {
+    class Perspective: Serializable, IdentifiableObject {
+        typealias ID = Int64
+
+        @Serialized var id: ID = 0
         @Serialized var designation: String = ""
         @Serialized var aspects: [Aspect]
 
         required init() {}
-    }
-}
 
-extension Brain.Perspective: Identifiable, Hashable {
-    static func == (lhs: Brain.Perspective, rhs: Brain.Perspective) -> Bool {
-        lhs.id == rhs.id
-    }
-
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(self.id)
+        init( _ designation: String, @Brain.Aspect.Builder aspects: () -> [Aspect]) {
+            self.designation = designation
+            self.aspects = aspects()
+        }
     }
 }
 

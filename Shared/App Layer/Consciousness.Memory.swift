@@ -9,20 +9,9 @@ import Combine
 import Foundation
 
 extension Consciousness {
-    class Memory: Serializable {
-        var cancellables: Set<AnyCancellable> = []
+    class Memory: Serializable, ObservableObject {
 
-        @Serialized var brain: Brain = .init() {
-            willSet {
-                objectWillChange.send()
-            }
-            didSet {
-                brain.objectWillChange.sink(receiveValue: {
-                    self.objectWillChange.send()
-                })
-                .store(in: &cancellables)
-            }
-        }
+        @ObservedSerialized var brain: Brain = .init()
 
         required init() {}
     }

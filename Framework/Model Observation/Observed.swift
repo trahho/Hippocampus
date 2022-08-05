@@ -23,8 +23,12 @@ class Observed<Value: ObservableObject> {
     }
 
     private var cancellable: AnyCancellable?
-    private var observedInstance: Value?
     private var initialValue: (() -> Value)?
+    private var observedInstance: Value? {
+        didSet {
+            cancellable = nil
+        }
+    }
 
     /// Initializes the property wrapper with the declared value.
     ///
@@ -33,10 +37,6 @@ class Observed<Value: ObservableObject> {
     @inlinable public init(wrappedValue thunk: @autoclosure @escaping Initializer) {
         initialValue = thunk
     }
-
-//    @inlinable public init(wrappedValue thunk: @autoclosure @escaping () -> Serialized<Value>) {
-//        initialValue = thunk
-//    }
 
     /// Initializes the property wrapper with a value from the `Injector`.
     ///
@@ -69,6 +69,9 @@ class Observed<Value: ObservableObject> {
         get {
             let storage = instance[keyPath: storageKeyPath]
             if let result = storage.observedInstance {
+                if storage.cancellable == nil {
+                    storage.cancellable = registerObservation(observed: result, observer: instance, observedObject: storage)
+                }
                 return result
             } else {
                 let result = storage.initialValue!()
@@ -85,7 +88,7 @@ class Observed<Value: ObservableObject> {
                 publisher.send()
             }
             storage.observedInstance = newValue
-            storage.cancellable = registerObservation(observed: newValue, observer: instance, observedObject: storage)
+            storage.cancellable = nil
         }
     }
 }
