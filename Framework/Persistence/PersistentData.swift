@@ -26,9 +26,9 @@ class PersistentData<Content>: ObservableObject where Content: Serializable, Con
     private let metadataQuery = NSMetadataQuery()
     private var querySubscriber: AnyCancellable?
     private var contentSubscriber: AnyCancellable?
-    var didRefresh: (()->())?
-    var willCommit: (()->())?
-
+    var didRefresh: (() -> ())?
+    var willCommit: (() -> ())?
+    private(set) var hasChanges = false
 
     private var _content: Content?
     var content: Content {
@@ -36,8 +36,10 @@ class PersistentData<Content>: ObservableObject where Content: Serializable, Con
         set {
             objectWillChange.send()
             _content = newValue
-            contentSubscriber = newValue.objectWillChange.sink { _ in
-                self.objectWillChange.send()
+            hasChanges = true
+            contentSubscriber = newValue.objectWillChange.sink { [self] _ in
+                objectWillChange.send()
+                hasChanges = true
             }
         }
     }

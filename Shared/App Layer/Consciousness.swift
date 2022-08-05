@@ -9,49 +9,42 @@ import Combine
 import Foundation
 
 class Consciousness: ObservableObject {
-    private var cancellable: AnyCancellable?
-
-    private var persistentMemory: PersistentData<Memory>?{
+    var cancellable: AnyCancellable?
+    var _memory: Memory? {
         willSet {
             objectWillChange.send()
         }
         didSet {
-            cancellable = persistentMemory?.objectWillChange.sink(receiveValue: {
+            cancellable = _memory?.objectWillChange.sink(receiveValue: {
                 self.objectWillChange.send()
             })
         }
     }
 
-    
     var memory: Memory {
-        persistentMemory!.content
+        _memory!
     }
 
     var isEmpty: Bool {
-        persistentMemory == nil
-    }
-
-    private func persistentUrl(url: URL) -> URL {
-        url.appendingPathComponent("memory." + HippocampusApp.persistentExtension)
+        _memory == nil
     }
 
     func openMemory(url: URL) {
-        persistentMemory = PersistentData<Memory>.init(url: persistentUrl(url: url), content: Memory())
+        _memory = Memory(url: url)
     }
 
     func createMemory(name: String, local: Bool) {
         let url = HippocampusApp.memoryUrl(name: name, local: local)
-        persistentMemory = PersistentData<Memory>.init(url: persistentUrl(url: url), content: Memory())
-        persistentMemory!.commit()
+        let memory = Memory(url: url)
+        memory.commit()
+        _memory = memory
     }
 
-    func fleetingMemory(_ memory: Memory) {
-        persistentMemory = PersistentData<Memory>.init(url: URL.virtual(), content: memory)
+    func showMemory(_ memory: Memory) {
+        _memory = memory
     }
-    
+
     func commit() {
-        persistentMemory?.commit()
+        memory.commit()
     }
 }
-
-

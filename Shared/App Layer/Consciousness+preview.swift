@@ -9,7 +9,7 @@ import Foundation
 
 extension Consciousness {
     static var preview1: Consciousness = {
-        let memory = Memory()
+        let memory = Memory(url: URL.virtual())
         let brain = memory.brain
         let neuron1 = Brain.Neuron()
         let neuron2 = Brain.Neuron()
@@ -19,7 +19,7 @@ extension Consciousness {
         brain.add(synapse: synapse)
 
         let result = Consciousness()
-        result.fleetingMemory(memory)
+        result.showMemory(memory)
         return result
     }()
 }

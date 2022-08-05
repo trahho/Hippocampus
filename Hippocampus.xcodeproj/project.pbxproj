@@ -340,12 +340,12 @@
 				C54BE53F2895C46C0060A066 /* Brain.swift */,
 				C54BE57F289DA0F60060A066 /* Brain+buildPerspectives.swift */,
 				C54BE56B289889EB0060A066 /* Brain.Information.swift */,
+				C54BE5452895DB3B0060A066 /* Brain.Neuron.swift */,
+				C54BE5422895DB180060A066 /* Brain.Synapse.swift */,
 				C54BE5682898852E0060A066 /* Brain.Perspective.swift */,
 				C54BE57C289D9EED0060A066 /* Brain.Perspective.Builder.swift */,
 				C54BE565289884CE0060A066 /* Brain.Aspect.swift */,
 				C54BE579289D9E890060A066 /* Brain.Aspect.Builder.swift */,
-				C54BE5452895DB3B0060A066 /* Brain.Neuron.swift */,
-				C54BE5422895DB180060A066 /* Brain.Synapse.swift */,
 			);
 			path = "Brain Layer";
 			sourceTree = "<group>";
