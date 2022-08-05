@@ -11,9 +11,12 @@ extension Consciousness {
     static var preview1: Consciousness = {
         let memory = Memory()
         let brain = memory.brain
-        let neuron1 = brain.createNeuron()
-        let neuron2 = brain.createNeuron()
-        _ = brain.createSynapse(pre: neuron1, post: neuron2)
+        let neuron1 = Brain.Neuron()
+        let neuron2 = Brain.Neuron()
+        let synapse = Brain.Synapse(pre: neuron1, post: neuron2)
+        brain.add(neuron: neuron1)
+        brain.add(neuron: neuron2)
+        brain.add(synapse: synapse)
 
         let result = Consciousness()
         result.fleetingMemory(memory)

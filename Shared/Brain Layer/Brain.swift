@@ -8,9 +8,9 @@
 import Foundation
 
 class Brain: Serializable, ObservableObject {
-    @Serialized private var informationId: Int = 1
-    @PublishedSerialized private(set) var neurons: [Int: Neuron] = [:]
-    @PublishedSerialized private(set) var synapses: [Int: Synapse] = [:]
+    @Serialized private var informationId: Information.ID = 0
+    @PublishedSerialized private(set) var neurons: [Information.ID: Neuron] = [:]
+    @PublishedSerialized private(set) var synapses: [Information.ID: Synapse] = [:]
 
     let staticPerspective: [Perspective] = buildPerspectives {
         Perspective("Hallo") {
@@ -23,13 +23,23 @@ class Brain: Serializable, ObservableObject {
 
     func add(neuron: Neuron) {
         if neuron.id == 0 {
-            neuron.setId(informationId ++)
+            informationId += 1
+            neuron.id = informationId
         }
+        neurons[neuron.id] = neuron
+    }
+    
+    func add(synapse: Synapse) {
+        if synapse.id == 0 {
+            informationId += 1
+            synapse.id = informationId
+        }
+        synapses[synapse.id] = synapse
     }
 
-    func createSynapse(pre: Neuron, post: Neuron) -> Synapse {
-        let synapse = Synapse(pre: pre, post: post)
-        synapses.append(synapse)
-        return synapse
-    }
+//    func createSynapse(pre: Neuron, post: Neuron) -> Synapse {
+//        let synapse = Synapse(pre: pre, post: post)
+//        synapses.append(synapse)
+//        return synapse
+//    }
 }

@@ -18,20 +18,25 @@ extension URL {
     }
 }
 
+protocol PersistentDataDelegate {}
+
 class PersistentData<Content>: ObservableObject where Content: Serializable, Content: ObservableObject {
     let url: URL
     private var currentTimestamp: Date = .distantPast
     private let metadataQuery = NSMetadataQuery()
     private var querySubscriber: AnyCancellable?
     private var contentSubscriber: AnyCancellable?
+    var didRefresh: (()->())?
+    var willCommit: (()->())?
 
-    private var _content: Content
+
+    private var _content: Content?
     var content: Content {
-        get { _content }
+        get { _content! }
         set {
             objectWillChange.send()
             _content = newValue
-            contentSubscriber = _content.objectWillChange.sink { _ in
+            contentSubscriber = newValue.objectWillChange.sink { _ in
                 self.objectWillChange.send()
             }
         }
@@ -89,7 +94,7 @@ class PersistentData<Content>: ObservableObject where Content: Serializable, Con
             .sink { [self] notification in
                 guard let query = notification.object as? NSMetadataQuery, query === self.metadataQuery else { return }
                 query.disableUpdates()
-                let modificationDate = try? FileManager.default.attributesOfItem(atPath: self.url.path)[.modificationDate] as? Date
+//                let modificationDate = try? FileManager.default.attributesOfItem(atPath: self.url.path)[.modificationDate] as? Date
 //                print("MD: \(modificationDate ?? Date.distantPast), CTS: \(currentTimestamp)")
                 self.refresh()
                 query.enableUpdates()
@@ -113,7 +118,7 @@ class PersistentData<Content>: ObservableObject where Content: Serializable, Con
 
     init(url: URL, content: Content) {
         self.url = url
-        self._content = content
+        self.content = content
         setupMetadataQuery()
     }
 

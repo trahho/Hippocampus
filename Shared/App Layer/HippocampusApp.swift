@@ -29,8 +29,9 @@ struct HippocampusApp: App {
     static let memoryExtension = "memory"
     static let persistentExtension = "persistent"
 
-    @ObservedObject var consciousness: Consciousness =  // Consciousness.preview1
-    Consciousness()
+    @ObservedObject var consciousness: Consciousness =
+     Consciousness.preview1
+//    Consciousness()
 
     var body: some Scene {
         WindowGroup {
