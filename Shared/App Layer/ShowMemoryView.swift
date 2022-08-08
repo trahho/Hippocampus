@@ -9,14 +9,15 @@ import SwiftUI
 
 struct ShowConsciousnessView: View {
     @EnvironmentObject var consciousness: Consciousness
-    
+
     var brain: Brain {
         consciousness.memory.brain
     }
 
     var body: some View {
         List(Array(brain.neurons.values)) { neuron in
-            Text("\(neuron.id.hashValue)")
+            let text = neuron[-1] as? String ?? "Nix"
+            Text("\(neuron.id.hashValue) to: \(neuron.axons.count) from: \(neuron.dendrites.count) with: \(text)")
         }
         Button("Add") {
             brain.add(neuron: Brain.Neuron())
@@ -25,7 +26,7 @@ struct ShowConsciousnessView: View {
     }
 }
 
-//struct ShowMemoryView: View {
+// struct ShowMemoryView: View {
 //    @ObservedObject var brain: Brain
 //
 //    var body: some View {
@@ -33,11 +34,11 @@ struct ShowConsciousnessView: View {
 //            Text("\(neuron.id.hashValue)")
 //        }
 //    }
-//}
+// }
 //
- struct ShowConsciousnessView_Previews: PreviewProvider {
+struct ShowConsciousnessView_Previews: PreviewProvider {
     static var previews: some View {
         ShowConsciousnessView()
             .environmentObject(Consciousness.preview1)
     }
- }
+}

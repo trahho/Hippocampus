@@ -57,12 +57,14 @@ class PersistentData<Content>: ObservableObject where Content: Serializable, Con
         guard let data = encode(), !url.isVirtual else { return }
 
         metadataQuery.stop()
+        willCommit?()
         let directory = url.deletingLastPathComponent()
         if !FileManager.default.fileExists(atPath: directory.path) {
             try! FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
         }
         try! data.write(to: url, options: [.atomic])
         currentTimestamp = try! FileManager.default.attributesOfItem(atPath: url.path)[.modificationDate] as! Date
+        hasChanges = false
         metadataQuery.start()
     }
 
@@ -83,6 +85,8 @@ class PersistentData<Content>: ObservableObject where Content: Serializable, Con
 
         decode(data)
         currentTimestamp = modificationDate
+        hasChanges = false
+        didRefresh?()
     }
 
     fileprivate func setupMetadataQuery() {
