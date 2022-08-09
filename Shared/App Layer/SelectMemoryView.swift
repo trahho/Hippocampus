@@ -105,7 +105,7 @@ extension SelectMemoryView {
 
                     TextField("", text: $name)
 
-                    if exists && !finishing {
+                    if exists, !finishing {
                         Image(systemName: "exclamationmark.triangle")
                             .foregroundColor(.red)
                             .font(.system(size: 20))

@@ -5,8 +5,8 @@
 //  Created by Guido Kühn on 07.07.22.
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 extension NSPredicate {
     static func && (lhs: NSPredicate, rhs: NSPredicate) -> NSPredicate {
@@ -21,4 +21,3 @@ extension NSPredicate {
         NSCompoundPredicate(notPredicateWithSubpredicate: rhs)
     }
 }
-

@@ -1,6 +1,6 @@
 //
 //  Transformable.swift
-//  
+//
 //
 //  Created by Dejan Skledar on 05/09/2020.
 //
@@ -13,7 +13,7 @@ public typealias Transformable = TransformableFromJSON & TransformableToJSON
 public protocol TransformableFromJSON {
     associatedtype From: Any
     associatedtype To: Any
-    
+
     static func transformFromJSON(value: From?) -> To?
 }
 
@@ -21,6 +21,6 @@ public protocol TransformableFromJSON {
 public protocol TransformableToJSON {
     associatedtype From: Any
     associatedtype To: Any
-    
+
     static func transformToJSON(value: To?) -> From?
 }

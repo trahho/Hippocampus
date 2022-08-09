@@ -11,6 +11,6 @@ import SwiftUI
 
 extension View {
     func offset(position: CGPoint) -> some View {
-        self.offset(x: position.x, y: position.y)
+        offset(x: position.x, y: position.y)
     }
 }

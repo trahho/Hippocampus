@@ -17,8 +17,6 @@ extension CGPoint {
         CGPoint(x: point.x - size.width, y: point.y - size.height)
     }
 
-  
-
     static func + (a: CGPoint, b: CGPoint) -> CGPoint {
         CGPoint(x: a.x + b.x, y: a.y + b.y)
     }
@@ -28,34 +26,34 @@ extension CGPoint {
     }
 
     static func * (point: CGPoint, factor: CGFloat) -> CGPoint {
-        return CGPoint(x: point.x * factor, y: point.y * factor)
+        CGPoint(x: point.x * factor, y: point.y * factor)
     }
 
     static func * (factor: CGFloat, point: CGPoint) -> CGPoint {
-        return point * factor
+        point * factor
     }
-    
+
     static func * (point: CGPoint, size: CGSize) -> CGPoint {
         CGPoint(x: point.x * size.width, y: point.y * size.height)
     }
 
     static func / (point: CGPoint, factor: CGFloat) -> CGPoint {
-        return CGPoint(x: point.x / factor, y: point.y / factor)
+        CGPoint(x: point.x / factor, y: point.y / factor)
     }
-    
+
     static var infinite: CGPoint {
         CGPoint(x: CGFloat.infinity, y: CGFloat.infinity)
     }
 }
 
 func min(_ a: CGPoint, _ b: CGPoint) -> CGPoint {
-    return CGPoint(x: min(a.x, b.x), y: min(a.y, b.y))
+    CGPoint(x: min(a.x, b.x), y: min(a.y, b.y))
 }
 
 func max(_ a: CGPoint, _ b: CGPoint) -> CGPoint {
-    return CGPoint(x: max(a.x, b.x), y: max(a.y, b.y))
+    CGPoint(x: max(a.x, b.x), y: max(a.y, b.y))
 }
 
 func abs(_ point: CGPoint) -> CGPoint {
-    return CGPoint(x: abs(point.x), y: abs(point.y))
+    CGPoint(x: abs(point.x), y: abs(point.y))
 }

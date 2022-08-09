@@ -13,6 +13,6 @@ extension IdentifiableObject {
     }
 
     func hash(into hasher: inout Hasher) {
-        hasher.combine(self.id)
+        hasher.combine(id)
     }
 }

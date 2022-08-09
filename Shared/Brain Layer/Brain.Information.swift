@@ -8,11 +8,7 @@
 import Foundation
 
 extension Brain {
-    class Information: Serializable, ObservableObject, IdentifiableObject {
-        typealias ID = Int64
-
-        @Serialized var id: ID = 0
-
+    class Information: PersistentObject {
         @PublishedSerialized private(set) var perspectives: Set<Perspective.ID> = []
         @PublishedSerialized private(set) var aspects: [Aspect.ID: Codable] = [:]
 

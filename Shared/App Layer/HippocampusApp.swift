@@ -30,14 +30,14 @@ struct HippocampusApp: App {
     static let persistentExtension = "persistent"
 
     @ObservedObject var consciousness: Consciousness =
-//     Consciousness.preview1
-    Consciousness()
+        .preview1
+//    Consciousness()
 
     var body: some Scene {
         WindowGroup {
-                ContentView()
-            .environmentObject(consciousness)
-            .onOpenURL { consciousness.openMemory(url: $0) }
+            ContentView()
+                .environmentObject(consciousness)
+                .onOpenURL { consciousness.openMemory(url: $0) }
         }
     }
 }

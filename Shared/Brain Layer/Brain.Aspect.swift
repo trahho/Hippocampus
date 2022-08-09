@@ -9,15 +9,13 @@ import Foundation
 import SwiftUI
 
 extension Brain {
-    class Aspect: Serializable, ObservableObject, IdentifiableObject {
-        typealias ID = Int64
-
-        @Serialized var id: ID = 0
+    class Aspect: PersistentObject {
         @PublishedSerialized var designation: String = ""
         @PublishedSerialized var representation: Representation
         @PublishedSerialized var defaultValue: Codable?
 
         init(_ designation: String, _ representation: Representation, defaultValue: Codable? = nil) {
+            super.init()
             self.designation = designation
             self.representation = representation
             self.defaultValue = defaultValue
@@ -33,8 +31,8 @@ extension Brain.Aspect {
     }
 }
 
-//extension Dictionary where Self.Key == Brain.Aspect.ID, Self.Value == Codable {
-//    
-//}
+// extension Dictionary where Self.Key == Brain.Aspect.ID, Self.Value == Codable {
+//
+// }
 
 // TODO: Collection von Frames, welche die Werte repräsentieren können. Frame kann einen davon wählen. Über Id.

@@ -25,8 +25,8 @@ extension Brain {
 
 extension Array where Array.Element == Brain.Perspective {
     func addGroup(@Brain.Perspective.Builder _ content: () -> [Brain.Perspective]) -> [Brain.Perspective] {
-        var perspectiveId = (self.last?.id ?? 0)
-        var aspectId = (self.last?.aspects.last?.id ?? 0)
+        var perspectiveId = (last?.id ?? 0)
+        var aspectId = (last?.aspects.last?.id ?? 0)
         let result = content()
         for perspective in result {
             perspectiveId -= 1

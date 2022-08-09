@@ -8,9 +8,7 @@
 import Foundation
 
 extension Brain {
-    class Perspective: Serializable, IdentifiableObject {
-        typealias ID = Int64
-
+    class Perspective: PersistentObject {
         static let perspectives = buildPerspectives {
             Perspective("Hallo") {
                 Aspect("Welt", .text)
@@ -22,19 +20,19 @@ extension Brain {
             perspectives.first { $0.designation == designation }!
         }
 
-         subscript(_ designation: String) -> Aspect {
+        subscript(_ designation: String) -> Aspect {
             aspects.first { $0.designation == designation }!
         }
-        
-        @Serialized var id: ID = 0
+
         @Serialized var designation: String = ""
         @Serialized var aspects: [Aspect]
 
         required init() {}
 
         init(_ designation: String, @Brain.Aspect.Builder aspects: () -> [Aspect]) {
+            super.init()
             self.designation = designation
-            self.aspects = aspects()
+            aspects = aspects()
         }
     }
 }

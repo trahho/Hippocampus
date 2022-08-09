@@ -9,8 +9,8 @@ import Foundation
 
 extension Brain {
     class Neuron: Information {
-        @Published var dendrites: Set<Synapse>=[]
-        @Published var axons: Set<Synapse>=[]
+        @Published var dendrites: Set<Synapse> = []
+        @Published var axons: Set<Synapse> = []
 
         required init() {}
     }

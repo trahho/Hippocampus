@@ -7,48 +7,40 @@
 //
 
 public class Box<Value> {
-    
     fileprivate var value: Value
-    
+
     public required init(_ value: Value) {
         self.value = value
     }
-    
+
     public subscript() -> Value {
-        return value
+        value
     }
-    
+
     public func mutableCopy() -> MutableBox<Value> {
-        return MutableBox(self[])
+        MutableBox(self[])
     }
-    
 }
 
 extension Box: Equatable where Value: Equatable {
-    
     public static func == (lhs: Box<Value>, rhs: Box<Value>) -> Bool {
-        return lhs[] == rhs[]
+        lhs[] == rhs[]
     }
-    
 }
 
-extension Box {
-    
-    public func map<T>(_ transform: (Value) throws -> T) rethrows -> Box<T> {
-        return Box<T>(try transform(self[]))
+public extension Box {
+    func map<T>(_ transform: (Value) throws -> T) rethrows -> Box<T> {
+        Box<T>(try transform(self[]))
     }
-    
 }
 
 public class MutableBox<Value>: Box<Value> {
-    
-    public override subscript() -> Value {
+    override public subscript() -> Value {
         get {
-            return value
+            value
         }
         set {
             value = newValue
         }
     }
-    
 }

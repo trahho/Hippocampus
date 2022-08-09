@@ -33,7 +33,7 @@ extension Consciousness {
             }
         }
 
-        func setup<T>(url: URL, content: T, didRefresh: @escaping () -> ()) -> PersistentData<T> {
+        func setup<T>(url: URL, content: T, didRefresh: @escaping () -> Void) -> PersistentData<T> {
             let persistentT = PersistentData<T>(url: url, content: content)
             persistentT.didRefresh = didRefresh
             persistentT.objectWillChange.sink(receiveValue: {

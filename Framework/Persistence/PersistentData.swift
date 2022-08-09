@@ -26,8 +26,8 @@ class PersistentData<Content>: ObservableObject where Content: Serializable, Con
     private let metadataQuery = NSMetadataQuery()
     private var querySubscriber: AnyCancellable?
     private var contentSubscriber: AnyCancellable?
-    var didRefresh: (() -> ())?
-    var willCommit: (() -> ())?
+    var didRefresh: (() -> Void)?
+    var willCommit: (() -> Void)?
     private(set) var hasChanges = false
 
     private var _content: Content?
@@ -111,10 +111,10 @@ class PersistentData<Content>: ObservableObject where Content: Serializable, Con
             metadataQuery.searchScopes = [NSMetadataQueryUbiquitousDocumentsScope]
         } else {
             #if os(iOS)
-            metadataQuery.searchScopes = [NSMetadataQueryAccessibleUbiquitousExternalDocumentsScope]
+                metadataQuery.searchScopes = [NSMetadataQueryAccessibleUbiquitousExternalDocumentsScope]
             #endif
             #if os(macOS)
-            metadataQuery.searchScopes = [NSMetadataQueryLocalComputerScope]
+                metadataQuery.searchScopes = [NSMetadataQueryLocalComputerScope]
             #endif
         }
 

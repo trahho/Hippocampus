@@ -10,6 +10,7 @@ import Foundation
 extension Mind {
     indirect enum Criterion: Codable {
         case `is`(Bool)
+        case opposite(Criterion)
         case any([Criterion])
         case all([Criterion])
         case hasPerspective(Brain.Perspective.ID)
@@ -20,43 +21,71 @@ extension Mind {
 
         func isValid(for neuron: Brain.Neuron) -> Bool {
             switch self {
-            case .is(let truth):
+            case let .is(truth):
                 return truth
-            case .any(let criteria):
+            case let .opposite(criterion):
+                return !criterion.isValid(for: neuron)
+            case let .any(criteria):
                 return criteria.contains { $0.isValid(for: neuron) }
-            case .all(let criteria):
+            case let .all(criteria):
                 return criteria.allSatisfy { $0.isValid(for: neuron) }
-            case .hasPerspective(let id):
+            case let .hasPerspective(id):
                 return neuron.perspectives.contains(id)
-            case .knownBy(let criterion):
+            case let .knownBy(criterion):
                 return neuron.dendrites.contains { criterion.isValid(for: $0.pre) }
-            case .knows(let criterion):
+            case let .knows(criterion):
                 return neuron.axons.contains { criterion.isValid(for: $0.post) }
-            case .hasAxon(let criterion):
+            case let .hasAxon(criterion):
                 return neuron.axons.contains { criterion.isValid(for: $0) }
-            case .hasDendrite(let criterion):
+            case let .hasDendrite(criterion):
                 return neuron.dendrites.contains { criterion.isValid(for: $0) }
             }
         }
 
         func isValid(for synapse: Brain.Synapse) -> Bool {
             switch self {
-            case .is(let truth):
+            case let .is(truth):
                 return truth
-            case .any(let criteria):
+            case let .opposite(criterion):
+                return !criterion.isValid(for: synapse)
+            case let .any(criteria):
                 return criteria.contains { $0.isValid(for: synapse) }
-            case .all(let criteria):
+            case let .all(criteria):
                 return criteria.allSatisfy { $0.isValid(for: synapse) }
-            case .hasPerspective(let id):
+            case let .hasPerspective(id):
                 return synapse.perspectives.contains(id)
-            case .knownBy(let criterion):
+            case let .knownBy(criterion):
                 return criterion.isValid(for: synapse.pre)
-            case .knows(let criterion):
+            case let .knows(criterion):
                 return criterion.isValid(for: synapse.post)
-            case .hasAxon(let criterion):
+            case let .hasAxon(criterion):
                 return synapse.pre.axons.contains { criterion.isValid(for: $0) }
-            case .hasDendrite(let criterion):
+            case let .hasDendrite(criterion):
                 return synapse.post.dendrites.contains { criterion.isValid(for: $0) }
+            }
+        }
+
+        static prefix func ! (rhs: Criterion) -> Criterion {
+            .opposite(rhs)
+        }
+
+        static func && (lhs: Criterion, rhs: Criterion) -> Criterion {
+            if case let .all(criteria) = lhs {
+                return .all(criteria + [rhs])
+            } else if case let .all(criteria) = rhs {
+                return .all([lhs] + criteria)
+            } else {
+                return .all([lhs, rhs])
+            }
+        }
+
+        static func || (lhs: Criterion, rhs: Criterion) -> Criterion {
+            if case let .any(criteria) = lhs {
+                return .any(criteria + [rhs])
+            } else if case let .any(criteria) = rhs {
+                return .any([lhs] + criteria)
+            } else {
+                return .any([lhs, rhs])
             }
         }
     }

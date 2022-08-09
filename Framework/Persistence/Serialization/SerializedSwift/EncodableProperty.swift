@@ -1,6 +1,6 @@
 //
 //  EncodableProperty.swift
-//  
+//
 //
 //  Created by Dejan Skledar on 05/09/2020.
 //

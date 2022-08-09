@@ -14,11 +14,11 @@ extension CGSize {
     }
 
     static func * (size: CGSize, factor: CGFloat) -> CGSize {
-        return CGSize(width: size.width * factor, height: size.height * factor)
+        CGSize(width: size.width * factor, height: size.height * factor)
     }
 
     static func * (factor: CGFloat, size: CGSize) -> CGSize {
-        return size * factor
+        size * factor
     }
 
     static func / (size: CGSize, factor: CGFloat) -> CGSize {
@@ -38,7 +38,7 @@ extension CGSize {
     }
 
     var length: CGFloat {
-        return sqrt(width * width + height * height)
+        sqrt(width * width + height * height)
     }
 
     init(_ point: CGPoint) {

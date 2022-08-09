@@ -20,12 +20,14 @@ extension Consciousness {
         brain.add(neuron: neuron2)
         brain.add(synapse: synapse)
 
-        let criterion : Mind.Criterion = .any([
+        let criterion: Mind.Criterion = .any([
             .is(true),
-                .knownBy(
-                    .hasPerspective(Brain.Perspective["Hallo"].id))
+            .knownBy(
+                .hasPerspective(Brain.Perspective["Hallo"].id)),
         ])
-        
+
+        let testCriterion: Mind.Criterion = (.is(true) || .knownBy(.hasPerspective(Brain.Perspective["Hallo"].id))) && .is(false)
+
         let result = Consciousness()
         result.showMemory(memory)
         return result

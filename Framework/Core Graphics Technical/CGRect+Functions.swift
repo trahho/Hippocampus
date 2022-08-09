@@ -12,11 +12,11 @@ extension CGRect {
     var center: CGPoint {
         origin + size / 2
     }
-    
+
     var topLeft: CGPoint {
         CGPoint(x: minX, y: minY)
     }
-    
+
     var bottomRight: CGPoint {
         CGPoint(x: maxX, y: maxY)
     }

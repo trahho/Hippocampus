@@ -29,12 +29,12 @@ public class ObservedSerialized<T: ObservableObject> {
 
     /// Wrapped value getter for optionals
     private func _wrappedValue<U>(_: U.Type) -> U? where U: ExpressibleByNilLiteral {
-        return _value as? U
+        _value as? U
     }
 
     /// Wrapped value getter for non-optionals
     private func _wrappedValue<U>(_: U.Type) -> U {
-        return _value as! U
+        _value as! U
     }
 
     public static subscript<EnclosingSelf: ObservableObject>(
@@ -75,13 +75,13 @@ public class ObservedSerialized<T: ObservableObject> {
     public init(wrappedValue: @autoclosure @escaping () -> T, _ key: String? = nil, alternateKey: String? = nil) {
         self.key = key
         self.alternateKey = alternateKey
-        self._value = wrappedValue()
+        _value = wrappedValue()
     }
 
     public init(_ key: String? = nil, alternateKey: String? = nil) {
         self.key = key
         self.alternateKey = alternateKey
-        self._value = nil
+        _value = nil
     }
 }
 
