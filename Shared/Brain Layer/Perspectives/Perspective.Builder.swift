@@ -6,12 +6,12 @@
 //
 
 import Foundation
-extension Brain.Perspective {
+extension Perspective {
     @resultBuilder
     enum Builder {
-        static func buildBlock() -> [Brain.Perspective] { [] }
+        static func buildBlock() -> [Perspective] { [] }
 
-        static func buildBlock(_ perspectives: Brain.Perspective...) -> [Brain.Perspective] {
+        static func buildBlock(_ perspectives: Perspective...) -> [Perspective] {
             perspectives
         }
     }

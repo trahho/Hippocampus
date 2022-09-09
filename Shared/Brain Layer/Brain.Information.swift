@@ -8,19 +8,32 @@
 import Foundation
 
 extension Brain {
-    class Information: PersistentObject {
+    class Information: PersistentObject, AspectStorage {
         @PublishedSerialized private(set) var perspectives: Set<Perspective.ID> = []
         @PublishedSerialized private(set) var aspects: [Aspect.ID: Codable] = [:]
 
-        subscript(_ aspectId: Aspect.ID) -> Codable? {
+        required init() {}
+        
+        func setValue(_ key: Aspect.ID, value: Codable?) {
+            aspects[key] = value
+        }
+
+        subscript(_ key: Aspect.ID) -> Codable? {
             get {
-                aspects[aspectId]
+                aspects[key]
             }
             set {
-                aspects[aspectId] = newValue
+                aspects[key] = newValue
             }
         }
 
-        required init() {}
+        subscript(_ aspect: Aspect) -> Codable? {
+            get {
+                aspects[aspect.id]
+            }
+            set {
+                aspects[aspect.id] = newValue
+            }
+        }
     }
 }

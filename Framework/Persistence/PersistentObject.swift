@@ -8,18 +8,22 @@
 import Combine
 import Foundation
 
-class PersistentObject: Serializable, ObservableObject, Hashable, Identifiable {
+class IdentifiableObject: ObservableObject, Hashable, Identifiable {
     typealias ID = Int64
 
     @Serialized var id: ID = 0
 
-    static func == (lhs: PersistentObject, rhs: PersistentObject) -> Bool {
+    static func == (lhs: IdentifiableObject, rhs: IdentifiableObject) -> Bool {
         lhs.id == rhs.id
     }
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
+}
 
-    required init() {}
+class PersistentObject: IdentifiableObject, Serializable {
+    required override init(){
+        super.init()
+    }
 }

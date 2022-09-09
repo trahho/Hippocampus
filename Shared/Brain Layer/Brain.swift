@@ -9,6 +9,8 @@ import Foundation
 
 final class Brain: Serializable, ObservableObject {
     @Serialized private var informationId: Information.ID = 0
+    @Serialized private var perspectiveId: Information.ID = 0
+    @Serialized private var aspectId: Information.ID = 0
     @PublishedSerialized private(set) var neurons: [Information.ID: Neuron] = [:]
     @PublishedSerialized private(set) var synapses: [Information.ID: Synapse] = [:]
     @PublishedSerialized private var customPerspectives: [Perspective] = []
