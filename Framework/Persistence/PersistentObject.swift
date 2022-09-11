@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-class IdentifiableObject: ObservableObject, Hashable, Identifiable {
+class IdentifiableObject {
     typealias ID = Int64
 
     @Serialized var id: ID = 0

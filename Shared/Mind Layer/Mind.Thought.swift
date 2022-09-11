@@ -11,92 +11,94 @@ infix operator <~: DefaultPrecedence
 
 extension Mind {
     indirect enum Thought: Codable {
-        case about(synapse: Thought, neuron: Thought)
+        typealias ComparableCodable = Codable & Comparable & Equatable
         case always(Bool)
-        case opposite(Thought)
+        case untrue(Thought)
         case any([Thought])
         case all([Thought])
         case knownBy(Thought)
         case knows(Thought)
-        case hasAxon(Thought)
-        case hasDendrite(Thought)
+//        case hasAxon(Thought)
+//        case hasDendrite(Thought)
         case takeOpinion(when: Thought, of: Perspective.ID)
         case hasPerspective(Perspective.ID)
-        case aspectIsEqual(Aspect.ID, String)
-        case aspectIsBelow(Aspect.ID, String)
-        case aspectIsAbove(Aspect.ID, String)
+        case aspectIsEqual(Aspect.ID, any ComparableCodable)
+        case aspectIsBelow(Aspect.ID, any ComparableCodable)
+        case aspectIsAbove(Aspect.ID, any ComparableCodable)
 
-        func opinion(of neuron: Brain.Neuron) -> (matches: Bool, perspective: Perspective.ID?) {
+//        func opinion(of neuron: Brain.Neuron) -> (matches: Bool, perspective: Perspective.ID?) {
+//            switch self {
+//            case let .about(_, neuronThought):
+//                return neuronThought.opinion(of: neuron)
+//            case let .always(truth):
+//                return (truth, nil)
+//            case let .opposite(thought):
+//                let opinion = thought.opinion(of: neuron)
+//                return (!opinion.matches, opinion.perspective)
+//            case let .any(thoughts):
+//                return thoughts.map { $0.opinion(of: neuron) }.first { $0.matches } ?? (false, nil)
+//            case let .all(thoughts):
+//                return thoughts.reduce((matches: false, perspective: nil)) { sum, thought in
+//                    let opinion = thought.opinion(of: neuron)
+//                    return (sum.matches && opinion.matches, sum.perspective ?? opinion.perspective)
+//                }
+//            case let .takeOpinion(thought, perspective):
+//                return (thought.opinion(of: neuron).matches, perspective)
+//            case let .hasPerspective(id):
+//                return (neuron.perspectives.contains(id), nil)
+//            case let .knownBy(thought):
+//                return neuron.dendrites.map { thought.opinion(of: $0.pre) }.first { $0.matches } ?? (false, nil)
+//            case let .knows(thought):
+//                return neuron.dendrites.map { thought.opinion(of: $0.receptor) }.first { $0.matches } ?? (false, nil)
+//            case let .hasAxon(thought):
+//                return neuron.axons.map { thought.opinion(of: $0) }.first { $0.matches } ?? (false, nil)
+//            case let .hasDendrite(thought):
+//                return neuron.dendrites.map { thought.opinion(of: $0) }.first { $0.matches } ?? (false, nil)
+//            case let .aspectIsEqual(id, value):
+//                return (isEqual(neuron.aspects[id], value), nil)
+//            case let .aspectIsBelow(id, value):
+//                return (isBelow(neuron.aspects[id], value), nil)
+//            case let .aspectIsAbove(id, value):
+//                return (isAbove(neuron.aspects[id], value), nil)
+//            }
+//        }
+
+        func opinion(of information: AspectStorage) -> (matches: Bool, perspective: Set<Perspective.ID>) {
             switch self {
-            case let .about(_, neuronThought):
-                return neuronThought.opinion(of: neuron)
             case let .always(truth):
-                return (truth, nil)
-            case let .opposite(thought):
-                let opinion = thought.opinion(of: neuron)
+                return (truth, [])
+            case let .untrue(thought):
+                let opinion = thought.opinion(of: information)
                 return (!opinion.matches, opinion.perspective)
             case let .any(thoughts):
-                return thoughts.map { $0.opinion(of: neuron) }.first { $0.matches } ?? (false, nil)
+                return thoughts.map { $0.opinion(of: information) }.first { $0.matches } ?? (false, [])
             case let .all(thoughts):
-                return thoughts.reduce((matches: false, perspective: nil)) { sum, thought in
-                    let opinion = thought.opinion(of: neuron)
-                    return (sum.matches && opinion.matches, sum.perspective ?? opinion.perspective)
+                return thoughts.reduce((matches: false, perspective: Set<Perspective.ID>())) { sum, thought in
+                    let opinion = thought.opinion(of: information)
+                    return (sum.matches && opinion.matches, sum.perspective.union(opinion.perspective))
                 }
             case let .takeOpinion(thought, perspective):
-                return (thought.opinion(of: neuron).matches, perspective)
+                let opinion = thought.opinion(of: information)
+                return (opinion.matches, opinion.matches ? [perspective] : [])
             case let .hasPerspective(id):
-                return (neuron.perspectives.contains(id), nil)
+                return (information.takesPerspective(id), [])
             case let .knownBy(thought):
-                return neuron.dendrites.map { thought.opinion(of: $0.pre) }.first { $0.matches } ?? (false, nil)
+                return thought.opinion(of: information)
             case let .knows(thought):
-                return neuron.dendrites.map { thought.opinion(of: $0.post) }.first { $0.matches } ?? (false, nil)
-            case let .hasAxon(thought):
-                return neuron.axons.map { thought.opinion(of: $0) }.first { $0.matches } ?? (false, nil)
-            case let .hasDendrite(thought):
-                return neuron.dendrites.map { thought.opinion(of: $0) }.first { $0.matches } ?? (false, nil)
+                return thought.opinion(of: information)
+                //            case .hasAxon:
+                //                return (false, nil)
+                //            case .hasDendrite:
+                //                return (false, nil)
             case let .aspectIsEqual(id, value):
-                return (isEqual(neuron.aspects[id], value), nil)
+                let isEqual = Aspect.compareValues(lhs: information[id], rhs: value) == .equal
+                return (isEqual, [])
             case let .aspectIsBelow(id, value):
-                return (isBelow(neuron.aspects[id], value), nil)
+                let isBelow = Aspect.compareValues(lhs: information[id], rhs: value) == .smaller
+                return (isBelow, [])
             case let .aspectIsAbove(id, value):
-                return (isAbove(neuron.aspects[id], value), nil)
-            }
-        }
-
-        func opinion(of synapse: Brain.Synapse) -> (matches: Bool, perspective: Perspective.ID?) {
-            switch self {
-            case let .about(synapseThought, _):
-                return synapseThought.opinion(of: synapse)
-            case let .always(truth):
-                return (truth, nil)
-            case let .opposite(thought):
-                let opinion = thought.opinion(of: synapse)
-                return (!opinion.matches, opinion.perspective)
-            case let .any(thoughts):
-                return thoughts.map { $0.opinion(of: synapse) }.first { $0.matches } ?? (false, nil)
-            case let .all(thoughts):
-                return thoughts.reduce((matches: false, perspective: nil)) { sum, thought in
-                    let opinion = thought.opinion(of: synapse)
-                    return (sum.matches && opinion.matches, sum.perspective ?? opinion.perspective)
-                }
-            case let .takeOpinion(thought, perspective):
-                return (thought.opinion(of: synapse).matches, perspective)
-            case let .hasPerspective(id):
-                return (synapse.perspectives.contains(id), nil)
-            case let .knownBy(thought):
-                return thought.opinion(of: synapse.pre)
-            case let .knows(thought):
-                return thought.opinion(of: synapse.post)
-            case .hasAxon:
-                return (false, nil)
-            case .hasDendrite:
-                return (false, nil)
-            case let .aspectIsEqual(id, value):
-                return (isEqual(synapse.aspects[id], value), nil)
-            case let .aspectIsBelow(id, value):
-                return (isBelow(synapse.aspects[id], value), nil)
-            case let .aspectIsAbove(id, value):
-                return (isAbove(synapse.aspects[id], value), nil)
+                let isAbove = Aspect.compareValues(lhs: information[id], rhs: value) == .larger
+                return (isAbove, [])
             }
         }
 

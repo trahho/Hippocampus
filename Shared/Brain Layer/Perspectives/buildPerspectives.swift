@@ -6,9 +6,7 @@
 //
 
 import Foundation
-func buildPerspectives(@Perspective.Builder _ content: () -> [Perspective]) -> [Perspective.ID: Perspective] {
-    var perspectiveId: Perspective.ID = 0
-    var aspectId: Aspect.ID = 0
+private func buildPerspectives(_ content: () -> [Perspective], _ perspectiveId: inout Int64, _ aspectId: inout Int64) -> [Perspective.ID: Perspective] {
     let content = content()
     var result: [Perspective.ID: Perspective] = [:]
     for perspective in content {
@@ -17,29 +15,24 @@ func buildPerspectives(@Perspective.Builder _ content: () -> [Perspective]) -> [
         for aspect in perspective.aspects {
             aspectId -= 1
             aspect.id = aspectId
+            aspect.perspective = perspective
         }
         result[perspective.id] = perspective
     }
     return result
 }
 
+func buildPerspectives(@Perspective.Builder _ content: () -> [Perspective]) -> [Perspective.ID: Perspective] {
+    var perspectiveId: Perspective.ID = 0
+    var aspectId: Aspect.ID = 0
+    return buildPerspectives(content, &perspectiveId, &aspectId)
+}
+
 extension Dictionary where Key == Perspective.ID, Value == Perspective {
     func addGroup(@Perspective.Builder _ content: () -> [Perspective]) -> [Perspective.ID: Perspective] {
         var perspectiveId = keys.min() ?? 0
         var aspectId = values.flatMap { $0.aspects.map { $0.id } }.min() ?? 0
-        let content = content()
-        var result: [Perspective.ID: Perspective] = [:]
-        for perspective in content {
-            perspectiveId -= 1
-            perspective.id = perspectiveId
-            for aspect in perspective.aspects {
-                aspectId -= 1
-                aspect.id = aspectId
-            }
-            result[perspective.id] = perspective
-        }
-        return self.merging(result) { $1 }
 
-//        return self.merging(result) { old, _ in old }
+        return self.merging(buildPerspectives(content, &perspectiveId, &aspectId)) { $1 }
     }
 }

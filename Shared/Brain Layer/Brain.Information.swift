@@ -8,14 +8,14 @@
 import Foundation
 
 extension Brain {
-    class Information: PersistentObject, AspectStorage {
+    class Information: PersistentObject, ObservableObject, AspectStorage {
         @PublishedSerialized private(set) var perspectives: Set<Perspective.ID> = []
         @PublishedSerialized private(set) var aspects: [Aspect.ID: Codable] = [:]
 
         required init() {}
-        
-        func setValue(_ key: Aspect.ID, value: Codable?) {
-            aspects[key] = value
+
+        func takesPerspective(_ id: Perspective.ID) -> Bool {
+            perspectives.contains(id)
         }
 
         subscript(_ key: Aspect.ID) -> Codable? {
@@ -24,15 +24,6 @@ extension Brain {
             }
             set {
                 aspects[key] = newValue
-            }
-        }
-
-        subscript(_ aspect: Aspect) -> Codable? {
-            get {
-                aspects[aspect.id]
-            }
-            set {
-                aspects[aspect.id] = newValue
             }
         }
     }

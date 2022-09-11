@@ -8,13 +8,31 @@
 import Foundation
 extension Mind {
     class Idea: IdentifiableObject {
-        @Observed var neuron: Brain.Neuron
-        var perspective: Perspective?
+        @Observed var receptor: Brain.Neuron
+        @Observed var axon: Brain.Synapse
+        var perspectives: [Perspective]
 
-        init(neuron: Brain.Neuron, perspective: Perspective?) {
-            self.perspective = perspective
+        override var id: ID {
+            get {
+                axon.id
+            }
+            set {}
+        }
+
+        subscript(_ aspect: Aspect) -> Codable? {
+            get {
+                aspect[axon]
+            }
+            set {
+                aspect[axon] = newValue
+            }
+        }
+
+        init(synapse: Brain.Synapse, perspectives: [Perspective]) {
+            self.perspectives = perspectives
             super.init()
-            self.neuron = neuron
+            self.axon = synapse
+            self.receptor = synapse.receptor
         }
     }
 }

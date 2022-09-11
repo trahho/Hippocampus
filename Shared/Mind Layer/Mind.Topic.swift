@@ -13,11 +13,24 @@ extension Mind {
         @Serialized var secondary: [Thought] = []
         @Serialized var stimuli: [Idea] = []
         @Serialized var consequences: [Idea] = []
-        @Serialized var associations: [Link] = []
 
         func rethink(of brain: Brain) {
-            var ideas: [Brain.Neuron.ID: Idea] = [:]
-            var links: [Brain.Neuron.ID: Link] = [:]
+            primary = brain.synapses.compactMapValues({ synapse in
+                let axonOpinion = primary.map { thought in
+                    thought.opinion(of: synapse)
+                }.first { opinion in
+                    opinion.matches
+                }
+                let receptorOpinion = primary.map { thought in
+                    thought.opinion(of: synapse.)
+                }.first { opinion in
+                    opinion.matches
+                }
+            })
+            
+            
+            var ideas: [Idea] = []
+            
             for neuron in brain.neurons.values {
                 guard ideas[neuron.id] == nil, let opinion = primary.map({ thought in thought.opinion(of: neuron) }).first(where: { opinion in opinion.matches }) else { continue }
 
@@ -26,7 +39,7 @@ extension Mind {
                 if let id = opinion.perspective, let perspective = brain.perspectives[id] {
                     ideaPerspective = perspective
                 }
-                let idea = Idea(neuron: neuron, perspective: ideaPerspective)
+                
             }
         }
     }

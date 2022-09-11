@@ -13,15 +13,20 @@ final class Brain: Serializable, ObservableObject {
     @Serialized private var aspectId: Information.ID = 0
     @PublishedSerialized private(set) var neurons: [Information.ID: Neuron] = [:]
     @PublishedSerialized private(set) var synapses: [Information.ID: Synapse] = [:]
-    @PublishedSerialized private var customPerspectives: [Perspective] = []
+    @PublishedSerialized private var customPerspectives: [Perspective.ID: Perspective] = [:]
 
-    var perspectives: [Perspective] {
-        Perspective.perspectives + customPerspectives
+    var perspectives: [Perspective.ID: Perspective] {
+        Perspective.perspectives.merging(customPerspectives, uniquingKeysWith: { $1 })
     }
 
     func recover() {
         synapses.values.forEach { synapse in
             synapse.connect()
+        }
+        customPerspectives.values.forEach { perspective in
+            perspective.aspects.forEach { aspect in
+                aspect.perspective = perspective
+            }
         }
     }
 
