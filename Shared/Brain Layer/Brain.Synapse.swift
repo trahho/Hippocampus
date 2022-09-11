@@ -14,24 +14,24 @@ extension Brain {
 
         required init() {}
 
-        override subscript(aspect: Aspect) -> Codable? {
-            get {
-                if receptor.takesPerspective(aspect.perspective) {
-                    return receptor[aspect]
-                } else if takesPerspective(aspect.perspective) {
-                    return super[aspect]
-                } else {
-                    return nil
-                }
-            }
-            set {
-                if receptor.takesPerspective(aspect.perspective) {
-                    receptor[aspect] = newValue
-                } else if takesPerspective(aspect.perspective) {
-                    super[aspect] = newValue
-                }
-            }
-        }
+//        override subscript(aspect: Aspect) -> Codable? {
+//            get {
+//                if receptor.takesPerspective(aspect.perspective) {
+//                    return receptor[aspect]
+//                } else if takesPerspective(aspect.perspective) {
+//                    return super[aspect]
+//                } else {
+//                    return nil
+//                }
+//            }
+//            set {
+//                if receptor.takesPerspective(aspect.perspective) {
+//                    receptor[aspect] = newValue
+//                } else if takesPerspective(aspect.perspective) {
+//                    super[aspect] = newValue
+//                }
+//            }
+//        }
 
         func connect() {
             emitter.axons.insert(self)

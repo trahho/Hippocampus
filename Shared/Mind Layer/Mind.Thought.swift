@@ -149,7 +149,7 @@ extension Mind {
         }
 
         static prefix func ! (rhs: Thought) -> Thought {
-            .opposite(rhs)
+            .untrue(rhs)
         }
 
         static func && (lhs: Thought, rhs: Thought) -> Thought {

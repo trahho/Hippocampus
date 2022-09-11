@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C528A18B28CDE3020027FA44 /* AspectTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C528A18A28CDE3020027FA44 /* AspectTest.swift */; };
+		C528A18C28CDE3550027FA44 /* Aspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE565289884CE0060A066 /* Aspect.swift */; };
+		C528A18D28CDE37F0027FA44 /* ComparisonResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CD5A9228C40D7A00DA9F7D /* ComparisonResult.swift */; };
 		C54BE4B12894866C0060A066 /* HippocampusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4A12894866A0060A066 /* HippocampusApp.swift */; };
 		C54BE4B22894866C0060A066 /* HippocampusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4A12894866A0060A066 /* HippocampusApp.swift */; };
 		C54BE4B32894866C0060A066 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4A22894866A0060A066 /* ContentView.swift */; };
@@ -119,7 +122,19 @@
 		C5CD5A9428C40D7A00DA9F7D /* ComparisonResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CD5A9228C40D7A00DA9F7D /* ComparisonResult.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		C528A18528CDE2A90027FA44 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C54BE49C289486690060A066 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C54BE4AD2894866C0060A066;
+			remoteInfo = "Hippocampus (macOS)";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		C528A18128CDE2A90027FA44 /* HippocampusTestsMacOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HippocampusTestsMacOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C528A18A28CDE3020027FA44 /* AspectTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectTest.swift; sourceTree = "<group>"; };
 		C54BE4A12894866A0060A066 /* HippocampusApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HippocampusApp.swift; sourceTree = "<group>"; };
 		C54BE4A22894866A0060A066 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C54BE4A32894866C0060A066 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -184,6 +199,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		C528A17E28CDE2A90027FA44 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C54BE4A52894866C0060A066 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -201,6 +223,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C528A18228CDE2A90027FA44 /* HippocampusTestsMacOS */ = {
+			isa = PBXGroup;
+			children = (
+				C528A18A28CDE3020027FA44 /* AspectTest.swift */,
+			);
+			path = HippocampusTestsMacOS;
+			sourceTree = "<group>";
+		};
 		C54BE49B289486690060A066 = {
 			isa = PBXGroup;
 			children = (
@@ -210,6 +240,7 @@
 				C54BE4BF28958F470060A066 /* Framework */,
 				C54BE4A02894866A0060A066 /* Shared */,
 				C54BE4AF2894866C0060A066 /* macOS */,
+				C528A18228CDE2A90027FA44 /* HippocampusTestsMacOS */,
 				C54BE4A92894866C0060A066 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -230,6 +261,7 @@
 			children = (
 				C54BE4A82894866C0060A066 /* Hippocampus.app */,
 				C54BE4AE2894866C0060A066 /* Hippocampus.app */,
+				C528A18128CDE2A90027FA44 /* HippocampusTestsMacOS.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -407,6 +439,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		C528A18028CDE2A90027FA44 /* HippocampusTestsMacOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C528A18728CDE2A90027FA44 /* Build configuration list for PBXNativeTarget "HippocampusTestsMacOS" */;
+			buildPhases = (
+				C528A17D28CDE2A90027FA44 /* Sources */,
+				C528A17E28CDE2A90027FA44 /* Frameworks */,
+				C528A17F28CDE2A90027FA44 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C528A18628CDE2A90027FA44 /* PBXTargetDependency */,
+			);
+			name = HippocampusTestsMacOS;
+			productName = HippocampusTestsMacOS;
+			productReference = C528A18128CDE2A90027FA44 /* HippocampusTestsMacOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		C54BE4A72894866C0060A066 /* Hippocampus (iOS) */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C54BE4B92894866C0060A066 /* Build configuration list for PBXNativeTarget "Hippocampus (iOS)" */;
@@ -448,9 +498,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1340;
+				LastSwiftUpdateCheck = 1400;
 				LastUpgradeCheck = 1340;
 				TargetAttributes = {
+					C528A18028CDE2A90027FA44 = {
+						CreatedOnToolsVersion = 14.0;
+						TestTargetID = C54BE4AD2894866C0060A066;
+					};
 					C54BE4A72894866C0060A066 = {
 						CreatedOnToolsVersion = 13.4.1;
 					};
@@ -474,11 +528,19 @@
 			targets = (
 				C54BE4A72894866C0060A066 /* Hippocampus (iOS) */,
 				C54BE4AD2894866C0060A066 /* Hippocampus (macOS) */,
+				C528A18028CDE2A90027FA44 /* HippocampusTestsMacOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		C528A17F28CDE2A90027FA44 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C54BE4A62894866C0060A066 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -498,6 +560,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		C528A17D28CDE2A90027FA44 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C528A18C28CDE3550027FA44 /* Aspect.swift in Sources */,
+				C528A18B28CDE3020027FA44 /* AspectTest.swift in Sources */,
+				C528A18D28CDE37F0027FA44 /* ComparisonResult.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C54BE4A42894866C0060A066 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -622,7 +694,55 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		C528A18628CDE2A90027FA44 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C54BE4AD2894866C0060A066 /* Hippocampus (macOS) */;
+			targetProxy = C528A18528CDE2A90027FA44 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		C528A18828CDE2A90027FA44 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6Z37VA2PZL;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = de.kuehnerleben.HippocampusTestsMacOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hippocampus.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Hippocampus";
+			};
+			name = Debug;
+		};
+		C528A18928CDE2A90027FA44 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6Z37VA2PZL;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = de.kuehnerleben.HippocampusTestsMacOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hippocampus.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Hippocampus";
+			};
+			name = Release;
+		};
 		C54BE4B72894866C0060A066 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -862,6 +982,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		C528A18728CDE2A90027FA44 /* Build configuration list for PBXNativeTarget "HippocampusTestsMacOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C528A18828CDE2A90027FA44 /* Debug */,
+				C528A18928CDE2A90027FA44 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C54BE49F289486690060A066 /* Build configuration list for PBXProject "Hippocampus" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

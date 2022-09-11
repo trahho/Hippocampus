@@ -15,10 +15,10 @@ struct ShowConsciousnessView: View {
     }
 
     var body: some View {
-        List(Array(brain.neurons.values)) { neuron in
-            let text = neuron[-1] as? String ?? "Nix"
-            Text("\(neuron.id.hashValue) to: \(neuron.axons.count) from: \(neuron.dendrites.count) with: \(text)")
-        }
+//        List(Array(brain.neurons.values)) { neuron in
+//            let text = neuron[-1] as? String ?? "Nix"
+//            Text("\(neuron.id.hashValue) to: \(neuron.axons.count) from: \(neuron.dendrites.count) with: \(text)")
+//        }
         Button("Add") {
             brain.add(neuron: Brain.Neuron())
             consciousness.commit()
