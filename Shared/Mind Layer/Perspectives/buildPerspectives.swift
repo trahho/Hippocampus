@@ -6,18 +6,19 @@
 //
 
 import Foundation
+
 private func buildPerspectives(_ content: () -> [Perspective], _ perspectiveId: inout Int64, _ aspectId: inout Int64) -> [Perspective.ID: Perspective] {
     let content = content()
     var result: [Perspective.ID: Perspective] = [:]
     for perspective in content {
         perspectiveId -= 1
         perspective.id = perspectiveId
-        for aspect in perspective.aspects {
+        result[perspective.id] = perspective
+        for aspect in perspective.aspects.filter({$0.id == 0}) {
             aspectId -= 1
             aspect.id = aspectId
             aspect.perspective = perspective
         }
-        result[perspective.id] = perspective
     }
     return result
 }

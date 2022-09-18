@@ -17,6 +17,10 @@ extension Brain {
         func takesPerspective(_ id: Perspective.ID) -> Bool {
             perspectives.contains(id)
         }
+        
+        func takePerspective(_ id: Perspective.ID) {
+            perspectives.insert(id)
+        }
 
         subscript(_ key: Aspect.ID) -> Codable? {
             get {

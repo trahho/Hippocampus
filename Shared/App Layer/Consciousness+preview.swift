@@ -12,23 +12,22 @@ extension Consciousness {
         let memory = Memory(url: URL.virtual())
         let brain = memory.brain
         let neuron1 = Brain.Neuron()
-        neuron1[-1] = "Hallo"
+        neuron1[Perspective.thema.name] = "A"
         let neuron2 = Brain.Neuron()
-        neuron2[-1] = "Welt"
-        let synapse = Brain.Synapse(pre: neuron1, post: neuron2)
-        brain.add(neuron: neuron1)
-        brain.add(neuron: neuron2)
-        brain.add(synapse: synapse)
+        neuron2[Perspective.thema.name] = "B"
+        let neuron3 = Brain.Neuron()
+        neuron3[Perspective.thema.name] = "C"
 
-        let criterion: Mind.Thought = .any([
-            .always(true),
-            .knownBy(
-                .hasPerspective(Perspective.Hallo)),
-        ])
+        brain.add(synapse: Brain.Synapse(pre: neuron1, post: neuron2))
+        brain.add(synapse: Brain.Synapse(pre: neuron2, post: neuron3))
+        brain.add(synapse: Brain.Synapse(pre: neuron3, post: neuron1))
 
-        let testCriterion: Mind.Thought = (.always(true) || .knownBy(.hasPerspective(Perspective.Hallo))) && .always(false)
+        let topic = Mind.Topic()
+        let thought = Mind.Thought()
+        thought.opinion = Mind.Opinion.takesPerspective(Perspective.thema)
+        topic.thoughts.append(thought)
 
-        let notesRootCriterion: Mind.Thought = .about(synapse: .always(true), neuron: .takeOpinion(when: .hasPerspective(0) ~> .hasPerspective(1), of: 1))
+        memory.mind.add(topic: topic)
 
         let result = Consciousness()
         result.showMemory(memory)

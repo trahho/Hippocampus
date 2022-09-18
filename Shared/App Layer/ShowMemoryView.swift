@@ -14,14 +14,44 @@ struct ShowConsciousnessView: View {
         consciousness.memory.brain
     }
 
+    var mind: Mind {
+        consciousness.memory.mind
+    }
+
+    var topic: Mind.Topic {
+        mind.topics.values.first!
+    }
+
+    var items: [Mind.Idea] {
+        topic.ideas
+    }
+
     var body: some View {
-//        List(Array(brain.neurons.values)) { neuron in
-//            let text = neuron[-1] as? String ?? "Nix"
-//            Text("\(neuron.id.hashValue) to: \(neuron.axons.count) from: \(neuron.dendrites.count) with: \(text)")
-//        }
-        Button("Add") {
-            brain.add(neuron: Brain.Neuron())
-            consciousness.commit()
+        ShowTopicView(topic: topic)
+            .onAppear {
+                topic.rethink(of: brain)
+            }
+    }
+}
+
+struct ShowTopicView: View {
+    @ObservedObject var topic: Mind.Topic
+
+    var items: [Mind.Idea] {
+        topic.ideas.sorted(by: { a, b in
+            let aspect = Perspective.thema.name
+            return aspect[a, ""] < aspect[b, ""]
+        })
+    }
+
+    var body: some View {
+        Form {
+            Text("\(topic.ideas.count)")
+            List(items) { item in
+                let aspect = Perspective.thema.name
+                let text: String = aspect[item, ""]
+                Text(text)
+            }
         }
     }
 }

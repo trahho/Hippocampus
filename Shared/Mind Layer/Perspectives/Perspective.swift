@@ -10,18 +10,25 @@ import Foundation
 @dynamicMemberLookup
 class Perspective: PersistentObject {
     static let perspectives = buildPerspectives {
-        Perspective("Hallo") {
-            Aspect("Welt", .text)
-            Aspect("Sonnenuntergang", .drawing)
+        Perspective("Global") {
+            Aspect("Name", .text)
+        }
+        Perspective("Thema") {
+            Aspect("Name", .text)
+        }
+        Perspective("Notiz") {
+            Aspect("Name", .text)
+            Aspect("Text", .text)
+            Aspect("Zeichnung", .drawing)
         }
     }
 
-    static subscript(dynamicMember designation: String) -> Perspective.ID {
-        perspectives.values.first { $0.designation == designation }!.id
+    static subscript(dynamicMember designation: String) -> Perspective {
+        perspectives.values.first { $0.designation.lowercased() == designation.lowercased() }!
     }
 
-    subscript(dynamicMember designation: String) -> Aspect.ID {
-        aspects.first { $0.designation == designation }!.id
+    subscript(dynamicMember designation: String) -> Aspect {
+        aspects.first { $0.designation.lowercased() == designation.lowercased() }!
     }
 
     @Serialized var designation: String = ""
