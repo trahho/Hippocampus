@@ -18,22 +18,22 @@ extension Mind.Opinion {
             self.right = right
         }
 
-        override func take(for information: Brain.Information) -> (matches: Bool, perspectives: Set<Perspective.ID>) {
+        override func take(for information: Brain.Information) -> (matches: Bool, perspectives: Set<Perspective>) {
             return (right, [])
         }
     }
 
     class TakesPerspective: Mind.Opinion {
-        @Serialized var perspective: Perspective.ID
+        @Serialized var perspective: Perspective
 
         required init() {}
 
-        init(perspective: Perspective.ID) {
+        init(perspective: Perspective) {
             super.init()
             self.perspective = perspective
         }
 
-        override func take(for information: Brain.Information) -> (matches: Bool, perspectives: Set<Perspective.ID>) {
+        override func take(for information: Brain.Information) -> (matches: Bool, perspectives: Set<Perspective>) {
             information.takesPerspective(perspective) ? (true, [perspective]) : (false, [])
         }
     }
@@ -43,44 +43,42 @@ extension Mind.Opinion {
             case below, above, equal, unequal
         }
 
-        @Serialized var aspect: Aspect.ID
-        @Serialized var perspective: Perspective.ID
+        @Serialized var aspect: Aspect
         @Serialized var value: T?
         @Serialized var comparison: Comparison
 
         required init() {}
 
-        init(perspective: Perspective.ID, aspect: Aspect.ID, comparison: Comparison, value: T?) {
+        init(aspect: Aspect, comparison: Comparison, value: T?) {
             super.init()
-            self.perspective = perspective
             self.aspect = aspect
             self.comparison = comparison
             self.value = value
         }
 
-        override func take(for information: Brain.Information) -> (matches: Bool, perspectives: Set<Perspective.ID>) {
-            let aspectValue = information[aspect] as? T
+        override func take(for information: Brain.Information) -> (matches: Bool, perspectives: Set<Perspective>) {
+            let aspectValue: T? = aspect[information]
             switch comparison {
             case .below:
-                guard information.takesPerspective(perspective), value != nil, aspectValue == nil || aspectValue! < value! else {
+                guard information.takesPerspective(aspect.perspective), value != nil, aspectValue == nil || aspectValue! < value! else {
                     return (false, [])
                 }
-                return (true, [perspective])
+                return (true, [aspect.perspective])
             case .above:
-                guard information.takesPerspective(perspective), aspectValue != nil, value == nil || aspectValue! > value! else {
+                guard information.takesPerspective(aspect.perspective), aspectValue != nil, value == nil || aspectValue! > value! else {
                     return (false, [])
                 }
-                return (true, [perspective])
+                return (true, [aspect.perspective])
             case .equal:
-                guard information.takesPerspective(perspective), value == aspectValue else {
+                guard information.takesPerspective(aspect.perspective), value == aspectValue else {
                     return (false, [])
                 }
-                return (true, [perspective])
+                return (true, [aspect.perspective])
             case .unequal:
-                guard information.takesPerspective(perspective), value != aspectValue else {
+                guard information.takesPerspective(aspect.perspective), value != aspectValue else {
                     return (false, [])
                 }
-                return (true, [perspective])
+                return (true, [aspect.perspective])
             }
         }
     }

@@ -41,13 +41,12 @@ class Aspect: PersistentObject {
 //    }
 
     subscript<T: Codable>(_ storage: AspectStorage) -> T? {
-        get { return storage[self] as? T ?? self.defaultValue as? T }
-        set { storage[self] = newValue }
+        get { return storage[self.id] as? T ?? self.defaultValue as? T }
+        set { storage[self.id] = newValue }
     }
 
     subscript<T: Codable>(_ storage: AspectStorage, _ defaultValue: T) -> T {
         get { return self[storage] ?? defaultValue }
-        set { storage[self] = newValue }
     }
 
 //    func value<T: AspectStorage>(for storage: T) -> Codable? {

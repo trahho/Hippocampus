@@ -21,10 +21,10 @@ extension Mind.Opinion {
     }
 
     static func aspectValueIs<T: ComparableCodable>(_ aspect: Aspect, _ comparison: AspectValueComparison<T>.Comparison, _ value: T) -> Mind.Opinion {
-        AspectValueComparison<T>(perspective: aspect.perspective.id, aspect: aspect.id, comparison: comparison, value: value)
+        AspectValueComparison<T>(aspect: aspect, comparison: comparison, value: value)
     }
-    
+
     static func takesPerspective(_ perspective: Perspective) -> Mind.Opinion {
-        TakesPerspective(perspective: perspective.id)
+        TakesPerspective(perspective: perspective)
     }
 }

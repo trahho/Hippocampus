@@ -19,7 +19,7 @@ extension Mind.Opinion {
         }
 
         class Wrong: AboutOne {
-            override func take(for information: Brain.Information) -> (matches: Bool, perspectives: Set<Perspective.ID>) {
+            override func take(for information: Brain.Information) -> (matches: Bool, perspectives: Set<Perspective>) {
                 let opinion = self.opinion.take(for: information)
                 return (!opinion.matches, !opinion.matches ? opinion.perspectives : [])
             }
@@ -41,7 +41,7 @@ extension Mind.Opinion {
                 super.init()
             }
 
-            override func take(for information: Brain.Information) -> (matches: Bool, perspectives: Set<Perspective.ID>) {
+            override func take(for information: Brain.Information) -> (matches: Bool, perspectives: Set<Perspective>) {
                 if let synapse = information as? Brain.Synapse {
                     switch familiarity {
                     case .knows:

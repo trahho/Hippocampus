@@ -46,7 +46,7 @@ extension Mind {
             let agreement = thoughts.map { $0.opinion }
                 .reduce((matches: false, perspectives: Set<Perspective>())) { agreement, opinion in
                     let acceptance = opinion.take(for: information)
-                    let acceptedPerspectives = acceptance.perspectives.compactMap { brain!.perspectives[$0] }
+                    let acceptedPerspectives = acceptance.perspectives
                     return (agreement.matches || acceptance.matches, agreement.perspectives.union(acceptedPerspectives))
                 }
             return agreement.matches ? agreement.perspectives : nil

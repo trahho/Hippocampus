@@ -33,7 +33,13 @@ final class Mind: Serializable, ObservableObject {
         _brain = brain
     }
 
-    func recover() {}
+    func recover() {
+        customPerspectives.values.forEach { perspective in
+            perspective.aspects.forEach { aspect in
+                aspect.perspective = perspective
+            }
+        }
+    }
 
     @Serialized private var thoughtId: Thought.ID = 0
     @PublishedSerialized private var customThoughts: [Thought.ID: Thought] = [:]
@@ -65,5 +71,21 @@ final class Mind: Serializable, ObservableObject {
             topic.id = topicId
         }
         customTopics[topic.id] = topic
+    }
+
+    @Serialized private var perspectiveId: Perspective.ID = 0
+    @PublishedSerialized private var customPerspectives: [Perspective.ID: Perspective] = [:]
+
+    var perspectives: [Perspective.ID: Perspective] {
+        Perspective.perspectives.merging(customPerspectives, uniquingKeysWith: { $1 })
+    }
+    
+    func add(perspective: Perspective) {
+        guard customPerspectives[perspective.id] == nil else { return }
+        if perspective.id == 0 {
+            perspectiveId += 1
+            perspective.id = perspectiveId
+        }
+        customPerspectives[perspective.id] = perspective
     }
 }

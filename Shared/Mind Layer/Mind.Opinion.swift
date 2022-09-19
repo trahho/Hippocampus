@@ -11,13 +11,11 @@ extension Mind {
     class Opinion: PersistentObject {
         typealias ComparableCodable = Codable & Comparable
 
-        func take(for information: Brain.Information) -> (matches: Bool, perspectives: Set<Perspective.ID>) {
-            fatalError()
+        func take(for information: Brain.Information) -> (matches: Bool, perspectives: Set<Perspective>) {
+            (false, [])
         }
     }
 }
-
-
 
 //        static func ~> (lhs: Thought, rhs: Thought) -> Thought {
 //            lhs && .knows(rhs)

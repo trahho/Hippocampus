@@ -19,8 +19,8 @@ extension Mind.Opinion {
         }
 
         class Some: AboutMany {
-            override func take(for information: Brain.Information) -> (matches: Bool, perspectives: Set<Perspective.ID>) {
-                let agreement = opinions.reduce((matches: false, perspectives: Set<Perspective.ID>())) { agreement, opinion in
+            override func take(for information: Brain.Information) -> (matches: Bool, perspectives: Set<Perspective>) {
+                let agreement = opinions.reduce((matches: false, perspectives: Set<Perspective>())) { agreement, opinion in
                     let acceptance = opinion.take(for: information)
                     return (agreement.matches || acceptance.matches, agreement.perspectives.union(acceptance.perspectives))
                 }
@@ -29,8 +29,8 @@ extension Mind.Opinion {
         }
 
         class All: AboutMany {
-            override func take(for information: Brain.Information) -> (matches: Bool, perspectives: Set<Perspective.ID>) {
-                let agreement = opinions.reduce((matches: false, perspectives: Set<Perspective.ID>())) { agreement, opinion in
+            override func take(for information: Brain.Information) -> (matches: Bool, perspectives: Set<Perspective>) {
+                let agreement = opinions.reduce((matches: false, perspectives: Set<Perspective>())) { agreement, opinion in
                     let acceptance = opinion.take(for: information)
                     return (agreement.matches && acceptance.matches, agreement.perspectives.union(acceptance.perspectives))
                 }
@@ -39,7 +39,7 @@ extension Mind.Opinion {
         }
 
         class First: AboutMany {
-            override func take(for information: Brain.Information) -> (matches: Bool, perspectives: Set<Perspective.ID>) {
+            override func take(for information: Brain.Information) -> (matches: Bool, perspectives: Set<Perspective>) {
                 return opinions.map { $0.take(for: information) }.first { $0.matches } ?? (false, [])
             }
         }
