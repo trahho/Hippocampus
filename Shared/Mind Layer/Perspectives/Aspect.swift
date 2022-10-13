@@ -40,12 +40,12 @@ class Aspect: PersistentObject {
 //        return lhs! < rhs! ? .smaller : .larger
 //    }
 
-    subscript<T: Codable>(_ storage: AspectStorage) -> T? {
+    subscript<T: Codable>(_ storage: any AspectStorage) -> T? {
         get { return storage[self.id] as? T ?? self.defaultValue as? T }
         set { storage[self.id] = newValue }
     }
 
-    subscript<T: Codable>(_ storage: AspectStorage, _ defaultValue: T) -> T {
+    subscript<T: Codable>(_ storage: any AspectStorage, _ defaultValue: T) -> T {
         get { return self[storage] ?? defaultValue }
     }
 
@@ -58,11 +58,7 @@ class Aspect: PersistentObject {
 //    }
 }
 
-extension Aspect {
-    enum Representation {
-        case text, drawing
-    }
-}
+
 
 // extension Dictionary where Self.Key == Brain.Aspect.ID, Self.Value == Codable {
 //

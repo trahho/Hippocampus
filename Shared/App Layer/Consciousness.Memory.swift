@@ -23,6 +23,12 @@ extension Consciousness {
         var mind: Mind {
             persistentMind!.content
         }
+        
+        private var persistentSenses: PersistentData<Senses>?
+
+        var senses: Senses {
+            persistentSenses!.content
+        }
 
         func commit() {
             if persistentBrain?.hasChanges ?? false {
@@ -30,6 +36,9 @@ extension Consciousness {
             }
             if persistentMind?.hasChanges ?? false {
                 persistentMind!.commit()
+            }
+            if persistentSenses?.hasChanges ?? false {
+                persistentSenses!.commit()
             }
         }
 
@@ -52,6 +61,11 @@ extension Consciousness {
             let mindUrl = url.appendingPathComponent("mind." + HippocampusApp.persistentExtension)
             persistentMind = setup(url: mindUrl, content: Mind(), didRefresh: mindDidRefresh)
         }
+        
+        func setupSenses(url: URL) {
+            let sensesUrl = url.appendingPathComponent("senses." + HippocampusApp.persistentExtension)
+            persistentSenses = setup(url: sensesUrl, content: Senses(), didRefresh: sensesDidRefresh)
+        }
 
         func brainDidRefresh() {
             brain.recover()
@@ -63,6 +77,15 @@ extension Consciousness {
         func mindDidRefresh() {
             if let brain = persistentBrain?.content {
                 mind.adoptBrain(brain)
+            }
+            if let senses = persistentSenses?.content {
+                senses.adoptMind(mind)
+            }
+        }
+        
+        func sensesDidRefresh() {
+            if let mind = persistentMind?.content {
+                senses.adoptMind(mind)
             }
         }
 

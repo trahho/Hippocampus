@@ -46,13 +46,22 @@ struct ShowTopicView: View {
 
     var body: some View {
         Form {
-            Text("\(topic.ideas.count)")
-            List(items) { item in
-                let aspect = Perspective.thema.name
-                let text: String = aspect[item, ""]
-                Text(text)
+            VStack {
+                Text("\(topic.ideas.count)")
+                ForEach(items) { item in
+//                    let aspect = Perspective.thema.name
+//                    aspect.sensation(for: item, variation: .normal)
+                    EmptyView()
+                }
             }
+//            Text("3")
+//            List {
+//                Text("A")
+//                Text("B")
+//                Text("C")
+//            }
         }
+//        .frame(width: 400)
     }
 }
 

@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C509589528DCFBF600068D37 /* Senses.swift in Sources */ = {isa = PBXBuildFile; fileRef = C509589428DCFBF600068D37 /* Senses.swift */; };
+		C509589728DE3C5200068D37 /* Aspect+Sensation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C509589628DE3C5200068D37 /* Aspect+Sensation.swift */; };
+		C509589828DE3C5200068D37 /* Aspect+Sensation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C509589628DE3C5200068D37 /* Aspect+Sensation.swift */; };
+		C509589A28DE44D600068D37 /* Aspect.Representation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C509589928DE44D600068D37 /* Aspect.Representation.swift */; };
+		C509589B28DE44D600068D37 /* Aspect.Representation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C509589928DE44D600068D37 /* Aspect.Representation.swift */; };
+		C509589D28E0D4B400068D37 /* Senses.Sensation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C509589C28E0D4B400068D37 /* Senses.Sensation.swift */; };
+		C509589E28E0D4B400068D37 /* Senses.Sensation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C509589C28E0D4B400068D37 /* Senses.Sensation.swift */; };
+		C50958A028E0D4F700068D37 /* Visualisation.Intensity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C509589F28E0D4F700068D37 /* Visualisation.Intensity.swift */; };
+		C50958A128E0D4F700068D37 /* Visualisation.Intensity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C509589F28E0D4F700068D37 /* Visualisation.Intensity.swift */; };
 		C50BEEC828D519EB00F9F6E6 /* Mind.Opinion+Basics.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50BEEC728D519EA00F9F6E6 /* Mind.Opinion+Basics.swift */; };
 		C50BEEC928D519EB00F9F6E6 /* Mind.Opinion+Basics.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50BEEC728D519EA00F9F6E6 /* Mind.Opinion+Basics.swift */; };
 		C50BEECB28D51ACA00F9F6E6 /* Mind.Opinion+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50BEECA28D51ACA00F9F6E6 /* Mind.Opinion+Factory.swift */; };
@@ -19,6 +28,8 @@
 		C50BEED528D53EA300F9F6E6 /* Mind.Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50BEED328D53EA300F9F6E6 /* Mind.Link.swift */; };
 		C50BEED728D673DA00F9F6E6 /* Mind.Thing.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50BEED628D673DA00F9F6E6 /* Mind.Thing.swift */; };
 		C50BEED828D673DA00F9F6E6 /* Mind.Thing.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50BEED628D673DA00F9F6E6 /* Mind.Thing.swift */; };
+		C5187E1928E63B7900C09EB4 /* Visualisation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5187E1828E63B7900C09EB4 /* Visualisation.swift */; };
+		C5187E1A28E63B7900C09EB4 /* Visualisation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5187E1828E63B7900C09EB4 /* Visualisation.swift */; };
 		C528A18B28CDE3020027FA44 /* AspectTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C528A18A28CDE3020027FA44 /* AspectTest.swift */; };
 		C528A18C28CDE3550027FA44 /* Aspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE565289884CE0060A066 /* Aspect.swift */; };
 		C528A18D28CDE37F0027FA44 /* ComparisonResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CD5A9228C40D7A00DA9F7D /* ComparisonResult.swift */; };
@@ -151,12 +162,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C509589428DCFBF600068D37 /* Senses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Senses.swift; sourceTree = "<group>"; };
+		C509589628DE3C5200068D37 /* Aspect+Sensation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Aspect+Sensation.swift"; sourceTree = "<group>"; };
+		C509589928DE44D600068D37 /* Aspect.Representation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aspect.Representation.swift; sourceTree = "<group>"; };
+		C509589C28E0D4B400068D37 /* Senses.Sensation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Senses.Sensation.swift; sourceTree = "<group>"; };
+		C509589F28E0D4F700068D37 /* Visualisation.Intensity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Visualisation.Intensity.swift; sourceTree = "<group>"; };
 		C50BEEC728D519EA00F9F6E6 /* Mind.Opinion+Basics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mind.Opinion+Basics.swift"; sourceTree = "<group>"; };
 		C50BEECA28D51ACA00F9F6E6 /* Mind.Opinion+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mind.Opinion+Factory.swift"; sourceTree = "<group>"; };
 		C50BEECD28D52C1700F9F6E6 /* Aspect+Comparisons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Aspect+Comparisons.swift"; sourceTree = "<group>"; };
 		C50BEED028D533A100F9F6E6 /* Mind.Thought.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mind.Thought.swift; sourceTree = "<group>"; };
 		C50BEED328D53EA300F9F6E6 /* Mind.Link.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mind.Link.swift; sourceTree = "<group>"; };
 		C50BEED628D673DA00F9F6E6 /* Mind.Thing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mind.Thing.swift; sourceTree = "<group>"; };
+		C5187E1828E63B7900C09EB4 /* Visualisation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Visualisation.swift; sourceTree = "<group>"; };
 		C528A18128CDE2A90027FA44 /* HippocampusTestsMacOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HippocampusTestsMacOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C528A18A28CDE3020027FA44 /* AspectTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectTest.swift; sourceTree = "<group>"; };
 		C54BE4A12894866A0060A066 /* HippocampusApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HippocampusApp.swift; sourceTree = "<group>"; };
@@ -250,6 +267,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C509589328DCFBCD00068D37 /* Vision Layer */ = {
+			isa = PBXGroup;
+			children = (
+				C509589428DCFBF600068D37 /* Senses.swift */,
+				C509589628DE3C5200068D37 /* Aspect+Sensation.swift */,
+				C509589C28E0D4B400068D37 /* Senses.Sensation.swift */,
+				C5187E1828E63B7900C09EB4 /* Visualisation.swift */,
+				C509589F28E0D4F700068D37 /* Visualisation.Intensity.swift */,
+			);
+			path = "Vision Layer";
+			sourceTree = "<group>";
+		};
 		C528A18228CDE2A90027FA44 /* HippocampusTestsMacOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -276,6 +305,7 @@
 			isa = PBXGroup;
 			children = (
 				C54BE5482895DCD50060A066 /* App Layer */,
+				C509589328DCFBCD00068D37 /* Vision Layer */,
 				C54BE58528A1BD020060A066 /* Mind Layer */,
 				C54BE53E2895C4500060A066 /* Brain Layer */,
 				C54BE4A32894866C0060A066 /* Assets.xcassets */,
@@ -464,6 +494,7 @@
 				C5CD5A9228C40D7A00DA9F7D /* ComparisonResult.swift */,
 				C5CD5A8C28C4095900DA9F7D /* AspectStorage.swift */,
 				C54BE565289884CE0060A066 /* Aspect.swift */,
+				C509589928DE44D600068D37 /* Aspect.Representation.swift */,
 				C54BE579289D9E890060A066 /* Aspect.Builder.swift */,
 				C54BE5682898852E0060A066 /* Perspective.swift */,
 				C54BE57C289D9EED0060A066 /* Perspective.Builder.swift */,
@@ -621,12 +652,14 @@
 				C5D042BE28D4E8E00088D6B0 /* Mind.Opinion.AboutMany.swift in Sources */,
 				C54BE4B32894866C0060A066 /* ContentView.swift in Sources */,
 				C54BE4D128958F820060A066 /* SerializedCodingKeys.swift in Sources */,
+				C509589A28DE44D600068D37 /* Aspect.Representation.swift in Sources */,
 				C582B38928A2FAAD00F795F0 /* Mind.Topic.swift in Sources */,
 				C54BE53C289591950060A066 /* NSPredicate+operators.swift in Sources */,
 				C54BE4DF28958F910060A066 /* Primitive.swift in Sources */,
 				C54BE5462895DB3C0060A066 /* Brain.Neuron.swift in Sources */,
 				C54BE50E289591700060A066 /* MeasureSizeModifier.swift in Sources */,
 				C50BEECE28D52C1700F9F6E6 /* Aspect+Comparisons.swift in Sources */,
+				C509589D28E0D4B400068D37 /* Senses.Sensation.swift in Sources */,
 				C54BE56C289889EB0060A066 /* Brain.Information.swift in Sources */,
 				C54BE4FF289591440060A066 /* CGPoint+Operators.swift in Sources */,
 				C54BE54D289602980060A066 /* Consciousness.swift in Sources */,
@@ -639,8 +672,11 @@
 				C54BE5692898852E0060A066 /* Perspective.swift in Sources */,
 				C54BE4FB289591440060A066 /* CGRect+Functions.swift in Sources */,
 				C54BE4E328958F910060A066 /* Box.swift in Sources */,
+				C50958A028E0D4F700068D37 /* Visualisation.Intensity.swift in Sources */,
 				C5D042BB28D4E8BF0088D6B0 /* Mind.Opinion+Operators.swift in Sources */,
+				C509589728DE3C5200068D37 /* Aspect+Sensation.swift in Sources */,
 				C54BE577289D7B0F0060A066 /* PublishedSerialized.swift in Sources */,
+				C509589528DCFBF600068D37 /* Senses.swift in Sources */,
 				C54BE50A289591530060A066 /* Array+asSet.swift in Sources */,
 				C50BEED428D53EA300F9F6E6 /* Mind.Link.swift in Sources */,
 				C54BE514289591840060A066 /* InjectedPropertyWrapper.swift in Sources */,
@@ -648,6 +684,7 @@
 				C54BE4CF28958F820060A066 /* SerializableDecodable.swift in Sources */,
 				C54BE4D328958F820060A066 /* EncodableProperty.swift in Sources */,
 				C50BEED728D673DA00F9F6E6 /* Mind.Thing.swift in Sources */,
+				C5187E1928E63B7900C09EB4 /* Visualisation.swift in Sources */,
 				C54BE566289884CE0060A066 /* Aspect.swift in Sources */,
 				C54BE508289591530060A066 /* Set+asArray.swift in Sources */,
 				C54BE4D528958F820060A066 /* SerializableEncodable.swift in Sources */,
@@ -684,6 +721,7 @@
 				C5CD5A8E28C4095900DA9F7D /* AspectStorage.swift in Sources */,
 				C54BE555289610A00060A066 /* ShowMemoryView.swift in Sources */,
 				C54BE4F4289591320060A066 /* Observed.swift in Sources */,
+				C509589828DE3C5200068D37 /* Aspect+Sensation.swift in Sources */,
 				C54BE4F2289591320060A066 /* ObservedChangeReceiver.swift in Sources */,
 				C54BE504289591440060A066 /* CGFloat+Operators.swift in Sources */,
 				C54BE4E228958F910060A066 /* CycleBreaker.swift in Sources */,
@@ -692,9 +730,11 @@
 				C54BE4B42894866C0060A066 /* ContentView.swift in Sources */,
 				C54BE4D228958F820060A066 /* SerializedCodingKeys.swift in Sources */,
 				C582B38A28A2FAAD00F795F0 /* Mind.Topic.swift in Sources */,
+				C509589B28DE44D600068D37 /* Aspect.Representation.swift in Sources */,
 				C54BE53D289591950060A066 /* NSPredicate+operators.swift in Sources */,
 				C54BE4E028958F910060A066 /* Primitive.swift in Sources */,
 				C54BE5472895DB3C0060A066 /* Brain.Neuron.swift in Sources */,
+				C50958A128E0D4F700068D37 /* Visualisation.Intensity.swift in Sources */,
 				C54BE50F289591700060A066 /* MeasureSizeModifier.swift in Sources */,
 				C50BEECF28D52C1700F9F6E6 /* Aspect+Comparisons.swift in Sources */,
 				C54BE56D289889EB0060A066 /* Brain.Information.swift in Sources */,
@@ -706,6 +746,7 @@
 				C54BE5442895DB180060A066 /* Brain.Synapse.swift in Sources */,
 				C5CD5A9428C40D7A00DA9F7D /* ComparisonResult.swift in Sources */,
 				C54BE4CA28958F820060A066 /* Transformable.swift in Sources */,
+				C509589E28E0D4B400068D37 /* Senses.Sensation.swift in Sources */,
 				C54BE56A2898852E0060A066 /* Perspective.swift in Sources */,
 				C54BE4FC289591440060A066 /* CGRect+Functions.swift in Sources */,
 				C54BE4E428958F910060A066 /* Box.swift in Sources */,
@@ -725,6 +766,7 @@
 				C54BE4CC28958F820060A066 /* Serialized.swift in Sources */,
 				C54BE58828A1BD5B0060A066 /* Mind.swift in Sources */,
 				C54BE5412895C46C0060A066 /* Brain.swift in Sources */,
+				C5187E1A28E63B7900C09EB4 /* Visualisation.swift in Sources */,
 				C54BE56128986F540060A066 /* Consciousness+preview.swift in Sources */,
 				C54BE576289D7A090060A066 /* ObservedSerialized.swift in Sources */,
 				C54BE502289591440060A066 /* CGSize+Operators.swift in Sources */,
@@ -850,6 +892,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -903,6 +947,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -928,7 +974,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -961,7 +1007,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

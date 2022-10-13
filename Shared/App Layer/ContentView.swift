@@ -16,7 +16,7 @@ struct ContentView: View {
                 .frame(minWidth: 400, minHeight: 600, alignment: .topLeading)
         } else {
             ShowConsciousnessView()
-                .frame(minWidth: 1200, minHeight: 800, alignment: .topLeading)
+//              mac   .frame(minWidth: 1200, minHeight: 800, alignment: .topLeading)
         }
     }
 }

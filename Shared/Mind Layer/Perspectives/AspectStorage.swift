@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol AspectStorage: AnyObject {
+protocol AspectStorage:  ObservableObject {
     func takesPerspective(_ id: Perspective.ID) -> Bool
     func takePerspective (_ id: Perspective.ID)
 
