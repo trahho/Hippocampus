@@ -8,7 +8,41 @@
 import Foundation
 import SwiftUI
 
-//extension Aspect {
+extension Aspect {
+    struct Sensation: View {
+        @ObservedObject var storage: Mind.Thing
+        var aspect: Aspect
+        var edit = false
+
+        var body: some View {
+            switch aspect.representation {
+            case .text:
+                TextView(value: Binding(get: { aspect[storage] ?? "" }, set: { aspect[storage] = $0 }), edit: edit)
+            default:
+                EmptyView()
+            }
+        }
+
+        struct TextView: View {
+            @Binding var value: String
+            var edit: Bool
+
+            var body: some View {
+                if edit {
+                    TextField("", text: $value)
+                } else {
+                    Text(value)
+                }
+            }
+        }
+    }
+
+    func sensation(for storage: Mind.Thing) -> Sensation {
+        Sensation(storage: storage, aspect: self)
+    }
+}
+
+// extension Aspect {
 //    enum Variation {
 //        case icon, small, normal
 //    }
@@ -35,26 +69,26 @@ import SwiftUI
 //            }
 //        }
 //    }
-//}
+// }
 //
-//class Storage: ObservableObject {
+// class Storage: ObservableObject {
 //    var storage: any AspectStorage
 //
 //    init(storage: any AspectStorage) {
 //        self.storage = storage
 //    }
-//}
+// }
 //
-//struct TextView: View {
+// struct TextView: View {
 //    @ObservedObject var storage: Storage
 //    var aspect: Aspect
 //
 //    var body: some View {
 //        Text(aspect[storage.storage, ""])
 //    }
-//}
+// }
 
-//extension Binding where Value: Codable {
+// extension Binding where Value: Codable {
 //    init(_ storage: any AspectStorage, _ aspect: Aspect) {
 //        self.init(
 //            get: { aspect[storage] },
@@ -63,7 +97,7 @@ import SwiftUI
 //            }
 //        )
 //    }
-//}
+// }
 
 //    class Sensation<Content: SensationDisplayView>: IdentifiableObject, ObservableObject {
 //        enum Variation {

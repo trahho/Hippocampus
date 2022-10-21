@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Visualisation {
+extension Senses.Genes {
     enum Intensity: Codable {
         case symbol, small, normal, full
     }

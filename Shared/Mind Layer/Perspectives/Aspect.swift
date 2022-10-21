@@ -42,12 +42,12 @@ class Aspect: PersistentObject {
 
     subscript<T: Codable>(_ storage: any AspectStorage) -> T? {
         get { return storage[self.id] as? T ?? self.defaultValue as? T }
-        set { storage[self.id] = newValue }
+        set {
+            storage[self.id] = newValue
+        }
     }
 
-    subscript<T: Codable>(_ storage: any AspectStorage, _ defaultValue: T) -> T {
-        get { return self[storage] ?? defaultValue }
-    }
+    subscript<T: Codable>(_ storage: any AspectStorage, _ defaultValue: T) -> T { return self[storage] ?? defaultValue }
 
 //    func value<T: AspectStorage>(for storage: T) -> Codable? {
 //        return storage[id]
@@ -57,8 +57,6 @@ class Aspect: PersistentObject {
 //        storage.setValue(id, value: value)
 //    }
 }
-
-
 
 // extension Dictionary where Self.Key == Brain.Aspect.ID, Self.Value == Codable {
 //

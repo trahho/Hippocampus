@@ -14,8 +14,8 @@
 		C509589B28DE44D600068D37 /* Aspect.Representation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C509589928DE44D600068D37 /* Aspect.Representation.swift */; };
 		C509589D28E0D4B400068D37 /* Senses.Sensation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C509589C28E0D4B400068D37 /* Senses.Sensation.swift */; };
 		C509589E28E0D4B400068D37 /* Senses.Sensation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C509589C28E0D4B400068D37 /* Senses.Sensation.swift */; };
-		C50958A028E0D4F700068D37 /* Visualisation.Intensity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C509589F28E0D4F700068D37 /* Visualisation.Intensity.swift */; };
-		C50958A128E0D4F700068D37 /* Visualisation.Intensity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C509589F28E0D4F700068D37 /* Visualisation.Intensity.swift */; };
+		C50958A028E0D4F700068D37 /* Senses.Genes.Intensity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C509589F28E0D4F700068D37 /* Senses.Genes.Intensity.swift */; };
+		C50958A128E0D4F700068D37 /* Senses.Genes.Intensity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C509589F28E0D4F700068D37 /* Senses.Genes.Intensity.swift */; };
 		C50BEEC828D519EB00F9F6E6 /* Mind.Opinion+Basics.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50BEEC728D519EA00F9F6E6 /* Mind.Opinion+Basics.swift */; };
 		C50BEEC928D519EB00F9F6E6 /* Mind.Opinion+Basics.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50BEEC728D519EA00F9F6E6 /* Mind.Opinion+Basics.swift */; };
 		C50BEECB28D51ACA00F9F6E6 /* Mind.Opinion+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50BEECA28D51ACA00F9F6E6 /* Mind.Opinion+Factory.swift */; };
@@ -28,11 +28,12 @@
 		C50BEED528D53EA300F9F6E6 /* Mind.Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50BEED328D53EA300F9F6E6 /* Mind.Link.swift */; };
 		C50BEED728D673DA00F9F6E6 /* Mind.Thing.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50BEED628D673DA00F9F6E6 /* Mind.Thing.swift */; };
 		C50BEED828D673DA00F9F6E6 /* Mind.Thing.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50BEED628D673DA00F9F6E6 /* Mind.Thing.swift */; };
-		C5187E1928E63B7900C09EB4 /* Visualisation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5187E1828E63B7900C09EB4 /* Visualisation.swift */; };
-		C5187E1A28E63B7900C09EB4 /* Visualisation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5187E1828E63B7900C09EB4 /* Visualisation.swift */; };
+		C5187E1928E63B7900C09EB4 /* Senses.Genes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5187E1828E63B7900C09EB4 /* Senses.Genes.swift */; };
+		C5187E1A28E63B7900C09EB4 /* Senses.Genes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5187E1828E63B7900C09EB4 /* Senses.Genes.swift */; };
 		C528A18B28CDE3020027FA44 /* AspectTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C528A18A28CDE3020027FA44 /* AspectTest.swift */; };
 		C528A18C28CDE3550027FA44 /* Aspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE565289884CE0060A066 /* Aspect.swift */; };
 		C528A18D28CDE37F0027FA44 /* ComparisonResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CD5A9228C40D7A00DA9F7D /* ComparisonResult.swift */; };
+		C5394A5629033E7B003B99BF /* Senses.swift in Sources */ = {isa = PBXBuildFile; fileRef = C509589428DCFBF600068D37 /* Senses.swift */; };
 		C54BE4B12894866C0060A066 /* HippocampusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4A12894866A0060A066 /* HippocampusApp.swift */; };
 		C54BE4B22894866C0060A066 /* HippocampusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4A12894866A0060A066 /* HippocampusApp.swift */; };
 		C54BE4B32894866C0060A066 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4A22894866A0060A066 /* ContentView.swift */; };
@@ -166,14 +167,14 @@
 		C509589628DE3C5200068D37 /* Aspect+Sensation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Aspect+Sensation.swift"; sourceTree = "<group>"; };
 		C509589928DE44D600068D37 /* Aspect.Representation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aspect.Representation.swift; sourceTree = "<group>"; };
 		C509589C28E0D4B400068D37 /* Senses.Sensation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Senses.Sensation.swift; sourceTree = "<group>"; };
-		C509589F28E0D4F700068D37 /* Visualisation.Intensity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Visualisation.Intensity.swift; sourceTree = "<group>"; };
+		C509589F28E0D4F700068D37 /* Senses.Genes.Intensity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Senses.Genes.Intensity.swift; sourceTree = "<group>"; };
 		C50BEEC728D519EA00F9F6E6 /* Mind.Opinion+Basics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mind.Opinion+Basics.swift"; sourceTree = "<group>"; };
 		C50BEECA28D51ACA00F9F6E6 /* Mind.Opinion+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mind.Opinion+Factory.swift"; sourceTree = "<group>"; };
 		C50BEECD28D52C1700F9F6E6 /* Aspect+Comparisons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Aspect+Comparisons.swift"; sourceTree = "<group>"; };
 		C50BEED028D533A100F9F6E6 /* Mind.Thought.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mind.Thought.swift; sourceTree = "<group>"; };
 		C50BEED328D53EA300F9F6E6 /* Mind.Link.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mind.Link.swift; sourceTree = "<group>"; };
 		C50BEED628D673DA00F9F6E6 /* Mind.Thing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mind.Thing.swift; sourceTree = "<group>"; };
-		C5187E1828E63B7900C09EB4 /* Visualisation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Visualisation.swift; sourceTree = "<group>"; };
+		C5187E1828E63B7900C09EB4 /* Senses.Genes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Senses.Genes.swift; sourceTree = "<group>"; };
 		C528A18128CDE2A90027FA44 /* HippocampusTestsMacOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HippocampusTestsMacOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C528A18A28CDE3020027FA44 /* AspectTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectTest.swift; sourceTree = "<group>"; };
 		C54BE4A12894866A0060A066 /* HippocampusApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HippocampusApp.swift; sourceTree = "<group>"; };
@@ -273,8 +274,8 @@
 				C509589428DCFBF600068D37 /* Senses.swift */,
 				C509589628DE3C5200068D37 /* Aspect+Sensation.swift */,
 				C509589C28E0D4B400068D37 /* Senses.Sensation.swift */,
-				C5187E1828E63B7900C09EB4 /* Visualisation.swift */,
-				C509589F28E0D4F700068D37 /* Visualisation.Intensity.swift */,
+				C5187E1828E63B7900C09EB4 /* Senses.Genes.swift */,
+				C509589F28E0D4F700068D37 /* Senses.Genes.Intensity.swift */,
 			);
 			path = "Vision Layer";
 			sourceTree = "<group>";
@@ -672,7 +673,7 @@
 				C54BE5692898852E0060A066 /* Perspective.swift in Sources */,
 				C54BE4FB289591440060A066 /* CGRect+Functions.swift in Sources */,
 				C54BE4E328958F910060A066 /* Box.swift in Sources */,
-				C50958A028E0D4F700068D37 /* Visualisation.Intensity.swift in Sources */,
+				C50958A028E0D4F700068D37 /* Senses.Genes.Intensity.swift in Sources */,
 				C5D042BB28D4E8BF0088D6B0 /* Mind.Opinion+Operators.swift in Sources */,
 				C509589728DE3C5200068D37 /* Aspect+Sensation.swift in Sources */,
 				C54BE577289D7B0F0060A066 /* PublishedSerialized.swift in Sources */,
@@ -684,7 +685,7 @@
 				C54BE4CF28958F820060A066 /* SerializableDecodable.swift in Sources */,
 				C54BE4D328958F820060A066 /* EncodableProperty.swift in Sources */,
 				C50BEED728D673DA00F9F6E6 /* Mind.Thing.swift in Sources */,
-				C5187E1928E63B7900C09EB4 /* Visualisation.swift in Sources */,
+				C5187E1928E63B7900C09EB4 /* Senses.Genes.swift in Sources */,
 				C54BE566289884CE0060A066 /* Aspect.swift in Sources */,
 				C54BE508289591530060A066 /* Set+asArray.swift in Sources */,
 				C54BE4D528958F820060A066 /* SerializableEncodable.swift in Sources */,
@@ -734,7 +735,7 @@
 				C54BE53D289591950060A066 /* NSPredicate+operators.swift in Sources */,
 				C54BE4E028958F910060A066 /* Primitive.swift in Sources */,
 				C54BE5472895DB3C0060A066 /* Brain.Neuron.swift in Sources */,
-				C50958A128E0D4F700068D37 /* Visualisation.Intensity.swift in Sources */,
+				C50958A128E0D4F700068D37 /* Senses.Genes.Intensity.swift in Sources */,
 				C54BE50F289591700060A066 /* MeasureSizeModifier.swift in Sources */,
 				C50BEECF28D52C1700F9F6E6 /* Aspect+Comparisons.swift in Sources */,
 				C54BE56D289889EB0060A066 /* Brain.Information.swift in Sources */,
@@ -745,6 +746,7 @@
 				C50BEEC928D519EB00F9F6E6 /* Mind.Opinion+Basics.swift in Sources */,
 				C54BE5442895DB180060A066 /* Brain.Synapse.swift in Sources */,
 				C5CD5A9428C40D7A00DA9F7D /* ComparisonResult.swift in Sources */,
+				C5394A5629033E7B003B99BF /* Senses.swift in Sources */,
 				C54BE4CA28958F820060A066 /* Transformable.swift in Sources */,
 				C509589E28E0D4B400068D37 /* Senses.Sensation.swift in Sources */,
 				C54BE56A2898852E0060A066 /* Perspective.swift in Sources */,
@@ -766,7 +768,7 @@
 				C54BE4CC28958F820060A066 /* Serialized.swift in Sources */,
 				C54BE58828A1BD5B0060A066 /* Mind.swift in Sources */,
 				C54BE5412895C46C0060A066 /* Brain.swift in Sources */,
-				C5187E1A28E63B7900C09EB4 /* Visualisation.swift in Sources */,
+				C5187E1A28E63B7900C09EB4 /* Senses.Genes.swift in Sources */,
 				C54BE56128986F540060A066 /* Consciousness+preview.swift in Sources */,
 				C54BE576289D7A090060A066 /* ObservedSerialized.swift in Sources */,
 				C54BE502289591440060A066 /* CGSize+Operators.swift in Sources */,
