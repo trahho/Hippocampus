@@ -8,39 +8,83 @@
 import Foundation
 import SwiftUI
 
-extension Aspect {
-    struct Sensation: View {
+class Sensation {}
+
+extension Sensation {
+    
+    enum Perception {
+        
+    }
+    
+    enum ReceptionStrength: Codable {
+        case invisible, symbol, normal
+    }
+
+    struct Reception: View {
         @ObservedObject var storage: Mind.Thing
         var aspect: Aspect
-        var edit = false
 
         var body: some View {
             switch aspect.representation {
             case .text:
-                TextView(value: Binding(get: { aspect[storage] ?? "" }, set: { aspect[storage] = $0 }), edit: edit)
+                TextView(storage: storage, aspect: aspect)
             default:
                 EmptyView()
             }
         }
 
         struct TextView: View {
-            @Binding var value: String
-            var edit: Bool
+            @EnvironmentObject var genes: Genes
+            @ObservedObject var storage: Mind.Thing
+            var aspect: Aspect
+
+            var text: Binding<String> {
+                Binding(get: { aspect[storage] ?? "" }, set: { newValue in aspect[storage] = newValue })
+            }
+
+            var edit: Bool {
+                genes.edit ?? false
+            }
+
+            var strength: ReceptionStrength {
+                genes.receptionStrength ?? ReceptionStrength.normal
+            }
+
+            @ViewBuilder var normalView: some View {
+                if edit {
+                    TextField("", text: text)
+                } else {
+                    Text(text.wrappedValue)
+                }
+            }
+
+            @ViewBuilder var symbolView: some View {
+                Image(systemName: "doc.plaintext")
+            }
 
             var body: some View {
-                if edit {
-                    TextField("", text: $value)
-                } else {
-                    Text(value)
+                switch strength {
+                case .normal:
+                    normalView
+                case .symbol:
+                    symbolView
+                default:
+                    EmptyView()
                 }
             }
         }
     }
-
-    func sensation(for storage: Mind.Thing) -> Sensation {
-        Sensation(storage: storage, aspect: self)
-    }
 }
+
+// extension Aspect {
+//    struct Sensation: View {
+//
+//    }
+//
+//    func sensation(for storage: Mind.Thing) -> Sensation {
+//        Sensation(storage: storage, aspect: self)
+//    }
+// }
 
 // extension Aspect {
 //    enum Variation {

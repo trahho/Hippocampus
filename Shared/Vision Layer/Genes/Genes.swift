@@ -45,50 +45,72 @@ import SwiftUI
 //    }
 // }
 
-extension Senses.Genes {
+extension Genes {
     struct NotFoundError: Error {
         let key: String
     }
 }
 
-extension Senses {
-    @dynamicMemberLookup
-    class Genes: PersistentObject, ObservableObject {
-        static let genes: Genes = {
-            let result = Genes()
-            result.intensity = Intensity.normal
-            return result
-        }()
-        
-        @PublishedSerialized var dna: [String: Codable] = [:]
-        //    @Serialized var details: [Mind.Thing.ID: Genes] = [:]
-        @Serialized var superVisor: Genes?
-        
-        func getValue<T>(for key: String) throws -> T {
-            if let value = dna[key] as? T {
-                return value
-            } else if let superVisor, let value: T = try? superVisor.getValue(for: key) {
-                return value
-            } else if let value: T = try? Genes.genes.getValue(for: key) {
-                return value
-            } else {
-                throw NotFoundError(key: key)
-            }
-        }
-        
-        func setValue(_ value: Codable, for key: String) {
-            dna[key] = value
-        }
-        
-        subscript<T>(dynamicMember dynamicMember: String) -> T where T: Codable {
-            get { try! getValue(for: dynamicMember) }
-            set { setValue(newValue, for: dynamicMember) }
-        }
-        
-        //    func recover() {
-        //        details.values.forEach { $0.superVisor = self }
-        //    }
+extension Genes {
+    final class DNA: Serializable, ObservableObject {
+        @PublishedSerialized var strength: Sensation.ReceptionStrength?
     }
+}
+
+@dynamicMemberLookup
+class Genes: PersistentObject, ObservableObject {
+    static let genes: Genes = {
+        let result = Genes()
+        result.strength = .normal
+        return result
+    }()
+
+//    @PublishedSerialized var dna: [String: Codable] = [:]
+    @PublishedSerialized var dna: DNA = .init()
+    //    @Serialized var details: [Mind.Thing.ID: Genes] = [:]
+
+    @Serialized var ancestor: Genes?
+
+    subscript<T>(dynamicMember keyPath: WritableKeyPath<DNA, T?>) -> T? where T: Codable {
+        get {
+            if let value = dna[keyPath: keyPath] {
+                return value
+            } else if let ancestor, let value = ancestor[dynamicMember: keyPath] {
+                return value
+            } else if let value = Genes.genes[dynamicMember: keyPath] {
+                return value
+            }
+            return nil
+        }
+        set {
+            dna[keyPath: keyPath] = newValue
+        }
+    }
+
+//    func getValue<T>(for key: String) -> T? {
+//        if let value = dna[key] as? T {
+//            return value
+//        } else if let superVisor, let value: T = superVisor.getValue(for: key) {
+//            return value
+//        } else if let value: T = Genes.genes.getValue(for: key) {
+//            return value
+//        } else {
+//            return nil
+//        }
+//    }
+
+//    func setValue(_ value: Codable, for key: String) {
+//        dna[key] = value
+//    }
+
+//    subscript<T>(dynamicMember dynamicMember: String) -> T? where T: Codable {
+//        get { getValue(for: dynamicMember) }
+//        set { setValue(newValue, for: dynamicMember) }
+//    }
+
+    //    func recover() {
+    //        details.values.forEach { $0.superVisor = self }
+    //    }
 }
 
 // extension Color: Codable {
