@@ -8,14 +8,31 @@
 import Foundation
 import SwiftUI
 
-class Sensation {}
+class Sensation: PersistentObject, ObservableObject {
+    @Serialized var genes: Genes = Genes()
 
-extension Sensation {
-    
-    enum Perception {
-        
+    func getExpression(for storage: Mind.Thing) {
+        fatalError()
     }
     
+}
+
+class CompoundSensation: Sensation {
+    @Serialized var impressions: [Sensation]
+    
+}
+
+class SingleSensation: Sensation {
+    @Serialized var aspectId: Aspect.ID
+    
+    override func getExpression(for storage: Mind.Thing) {
+        <#code#>
+    }
+}
+
+extension Sensation {
+    enum Perception {}
+
     enum ReceptionStrength: Codable {
         case invisible, symbol, normal
     }
@@ -42,16 +59,8 @@ extension Sensation {
                 Binding(get: { aspect[storage] ?? "" }, set: { newValue in aspect[storage] = newValue })
             }
 
-            var edit: Bool {
-                genes.edit ?? false
-            }
-
-            var strength: ReceptionStrength {
-                genes.receptionStrength ?? ReceptionStrength.normal
-            }
-
             @ViewBuilder var normalView: some View {
-                if edit {
+                if genes.editable {
                     TextField("", text: text)
                 } else {
                     Text(text.wrappedValue)
@@ -63,7 +72,7 @@ extension Sensation {
             }
 
             var body: some View {
-                switch strength {
+                switch genes.strength {
                 case .normal:
                     normalView
                 case .symbol:

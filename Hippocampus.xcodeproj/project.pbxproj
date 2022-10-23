@@ -20,8 +20,6 @@
 		C50BEECC28D51ACA00F9F6E6 /* Mind.Opinion+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50BEECA28D51ACA00F9F6E6 /* Mind.Opinion+Factory.swift */; };
 		C50BEECE28D52C1700F9F6E6 /* Aspect+Comparisons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50BEECD28D52C1700F9F6E6 /* Aspect+Comparisons.swift */; };
 		C50BEECF28D52C1700F9F6E6 /* Aspect+Comparisons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50BEECD28D52C1700F9F6E6 /* Aspect+Comparisons.swift */; };
-		C50BEED128D533A100F9F6E6 /* Mind.Thought.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50BEED028D533A100F9F6E6 /* Mind.Thought.swift */; };
-		C50BEED228D533A100F9F6E6 /* Mind.Thought.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50BEED028D533A100F9F6E6 /* Mind.Thought.swift */; };
 		C50BEED428D53EA300F9F6E6 /* Mind.Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50BEED328D53EA300F9F6E6 /* Mind.Link.swift */; };
 		C50BEED528D53EA300F9F6E6 /* Mind.Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50BEED328D53EA300F9F6E6 /* Mind.Link.swift */; };
 		C50BEED728D673DA00F9F6E6 /* Mind.Thing.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50BEED628D673DA00F9F6E6 /* Mind.Thing.swift */; };
@@ -134,8 +132,8 @@
 		C54BE58828A1BD5B0060A066 /* Mind.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE58628A1BD5B0060A066 /* Mind.swift */; };
 		C582B38628A2F00400F795F0 /* PersistentObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C582B38528A2F00400F795F0 /* PersistentObject.swift */; };
 		C582B38728A2F00400F795F0 /* PersistentObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C582B38528A2F00400F795F0 /* PersistentObject.swift */; };
-		C582B38928A2FAAD00F795F0 /* Mind.Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = C582B38828A2FAAD00F795F0 /* Mind.Topic.swift */; };
-		C582B38A28A2FAAD00F795F0 /* Mind.Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = C582B38828A2FAAD00F795F0 /* Mind.Topic.swift */; };
+		C582B38928A2FAAD00F795F0 /* Mind.Thought.swift in Sources */ = {isa = PBXBuildFile; fileRef = C582B38828A2FAAD00F795F0 /* Mind.Thought.swift */; };
+		C582B38A28A2FAAD00F795F0 /* Mind.Thought.swift in Sources */ = {isa = PBXBuildFile; fileRef = C582B38828A2FAAD00F795F0 /* Mind.Thought.swift */; };
 		C582B38C28A43C1700F795F0 /* Mind.Idea.swift in Sources */ = {isa = PBXBuildFile; fileRef = C582B38B28A43C1700F795F0 /* Mind.Idea.swift */; };
 		C582B38D28A43C1700F795F0 /* Mind.Idea.swift in Sources */ = {isa = PBXBuildFile; fileRef = C582B38B28A43C1700F795F0 /* Mind.Idea.swift */; };
 		C5CD5A8D28C4095900DA9F7D /* AspectStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CD5A8C28C4095900DA9F7D /* AspectStorage.swift */; };
@@ -168,7 +166,6 @@
 		C50BEEC728D519EA00F9F6E6 /* Mind.Opinion+Basics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mind.Opinion+Basics.swift"; sourceTree = "<group>"; };
 		C50BEECA28D51ACA00F9F6E6 /* Mind.Opinion+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mind.Opinion+Factory.swift"; sourceTree = "<group>"; };
 		C50BEECD28D52C1700F9F6E6 /* Aspect+Comparisons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Aspect+Comparisons.swift"; sourceTree = "<group>"; };
-		C50BEED028D533A100F9F6E6 /* Mind.Thought.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mind.Thought.swift; sourceTree = "<group>"; };
 		C50BEED328D53EA300F9F6E6 /* Mind.Link.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mind.Link.swift; sourceTree = "<group>"; };
 		C50BEED628D673DA00F9F6E6 /* Mind.Thing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mind.Thing.swift; sourceTree = "<group>"; };
 		C5187E1828E63B7900C09EB4 /* Genes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genes.swift; sourceTree = "<group>"; };
@@ -232,7 +229,7 @@
 		C54BE58228A1965B0060A066 /* Mind.Opinion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mind.Opinion.swift; sourceTree = "<group>"; };
 		C54BE58628A1BD5B0060A066 /* Mind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mind.swift; sourceTree = "<group>"; };
 		C582B38528A2F00400F795F0 /* PersistentObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentObject.swift; sourceTree = "<group>"; };
-		C582B38828A2FAAD00F795F0 /* Mind.Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mind.Topic.swift; sourceTree = "<group>"; };
+		C582B38828A2FAAD00F795F0 /* Mind.Thought.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mind.Thought.swift; sourceTree = "<group>"; };
 		C582B38B28A43C1700F795F0 /* Mind.Idea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mind.Idea.swift; sourceTree = "<group>"; };
 		C5CD5A8C28C4095900DA9F7D /* AspectStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectStorage.swift; sourceTree = "<group>"; };
 		C5CD5A9228C40D7A00DA9F7D /* ComparisonResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonResult.swift; sourceTree = "<group>"; };
@@ -487,8 +484,7 @@
 			children = (
 				C5CD5A9528C40DA600DA9F7D /* Perspectives */,
 				C54BE58628A1BD5B0060A066 /* Mind.swift */,
-				C582B38828A2FAAD00F795F0 /* Mind.Topic.swift */,
-				C50BEED028D533A100F9F6E6 /* Mind.Thought.swift */,
+				C582B38828A2FAAD00F795F0 /* Mind.Thought.swift */,
 				C54BE58228A1965B0060A066 /* Mind.Opinion.swift */,
 				C50BEEC728D519EA00F9F6E6 /* Mind.Opinion+Basics.swift */,
 				C5D042C028D4E91E0088D6B0 /* Mind.Opinion.AboutOne.swift */,
@@ -668,7 +664,7 @@
 				C54BE4B32894866C0060A066 /* ContentView.swift in Sources */,
 				C54BE4D128958F820060A066 /* SerializedCodingKeys.swift in Sources */,
 				C509589A28DE44D600068D37 /* Aspect.Representation.swift in Sources */,
-				C582B38928A2FAAD00F795F0 /* Mind.Topic.swift in Sources */,
+				C582B38928A2FAAD00F795F0 /* Mind.Thought.swift in Sources */,
 				C54BE53C289591950060A066 /* NSPredicate+operators.swift in Sources */,
 				C54BE4DF28958F910060A066 /* Primitive.swift in Sources */,
 				C54BE5462895DB3C0060A066 /* Brain.Neuron.swift in Sources */,
@@ -713,7 +709,6 @@
 				C54BE58328A1965B0060A066 /* Mind.Opinion.swift in Sources */,
 				C54BE4CD28958F820060A066 /* DecodableProperty.swift in Sources */,
 				C54BE4E728958F910060A066 /* CyclicDecoder.swift in Sources */,
-				C50BEED128D533A100F9F6E6 /* Mind.Thought.swift in Sources */,
 				C54BE54A2895DCEA0060A066 /* Consciousness.Memory.swift in Sources */,
 				C54BE4FD289591440060A066 /* View+offset.swift in Sources */,
 				C582B38628A2F00400F795F0 /* PersistentObject.swift in Sources */,
@@ -743,7 +738,7 @@
 				C5D042BF28D4E8E00088D6B0 /* Mind.Opinion.AboutMany.swift in Sources */,
 				C54BE4B42894866C0060A066 /* ContentView.swift in Sources */,
 				C54BE4D228958F820060A066 /* SerializedCodingKeys.swift in Sources */,
-				C582B38A28A2FAAD00F795F0 /* Mind.Topic.swift in Sources */,
+				C582B38A28A2FAAD00F795F0 /* Mind.Thought.swift in Sources */,
 				C509589B28DE44D600068D37 /* Aspect.Representation.swift in Sources */,
 				C54BE53D289591950060A066 /* NSPredicate+operators.swift in Sources */,
 				C54BE4E028958F910060A066 /* Primitive.swift in Sources */,
@@ -788,7 +783,6 @@
 				C54BE58428A1965B0060A066 /* Mind.Opinion.swift in Sources */,
 				C54BE4CE28958F820060A066 /* DecodableProperty.swift in Sources */,
 				C54BE4E828958F910060A066 /* CyclicDecoder.swift in Sources */,
-				C50BEED228D533A100F9F6E6 /* Mind.Thought.swift in Sources */,
 				C54BE54B2895DCEA0060A066 /* Consciousness.Memory.swift in Sources */,
 				C54BE4FE289591440060A066 /* View+offset.swift in Sources */,
 				C582B38728A2F00400F795F0 /* PersistentObject.swift in Sources */,
