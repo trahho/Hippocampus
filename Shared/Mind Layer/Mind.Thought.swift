@@ -23,8 +23,9 @@ extension Mind {
         private var internalLinks: [Link.ID: Link] = [:]
         private var brain: Brain?
 
-        convenience init(_ opinions: [Opinion]) {
+        convenience init(_ designation: String, _ opinions: [Opinion]) {
             self.init()
+            self.designation = designation
             self.opinions = opinions
         }
 
@@ -79,6 +80,12 @@ extension Mind {
 extension Mind.Thought {
     static let thoughts: [Mind.Thought.ID: Mind.Thought] = {
         let topics: [Mind.Thought] = [
+            Mind.Thought("Test", [
+                .always(true)
+            ]),
+            Mind.Thought("Test2", [
+                .always(true)
+            ])
         ]
         var result: [Mind.Thought.ID: Mind.Thought] = [:]
         var id: Mind.Thought.ID = 0

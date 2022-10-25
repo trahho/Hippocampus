@@ -45,8 +45,8 @@ final class Mind: Serializable, ObservableObject {
     @PublishedSerialized private var customThoughts: [Thought.ID: Thought] = [:]
 
     var thoughts: [Thought.ID: Thought] {
-        customThoughts
-//        Thought.thoughts.merging(customThoughts, uniquingKeysWith: { $1 })
+//        customThoughts
+        Thought.thoughts.merging(customThoughts, uniquingKeysWith: { $1 })
     }
 
     func add(thought: Thought) {
@@ -57,21 +57,21 @@ final class Mind: Serializable, ObservableObject {
         customThoughts[thought.id] = thought
     }
 
-    @Serialized private var topicId: Topic.ID = 0
-    @PublishedSerialized private var customTopics: [Topic.ID: Topic] = [:]
+//    @Serialized private var topicId: Topic.ID = 0
+//    @PublishedSerialized private var customTopics: [Topic.ID: Topic] = [:]
+//
+//    var topics: [Topic.ID: Topic] {
+//        Topic.topics.merging(customTopics, uniquingKeysWith: { $1 })
+//    }
 
-    var topics: [Topic.ID: Topic] {
-        Topic.topics.merging(customTopics, uniquingKeysWith: { $1 })
-    }
-
-    func add(topic: Topic) {
-        guard topics[topic.id] == nil else { return }
-        if topic.id == 0 {
-            topicId += 1
-            topic.id = topicId
-        }
-        customTopics[topic.id] = topic
-    }
+//    func add(topic: Topic) {
+//        guard topics[topic.id] == nil else { return }
+//        if topic.id == 0 {
+//            topicId += 1
+//            topic.id = topicId
+//        }
+//        customTopics[topic.id] = topic
+//    }
 
     @Serialized private var perspectiveId: Perspective.ID = 0
     @PublishedSerialized private var customPerspectives: [Perspective.ID: Perspective] = [:]

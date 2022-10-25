@@ -26,7 +26,7 @@ class SingleSensation: Sensation {
     @Serialized var aspectId: Aspect.ID
     
     override func getExpression(for storage: Mind.Thing) {
-        <#code#>
+        
     }
 }
 

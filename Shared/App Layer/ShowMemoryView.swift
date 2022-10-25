@@ -18,52 +18,69 @@ struct ShowConsciousnessView: View {
         consciousness.memory.mind
     }
 
-    var topic: Mind.Topic {
-        mind.topics.values.first!
+    var thoughts: [Mind.Thought] {
+        mind.thoughts.values.sorted(using: KeyPathComparator(\.designation, order: .forward))
     }
 
-    var items: [Mind.Idea] {
-        topic.ideas
-    }
+    @State var thought: Mind.Thought.ID?
+    @State private var visibility: NavigationSplitViewVisibility = .all
 
     var body: some View {
-        ShowTopicView(topic: topic)
-            .onAppear {
-                topic.rethink(of: brain)
+        NavigationSplitView(columnVisibility: $visibility) {
+            List(thoughts, selection: $thought) { thought in
+                Text("\(thought.designation)")
             }
-    }
-}
-
-struct ShowTopicView: View {
-    @ObservedObject var topic: Mind.Topic
-
-    var items: [Mind.Idea] {
-        topic.ideas.sorted(by: { a, b in
-            let aspect = Perspective.thema.name
-            return aspect[a, ""] < aspect[b, ""]
-        })
-    }
-
-    var body: some View {
-        Form {
-            VStack {
-                Text("\(topic.ideas.count)")
-                ForEach(items) { item in
-//                    let aspect = Perspective.thema.name
-//                    aspect.sensation(for: item, variation: .normal)
-                    EmptyView()
-                }
-            }
-//            Text("3")
-//            List {
-//                Text("A")
-//                Text("B")
-//                Text("C")
-//            }
+            .navigationTitle(Text("Thoughts").font(Font.custom("Helvetica", size: 10)))
+            .navigationBarTitleDisplayMode(.inline)
         }
-//        .frame(width: 400)
+        //    content: {
+        //            List {
+        //                ForEach(thoughts) { thought in
+        //                    Text("\(thought.designation)")
+        //                }
+        //            }
+        //            .navigationTitle("Expression")
+        //        }
+    detail: {
+            if let thoughtId = thought, let thought = mind.thoughts[thoughtId] {
+                Text("\(thought.designation)")
+            } else {
+                Text("Choose")
+            }
+        }
     }
 }
+
+// struct ShowTopicView: View {
+//    @ObservedObject var topic: Mind.Topic
+//
+//    var items: [Mind.Idea] {
+//        topic.ideas.sorted(by: { a, b in
+//            let aspect = Perspective.thema.name
+//            return aspect[a, ""] < aspect[b, ""]
+//        })
+//    }
+//
+//    var body: some View {
+//        Form {
+//            VStack {
+//                Text("\(topic.ideas.count)")
+//                ForEach(items) { item in
+////                    let aspect = Perspective.thema.name
+////                    aspect.sensation(for: item, variation: .normal)
+//                    EmptyView()
+//                }
+//            }
+////            Text("3")
+////            List {
+////                Text("A")
+////                Text("B")
+////                Text("C")
+////            }
+//        }
+////        .frame(width: 400)
+//    }
+// }
 
 // struct ShowMemoryView: View {
 //    @ObservedObject var brain: Brain

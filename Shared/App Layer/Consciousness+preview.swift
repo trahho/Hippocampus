@@ -22,12 +22,12 @@ extension Consciousness {
         brain.add(synapse: Brain.Synapse(pre: neuron2, post: neuron3))
         brain.add(synapse: Brain.Synapse(pre: neuron3, post: neuron1))
 
-        let topic = Mind.Topic()
-        let thought = Mind.Thought()
-        thought.opinion = Mind.Opinion.takesPerspective(Perspective.thema)
-        topic.thoughts.append(thought)
-
-        memory.mind.add(topic: topic)
+//        let topic = Mind.Topic()
+//        let thought = Mind.Thought()
+//        thought.opinion = Mind.Opinion.takesPerspective(Perspective.thema)
+//        topic.thoughts.append(thought)
+//
+//        memory.mind.add(topic: topic)
 
         let result = Consciousness()
         result.showMemory(memory)
