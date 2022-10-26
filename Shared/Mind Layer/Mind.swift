@@ -80,6 +80,7 @@ final class Mind: Serializable, ObservableObject {
         Perspective.perspectives.merging(customPerspectives, uniquingKeysWith: { $1 })
     }
     
+    
     func add(perspective: Perspective) {
         guard customPerspectives[perspective.id] == nil else { return }
         if perspective.id == 0 {

@@ -13,13 +13,13 @@ class Perspective: PersistentObject {
         Perspective("Global") {
             Aspect("Name", .text)
         }
-        Perspective("Thema") {
-            Aspect("Name", .text)
-        }
-        Perspective("Notiz") {
-            Aspect("Name", .text)
-            Aspect("Text", .text)
+        Perspective("Zeichnung") {
             Aspect("Zeichnung", .drawing)
+        }
+        Perspective("Thema", [Perspective.global]) {}
+        Perspective("Notiz", [Perspective.global, Perspective.zeichnung]) {
+            Aspect("Titel", .text)
+            Aspect("Text", .text)
         }
     }
 
@@ -28,15 +28,37 @@ class Perspective: PersistentObject {
     }
 
     subscript(dynamicMember designation: String) -> Aspect {
-        aspects.first { $0.designation.lowercased() == designation.lowercased() }!
+        self[designation]!
     }
+
+    subscript(_ designation: String) -> Aspect? {
+        aspects.first(where: { $0.designation.lowercased() == designation.lowercased() }) ?? higherPerspectives.compactMap { $0[designation] }.first
+    }
+
+    typealias PerspectiveBuilder = () -> [Perspective]
 
     @Serialized var designation: String = ""
     @Serialized var aspects: [Aspect]
+    @Serialized var perspectives: [Perspective] = []
+    var perspectivesBuilder: PerspectiveBuilder
 
-    required init() {}
+    var higherPerspectives: [Perspective] {
+        perspectives + perspectivesBuilder()
+    }
 
-    init(_ designation: String, @Aspect.Builder aspects: () -> [Aspect]) {
+    func addAspect(_ aspect: Aspect) {
+        aspect.id = aspects.map { $0.id }.max() ?? 2
+        aspect.perspective = self
+        aspects.append(aspect)
+    }
+
+    required init() {
+        self.perspectivesBuilder = [Perspective].init
+        super.init()
+    }
+
+    init(_ designation: String, _ perspectivesBuilder: @autoclosure @escaping PerspectiveBuilder = [Perspective](), @Aspect.Builder aspects: () -> [Aspect]) {
+        self.perspectivesBuilder = perspectivesBuilder
         super.init()
         self.designation = designation
         self.aspects = aspects()

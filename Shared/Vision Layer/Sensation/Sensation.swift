@@ -23,7 +23,7 @@ class CompoundSensation: Sensation {
 }
 
 class SingleSensation: Sensation {
-    @Serialized var aspectId: Aspect.ID
+    @Serialized var perspectiveDesignation: String
     
     override func getExpression(for storage: Mind.Thing) {
         
