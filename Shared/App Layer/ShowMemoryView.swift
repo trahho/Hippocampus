@@ -31,7 +31,9 @@ struct ShowConsciousnessView: View {
                 Text("\(thought.designation)")
             }
             .navigationTitle(Text("Thoughts").font(Font.custom("Helvetica", size: 10)))
-            .navigationBarTitleDisplayMode(.inline)
+#if iOS
+                .navigationBarTitleDisplayMode(.inline)
+#endif
         }
         //    content: {
         //            List {
