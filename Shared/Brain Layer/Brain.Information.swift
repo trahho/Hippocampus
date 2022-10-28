@@ -9,23 +9,6 @@ import Foundation
 
 extension Brain {
     class Information: PersistentObject, ObservableObject, AspectStorage {
-        private static var _currentMoment: Date?
-        static var currentMoment: Date {
-            _currentMoment ?? Date()
-        }
-
-        func remember(at timePoint: Date) {
-            guard Information._currentMoment == nil, timePoint <= Date() else { return }
-            objectWillChange.send()
-            Information._currentMoment = timePoint
-        }
-
-        func awaken() {
-            guard Information._currentMoment == nil else { return }
-            objectWillChange.send()
-            Information._currentMoment = nil
-        }
-
         struct PointInTime: Serializable {
             init() {}
 
@@ -53,16 +36,20 @@ extension Brain {
 
         subscript(_ key: Aspect.ID) -> Codable? {
             get {
-                let currentMoment = Information.currentMoment
                 return aspects[key]?.last(where: { $0.time <= currentMoment })
             }
             set {
-                let timeLine = aspects[key]
-                let currentMoment = Information.currentMoment
-                if timeLine?.isEmpty ?? true {
+                let currentMoment = currentMoment
+
+                if let timeLine = aspects[key], let last = timeLine.last {
+                    if last.time <= currentMoment {
+                        if last.time == currentMoment {
+                            aspects[key]!.removeLast()
+                        }
+                        aspects[key]!.append(PointInTime(time: currentMoment, data: newValue))
+                    }
+                } else {
                     aspects[key] = [PointInTime(time: currentMoment, data: newValue)]
-                } else if let timeLine, !timeLine.contains(where: { $0.time >= currentMoment }) {
-                    aspects[key]!.append(PointInTime(time: currentMoment, data: newValue))
                 }
             }
         }
