@@ -11,8 +11,8 @@ extension Mind {
         var from: Set<Link> = []
         var to: Set<Link> = []
         
-        init(neuron: Brain.Neuron, perspectives: Set<Perspective>){
-            super.init(information: neuron, perspectives: perspectives)
+        init(brain: Brain, neuron: Brain.Neuron, perspectives: Set<Perspective>){
+            super.init(brain: brain, information: neuron, perspectives: perspectives)
         }
     }
 }

@@ -9,6 +9,6 @@ import Foundation
 
 extension Aspect {
     enum Representation {
-        case text, drawing
+        case text, drawing, date
     }
 }

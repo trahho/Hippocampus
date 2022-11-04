@@ -9,10 +9,13 @@ import Foundation
 
 extension Mind {
     class Thing: IdentifiableObject, AspectStorage {
-        let information: Brain.Information
+        var brain: Brain
+        var information: Brain.Information
+        
         let perspectives: Set<Perspective>
         
-        init(information: Brain.Information, perspectives: Set<Perspective>) {
+        init(brain: Brain, information: Brain.Information, perspectives: Set<Perspective>) {
+            self.brain = brain
             self.information = information
             self.perspectives = perspectives
         }
@@ -37,8 +40,6 @@ extension Mind {
             perspectives.contains { $0.id == id }
         }
         
-        func takePerspective(_ id: Perspective.ID) {
-            
-        }
+        func takePerspective(_ id: Perspective.ID) {}
     }
 }

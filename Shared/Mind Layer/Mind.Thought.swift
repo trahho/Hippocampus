@@ -8,39 +8,26 @@
 import Foundation
 
 extension Mind {
+    @dynamicMemberLookup
     final class Thought: PersistentObject, ObservableObject {
-        @PublishedSerialized var designation: String = ""
-        @Published var opinions: [Opinion] = []
+        class Conclusion {
+            var ideas: [Idea.ID: Idea] = [:]
+            var links: [Link.ID: Link] = [:]
+        }
 
-        var ideas: [Idea] = []
-        var links: [Link] = []
+        @PublishedSerialized var designation: String = ""
+        @PublishedSerialized var opinions: [Opinion] = []
 
 //        var links: [Link] {
 //            Array(internalLinks.values)
 //        }
 
-        private var internalIdeas: [Idea.ID: Idea] = [:]
-        private var internalLinks: [Link.ID: Link] = [:]
-        private var brain: Brain?
-
-        convenience init(_ designation: String, _ opinions: [Opinion]) {
-            self.init()
-            self.designation = designation
-            self.opinions = opinions
-        }
-
-        func rethink(of brain: Brain) {
-            guard self.brain == nil else { return }
-            self.brain = brain
+        func think(in brain: Brain) -> Conclusion {
+            let conclusion = Conclusion()
             for neuron in brain.neurons.values {
-                analyze(neuron: neuron)
+                analyze(in: brain, neuron: neuron, for: conclusion)
             }
-            objectWillChange.send()
-            ideas = Array(internalIdeas.values)
-            links = Array(internalLinks.values)
-            self.brain = nil
-            internalIdeas = [:]
-            internalLinks = [:]
+            return conclusion
         }
 
         func agree(_ information: Brain.Information) -> Set<Perspective>? {
@@ -53,47 +40,27 @@ extension Mind {
             return agreement.matches ? agreement.perspectives : nil
         }
 
-        func analyze(neuron: Brain.Neuron) {
-            guard internalIdeas[neuron.id] == nil else { return }
+        func analyze(in brain: Brain, neuron: Brain.Neuron, for conclusion: Conclusion) {
+            guard conclusion.ideas[neuron.id] == nil else { return }
             let perspectives = agree(neuron)
             if let perspectives {
-                let idea = Idea(neuron: neuron, perspectives: perspectives)
-                internalIdeas[idea.id] = idea
+                let neuronPerspectives = perspectives.filter { neuron.takesPerspective($0) }
+                let idea = Idea(brain: brain, neuron: neuron, perspectives: neuronPerspectives)
+                conclusion.ideas[idea.id] = idea
                 for synapse in neuron.axons {
-                    analyze(synapse: synapse)
+                    analyze(in: brain, synapse: synapse, for: conclusion)
                 }
             }
         }
 
-        func analyze(synapse: Brain.Synapse) {
-            guard internalLinks[synapse.id] == nil else { return }
-            analyze(neuron: synapse.receptor)
-            guard let from = internalIdeas[synapse.emitter.id], let to = internalIdeas[synapse.receptor.id] else { return }
-            let link = Link(synapse: synapse, perspectives: agree(synapse) ?? [], from: from, to: to)
-            internalLinks[link.id] = link
+        func analyze(in brain: Brain, synapse: Brain.Synapse, for conclusion: Conclusion) {
+            guard conclusion.links[synapse.id] == nil else { return }
+            analyze(in: brain, neuron: synapse.receptor, for: conclusion)
+            guard let from = conclusion.ideas[synapse.emitter.id], let to = conclusion.ideas[synapse.receptor.id] else { return }
+            let link = Link(brain: brain, synapse: synapse, perspectives: agree(synapse)?.filter { synapse.takesPerspective($0) } ?? [], from: from, to: to)
+            conclusion.links[link.id] = link
             from.to.insert(link)
             to.from.insert(link)
         }
     }
-}
-
-extension Mind.Thought {
-    static let thoughts: [Mind.Thought.ID: Mind.Thought] = {
-        let topics: [Mind.Thought] = [
-            Mind.Thought("Test", [
-                .always(true)
-            ]),
-            Mind.Thought("Test2", [
-                .always(true)
-            ])
-        ]
-        var result: [Mind.Thought.ID: Mind.Thought] = [:]
-        var id: Mind.Thought.ID = 0
-        for topic in topics {
-            id = id - 1
-            topic.id = id
-            result[id] = topic
-        }
-        return result
-    }()
 }

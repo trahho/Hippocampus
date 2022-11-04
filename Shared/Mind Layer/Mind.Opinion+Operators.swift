@@ -29,14 +29,15 @@ extension Mind.Opinion {
     }
 
     static func || (lhs: Mind.Opinion, rhs: Mind.Opinion) -> Mind.Opinion {
-        if let lhs = lhs as? AboutMany.Some, let rhs = rhs as? AboutMany.Some {
-            return AboutMany.Some(lhs.opinions + rhs.opinions)
-        } else if let lhs = lhs as? AboutMany.Some {
-            return AboutMany.Some(lhs.opinions + [rhs])
-        } else if let rhs = rhs as? AboutMany.Some {
-            return AboutMany.Some([lhs] + rhs.opinions)
+        typealias Or = AboutMany.Some
+        if let lhs = lhs as? Or, let rhs = rhs as? Or {
+            return Or(lhs.opinions + rhs.opinions)
+        } else if let lhs = lhs as? Or {
+            return Or(lhs.opinions + [rhs])
+        } else if let rhs = rhs as? Or{
+            return Or([lhs] + rhs.opinions)
         } else {
-            return AboutMany.Some([lhs, rhs])
+            return Or([lhs, rhs])
         }
     }
 

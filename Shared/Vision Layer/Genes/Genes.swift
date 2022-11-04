@@ -8,19 +8,6 @@
 import Foundation
 import SwiftUI
 
-extension Genes {
-    final class DNA: Serializable, ObservableObject {
-        static let origin: DNA = {
-            let result = DNA()
-            result.strength = .normal
-            result.editable = false
-            return result
-        }()
-
-        @PublishedSerialized var strength: Sensation.ReceptionStrength?
-        @PublishedSerialized var editable: Bool?
-    }
-}
 
 extension Genes {
     struct NotFoundError: Error {}

@@ -20,7 +20,7 @@ extension URL {
 
 protocol PersistentDataDelegate {}
 
-class PersistentData<Content>: ObservableObject where Content: Serializable, Content: ObservableObject {
+class PersistentData<Content> where Content: Serializable, Content: ObservableObject {
     let url: URL
     private var currentTimestamp: Date = .distantPast
     private let metadataQuery = NSMetadataQuery()
@@ -34,11 +34,9 @@ class PersistentData<Content>: ObservableObject where Content: Serializable, Con
     var content: Content {
         get { _content! }
         set {
-            objectWillChange.send()
             _content = newValue
             hasChanges = true
             contentSubscriber = newValue.objectWillChange.sink { [self] _ in
-                objectWillChange.send()
                 hasChanges = true
             }
         }

@@ -37,6 +37,11 @@ extension Brain {
             emitter.axons.insert(self)
             receptor.dendrites.insert(self)
         }
+        
+        func disconnect() {
+            emitter.axons.remove(self)
+            receptor.dendrites.remove(self)
+        }
 
         init(pre: Neuron, post: Neuron) {
             super.init()

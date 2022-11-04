@@ -24,10 +24,10 @@ extension Consciousness {
             persistentMind!.content
         }
         
-        private var persistentSenses: PersistentData<Senses>?
+        private var persistentImagination: PersistentData<Imagination>?
 
-        var senses: Senses {
-            persistentSenses!.content
+        var imagination: Imagination {
+            persistentImagination!.content
         }
 
         func commit() {
@@ -37,19 +37,25 @@ extension Consciousness {
             if persistentMind?.hasChanges ?? false {
                 persistentMind!.commit()
             }
-            if persistentSenses?.hasChanges ?? false {
-                persistentSenses!.commit()
+            if persistentImagination?.hasChanges ?? false {
+                persistentImagination!.commit()
+            }
+        }
+        
+        func commitBrain() {
+            if persistentBrain?.hasChanges ?? false {
+                persistentBrain!.commit()
             }
         }
 
         func setup<T>(url: URL, content: T, didRefresh: @escaping () -> Void) -> PersistentData<T> {
-            let persistentT = PersistentData<T>(url: url, content: content)
-            persistentT.didRefresh = didRefresh
-            persistentT.objectWillChange.sink(receiveValue: {
+            let persistentData = PersistentData<T>(url: url, content: content)
+            persistentData.didRefresh = didRefresh
+            persistentData.content.objectWillChange.sink(receiveValue: {_ in 
                 self.objectWillChange.send()
             })
             .store(in: &cancellables)
-            return persistentT
+            return persistentData
         }
 
         func setupBrain(url: URL) {
@@ -64,7 +70,7 @@ extension Consciousness {
         
         func setupSenses(url: URL) {
             let sensesUrl = url.appendingPathComponent("senses." + HippocampusApp.persistentExtension)
-            persistentSenses = setup(url: sensesUrl, content: Senses(), didRefresh: sensesDidRefresh)
+            persistentImagination = setup(url: sensesUrl, content: Imagination(), didRefresh: sensesDidRefresh)
         }
 
         func brainDidRefresh() {
@@ -78,14 +84,14 @@ extension Consciousness {
             if let brain = persistentBrain?.content {
                 mind.adoptBrain(brain)
             }
-            if let senses = persistentSenses?.content {
+            if let senses = persistentImagination?.content {
                 senses.adoptMind(mind)
             }
         }
         
         func sensesDidRefresh() {
             if let mind = persistentMind?.content {
-                senses.adoptMind(mind)
+                imagination.adoptMind(mind)
             }
         }
 

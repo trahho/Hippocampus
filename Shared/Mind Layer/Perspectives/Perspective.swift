@@ -9,24 +9,6 @@ import Foundation
 
 @dynamicMemberLookup
 class Perspective: PersistentObject {
-    static let perspectives = buildPerspectives {
-        Perspective("Global") {
-            Aspect("Name", .text)
-        }
-        Perspective("Zeichnung") {
-            Aspect("Zeichnung", .drawing)
-        }
-        Perspective("Thema", [Perspective.global]) {}
-        Perspective("Notiz", [Perspective.global, Perspective.zeichnung]) {
-            Aspect("Titel", .text)
-            Aspect("Text", .text)
-        }
-    }
-
-    static subscript(dynamicMember designation: String) -> Perspective {
-        perspectives.values.first { $0.designation.lowercased() == designation.lowercased() }!
-    }
-
     subscript(dynamicMember designation: String) -> Aspect {
         self[designation]!
     }
@@ -35,12 +17,12 @@ class Perspective: PersistentObject {
         aspects.first(where: { $0.designation.lowercased() == designation.lowercased() }) ?? higherPerspectives.compactMap { $0[designation] }.first
     }
 
-    typealias PerspectiveBuilder = () -> [Perspective]
+    typealias PerspectiveReferences = () -> [Perspective]
 
     @Serialized var designation: String = ""
     @Serialized var aspects: [Aspect]
     @Serialized var perspectives: [Perspective] = []
-    var perspectivesBuilder: PerspectiveBuilder
+    var perspectivesBuilder: PerspectiveReferences = [Perspective].init
 
     var higherPerspectives: [Perspective] {
         perspectives + perspectivesBuilder()
@@ -52,17 +34,9 @@ class Perspective: PersistentObject {
         aspects.append(aspect)
     }
 
-    required init() {
-        self.perspectivesBuilder = [Perspective].init
-        super.init()
-    }
+    required init() {}
 
-    init(_ designation: String, _ perspectivesBuilder: @autoclosure @escaping PerspectiveBuilder = [Perspective](), @Aspect.Builder aspects: () -> [Aspect]) {
-        self.perspectivesBuilder = perspectivesBuilder
-        super.init()
-        self.designation = designation
-        self.aspects = aspects()
-    }
+   
 }
 
 // TODO: Collection von Frames, welche die Perspektiven repräsentieren können. Frame kann einen davon wählen. Über Id.

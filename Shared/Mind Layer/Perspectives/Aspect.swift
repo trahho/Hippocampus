@@ -22,7 +22,7 @@ class Aspect: PersistentObject {
         self.representation = representation
         self.defaultValue = defaultValue
     }
-
+    
     required init() {}
 
 //    func compare<T: AspectStorage>(lhs: T, rhs: T) -> ComparisonResult {
@@ -43,6 +43,11 @@ class Aspect: PersistentObject {
     subscript<T: Codable>(_ storage: any AspectStorage) -> T? {
         get { return storage[self.id] as? T ?? self.defaultValue as? T }
         set {
+            let moment = Date()
+            if storage[self.perspective.created] == nil {
+                storage[self.perspective.created] = moment
+            }
+            storage[self.perspective.modified] = moment
             storage[self.id] = newValue
         }
     }

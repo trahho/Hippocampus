@@ -12,10 +12,10 @@ extension Mind {
         var from: Idea
         var to: Idea
 
-        init(synapse: Brain.Synapse, perspectives: Set<Perspective>, from: Idea, to: Idea) {
+        init(brain: Brain, synapse: Brain.Synapse, perspectives: Set<Perspective>, from: Idea, to: Idea) {
             self.from = from
             self.to = to
-            super.init(information: synapse, perspectives: perspectives)
+            super.init(brain: brain, information: synapse, perspectives: perspectives)
         }
     }
 }

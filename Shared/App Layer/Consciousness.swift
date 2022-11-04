@@ -47,4 +47,5 @@ class Consciousness: ObservableObject {
     func commit() {
         memory.commit()
     }
+
 }

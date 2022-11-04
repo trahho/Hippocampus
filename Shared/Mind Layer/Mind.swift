@@ -46,10 +46,11 @@ final class Mind: Serializable, ObservableObject {
 
     var thoughts: [Thought.ID: Thought] {
 //        customThoughts
-        Thought.thoughts.merging(customThoughts, uniquingKeysWith: { $1 })
+        Thought.globalThoughts.merging(customThoughts, uniquingKeysWith: { $1 })
     }
 
     func add(thought: Thought) {
+        guard customThoughts[thought.id] == nil else { return }
         if thought.id == 0 {
             thoughtId += 1
             thought.id = thoughtId
@@ -77,7 +78,7 @@ final class Mind: Serializable, ObservableObject {
     @PublishedSerialized private var customPerspectives: [Perspective.ID: Perspective] = [:]
 
     var perspectives: [Perspective.ID: Perspective] {
-        Perspective.perspectives.merging(customPerspectives, uniquingKeysWith: { $1 })
+        Perspective.globalPerspectives.merging(customPerspectives, uniquingKeysWith: { $1 })
     }
     
     

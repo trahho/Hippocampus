@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-final class Senses: Serializable, ObservableObject {
+final class Imagination: Serializable, ObservableObject {
     var cancellable: AnyCancellable?
     private var _mind: Mind? {
         willSet {
@@ -41,7 +41,7 @@ final class Senses: Serializable, ObservableObject {
 //        }
     }
 
-   
+    @Serialized var experiences: [Mind.Thought.ID: [Experience]] = .init()
 
 //    @Serialized private var visionId: Thought.ID = 0
     ////    @PublishedSerialized private var customThoughts: [Thought.ID: Thought] = [:]
@@ -91,3 +91,4 @@ final class Senses: Serializable, ObservableObject {
 //        customPerspectives[perspective.id] = perspective
 //    }
 }
+

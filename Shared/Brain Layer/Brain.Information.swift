@@ -7,6 +7,11 @@
 
 import Foundation
 
+// protocol InformationManager {
+//    func changeHappened(information: Brain.Information)
+//    var currentMoment: Date { get }
+// }
+
 extension Brain {
     class Information: PersistentObject, ObservableObject, AspectStorage {
         struct PointInTime: Serializable {
@@ -23,6 +28,7 @@ extension Brain {
 
         @PublishedSerialized private(set) var perspectives: Set<Perspective.ID> = []
         @PublishedSerialized private(set) var aspects: [Aspect.ID: [PointInTime]] = [:]
+        var brain: Brain!
 
         required init() {}
 
@@ -34,12 +40,19 @@ extension Brain {
             perspectives.insert(id)
         }
 
+        func forget(moment: Date) {
+            guard brain.dreaming else { return }
+            aspects.forEach { (key: Aspect.ID, value: [PointInTime]) in
+                aspects[key] = value.filter { $0.time < moment }
+            }
+        }
+
         subscript(_ key: Aspect.ID) -> Codable? {
             get {
-                return aspects[key]?.last(where: { $0.time <= currentMoment })
+                return aspects[key]?.last(where: { $0.time <= brain.currentMoment ?? Date() })
             }
             set {
-                let currentMoment = currentMoment
+                guard brain.dreaming, let currentMoment = brain.currentMoment else { return }
 
                 if let timeLine = aspects[key], let last = timeLine.last {
                     if last.time <= currentMoment {
@@ -51,6 +64,8 @@ extension Brain {
                 } else {
                     aspects[key] = [PointInTime(time: currentMoment, data: newValue)]
                 }
+                
+                brain.addChange(.modified(self, currentMoment))
             }
         }
     }

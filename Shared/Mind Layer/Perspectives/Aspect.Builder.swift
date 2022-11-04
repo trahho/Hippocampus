@@ -7,31 +7,35 @@
 
 import Foundation
 
-protocol AspectProducer {
-    func buildAspects() -> [Aspect]
-}
-
-extension Aspect: AspectProducer {
-    func buildAspects() -> [Aspect] {
-        [self]
-    }
-}
-
-extension Perspective: AspectProducer {
-    func buildAspects() -> [Aspect] {
-        aspects
-    }
-}
+//protocol AspectProducer {
+//    func buildAspects() -> [Aspect]
+//}
+//
+//extension Aspect: AspectProducer {
+//    func buildAspects() -> [Aspect] {
+//        [self]
+//    }
+//}
+//
+//extension Perspective: AspectProducer {
+//    func buildAspects() -> [Aspect] {
+//        aspects
+//    }
+//}
 
 extension Aspect {
     @resultBuilder
     enum Builder {
         static func buildBlock() -> [Aspect] { [] }
 
-        static func buildBlock(_ producers: AspectProducer...) -> [Aspect] {
-            let perspectives = producers.filter { $0 is Perspective }
-            let aspects = producers.filter { $0 is Aspect }
-            return perspectives.flatMap { $0.buildAspects() }.asSet.asArray + aspects.flatMap { $0.buildAspects() }
+//        static func buildBlock(_ producers: AspectProducer...) -> [Aspect] {
+//            let perspectives = producers.filter { $0 is Perspective }
+//            let aspects = producers.filter { $0 is Aspect }
+//            return perspectives.flatMap { $0.buildAspects() }.asSet.asArray + aspects.flatMap { $0.buildAspects() }
+//        }
+        
+        static func buildBlock(_ aspects: Aspect...) -> [Aspect] {
+            aspects
         }
 
 //        static func buildBlock(_ perspectives: Perspective..., _ aspects: Aspect...) -> [Aspect] {
