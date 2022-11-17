@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct HippocampusApp: App {
+    
     static var iCloudContainerUrl: URL {
         let containerUrl = FileManager.default.url(forUbiquityContainerIdentifier: nil)!
         return containerUrl.appendingPathComponent("Documents")
@@ -30,8 +31,8 @@ struct HippocampusApp: App {
     static let persistentExtension = "persistent"
 
     @ObservedObject var consciousness: Consciousness =
-        .preview1
-//    Consciousness()
+//        .preview1
+    Consciousness(name: "Test", local: true)
 
     var body: some Scene {
         WindowGroup {

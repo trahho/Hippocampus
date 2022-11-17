@@ -30,7 +30,13 @@ extension Imagination {
 
         struct ListExpression: View {
             @ObservedObject var experience: Experience
-
+            @State var layouter: Experience
+            
+            init(experience: Experience) {
+                self.experience = experience
+                self.layouter = experience
+            }
+            
             var body: some View {
                 EmptyView()
 //                List(experience.rootItems) {}

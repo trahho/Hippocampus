@@ -20,7 +20,15 @@ extension URL {
 
 protocol PersistentDataDelegate {}
 
-class PersistentData<Content> where Content: Serializable, Content: ObservableObject {
+protocol DidChangeNotifier {
+    associatedtype ObjectDidChangePublisher: Publisher = ObservableObjectPublisher where ObjectDidChangePublisher.Failure == Never
+
+    var objectDidChange: ObjectDidChangePublisher { get }
+}
+
+extension DidChangeNotifier {}
+
+class PersistentData<Content> where Content: Serializable, Content: DidChangeNotifier {
     let url: URL
     private var currentTimestamp: Date = .distantPast
     private let metadataQuery = NSMetadataQuery()
@@ -28,6 +36,7 @@ class PersistentData<Content> where Content: Serializable, Content: ObservableOb
     private var contentSubscriber: AnyCancellable?
     var didRefresh: (() -> Void)?
     var willCommit: (() -> Void)?
+    var commitOnChange = false
     private(set) var hasChanges = false
 
     private var _content: Content?
@@ -36,8 +45,13 @@ class PersistentData<Content> where Content: Serializable, Content: ObservableOb
         set {
             _content = newValue
             hasChanges = true
-            contentSubscriber = newValue.objectWillChange.sink { [self] _ in
-                hasChanges = true
+            contentSubscriber = newValue.objectDidChange.sink { [self] _ in
+                if commitOnChange {
+                    commit()
+                    hasChanges = false
+                } else {
+                    hasChanges = true
+                }
             }
         }
     }
@@ -49,6 +63,12 @@ class PersistentData<Content> where Content: Serializable, Content: ObservableOb
         else { return nil }
 
         return compressedData
+        
+//        guard // let flattened = try? CyclicEncoder().flatten(content),
+//              let data = try? JSONEncoder().encode(content)
+//        else { return nil }
+//
+//        return data
     }
 
     func commit() {
@@ -72,6 +92,11 @@ class PersistentData<Content> where Content: Serializable, Content: ObservableOb
               let newContent = try? CyclicDecoder().decode(Content.self, from: flattened)
         else { return }
         content = newContent
+//        guard // let data = try? (compressedData as NSData).decompressed(using: .lzfse) as Data,
+//              let newContent = try? JSONDecoder().decode(Content.self, from: compressedData)
+////              let newContent = try? CyclicDecoder().decode(Content.self, from: flattened)
+//        else { return }
+//        content = newContent
     }
 
     func refresh() {

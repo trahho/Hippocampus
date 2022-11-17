@@ -20,7 +20,7 @@ extension Mind {
             self.perspectives = perspectives
         }
         
-        subscript(id: Aspect.ID) -> Codable? {
+        subscript(id: Aspect.ID) -> Aspect.Point {
             get {
                 information[id]
             }

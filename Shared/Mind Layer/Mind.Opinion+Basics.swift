@@ -38,18 +38,18 @@ extension Mind.Opinion {
         }
     }
 
-    class AspectValueComparison<T: ComparableCodable>: Mind.Opinion {
+    class AspectValueComparison: Mind.Opinion {
         enum Comparison {
             case below, above, equal, unequal
         }
 
         @Serialized var aspect: Aspect
-        @Serialized var value: T?
+        @Serialized var value: Aspect.Point
         @Serialized var comparison: Comparison
 
         required init() {}
 
-        init(aspect: Aspect, comparison: Comparison, value: T?) {
+        init(aspect: Aspect, comparison: Comparison, value: Aspect.Point) {
             super.init()
             self.aspect = aspect
             self.comparison = comparison
@@ -57,15 +57,15 @@ extension Mind.Opinion {
         }
 
         override func take(for information: Brain.Information) -> (matches: Bool, perspectives: Set<Perspective>) {
-            let aspectValue: T? = aspect[information]
+            let aspectValue = aspect[information]
             switch comparison {
             case .below:
-                guard information.takesPerspective(aspect.perspective), value != nil, aspectValue == nil || aspectValue! < value! else {
+                guard information.takesPerspective(aspect.perspective), value != .empty, aspectValue == .empty || aspectValue < value else {
                     return (false, [])
                 }
                 return (true, [aspect.perspective])
             case .above:
-                guard information.takesPerspective(aspect.perspective), aspectValue != nil, value == nil || aspectValue! > value! else {
+                guard information.takesPerspective(aspect.perspective), aspectValue != .empty, value == .empty || aspectValue > value else {
                     return (false, [])
                 }
                 return (true, [aspect.perspective])

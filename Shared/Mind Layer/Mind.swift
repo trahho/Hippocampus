@@ -8,7 +8,9 @@
 import Combine
 import Foundation
 
-final class Mind: Serializable, ObservableObject {
+final class Mind: Serializable, ObservableObject, DidChangeNotifier {
+    let objectDidChange = ObjectDidChangePublisher()
+
     var cancellable: AnyCancellable?
     private var _brain: Brain? {
         willSet {
@@ -80,8 +82,7 @@ final class Mind: Serializable, ObservableObject {
     var perspectives: [Perspective.ID: Perspective] {
         Perspective.globalPerspectives.merging(customPerspectives, uniquingKeysWith: { $1 })
     }
-    
-    
+
     func add(perspective: Perspective) {
         guard customPerspectives[perspective.id] == nil else { return }
         if perspective.id == 0 {

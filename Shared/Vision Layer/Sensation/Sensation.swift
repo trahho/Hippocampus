@@ -56,7 +56,7 @@ extension Sensation {
             var aspect: Aspect
 
             var text: Binding<String> {
-                Binding(get: { aspect[storage] ?? "" }, set: { newValue in aspect[storage] = newValue })
+                Binding(get: { storage[aspect] ?? "" }, set: { newValue in storage[aspect] = newValue })
             }
 
             @ViewBuilder var normalView: some View {

@@ -8,21 +8,37 @@
 import Foundation
 
 extension Aspect {
-    func below<T: ComparableCodable>(_ value: T) -> Mind.Opinion.AspectValueComparison<T> {
-        Mind.Opinion.AspectValueComparison<T>(aspect: self, comparison: .below, value: value)
+    func below(_ value: String) -> Mind.Opinion.AspectValueComparison {
+        Mind.Opinion.AspectValueComparison(aspect: self, comparison: .below, value: .string(value))
     }
-
-    func above<T: ComparableCodable>(_ value: T) -> Mind.Opinion.AspectValueComparison<T> {
-        Mind.Opinion.AspectValueComparison<T>(aspect: self, comparison: .above, value: value)
+    
+    func below(_ value: Date) -> Mind.Opinion.AspectValueComparison {
+        Mind.Opinion.AspectValueComparison(aspect: self, comparison: .below, value: .date(value))
     }
-
-    func isEqual<T: ComparableCodable>(_ value: T) -> Mind.Opinion.AspectValueComparison<T> {
-        Mind.Opinion.AspectValueComparison<T>(aspect: self, comparison: .equal, value: value)
+    
+    func below(_ value: Int) -> Mind.Opinion.AspectValueComparison {
+        Mind.Opinion.AspectValueComparison(aspect: self, comparison: .below, value: .int(value))
     }
-
-    func isUnequal<T: ComparableCodable>(_ value: T) -> Mind.Opinion.AspectValueComparison<T> {
-        Mind.Opinion.AspectValueComparison<T>(aspect: self, comparison: .unequal, value: value)
+    
+    func above(_ value: String) -> Mind.Opinion.AspectValueComparison {
+        Mind.Opinion.AspectValueComparison(aspect: self, comparison: .above, value: .string(value))
     }
+    
+    func above(_ value: Date) -> Mind.Opinion.AspectValueComparison {
+        Mind.Opinion.AspectValueComparison(aspect: self, comparison: .above, value: .date(value))
+    }
+    
+    func above(_ value: Int) -> Mind.Opinion.AspectValueComparison {
+        Mind.Opinion.AspectValueComparison(aspect: self, comparison: .above, value: .int(value))
+    }
+    
+//    func isEqual<T: ComparableCodable>(_ value: T) -> Mind.Opinion.AspectValueComparison<T> {
+//        Mind.Opinion.AspectValueComparison<T>(aspect: self, comparison: .equal, value: value)
+//    }
+//
+//    func isUnequal<T: ComparableCodable>(_ value: T) -> Mind.Opinion.AspectValueComparison<T> {
+//        Mind.Opinion.AspectValueComparison<T>(aspect: self, comparison: .unequal, value: value)
+//    }
 }
 
 extension Bool: Comparable {

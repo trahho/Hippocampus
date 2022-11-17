@@ -20,8 +20,8 @@ extension Mind.Opinion {
         AboutMany.First(opinions)
     }
 
-    static func aspectValueIs<T: ComparableCodable>(_ aspect: Aspect, _ comparison: AspectValueComparison<T>.Comparison, _ value: T) -> Mind.Opinion {
-        AspectValueComparison<T>(aspect: aspect, comparison: comparison, value: value)
+    static func aspectValueIs(_ aspect: Aspect, _ comparison: AspectValueComparison.Comparison, _ value: Aspect.Point) -> Mind.Opinion {
+        AspectValueComparison(aspect: aspect, comparison: comparison, value: value)
     }
 
     static func takesPerspective(_ perspective: Perspective) -> Mind.Opinion {

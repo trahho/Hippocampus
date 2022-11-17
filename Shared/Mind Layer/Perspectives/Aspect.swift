@@ -13,46 +13,50 @@ class Aspect: PersistentObject {
 
     @Serialized var designation: String = ""
     @Serialized var representation: Representation
-    @Serialized var defaultValue: Codable?
+    @Serialized var defaultValue: Point
     var perspective: Perspective!
 
-    init(_ designation: String, _ representation: Representation, defaultValue: Codable? = nil) {
+    init(_ designation: String, _ representation: Representation, defaultValue: Point = .empty) {
         super.init()
         self.designation = designation
         self.representation = representation
         self.defaultValue = defaultValue
     }
-    
+
     required init() {}
 
-//    func compare<T: AspectStorage>(lhs: T, rhs: T) -> ComparisonResult {
-//        Aspect.compareValues(lhs: self[lhs], rhs: self[rhs])
+//    func compare<T: AspectStorage>(lhs: T, rhs: T) -> AspectComparisonResult {
+//        Aspect.compareValues(lhs: self[lhs] as? Codable, rhs: self[rhs] as? Codable)
 //    }
 //
-    //   static  func compareValues<T>(lhs: T?, rhs: T?) -> ComparisonResult {
+//    static func compareValues<T>(lhs: T?, rhs: T?) -> AspectComparisonResult {
 //        return .unknown
 //    }
 //
-    //   static func compareValues<T: Comparable>(lhs: T?, rhs: T?) -> ComparisonResult {
+//    static func compareValues<T: Comparable>(lhs: T?, rhs: T?) -> AspectComparisonResult {
 //        if lhs == nil, rhs != nil { return .smaller }
 //        if lhs != nil, rhs == nil { return .larger }
 //        if lhs == rhs { return .equal }
 //        return lhs! < rhs! ? .smaller : .larger
 //    }
 
-    subscript<T: Codable>(_ storage: any AspectStorage) -> T? {
-        get { return storage[self.id] as? T ?? self.defaultValue as? T }
+    subscript(_ storage: any AspectStorage) -> Point {
+        get {
+            storage[self.id].gettingToThePoint(self.defaultValue)
+        }
         set {
             let moment = Date()
-            if storage[self.perspective.created] == nil {
-                storage[self.perspective.created] = moment
+            if storage[self.perspective.created.id] == .empty {
+                storage[self.perspective.created.id] = .date(moment)
             }
-            storage[self.perspective.modified] = moment
+            storage[self.perspective.modified.id] = .date(moment)
             storage[self.id] = newValue
         }
     }
 
-    subscript<T: Codable>(_ storage: any AspectStorage, _ defaultValue: T) -> T { return self[storage] ?? defaultValue }
+    subscript(_ storage: any AspectStorage, _ defaultValue: Point = .empty) -> Point {
+        storage[self.id].gettingToThePoint(defaultValue.gettingToThePoint(self.defaultValue))
+    }
 
 //    func value<T: AspectStorage>(for storage: T) -> Codable? {
 //        return storage[id]

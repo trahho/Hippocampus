@@ -14,20 +14,32 @@ import Foundation
 
 extension Brain {
     class Information: PersistentObject, ObservableObject, AspectStorage {
+   
+        
         struct PointInTime: Serializable {
             init() {}
 
             @Serialized private(set) var time: Date
-            @Serialized private(set) var data: Codable?
+            @Serialized private(set) var point: Aspect.Point
 
-            init(time: Date, data: Codable?) {
+            init(time: Date, point: Aspect.Point) {
                 self.time = time
-                self.data = data
+                self.point = point
             }
         }
 
-        @PublishedSerialized private(set) var perspectives: Set<Perspective.ID> = []
-        @PublishedSerialized private(set) var aspects: [Aspect.ID: [PointInTime]] = [:]
+//        struct PointInTime: Codable {
+//            var time: Date
+//            var data: Codable?
+//
+//            init(time: Date, data: Codable?) {
+//                self.time = time
+//                self.data = data
+//            }
+//        }
+
+        @Serialized private(set) var perspectives: Set<Perspective.ID> = []
+        @Serialized private(set) var aspects: [Aspect.ID: [PointInTime]] = [:]
         var brain: Brain!
 
         required init() {}
@@ -47,25 +59,28 @@ extension Brain {
             }
         }
 
-        subscript(_ key: Aspect.ID) -> Codable? {
+        subscript(_ key: Aspect.ID) -> Aspect.Point {
             get {
-                return aspects[key]?.last(where: { $0.time <= brain.currentMoment ?? Date() })
+                let result = aspects[key]?.last(where: { $0.time <= brain.currentMoment ?? Date() })
+                return result?.point ?? .empty
             }
             set {
-                guard brain.dreaming, let currentMoment = brain.currentMoment else { return }
+                brain.dream {
+                    guard let currentMoment = brain.currentMoment else { return }
 
-                if let timeLine = aspects[key], let last = timeLine.last {
-                    if last.time <= currentMoment {
-                        if last.time == currentMoment {
-                            aspects[key]!.removeLast()
+                    if let timeLine = aspects[key], let last = timeLine.last {
+                        if last.time <= currentMoment {
+                            if last.time == currentMoment {
+                                aspects[key]!.removeLast()
+                            }
+                            aspects[key]!.append(PointInTime(time: currentMoment, point: newValue))
                         }
-                        aspects[key]!.append(PointInTime(time: currentMoment, data: newValue))
+                    } else {
+                        aspects[key] = [PointInTime(time: currentMoment, point: newValue)]
                     }
-                } else {
-                    aspects[key] = [PointInTime(time: currentMoment, data: newValue)]
+
+                    brain.addChange(.modified(self, currentMoment))
                 }
-                
-                brain.addChange(.modified(self, currentMoment))
             }
         }
     }

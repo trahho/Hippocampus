@@ -10,10 +10,7 @@ import Foundation
 extension Mind {
     @dynamicMemberLookup
     final class Thought: PersistentObject, ObservableObject {
-        class Conclusion {
-            var ideas: [Idea.ID: Idea] = [:]
-            var links: [Link.ID: Link] = [:]
-        }
+     
 
         @PublishedSerialized var designation: String = ""
         @PublishedSerialized var opinions: [Opinion] = []

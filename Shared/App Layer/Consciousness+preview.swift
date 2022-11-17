@@ -11,17 +11,26 @@ extension Consciousness {
     static var preview1: Consciousness = {
         let memory = Memory(url: URL.virtual())
         let brain = memory.brain
-        let neuron1 = Brain.Neuron()
-        neuron1[Perspective.thema.name] = "A"
-        let neuron2 = Brain.Neuron()
-        neuron2[Perspective.thema.name] = "B"
-        let neuron3 = Brain.Neuron()
-        neuron3[Perspective.thema.name] = "C"
-
-        brain.add(synapse: Brain.Synapse(pre: neuron1, post: neuron2))
-        brain.add(synapse: Brain.Synapse(pre: neuron2, post: neuron3))
-        brain.add(synapse: Brain.Synapse(pre: neuron3, post: neuron1))
-
+        brain.dream {
+            let neuron1 = Brain.Neuron()
+            brain.add(neuron: neuron1)
+            neuron1[Perspective.global.name] = "A"
+            neuron1[Perspective.note.text] = "Erster Text"
+            
+            let neuron2 = Brain.Neuron()
+            brain.add(neuron: neuron2)
+            neuron2[Perspective.global.name] = "B"
+            neuron2[Perspective.note.text] = "Zweiter Text"
+            
+            let neuron3 = Brain.Neuron()
+            brain.add(neuron: neuron3)
+            neuron3[Perspective.global.name] = "C"
+            neuron3[Perspective.note.text] = "Dritter Text"
+            
+            brain.add(synapse: Brain.Synapse(pre: neuron1, post: neuron2))
+            brain.add(synapse: Brain.Synapse(pre: neuron2, post: neuron3))
+            brain.add(synapse: Brain.Synapse(pre: neuron3, post: neuron1))
+        }
 //        let topic = Mind.Topic()
 //        let thought = Mind.Thought()
 //        thought.opinion = Mind.Opinion.takesPerspective(Perspective.thema)

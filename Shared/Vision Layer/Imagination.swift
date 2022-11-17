@@ -8,7 +8,19 @@
 import Combine
 import Foundation
 
-final class Imagination: Serializable, ObservableObject {
+final class Imagination: Serializable, ObservableObject, DidChangeNotifier {
+    var objectDidChange: ObservableObjectPublisher = ObjectDidChangePublisher()
+    
+    static var globalExperiences: [Mind.Thought.ID: [Experience]] = [
+        Mind.Thought.notes.id: [
+            Experience(id: -1, "Zeitliste", .list),
+            Experience(id: -2, "Themas", .tree)
+        ],
+        Mind.Thought.drawings.id: [
+            Experience(id: -3, "Ordner", .tree)
+        ]
+    ]
+
     var cancellable: AnyCancellable?
     private var _mind: Mind? {
         willSet {
@@ -41,7 +53,18 @@ final class Imagination: Serializable, ObservableObject {
 //        }
     }
 
-    @Serialized var experiences: [Mind.Thought.ID: [Experience]] = .init()
+    @Serialized var customExperiences: [Mind.Thought.ID: [Experience]] = .init()
+
+    var experiences: [Mind.Thought.ID: [Experience]] {
+        var result = [Mind.Thought.ID: [Experience]]()
+        Imagination.globalExperiences.forEach { (key: Mind.Thought.ID, value: [Experience]) in
+            result[key] = value
+        }
+        customExperiences.forEach { (key: Mind.Thought.ID, value: [Experience]) in
+            result[key] = (result[key] ?? []) + value
+        }
+        return result
+    }
 
 //    @Serialized private var visionId: Thought.ID = 0
     ////    @PublishedSerialized private var customThoughts: [Thought.ID: Thought] = [:]
@@ -91,4 +114,3 @@ final class Imagination: Serializable, ObservableObject {
 //        customPerspectives[perspective.id] = perspective
 //    }
 }
-

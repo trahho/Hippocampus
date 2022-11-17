@@ -11,8 +11,15 @@ extension Mind.Thought {
     enum Builder {
         static func buildBlock() -> [Mind.Thought.ID: Mind.Thought] { [:] }
 
-        static func buildBlock(_ thoughts: Mind.Thought...) -> [Mind.Thought.ID: Mind.Thought]  {
+        static func buildBlock(_ thoughts: Mind.Thought...) -> [Mind.Thought.ID: Mind.Thought] {
             thoughts.asDictionary(key: \.id)
         }
+    }
+
+    convenience init(_ id: GlobalThoughts, _ designation: String, @Mind.Opinion.Builder opinions: () -> [Mind.Opinion]) {
+        self.init()
+        self.id = -id.rawValue
+        self.designation = designation
+        self.opinions = opinions()
     }
 }

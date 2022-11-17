@@ -12,7 +12,7 @@ protocol AspectStorage: ObservableObject, Identifiable {
     func takesPerspective(_ id: Perspective.ID) -> Bool
     func takePerspective(_ id: Perspective.ID)
 
-    subscript(_ id: Aspect.ID) -> Codable? {
+    subscript(_ id: Aspect.ID) -> Aspect.Point {
         get set
     }
 
@@ -31,14 +31,46 @@ extension AspectStorage {
         takePerspective(perspective.id)
     }
 
-    subscript(_ aspect: Aspect) -> Codable? {
-        get { self[aspect.id] }
+    subscript(_ aspect: Aspect) -> Aspect.Point {
+        get { aspect[self] }
         set {
             if let publisher = objectWillChange as? Combine.ObservableObjectPublisher {
                 publisher.send()
             }
-            self[aspect.id] = newValue
+            aspect[self] = newValue
             takePerspective(aspect.perspective)
+        }
+    }
+
+    subscript(_ aspect: Aspect) -> String? {
+        get {
+            guard case let .string(string) = self[aspect] else {
+                return nil
+            }
+            return string
+        }
+        set {
+            if let newValue {
+                self[aspect] = .string(newValue)
+            } else {
+                self[aspect] = .empty
+            }
+        }
+    }
+
+    subscript(_ aspect: Aspect) -> Date? {
+        get {
+            guard case let .date(date) = self[aspect] else {
+                return nil
+            }
+            return date
+        }
+        set {
+            if let newValue {
+                self[aspect] = .date(newValue)
+            } else {
+                self[aspect] = .empty
+            }
         }
     }
 }

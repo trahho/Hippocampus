@@ -8,11 +8,14 @@
 import Combine
 import Foundation
 
-protocol CompletelyObservableObject: ObservableObject {
-    associatedtype ObjectDidChangePublisher: Publisher = ObservableObjectPublisher
-}
 
-final class Brain: Serializable, ObservableObject {
+final class Brain: Serializable, ObservableObject, DidChangeNotifier {
+    var objectDidChange: ObservableObjectPublisher = ObjectDidChangePublisher()
+    
+    enum BrainDamage: Error {
+        case notDreaming
+    }
+
     typealias Dream = () throws -> ()
 
     enum InformationChange {
@@ -39,21 +42,22 @@ final class Brain: Serializable, ObservableObject {
     var dreaming = false
 
     func dream(_ dream: Dream) {
-        remember(moment: Date())
-        dreaming = true
+        let hasStarted = !dreaming
+        self.dream()
         do {
             try dream()
         } catch {
             forget()
         }
-        awaken()
+        if hasStarted {
+            awaken()
+        }
     }
-    
+
     func dream() {
         remember(moment: Date())
         dreaming = true
     }
-
 
     func remember(moment: Date) {
         guard !dreaming, moment <= Date() else { return }
@@ -65,6 +69,9 @@ final class Brain: Serializable, ObservableObject {
     func awaken() {
         guard currentMoment != nil else { return }
         objectWillChange.send()
+        if dreaming {
+            objectDidChange.send()
+        }
         dreaming = false
         currentMoment = nil
         informationChanges = []
@@ -92,12 +99,20 @@ final class Brain: Serializable, ObservableObject {
         informationChanges.append(change)
     }
 
+    func createNeuron() throws -> Neuron {
+        guard dreaming else { throw BrainDamage.notDreaming }
+        let neuron = Neuron()
+        add(neuron: neuron)
+        return neuron
+    }
+
     func add(neuron: Neuron) {
         guard dreaming, neurons[neuron.id] == nil else { return }
         if neuron.id == 0 {
             informationId += 1
             neuron.id = informationId
         }
+        neuron.brain = self
         neurons[neuron.id] = neuron
         addChange(.neuronCreated(neuron))
     }
@@ -108,6 +123,7 @@ final class Brain: Serializable, ObservableObject {
             informationId += 1
             synapse.id = informationId
         }
+        synapse.brain = self
         synapses[synapse.id] = synapse
         add(neuron: synapse.emitter)
         add(neuron: synapse.receptor)

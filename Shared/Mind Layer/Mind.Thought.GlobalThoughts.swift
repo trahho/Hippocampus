@@ -13,7 +13,8 @@ extension Mind.Thought {
         case drawings
     }
 
-    @Builder static func buildGlobalThoughts() -> [Mind.Thought.ID: Mind.Thought] {
+    @Builder
+    static func buildGlobalThoughts() -> [Mind.Thought.ID: Mind.Thought] {
         Mind.Thought(.notes, "Notizen") {
             .takesPerspective(Perspective.note) || .takesPerspective(Perspective.topic)
         }
@@ -29,11 +30,8 @@ extension Mind.Thought {
         return globalThoughts.values.first { $0.id == thoughtId }!
     }
     
-    convenience init(_ id: GlobalThoughts, _ designation: String, @Mind.Opinion.Builder opinions: () -> [Mind.Opinion]) {
-        self.init()
-        self.id = -id.rawValue
-        self.designation = designation
-        self.opinions = opinions()
-    }
+  
 
 }
+
+

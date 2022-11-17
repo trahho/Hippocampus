@@ -47,6 +47,7 @@ extension Perspective {
         self.aspects.forEach { aspect in
             aspectId -= 1
             aspect.id = aspectId
+            aspect.perspective = self
         }
     }
 }

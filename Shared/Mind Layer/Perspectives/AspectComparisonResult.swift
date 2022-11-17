@@ -6,6 +6,6 @@
 //
 
 import Foundation
-enum ComparisonResult {
+enum AspectComparisonResult {
     case smaller, equal, larger, unknown
 }

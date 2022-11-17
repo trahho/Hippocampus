@@ -47,5 +47,13 @@ class Consciousness: ObservableObject {
     func commit() {
         memory.commit()
     }
+    
+    convenience init(name: String, local: Bool) {
+        self.init()
+        createMemory(name: name, local: local)
+    }
+    
+    @Published var currentThought : Mind.Thought? = Mind.Thought.notes
+    @Published var currentExperience: Imagination.Experience?
 
 }
