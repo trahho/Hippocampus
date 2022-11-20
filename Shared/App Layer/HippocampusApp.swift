@@ -9,7 +9,6 @@ import SwiftUI
 
 @main
 struct HippocampusApp: App {
-    
     static var iCloudContainerUrl: URL {
         let containerUrl = FileManager.default.url(forUbiquityContainerIdentifier: nil)!
         return containerUrl.appendingPathComponent("Documents")
@@ -32,13 +31,27 @@ struct HippocampusApp: App {
 
     @ObservedObject var consciousness: Consciousness =
 //        .preview1
-    Consciousness(name: "Test", local: true)
+        .init(name: "Test", local: false)
 
     var body: some Scene {
         WindowGroup {
+            ConsciousnessView(consciousness: consciousness)
+                .onOpenURL { consciousness.openMemory(url: $0) }
+        }
+    }
+
+    struct ConsciousnessView: View {
+        @ObservedObject var consciousness: Consciousness
+        var brain: Brain { consciousness.memory.brain }
+        var mind: Mind { consciousness.memory.mind }
+        var imagination: Imagination { consciousness.memory.imagination }
+
+        var body: some View {
             ContentView()
                 .environmentObject(consciousness)
-                .onOpenURL { consciousness.openMemory(url: $0) }
+                .environmentObject(brain)
+                .environmentObject(mind)
+                .environmentObject(imagination)
         }
     }
 }

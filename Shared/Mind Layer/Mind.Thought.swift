@@ -36,6 +36,10 @@ extension Mind {
                 }
             return agreement.matches ? agreement.perspectives : nil
         }
+        
+        func agree(_ thing: Mind.Thing) -> Set<Perspective>? {
+            agree(thing.information)
+        }
 
         func analyze(in brain: Brain, neuron: Brain.Neuron, for conclusion: Conclusion) {
             guard conclusion.ideas[neuron.id] == nil else { return }

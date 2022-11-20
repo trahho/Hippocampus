@@ -42,16 +42,16 @@ extension Consciousness {
             }
         }
         
-        func commitBrain() {
-            if persistentBrain?.hasChanges ?? false {
-                persistentBrain!.commit()
-            }
-        }
+//        func commitBrain() {
+//            if persistentBrain?.hasChanges ?? false {
+//                persistentBrain!.commit()
+//            }
+//        }
 
         func setup<T: DidChangeNotifier>(url: URL, content: T, didRefresh: @escaping () -> Void) -> PersistentData<T> {
             let persistentData = PersistentData<T>(url: url, content: content)
             persistentData.didRefresh = didRefresh
-            persistentData.content.objectDidChange.sink(receiveValue: {_ in 
+            persistentData.objectWillChange.sink(receiveValue: {_ in 
                 self.objectWillChange.send()
             })
             .store(in: &cancellables)
@@ -62,19 +62,20 @@ extension Consciousness {
             let brainUrl = url.appendingPathComponent("brain." + HippocampusApp.persistentExtension)
             persistentBrain = setup(url: brainUrl, content: Brain(), didRefresh: brainDidRefresh)
             persistentBrain!.commitOnChange = true
-            persistentBrain!.refresh()
+            brainDidRefresh()
+//            persistentBrain!.refresh()
         }
 
         func setupMind(url: URL) {
             let mindUrl = url.appendingPathComponent("mind." + HippocampusApp.persistentExtension)
             persistentMind = setup(url: mindUrl, content: Mind(), didRefresh: mindDidRefresh)
-            persistentMind!.refresh()
+//            persistentMind!.refresh()
         }
         
         func setupImagination(url: URL) {
             let imaginationUrl = url.appendingPathComponent("imagination." + HippocampusApp.persistentExtension)
             persistentImagination = setup(url: imaginationUrl, content: Imagination(), didRefresh: imaginationDidRefresh)
-            persistentImagination!.refresh()
+//            persistentImagination!.refresh()
         }
 
         func brainDidRefresh() {

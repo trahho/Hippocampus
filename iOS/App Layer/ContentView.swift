@@ -18,10 +18,10 @@ struct ListView: View {
         Mind.Thought.notes.think(in: brain)
     }
 
-    var items: [Mind.Idea] {
-        conclusion.ideas.values
-            .sorted(using: Aspect.Comparator(order: .forward, aspect: Perspective.note.name))
-    }
+//    var items: [Mind.Idea] {
+//        conclusion.ideas.values
+//            .sorted(using: Aspect.Comparator(order: .forward, aspect: Perspective.note.name))
+//    }
 
     var body: some View {
         VStack {
@@ -30,6 +30,8 @@ struct ListView: View {
             } label: {
                 Text("Add")
             }
+            let items = conclusion.ideas.values
+                .sorted(using: Aspect.Comparator(order: .forward, aspect: Perspective.note.name))
             List(items) { idea in
                 if case let .string(string) = Perspective.note.name[idea] {
                     Text(string)
@@ -50,7 +52,7 @@ struct EditNoteView: View {
 
     var text: Binding<String> {
         Binding(get: {
-            guard case let  .string(string) = textAspect[note] else {
+            guard case let .string(string) = textAspect[note] else {
                 return ""
             }
             return string
@@ -67,9 +69,6 @@ struct ContentView: View {
 
     var body: some View {
         ListView()
-            .environmentObject(consciousness.memory.brain)
-            .environmentObject(consciousness.memory.mind)
-            .environmentObject(consciousness.memory.imagination)
     }
 }
 

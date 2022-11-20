@@ -35,8 +35,11 @@ class Consciousness: ObservableObject {
 
     func createMemory(name: String, local: Bool) {
         let url = HippocampusApp.memoryUrl(name: name, local: local)
+        if !local {
+            try? FileManager.default.startDownloadingUbiquitousItem(at: url)
+        }
         let memory = Memory(url: url)
-        memory.commit()
+//        memory.commit()
         _memory = memory
     }
 
@@ -47,13 +50,12 @@ class Consciousness: ObservableObject {
     func commit() {
         memory.commit()
     }
-    
+
     convenience init(name: String, local: Bool) {
         self.init()
         createMemory(name: name, local: local)
     }
-    
-    @Published var currentThought : Mind.Thought? = Mind.Thought.notes
-    @Published var currentExperience: Imagination.Experience?
 
+    @Published var currentThought: Mind.Thought? = Mind.Thought.notes
+    @Published var currentExperience: Imagination.Experience?
 }

@@ -28,7 +28,7 @@ protocol DidChangeNotifier {
 
 extension DidChangeNotifier {}
 
-class PersistentData<Content> where Content: Serializable, Content: DidChangeNotifier {
+class PersistentData<Content>: ObservableObject where Content: Serializable, Content: DidChangeNotifier {
     let url: URL
     private var currentTimestamp: Date = .distantPast
     private let metadataQuery = NSMetadataQuery()
@@ -43,6 +43,7 @@ class PersistentData<Content> where Content: Serializable, Content: DidChangeNot
     var content: Content {
         get { _content! }
         set {
+            objectWillChange.send()
             _content = newValue
             hasChanges = true
             contentSubscriber = newValue.objectDidChange.sink { [self] _ in
@@ -63,7 +64,7 @@ class PersistentData<Content> where Content: Serializable, Content: DidChangeNot
         else { return nil }
 
         return compressedData
-        
+
 //        guard // let flattened = try? CyclicEncoder().flatten(content),
 //              let data = try? JSONEncoder().encode(content)
 //        else { return nil }
@@ -94,22 +95,28 @@ class PersistentData<Content> where Content: Serializable, Content: DidChangeNot
         content = newContent
 //        guard // let data = try? (compressedData as NSData).decompressed(using: .lzfse) as Data,
 //              let newContent = try? JSONDecoder().decode(Content.self, from: compressedData)
-////              let newContent = try? CyclicDecoder().decode(Content.self, from: flattened)
+        ////              let newContent = try? CyclicDecoder().decode(Content.self, from: flattened)
 //        else { return }
 //        content = newContent
     }
 
     func refresh() {
         guard !url.isVirtual else { return }
-        guard let modificationDate = try? FileManager.default.attributesOfItem(atPath: url.path)[.modificationDate] as? Date,
-              modificationDate > currentTimestamp,
-              let data = try? Data(contentsOf: url, options: [.uncached])
-        else { return }
+        guard
+            let modificationDate = try? FileManager.default.attributesOfItem(atPath: url.path(percentEncoded: false))[.modificationDate] as? Date,
+            modificationDate > currentTimestamp,
+            let data = try? Data(contentsOf: url, options: [.uncached])
+        else {
+            print("Up to date")
+            return
+        }
 
+        print("MD: \(modificationDate), CTS: \(currentTimestamp)")
         decode(data)
         currentTimestamp = modificationDate
         hasChanges = false
         didRefresh?()
+        print("Updated")
     }
 
     fileprivate func setupMetadataQuery() {
@@ -121,17 +128,23 @@ class PersistentData<Content> where Content: Serializable, Content: DidChangeNot
         querySubscriber = Publishers.MergeMany(publishers)
             .receive(on: DispatchQueue.main)
             .sink { [self] notification in
+                print("Notification")
                 guard let query = notification.object as? NSMetadataQuery, query === self.metadataQuery else { return }
+                print("My notification")
                 query.disableUpdates()
-//                let modificationDate = try? FileManager.default.attributesOfItem(atPath: self.url.path)[.modificationDate] as? Date
+//                let modificationDate = try? FileManager.default.attributesOfItem(atPath: self.url.path(percentEncoded: false))[.modificationDate] as? Date
 //                print("MD: \(modificationDate ?? Date.distantPast), CTS: \(currentTimestamp)")
                 self.refresh()
                 query.enableUpdates()
             }
 
         metadataQuery.notificationBatchingInterval = 1
-        if let containerUrl = FileManager.default.url(forUbiquityContainerIdentifier: nil), url.path.starts(with: containerUrl.path) {
+        if let containerUrl = FileManager.default.url(forUbiquityContainerIdentifier: nil), url.path(percentEncoded: false).starts(with: containerUrl.path(percentEncoded: false)) {
             metadataQuery.searchScopes = [NSMetadataQueryUbiquitousDocumentsScope]
+            if FileManager.default.fileExists(atPath: url.path(percentEncoded: false)) {
+//                refresh()
+            }
+            try? FileManager.default.startDownloadingUbiquitousItem(at: url)
         } else {
             #if os(iOS)
                 metadataQuery.searchScopes = [NSMetadataQueryAccessibleUbiquitousExternalDocumentsScope]
@@ -141,8 +154,17 @@ class PersistentData<Content> where Content: Serializable, Content: DidChangeNot
             #endif
         }
 
-        metadataQuery.predicate = NSPredicate(format: "%K == %@", NSMetadataItemPathKey, url.path)
+        let pathPredicate = NSComparisonPredicate(leftExpression: NSExpression(forConstantValue: url.path(percentEncoded: false)),
+                                                  rightExpression: NSExpression(forKeyPath: NSMetadataItemPathKey),
+                                                  modifier: .direct,
+                                                  type: .beginsWith)
+        metadataQuery.predicate = pathPredicate
+
+//        metadataQuery.predicate = NSPredicate(format: "%K == %@", NSMetadataItemPathKey, url.path(percentEncoded: false))
+//        metadataQuery.predicate = NSPredicate(format: "%K == %@", NSMetadataItemURLKey, url as NSURL)
+
         metadataQuery.start()
+        metadataQuery.enableUpdates()
     }
 
     init(url: URL, content: Content) {
