@@ -14,8 +14,6 @@ import Foundation
 
 extension Brain {
     class Information: PersistentObject, ObservableObject, AspectStorage {
-   
-        
         struct PointInTime: Serializable {
             init() {}
 
@@ -52,11 +50,9 @@ extension Brain {
             perspectives.insert(id)
         }
 
-        func forget(moment: Date) {
-            guard brain.dreaming else { return }
-            aspects.forEach { (key: Aspect.ID, value: [PointInTime]) in
-                aspects[key] = value.filter { $0.time < moment }
-            }
+        func forget(_ key: Aspect.ID, moment: Date) {
+            guard brain.dreaming, let value = aspects[key] else { return }
+            aspects[key] = value.filter { $0.time < moment }
         }
 
         subscript(_ key: Aspect.ID) -> Aspect.Point {
@@ -79,7 +75,7 @@ extension Brain {
                         aspects[key] = [PointInTime(time: currentMoment, point: newValue)]
                     }
 
-                    brain.addChange(.modified(self, currentMoment))
+                    brain.addChange(.modified(self, key, currentMoment))
                 }
             }
         }

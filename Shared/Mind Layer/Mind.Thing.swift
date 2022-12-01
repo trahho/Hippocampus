@@ -5,12 +5,14 @@
 //  Created by Guido Kühn on 17.09.22.
 //
 
+import Combine
 import Foundation
 
 extension Mind {
-    class Thing: IdentifiableObject, AspectStorage {
+    class Thing: IdentifiableObject, AspectStorage, ObservableObject {
         var brain: Brain
         var information: Brain.Information
+        var cancellable: AnyCancellable?
         
         let perspectives: Set<Perspective>
         
@@ -18,6 +20,10 @@ extension Mind {
             self.brain = brain
             self.information = information
             self.perspectives = perspectives
+            super.init()
+            self.cancellable = self.information.objectWillChange.sink {
+                self.objectWillChange.send()
+            }
         }
         
         subscript(id: Aspect.ID) -> Aspect.Point {

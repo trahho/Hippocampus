@@ -83,6 +83,7 @@ class PersistentData<Content>: ObservableObject where Content: Serializable, Con
         }
         try! data.write(to: url, options: [.atomic])
         currentTimestamp = try! FileManager.default.attributesOfItem(atPath: url.path)[.modificationDate] as! Date
+        print("Modified \(currentTimestamp)")
         hasChanges = false
         metadataQuery.start()
     }
@@ -106,17 +107,14 @@ class PersistentData<Content>: ObservableObject where Content: Serializable, Con
             let modificationDate = try? FileManager.default.attributesOfItem(atPath: url.path(percentEncoded: false))[.modificationDate] as? Date,
             modificationDate > currentTimestamp,
             let data = try? Data(contentsOf: url, options: [.uncached])
-        else {
-            print("Up to date")
-            return
-        }
+        else { return }
 
-        print("MD: \(modificationDate), CTS: \(currentTimestamp)")
+//        print("MD: \(modificationDate), CTS: \(currentTimestamp)")
         decode(data)
         currentTimestamp = modificationDate
         hasChanges = false
         didRefresh?()
-        print("Updated")
+        print("Updated \(currentTimestamp)")
     }
 
     fileprivate func setupMetadataQuery() {
@@ -128,9 +126,9 @@ class PersistentData<Content>: ObservableObject where Content: Serializable, Con
         querySubscriber = Publishers.MergeMany(publishers)
             .receive(on: DispatchQueue.main)
             .sink { [self] notification in
-                print("Notification")
+//                print("Notification")
                 guard let query = notification.object as? NSMetadataQuery, query === self.metadataQuery else { return }
-                print("My notification")
+//                print("My notification")
                 query.disableUpdates()
 //                let modificationDate = try? FileManager.default.attributesOfItem(atPath: self.url.path(percentEncoded: false))[.modificationDate] as? Date
 //                print("MD: \(modificationDate ?? Date.distantPast), CTS: \(currentTimestamp)")

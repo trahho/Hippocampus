@@ -44,6 +44,8 @@
 		C528A18C28CDE3550027FA44 /* Aspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE565289884CE0060A066 /* Aspect.swift */; };
 		C528A18D28CDE37F0027FA44 /* AspectComparisonResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CD5A9228C40D7A00DA9F7D /* AspectComparisonResult.swift */; };
 		C5394A5629033E7B003B99BF /* Imagination.swift in Sources */ = {isa = PBXBuildFile; fileRef = C509589428DCFBF600068D37 /* Imagination.swift */; };
+		C548BCBB292ADA8600DB6185 /* EditNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C548BCBA292ADA8600DB6185 /* EditNoteView.swift */; };
+		C548BCBC292ADA8600DB6185 /* EditNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C548BCBA292ADA8600DB6185 /* EditNoteView.swift */; };
 		C54BE4B12894866C0060A066 /* HippocampusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4A12894866A0060A066 /* HippocampusApp.swift */; };
 		C54BE4B22894866C0060A066 /* HippocampusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4A12894866A0060A066 /* HippocampusApp.swift */; };
 		C54BE4B52894866C0060A066 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C54BE4A32894866C0060A066 /* Assets.xcassets */; };
@@ -205,6 +207,7 @@
 		C528A18128CDE2A90027FA44 /* HippocampusTestsMacOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HippocampusTestsMacOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C528A18A28CDE3020027FA44 /* AspectTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectTest.swift; sourceTree = "<group>"; };
 		C5394A5829049969003B99BF /* Nachdenken.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Nachdenken.md; sourceTree = "<group>"; };
+		C548BCBA292ADA8600DB6185 /* EditNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteView.swift; sourceTree = "<group>"; };
 		C54BE4A12894866A0060A066 /* HippocampusApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HippocampusApp.swift; sourceTree = "<group>"; };
 		C54BE4A22894866A0060A066 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C54BE4A32894866C0060A066 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -561,6 +564,7 @@
 			children = (
 				C58FB452291F215500D0B713 /* ContentView.swift */,
 				C5786DC12924405500865EFD /* AddNoteView.swift */,
+				C548BCBA292ADA8600DB6185 /* EditNoteView.swift */,
 			);
 			path = "App Layer";
 			sourceTree = "<group>";
@@ -758,6 +762,7 @@
 				C54BE4FF289591440060A066 /* CGPoint+Operators.swift in Sources */,
 				C54BE54D289602980060A066 /* Consciousness.swift in Sources */,
 				C5D042C128D4E91E0088D6B0 /* Mind.Opinion.AboutOne.swift in Sources */,
+				C548BCBB292ADA8600DB6185 /* EditNoteView.swift in Sources */,
 				C54BE55128960EF10060A066 /* SelectMemoryView.swift in Sources */,
 				C50BEEC828D519EB00F9F6E6 /* Mind.Opinion+Basics.swift in Sources */,
 				C54BE5432895DB180060A066 /* Brain.Synapse.swift in Sources */,
@@ -845,6 +850,7 @@
 				C504036C290DDE8D0083AC41 /* CaseIterable+StringConversion.swift in Sources */,
 				C50BEECF28D52C1700F9F6E6 /* Aspect+Comparisons.swift in Sources */,
 				C54BE56D289889EB0060A066 /* Brain.Information.swift in Sources */,
+				C548BCBC292ADA8600DB6185 /* EditNoteView.swift in Sources */,
 				C54BE500289591440060A066 /* CGPoint+Operators.swift in Sources */,
 				C54BE54E289602980060A066 /* Consciousness.swift in Sources */,
 				C5D042C228D4E91E0088D6B0 /* Mind.Opinion.AboutOne.swift in Sources */,

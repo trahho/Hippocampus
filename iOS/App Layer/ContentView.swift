@@ -13,6 +13,7 @@ struct ListView: View {
     @EnvironmentObject var brain: Brain
 
     @State var addSheetIsPresented = false
+    @State var editSheetItem: Mind.Thing?
 
     var conclusion: Mind.Thought.Conclusion {
         Mind.Thought.notes.think(in: brain)
@@ -24,7 +25,7 @@ struct ListView: View {
 //    }
 
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             Button {
                 addSheetIsPresented.toggle()
             } label: {
@@ -32,35 +33,31 @@ struct ListView: View {
             }
             let items = conclusion.ideas.values
                 .sorted(using: Aspect.Comparator(order: .forward, aspect: Perspective.note.name))
-            List(items) { idea in
-                if case let .string(string) = Perspective.note.name[idea] {
-                    Text(string)
+            ScrollView {
+                ForEach(items) { idea in
+                    if case let .string(string) = idea[Perspective.note.name] {
+                        NavigationLink(value: idea) {
+                            Text(string)
+                        }
+                        .padding(2)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .contentShape(Rectangle())
+//                        .onTapGesture {
+//                            editSheetItem = idea
+//                        }
+                    }
                 }
+            }
+            .navigationDestination(for: Mind.Idea.self) { note in
+                EditNoteView(note: note)
             }
         }
         .sheet(isPresented: $addSheetIsPresented) {
             AddNoteView()
         }
-    }
-}
-
-struct EditNoteView: View {
-    @ObservedObject var note: Brain.Neuron
-    @State var edit = false
-
-    let textAspect = Perspective.note.text
-
-    var text: Binding<String> {
-        Binding(get: {
-            guard case let .string(string) = textAspect[note] else {
-                return ""
-            }
-            return string
-        }, set: { newValue in textAspect[note] = .string(newValue) })
-    }
-
-    var body: some View {
-        TextField("Text", text: text)
+        .sheet(item: $editSheetItem) { item in
+            EditNoteView(note: item)
+        }
     }
 }
 

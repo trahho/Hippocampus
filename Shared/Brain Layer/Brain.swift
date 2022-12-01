@@ -8,10 +8,9 @@
 import Combine
 import Foundation
 
-
 final class Brain: Serializable, ObservableObject, DidChangeNotifier {
     var objectDidChange: ObservableObjectPublisher = ObjectDidChangePublisher()
-    
+
     enum BrainDamage: Error {
         case notDreaming
     }
@@ -21,7 +20,7 @@ final class Brain: Serializable, ObservableObject, DidChangeNotifier {
     enum InformationChange {
         case neuronCreated(Neuron)
         case synapseCreated(Synapse)
-        case modified(Information, Date)
+        case modified(Information, Aspect.ID, Date)
     }
 
     @Serialized private var informationId: Information.ID = 0
@@ -69,7 +68,7 @@ final class Brain: Serializable, ObservableObject, DidChangeNotifier {
     func awaken() {
         guard currentMoment != nil else { return }
         objectWillChange.send()
-        if dreaming {
+        if dreaming, !informationChanges.isEmpty {
             objectDidChange.send()
         }
         dreaming = false
@@ -86,8 +85,8 @@ final class Brain: Serializable, ObservableObject, DidChangeNotifier {
             case let .synapseCreated(synapse):
                 synapse.disconnect()
                 synapses.removeValue(forKey: synapse.id)
-            case let .modified(information, moment):
-                information.forget(moment: moment)
+            case let .modified(information, aspectId, moment):
+                information.forget(aspectId, moment: moment)
             }
         }
         informationChanges = []
