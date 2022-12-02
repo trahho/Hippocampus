@@ -12,19 +12,19 @@ extension Consciousness {
     class Memory: ObservableObject {
         private var cancellables: Set<AnyCancellable> = []
 
-        private var persistentBrain: PersistentData<Brain>?
+        private var persistentBrain: PersistentContainer<Brain>?
 
         var brain: Brain {
             persistentBrain!.content
         }
 
-        private var persistentMind: PersistentData<Mind>?
+        private var persistentMind: PersistentContainer<Mind>?
 
         var mind: Mind {
             persistentMind!.content
         }
         
-        private var persistentImagination: PersistentData<Imagination>?
+        private var persistentImagination: PersistentContainer<Imagination>?
 
         var imagination: Imagination {
             persistentImagination!.content
@@ -48,8 +48,8 @@ extension Consciousness {
 //            }
 //        }
 
-        func setup<T: DidChangeNotifier>(url: URL, content: T, didRefresh: @escaping () -> Void) -> PersistentData<T> {
-            let persistentData = PersistentData<T>(url: url, content: content)
+        func setup<T: DidChangeNotifier>(url: URL, content: T, didRefresh: @escaping () -> Void) -> PersistentContainer<T> {
+            let persistentData = PersistentContainer<T>(url: url, content: content)
             persistentData.didRefresh = didRefresh
             persistentData.objectWillChange.sink(receiveValue: {_ in 
                 self.objectWillChange.send()

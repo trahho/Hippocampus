@@ -28,7 +28,7 @@ protocol DidChangeNotifier {
 
 extension DidChangeNotifier {}
 
-class PersistentData<Content>: ObservableObject where Content: Serializable, Content: DidChangeNotifier {
+class PersistentContainer<Content>: ObservableObject where Content: Serializable, Content: DidChangeNotifier {
     let url: URL
     private var currentTimestamp: Date = .distantPast
     private let metadataQuery = NSMetadataQuery()

@@ -76,8 +76,8 @@
 		C54BE4E628958F910060A066 /* CyclicEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4DD28958F910060A066 /* CyclicEncoder.swift */; };
 		C54BE4E728958F910060A066 /* CyclicDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4DE28958F910060A066 /* CyclicDecoder.swift */; };
 		C54BE4E828958F910060A066 /* CyclicDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4DE28958F910060A066 /* CyclicDecoder.swift */; };
-		C54BE4EC28958FC70060A066 /* PersistentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4EB28958FC70060A066 /* PersistentData.swift */; };
-		C54BE4ED28958FC70060A066 /* PersistentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4EB28958FC70060A066 /* PersistentData.swift */; };
+		C54BE4EC28958FC70060A066 /* PersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4EB28958FC70060A066 /* PersistentContainer.swift */; };
+		C54BE4ED28958FC70060A066 /* PersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4EB28958FC70060A066 /* PersistentContainer.swift */; };
 		C54BE4F1289591320060A066 /* ObservedChangeReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4EF289591320060A066 /* ObservedChangeReceiver.swift */; };
 		C54BE4F2289591320060A066 /* ObservedChangeReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4EF289591320060A066 /* ObservedChangeReceiver.swift */; };
 		C54BE4F3289591320060A066 /* Observed.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4F0289591320060A066 /* Observed.swift */; };
@@ -227,7 +227,7 @@
 		C54BE4DC28958F910060A066 /* Box.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
 		C54BE4DD28958F910060A066 /* CyclicEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CyclicEncoder.swift; sourceTree = "<group>"; };
 		C54BE4DE28958F910060A066 /* CyclicDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CyclicDecoder.swift; sourceTree = "<group>"; };
-		C54BE4EB28958FC70060A066 /* PersistentData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentData.swift; sourceTree = "<group>"; };
+		C54BE4EB28958FC70060A066 /* PersistentContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentContainer.swift; sourceTree = "<group>"; };
 		C54BE4EF289591320060A066 /* ObservedChangeReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservedChangeReceiver.swift; sourceTree = "<group>"; };
 		C54BE4F0289591320060A066 /* Observed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observed.swift; sourceTree = "<group>"; };
 		C54BE4F6289591440060A066 /* CGRect+Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+Functions.swift"; sourceTree = "<group>"; };
@@ -445,7 +445,7 @@
 			isa = PBXGroup;
 			children = (
 				C54BE4E928958F970060A066 /* Serialization */,
-				C54BE4EB28958FC70060A066 /* PersistentData.swift */,
+				C54BE4EB28958FC70060A066 /* PersistentContainer.swift */,
 				C582B38528A2F00400F795F0 /* PersistentObject.swift */,
 			);
 			path = Persistence;
@@ -810,7 +810,7 @@
 				C54BE518289591840060A066 /* Injector.swift in Sources */,
 				C5040377290DF9A30083AC41 /* Mind.Opinion.Builder.swift in Sources */,
 				C504036E290DF5610083AC41 /* Perspective.GlobalPerspectives.swift in Sources */,
-				C54BE4EC28958FC70060A066 /* PersistentData.swift in Sources */,
+				C54BE4EC28958FC70060A066 /* PersistentContainer.swift in Sources */,
 				C58FB4552920585C00D0B713 /* Mind.Thought.Conclusion.swift in Sources */,
 				C54BE4E528958F910060A066 /* CyclicEncoder.swift in Sources */,
 				C54BE55A289698990060A066 /* View+If.swift in Sources */,
@@ -899,7 +899,7 @@
 				C54BE519289591840060A066 /* Injector.swift in Sources */,
 				C5040378290DF9A30083AC41 /* Mind.Opinion.Builder.swift in Sources */,
 				C504036F290DF5610083AC41 /* Perspective.GlobalPerspectives.swift in Sources */,
-				C54BE4ED28958FC70060A066 /* PersistentData.swift in Sources */,
+				C54BE4ED28958FC70060A066 /* PersistentContainer.swift in Sources */,
 				C54BE4E628958F910060A066 /* CyclicEncoder.swift in Sources */,
 				C54BE55B289698990060A066 /* View+If.swift in Sources */,
 				C582B38D28A43C1700F795F0 /* Mind.Idea.swift in Sources */,

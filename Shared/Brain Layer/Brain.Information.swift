@@ -38,7 +38,7 @@ extension Brain {
 
         @Serialized private(set) var perspectives: Set<Perspective.ID> = []
         @Serialized private(set) var aspects: [Aspect.ID: [PointInTime]] = [:]
-        var brain: Brain!
+        var brain: Brain?
 
         required init() {}
 
@@ -51,16 +51,20 @@ extension Brain {
         }
 
         func forget(_ key: Aspect.ID, moment: Date) {
-            guard brain.dreaming, let value = aspects[key] else { return }
+            guard let brain,  brain.dreaming, let value = aspects[key] else { return }
             aspects[key] = value.filter { $0.time < moment }
         }
 
         subscript(_ key: Aspect.ID) -> Aspect.Point {
             get {
-                let result = aspects[key]?.last(where: { $0.time <= brain.currentMoment ?? Date() })
+                let result = aspects[key]?.last(where: { $0.time <= brain?.currentMoment ?? Date() })
                 return result?.point ?? .empty
             }
             set {
+                guard let brain else {
+                    aspects[key] = [PointInTime(time: Date(), point: newValue)]
+                    return
+                }
                 brain.dream {
                     guard let currentMoment = brain.currentMoment else { return }
 
