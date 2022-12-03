@@ -48,7 +48,7 @@ extension Consciousness {
 //            }
 //        }
 
-        func setup<T: DidChangeNotifier>(url: URL, content: T, didRefresh: @escaping () -> Void) -> PersistentContainer<T> {
+        func setup<T: PersistentContent>(url: URL, content: T, didRefresh: @escaping () -> Void) -> PersistentContainer<T> {
             let persistentData = PersistentContainer<T>(url: url, content: content)
             persistentData.didRefresh = didRefresh
             persistentData.objectWillChange.sink(receiveValue: {_ in 
@@ -79,7 +79,6 @@ extension Consciousness {
         }
 
         func brainDidRefresh() {
-            brain.recover()
             if let mind = persistentMind?.content {
                 mind.adoptBrain(brain)
             }

@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-final class Mind: Serializable, ObservableObject, DidChangeNotifier {
+final class Mind: Serializable, ObservableObject, PersistentContent {
     let objectDidChange = ObjectDidChangePublisher()
 
     var cancellable: AnyCancellable?
@@ -35,7 +35,7 @@ final class Mind: Serializable, ObservableObject, DidChangeNotifier {
         _brain = brain
     }
 
-    func recover() {
+    func restore() {
         customPerspectives.values.forEach { perspective in
             perspective.aspects.forEach { aspect in
                 aspect.perspective = perspective

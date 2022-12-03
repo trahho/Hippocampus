@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-final class Imagination: Serializable, ObservableObject, DidChangeNotifier {
+final class Imagination: Serializable, ObservableObject, PersistentContent {
     var objectDidChange: ObservableObjectPublisher = ObjectDidChangePublisher()
     
     static var globalExperiences: [Mind.Thought.ID: [Experience]] = [
@@ -45,7 +45,7 @@ final class Imagination: Serializable, ObservableObject, DidChangeNotifier {
         _mind = mind
     }
 
-    func recover() {
+    func restore() {
 //        customPerspectives.values.forEach { perspective in
 //            perspective.aspects.forEach { aspect in
 //                aspect.perspective = perspective

@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-final class Brain: Serializable, ObservableObject, DidChangeNotifier {
+final class Brain: Serializable, ObservableObject, PersistentContent {
     var objectDidChange: ObservableObjectPublisher = ObjectDidChangePublisher()
 
     enum BrainDamage: Error {
@@ -27,7 +27,7 @@ final class Brain: Serializable, ObservableObject, DidChangeNotifier {
     @Serialized private(set) var neurons: [Information.ID: Neuron] = [:]
     @Serialized private(set) var synapses: [Information.ID: Synapse] = [:]
 
-    func recover() {
+    func restore() {
         neurons.values.forEach { neuron in
             neuron.brain = self
         }

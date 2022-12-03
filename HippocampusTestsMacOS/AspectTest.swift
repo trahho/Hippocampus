@@ -32,3 +32,15 @@ import XCTest
 //        }
 //    }
 //}
+
+final class PersistentText: XCTestCase {
+    class Item: PersistentClass {
+        @Persistent var test: String = ""
+    }
+    
+    func testInitObject() throws {
+        let test = Item()
+        test.test = "Hallo Welt"
+        XCTAssert(test.test == "Hallo Welt")
+    }
+}

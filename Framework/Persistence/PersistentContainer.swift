@@ -8,27 +8,10 @@
 import Combine
 import Foundation
 
-extension URL {
-    var isVirtual: Bool {
-        scheme == "virtual"
-    }
 
-    static func virtual() -> URL {
-        URL(string: "virtual:///")!
-    }
-}
 
-protocol PersistentDataDelegate {}
 
-protocol DidChangeNotifier {
-    associatedtype ObjectDidChangePublisher: Publisher = ObservableObjectPublisher where ObjectDidChangePublisher.Failure == Never
-
-    var objectDidChange: ObjectDidChangePublisher { get }
-}
-
-extension DidChangeNotifier {}
-
-class PersistentContainer<Content>: ObservableObject where Content: Serializable, Content: DidChangeNotifier {
+class PersistentContainer<Content>: ObservableObject where Content: PersistentContent {
     let url: URL
     private var currentTimestamp: Date = .distantPast
     private let metadataQuery = NSMetadataQuery()
@@ -93,6 +76,7 @@ class PersistentContainer<Content>: ObservableObject where Content: Serializable
               let flattened = try? JSONDecoder().decode(FlattenedContainer.self, from: data),
               let newContent = try? CyclicDecoder().decode(Content.self, from: flattened)
         else { return }
+        newContent.restore()
         content = newContent
 //        guard // let data = try? (compressedData as NSData).decompressed(using: .lzfse) as Data,
 //              let newContent = try? JSONDecoder().decode(Content.self, from: compressedData)
@@ -167,6 +151,7 @@ class PersistentContainer<Content>: ObservableObject where Content: Serializable
 
     init(url: URL, content: Content) {
         self.url = url
+        content.restore()
         self.content = content
         setupMetadataQuery()
     }
