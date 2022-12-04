@@ -5,11 +5,22 @@
 //  Created by Guido Kühn on 02.12.22.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 protocol DidChangeNotifier {
-    associatedtype ObjectDidChangePublisher: Publisher = ObservableObjectPublisher where ObjectDidChangePublisher.Failure == Never
+    associatedtype ObjectDidChangePublisher: Publisher = Publisher where
+//        ObjectDidChangePublisher.Output == Void ,
+        ObjectDidChangePublisher.Failure == Never
 
     var objectDidChange: ObjectDidChangePublisher { get }
+    
 }
+
+//protocol DidChangeNotifier<Key: String, V {
+//    associatedtype ObjectDidChangePublisher: Publisher = ObservableObjectPublisher where
+////        ObjectDidChangePublisher.Output == PersistentGraph<Key.Change,
+//        ObjectDidChangePublisher.Failure == Never
+//
+//    var objectDidChange: ObjectDidChangePublisher { get }
+//}

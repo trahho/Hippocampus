@@ -8,9 +8,6 @@
 import Combine
 import Foundation
 
-
-
-
 class PersistentContainer<Content>: ObservableObject where Content: PersistentContent {
     let url: URL
     private var currentTimestamp: Date = .distantPast

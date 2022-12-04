@@ -225,6 +225,9 @@
 		C5C4A111293B9EC300FF9AB8 /* Array+asSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE507289591530060A066 /* Array+asSet.swift */; };
 		C5C4A112293B9F0D00FF9AB8 /* CaseIterable+StringConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = C504036A290DDE8D0083AC41 /* CaseIterable+StringConversion.swift */; };
 		C5C4A113293B9FC400FF9AB8 /* ObservedChangeReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4EF289591320060A066 /* ObservedChangeReceiver.swift */; };
+		C5C4A115293C0D4F00FF9AB8 /* PersistentGraph.Change.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A114293C0D4F00FF9AB8 /* PersistentGraph.Change.swift */; };
+		C5C4A116293C0D4F00FF9AB8 /* PersistentGraph.Change.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A114293C0D4F00FF9AB8 /* PersistentGraph.Change.swift */; };
+		C5C4A117293C0D5500FF9AB8 /* PersistentGraph.Change.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A114293C0D4F00FF9AB8 /* PersistentGraph.Change.swift */; };
 		C5CD5A8D28C4095900DA9F7D /* AspectStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CD5A8C28C4095900DA9F7D /* AspectStorage.swift */; };
 		C5CD5A8E28C4095900DA9F7D /* AspectStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CD5A8C28C4095900DA9F7D /* AspectStorage.swift */; };
 		C5CD5A9328C40D7A00DA9F7D /* AspectComparisonResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CD5A9228C40D7A00DA9F7D /* AspectComparisonResult.swift */; };
@@ -349,6 +352,7 @@
 		C5C4A0E2293AC7C600FF9AB8 /* PersistentClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentClass.swift; sourceTree = "<group>"; };
 		C5C4A0E5293B78E000FF9AB8 /* Persistent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistent.swift; sourceTree = "<group>"; };
 		C5C4A0E8293B9A8A00FF9AB8 /* PersistentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentData.swift; sourceTree = "<group>"; };
+		C5C4A114293C0D4F00FF9AB8 /* PersistentGraph.Change.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentGraph.Change.swift; sourceTree = "<group>"; };
 		C5CD5A8C28C4095900DA9F7D /* AspectStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectStorage.swift; sourceTree = "<group>"; };
 		C5CD5A9228C40D7A00DA9F7D /* AspectComparisonResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectComparisonResult.swift; sourceTree = "<group>"; };
 		C5D042BA28D4E8BF0088D6B0 /* Mind.Opinion+Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mind.Opinion+Operators.swift"; sourceTree = "<group>"; };
@@ -530,6 +534,7 @@
 				C582B38528A2F00400F795F0 /* PersistentObject.swift */,
 				C5C4A0D3293AB05900FF9AB8 /* PersistentContent.swift */,
 				C5C4A0CD293AAEAF00FF9AB8 /* PersistentGraph.swift */,
+				C5C4A114293C0D4F00FF9AB8 /* PersistentGraph.Change.swift */,
 				C5C4A0D9293AB3FC00FF9AB8 /* PersistentGraph.Member.swift */,
 				C5C4A0DC293AB7D500FF9AB8 /* PersistentGraph.Node.swift */,
 				C5C4A0DF293AC3AE00FF9AB8 /* PersistentGraph.Edge.swift */,
@@ -845,6 +850,7 @@
 				C5C4A0ED293B9B0E00FF9AB8 /* PersistentGraph.Node.swift in Sources */,
 				C5C4A10A293B9E9E00FF9AB8 /* Perspective.Builder.swift in Sources */,
 				C5C4A111293B9EC300FF9AB8 /* Array+asSet.swift in Sources */,
+				C5C4A117293C0D5500FF9AB8 /* PersistentGraph.Change.swift in Sources */,
 				C5C4A0F7293B9B0E00FF9AB8 /* DidChangeNotifier.swift in Sources */,
 				C5C4A0F1293B9B0E00FF9AB8 /* PersistentGraph.swift in Sources */,
 				C5C4A0F3293B9B0E00FF9AB8 /* PersistentClass.swift in Sources */,
@@ -882,6 +888,7 @@
 				C54BE4F3289591320060A066 /* Observed.swift in Sources */,
 				C5040380290F00590083AC41 /* Genes.DNA.swift in Sources */,
 				C54BE4F1289591320060A066 /* ObservedChangeReceiver.swift in Sources */,
+				C5C4A115293C0D4F00FF9AB8 /* PersistentGraph.Change.swift in Sources */,
 				C54BE503289591440060A066 /* CGFloat+Operators.swift in Sources */,
 				C54BE4E128958F910060A066 /* CycleBreaker.swift in Sources */,
 				C50BEECB28D51ACA00F9F6E6 /* Mind.Opinion+Factory.swift in Sources */,
@@ -982,6 +989,7 @@
 				C5040375290DF63D0083AC41 /* Mind.Thought.Builder.swift in Sources */,
 				C54BE4F4289591320060A066 /* Observed.swift in Sources */,
 				C5040381290F00590083AC41 /* Genes.DNA.swift in Sources */,
+				C5C4A116293C0D4F00FF9AB8 /* PersistentGraph.Change.swift in Sources */,
 				C509589828DE3C5200068D37 /* Sensation.swift in Sources */,
 				C54BE4F2289591320060A066 /* ObservedChangeReceiver.swift in Sources */,
 				C54BE504289591440060A066 /* CGFloat+Operators.swift in Sources */,

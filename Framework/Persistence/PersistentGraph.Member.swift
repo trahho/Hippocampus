@@ -5,10 +5,12 @@
 //  Created by Guido Kühn on 02.12.22.
 //
 
+import Combine
 import Foundation
 
 extension PersistentGraph {
     open class Member: PersistentObject, ObservableObject {
+      
         struct TimedValue: Serializable {
             @Serialized private(set) var time: Date
             @Serialized private(set) var value: PersistentValue
@@ -24,10 +26,8 @@ extension PersistentGraph {
         @Serialized private(set) var roles: Set<Role> = []
         @Serialized private(set) var values: [Key: [TimedValue]] = [:]
         
-        var graph: PersistentGraph<Role, Key>?
-        
-        //    required public init() {}
-        
+        var graph: PersistentGraph?
+                
         func rewind(_ key: Key, to timestamp: Date) {
             guard let graph, graph.changing, let value = values[key] else { return }
             objectWillChange.send()
@@ -69,7 +69,8 @@ extension PersistentGraph {
                         values[key] = [TimedValue(time: timestamp, value: newValue)]
                     }
                     
-                    graph.addChange(.modified(self, key, timestamp))
+                    let change: Change = .modified(self, key, timestamp)
+                    graph.addChange(change)
                 }
             }
         }

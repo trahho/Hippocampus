@@ -6,24 +6,21 @@
 //
 
 import Foundation
+import Combine
 
 open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable>: PersistentContent, ObservableObject {
     public typealias Transaction = () throws -> ()
     public typealias PersistentValue = (any Codable)?
+    typealias ChangePublisher = PassthroughSubject<Change, Never>
 
-    var objectDidChange: ObjectDidChangePublisher = .init()
-
-    enum Change {
-        case node(Node)
-        case edge(Edge)
-//        case synapseCreated(Synapse)
-        case modified(Member, Key, Date)
-    }
 
     @Serialized private var idCounter: Member.ID = 0
     @Serialized private(set) var nodes: [Member.ID: Node] = [:]
     @Serialized private(set) var edges: [Member.ID: Edge] = [:]
 
+    var objectDidChange = PassthroughSubject<Void,Never>()
+    var changeDidHappen:  ChangePublisher = .init()
+    
     public required init() {}
 
     func restore() {
@@ -53,8 +50,10 @@ open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable>:
     }
 
     func change() {
+        guard !changing else { return }
         rewind(timestamp: Date())
         changing = true
+        changeDidHappen.send(.changing)
     }
 
     func rewind(timestamp: Date) {
@@ -62,6 +61,7 @@ open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable>:
         objectWillChange.send()
         changing = false
         self.timestamp = timestamp
+        changeDidHappen.send(.rewinding(timestamp))
     }
 
     func finish() {
@@ -73,6 +73,7 @@ open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable>:
         changing = false
         timestamp = nil
         changes = []
+        changeDidHappen.send(.finished)
     }
 
     func discardChange() {
@@ -81,11 +82,15 @@ open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable>:
             switch change {
             case let .node(node):
                 nodes.removeValue(forKey: node.id)
+                changeDidHappen.send(.discarded(change))
             case let .edge(edge):
                 edge.disconnect()
                 edges.removeValue(forKey: edge.id)
+                changeDidHappen.send(.discarded(change))
             case let .modified(member, key, timestamp):
                 member.rewind(key, to: timestamp)
+                changeDidHappen.send(.discarded(change))
+            default: break
             }
         }
         changes = []
@@ -95,5 +100,6 @@ open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable>:
 
     func addChange(_ change: Change) {
         changes.append(change)
+        changeDidHappen.send(change)
     }
 }

@@ -43,4 +43,13 @@ final class PersistentText: XCTestCase {
         test.test = "Hallo Welt"
         XCTAssert(test.test == "Hallo Welt")
     }
+    
+    func testInitManyObjects() throws {
+        let node = PersistentData.Node()
+        let o1 = Item(node)
+        let o2 = Item(node)
+        o1.test = "Hallo Welt"
+        XCTAssert(o2.test == "Hallo Welt")
+        XCTAssert(o1 == o2)
+    }
 }

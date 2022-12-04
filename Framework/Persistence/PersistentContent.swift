@@ -10,3 +10,4 @@ import Foundation
 protocol PersistentContent: Serializable, DidChangeNotifier {
     func restore() 
 }
+
