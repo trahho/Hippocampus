@@ -34,7 +34,7 @@ import XCTest
 //}
 
 final class PersistentText: XCTestCase {
-    class Item: PersistentClass {
+    class Item: PersistentData.Object {
         @Persistent var test: String = ""
     }
     

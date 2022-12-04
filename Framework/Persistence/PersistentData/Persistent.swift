@@ -21,13 +21,13 @@ import Foundation
 @propertyWrapper class Persistent<Value: Codable> {
     private var key: String
     private let defaultValue: (() -> Value)?
-    
+
     @available(*, unavailable, message: "This property wrapper can only be applied to classes")
     var wrappedValue: Value {
         get { fatalError() }
         set { fatalError() }
     }
-    
+
     //    init(wrappedValue defaultValue: @autoclosure @escaping () -> Value, key: String) {
     //        self.key = key
     //        self.defaultValue = defaultValue
@@ -37,20 +37,21 @@ import Foundation
     //        self.key = key
     //        self.defaultValue = nil
     //    }
-    
+
     init(optional key: String = "") {
         self.key = key
         defaultValue = nil
     }
-    
+
     init(wrappedValue defaultValue: @autoclosure @escaping () -> Value, optional key: String = "") {
         self.key = key
         self.defaultValue = defaultValue
     }
+
     
-    func getKey(from instance: PersistentClass) -> String {
+    func getKey(from instance: PersistentData.Object) -> String {
         guard key.isEmpty else { return key }
-        
+
         let mirror = Mirror(reflecting: instance)
         let label = mirror.children.first { (_: String?, value: Any) in
             guard let property = value as? Persistent<Value>, property === self else { return false }
@@ -59,8 +60,8 @@ import Foundation
         key = String(label)
         return key
     }
-    
-    static subscript<EnclosingType: PersistentClass>(
+
+    static subscript<EnclosingType: PersistentData.Object>(
         _enclosingInstance instance: EnclosingType,
         wrapped _: ReferenceWritableKeyPath<EnclosingType, Value>,
         storage storageKeyPath: ReferenceWritableKeyPath<EnclosingType, Persistent>

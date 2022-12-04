@@ -9,7 +9,7 @@ import Combine
 import Foundation
 
 final class Mind: Serializable, ObservableObject, PersistentContent {
-    let objectDidChange = ObjectDidChangePublisher()
+    let objectDidChange = PassthroughSubject<Void, Never>()
 
     var cancellable: AnyCancellable?
     private var _brain: Brain? {
