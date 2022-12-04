@@ -9,19 +9,19 @@ import Combine
 import Foundation
 
 open class PersistentClass: ObservableObject {
-    private let node: PersistentData.Node
-    private var cancellables: Set<AnyCancellable> = []
+    internal let node: PersistentData.Node
+    private var cancellable: AnyCancellable?
 
-    private var typeName: String{
+    internal var typeName: String{
         String(describing: type(of: self))
     }
     
     public init(_ node: PersistentData.Node) {
         self.node = node
         node[role: typeName] = true
-        node.objectWillChange.sink { [weak self] _ in
+        cancellable = node.objectWillChange.sink { [weak self] _ in
             self?.objectWillChange.send()
-        }.store(in: &cancellables)
+        }
     }
 
     public convenience init() {
@@ -38,21 +38,5 @@ open class PersistentClass: ObservableObject {
     }
 }
 
-extension PersistentClass: Identifiable {
-    public var id: PersistentData.Node.ID {
-        node.id
-    }
-}
 
-extension PersistentClass: Equatable {
-    public static func == (lhs: PersistentClass, rhs: PersistentClass) -> Bool {
-        lhs.id == rhs.id && type(of: lhs) == type(of: rhs)
-    }
-}
 
-extension PersistentClass: Hashable {
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-        hasher.combine(typeName)
-    }
-}
