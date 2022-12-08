@@ -17,7 +17,7 @@ extension PersistentData {
             String(describing: type(of: self))
         }
 
-        public init(_ node: PersistentData.Node) {
+        public required init(_ node: PersistentData.Node) {
             self.node = node
             node[role: typeName] = true
             cancellable = node.objectWillChange.sink { [weak self] _ in
@@ -37,5 +37,7 @@ extension PersistentData {
                 node[key] = newValue
             }
         }
+        
+       
     }
 }

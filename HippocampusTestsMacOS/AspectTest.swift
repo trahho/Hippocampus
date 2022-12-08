@@ -36,6 +36,13 @@ import XCTest
 final class PersistentText: XCTestCase {
     class Item: PersistentData.Object {
         @Persistent var test: String = ""
+        var  item: SubItem?
+//        @Reference var item: SubItem
+    }
+    
+    class SubItem: PersistentData.Object {
+        var superItem: Item?
+//        @Reference(reference: \Item.te)
     }
     
     func testInitObject() throws {
@@ -52,4 +59,20 @@ final class PersistentText: XCTestCase {
         XCTAssert(o2.test == "Hallo Welt")
         XCTAssert(o1 == o2)
     }
+    
+    func testKeyPath() throws {
+        let keypath = \Item.test
+        let test = Item()
+        test.test = "Hallo Welt"
+        let result =  test[keyPath: keypath]
+        XCTAssert(result == "Hallo Welt")
+    }
+    
+//    func testMirrorClass() throws {
+//        let keypathA = \Item.item
+//        let keypathB = \SubItem.superItem
+//        let
+//
+//        XCTAssert(children.count == 1)
+//    }
 }

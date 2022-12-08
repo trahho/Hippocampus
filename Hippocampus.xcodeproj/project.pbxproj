@@ -499,15 +499,15 @@
 		C54BE4C028958F820060A066 /* SerializedSwift */ = {
 			isa = PBXGroup;
 			children = (
+				C54BE4C628958F820060A066 /* EncodableProperty.swift */,
+				C54BE4C328958F820060A066 /* DecodableProperty.swift */,
+				C54BE4C728958F820060A066 /* SerializableEncodable.swift */,
+				C54BE4C428958F820060A066 /* SerializableDecodable.swift */,
+				C54BE4C528958F820060A066 /* SerializedCodingKeys.swift */,
 				C54BE4C128958F820060A066 /* Transformable.swift */,
 				C54BE4C228958F820060A066 /* Serialized.swift */,
 				C54BE571289D64960060A066 /* PublishedSerialized.swift */,
 				C54BE574289D7A090060A066 /* ObservedSerialized.swift */,
-				C54BE4C328958F820060A066 /* DecodableProperty.swift */,
-				C54BE4C428958F820060A066 /* SerializableDecodable.swift */,
-				C54BE4C528958F820060A066 /* SerializedCodingKeys.swift */,
-				C54BE4C628958F820060A066 /* EncodableProperty.swift */,
-				C54BE4C728958F820060A066 /* SerializableEncodable.swift */,
 				C54BE4C828958F820060A066 /* SerializedTransformable.swift */,
 			);
 			path = SerializedSwift;
