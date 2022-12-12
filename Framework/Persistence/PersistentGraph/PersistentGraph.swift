@@ -9,10 +9,13 @@ import Foundation
 import Combine
 
 open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable>: PersistentContent, ObservableObject {
+    
+    // MARK: - Types
     public typealias Transaction = () throws -> ()
     public typealias PersistentValue = (any Codable)?
     typealias ChangePublisher = PassthroughSubject<Change, Never>
 
+    // MARK: - Data
 
     @Serialized private var idCounter: Member.ID = 0
     @Serialized private(set) var nodes: [Member.ID: Node] = [:]

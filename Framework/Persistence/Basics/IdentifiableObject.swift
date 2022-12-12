@@ -8,6 +8,7 @@
 import Foundation
 
 open class IdentifiableObject: Identifiable, Hashable {
+//    public typealias ID = UUID
     public typealias ID = Int64
 
     @Serialized public var id: ID = 0

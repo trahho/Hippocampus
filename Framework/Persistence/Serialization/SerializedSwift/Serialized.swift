@@ -9,13 +9,82 @@ import Foundation
 
 public typealias Serializable = SerializableEncodable & SerializableDecodable
 
+//public protocol Referencable {
+//    func insertSelf<K>(into object: inout K, through keyPath: AnyKeyPath)
+//}
+//
+//extension PersistentObject: Referencable {
+//    public func insertSelf<K>(into object: inout K, through keyPath: AnyKeyPath) {
+//        if let path = keyPath as? ReferenceWritableKeyPath<K, Self?> {
+//            object[keyPath: path] = self as? Self
+//        } else if let path = keyPath as? ReferenceWritableKeyPath<K, Self> {
+//            object[keyPath: path] = self as! Self
+//        } else if let path = keyPath as? ReferenceWritableKeyPath<K, Set<Self>> {
+//            object[keyPath: path].insert(self as! Self)
+//        }
+//    }
+//}
+//
+//public protocol ReverseReference {
+//    func restore(_ target: Referencable)
+////    var reverseKeyPath: AnyKeyPath? { get }
+//}
+//
+//extension Serialized: ReverseReference {
+//    public func restore(_ target: Referencable) {
+//        guard let reverse, let _ = _value else { return }
+//        target.insertSelf(into: &_value, through: reverse)
+//    }
+//}
+
+// @propertyWrapper
+// final class SerializedReverse<T: AnyObject>: ReverseReference  {
+//
+////    func accept<Target: AnyObject>(target: Target) {
+////        wrappedValue = target
+////    }
+////
+//
+//    private var _value: T?
+//    private(set) var path: AnyKeyPath
+//
+//    /// Wrapped value getter for optionals
+//    private func _wrappedValue<U>(_: U.Type) -> U? where U: ExpressibleByNilLiteral {
+//        _value as? U
+//    }
+//
+//    /// Wrapped value getter for non-optionals
+//    private func _wrappedValue<U>(_: U.Type) -> U {
+//        _value as! U
+//    }
+//
+//    public var wrappedValue: T {
+//        get {
+//            _wrappedValue(T.self)
+//        } set {
+//            _value = newValue
+//        }
+//    }
+//
+//    init<R,T>(_ path: WritableKeyPath<R, T>) {
+//        self.path = path
+//    }
+// }
+
 @propertyWrapper
 /// Property wrapper for Serializable (Encodable + Decodable) properties.
 /// The Object itself must conform to Serializable (or SerializableEncodable / SerializableDecodable)
 /// Default value is by default nil. Can be used directly without arguments
 public final class Serialized<T> {
+//    public typealias ReferenceKeyPath = AnyKeyPath
     var key: String?
     var alternateKey: String?
+//    private(set) var reverse: ReferenceKeyPath?
+
+//    func setup() {
+//        guard let reverse, _value != nil else { return }
+//        _value[keyPath: reverse] = wrappedValue
+//    }
 
     private var _value: T?
 
@@ -37,6 +106,7 @@ public final class Serialized<T> {
         }
     }
 
+    // TODO: InverseRelation
     /// Defualt init for Serialized wrapper
     /// - Parameters:
     ///   - key: The JSON decoding key to be used. If `nil` (or not passed), the property name gets used for decoding
@@ -63,6 +133,7 @@ extension Serialized: EncodableProperty where T: Encodable {
     ///   - propertyName: The Property Name to be used, if key is not present
     /// - Throws: Throws JSON encoding errorj
     public func encodeValue(from container: inout EncodeContainer, propertyName: String) throws {
+        guard let _ = _value else { return }
         let codingKey = SerializedCodingKeys(key: key ?? propertyName)
         try container.encodeIfPresent(wrappedValue, forKey: codingKey)
     }
@@ -77,7 +148,6 @@ extension Serialized: DecodableProperty where T: Decodable {
     /// - Throws: Doesnt throws anything; Sets the wrappedValue to nil instead (possible crash for non-optionals if no default value was set)
     public func decodeValue(from container: DecodeContainer, propertyName: String) throws {
         let codingKey = SerializedCodingKeys(key: key ?? propertyName)
-
         if let value = try? container.decodeIfPresent(T.self, forKey: codingKey) {
             wrappedValue = value
         } else {

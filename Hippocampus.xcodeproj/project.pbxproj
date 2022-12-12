@@ -237,6 +237,7 @@
 		C5C4A124293CD61300FF9AB8 /* PersistentData.Object+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A123293CD61300FF9AB8 /* PersistentData.Object+Hashable.swift */; };
 		C5C4A125293CD61300FF9AB8 /* PersistentData.Object+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A123293CD61300FF9AB8 /* PersistentData.Object+Hashable.swift */; };
 		C5C4A126293CD61300FF9AB8 /* PersistentData.Object+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A123293CD61300FF9AB8 /* PersistentData.Object+Hashable.swift */; };
+		C5C4A12B2942701100FF9AB8 /* SerialisationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A12A2942701100FF9AB8 /* SerialisationTests.swift */; };
 		C5CD5A8D28C4095900DA9F7D /* AspectStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CD5A8C28C4095900DA9F7D /* AspectStorage.swift */; };
 		C5CD5A8E28C4095900DA9F7D /* AspectStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CD5A8C28C4095900DA9F7D /* AspectStorage.swift */; };
 		C5CD5A9328C40D7A00DA9F7D /* AspectComparisonResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CD5A9228C40D7A00DA9F7D /* AspectComparisonResult.swift */; };
@@ -365,6 +366,7 @@
 		C5C4A11B293CD5E600FF9AB8 /* PersistentData.Object+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistentData.Object+Identifiable.swift"; sourceTree = "<group>"; };
 		C5C4A11F293CD5FF00FF9AB8 /* PersistentData.Object+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistentData.Object+Equatable.swift"; sourceTree = "<group>"; };
 		C5C4A123293CD61300FF9AB8 /* PersistentData.Object+Hashable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistentData.Object+Hashable.swift"; sourceTree = "<group>"; };
+		C5C4A12A2942701100FF9AB8 /* SerialisationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialisationTests.swift; sourceTree = "<group>"; };
 		C5CD5A8C28C4095900DA9F7D /* AspectStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectStorage.swift; sourceTree = "<group>"; };
 		C5CD5A9228C40D7A00DA9F7D /* AspectComparisonResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectComparisonResult.swift; sourceTree = "<group>"; };
 		C5D042BA28D4E8BF0088D6B0 /* Mind.Opinion+Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mind.Opinion+Operators.swift"; sourceTree = "<group>"; };
@@ -417,6 +419,7 @@
 			isa = PBXGroup;
 			children = (
 				C528A18A28CDE3020027FA44 /* AspectTest.swift */,
+				C5C4A12A2942701100FF9AB8 /* SerialisationTests.swift */,
 			);
 			path = HippocampusTestsMacOS;
 			sourceTree = "<group>";
@@ -900,6 +903,7 @@
 				C5C4A100293B9E4800FF9AB8 /* SerializedTransformable.swift in Sources */,
 				C5C4A105293B9E5000FF9AB8 /* CyclicEncoder.swift in Sources */,
 				C5C4A10C293B9E9E00FF9AB8 /* Aspect.Builder.swift in Sources */,
+				C5C4A12B2942701100FF9AB8 /* SerialisationTests.swift in Sources */,
 				C5C4A0FC293B9E4800FF9AB8 /* DecodableProperty.swift in Sources */,
 				C5C4A0F9293B9E4800FF9AB8 /* PublishedSerialized.swift in Sources */,
 				C528A18B28CDE3020027FA44 /* AspectTest.swift in Sources */,

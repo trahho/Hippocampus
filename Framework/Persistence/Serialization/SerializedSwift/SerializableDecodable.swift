@@ -45,11 +45,11 @@ public extension SerializableDecodable {
             for child in children {
                 guard let decodableKey = child.value as? DecodableProperty else { continue }
 
-                // Get the propertyName of the property. By syntax, the property name is
-                // in the form: "_name". Dropping the "_" -> "name"
                 let propertyName = String((child.label ?? "").dropFirst())
-
                 try decodableKey.decodeValue(from: container, propertyName: propertyName)
+
+                guard let referenceKey = child.value as? ReverseReference, let reference = self as? Referencable else { continue }
+                referenceKey.restore(reference)
             }
             mirror = mirror?.superclassMirror
         } while mirror != nil
