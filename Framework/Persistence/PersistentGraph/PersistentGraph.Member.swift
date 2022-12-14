@@ -10,7 +10,7 @@ import Foundation
 
 extension PersistentGraph {
     open class Member: PersistentObject, ObservableObject {
-      
+        
         struct TimedValue: Serializable {
             @Serialized private(set) var time: Date
             @Serialized private(set) var value: PersistentValue

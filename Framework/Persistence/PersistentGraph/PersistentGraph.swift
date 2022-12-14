@@ -5,13 +5,13 @@
 //  Created by Guido Kühn on 02.12.22.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable>: PersistentContent, ObservableObject {
-    
     // MARK: - Types
-    public typealias Transaction = () throws -> ()
+
+    public typealias Transaction = () throws -> Void
     public typealias PersistentValue = (any Codable)?
     typealias ChangePublisher = PassthroughSubject<Change, Never>
 
@@ -21,9 +21,9 @@ open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable>:
     @Serialized private(set) var nodes: [Member.ID: Node] = [:]
     @Serialized private(set) var edges: [Member.ID: Edge] = [:]
 
-    var objectDidChange = PassthroughSubject<Void,Never>()
-    var changeDidHappen:  ChangePublisher = .init()
-    
+    var objectDidChange = PassthroughSubject<Void, Never>()
+    var changeDidHappen: ChangePublisher = .init()
+
     public required init() {}
 
     func restore() {

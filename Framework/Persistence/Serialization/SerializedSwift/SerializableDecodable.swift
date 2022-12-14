@@ -48,8 +48,8 @@ public extension SerializableDecodable {
                 let propertyName = String((child.label ?? "").dropFirst())
                 try decodableKey.decodeValue(from: container, propertyName: propertyName)
 
-                guard let referenceKey = child.value as? ReverseReference, let reference = self as? Referencable else { continue }
-                referenceKey.restore(reference)
+//                guard let referenceKey = child.value as? ReverseReference, let reference = self as? Referencable else { continue }
+//                referenceKey.restore(reference)
             }
             mirror = mirror?.superclassMirror
         } while mirror != nil

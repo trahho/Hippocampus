@@ -9,35 +9,16 @@ import Combine
 import Foundation
 
 extension PersistentData {
-    open class Object: ObservableObject {
-        internal let node: PersistentData.Node
-        private var cancellable: AnyCancellable?
-
-        internal var typeName: String {
-            String(describing: type(of: self))
-        }
-
-        public required init(_ node: PersistentData.Node) {
-            self.node = node
-            node[role: typeName] = true
-            cancellable = node.objectWillChange.sink { [weak self] _ in
-                self?.objectWillChange.send()
-            }
-        }
-
-        public convenience init() {
-            self.init(PersistentData.Node())
-        }
-
-        internal subscript(_ key: String) -> PersistentData.PersistentValue {
-            get {
-                node[key]
-            }
-            set {
-                node[key] = newValue
-            }
-        }
-        
-       
+//    @dynamicMemberLookup
+    open class Object: PersistentData.Member {
+//        internal subscript(dynamicMember key: String) -> PersistentValue {
+//            get {
+//                self[key]
+//            }
+//            set {
+//                self[key] = newValue
+//            }
+//        }
     }
 }
+
