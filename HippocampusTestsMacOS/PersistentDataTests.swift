@@ -45,6 +45,10 @@ final class PersistentDataTests: XCTestCase {
         XCTAssert(target.datas.contains(data1))
         XCTAssert(target.datas.contains(data2))
         XCTAssert(target.datas.contains(data3))
+        XCTAssert(data1.targets == target)
+        XCTAssert(data2.targets == target)
+        XCTAssert(data3.targets == target)
+
         print("juhu")
     }
 }
