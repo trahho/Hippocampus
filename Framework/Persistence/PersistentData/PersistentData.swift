@@ -7,6 +7,4 @@
 
 import Foundation
 
-open class PersistentData: PersistentGraph<String, String> {
-    
-}
+open class PersistentData: PersistentGraph<String, String> {}

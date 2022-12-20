@@ -40,7 +40,6 @@
 		C50BEED828D673DA00F9F6E6 /* Mind.Thing.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50BEED628D673DA00F9F6E6 /* Mind.Thing.swift */; };
 		C5187E1928E63B7900C09EB4 /* Genes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5187E1828E63B7900C09EB4 /* Genes.swift */; };
 		C5187E1A28E63B7900C09EB4 /* Genes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5187E1828E63B7900C09EB4 /* Genes.swift */; };
-		C528A18B28CDE3020027FA44 /* AspectTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C528A18A28CDE3020027FA44 /* AspectTest.swift */; };
 		C528A18C28CDE3550027FA44 /* Aspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE565289884CE0060A066 /* Aspect.swift */; };
 		C528A18D28CDE37F0027FA44 /* AspectComparisonResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CD5A9228C40D7A00DA9F7D /* AspectComparisonResult.swift */; };
 		C5394A5629033E7B003B99BF /* Imagination.swift in Sources */ = {isa = PBXBuildFile; fileRef = C509589428DCFBF600068D37 /* Imagination.swift */; };
@@ -144,6 +143,12 @@
 		C54BE58428A1965B0060A066 /* Mind.Opinion.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE58228A1965B0060A066 /* Mind.Opinion.swift */; };
 		C54BE58728A1BD5B0060A066 /* Mind.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE58628A1BD5B0060A066 /* Mind.swift */; };
 		C54BE58828A1BD5B0060A066 /* Mind.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE58628A1BD5B0060A066 /* Mind.swift */; };
+		C5576EB529510BB5005257A4 /* PersistentData.Object+getKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5576EB429510BB5005257A4 /* PersistentData.Object+getKey.swift */; };
+		C5576EB629510BB5005257A4 /* PersistentData.Object+getKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5576EB429510BB5005257A4 /* PersistentData.Object+getKey.swift */; };
+		C5576EB729510BB5005257A4 /* PersistentData.Object+getKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5576EB429510BB5005257A4 /* PersistentData.Object+getKey.swift */; };
+		C55AC5A929512E3400F09326 /* Relations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55AC5A829512E3400F09326 /* Relations.swift */; };
+		C55AC5AA29512E3400F09326 /* Relations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55AC5A829512E3400F09326 /* Relations.swift */; };
+		C55AC5AB29512E3400F09326 /* Relations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55AC5A829512E3400F09326 /* Relations.swift */; };
 		C5786DC22924405500865EFD /* AddNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5786DC12924405500865EFD /* AddNoteView.swift */; };
 		C5786DC32925A31F00865EFD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58FB452291F215500D0B713 /* ContentView.swift */; };
 		C5786DC42925A32300865EFD /* AddNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5786DC12924405500865EFD /* AddNoteView.swift */; };
@@ -228,15 +233,6 @@
 		C5C4A115293C0D4F00FF9AB8 /* PersistentGraph.Change.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A114293C0D4F00FF9AB8 /* PersistentGraph.Change.swift */; };
 		C5C4A116293C0D4F00FF9AB8 /* PersistentGraph.Change.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A114293C0D4F00FF9AB8 /* PersistentGraph.Change.swift */; };
 		C5C4A117293C0D5500FF9AB8 /* PersistentGraph.Change.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A114293C0D4F00FF9AB8 /* PersistentGraph.Change.swift */; };
-		C5C4A11C293CD5E600FF9AB8 /* PersistentData.Object+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A11B293CD5E600FF9AB8 /* PersistentData.Object+Identifiable.swift */; };
-		C5C4A11D293CD5E600FF9AB8 /* PersistentData.Object+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A11B293CD5E600FF9AB8 /* PersistentData.Object+Identifiable.swift */; };
-		C5C4A11E293CD5E600FF9AB8 /* PersistentData.Object+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A11B293CD5E600FF9AB8 /* PersistentData.Object+Identifiable.swift */; };
-		C5C4A120293CD5FF00FF9AB8 /* PersistentData.Object+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A11F293CD5FF00FF9AB8 /* PersistentData.Object+Equatable.swift */; };
-		C5C4A121293CD5FF00FF9AB8 /* PersistentData.Object+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A11F293CD5FF00FF9AB8 /* PersistentData.Object+Equatable.swift */; };
-		C5C4A122293CD5FF00FF9AB8 /* PersistentData.Object+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A11F293CD5FF00FF9AB8 /* PersistentData.Object+Equatable.swift */; };
-		C5C4A124293CD61300FF9AB8 /* PersistentData.Object+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A123293CD61300FF9AB8 /* PersistentData.Object+Hashable.swift */; };
-		C5C4A125293CD61300FF9AB8 /* PersistentData.Object+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A123293CD61300FF9AB8 /* PersistentData.Object+Hashable.swift */; };
-		C5C4A126293CD61300FF9AB8 /* PersistentData.Object+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A123293CD61300FF9AB8 /* PersistentData.Object+Hashable.swift */; };
 		C5C4A12B2942701100FF9AB8 /* SerialisationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A12A2942701100FF9AB8 /* SerialisationTests.swift */; };
 		C5CD5A8D28C4095900DA9F7D /* AspectStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CD5A8C28C4095900DA9F7D /* AspectStorage.swift */; };
 		C5CD5A8E28C4095900DA9F7D /* AspectStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CD5A8C28C4095900DA9F7D /* AspectStorage.swift */; };
@@ -252,6 +248,16 @@
 		C5E28A4B2918425900103AD4 /* Consciousness.Experience.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E28A492918425900103AD4 /* Consciousness.Experience.swift */; };
 		C5E28A4D2918427600103AD4 /* Mind.ThoughtsExperience.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E28A4C2918427600103AD4 /* Mind.ThoughtsExperience.swift */; };
 		C5E28A4E2918427600103AD4 /* Mind.ThoughtsExperience.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E28A4C2918427600103AD4 /* Mind.ThoughtsExperience.swift */; };
+		C5E35542294E630D0015CDFD /* PersistentGraph.Member.TimeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E35541294E630D0015CDFD /* PersistentGraph.Member.TimeLine.swift */; };
+		C5E35543294E630D0015CDFD /* PersistentGraph.Member.TimeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E35541294E630D0015CDFD /* PersistentGraph.Member.TimeLine.swift */; };
+		C5E35544294E630D0015CDFD /* PersistentGraph.Member.TimeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E35541294E630D0015CDFD /* PersistentGraph.Member.TimeLine.swift */; };
+		C5E35546294E632F0015CDFD /* PersistentGraph.Member.TimedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E35545294E632F0015CDFD /* PersistentGraph.Member.TimedValue.swift */; };
+		C5E35547294E632F0015CDFD /* PersistentGraph.Member.TimedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E35545294E632F0015CDFD /* PersistentGraph.Member.TimedValue.swift */; };
+		C5E35548294E632F0015CDFD /* PersistentGraph.Member.TimedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E35545294E632F0015CDFD /* PersistentGraph.Member.TimedValue.swift */; };
+		C5E4CB02294BDD4B00755959 /* Relation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E4CB01294BDD4B00755959 /* Relation.swift */; };
+		C5E4CB03294BDD4B00755959 /* Relation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E4CB01294BDD4B00755959 /* Relation.swift */; };
+		C5E4CB04294BDD4B00755959 /* Relation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E4CB01294BDD4B00755959 /* Relation.swift */; };
+		C5E4CB06294BDEA000755959 /* PersistentDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E4CB05294BDEA000755959 /* PersistentDataTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -283,7 +289,6 @@
 		C50BEED628D673DA00F9F6E6 /* Mind.Thing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mind.Thing.swift; sourceTree = "<group>"; };
 		C5187E1828E63B7900C09EB4 /* Genes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genes.swift; sourceTree = "<group>"; };
 		C528A18128CDE2A90027FA44 /* HippocampusTestsMacOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HippocampusTestsMacOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C528A18A28CDE3020027FA44 /* AspectTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectTest.swift; sourceTree = "<group>"; };
 		C5394A5829049969003B99BF /* Nachdenken.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Nachdenken.md; sourceTree = "<group>"; };
 		C548BCBA292ADA8600DB6185 /* EditNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteView.swift; sourceTree = "<group>"; };
 		C54BE4A12894866A0060A066 /* HippocampusApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HippocampusApp.swift; sourceTree = "<group>"; };
@@ -342,6 +347,8 @@
 		C54BE57F289DA0F60060A066 /* buildPerspectives.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = buildPerspectives.swift; sourceTree = "<group>"; };
 		C54BE58228A1965B0060A066 /* Mind.Opinion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mind.Opinion.swift; sourceTree = "<group>"; };
 		C54BE58628A1BD5B0060A066 /* Mind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mind.swift; sourceTree = "<group>"; };
+		C5576EB429510BB5005257A4 /* PersistentData.Object+getKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistentData.Object+getKey.swift"; sourceTree = "<group>"; };
+		C55AC5A829512E3400F09326 /* Relations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relations.swift; sourceTree = "<group>"; };
 		C5786DC12924405500865EFD /* AddNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteView.swift; sourceTree = "<group>"; };
 		C5786DC72926EBDF00865EFD /* Aspect.Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aspect.Point.swift; sourceTree = "<group>"; };
 		C582B38528A2F00400F795F0 /* PersistentObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentObject.swift; sourceTree = "<group>"; };
@@ -363,9 +370,6 @@
 		C5C4A0E5293B78E000FF9AB8 /* Persistent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistent.swift; sourceTree = "<group>"; };
 		C5C4A0E8293B9A8A00FF9AB8 /* PersistentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentData.swift; sourceTree = "<group>"; };
 		C5C4A114293C0D4F00FF9AB8 /* PersistentGraph.Change.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentGraph.Change.swift; sourceTree = "<group>"; };
-		C5C4A11B293CD5E600FF9AB8 /* PersistentData.Object+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistentData.Object+Identifiable.swift"; sourceTree = "<group>"; };
-		C5C4A11F293CD5FF00FF9AB8 /* PersistentData.Object+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistentData.Object+Equatable.swift"; sourceTree = "<group>"; };
-		C5C4A123293CD61300FF9AB8 /* PersistentData.Object+Hashable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistentData.Object+Hashable.swift"; sourceTree = "<group>"; };
 		C5C4A12A2942701100FF9AB8 /* SerialisationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialisationTests.swift; sourceTree = "<group>"; };
 		C5CD5A8C28C4095900DA9F7D /* AspectStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectStorage.swift; sourceTree = "<group>"; };
 		C5CD5A9228C40D7A00DA9F7D /* AspectComparisonResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectComparisonResult.swift; sourceTree = "<group>"; };
@@ -374,6 +378,10 @@
 		C5D042C028D4E91E0088D6B0 /* Mind.Opinion.AboutOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mind.Opinion.AboutOne.swift; sourceTree = "<group>"; };
 		C5E28A492918425900103AD4 /* Consciousness.Experience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consciousness.Experience.swift; sourceTree = "<group>"; };
 		C5E28A4C2918427600103AD4 /* Mind.ThoughtsExperience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mind.ThoughtsExperience.swift; sourceTree = "<group>"; };
+		C5E35541294E630D0015CDFD /* PersistentGraph.Member.TimeLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentGraph.Member.TimeLine.swift; sourceTree = "<group>"; };
+		C5E35545294E632F0015CDFD /* PersistentGraph.Member.TimedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentGraph.Member.TimedValue.swift; sourceTree = "<group>"; };
+		C5E4CB01294BDD4B00755959 /* Relation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relation.swift; sourceTree = "<group>"; };
+		C5E4CB05294BDEA000755959 /* PersistentDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentDataTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -418,8 +426,8 @@
 		C528A18228CDE2A90027FA44 /* HippocampusTestsMacOS */ = {
 			isa = PBXGroup;
 			children = (
-				C528A18A28CDE3020027FA44 /* AspectTest.swift */,
 				C5C4A12A2942701100FF9AB8 /* SerialisationTests.swift */,
+				C5E4CB05294BDEA000755959 /* PersistentDataTests.swift */,
 			);
 			path = HippocampusTestsMacOS;
 			sourceTree = "<group>";
@@ -694,6 +702,8 @@
 				C5C4A0CD293AAEAF00FF9AB8 /* PersistentGraph.swift */,
 				C5C4A114293C0D4F00FF9AB8 /* PersistentGraph.Change.swift */,
 				C5C4A0D9293AB3FC00FF9AB8 /* PersistentGraph.Member.swift */,
+				C5E35545294E632F0015CDFD /* PersistentGraph.Member.TimedValue.swift */,
+				C5E35541294E630D0015CDFD /* PersistentGraph.Member.TimeLine.swift */,
 				C5C4A0DC293AB7D500FF9AB8 /* PersistentGraph.Node.swift */,
 				C5C4A0DF293AC3AE00FF9AB8 /* PersistentGraph.Edge.swift */,
 			);
@@ -705,9 +715,9 @@
 			children = (
 				C5C4A0E8293B9A8A00FF9AB8 /* PersistentData.swift */,
 				C5C4A0E2293AC7C600FF9AB8 /* PersistentData.Object.swift */,
-				C5C4A11B293CD5E600FF9AB8 /* PersistentData.Object+Identifiable.swift */,
-				C5C4A11F293CD5FF00FF9AB8 /* PersistentData.Object+Equatable.swift */,
-				C5C4A123293CD61300FF9AB8 /* PersistentData.Object+Hashable.swift */,
+				C5576EB429510BB5005257A4 /* PersistentData.Object+getKey.swift */,
+				C5E4CB01294BDD4B00755959 /* Relation.swift */,
+				C55AC5A829512E3400F09326 /* Relations.swift */,
 				C5C4A0E5293B78E000FF9AB8 /* Persistent.swift */,
 			);
 			path = PersistentData;
@@ -871,11 +881,11 @@
 				C5C4A113293B9FC400FF9AB8 /* ObservedChangeReceiver.swift in Sources */,
 				C5C4A102293B9E4800FF9AB8 /* SerializedCodingKeys.swift in Sources */,
 				C5C4A0F5293B9B0E00FF9AB8 /* Persistent.swift in Sources */,
-				C5C4A126293CD61300FF9AB8 /* PersistentData.Object+Hashable.swift in Sources */,
 				C5C4A110293B9E9E00FF9AB8 /* Aspect.Representation.swift in Sources */,
 				C5C4A0EE293B9B0E00FF9AB8 /* PersistentContent.swift in Sources */,
 				C5C4A107293B9E5000FF9AB8 /* Primitive.swift in Sources */,
 				C5C4A103293B9E5000FF9AB8 /* CyclicDecoder.swift in Sources */,
+				C5E4CB06294BDEA000755959 /* PersistentDataTests.swift in Sources */,
 				C5C4A0F6293B9B0E00FF9AB8 /* PersistentContainer.swift in Sources */,
 				C5C4A0F2293B9B0E00FF9AB8 /* PersistentData.swift in Sources */,
 				C5C4A0FD293B9E4800FF9AB8 /* SerializableEncodable.swift in Sources */,
@@ -891,25 +901,27 @@
 				C5C4A10E293B9E9E00FF9AB8 /* AspectStorage.swift in Sources */,
 				C5C4A106293B9E5000FF9AB8 /* Box.swift in Sources */,
 				C5C4A0ED293B9B0E00FF9AB8 /* PersistentGraph.Node.swift in Sources */,
-				C5C4A122293CD5FF00FF9AB8 /* PersistentData.Object+Equatable.swift in Sources */,
 				C5C4A10A293B9E9E00FF9AB8 /* Perspective.Builder.swift in Sources */,
-				C5C4A11E293CD5E600FF9AB8 /* PersistentData.Object+Identifiable.swift in Sources */,
 				C5C4A111293B9EC300FF9AB8 /* Array+asSet.swift in Sources */,
+				C5E4CB04294BDD4B00755959 /* Relation.swift in Sources */,
 				C5C4A117293C0D5500FF9AB8 /* PersistentGraph.Change.swift in Sources */,
 				C5C4A0F7293B9B0E00FF9AB8 /* DidChangeNotifier.swift in Sources */,
 				C5C4A0F1293B9B0E00FF9AB8 /* PersistentGraph.swift in Sources */,
 				C5C4A0F3293B9B0E00FF9AB8 /* PersistentData.Object.swift in Sources */,
+				C5E35544294E630D0015CDFD /* PersistentGraph.Member.TimeLine.swift in Sources */,
 				C5C4A0FE293B9E4800FF9AB8 /* Serialized.swift in Sources */,
 				C5C4A100293B9E4800FF9AB8 /* SerializedTransformable.swift in Sources */,
+				C5E35548294E632F0015CDFD /* PersistentGraph.Member.TimedValue.swift in Sources */,
 				C5C4A105293B9E5000FF9AB8 /* CyclicEncoder.swift in Sources */,
+				C5576EB729510BB5005257A4 /* PersistentData.Object+getKey.swift in Sources */,
 				C5C4A10C293B9E9E00FF9AB8 /* Aspect.Builder.swift in Sources */,
 				C5C4A12B2942701100FF9AB8 /* SerialisationTests.swift in Sources */,
 				C5C4A0FC293B9E4800FF9AB8 /* DecodableProperty.swift in Sources */,
 				C5C4A0F9293B9E4800FF9AB8 /* PublishedSerialized.swift in Sources */,
-				C528A18B28CDE3020027FA44 /* AspectTest.swift in Sources */,
 				C5C4A112293B9F0D00FF9AB8 /* CaseIterable+StringConversion.swift in Sources */,
 				C5C4A0F8293B9E4000FF9AB8 /* URL+virtual.swift in Sources */,
 				C5C4A0EB293B9B0E00FF9AB8 /* CodableIdentifiable.swift in Sources */,
+				C55AC5AB29512E3400F09326 /* Relations.swift in Sources */,
 				C5C4A108293B9E9E00FF9AB8 /* Aspect.Point.swift in Sources */,
 				C5C4A0F0293B9B0E00FF9AB8 /* PersistentGraph.Edge.swift in Sources */,
 				C5C4A0FA293B9E4800FF9AB8 /* EncodableProperty.swift in Sources */,
@@ -928,6 +940,7 @@
 				C54BE4D728958F820060A066 /* SerializedTransformable.swift in Sources */,
 				C504037D290EFFA50083AC41 /* Imagination.Expression.swift in Sources */,
 				C5C4A0E9293B9A8A00FF9AB8 /* PersistentData.swift in Sources */,
+				C55AC5A929512E3400F09326 /* Relations.swift in Sources */,
 				C5CD5A8D28C4095900DA9F7D /* AspectStorage.swift in Sources */,
 				C54BE554289610A00060A066 /* ShowMemoryView.swift in Sources */,
 				C5040374290DF63D0083AC41 /* Mind.Thought.Builder.swift in Sources */,
@@ -950,6 +963,7 @@
 				C54BE50E289591700060A066 /* MeasureSizeModifier.swift in Sources */,
 				C5040371290DF5A10083AC41 /* Mind.Thought.GlobalThoughts.swift in Sources */,
 				C5786DC82926EBDF00865EFD /* Aspect.Point.swift in Sources */,
+				C5E35546294E632F0015CDFD /* PersistentGraph.Member.TimedValue.swift in Sources */,
 				C50BEECE28D52C1700F9F6E6 /* Aspect+Comparisons.swift in Sources */,
 				C504036B290DDE8D0083AC41 /* CaseIterable+StringConversion.swift in Sources */,
 				C54BE56C289889EB0060A066 /* Brain.Information.swift in Sources */,
@@ -976,11 +990,10 @@
 				C50BEED428D53EA300F9F6E6 /* Mind.Link.swift in Sources */,
 				C54BE514289591840060A066 /* InjectedPropertyWrapper.swift in Sources */,
 				C54BE580289DA0F60060A066 /* buildPerspectives.swift in Sources */,
+				C5576EB529510BB5005257A4 /* PersistentData.Object+getKey.swift in Sources */,
 				C54BE4CF28958F820060A066 /* SerializableDecodable.swift in Sources */,
 				C54BE4D328958F820060A066 /* EncodableProperty.swift in Sources */,
 				C5C4A0D7293AB08C00FF9AB8 /* CodableIdentifiable.swift in Sources */,
-				C5C4A11C293CD5E600FF9AB8 /* PersistentData.Object+Identifiable.swift in Sources */,
-				C5C4A124293CD61300FF9AB8 /* PersistentData.Object+Hashable.swift in Sources */,
 				C58FB453291F215500D0B713 /* ContentView.swift in Sources */,
 				C50BEED728D673DA00F9F6E6 /* Mind.Thing.swift in Sources */,
 				C5C4A0C8293A83C100FF9AB8 /* URL+virtual.swift in Sources */,
@@ -989,7 +1002,6 @@
 				C54BE508289591530060A066 /* Set+asArray.swift in Sources */,
 				C5C4A0E3293AC7C600FF9AB8 /* PersistentData.Object.swift in Sources */,
 				C54BE4D528958F820060A066 /* SerializableEncodable.swift in Sources */,
-				C5C4A120293CD5FF00FF9AB8 /* PersistentData.Object+Equatable.swift in Sources */,
 				C54BE4B12894866C0060A066 /* HippocampusApp.swift in Sources */,
 				C54BE4CB28958F820060A066 /* Serialized.swift in Sources */,
 				C5C4A0E0293AC3AE00FF9AB8 /* PersistentGraph.Edge.swift in Sources */,
@@ -999,11 +1011,13 @@
 				C5E28A4D2918427600103AD4 /* Mind.ThoughtsExperience.swift in Sources */,
 				C54BE56028986F540060A066 /* Consciousness+preview.swift in Sources */,
 				C54BE575289D7A090060A066 /* ObservedSerialized.swift in Sources */,
+				C5E4CB02294BDD4B00755959 /* Relation.swift in Sources */,
 				C54BE501289591440060A066 /* CGSize+Operators.swift in Sources */,
 				C54BE57D289D9EED0060A066 /* Perspective.Builder.swift in Sources */,
 				C5C4A0CB293A9F9400FF9AB8 /* IdentifiableObject.swift in Sources */,
 				C54BE58328A1965B0060A066 /* Mind.Opinion.swift in Sources */,
 				C5C4A0DD293AB7D500FF9AB8 /* PersistentGraph.Node.swift in Sources */,
+				C5E35542294E630D0015CDFD /* PersistentGraph.Member.TimeLine.swift in Sources */,
 				C5C4A0D1293AAFDD00FF9AB8 /* DidChangeNotifier.swift in Sources */,
 				C54BE4CD28958F820060A066 /* DecodableProperty.swift in Sources */,
 				C54BE4E728958F910060A066 /* CyclicDecoder.swift in Sources */,
@@ -1032,6 +1046,7 @@
 				C54BE4D828958F820060A066 /* SerializedTransformable.swift in Sources */,
 				C5786DC62925A3A800865EFD /* Aspect.Comparator.swift in Sources */,
 				C5C4A0EA293B9A8A00FF9AB8 /* PersistentData.swift in Sources */,
+				C55AC5AA29512E3400F09326 /* Relations.swift in Sources */,
 				C504037E290EFFA50083AC41 /* Imagination.Expression.swift in Sources */,
 				C5CD5A8E28C4095900DA9F7D /* AspectStorage.swift in Sources */,
 				C54BE555289610A00060A066 /* ShowMemoryView.swift in Sources */,
@@ -1054,6 +1069,7 @@
 				C54BE4E028958F910060A066 /* Primitive.swift in Sources */,
 				C54BE5472895DB3C0060A066 /* Brain.Neuron.swift in Sources */,
 				C5786DC92926EC7F00865EFD /* Aspect.Point.swift in Sources */,
+				C5E35547294E632F0015CDFD /* PersistentGraph.Member.TimedValue.swift in Sources */,
 				C5040372290DF5A10083AC41 /* Mind.Thought.GlobalThoughts.swift in Sources */,
 				C54BE50F289591700060A066 /* MeasureSizeModifier.swift in Sources */,
 				C5786DC32925A31F00865EFD /* ContentView.swift in Sources */,
@@ -1080,11 +1096,10 @@
 				C54BE578289D7B0F0060A066 /* PublishedSerialized.swift in Sources */,
 				C54BE50B289591530060A066 /* Array+asSet.swift in Sources */,
 				C50BEED528D53EA300F9F6E6 /* Mind.Link.swift in Sources */,
+				C5576EB629510BB5005257A4 /* PersistentData.Object+getKey.swift in Sources */,
 				C54BE515289591840060A066 /* InjectedPropertyWrapper.swift in Sources */,
 				C54BE581289DA0F60060A066 /* buildPerspectives.swift in Sources */,
 				C5C4A0D8293AB08C00FF9AB8 /* CodableIdentifiable.swift in Sources */,
-				C5C4A11D293CD5E600FF9AB8 /* PersistentData.Object+Identifiable.swift in Sources */,
-				C5C4A125293CD61300FF9AB8 /* PersistentData.Object+Hashable.swift in Sources */,
 				C54BE4D028958F820060A066 /* SerializableDecodable.swift in Sources */,
 				C54BE4D428958F820060A066 /* EncodableProperty.swift in Sources */,
 				C5C4A0C9293A840300FF9AB8 /* URL+virtual.swift in Sources */,
@@ -1093,7 +1108,6 @@
 				C54BE509289591530060A066 /* Set+asArray.swift in Sources */,
 				C5C4A0E4293AC7C600FF9AB8 /* PersistentData.Object.swift in Sources */,
 				C54BE4D628958F820060A066 /* SerializableEncodable.swift in Sources */,
-				C5C4A121293CD5FF00FF9AB8 /* PersistentData.Object+Equatable.swift in Sources */,
 				C54BE4B22894866C0060A066 /* HippocampusApp.swift in Sources */,
 				C54BE4CC28958F820060A066 /* Serialized.swift in Sources */,
 				C5C4A0E1293AC3AE00FF9AB8 /* PersistentGraph.Edge.swift in Sources */,
@@ -1103,11 +1117,13 @@
 				C5E28A4E2918427600103AD4 /* Mind.ThoughtsExperience.swift in Sources */,
 				C54BE56128986F540060A066 /* Consciousness+preview.swift in Sources */,
 				C54BE576289D7A090060A066 /* ObservedSerialized.swift in Sources */,
+				C5E4CB03294BDD4B00755959 /* Relation.swift in Sources */,
 				C54BE502289591440060A066 /* CGSize+Operators.swift in Sources */,
 				C54BE57E289D9EED0060A066 /* Perspective.Builder.swift in Sources */,
 				C5C4A0CC293AA02700FF9AB8 /* IdentifiableObject.swift in Sources */,
 				C5786DC52925A38300865EFD /* Mind.Thought.Conclusion.swift in Sources */,
 				C5C4A0DE293AB7D500FF9AB8 /* PersistentGraph.Node.swift in Sources */,
+				C5E35543294E630D0015CDFD /* PersistentGraph.Member.TimeLine.swift in Sources */,
 				C5C4A0D2293AAFDD00FF9AB8 /* DidChangeNotifier.swift in Sources */,
 				C54BE58428A1965B0060A066 /* Mind.Opinion.swift in Sources */,
 				C54BE4CE28958F820060A066 /* DecodableProperty.swift in Sources */,
@@ -1314,7 +1330,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1347,7 +1363,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

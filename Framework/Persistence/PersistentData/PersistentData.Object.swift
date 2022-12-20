@@ -10,7 +10,8 @@ import Foundation
 
 extension PersistentData {
 //    @dynamicMemberLookup
-    open class Object: PersistentData.Member {
+    open class Object: PersistentData.Node {
+//        public typealias Value<T: Codable> = ValueWrapper<Object, T>
 //        internal subscript(dynamicMember key: String) -> PersistentValue {
 //            get {
 //                self[key]
@@ -21,4 +22,3 @@ extension PersistentData {
 //        }
     }
 }
-

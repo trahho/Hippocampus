@@ -23,7 +23,7 @@ final class Brain: Serializable, ObservableObject, PersistentContent {
         case modified(Information, Aspect.ID, Date)
     }
 
-    @Serialized private var informationId: Information.ID = 0
+//    @Serialized private var informationId: Information.ID = 0
     @Serialized private(set) var neurons: [Information.ID: Neuron] = [:]
     @Serialized private(set) var synapses: [Information.ID: Synapse] = [:]
 
@@ -107,10 +107,6 @@ final class Brain: Serializable, ObservableObject, PersistentContent {
 
     func add(neuron: Neuron) {
         guard dreaming, neurons[neuron.id] == nil else { return }
-        if neuron.id == 0 {
-            informationId += 1
-            neuron.id = informationId
-        }
         neuron.brain = self
         neurons[neuron.id] = neuron
         addChange(.neuronCreated(neuron))
@@ -118,10 +114,6 @@ final class Brain: Serializable, ObservableObject, PersistentContent {
 
     func add(synapse: Synapse) {
         guard dreaming, synapses[synapse.id] == nil else { return }
-        if synapse.id == 0 {
-            informationId += 1
-            synapse.id = informationId
-        }
         synapse.brain = self
         synapses[synapse.id] = synapse
         add(neuron: synapse.emitter)

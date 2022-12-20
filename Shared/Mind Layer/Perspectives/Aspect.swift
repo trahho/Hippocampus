@@ -23,6 +23,11 @@ class Aspect: PersistentObject {
         self.defaultValue = defaultValue
     }
 
+    convenience init(_ id: String, _ designation: String, _ representation: Representation, defaultValue: Point = .empty) {
+        self.init(designation, representation, defaultValue: defaultValue)
+        self.id = UUID(uuidString: id)!
+    }
+
     required init() {}
 
 //    func compare<T: AspectStorage>(lhs: T, rhs: T) -> AspectComparisonResult {
@@ -45,11 +50,11 @@ class Aspect: PersistentObject {
             storage[self.id].gettingToThePoint(self.defaultValue)
         }
         set {
-            let moment = Date()
-            if storage[self.perspective.created.id] == .empty {
-                storage[self.perspective.created.id] = .date(moment)
-            }
-            storage[self.perspective.modified.id] = .date(moment)
+//            let moment = Date()
+//            if storage[self.perspective.created.id] == .empty {
+//                storage[self.perspective.created.id] = .date(moment)
+//            }
+//            storage[self.perspective.modified.id] = .date(moment)
             storage[self.id] = newValue
         }
     }

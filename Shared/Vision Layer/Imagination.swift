@@ -10,14 +10,14 @@ import Foundation
 
 final class Imagination: Serializable, ObservableObject, PersistentContent {
     var objectDidChange: ObservableObjectPublisher = ObjectDidChangePublisher()
-    
+
     static var globalExperiences: [Mind.Thought.ID: [Experience]] = [
         Mind.Thought.notes.id: [
-            Experience(id: -1, "Zeitliste", .list),
-            Experience(id: -2, "Themas", .tree)
+            Experience("Zeitliste", .list),
+            Experience("Themas", .tree)
         ],
         Mind.Thought.drawings.id: [
-            Experience(id: -3, "Ordner", .tree)
+            Experience("Ordner", .tree)
         ]
     ]
 

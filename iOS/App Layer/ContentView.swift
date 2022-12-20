@@ -14,6 +14,7 @@ struct ListView: View {
 
     @State var addSheetIsPresented = false
     @State var editSheetItem: Mind.Thing?
+    @State var sortOrder: SortOrder = .forward
 
     var conclusion: Mind.Thought.Conclusion {
         Mind.Thought.notes.think(in: brain)
@@ -31,8 +32,13 @@ struct ListView: View {
             } label: {
                 Text("Add")
             }
+            Button {
+                brain.objectWillChange.send()
+            } label: {
+                Text("Sort")
+            }
             let items = conclusion.ideas.values
-                .sorted(using: Aspect.Comparator(order: .forward, aspect: Perspective.note.name))
+                .sorted(using: Aspect.Comparator(order: sortOrder, aspect: Perspective.note.name))
             ScrollView {
                 ForEach(items) { idea in
                     if case let .string(string) = idea[Perspective.note.name] {

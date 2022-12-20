@@ -16,5 +16,7 @@ extension PersistentGraph {
         case node(Node)
         case edge(Edge)
         case modified(Member, Key, Date)
+        case role(Member, Date)
+        case deleted(Member, Date)
     }
 }

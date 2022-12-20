@@ -14,14 +14,18 @@ extension PersistentGraph {
         
         public required init() {}
         
+        func getOther(for node: Node) -> Node {
+            node == from ? to : from
+        }
+        
         func connect() {
-            from.outgoing.insert(self)
-            to.incoming.insert(self)
+            from.outgoingEdges.insert(self)
+            to.incomingEdges.insert(self)
         }
         
         func disconnect() {
-            from.outgoing.remove(self)
-            to.incoming.remove(self)
+            from.outgoingEdges.remove(self)
+            to.incomingEdges.remove(self)
         }
         
         init(from: Node, to: Node) {

@@ -39,7 +39,7 @@ public class ObservedSerialized<T: ObservableObject> {
 
     public static subscript<EnclosingSelf: ObservableObject>(
         _enclosingInstance instance: EnclosingSelf,
-        wrapped _: ReferenceWritableKeyPath<EnclosingSelf, T>,
+        wrapped wrappedKeyPath: ReferenceWritableKeyPath<EnclosingSelf, T>,
         storage storageKeyPath: ReferenceWritableKeyPath<EnclosingSelf, ObservedSerialized>
     ) -> T {
         get {

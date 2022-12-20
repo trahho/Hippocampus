@@ -17,27 +17,38 @@ open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable>:
 
     // MARK: - Data
 
-    @Serialized private var idCounter: Member.ID = 0
-    @Serialized private(set) var nodes: [Member.ID: Node] = [:]
-    @Serialized private(set) var edges: [Member.ID: Edge] = [:]
+    @Serialized private(set) var nodeStorage: [Member.ID: Node] = [:]
+    @Serialized private(set) var edgeStorage: [Member.ID: Edge] = [:]
+
+    var nodes: Set<Node> { Set<Node>(nodeStorage.values.filter { $0.isDeleted == false }) }
+    var edges: Set<Edge> { Set<Edge>(edgeStorage.values.filter({ $0.isDeleted == false }))}
+
+    // MARK: - Publishers
 
     var objectDidChange = PassthroughSubject<Void, Never>()
     var changeDidHappen: ChangePublisher = .init()
 
+    // MARK: - Initialisation
+
     public required init() {}
 
+    // MARK: - Restoration
+
     func restore() {
-        nodes.values.forEach { node in
+        nodeStorage.values.forEach { node in
             node.graph = self
         }
-        edges.values.forEach { edge in
+        edgeStorage.values.forEach { edge in
             edge.graph = self
             edge.connect()
         }
     }
 
+    // MARK: - Modification
+
     private(set) var timestamp: Date?
     private(set) var changing = false
+    private var changes: [Change] = []
 
     func change(_ transaction: Transaction) {
         let hasStarted = !changing
@@ -84,25 +95,39 @@ open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable>:
         for change in changes {
             switch change {
             case let .node(node):
-                nodes.removeValue(forKey: node.id)
-                changeDidHappen.send(.discarded(change))
+                nodeStorage.removeValue(forKey: node.id)
             case let .edge(edge):
                 edge.disconnect()
-                edges.removeValue(forKey: edge.id)
-                changeDidHappen.send(.discarded(change))
+                edgeStorage.removeValue(forKey: edge.id)
             case let .modified(member, key, timestamp):
-                member.rewind(key, to: timestamp)
-                changeDidHappen.send(.discarded(change))
+                member.reset(key, before: timestamp)
+            case let .deleted(member, timestamp):
+                member.reset(\.deleted, before: timestamp)
+            case let .role(member, timestamp):
+                member.reset(\.roles, before: timestamp)
             default: break
             }
+            changeDidHappen.send(.discarded(change))
         }
         changes = []
     }
 
-    private var changes: [Change] = []
-
     func addChange(_ change: Change) {
         changes.append(change)
         changeDidHappen.send(change)
+    }
+    
+    // MARK: - Function
+    
+    func add(_ edge: Edge) {
+        guard changing, let timestamp = timestamp, edgeStorage[edge.id] == nil else { return }
+        edge.added = timestamp
+        edgeStorage[edge.id] = edge
+    }
+    
+    func add(_ node: Node) {
+        guard changing, let timestamp = timestamp, nodeStorage[node.id] == nil else { return }
+        node.added = timestamp
+        nodeStorage[node.id] = node
     }
 }

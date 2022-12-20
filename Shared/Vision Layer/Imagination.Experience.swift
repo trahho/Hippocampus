@@ -9,10 +9,7 @@ import Foundation
 
 extension Imagination {
     class Experience: PersistentObject, ObservableObject {
-        
-        struct Attention {
-            	
-        }
+        struct Attention {}
         
         enum Impression {
             case none, list, tree, map, table, grid
@@ -21,7 +18,6 @@ extension Imagination {
         enum Focus: Codable {
             case none
             case order(Aspect.ID, SortOrder)
-
         }
         
         @PublishedSerialized var designation: String = ""
@@ -32,6 +28,12 @@ extension Imagination {
         convenience init(id: ID, _ designation: String, _ impression: Impression) {
             self.init()
             self.id = id
+            self.designation = designation
+            self.impression = impression
+        }
+        
+        convenience init(_ designation: String, _ impression: Impression) {
+            self.init()
             self.designation = designation
             self.impression = impression
         }

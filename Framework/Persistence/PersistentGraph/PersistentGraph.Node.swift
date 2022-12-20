@@ -9,11 +9,16 @@ import Foundation
 
 extension PersistentGraph {
     open class Node: Member {
-        @Published var incoming: Set<Edge> = []
-        @Published var outgoing: Set<Edge> = []
+        @Published internal var incomingEdges: Set<Edge> = []
+        @Published internal var outgoingEdges: Set<Edge> = []
+
+        var incoming: Set<Edge> { incomingEdges.filter { !$0.isDeleted }}
+        var outgoing: Set<Edge> { outgoingEdges.filter { !$0.isDeleted }}
+
+        var edges: Set<Edge> {
+            incoming.union(outgoing).filter { !$0.isDeleted }
+        }
 
         public required init() {}
     }
-
-   
 }

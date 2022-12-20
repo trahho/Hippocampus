@@ -43,7 +43,6 @@ final class Mind: Serializable, ObservableObject, PersistentContent {
         }
     }
 
-    @Serialized private var thoughtId: Thought.ID = 0
     @PublishedSerialized private var customThoughts: [Thought.ID: Thought] = [:]
 
     var thoughts: [Thought.ID: Thought] {
@@ -53,10 +52,7 @@ final class Mind: Serializable, ObservableObject, PersistentContent {
 
     func add(thought: Thought) {
         guard customThoughts[thought.id] == nil else { return }
-        if thought.id == 0 {
-            thoughtId += 1
-            thought.id = thoughtId
-        }
+
         customThoughts[thought.id] = thought
     }
 
@@ -76,7 +72,6 @@ final class Mind: Serializable, ObservableObject, PersistentContent {
 //        customTopics[topic.id] = topic
 //    }
 
-    @Serialized private var perspectiveId: Perspective.ID = 0
     @PublishedSerialized private var customPerspectives: [Perspective.ID: Perspective] = [:]
 
     var perspectives: [Perspective.ID: Perspective] {
@@ -85,10 +80,7 @@ final class Mind: Serializable, ObservableObject, PersistentContent {
 
     func add(perspective: Perspective) {
         guard customPerspectives[perspective.id] == nil else { return }
-        if perspective.id == 0 {
-            perspectiveId += 1
-            perspective.id = perspectiveId
-        }
+
         customPerspectives[perspective.id] = perspective
     }
 }

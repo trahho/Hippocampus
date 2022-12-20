@@ -8,9 +8,11 @@
 import Foundation
 
 extension Mind.Thought {
-    enum GlobalThoughts: Mind.Thought.ID, CaseIterable {
-        case notes
-        case drawings
+    enum GlobalThoughts: String, CaseIterable {
+        case notes = "2F0E3006-A54F-4E09-8946-5919272FE4F5"
+        case drawings = "DC23F51B-5CF5-4A25-829B-C27AFAF89547"
+
+        var id: UUID { UUID(uuidString: self.rawValue)! }
     }
 
     @Builder
@@ -26,12 +28,7 @@ extension Mind.Thought {
     static let globalThoughts: [Mind.Thought.ID: Mind.Thought] = buildGlobalThoughts()
 
     static subscript(dynamicMember designation: String) -> Mind.Thought {
-        let thoughtId = -GlobalThoughts.from(string: designation.lowercased())!.rawValue
+        let thoughtId = GlobalThoughts.from(string: designation.lowercased())!.id
         return globalThoughts.values.first { $0.id == thoughtId }!
     }
-    
-  
-
 }
-
-

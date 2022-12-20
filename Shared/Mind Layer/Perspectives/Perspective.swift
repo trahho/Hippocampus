@@ -20,7 +20,7 @@ class Perspective: PersistentObject {
     typealias PerspectiveReferences = () -> [Perspective]
 
     @Serialized var designation: String = ""
-    @Serialized var aspects: [Aspect]
+    @Serialized var aspects: [Aspect] = []
     @Serialized var perspectives: [Perspective] = []
     var perspectivesBuilder: PerspectiveReferences = [Perspective].init
 
@@ -29,7 +29,6 @@ class Perspective: PersistentObject {
     }
 
     func addAspect(_ aspect: Aspect) {
-        aspect.id = aspects.map { $0.id }.max() ?? 2
         aspect.perspective = self
         aspects.append(aspect)
     }

@@ -22,11 +22,10 @@ extension Consciousness {
         @EnvironmentObject var mind: Mind
         @EnvironmentObject var imagination: Imagination
 
-        
         var thoughts: [Mind.Thought] {
-            mind.thoughts.values.sorted(using: KeyPathComparator(\.designation, order: .forward))
+            self.mind.thoughts.values.sorted(using: KeyPathComparator(\.designation, order: .forward))
         }
-        
+
         var body: some View {
 //           NavigationSplitView {
 //
@@ -40,7 +39,7 @@ extension Consciousness {
                 if let selected = consciousness.currentThought {
 //                    imagination.experiencePossibleExperiences(for: selected)
                     let experiences = imagination.experiences[selected.id] ?? [
-                        Imagination.Experience(id: -1, "Wat auch immer", .list)
+                        Imagination.Experience("Wat auch immer", .list)
                     ]
                     List(experiences, selection: $consciousness.currentExperience) { experience in
                         Text(experience.designation)

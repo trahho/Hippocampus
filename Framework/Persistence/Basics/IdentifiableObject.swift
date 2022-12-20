@@ -9,9 +9,9 @@ import Foundation
 
 open class IdentifiableObject: Identifiable, Hashable {
 //    public typealias ID = UUID
-    public typealias ID = Int64
+    public typealias ID = UUID
 
-    @Serialized public var id: ID = 0
+    @Serialized public var id: ID = UUID()
 
     public static func == (lhs: IdentifiableObject, rhs: IdentifiableObject) -> Bool {
         lhs.id == rhs.id

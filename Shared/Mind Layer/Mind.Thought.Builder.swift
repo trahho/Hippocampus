@@ -18,7 +18,7 @@ extension Mind.Thought {
 
     convenience init(_ id: GlobalThoughts, _ designation: String, @Mind.Opinion.Builder opinions: () -> [Mind.Opinion]) {
         self.init()
-        self.id = -id.rawValue
+        self.id = id.id
         self.designation = designation
         self.opinions = opinions()
     }
