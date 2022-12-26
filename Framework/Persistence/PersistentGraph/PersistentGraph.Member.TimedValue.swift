@@ -10,11 +10,11 @@ import Foundation
 extension PersistentGraph.Member {
     struct TimedValue: Serializable {
         @Serialized private(set) var time: Date
-        @Serialized private(set) var value: PersistentGraph.PersistentValue?
-        
+        @Serialized private(set) var value: (any PersistentGraph.PersistentValue)?
+
         init() {}
-        
-        init(time: Date, value: PersistentGraph.PersistentValue?) {
+
+        init(time: Date, value: (any PersistentGraph.PersistentValue)?) {
             self.time = time
             self.value = value
         }

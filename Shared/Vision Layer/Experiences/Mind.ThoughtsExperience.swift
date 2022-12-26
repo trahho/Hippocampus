@@ -19,7 +19,7 @@ extension Mind {
         @Binding var selected: Thought?
 
         var thoughts: [Mind.Thought] {
-            mind.thoughts.values.sorted(using: KeyPathComparator(\.designation, order: .forward))
+            mind.thoughts.sorted(using: KeyPathComparator(\.designation, order: .forward))
         }
 
         var body: some View {

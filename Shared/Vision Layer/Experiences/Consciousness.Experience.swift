@@ -23,7 +23,7 @@ extension Consciousness {
         @EnvironmentObject var imagination: Imagination
 
         var thoughts: [Mind.Thought] {
-            self.mind.thoughts.values.sorted(using: KeyPathComparator(\.designation, order: .forward))
+            self.mind.thoughts.sorted(using: KeyPathComparator(\.designation, order: .forward))
         }
 
         var body: some View {

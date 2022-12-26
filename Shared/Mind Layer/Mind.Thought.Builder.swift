@@ -20,6 +20,6 @@ extension Mind.Thought {
         self.init()
         self.id = id.id
         self.designation = designation
-        self.opinions = opinions()
+        self.opinions = opinions().asSet
     }
 }

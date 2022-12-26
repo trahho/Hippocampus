@@ -7,7 +7,8 @@
 
 import Foundation
 
-protocol PersistentRelationWrapper: AnyObject {}
+protocol PersistentRelationWrapper//: AnyObject
+{}
 
 @propertyWrapper final class Relation<Target>: PersistentRelationWrapper where Target: PersistentData.Object {
     @available(*, unavailable, message: "This property wrapper can only be applied to classes")

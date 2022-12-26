@@ -9,6 +9,10 @@ import Combine
 import Foundation
 
 final class Imagination: Serializable, ObservableObject, PersistentContent {
+    func merge(other: Imagination) throws {
+        throw Brain.Stroke.mergeFailed
+    }
+    
     var objectDidChange: ObservableObjectPublisher = ObjectDidChangePublisher()
 
     static var globalExperiences: [Mind.Thought.ID: [Experience]] = [

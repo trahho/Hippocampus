@@ -45,13 +45,24 @@ import Foundation
             let storage = instance[keyPath: storageKeyPath]
             let key = storage.getKey(from: instance)
             let change = {
-                instance.edges
-                    .filter { $0[role: key] && !newValue.contains($0.getOther(for: instance) as! Target) }
-                    .forEach { $0.isDeleted = true }
-
                 let currentValue = Relations[_enclosingInstance: instance, wrapped: wrappedKeyPath, storage: storageKeyPath]
+                let added = newValue.subtracting(currentValue)
+                let removed = currentValue.subtracting(newValue)
 
-                newValue.subtracting(currentValue)
+                removed
+                    .flatMap { item in
+                        instance.edges.filter { edge in
+                            edge[role: key] && edge.getOther(for: instance) == item
+                        }
+                    }
+                    .forEach { edge in
+                        if storage.inversekey != nil {
+                            edge.getOther(for: instance).objectWillChange.send()
+                        }
+                        edge.isDeleted = true
+                    }
+
+                added
                     .forEach {
                         let edge = PersistentData.Edge(from: instance, to: $0)
                         edge[role: key] = true

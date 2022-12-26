@@ -8,6 +8,11 @@
 import Foundation
 
 protocol PersistentContent: Serializable, DidChangeNotifier {
-    func restore() 
+  
+    func restore()
+    func merge(other: Self) throws
 }
 
+protocol MergeablePersistentContent: PersistentContent {
+    func merge<Self>(other: Self) where Self: MergeablePersistentContent
+}

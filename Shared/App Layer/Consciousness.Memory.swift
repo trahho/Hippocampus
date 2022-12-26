@@ -80,13 +80,13 @@ extension Consciousness {
 
         func brainDidRefresh() {
             if let mind = persistentMind?.content {
-                mind.adoptBrain(brain)
+//                mind.adoptBrain(brain)
             }
         }
 
         func mindDidRefresh() {
             if let brain = persistentBrain?.content {
-                mind.adoptBrain(brain)
+//                mind.adoptBrain(brain)
             }
             if let senses = persistentImagination?.content {
                 senses.adoptMind(mind)

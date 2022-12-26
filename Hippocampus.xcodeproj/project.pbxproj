@@ -149,6 +149,18 @@
 		C55AC5A929512E3400F09326 /* Relations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55AC5A829512E3400F09326 /* Relations.swift */; };
 		C55AC5AA29512E3400F09326 /* Relations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55AC5A829512E3400F09326 /* Relations.swift */; };
 		C55AC5AB29512E3400F09326 /* Relations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55AC5A829512E3400F09326 /* Relations.swift */; };
+		C55AC5AD295262CD00F09326 /* Present.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55AC5AC295262CD00F09326 /* Present.swift */; };
+		C55AC5AE295262CD00F09326 /* Present.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55AC5AC295262CD00F09326 /* Present.swift */; };
+		C55AC5AF295262CD00F09326 /* Present.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55AC5AC295262CD00F09326 /* Present.swift */; };
+		C55AC5B129560AF900F09326 /* Equatable+isEqualTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55AC5B029560AF900F09326 /* Equatable+isEqualTo.swift */; };
+		C55AC5B229560AF900F09326 /* Equatable+isEqualTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55AC5B029560AF900F09326 /* Equatable+isEqualTo.swift */; };
+		C55AC5B329560AF900F09326 /* Equatable+isEqualTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55AC5B029560AF900F09326 /* Equatable+isEqualTo.swift */; };
+		C55AC5B52957C7C600F09326 /* PersistentGraph.Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55AC5B42957C7C600F09326 /* PersistentGraph.Predicate.swift */; };
+		C55AC5B62957C7C600F09326 /* PersistentGraph.Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55AC5B42957C7C600F09326 /* PersistentGraph.Predicate.swift */; };
+		C55AC5B72957C7C600F09326 /* PersistentGraph.Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55AC5B42957C7C600F09326 /* PersistentGraph.Predicate.swift */; };
+		C55AC5B92958C1E700F09326 /* PersistentGraph.Predicate+Basics.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55AC5B82958C1E700F09326 /* PersistentGraph.Predicate+Basics.swift */; };
+		C55AC5BA2958C1E700F09326 /* PersistentGraph.Predicate+Basics.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55AC5B82958C1E700F09326 /* PersistentGraph.Predicate+Basics.swift */; };
+		C55AC5BB2958C1E700F09326 /* PersistentGraph.Predicate+Basics.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55AC5B82958C1E700F09326 /* PersistentGraph.Predicate+Basics.swift */; };
 		C5786DC22924405500865EFD /* AddNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5786DC12924405500865EFD /* AddNoteView.swift */; };
 		C5786DC32925A31F00865EFD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58FB452291F215500D0B713 /* ContentView.swift */; };
 		C5786DC42925A32300865EFD /* AddNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5786DC12924405500865EFD /* AddNoteView.swift */; };
@@ -349,6 +361,10 @@
 		C54BE58628A1BD5B0060A066 /* Mind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mind.swift; sourceTree = "<group>"; };
 		C5576EB429510BB5005257A4 /* PersistentData.Object+getKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistentData.Object+getKey.swift"; sourceTree = "<group>"; };
 		C55AC5A829512E3400F09326 /* Relations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relations.swift; sourceTree = "<group>"; };
+		C55AC5AC295262CD00F09326 /* Present.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Present.swift; sourceTree = "<group>"; };
+		C55AC5B029560AF900F09326 /* Equatable+isEqualTo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Equatable+isEqualTo.swift"; sourceTree = "<group>"; };
+		C55AC5B42957C7C600F09326 /* PersistentGraph.Predicate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentGraph.Predicate.swift; sourceTree = "<group>"; };
+		C55AC5B82958C1E700F09326 /* PersistentGraph.Predicate+Basics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistentGraph.Predicate+Basics.swift"; sourceTree = "<group>"; };
 		C5786DC12924405500865EFD /* AddNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteView.swift; sourceTree = "<group>"; };
 		C5786DC72926EBDF00865EFD /* Aspect.Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aspect.Point.swift; sourceTree = "<group>"; };
 		C582B38528A2F00400F795F0 /* PersistentObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentObject.swift; sourceTree = "<group>"; };
@@ -679,6 +695,7 @@
 			isa = PBXGroup;
 			children = (
 				C5C4A0C7293A83C100FF9AB8 /* URL+virtual.swift */,
+				C55AC5B029560AF900F09326 /* Equatable+isEqualTo.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -706,6 +723,8 @@
 				C5E35541294E630D0015CDFD /* PersistentGraph.Member.TimeLine.swift */,
 				C5C4A0DC293AB7D500FF9AB8 /* PersistentGraph.Node.swift */,
 				C5C4A0DF293AC3AE00FF9AB8 /* PersistentGraph.Edge.swift */,
+				C55AC5B42957C7C600F09326 /* PersistentGraph.Predicate.swift */,
+				C55AC5B82958C1E700F09326 /* PersistentGraph.Predicate+Basics.swift */,
 			);
 			path = PersistentGraph;
 			sourceTree = "<group>";
@@ -717,6 +736,7 @@
 				C5C4A0E2293AC7C600FF9AB8 /* PersistentData.Object.swift */,
 				C5576EB429510BB5005257A4 /* PersistentData.Object+getKey.swift */,
 				C5E4CB01294BDD4B00755959 /* Relation.swift */,
+				C55AC5AC295262CD00F09326 /* Present.swift */,
 				C55AC5A829512E3400F09326 /* Relations.swift */,
 				C5C4A0E5293B78E000FF9AB8 /* Persistent.swift */,
 			);
@@ -910,7 +930,9 @@
 				C5C4A0F3293B9B0E00FF9AB8 /* PersistentData.Object.swift in Sources */,
 				C5E35544294E630D0015CDFD /* PersistentGraph.Member.TimeLine.swift in Sources */,
 				C5C4A0FE293B9E4800FF9AB8 /* Serialized.swift in Sources */,
+				C55AC5B329560AF900F09326 /* Equatable+isEqualTo.swift in Sources */,
 				C5C4A100293B9E4800FF9AB8 /* SerializedTransformable.swift in Sources */,
+				C55AC5AF295262CD00F09326 /* Present.swift in Sources */,
 				C5E35548294E632F0015CDFD /* PersistentGraph.Member.TimedValue.swift in Sources */,
 				C5C4A105293B9E5000FF9AB8 /* CyclicEncoder.swift in Sources */,
 				C5576EB729510BB5005257A4 /* PersistentData.Object+getKey.swift in Sources */,
@@ -920,11 +942,13 @@
 				C5C4A0F9293B9E4800FF9AB8 /* PublishedSerialized.swift in Sources */,
 				C5C4A112293B9F0D00FF9AB8 /* CaseIterable+StringConversion.swift in Sources */,
 				C5C4A0F8293B9E4000FF9AB8 /* URL+virtual.swift in Sources */,
+				C55AC5B72957C7C600F09326 /* PersistentGraph.Predicate.swift in Sources */,
 				C5C4A0EB293B9B0E00FF9AB8 /* CodableIdentifiable.swift in Sources */,
 				C55AC5AB29512E3400F09326 /* Relations.swift in Sources */,
 				C5C4A108293B9E9E00FF9AB8 /* Aspect.Point.swift in Sources */,
 				C5C4A0F0293B9B0E00FF9AB8 /* PersistentGraph.Edge.swift in Sources */,
 				C5C4A0FA293B9E4800FF9AB8 /* EncodableProperty.swift in Sources */,
+				C55AC5BB2958C1E700F09326 /* PersistentGraph.Predicate+Basics.swift in Sources */,
 				C5C4A104293B9E5000FF9AB8 /* CycleBreaker.swift in Sources */,
 				C5C4A109293B9E9E00FF9AB8 /* Perspective.GlobalPerspectives.swift in Sources */,
 				C5C4A0FB293B9E4800FF9AB8 /* Transformable.swift in Sources */,
@@ -947,6 +971,7 @@
 				C54BE4F3289591320060A066 /* Observed.swift in Sources */,
 				C5040380290F00590083AC41 /* Genes.DNA.swift in Sources */,
 				C54BE4F1289591320060A066 /* ObservedChangeReceiver.swift in Sources */,
+				C55AC5B92958C1E700F09326 /* PersistentGraph.Predicate+Basics.swift in Sources */,
 				C5C4A115293C0D4F00FF9AB8 /* PersistentGraph.Change.swift in Sources */,
 				C54BE503289591440060A066 /* CGFloat+Operators.swift in Sources */,
 				C54BE4E128958F910060A066 /* CycleBreaker.swift in Sources */,
@@ -964,6 +989,7 @@
 				C5040371290DF5A10083AC41 /* Mind.Thought.GlobalThoughts.swift in Sources */,
 				C5786DC82926EBDF00865EFD /* Aspect.Point.swift in Sources */,
 				C5E35546294E632F0015CDFD /* PersistentGraph.Member.TimedValue.swift in Sources */,
+				C55AC5B129560AF900F09326 /* Equatable+isEqualTo.swift in Sources */,
 				C50BEECE28D52C1700F9F6E6 /* Aspect+Comparisons.swift in Sources */,
 				C504036B290DDE8D0083AC41 /* CaseIterable+StringConversion.swift in Sources */,
 				C54BE56C289889EB0060A066 /* Brain.Information.swift in Sources */,
@@ -977,6 +1003,7 @@
 				C54BE5432895DB180060A066 /* Brain.Synapse.swift in Sources */,
 				C504037A290EFC120083AC41 /* Imagination.Experience.swift in Sources */,
 				C5CD5A9328C40D7A00DA9F7D /* AspectComparisonResult.swift in Sources */,
+				C55AC5AD295262CD00F09326 /* Present.swift in Sources */,
 				C54BE4C928958F820060A066 /* Transformable.swift in Sources */,
 				C54BE5692898852E0060A066 /* Perspective.swift in Sources */,
 				C54BE4FB289591440060A066 /* CGRect+Functions.swift in Sources */,
@@ -1014,6 +1041,7 @@
 				C5E4CB02294BDD4B00755959 /* Relation.swift in Sources */,
 				C54BE501289591440060A066 /* CGSize+Operators.swift in Sources */,
 				C54BE57D289D9EED0060A066 /* Perspective.Builder.swift in Sources */,
+				C55AC5B52957C7C600F09326 /* PersistentGraph.Predicate.swift in Sources */,
 				C5C4A0CB293A9F9400FF9AB8 /* IdentifiableObject.swift in Sources */,
 				C54BE58328A1965B0060A066 /* Mind.Opinion.swift in Sources */,
 				C5C4A0DD293AB7D500FF9AB8 /* PersistentGraph.Node.swift in Sources */,
@@ -1053,6 +1081,7 @@
 				C5040375290DF63D0083AC41 /* Mind.Thought.Builder.swift in Sources */,
 				C54BE4F4289591320060A066 /* Observed.swift in Sources */,
 				C5040381290F00590083AC41 /* Genes.DNA.swift in Sources */,
+				C55AC5BA2958C1E700F09326 /* PersistentGraph.Predicate+Basics.swift in Sources */,
 				C5C4A116293C0D4F00FF9AB8 /* PersistentGraph.Change.swift in Sources */,
 				C509589828DE3C5200068D37 /* Sensation.swift in Sources */,
 				C54BE4F2289591320060A066 /* ObservedChangeReceiver.swift in Sources */,
@@ -1070,6 +1099,7 @@
 				C54BE5472895DB3C0060A066 /* Brain.Neuron.swift in Sources */,
 				C5786DC92926EC7F00865EFD /* Aspect.Point.swift in Sources */,
 				C5E35547294E632F0015CDFD /* PersistentGraph.Member.TimedValue.swift in Sources */,
+				C55AC5B229560AF900F09326 /* Equatable+isEqualTo.swift in Sources */,
 				C5040372290DF5A10083AC41 /* Mind.Thought.GlobalThoughts.swift in Sources */,
 				C54BE50F289591700060A066 /* MeasureSizeModifier.swift in Sources */,
 				C5786DC32925A31F00865EFD /* ContentView.swift in Sources */,
@@ -1083,6 +1113,7 @@
 				C5D042C228D4E91E0088D6B0 /* Mind.Opinion.AboutOne.swift in Sources */,
 				C5786DC42925A32300865EFD /* AddNoteView.swift in Sources */,
 				C54BE55228960EF10060A066 /* SelectMemoryView.swift in Sources */,
+				C55AC5AE295262CD00F09326 /* Present.swift in Sources */,
 				C50BEEC928D519EB00F9F6E6 /* Mind.Opinion+Basics.swift in Sources */,
 				C504037B290EFC120083AC41 /* Imagination.Experience.swift in Sources */,
 				C54BE5442895DB180060A066 /* Brain.Synapse.swift in Sources */,
@@ -1120,6 +1151,7 @@
 				C5E4CB03294BDD4B00755959 /* Relation.swift in Sources */,
 				C54BE502289591440060A066 /* CGSize+Operators.swift in Sources */,
 				C54BE57E289D9EED0060A066 /* Perspective.Builder.swift in Sources */,
+				C55AC5B62957C7C600F09326 /* PersistentGraph.Predicate.swift in Sources */,
 				C5C4A0CC293AA02700FF9AB8 /* IdentifiableObject.swift in Sources */,
 				C5786DC52925A38300865EFD /* Mind.Thought.Conclusion.swift in Sources */,
 				C5C4A0DE293AB7D500FF9AB8 /* PersistentGraph.Node.swift in Sources */,

@@ -7,4 +7,10 @@
 
 import Foundation
 
-open class PersistentData: PersistentGraph<String, String> {}
+open class PersistentData: PersistentGraph<String, String> {
+    
+    subscript<T>(_ id: Object.ID) -> T?{
+        nodeStorage[id] as? T ?? edgeStorage[id] as? T
+    }
+    
+}

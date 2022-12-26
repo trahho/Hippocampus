@@ -7,9 +7,7 @@
 
 import Foundation
 
-
-
-@propertyWrapper final class Persistent<Value> where Value: Codable {
+@propertyWrapper final class Persistent<Value> where Value: PersistentData.PersistentValue {
     @available(*, unavailable, message: "This property wrapper can only be applied to classes")
     public var wrappedValue: Value {
         get { fatalError() }
@@ -44,12 +42,12 @@ import Foundation
         get {
             let storage = instance[keyPath: storageKeyPath]
             let key = storage.getKey(from: instance)
-            return instance[key] as? Value ?? storage.defaultValue!()
+            return instance[Value.self, key] ?? storage.defaultValue!()
         }
         set {
             let storage = instance[keyPath: storageKeyPath]
             let key = storage.getKey(from: instance)
-            instance[key] = newValue
+            instance[Value.self, key] = newValue
         }
     }
 }

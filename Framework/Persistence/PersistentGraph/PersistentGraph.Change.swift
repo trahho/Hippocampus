@@ -9,14 +9,14 @@ import Foundation
 
 extension PersistentGraph {
     indirect enum Change {
-        case changing 
+        case changing
         case finished
-        case rewinding (Date)
+        case rewinding(Date)
         case discarded(Change)
         case node(Node)
         case edge(Edge)
-        case modified(Member, Key, Date)
-        case role(Member, Date)
-        case deleted(Member, Date)
+        case modified(Member, Key, Date!)
+        case role(Member, Date!)
+        case deleted(Member, Date!)
     }
 }

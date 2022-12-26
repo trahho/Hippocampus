@@ -9,6 +9,14 @@ import Combine
 import Foundation
 
 final class Brain: Serializable, ObservableObject, PersistentContent {
+    enum Stroke: Error {
+        case mergeFailed
+    }
+
+    func merge(other: Brain) throws {
+//        throw Stroke.mergeFailed
+    }
+
     var objectDidChange: ObservableObjectPublisher = ObjectDidChangePublisher()
 
     enum BrainDamage: Error {

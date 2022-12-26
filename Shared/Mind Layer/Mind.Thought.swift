@@ -9,11 +9,25 @@ import Foundation
 
 extension Mind {
     @dynamicMemberLookup
-    final class Thought: PersistentObject, ObservableObject {
-     
+    final class Thought: PersistentData.Object {
+        struct Opinion: Serializable, PersistentValue {
+            static func == (lhs: Opinion, rhs: Opinion) -> Bool {
+                lhs.condition == rhs.condition && lhs.perspectives == rhs.perspectives
+            }
+            
+            @Serialized var condition: Condition
+            @Serialized var perspectives: Set<Perspective.ID>
 
-        @PublishedSerialized var designation: String = ""
-        @PublishedSerialized var opinions: [Opinion] = []
+            init() {}
+
+            init(condition: Condition, perspectives: Set<Perspective.ID>) {
+                self.condition = condition
+                self.perspectives = perspectives
+            }
+        }
+
+        @Persistent var designation: String = ""
+        @Persistent var opinions: [Opinion] = []
 
 //        var links: [Link] {
 //            Array(internalLinks.values)
@@ -36,7 +50,7 @@ extension Mind {
                 }
             return agreement.matches ? agreement.perspectives : nil
         }
-        
+
         func agree(_ thing: Mind.Thing) -> Set<Perspective>? {
             agree(thing.information)
         }

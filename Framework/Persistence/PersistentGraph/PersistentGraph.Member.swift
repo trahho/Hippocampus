@@ -20,7 +20,7 @@ import Foundation
 
 extension PersistentGraph {
     open class Member: PersistentObject, ObservableObject {
-        @Serialized private(set) var roles = TimeLine()
+        @Serialized private(set) var roles = TimeLine(Set<Role>())
         @Serialized private(set) var values: [Key: TimeLine] = [:]
         @Serialized internal var deleted = TimeLine()
         @Serialized internal var added = Date()
@@ -29,20 +29,10 @@ extension PersistentGraph {
         
         var isDeleted: Bool {
             get {
-                deleted.getValue(at: graph?.timestamp) as? Bool ?? false
+                deleted[Bool.self, graph] ?? false
             }
             set {
-                if let graph {
-                    graph.change {
-                        guard isDeleted != newValue, let timestamp = graph.timestamp else { return }
-                        deleted.setValue(newValue, in: graph)
-                        graph.addChange(.deleted(self, timestamp))
-                    }
-                } else {
-                    let timeline = TimeLine()
-                    timeline.setValue(newValue)
-                    deleted = timeline
-                }
+                deleted[Bool.self, graph, .deleted(self, graph?.timestamp)] = newValue
             }
         }
         
@@ -51,68 +41,72 @@ extension PersistentGraph {
             objectWillChange.send()
             self[keyPath: keyPath].reset(before: timestamp)
         }
-                
+        
         func reset(_ key: Key, before timestamp: Date) {
             guard let graph, graph.changing, let value = values[key] else { return }
             objectWillChange.send()
             value.reset(before: timestamp)
         }
         
+        func adopt() {}
+        
+        func merge(other: Member) {
+            guard other.id == id else { return }
+            
+            roles = roles.merged(with: other.roles)
+            deleted = deleted.merged(with: other.deleted)
+            
+            Set(values.keys).intersection(Set(other.values.keys))
+                .forEach { key in
+                    values[key] = values[key]!.merged(with: other.values[key]!)
+                }
+
+            Set(other.values.keys).subtracting(Set(values.keys))
+                .forEach { key in
+                    values[key] = other.values[key]!
+                }
+        }
+        
         public subscript(role role: Role) -> Bool {
             get {
-                guard let roles = roles.getValue(at: graph?.timestamp) as? Set<Role> else { return false }
-                return roles.contains(role)
+                roles[Set<Role>.self, graph]?.contains(role) ?? false
             }
             set {
-                objectWillChange.send()
-               
-                if let graph {
-                    graph.change {
-                        guard let timestamp = graph.timestamp else { return }
-                        var value = roles.getValue(at: graph.timestamp) as? Set<Role> ?? []
-                        if newValue {
-                            value.insert(role)
-                        } else {
-                            value.remove(role)
-                        }
-                        roles.setValue(value, in: graph)
-                        graph.addChange(.role(self, timestamp))
-                    }
+                if newValue == true {
+                    roles[Set<Role>.self, graph, .role(self, graph?.timestamp)]!.insert(role)
                 } else {
-                    var value = roles.getValue(at: graph?.timestamp) as? Set<Role> ?? []
-                    if newValue {
-                        value.insert(role)
-                    } else {
-                        value.remove(role)
-                    }
-                    let timeline = TimeLine()
-                    timeline.setValue(value)
-                    roles = timeline
+                    roles[Set<Role>.self, graph, .role(self, graph?.timestamp)]!.remove(role)
                 }
             }
         }
         
-        public subscript(_ key: Key) -> PersistentValue? {
+        internal func timedValue(for key: Key) -> TimedValue? {
+            guard   let value = values[key] else { return nil }
+            return value.timedValue(at: graph?.timestamp)
+        }
+        
+        public subscript<T>(_ type: T.Type, _ key: Key) -> T? where T: PersistentValue {
             get {
-                return values[key]?.getValue(at: Date())
+                values[key]?[T.self, graph]
             }
             set {
-                objectWillChange.send()
                 if values[key] == nil {
                     values[key] = TimeLine()
                 }
-                if let graph {
-                    graph.change {
-                        guard let value = values[key], let timestamp = graph.timestamp else { return }
-                        value.setValue(newValue, in: graph)
-                        graph.addChange(.modified(self, key, timestamp))
-                    }
-                } else {
-                    let timeline = TimeLine()
-                    timeline.setValue(newValue)
-                    values[key] = timeline
-                }
+                values[key]![T.self, graph, .modified(self, key, graph?.timestamp)] = newValue
             }
         }
+        
+//        public subscript(_ type: T.Type, _ key: Key) -> T? where T: PersistentValue {
+//            get {
+//                values[key]?[T.self, graph]
+//            }
+//            set {
+//                if values[key] == nil {
+//                    values[key] = TimeLine()
+//                }
+//                values[key]![T.self, graph, .modified(self, key, graph?.timestamp)] = newValue
+//            }
+//        }
     }
 }

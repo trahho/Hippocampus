@@ -28,6 +28,17 @@ extension PersistentGraph {
             to.incomingEdges.remove(self)
         }
         
+        override func adopt() {
+            guard let graph else { return }
+            objectWillChange.send()
+            disconnect()
+            graph.add(from)
+            graph.add(to)
+            from = graph.nodeStorage[from.id]!
+            to = graph.nodeStorage[to.id]!
+            connect()
+        }
+        
         init(from: Node, to: Node) {
             super.init()
             self.from = from

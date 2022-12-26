@@ -26,6 +26,30 @@ final class PersistentDataTests: XCTestCase {
         print("juhu")
     }
 
+    func testComparison() throws {
+        let data = TestData()
+        data.text = "Hallo Welt"
+        let predicate = PersistentData.Condition.hasValue(PersistentData.Condition.Comparison(key:"text", value: "Hallo Welt", condition: .equal ))
+        let predicate2 = PersistentData.Condition.hasValue(PersistentData.Condition.Comparison(key:"text", value: "Hallo Wet", condition: .equal ))
+        let predicate3 = PersistentData.Condition.hasValue(PersistentData.Condition.Comparison(key:"text", value: "", condition: .above ))
+
+        XCTAssert(predicate.matches(for: data))
+        XCTAssert(!predicate2.matches(for: data))
+        XCTAssert(predicate3.matches(for: data))
+
+        print("juhu")
+    }
+    
+    func testPredicate() throws {
+        let predicate1 = PersistentData.Condition.hasValue(PersistentData.Condition.Comparison(key: "text", value: "", condition: .above))
+        let predicate2 = PersistentData.Condition.hasValue(PersistentData.Condition.Comparison(key: "text", value: "", condition: .above))
+        let predicate3 = PersistentData.Condition.hasValue(PersistentData.Condition.Comparison(key: "text", value: "a", condition: .above))
+
+        XCTAssert(predicate1 == predicate2)
+        XCTAssert(predicate2 != predicate3)
+        print("juhu")
+    }
+
     func testRelation() throws {
         let data = TestData()
         let target = TestTarget()
@@ -34,7 +58,7 @@ final class PersistentDataTests: XCTestCase {
         XCTAssert(target.data == data)
         print("juhu")
     }
-    
+
     func testRelations() throws {
         let data1 = TestData()
         let data2 = TestData()

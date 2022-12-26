@@ -9,6 +9,10 @@ import Combine
 import Foundation
 
 class PersistentContainer<Content>: ObservableObject where Content: PersistentContent {
+    enum Error {
+        case mergeFailed
+    }
+
     let url: URL
     private var currentTimestamp: Date = .distantPast
     private let metadataQuery = NSMetadataQuery()
@@ -74,7 +78,11 @@ class PersistentContainer<Content>: ObservableObject where Content: PersistentCo
               let newContent = try? CyclicDecoder().decode(Content.self, from: flattened)
         else { return }
         newContent.restore()
-        content = newContent
+        do {
+            try content.merge(other: newContent)
+        } catch {
+            content = newContent
+        }
 //        guard // let data = try? (compressedData as NSData).decompressed(using: .lzfse) as Data,
 //              let newContent = try? JSONDecoder().decode(Content.self, from: compressedData)
         ////              let newContent = try? CyclicDecoder().decode(Content.self, from: flattened)

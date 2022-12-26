@@ -19,7 +19,7 @@ struct ShowConsciousnessView: View {
     }
 
     var thoughts: [Mind.Thought] {
-        mind.thoughts.values.sorted(using: KeyPathComparator(\.designation, order: .forward))
+        mind.thoughts.sorted(using: KeyPathComparator(\.designation, order: .forward))
     }
 
     @State var thought: Mind.Thought.ID?
@@ -44,7 +44,7 @@ struct ShowConsciousnessView: View {
         //            .navigationTitle("Expression")
         //        }
     detail: {
-            if let thoughtId = thought, let thought = mind.thoughts[thoughtId] {
+        if let thoughtId = thought, let thought: Mind.Thought = mind[thoughtId] {
                 Text("\(thought.designation)")
             } else {
                 Text("Choose")
