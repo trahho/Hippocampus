@@ -7,8 +7,8 @@
 
 import Foundation
 
-extension PersistentGraph.Member {
-    struct TimeLine {
+extension PersistentGraph.Item {
+    struct TimeLine: Serializable {
         @Serialized private var values: [TimedValue]
                 
         var timestamp: Date? {
@@ -53,7 +53,10 @@ extension PersistentGraph.Member {
         
         subscript<T>(_ type: T.Type, _ graph: PersistentGraph? = nil) -> T? where T: PersistentGraph.PersistentValue {
             guard let timestamp = graph?.timestamp else {
-                return values.last?.value as? T
+                if let value = values.last {
+                    return value[T.self] 
+                }
+               return nil
             }
             guard let value = values.last(where: { $0.time <= timestamp }) else {
                 return nil
@@ -73,10 +76,12 @@ extension PersistentGraph.Member {
                     values = [TimedValue(time: Date(), value: newValue)]
                     return
                 }
-                guard let timestamp = graph.timestamp else {
-                    return
-                }
+//                guard let timestamp = graph.timestamp else {
+//                    return
+//                }
                 graph.change {
+                    guard let timestamp = graph.timestamp else { return }
+                    print("Changing value")
                     if let last = values.last, last.time == timestamp {
                         values.removeLast()
                     }

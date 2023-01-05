@@ -8,7 +8,7 @@
 import Foundation
 
 extension PersistentGraph {
-    open class Node: Member {
+    open class Node: Item {
         @Published internal var incomingEdges: Set<Edge> = []
         @Published internal var outgoingEdges: Set<Edge> = []
 

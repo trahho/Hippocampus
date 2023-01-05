@@ -7,118 +7,100 @@
 
 import SwiftUI
 
-struct TextAspectView: View {
-    @ObservedObject var information: Mind.Thing
-    let aspect: Aspect
-    let mode: Sensation.ReceptionStrength
-    let editable: Bool
+// struct TextAspectView: View {
+//    @ObservedObject var information: Information.Thing
+//    let aspect: Aspect
+//    let mode: Sensation.ReceptionStrength
+//    let editable: Bool
+//
+//    var text: Binding<String> {
+//        Binding(get: {
+//            guard case let .string(string) = information[aspect] else {
+//                return ""
+//            }
+//            return string
+//        }, set: { newValue in information[aspect] = .string(newValue) })
+//    }
+//
+//    @ViewBuilder var normalView: some View {
+//        if editable {
+//            TextField(aspect.designation, text: text)
+//        } else {
+//            Text(text.wrappedValue)
+//        }
+//    }
+//
+//    @ViewBuilder var symbolView: some View {
+//        Image(systemName: "doc.plaintext")
+//    }
+//
+//    var body: some View {
+//        switch mode {
+//        case .normal:
+//            normalView
+//        case .symbol:
+//            symbolView
+//        default:
+//            EmptyView()
+//        }
+//    }
+// }
 
-    var text: Binding<String> {
-        Binding(get: {
-            guard case let .string(string) = information[aspect] else {
-                return ""
-            }
-            return string
-        }, set: { newValue in information[aspect] = .string(newValue) })
-    }
-
-    @ViewBuilder var normalView: some View {
-        if editable {
-            TextField(aspect.designation, text: text)
-        } else {
-            Text(text.wrappedValue)
-        }
-    }
-
-    @ViewBuilder var symbolView: some View {
-        Image(systemName: "doc.plaintext")
-    }
-
-    var body: some View {
-        switch mode {
-        case .normal:
-            normalView
-        case .symbol:
-            symbolView
-        default:
-            EmptyView()
-        }
-    }
-}
-
-struct TextEditorAspectView: View {
-    @ObservedObject var information: Mind.Thing
-    let aspect: Aspect
-    let mode: Sensation.ReceptionStrength
-    let editable: Bool
-
-    var text: Binding<String> {
-        Binding(get: {
-            guard case let .string(string) = information[aspect] else {
-                return ""
-            }
-            return string
-        }, set: { newValue in information[aspect] = .string(newValue) })
-    }
-
-    @ViewBuilder var normalView: some View {
-        TextEditor(text: text)
-            .disabled(!editable)
-    }
-
-    @ViewBuilder var symbolView: some View {
-        Image(systemName: "doc.plaintext")
-    }
-
-    var body: some View {
-        switch mode {
-        case .normal:
-            normalView
-        case .symbol:
-            symbolView
-        default:
-            EmptyView()
-        }
-    }
-}
+// struct TextEditorAspectView: View {
+//    @ObservedObject var information: Mind.Thing
+//    let aspect: Aspect
+//    let mode: Sensation.ReceptionStrength
+//    let editable: Bool
+//
+//    var text: Binding<String> {
+//        Binding(get: {
+//            guard case let .string(string) = information[aspect] else {
+//                return ""
+//            }
+//            return string
+//        }, set: { newValue in information[aspect] = .string(newValue) })
+//    }
+//
+//    @ViewBuilder var normalView: some View {
+//        TextEditor(text: text)
+//            .disabled(!editable)
+//    }
+//
+//    @ViewBuilder var symbolView: some View {
+//        Image(systemName: "doc.plaintext")
+//    }
+//
+//    var body: some View {
+//        switch mode {
+//        case .normal:
+//            normalView
+//        case .symbol:
+//            symbolView
+//        default:
+//            EmptyView()
+//        }
+//    }
+// }
 
 struct EditNoteView: View {
-    @EnvironmentObject var brain: Brain
+    @EnvironmentObject var document: Document
     @Environment(\.dismiss) private var dismiss
+    @State var modification: Information.Transaction
 
-    @ObservedObject var note: Mind.Thing
+    @ObservedObject var note: Information.Node
 
-    let textAspect = Perspective.note.text
-    let titleAspect = Perspective.note.name
-
-    var text: Binding<String> {
-        Binding(get: {
-            guard case let .string(string) = textAspect[note] else {
-                return ""
-            }
-            return string
-        }, set: { newValue in textAspect[note] = .string(newValue) })
-    }
-
-    var title: Binding<String> {
-        Binding(get: {
-            guard case let .string(string) = titleAspect[note] else {
-                return ""
-            }
-            return string
-        }, set: { newValue in titleAspect[note] = .string(newValue) })
-    }
+    let textAspect = Structure.Role.note.text
+    let titleAspect = Structure.Role.note.name
 
     var body: some View {
         VStack {
-            TextAspectView(information: note, aspect: titleAspect, mode: .normal, editable: true)
-            TextAspectView(information: note, aspect: textAspect, mode: .normal, editable: true)
-            TextEditorAspectView(information: note, aspect: textAspect, mode: .normal, editable: true)
+            titleAspect.view(for: note, editable: true)
+            textAspect.view(for: note, editable: true)
         }
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
                 Button {
-                    brain.forget()
+                    modification.discard()
                     dismiss()
                 } label: {
                     Image(systemName: "xmark")
@@ -133,10 +115,12 @@ struct EditNoteView: View {
             }
         }
         .onAppear {
-            brain.dream()
+            modification.begin()
         }
         .onDisappear {
-            brain.awaken()
+            if modification.isActive {
+                modification.commit()
+            }
         }
     }
 }

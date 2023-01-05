@@ -42,7 +42,11 @@ import Foundation
         get {
             let storage = instance[keyPath: storageKeyPath]
             let key = storage.getKey(from: instance)
-            return instance[Value.self, key] ?? storage.defaultValue!()
+            if let value =  instance[Value.self, key] {
+                return value
+            } else {
+                return storage.defaultValue!()
+            }
         }
         set {
             let storage = instance[keyPath: storageKeyPath]

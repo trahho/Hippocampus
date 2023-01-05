@@ -9,16 +9,12 @@ import Combine
 import Foundation
 
 extension PersistentData {
-//    @dynamicMemberLookup
     open class Object: PersistentData.Node {
-//        public typealias Value<T: Codable> = ValueWrapper<Object, T>
-//        internal subscript(dynamicMember key: String) -> PersistentValue {
-//            get {
-//                self[key]
-//            }
-//            set {
-//                self[key] = newValue
-//            }
-//        }
+        
+        required public init() {
+            super.init()
+            let mirror = Mirror(reflecting: self)
+        }
+        
     }
 }

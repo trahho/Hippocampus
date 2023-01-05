@@ -10,55 +10,62 @@ import SwiftUI
 @main
 struct HippocampusApp: App {
     static var iCloudContainerUrl: URL {
-        let containerUrl = FileManager.default.url(forUbiquityContainerIdentifier: nil)!
-        return containerUrl.appendingPathComponent("Documents")
+        return URL.iCloudDirectory.appendingPathComponent("Documents")
     }
     
     static var localContainerUrl: URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        let documentsDirectory = paths[0]
-        return documentsDirectory.appendingPathComponent("Hippocampus")
+        return URL.localDirecotry.appendingPathComponent("Hippocampus")
     }
     
-    static func memoryUrl(name: String, local: Bool) -> URL {
+    static func documentURL(name: String, local: Bool) -> URL {
         let containerURL = local ? HippocampusApp.localContainerUrl : HippocampusApp.iCloudContainerUrl
-        let areaURL = containerURL.appendingPathComponent("\(name).\(HippocampusApp.memoryExtension)")
-        return areaURL
+        let result = containerURL.appendingPathComponent("\(name)\(HippocampusApp.memoryExtension)")
+//        result.ensureDirectory()
+        return result
     }
     
-    static let memoryExtension = "memory"
-    static let persistentExtension = "persistent"
+    static let memoryExtension = ".memory"
+    static let persistentExtension = ".persistent"
     
-    @ObservedObject var consciousness: Consciousness =
+    @ObservedObject var document: Document =
         //        .preview1
         .init(name: "Test", local: false)
     
     var body: some Scene {
         WindowGroup {
-            ConsciousnessView(consciousness: consciousness)
-                .onOpenURL { consciousness.openMemory(url: $0) }
+            DocumentView(document: document)
+//                .onOpenURL { self._document.wrappedValue = Document(url: $0) }
         }
     }
     
-    struct ConsciousnessView: View {
-        @State private var path = NavigationPath()
-        @ObservedObject var consciousness: Consciousness
-        var brain: Brain { consciousness.memory.brain }
-        var mind: Mind { consciousness.memory.mind }
-        var imagination: Imagination { consciousness.memory.imagination }
+    struct DocumentView: View {
+        @ObservedObject var document: Document
         
         var body: some View {
-            NavigationView {
-                ContentView()
-                    .environmentObject(consciousness)
-//                    .environmentObject(brain)
-//                    .environmentObject(mind)
-//                    .environmentObject(imagination)
-                    .environmentObject(consciousness.memory.brain)
-                    .environmentObject(consciousness.memory.mind)
-                    .environmentObject(consciousness.memory.imagination)
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            ContentView()
+                .environmentObject(document)
         }
     }
+    
+//    struct ConsciousnessView: View {
+//        @State private var path = NavigationPath()
+//        @ObservedObject var consciousness: Consciousness
+//        var brain: Brain { consciousness.memory.brain }
+//        var mind: Mind { consciousness.memory.mind }
+//        var imagination: Imagination { consciousness.memory.imagination }
+//
+//        var body: some View {
+//            NavigationView {
+//                ContentView()
+//                    .environmentObject(consciousness)
+    ////                    .environmentObject(brain)
+    ////                    .environmentObject(mind)
+    ////                    .environmentObject(imagination)
+//                    .environmentObject(consciousness.memory.brain)
+//                    .environmentObject(consciousness.memory.mind)
+//                    .environmentObject(consciousness.memory.imagination)
+//            }
+//            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+//        }
+//    }
 }

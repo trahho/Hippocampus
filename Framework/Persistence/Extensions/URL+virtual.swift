@@ -12,7 +12,29 @@ extension URL {
         scheme == "virtual"
     }
 
-    static func virtual() -> URL {
+    var isLocal: Bool {
+        return self.absoluteString.hasPrefix(URL.localDirecotry.absoluteString)
+    }
+    
+    var isiCloud: Bool {
+        return self.absoluteString.hasPrefix(URL.iCloudDirectory.absoluteString)
+    }
+
+    static var virtual: URL {
         URL(string: "virtual:///")!
+    }
+
+    static var iCloudDirectory: URL {
+        FileManager.default.url(forUbiquityContainerIdentifier: nil)!
+    }
+
+    static var localDirecotry: URL {
+        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    }
+    
+    func ensureDirectory() {
+        if !FileManager.default.fileExists(atPath: self.path) {
+            try! FileManager.default.createDirectory(at: self, withIntermediateDirectories: true)
+        }
     }
 }

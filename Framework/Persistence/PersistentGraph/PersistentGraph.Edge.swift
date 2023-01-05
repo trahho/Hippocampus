@@ -8,7 +8,7 @@
 import Foundation
 
 extension PersistentGraph {
-    open class Edge: Member {
+    open class Edge: Item {
         @PublishedSerialized private(set) var from: Node
         @PublishedSerialized private(set) var to: Node
         

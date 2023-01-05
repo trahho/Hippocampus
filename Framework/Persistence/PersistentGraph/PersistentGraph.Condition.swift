@@ -7,12 +7,16 @@
 
 import Foundation
 
+infix operator ~>: AdditionPrecedence
+infix operator <~: AdditionPrecedence
+
 extension PersistentGraph {
     indirect enum Condition: PersistentValue {
         typealias PersistentComparableValue = PersistentValue & Comparable
+        typealias Storage = PersistentGraph.ValueStorage
 
         struct Comparison: Serializable, Equatable {
-            enum Condition: Int {
+            enum Relation: Int {
                 case below, above, equal, unequal
             }
 
@@ -21,19 +25,28 @@ extension PersistentGraph {
             }
 
             @Serialized var key: Key
-            @Serialized var value: any PersistentComparableValue
-            @Serialized var condition: Condition
+            @Serialized var storage: Storage
+            @Serialized var condition: Relation
+
+            var value: (any PersistentComparableValue)? {
+                get {
+                    return storage.value as? (any PersistentComparableValue)
+                }
+                set {
+                    storage = Storage(newValue)
+                }
+            }
 
             init() {}
 
-            init(key: Key, value: any PersistentComparableValue, condition: Condition) {
+            init(key: Key, value: any PersistentComparableValue, condition: Relation) {
                 self.key = key
                 self.value = value
                 self.condition = condition
             }
 
-            func calculate(for member: Member) -> Bool {
-                guard let timedValue = member.timedValue(for: key) else { return false }
+            func calculate(for item: Item) -> Bool {
+                guard let timedValue = item.timedValue(for: key) else { return false }
                 guard let value = timedValue.value as? (any Comparable) else { return false }
                 switch condition {
                 case .below:
@@ -66,32 +79,33 @@ extension PersistentGraph {
 //        }
 
         case always(Bool)
-        case hasRole(Role)
+        case hasRole(role: Role)
         case hasValue(Comparison)
         case not(Condition)
         case any([Condition])
         case all([Condition])
 
-        func matches(for member: Member) -> Bool {
+        func matches(for item: Item) -> Bool {
             switch self {
             case let .always(value):
                 return value
             case let .hasRole(role):
-                return member[role: role]
+                let roles = item.roles.timedValue(at: item.roles.timestamp)?.value as? Set<Role>
+                return item[role: role]
             case let .hasValue(comparison):
-                return comparison.calculate(for: member)
+                return comparison.calculate(for: item)
             case let .not(condition):
-                return !condition.matches(for: member)
+                return !condition.matches(for: item)
             case let .any(conditions):
                 for condition in conditions {
-                    if condition.matches(for: member) {
+                    if condition.matches(for: item) {
                         return true
                     }
                 }
                 return false
             case let .all(conditions):
                 for condition in conditions {
-                    if !condition.matches(for: member) {
+                    if !condition.matches(for: item) {
                         return false
                     }
                 }
@@ -99,6 +113,14 @@ extension PersistentGraph {
             }
         }
     }
+
+//    static func ~> (lhs: Mind.Opinion, rhs: Mind.Opinion) -> Mind.Opinion {
+//        lhs && AboutOne.Acquaintance(.knows, rhs)
+//    }
+//
+//    static func <~ (lhs: Mind.Opinion, rhs: Mind.Opinion) -> Mind.Opinion {
+//        AboutOne.Acquaintance(.known, rhs) && rhs
+//    }
 
 //    class Predicate: Serializable, Equatable {
 //        static func == (lhs: Predicate, rhs: Predicate) -> Bool {

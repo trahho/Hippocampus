@@ -155,7 +155,10 @@ class PersistentContainer<Content>: ObservableObject where Content: PersistentCo
     }
 
     init(url: URL, content: Content) {
-        self.url = url
+        if url.isiCloud {
+            try? FileManager.default.startDownloadingUbiquitousItem(at: url.absoluteURL.deletingLastPathComponent())
+        }
+        self.url = url.absoluteURL
         content.restore()
         self.content = content
         setupMetadataQuery()

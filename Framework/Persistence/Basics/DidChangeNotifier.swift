@@ -10,7 +10,7 @@ import Foundation
 
 protocol DidChangeNotifier {
     associatedtype ObjectDidChangePublisher: Publisher = Publisher where
-//        ObjectDidChangePublisher.Output == Void ,
+//        ObjectDidChangePublisher.Output == Any ,
         ObjectDidChangePublisher.Failure == Never
 
     var objectDidChange: ObjectDidChangePublisher { get }

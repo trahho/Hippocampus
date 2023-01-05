@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AddNoteView: View {
-    @EnvironmentObject var brain: Brain
+    @EnvironmentObject var document: Document
     @Environment(\.dismiss) private var dismiss
 
     @State var title: String = ""
@@ -30,11 +30,11 @@ struct AddNoteView: View {
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button {
-                        brain.dream {
-                            let neuron = try! brain.createNeuron()
-                            neuron[Perspective.note.name] = title
-                            neuron[Perspective.note.text] = text
-                        }
+                        let node = Information.Node()
+                        node[String.self, Structure.Role.note.name] = title
+                        node[String.self, Structure.Role.note.text] = text
+                        node[role: Structure.Role.note.id]  = true
+                        document.information.add(node)
                         dismiss()
                     } label: {
                         Text("Add")
