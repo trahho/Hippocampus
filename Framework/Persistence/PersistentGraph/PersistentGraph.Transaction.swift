@@ -5,8 +5,8 @@
 //  Created by Guido Kühn on 05.01.23.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 public extension PersistentGraph {
     class Transaction {
@@ -19,13 +19,18 @@ public extension PersistentGraph {
         var isActive: Bool {
             timestamp != nil
         }
-        
-        var hasChanges: Bool{
+
+        var hasChanges: Bool {
             !changes.isEmpty
         }
 
         init(graph: PersistentGraph) {
             self.graph = graph
+        }
+
+        public func started() -> Transaction {
+            begin()
+            return self
         }
 
         public func begin() {
@@ -41,7 +46,7 @@ public extension PersistentGraph {
 //            print("Transaction \(timestamp) discards")
 
             graph.discardChanges(transaction: self)
-            
+
             graph.changeDidHappen.send(.finished(timestamp))
             disconnect()
             self.timestamp = nil
@@ -63,16 +68,23 @@ public extension PersistentGraph {
             graph.unregisterTransaction(transaction: self)
         }
 
+        private func addChange(change: Change) {
+            switch change {
+            case .node, .edge, .role, .deleted, .modified:
+                if let timestamp, change.timestamp >= timestamp {
+                    changes.append(change)
+                }
+            default:
+                break
+            }
+        }
+
         private func connect() {
-            guard let timestamp, !(graph.currentTransaction === self) else {
+            guard !(graph.currentTransaction === self) else {
                 fatalError("Confused transactions")
             }
             graph.registerTransaction(transaction: self)
-            changeObserver = graph.changeDidHappen.sink { [self] change in
-                if change.timestamp >= timestamp {
-                    changes.append(change)
-                }
-            }
+            changeObserver = graph.changeDidHappen.sink { self.addChange(change: $0) }
         }
     }
 }

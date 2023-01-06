@@ -14,6 +14,7 @@ struct ListView: View {
     @State var addSheetIsPresented = false
     @State var editSheetItem: Structure.Query.Result.Node?
     @State var sortOrder: SortOrder = .forward
+    @State var refresh: Bool = false
 
     var result: Structure.Query.Result {
         query.apply(to: information)
@@ -26,6 +27,10 @@ struct ListView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
+            Toggle(isOn: $refresh) {
+                Text("Refresh")
+            }
+            .hidden()
             Button {
                 addSheetIsPresented.toggle()
             } label: {
@@ -48,16 +53,27 @@ struct ListView: View {
                         }
                 }
             }
-            .navigationDestination(for: Structure.Query.Result.Node.self) { note in
-                EditNoteView(modification: information.transaction(), note: note.item as! Information.Node)
-            }
+//            .navigationDestination(for: Structure.Query.Result.Node.self) { note in
+//                EditNoteView(modification: information.transaction().started(), note: note.item as! Information.Node)
+//            }
         }
         .sheet(isPresented: $addSheetIsPresented) {
-            AddNoteView()
+            refresh.toggle()
+        } content: {
+            NoteView(editable: true)
         }
-        .sheet(item: $editSheetItem) { item in
-            EditNoteView(modification: information.transaction(), note: item.item as! Information.Node)
+        .sheet(item: $editSheetItem) {
+            refresh.toggle()
+        } content: { item in
+            NoteView(editable: true, note: item.item)
         }
+    }
+
+    func newNote() -> Information.Node {
+        let note = Information.Node()
+        note[role: Structure.Role.note.id] = true
+        information.add(note)
+        return note
     }
 }
 

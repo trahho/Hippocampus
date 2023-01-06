@@ -134,8 +134,10 @@ open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable>:
         transaction.changes.forEach { change in
             switch change {
             case let .node(node, _):
+                objectWillChange.send()
                 nodeStorage.removeValue(forKey: node.id)
             case let .edge(edge, _):
+                objectWillChange.send()
                 edge.disconnect()
                 edgeStorage.removeValue(forKey: edge.id)
             case let .modified(item, key, timestamp):
@@ -187,9 +189,9 @@ open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable>:
 
     func add(_ node: Node) {
         guard nodeStorage[node.id] == nil else { return }
+        objectWillChange.send()
         change {
             guard let timestamp = timestamp else { return }
-            objectWillChange.send()
             node.added = timestamp
             node.graph = self
             nodeStorage[node.id] = node

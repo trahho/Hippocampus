@@ -82,25 +82,27 @@ import SwiftUI
 //    }
 // }
 
-struct EditNoteView: View {
+struct NoteView: View {
     @EnvironmentObject var document: Document
     @Environment(\.dismiss) private var dismiss
-    @State var modification: Information.Transaction
-
-    @ObservedObject var note: Information.Node
+    @State var transaction: Information.Transaction?
+    @State var editable: Bool = false
+    @State var note: Information.Item?
 
     let textAspect = Structure.Role.note.text
     let titleAspect = Structure.Role.note.name
 
     var body: some View {
-        VStack {
-            titleAspect.view(for: note, editable: true)
-            textAspect.view(for: note, editable: true)
+        VStack (alignment: .leading) {
+            if let note {
+                titleAspect.view(for: note, editable: editable)
+                textAspect.view(for: note, editable: editable)
+            }
         }
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
                 Button {
-                    modification.discard()
+                    if let transaction { transaction.discard() }
                     dismiss()
                 } label: {
                     Image(systemName: "xmark")
@@ -115,11 +117,17 @@ struct EditNoteView: View {
             }
         }
         .onAppear {
-            modification.begin()
+            if editable {
+                transaction = document.information.transaction()
+                transaction!.begin()
+                if note == nil {
+                    note = document.information.createNode(roles: [Structure.Role.note])
+                }
+            }
         }
         .onDisappear {
-            if modification.isActive {
-                modification.commit()
+            if let transaction, transaction.isActive {
+                transaction.commit()
             }
         }
     }

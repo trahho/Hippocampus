@@ -44,7 +44,7 @@ extension Structure {
         }
 
         func analyze(node: Information.Node, in information: Information, for result: Result) {
-                guard result.nodeStorage[node.id] == nil else { return }
+            guard result.nodeStorage[node.id] == nil else { return }
             let roles = analyze(node)
             if let roles {
                 let item = Result.Node(node: node, roles: roles)

@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		C504036B290DDE8D0083AC41 /* CaseIterable+StringConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = C504036A290DDE8D0083AC41 /* CaseIterable+StringConversion.swift */; };
 		C504036C290DDE8D0083AC41 /* CaseIterable+StringConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = C504036A290DDE8D0083AC41 /* CaseIterable+StringConversion.swift */; };
-		C548BCBB292ADA8600DB6185 /* EditNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C548BCBA292ADA8600DB6185 /* EditNoteView.swift */; };
-		C548BCBC292ADA8600DB6185 /* EditNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C548BCBA292ADA8600DB6185 /* EditNoteView.swift */; };
+		C548BCBB292ADA8600DB6185 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C548BCBA292ADA8600DB6185 /* NoteView.swift */; };
+		C548BCBC292ADA8600DB6185 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C548BCBA292ADA8600DB6185 /* NoteView.swift */; };
 		C54BE4B12894866C0060A066 /* HippocampusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4A12894866A0060A066 /* HippocampusApp.swift */; };
 		C54BE4B22894866C0060A066 /* HippocampusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4A12894866A0060A066 /* HippocampusApp.swift */; };
 		C54BE4B52894866C0060A066 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C54BE4A32894866C0060A066 /* Assets.xcassets */; };
@@ -114,9 +114,7 @@
 		C55AC5DF295A4ACE00F09326 /* Structure.Query.Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55AC5DE295A4ACE00F09326 /* Structure.Query.Predicate.swift */; };
 		C55AC5E0295A4ACE00F09326 /* Structure.Query.Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55AC5DE295A4ACE00F09326 /* Structure.Query.Predicate.swift */; };
 		C55AC5E1295A4ACE00F09326 /* Structure.Query.Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55AC5DE295A4ACE00F09326 /* Structure.Query.Predicate.swift */; };
-		C5786DC22924405500865EFD /* AddNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5786DC12924405500865EFD /* AddNoteView.swift */; };
 		C5786DC32925A31F00865EFD /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58FB452291F215500D0B713 /* ListView.swift */; };
-		C5786DC42925A32300865EFD /* AddNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5786DC12924405500865EFD /* AddNoteView.swift */; };
 		C582B38628A2F00400F795F0 /* PersistentObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C582B38528A2F00400F795F0 /* PersistentObject.swift */; };
 		C582B38728A2F00400F795F0 /* PersistentObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C582B38528A2F00400F795F0 /* PersistentObject.swift */; };
 		C58FB453291F215500D0B713 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58FB452291F215500D0B713 /* ListView.swift */; };
@@ -148,8 +146,7 @@
 		C59B3CF7295CCED00053DE7D /* ShowMemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE553289610A00060A066 /* ShowMemoryView.swift */; };
 		C59B3CF8295CCEFF0053DE7D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E856295A652B002C7746 /* ContentView.swift */; };
 		C59B3CF9295DA4750053DE7D /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58FB452291F215500D0B713 /* ListView.swift */; };
-		C59B3CFA295DA4900053DE7D /* AddNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5786DC12924405500865EFD /* AddNoteView.swift */; };
-		C59B3CFB295DA4930053DE7D /* EditNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C548BCBA292ADA8600DB6185 /* EditNoteView.swift */; };
+		C59B3CFB295DA4930053DE7D /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C548BCBA292ADA8600DB6185 /* NoteView.swift */; };
 		C5C4A0C8293A83C100FF9AB8 /* URL+virtual.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A0C7293A83C100FF9AB8 /* URL+virtual.swift */; };
 		C5C4A0C9293A840300FF9AB8 /* URL+virtual.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A0C7293A83C100FF9AB8 /* URL+virtual.swift */; };
 		C5C4A0CB293A9F9400FF9AB8 /* IdentifiableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A0CA293A9F9400FF9AB8 /* IdentifiableObject.swift */; };
@@ -274,7 +271,7 @@
 		C5187E1828E63B7900C09EB4 /* Genes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genes.swift; sourceTree = "<group>"; };
 		C528A18128CDE2A90027FA44 /* HippocampusTestsMacOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HippocampusTestsMacOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5394A5829049969003B99BF /* Nachdenken.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Nachdenken.md; sourceTree = "<group>"; };
-		C548BCBA292ADA8600DB6185 /* EditNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteView.swift; sourceTree = "<group>"; };
+		C548BCBA292ADA8600DB6185 /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		C54BE4A12894866A0060A066 /* HippocampusApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HippocampusApp.swift; sourceTree = "<group>"; };
 		C54BE4A32894866C0060A066 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C54BE4A82894866C0060A066 /* Hippocampus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hippocampus.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -341,7 +338,6 @@
 		C55AC5D6295A4A5F00F09326 /* Structure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structure.swift; sourceTree = "<group>"; };
 		C55AC5DA295A4A8100F09326 /* Structure.Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structure.Query.swift; sourceTree = "<group>"; };
 		C55AC5DE295A4ACE00F09326 /* Structure.Query.Predicate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structure.Query.Predicate.swift; sourceTree = "<group>"; };
-		C5786DC12924405500865EFD /* AddNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteView.swift; sourceTree = "<group>"; };
 		C5786DC72926EBDF00865EFD /* Aspect.Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aspect.Point.swift; sourceTree = "<group>"; };
 		C582B38528A2F00400F795F0 /* PersistentObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentObject.swift; sourceTree = "<group>"; };
 		C582B38828A2FAAD00F795F0 /* Mind.Thought.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mind.Thought.swift; sourceTree = "<group>"; };
@@ -706,8 +702,7 @@
 			isa = PBXGroup;
 			children = (
 				C58FB452291F215500D0B713 /* ListView.swift */,
-				C5786DC12924405500865EFD /* AddNoteView.swift */,
-				C548BCBA292ADA8600DB6185 /* EditNoteView.swift */,
+				C548BCBA292ADA8600DB6185 /* NoteView.swift */,
 				C5C8E856295A652B002C7746 /* ContentView.swift */,
 			);
 			path = "App Layer";
@@ -999,13 +994,12 @@
 				C5576EB729510BB5005257A4 /* PersistentData.Object+getKey.swift in Sources */,
 				C5C4A12B2942701100FF9AB8 /* SerialisationTests.swift in Sources */,
 				C5C4A0FC293B9E4800FF9AB8 /* DecodableProperty.swift in Sources */,
-				C59B3CFA295DA4900053DE7D /* AddNoteView.swift in Sources */,
 				C59B3CEB295CCE9A0053DE7D /* CGSize+Operators.swift in Sources */,
 				C5C4A0F9293B9E4800FF9AB8 /* PublishedSerialized.swift in Sources */,
 				C55AC5DD295A4A8100F09326 /* Structure.Query.swift in Sources */,
 				C59B3CF4295CCEC80053DE7D /* Structure.Query.Result.swift in Sources */,
 				C59B3CF8295CCEFF0053DE7D /* ContentView.swift in Sources */,
-				C59B3CFB295DA4930053DE7D /* EditNoteView.swift in Sources */,
+				C59B3CFB295DA4930053DE7D /* NoteView.swift in Sources */,
 				C5C4A0F8293B9E4000FF9AB8 /* URL+virtual.swift in Sources */,
 				C59B3CF7295CCED00053DE7D /* ShowMemoryView.swift in Sources */,
 				C55AC5B72957C7C600F09326 /* PersistentGraph.Condition.swift in Sources */,
@@ -1052,14 +1046,13 @@
 				C5C8E85E295AFD4E002C7746 /* Structure.Role.swift in Sources */,
 				C504036B290DDE8D0083AC41 /* CaseIterable+StringConversion.swift in Sources */,
 				C54BE4FF289591440060A066 /* CGPoint+Operators.swift in Sources */,
-				C548BCBB292ADA8600DB6185 /* EditNoteView.swift in Sources */,
+				C548BCBB292ADA8600DB6185 /* NoteView.swift in Sources */,
 				C54BE55128960EF10060A066 /* SelectMemoryView.swift in Sources */,
 				C5C4A0DA293AB3FC00FF9AB8 /* PersistentGraph.Item.swift in Sources */,
 				C55AC5AD295262CD00F09326 /* Present.swift in Sources */,
 				C54BE4C928958F820060A066 /* Transformable.swift in Sources */,
 				C54BE4FB289591440060A066 /* CGRect+Functions.swift in Sources */,
 				C54BE4E328958F910060A066 /* Box.swift in Sources */,
-				C5786DC22924405500865EFD /* AddNoteView.swift in Sources */,
 				C54BE577289D7B0F0060A066 /* PublishedSerialized.swift in Sources */,
 				C54BE50A289591530060A066 /* Array+asSet.swift in Sources */,
 				C54BE514289591840060A066 /* InjectedPropertyWrapper.swift in Sources */,
@@ -1136,11 +1129,10 @@
 				C5C8E85F295AFD4E002C7746 /* Structure.Role.swift in Sources */,
 				C5786DC32925A31F00865EFD /* ListView.swift in Sources */,
 				C504036C290DDE8D0083AC41 /* CaseIterable+StringConversion.swift in Sources */,
-				C548BCBC292ADA8600DB6185 /* EditNoteView.swift in Sources */,
+				C548BCBC292ADA8600DB6185 /* NoteView.swift in Sources */,
 				C54BE500289591440060A066 /* CGPoint+Operators.swift in Sources */,
 				C5C4A0DB293AB3FC00FF9AB8 /* PersistentGraph.Item.swift in Sources */,
 				C59B3CDB295BBD9A0053DE7D /* ContentView.swift in Sources */,
-				C5786DC42925A32300865EFD /* AddNoteView.swift in Sources */,
 				C54BE55228960EF10060A066 /* SelectMemoryView.swift in Sources */,
 				C55AC5AE295262CD00F09326 /* Present.swift in Sources */,
 				C54BE4CA28958F820060A066 /* Transformable.swift in Sources */,

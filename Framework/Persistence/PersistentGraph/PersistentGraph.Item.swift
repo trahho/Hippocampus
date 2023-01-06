@@ -32,7 +32,7 @@ extension PersistentGraph {
                 deleted[Bool.self, graph] ?? false
             }
             set {
-                deleted[Bool.self, graph, .deleted(self, graph?.timestamp ?? Date.distantPast)] = newValue
+                deleted[Bool.self, graph, .deleted(self, graph?.timestamp ?? Date.distantFuture)] = newValue
             }
         }
         
@@ -75,9 +75,9 @@ extension PersistentGraph {
             }
             set {
                 if newValue == true, self[role: role] == false {
-                    roles[Set<Role>.self, graph, .role(self, graph?.timestamp ?? Date.distantPast)]!.insert(role)
+                    roles[Set<Role>.self, graph, .role(self, graph?.timestamp ?? Date.distantFuture)]!.insert(role)
                 } else if newValue == false, self[role: role] == true {
-                    roles[Set<Role>.self, graph, .role(self, graph?.timestamp ?? Date.distantPast)]!.remove(role)
+                    roles[Set<Role>.self, graph, .role(self, graph?.timestamp ?? Date.distantFuture)]!.remove(role)
                 }
             }
         }
@@ -97,7 +97,7 @@ extension PersistentGraph {
                 if values[key] == nil {
                     values[key] = TimeLine()
                 }
-                values[key]![T.self, graph, .modified(self, key, graph?.timestamp ?? Date.distantPast)] = newValue
+                values[key]![T.self, graph, .modified(self, key, graph?.timestamp ?? Date.distantFuture)] = newValue
             }
         }
         

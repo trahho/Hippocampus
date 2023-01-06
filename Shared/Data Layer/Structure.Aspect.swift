@@ -45,7 +45,7 @@ extension Structure.Aspect {
                 TextField(aspect.name, text: Binding(get: { item[String.self, aspect] ?? "" }, set: {
                     item[String.self, aspect] = $0 }))
             } else {
-                Text(item[String.self, aspect.id] ?? "")
+                Text(item[String.self, aspect] ?? "")
             }
         }
     }
