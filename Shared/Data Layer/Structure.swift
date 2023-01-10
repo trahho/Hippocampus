@@ -13,9 +13,9 @@ class Structure: PersistentData {
 
     override func setup() -> Structure {
         [Role.global, Role.drawing, Role.topic, Role.note]
-            .forEach { add($0) }
+            .forEach { add($0, changeManager: self.changeManager()) }
         [Query.notes]
-            .forEach { add($0) }
+            .forEach { add($0, changeManager: self.changeManager()) }
         return self
     }
 }

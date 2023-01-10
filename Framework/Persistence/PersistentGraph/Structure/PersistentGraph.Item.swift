@@ -20,43 +20,33 @@ import Foundation
 
 extension PersistentGraph {
     open class Item: PersistentObject, ObservableObject {
-        @Serialized private(set) var roles = TimeLine(Set<Role>())
+        @Serialized private(set) var rolesValue = TimeLine(Set<Role>())
         @Serialized private(set) var values: [Key: TimeLine] = [:]
-        @Serialized internal var deleted = TimeLine()
+        @Serialized internal var deletedValue = TimeLine()
         @Serialized var added = Date()
         
-        var graph: PersistentGraph?
-        
-        var isDeleted: Bool {
-            get {
-                deleted[Bool.self, graph] ?? false
-            }
-            set {
-                deleted[Bool.self, graph, .deleted(self, graph?.timestamp ?? Date.distantFuture)] = newValue
-            }
-        }
+        var graph: PersistentGraph!
         
         func reset(_ keyPath: KeyPath<Item, TimeLine>, before timestamp: Date) {
-            guard let graph, graph.changing else { return }
             objectWillChange.send()
             self[keyPath: keyPath].reset(before: timestamp)
         }
         
         func reset(_ key: Key, before timestamp: Date) {
-            guard let graph, graph.changing, let value = values[key] else { return }
+            guard let value = values[key] else { fatalError("Reset for nonexisting value") }
             objectWillChange.send()
             value.reset(before: timestamp)
         }
         
-        func adopt() {}
+        func adopt(changeManager: ChangeManager) {}
         
         func merge(other: Item) {
             guard other.id == id else { return }
             
             objectWillChange.send()
             
-            roles = roles.merged(with: other.roles)
-            deleted = deleted.merged(with: other.deleted)
+            rolesValue = rolesValue.merged(with: other.rolesValue)
+            deletedValue = deletedValue.merged(with: other.deletedValue)
             
             Set(values.keys).intersection(Set(other.values.keys))
                 .forEach { key in
@@ -69,15 +59,24 @@ extension PersistentGraph {
                 }
         }
         
-        public subscript(role role: Role) -> Bool {
+        public var isDeleted: Bool { deletedValue[Bool.self, graph] ?? false }
+        
+        public func isDeleted(_ newValue: Bool, changeManager: ChangeManager?) {
+            deletedValue[Bool.self, changeManager ?? graph.changeManager(), { .deleted(self, $0) }] = newValue
+        }
+        
+        public subscript(role role: Role, changeManager: ChangeManager? = nil) -> Bool {
             get {
-                roles[Set<Role>.self, graph]?.contains(role) ?? false
+                rolesValue[Set<Role>.self, graph]?.contains(role) ?? false
             }
             set {
-                if newValue == true, self[role: role] == false {
-                    roles[Set<Role>.self, graph, .role(self, graph?.timestamp ?? Date.distantFuture)]!.insert(role)
-                } else if newValue == false, self[role: role] == true {
-                    roles[Set<Role>.self, graph, .role(self, graph?.timestamp ?? Date.distantFuture)]!.remove(role)
+                var newRoles = rolesValue[Set<Role>.self, graph] ?? Set<Role>()
+                if newValue == true, !newRoles.contains(role) {
+                    newRoles.insert(role)
+                    rolesValue[Set<Role>.self, changeManager ?? graph.changeManager(), { .role(self, $0) }] = newRoles
+                } else if newValue == false, newRoles.contains(role) {
+                    newRoles.remove(role)
+                    rolesValue[Set<Role>.self, changeManager ?? graph.changeManager(), { .role(self, $0) }] = newRoles
                 }
             }
         }
@@ -87,7 +86,7 @@ extension PersistentGraph {
             return value.timedValue(at: graph?.timestamp)
         }
         
-        public subscript<T>(_ type: T.Type, _ key: Key) -> T? where T: PersistentValue {
+        public subscript<T>(_ type: T.Type, _ key: Key, changeManager: ChangeManager? = nil) -> T? where T: PersistentValue {
             get {
                 guard let value = values[key] else { return nil }
                 return value[T.self, graph]
@@ -97,7 +96,7 @@ extension PersistentGraph {
                 if values[key] == nil {
                     values[key] = TimeLine()
                 }
-                values[key]![T.self, graph, .modified(self, key, graph?.timestamp ?? Date.distantFuture)] = newValue
+                values[key]![T.self, changeManager ?? graph.changeManager(), { .modified(self, key, $0) }] = newValue
             }
         }
         

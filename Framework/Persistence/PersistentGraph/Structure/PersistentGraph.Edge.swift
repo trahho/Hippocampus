@@ -28,12 +28,12 @@ extension PersistentGraph {
             to.incomingEdges.remove(self)
         }
         
-        override func adopt() {
+        override func adopt(changeManager: ChangeManager) {
             guard let graph else { return }
             objectWillChange.send()
             disconnect()
-            graph.add(from)
-            graph.add(to)
+            graph.add(from, changeManager: changeManager)
+            graph.add(to, changeManager: changeManager)
             from = graph.nodeStorage[from.id]!
             to = graph.nodeStorage[to.id]!
             connect()

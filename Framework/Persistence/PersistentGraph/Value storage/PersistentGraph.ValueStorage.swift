@@ -26,7 +26,6 @@ extension PersistentGraph {
             else if let bool = value as? Bool { self = .bool(bool) }
             else if let string = value as? String { self = .string(string) }
             else if let date = value as? Date { self = .date(date) }
-            //            else if let array = value as? [any PersistentGraph.PersistentValue] { self = .array(array.map { ValueStorage($0) }) }
             else if let roles = value as? Set<Role> { self = .roles(roles.asArray) }
             else if let predicates = value as? [Structure.Query.Predicate] { self = .predicates(predicates) }
             else if let aspectRepresentation = value as? Structure.Aspect.Representation { self = .aspectRepresentation(aspectRepresentation) }
@@ -38,28 +37,22 @@ extension PersistentGraph {
             switch self {
             case .nil:
                 return nil
-            case let .int(v):
-                return v
-            case let .bool(v):
-                return v
-            case let .string(v):
-                return v
-            case let .date(v):
-                return v
-            //            case let .array(v):
-            //                var result =  [any PersistentGraph.PersistentValue]()
-            ////                for storage in v {
-            ////                    result.append(storage.value)
-            ////                }
-            //                return result
-            case let .roles(v):
-                return v.asSet
-            case let .predicates(v):
-                return v
-            case let .aspectRepresentation(v):
-                return v
-            case let .queryPredicate(v):
-                return v
+            case let .int(value):
+                return value
+            case let .bool(value):
+                return value
+            case let .string(value):
+                return value
+            case let .date(value):
+                return value
+            case let .roles(value):
+                return value.asSet
+            case let .predicates(value):
+                return value
+            case let .aspectRepresentation(value):
+                return value
+            case let .queryPredicate(value):
+                return value
             }
         }
     }

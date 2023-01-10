@@ -10,8 +10,8 @@ import Foundation
 extension Structure {
     class Query: Object {
         static let notes = Query("89913172-022C-4EF0-95BA-76FF8E32F18B", "Notizen") {
-            Predicate([.note, .topic], .hasRole(role: Role.note.id))
-//            Predicate([.note, .topic], .hasRole(Role.note.id) || .hasRole(Role.topic.id))
+//            Predicate([.note, .topic], .hasRole(Role.note.id))
+            Predicate([.note, .topic], .hasRole(Role.note.id) || .hasRole(Role.topic.id))
         }
 
         @Persistent var name: String

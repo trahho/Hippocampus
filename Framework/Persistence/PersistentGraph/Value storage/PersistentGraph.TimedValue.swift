@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension PersistentGraph.Item {
+extension PersistentGraph {
     struct TimedValue: Serializable {
         @Serialized private(set) var time: Date
         @Serialized private(set) var storage: PersistentGraph.ValueStorage = .nil

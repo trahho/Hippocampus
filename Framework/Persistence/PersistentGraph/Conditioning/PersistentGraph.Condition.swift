@@ -79,7 +79,7 @@ extension PersistentGraph {
 //        }
 
         case always(Bool)
-        case hasRole(role: Role)
+        case hasRole(Role)
         case hasValue(Comparison)
         case not(Condition)
         case any([Condition])
@@ -90,7 +90,6 @@ extension PersistentGraph {
             case let .always(value):
                 return value
             case let .hasRole(role):
-                let roles = item.roles.timedValue(at: item.roles.timestamp)?.value as? Set<Role>
                 return item[role: role]
             case let .hasValue(comparison):
                 return comparison.calculate(for: item)

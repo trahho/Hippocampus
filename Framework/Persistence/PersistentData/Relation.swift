@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol PersistentRelationWrapper//: AnyObject
+protocol PersistentRelationWrapper //: AnyObject
 {}
 
 @propertyWrapper final class Relation<Target>: PersistentRelationWrapper where Target: PersistentData.Object {
@@ -46,17 +46,18 @@ protocol PersistentRelationWrapper//: AnyObject
         set {
             let storage = instance[keyPath: storageKeyPath]
             let key = storage.getKey(from: instance)
+            let changeManager = instance.graph.changeManager()
             let change = {
                 instance.edges
                     .filter { $0[role: key] }
-                    .forEach { $0.isDeleted = true }
+                    .forEach { $0.isDeleted(true, changeManager: changeManager) }
 
                 guard let newValue else { return }
 
                 let edge = PersistentData.Edge(from: instance, to: newValue)
-                instance.graph?.add(edge)
+                instance.graph.add(edge, changeManager: changeManager)
 
-                edge[role: key] = true
+                edge[role: key, changeManager] = true
 
                 if let inversekey = storage.inversekey {
                     newValue.objectWillChange.send()

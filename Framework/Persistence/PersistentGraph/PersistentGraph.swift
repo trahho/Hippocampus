@@ -98,105 +98,111 @@ open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable>:
 
     // MARK: - Modification
 
-    public typealias Action = () throws -> Void
-    private var transactions: [Transaction] = []
-
-    var changing: Bool {
-        !transactions.isEmpty
+    private(set) var timestamp: Date?
+    
+    func changeManager() -> ChangeManager {
+        ChangeManager(graph: self)
     }
 
-    var timestamp: Date? {
-        transactions.first?.timestamp
-    }
-
-    var currentTransaction: Transaction? {
-        transactions.last
-    }
-
-    func registerTransaction(transaction: Transaction) {
-        guard !transactions.contains(where: { $0 === transaction }) else { fatalError("Confused transactions") }
-
-        transactions.append(transaction)
-    }
-
-    func unregisterTransaction(transaction: Transaction) {
-        guard transaction === currentTransaction else { fatalError("Confused transactions") }
-
-        transactions.removeLast()
-        if transactions.isEmpty, transaction.hasChanges {
-            objectDidChange.send()
-        }
-    }
+//    private var transactions: [Transaction] = []
+//
+//    var changing: Bool {
+//        !transactions.isEmpty
+//    }
+//
+//    var timestamp: Date? {
+//        transactions.first?.timestamp
+//    }
+//
+//    var currentTransaction: Transaction? {
+//        transactions.last
+//    }
+//
+//    func registerTransaction(transaction: Transaction) {
+//        guard !transactions.contains(where: { $0 === transaction }) else { fatalError("Confused transactions") }
+//
+//        transactions.append(transaction)
+//    }
+//
+//    func unregisterTransaction(transaction: Transaction) {
+//        guard transaction === currentTransaction else { fatalError("Confused transactions") }
+//
+//        transactions.removeLast()
+//        if transactions.isEmpty, transaction.hasChanges {
+//            objectDidChange.send()
+//        }
+//    }
 
     func discardChanges(transaction: Transaction) {
-        guard transaction === currentTransaction else { fatalError("Confused transactions") }
-
-        transaction.changes.forEach { change in
-            switch change {
-            case let .node(node, _):
-                objectWillChange.send()
-                nodeStorage.removeValue(forKey: node.id)
-            case let .edge(edge, _):
-                objectWillChange.send()
-                edge.disconnect()
-                edgeStorage.removeValue(forKey: edge.id)
-            case let .modified(item, key, timestamp):
-                item.reset(key, before: timestamp)
-            case let .deleted(item, timestamp):
-                item.reset(\.deleted, before: timestamp)
-            case let .role(item, timestamp):
-                item.reset(\.roles, before: timestamp)
-            default: break
-            }
-            changeDidHappen.send(.discarded(change, change.timestamp))
-        }
-        transaction.changes.removeAll()
+//        guard transaction === currentTransaction else { fatalError("Confused transactions") }
+//
+//        transaction.changes.forEach { change in
+//            switch change {
+//            case let .node(node, _):
+//                objectWillChange.send()
+//                nodeStorage.removeValue(forKey: node.id)
+//            case let .edge(edge, _):
+//                objectWillChange.send()
+//                edge.disconnect()
+//                edgeStorage.removeValue(forKey: edge.id)
+//            case let .modified(item, key, timestamp):
+//                item.reset(key, before: timestamp)
+//            case let .deleted(item, timestamp):
+//                item.reset(\.deleted, before: timestamp)
+//            case let .role(item, timestamp):
+//                item.reset(\.roles, before: timestamp)
+//            default: break
+//            }
+//            changeDidHappen.send(.discarded(change, change.timestamp))
+//        }
+//        transaction.changes.removeAll()
     }
 
-    func change(_ action: Action) {
-        let transaction = transaction()
-        transaction.begin()
-        do {
-            try action()
-            transaction.commit()
-        } catch {
-            transaction.discard()
-        }
-    }
-
-    func transaction() -> Transaction {
-        Transaction(graph: self)
-    }
-
-    func addChange(_ change: Change) {
-        changeDidHappen.send(change)
-    }
+//    func change(_ action: Action) {
+//        let transaction = transaction()
+//        transaction.begin()
+//        do {
+//            try action()
+//            transaction.commit()
+//        } catch {
+//            transaction.discard()
+//        }
+//    }
+//
+//    func transaction() -> Transaction {
+//        Transaction(graph: self)
+//    }
+//
+//    func addChange(_ change: Change) {
+//        changeDidHappen.send(change)
+//    }
 
     // MARK: - Function
+    
 
-    func add(_ edge: Edge) {
+
+    func add(_ edge: Edge, changeManager: ChangeManager) {
         guard edgeStorage[edge.id] == nil else { return }
-        change {
-            guard let timestamp = timestamp else { return }
+        changeManager.action {
             objectWillChange.send()
-            edge.added = timestamp
+            edge.added = changeManager.timestamp
             edge.graph = self
             edgeStorage[edge.id] = edge
             edge.adopt()
-            addChange(.edge(edge, timestamp))
+            changeManager.addChange(.edge(edge))
         }
     }
 
-    func add(_ node: Node) {
+    func add(_ node: Node, changeManager: ChangeManager) {
         guard nodeStorage[node.id] == nil else { return }
         objectWillChange.send()
-        change {
+        changeManager.action {
             guard let timestamp = timestamp else { return }
             node.added = timestamp
             node.graph = self
             nodeStorage[node.id] = node
             node.adopt()
-            addChange(.node(node, timestamp))
+            changeManager.addChange(.node(node))
         }
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension PersistentGraph.Item {
+extension PersistentGraph {
     struct TimeLine: Serializable {
         @Serialized private var values: [TimedValue]
                 
@@ -42,7 +42,7 @@ extension PersistentGraph.Item {
         }
         
         func timedValue(at timestamp: Date?) -> TimedValue? {
-            guard let timestamp  else {
+            guard let timestamp else {
                 return values.last
             }
             guard let value = values.last(where: { $0.time <= timestamp }) else {
@@ -51,42 +51,29 @@ extension PersistentGraph.Item {
             return value
         }
         
-        subscript<T>(_ type: T.Type, _ graph: PersistentGraph? = nil) -> T? where T: PersistentGraph.PersistentValue {
-            guard let timestamp = graph?.timestamp else {
-                if let value = values.last {
-                    return value[T.self] 
-                }
-               return nil
+        subscript<T>(_ type: T.Type, _ graph: PersistentGraph) -> T? where T: PersistentGraph.PersistentValue {
+            guard let timestamp = graph.timestamp else {
+                return values.last?[T.self]
             }
-            guard let value = values.last(where: { $0.time <= timestamp }) else {
-                return nil
-            }
-            return value.value as? T
+            return values.last(where: { $0.time <= timestamp })?[T.self]
         }
 
-        subscript<T>(_ type: T.Type, _ graph: PersistentGraph? = nil, _ change: @autoclosure (() -> PersistentGraph.Change)) -> T? where T: PersistentGraph.PersistentValue {
+        subscript<T>(_ type: T.Type,  _ changeManager: ChangeManager, _ change: ChangeBuilder) -> T? where T: PersistentGraph.PersistentValue {
             get {
-                return self[type, graph]
+                return self[type, changeManager.graph]
             }
             set {
-                if let value = values.last?.value as? T, value == newValue {
+                guard !changeManager.isBlocked else { fatalError("Change blocked") }
+                if let value = values.last?[T.self], value == newValue {
                     return
                 }
-                guard let graph = graph else {
-                    values = [TimedValue(time: Date(), value: newValue)]
-                    return
-                }
-//                guard let timestamp = graph.timestamp else {
-//                    return
-//                }
-                graph.change {
-                    guard let timestamp = graph.timestamp else { return }
-                    print("Changing value")
-                    if let last = values.last, last.time == timestamp {
+                changeManager.action {
+                    if let last = values.last, last.time == changeManager.timestamp {
                         values.removeLast()
                     }
-                    values.append(TimedValue(time: timestamp, value: newValue))
-                    graph.addChange(change())
+                    let newTimedValue = TimedValue(time: changeManager.timestamp, value: newValue)
+                    values.append(newTimedValue)
+                    changeManager.addChange(change(newTimedValue))
                 }
             }
         }
