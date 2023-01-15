@@ -16,7 +16,6 @@ extension PersistentGraph {
         case date(Date)
         case roles([Role])
         case predicates([Structure.Query.Predicate])
-        //        case array([ValueStorage])
         case aspectRepresentation(Structure.Aspect.Representation)
         case queryPredicate(Structure.Query.Predicate)
 

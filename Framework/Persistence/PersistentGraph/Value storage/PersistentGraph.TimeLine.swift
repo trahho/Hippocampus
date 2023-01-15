@@ -28,6 +28,9 @@ extension PersistentGraph {
         }
         
         func merged(with other: TimeLine) -> TimeLine {
+            var index = 0
+            var otherIndex = 0
+            
             let temp = (values + other.values).sorted { $0.time < $1.time }
             guard !temp.isEmpty else { return TimeLine() }
             
@@ -41,40 +44,23 @@ extension PersistentGraph {
             return TimeLine(result)
         }
         
-        func timedValue(at timestamp: Date?) -> TimedValue? {
-            guard let timestamp else {
-                return values.last
-            }
-            guard let value = values.last(where: { $0.time <= timestamp }) else {
-                return nil
-            }
-            return value
+        func timedValue(at timestamp: Date) -> TimedValue? {
+            return values.last(where: { $0.time <= timestamp })
         }
         
-        subscript<T>(_ type: T.Type, _ graph: PersistentGraph) -> T? where T: PersistentGraph.PersistentValue {
-            guard let timestamp = graph.timestamp else {
-                return values.last?[T.self]
-            }
-            return values.last(where: { $0.time <= timestamp })?[T.self]
-        }
-
-        subscript<T>(_ type: T.Type,  _ changeManager: ChangeManager, _ change: ChangeBuilder) -> T? where T: PersistentGraph.PersistentValue {
+        subscript<T>(type type: T.Type, at timestamp: Date) -> T? where T: PersistentGraph.PersistentValue {
             get {
-                return self[type, changeManager.graph]
+                timedValue(at: timestamp)?[type: T.self]
             }
             set {
-                guard !changeManager.isBlocked else { fatalError("Change blocked") }
-                if let value = values.last?[T.self], value == newValue {
-                    return
+                if let last = values.last {
+                    if last[type: T.self] == newValue { return }
+                    if last.time > timestamp { return }
+                    if last.time == timestamp { values.removeLast() }
                 }
-                changeManager.action {
-                    if let last = values.last, last.time == changeManager.timestamp {
-                        values.removeLast()
-                    }
-                    let newTimedValue = TimedValue(time: changeManager.timestamp, value: newValue)
-                    values.append(newTimedValue)
-                    changeManager.addChange(change(newTimedValue))
-                }
+                
+                let newTimedValue = TimedValue(time: timestamp, value: newValue)
+                values.append(newTimedValue)
             }
         }
         

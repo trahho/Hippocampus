@@ -21,7 +21,7 @@ extension PersistentGraph {
             }
         }
 
-        subscript<T: PersistentData.PersistentValue>(_ type: T.Type) -> T? {
+        subscript<T: PersistentData.PersistentValue>(type type: T.Type) -> T? {
             let value = value
             return value as? T
         }

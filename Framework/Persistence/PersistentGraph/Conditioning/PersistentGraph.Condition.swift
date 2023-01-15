@@ -46,8 +46,7 @@ extension PersistentGraph {
             }
 
             func calculate(for item: Item) -> Bool {
-                guard let timedValue = item.timedValue(for: key) else { return false }
-                guard let value = timedValue.value as? (any Comparable) else { return false }
+                guard let value = item.currentValue(key: key) as? (any Comparable) else { return false }
                 switch condition {
                 case .below:
                     return isBelow(value, self.value)

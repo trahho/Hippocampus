@@ -9,6 +9,11 @@ import Foundation
 extension Structure {
     @dynamicMemberLookup
     class Role: Object {
+        
+        enum Static: String {
+            case global = "D7812874-085B-4161-9ABB-C82D4A145634"
+        }
+        
         static let global = Role("D7812874-085B-4161-9ABB-C82D4A145634", "Global") {
             Aspect("8A81358C-2A7C-497D-A93D-306F776C217C", "Name", .text)
         }
@@ -26,9 +31,9 @@ extension Structure {
         
         @Persistent var roleDescription: String = ""
         
-        @Relations(inverse: "role") var aspects: Set<Aspect>
-        @Relations(inverse: "subRoles") var superRoles: Set<Role>
-        @Relations(inverse: "superRoles") var subRoles: Set<Role>
+        @Relations(reverse: "role") var aspects: Set<Aspect>
+        @Relations(reverse: "subRoles") var superRoles: Set<Role>
+        @Relations(reverse: "superRoles") var subRoles: Set<Role>
         
         subscript(dynamicMember dynamicMember: String) -> Aspect {
             let first :  (Aspect) -> Bool = { $0.name.lowercased() == dynamicMember.lowercased() }

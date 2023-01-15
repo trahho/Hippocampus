@@ -551,6 +551,7 @@
 		C54BE4EA28958FAD0060A066 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
+				C5D2734F2974810600F32EB6 /* Obsolete */,
 				C5C4A0C6293A83A400FF9AB8 /* Extensions */,
 				C54BE4E928958F970060A066 /* Serialization */,
 				C5C4A127293CD74E00FF9AB8 /* Basics */,
@@ -737,9 +738,7 @@
 				C5C4A0CD293AAEAF00FF9AB8 /* PersistentGraph.swift */,
 				C5D382ED296A3B0D00E31D69 /* Structure */,
 				C5D382EF296A3B8D00E31D69 /* Value storage */,
-				C5D382F0296A3C2A00E31D69 /* Change managing */,
 				C5D382EE296A3B3B00E31D69 /* Conditioning */,
-				C5D382E92967786900E31D69 /* PersistentGraph.Transaction.swift */,
 			);
 			path = PersistentGraph;
 			sourceTree = "<group>";
@@ -792,6 +791,15 @@
 				C54BE57F289DA0F60060A066 /* buildPerspectives.swift */,
 			);
 			path = Perspectives;
+			sourceTree = "<group>";
+		};
+		C5D2734F2974810600F32EB6 /* Obsolete */ = {
+			isa = PBXGroup;
+			children = (
+				C5D382F0296A3C2A00E31D69 /* Change managing */,
+				C5D382E92967786900E31D69 /* PersistentGraph.Transaction.swift */,
+			);
+			path = Obsolete;
 			sourceTree = "<group>";
 		};
 		C5D382ED296A3B0D00E31D69 /* Structure */ = {

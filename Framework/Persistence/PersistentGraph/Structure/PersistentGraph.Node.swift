@@ -12,8 +12,8 @@ extension PersistentGraph {
         @Published internal var incomingEdges: Set<Edge> = []
         @Published internal var outgoingEdges: Set<Edge> = []
 
-        var incoming: Set<Edge> { incomingEdges.filter { graph?.isCurrent($0, graph?.timestamp) ?? !$0.isDeleted }}
-        var outgoing: Set<Edge> { outgoingEdges.filter { graph?.isCurrent($0, graph?.timestamp) ?? !$0.isDeleted }}
+        var incoming: Set<Edge> { incomingEdges.filter { $0.isActive }}
+        var outgoing: Set<Edge> { outgoingEdges.filter { $0.isActive }}
 
         var edges: Set<Edge> {
             incoming.union(outgoing)
@@ -21,15 +21,15 @@ extension PersistentGraph {
 
         public required init() {}
 
-        override func adopt() {
+        override func adopt(timestamp: Date?) {
             guard let graph else { return }
             objectWillChange.send()
             incomingEdges = incomingEdges.map { edge in
-                graph.add(edge)
+                graph.add(edge, timestamp: timestamp)
                 return graph.edgeStorage[edge.id]!
             }.asSet
             outgoingEdges = outgoingEdges.map { edge in
-                graph.add(edge)
+                graph.add(edge, timestamp: timestamp)
                 return graph.edgeStorage[edge.id]!
             }.asSet
         }

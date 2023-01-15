@@ -13,4 +13,7 @@ open class PersistentData: PersistentGraph<String, String> {
         nodeStorage[id] as? T ?? edgeStorage[id] as? T
     }
     
+    
+    var changeTimestamp: Date?
+    
 }

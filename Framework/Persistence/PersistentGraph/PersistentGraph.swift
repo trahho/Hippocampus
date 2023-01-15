@@ -12,7 +12,7 @@ open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable>:
     // MARK: - Types
 
     public typealias PersistentValue = Codable & Equatable
-    typealias ChangePublisher = PassthroughSubject<Change, Never>
+//    typealias ChangePublisher = PassthroughSubject<Change, Never>
 
     enum Fault: Error {
         case mergeFailed
@@ -23,20 +23,13 @@ open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable>:
     @Serialized private(set) var nodeStorage: [Item.ID: Node] = [:]
     @Serialized private(set) var edgeStorage: [Item.ID: Edge] = [:]
 
-    let isCurrent: (Item, Date?) -> Bool = { item, timestamp in
-        guard !item.isDeleted else { return false }
-        guard let timestamp = timestamp else { return true }
-        guard item.added <= timestamp else { return false }
-        return true
-    }
-
-    var nodes: Set<Node> { Set<Node>(nodeStorage.values.filter { isCurrent($0, timestamp) }) }
-    var edges: Set<Edge> { Set<Edge>(edgeStorage.values.filter { isCurrent($0, timestamp) }) }
+    var nodes: Set<Node> { Set<Node>(nodeStorage.values.filter { $0.isActive }) }
+    var edges: Set<Edge> { Set<Edge>(edgeStorage.values.filter { $0.isActive }) }
 
     // MARK: - Publishers
 
     var objectDidChange = PassthroughSubject<Void, Never>()
-    var changeDidHappen: ChangePublisher = .init()
+//    var changeDidHappen: ChangePublisher = .init()
 
     // MARK: - Initialisation
 
@@ -82,7 +75,7 @@ open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable>:
                 let edge = other.edgeStorage[key]!
                 edgeStorage[key] = edge
                 edge.graph = self
-                edge.adopt()
+                edge.adopt(timestamp: nil)
             }
 
         Set(other.nodeStorage.keys).subtracting(Set(nodeStorage.keys))
@@ -90,7 +83,7 @@ open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable>:
                 let node = other.nodeStorage[key]!
                 nodeStorage[key] = node
                 node.graph = self
-                node.adopt()
+                node.adopt(timestamp: nil)
             }
     }
 
@@ -99,110 +92,34 @@ open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable>:
     // MARK: - Modification
 
     private(set) var timestamp: Date?
-    
-    func changeManager() -> ChangeManager {
-        ChangeManager(graph: self)
-    }
-
-//    private var transactions: [Transaction] = []
-//
-//    var changing: Bool {
-//        !transactions.isEmpty
-//    }
-//
-//    var timestamp: Date? {
-//        transactions.first?.timestamp
-//    }
-//
-//    var currentTransaction: Transaction? {
-//        transactions.last
-//    }
-//
-//    func registerTransaction(transaction: Transaction) {
-//        guard !transactions.contains(where: { $0 === transaction }) else { fatalError("Confused transactions") }
-//
-//        transactions.append(transaction)
-//    }
-//
-//    func unregisterTransaction(transaction: Transaction) {
-//        guard transaction === currentTransaction else { fatalError("Confused transactions") }
-//
-//        transactions.removeLast()
-//        if transactions.isEmpty, transaction.hasChanges {
-//            objectDidChange.send()
-//        }
-//    }
-
-    func discardChanges(transaction: Transaction) {
-//        guard transaction === currentTransaction else { fatalError("Confused transactions") }
-//
-//        transaction.changes.forEach { change in
-//            switch change {
-//            case let .node(node, _):
-//                objectWillChange.send()
-//                nodeStorage.removeValue(forKey: node.id)
-//            case let .edge(edge, _):
-//                objectWillChange.send()
-//                edge.disconnect()
-//                edgeStorage.removeValue(forKey: edge.id)
-//            case let .modified(item, key, timestamp):
-//                item.reset(key, before: timestamp)
-//            case let .deleted(item, timestamp):
-//                item.reset(\.deleted, before: timestamp)
-//            case let .role(item, timestamp):
-//                item.reset(\.roles, before: timestamp)
-//            default: break
-//            }
-//            changeDidHappen.send(.discarded(change, change.timestamp))
-//        }
-//        transaction.changes.removeAll()
-    }
-
-//    func change(_ action: Action) {
-//        let transaction = transaction()
-//        transaction.begin()
-//        do {
-//            try action()
-//            transaction.commit()
-//        } catch {
-//            transaction.discard()
-//        }
-//    }
-//
-//    func transaction() -> Transaction {
-//        Transaction(graph: self)
-//    }
-//
-//    func addChange(_ change: Change) {
-//        changeDidHappen.send(change)
-//    }
 
     // MARK: - Function
-    
 
-
-    func add(_ edge: Edge, changeManager: ChangeManager) {
+    func add(_ edge: Edge, timestamp: Date? = nil) {
         guard edgeStorage[edge.id] == nil else { return }
-        changeManager.action {
-            objectWillChange.send()
-            edge.added = changeManager.timestamp
-            edge.graph = self
-            edgeStorage[edge.id] = edge
-            edge.adopt()
-            changeManager.addChange(.edge(edge))
+        objectWillChange.send()
+
+        let timestamp = timestamp ?? Date()
+
+        if edge.added == nil {
+            edge.added = timestamp
         }
+        edge.graph = self
+        edgeStorage[edge.id] = edge
+        edge.adopt(timestamp: timestamp)
     }
 
-    func add(_ node: Node, changeManager: ChangeManager) {
+    func add(_ node: Node, timestamp: Date? = nil) {
         guard nodeStorage[node.id] == nil else { return }
         objectWillChange.send()
-        changeManager.action {
-            guard let timestamp = timestamp else { return }
+
+        let timestamp = timestamp ?? Date()
+
+        if node.added == nil {
             node.added = timestamp
-            node.graph = self
-            nodeStorage[node.id] = node
-            node.adopt()
-            changeManager.addChange(.node(node))
         }
+        node.graph = self
+        nodeStorage[node.id] = node
+        node.adopt(timestamp: timestamp)
     }
 }

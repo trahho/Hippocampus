@@ -40,36 +40,29 @@ protocol PersistentRelationWrapper //: AnyObject
         get {
             let storage = instance[keyPath: storageKeyPath]
             let key = storage.getKey(from: instance)
-            guard let result = instance.edges.first(where: { $0[role: key] })?.getOther(for: instance) else { return nil }
-            return result as? Target
+            return instance.edges
+                .first(where: { $0[role: key] })?
+                .getOther(for: instance) as? Target
         }
         set {
             let storage = instance[keyPath: storageKeyPath]
             let key = storage.getKey(from: instance)
-            let changeManager = instance.graph.changeManager()
-            let change = {
-                instance.edges
-                    .filter { $0[role: key] }
-                    .forEach { $0.isDeleted(true, changeManager: changeManager) }
 
-                guard let newValue else { return }
+            let timestamp = Date()
+            instance.edges
+                .filter { $0[role: key] }
+                .forEach { $0.isDeleted(true, timestamp: timestamp) }
 
-                let edge = PersistentData.Edge(from: instance, to: newValue)
-                instance.graph.add(edge, changeManager: changeManager)
+            guard let newValue else { return }
 
-                edge[role: key, changeManager] = true
+            let edge = PersistentData.Edge(from: instance, to: newValue)
+            instance.graph.add(edge, timestamp: timestamp)
 
-                if let inversekey = storage.inversekey {
-                    newValue.objectWillChange.send()
-                    edge[role: inversekey] = true
-                }
-            }
+            edge[role: key, timestamp: timestamp] = true
 
-            if let graph = instance.graph {
-                graph.change(change)
-            }
-            else {
-                change()
+            if let inversekey = storage.inversekey {
+                newValue.objectWillChange.send()
+                edge[role: inversekey] = true
             }
         }
     }

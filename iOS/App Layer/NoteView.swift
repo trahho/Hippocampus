@@ -85,7 +85,6 @@ import SwiftUI
 struct NoteView: View {
     @EnvironmentObject var document: Document
     @Environment(\.dismiss) private var dismiss
-    @State var transaction: Information.Transaction?
     @State var editable: Bool = false
     @State var note: Information.Item?
 
@@ -93,7 +92,7 @@ struct NoteView: View {
     let titleAspect = Structure.Role.note.name
 
     var body: some View {
-        VStack (alignment: .leading) {
+        VStack(alignment: .leading) {
             if let note {
                 titleAspect.view(for: note, editable: editable)
                 textAspect.view(for: note, editable: editable)
@@ -102,7 +101,6 @@ struct NoteView: View {
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
                 Button {
-                    if let transaction { transaction.discard() }
                     dismiss()
                 } label: {
                     Image(systemName: "xmark")
@@ -118,17 +116,13 @@ struct NoteView: View {
         }
         .onAppear {
             if editable {
-                transaction = document.information.transaction()
-                transaction!.begin()
                 if note == nil {
                     note = document.information.createNode(roles: [Structure.Role.note])
                 }
             }
         }
         .onDisappear {
-            if let transaction, transaction.isActive {
-                transaction.commit()
-            }
+            document.save()
         }
     }
 }

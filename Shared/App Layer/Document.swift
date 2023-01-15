@@ -36,4 +36,9 @@ class Document: ObservableObject {
         let url = HippocampusApp.documentURL(name: name, local: local)
         self.init(url: url)
     }
+    
+    func save() {
+        informationContainer.commit()
+        structureContainer.commit()
+    }
 }

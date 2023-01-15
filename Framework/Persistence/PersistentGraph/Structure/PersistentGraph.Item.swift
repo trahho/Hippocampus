@@ -8,24 +8,78 @@
 import Combine
 import Foundation
 
-// public protocol PersistentValueStorage: Serializable {
-//    associatedtype Role: CodableIdentifiable
-//    associatedtype Key: CodableIdentifiable
-//
-//    var timestamp: Date? { get }
-//    func getValue(at timestamp: Date?) -> PersistentGraph.PersistentValue?
-//    func setValue(_ value: PersistentGraph.PersistentValue?, in graph: PersistentGraph?)
-//    func reset(before timestamp: Date)
-// }
-
 extension PersistentGraph {
     open class Item: PersistentObject, ObservableObject {
         @Serialized private(set) var rolesValue = TimeLine(Set<Role>())
+        @Serialized private(set) var deletedValue = TimeLine()
         @Serialized private(set) var values: [Key: TimeLine] = [:]
-        @Serialized internal var deletedValue = TimeLine()
-        @Serialized var added = Date()
+        @Serialized var added: Date?
         
         var graph: PersistentGraph!
+        var readingTimestamp: Date { graph?.timestamp ?? Date.distantFuture }
+        func writingTimestamp(_ timestamp: Date?) -> Date { graph == nil ? Date.distantPast : timestamp ?? Date() }
+        var canChange: Bool { graph?.timestamp == nil }
+
+        // MARK: - State
+
+        public var isDeleted: Bool {
+            deletedValue[type: Bool.self, at: readingTimestamp] ?? false
+        }
+        
+        public func isDeleted(_ value: Bool, timestamp: Date? = nil) {
+            guard canChange else { return }
+            deletedValue[type: Bool.self, at: writingTimestamp(timestamp)] = value
+        }
+        
+        public subscript(role role: Role, timestamp timestamp: Date? = nil) -> Bool {
+            get {
+                rolesValue[type: Set<Role>.self, at: readingTimestamp]?.contains(role) ?? false
+            }
+            set {
+                guard canChange else { return }
+                
+                objectWillChange.send()
+                var newRoles = rolesValue[type: Set<Role>.self, at: readingTimestamp] ?? Set<Role>()
+                if newValue == true, !newRoles.contains(role) {
+                    newRoles.insert(role)
+                    rolesValue[type: Set<Role>.self, at: writingTimestamp(timestamp)] = newRoles
+                } else if newValue == false, newRoles.contains(role) {
+                    newRoles.remove(role)
+                    rolesValue[type: Set<Role>.self, at: writingTimestamp(timestamp)] = newRoles
+                }
+            }
+        }
+        
+        public subscript<T>(_ type: T.Type, _ key: Key, timestamp timestamp: Date? = nil) -> T? where T: PersistentValue {
+            get {
+                return values[key]?.timedValue(at: readingTimestamp)?[type: T.self]
+            }
+            set {
+                guard canChange else { return }
+                
+                objectWillChange.send()
+                if values[key] == nil {
+                    values[key] = TimeLine()
+                }
+                values[key]![type: T.self, at: writingTimestamp(timestamp)] = newValue
+            }
+        }
+        
+        public func currentValue(key: Key) -> (any PersistentValue)? {
+            values[key]?.timedValue(at: readingTimestamp)?.value
+        }
+        
+        // MARK: - Management
+            
+        public var isActive: Bool {
+            if let added, added <= readingTimestamp, !isDeleted {
+                return true
+            } else {
+                return false
+            }
+        }
+        
+        func adopt(timestamp: Date?) {}
         
         func reset(_ keyPath: KeyPath<Item, TimeLine>, before timestamp: Date) {
             objectWillChange.send()
@@ -33,12 +87,10 @@ extension PersistentGraph {
         }
         
         func reset(_ key: Key, before timestamp: Date) {
-            guard let value = values[key] else { fatalError("Reset for nonexisting value") }
+            guard let value = values[key] else { return }
             objectWillChange.send()
             value.reset(before: timestamp)
         }
-        
-        func adopt(changeManager: ChangeManager) {}
         
         func merge(other: Item) {
             guard other.id == id else { return }
@@ -58,58 +110,5 @@ extension PersistentGraph {
                     values[key] = other.values[key]!
                 }
         }
-        
-        public var isDeleted: Bool { deletedValue[Bool.self, graph] ?? false }
-        
-        public func isDeleted(_ newValue: Bool, changeManager: ChangeManager?) {
-            deletedValue[Bool.self, changeManager ?? graph.changeManager(), { .deleted(self, $0) }] = newValue
-        }
-        
-        public subscript(role role: Role, changeManager: ChangeManager? = nil) -> Bool {
-            get {
-                rolesValue[Set<Role>.self, graph]?.contains(role) ?? false
-            }
-            set {
-                var newRoles = rolesValue[Set<Role>.self, graph] ?? Set<Role>()
-                if newValue == true, !newRoles.contains(role) {
-                    newRoles.insert(role)
-                    rolesValue[Set<Role>.self, changeManager ?? graph.changeManager(), { .role(self, $0) }] = newRoles
-                } else if newValue == false, newRoles.contains(role) {
-                    newRoles.remove(role)
-                    rolesValue[Set<Role>.self, changeManager ?? graph.changeManager(), { .role(self, $0) }] = newRoles
-                }
-            }
-        }
-        
-        internal func timedValue(for key: Key) -> TimedValue? {
-            guard let value = values[key] else { return nil }
-            return value.timedValue(at: graph?.timestamp)
-        }
-        
-        public subscript<T>(_ type: T.Type, _ key: Key, changeManager: ChangeManager? = nil) -> T? where T: PersistentValue {
-            get {
-                guard let value = values[key] else { return nil }
-                return value[T.self, graph]
-            }
-            set {
-                objectWillChange.send()
-                if values[key] == nil {
-                    values[key] = TimeLine()
-                }
-                values[key]![T.self, changeManager ?? graph.changeManager(), { .modified(self, key, $0) }] = newValue
-            }
-        }
-        
-//        public subscript(_ type: T.Type, _ key: Key) -> T? where T: PersistentValue {
-//            get {
-//                values[key]?[T.self, graph]
-//            }
-//            set {
-//                if values[key] == nil {
-//                    values[key] = TimeLine()
-//                }
-//                values[key]![T.self, graph, .modified(self, key, graph?.timestamp)] = newValue
-//            }
-//        }
     }
 }

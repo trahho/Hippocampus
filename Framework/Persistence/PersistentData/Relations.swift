@@ -16,19 +16,19 @@ import Foundation
         set { fatalError() }
     }
 
-    private var _key: String?
-    private var inversekey: String?
+    private var key: String?
+    private var reverseKey: String?
 
     internal func getKey(from instance: PersistentData.Object) -> String {
-        if let key = _key, !key.isEmpty { return key }
+        if let key, !key.isEmpty { return key }
 
-        _key = instance.getKey(for: self)
-        return _key!
+        self.key = instance.getKey(for: self)
+        return self.key!
     }
 
-    public init(_ key: String? = nil, inverse: String? = nil) {
-        _key = key
-        inversekey = inverse
+    public init(_ key: String? = nil, reverse: String? = nil) {
+        self.key = key
+        self.reverseKey = reverse
     }
 
     public static subscript<Enclosing: PersistentData.Object>(_enclosingInstance instance: Enclosing,
@@ -39,47 +39,44 @@ import Foundation
         get {
             let storage = instance[keyPath: storageKeyPath]
             let key = storage.getKey(from: instance)
-            return instance.edges.filter { $0[role: key] }.map { $0.getOther(for: instance) as! Target }.asSet
+            return instance.edges
+                .filter { $0[role: key] }
+                .map { $0.getOther(for: instance) as! Target }
+                .asSet
         }
         set {
             let storage = instance[keyPath: storageKeyPath]
             let key = storage.getKey(from: instance)
-            let change = {
-                let currentValue = Relations[_enclosingInstance: instance, wrapped: wrappedKeyPath, storage: storageKeyPath]
-                let added = newValue.subtracting(currentValue)
-                let removed = currentValue.subtracting(newValue)
 
-                removed
-                    .flatMap { item in
-                        instance.edges.filter { edge in
-                            edge[role: key] && edge.getOther(for: instance) == item
-                        }
-                    }
-                    .forEach { edge in
-                        if storage.inversekey != nil {
-                            edge.getOther(for: instance).objectWillChange.send()
-                        }
-                        edge.isDeleted = true
-                    }
+            let currentValue = Relations[_enclosingInstance: instance, wrapped: wrappedKeyPath, storage: storageKeyPath]
+            let added = newValue.subtracting(currentValue)
+            let removed = currentValue.subtracting(newValue)
 
-                added
-                    .forEach {
-                        let edge = PersistentData.Edge(from: instance, to: $0)
-                        edge[role: key] = true
-                        if let inversekey = storage.inversekey {
-                            $0.objectWillChange.send()
-                            edge[role: inversekey] = true
-                        }
-                        instance.graph?.add(edge)
+            let timestamp = Date()
+            
+            removed
+                .flatMap { item in
+                    instance.edges.filter { edge in
+                        edge[role: key] && edge.getOther(for: instance) == item
                     }
-            }
+                }
+                .forEach { edge in
+                    if storage.reverseKey != nil {
+                        edge.getOther(for: instance).objectWillChange.send()
+                    }
+                    edge.isDeleted(true, timestamp: timestamp)
+                }
 
-            if let graph = instance.graph {
-                graph.change(change)
-            }
-            else {
-                change()
-            }
+            added
+                .forEach { item in
+                    let edge = PersistentData.Edge(from: instance, to: item)
+                    edge[role: key, timestamp: timestamp] = true
+                    if let inversekey = storage.reverseKey {
+                        item.objectWillChange.send()
+                        edge[role: inversekey, timestamp: timestamp] = true
+                    }
+                    instance.graph?.add(edge, timestamp: timestamp)
+                }
         }
     }
 }

@@ -8,34 +8,32 @@
 import Foundation
 
 class Information: PersistentGraph<Structure.Role.ID, Structure.Aspect.ID> {
-    func createNode(roles: [Structure.Role] = [], changeManager: ChangeManager) -> Node {
+    func createNode(roles: [Structure.Role] = [], timestamp: Date? = Date()) -> Node {
         let node = Node()
-        add(node, changeManager: changeManager)
-        roles.forEach { node[role: $0.id, changeManager] = true }
+        add(node, timestamp: timestamp)
+        roles.forEach { node[role: $0.id, timestamp: timestamp] = true }
         return node
     }
 }
 
 extension Information.Item {
-    subscript(role: Structure.Role, changeManager: Information.ChangeManager? = nil) -> Bool {
+    subscript(role: Structure.Role, timestamp: Date? = nil) -> Bool {
         get {
-            self[role: role.id]
+            self[role: role.id, timestamp: timestamp]
         }
         set {
-            self[role: role.id, changeManager] = newValue
+            self[role: role.id, timestamp: timestamp] = newValue
         }
     }
 
-    subscript<T>(_ type: T.Type, _ aspect: Structure.Aspect, changeManager: Information.ChangeManager? = nil) -> T? where T: Information.PersistentValue {
+    subscript<T>(_ type: T.Type, _ aspect: Structure.Aspect, timestamp: Date? = nil) -> T? where T: Information.PersistentValue {
         get {
-            self[type, aspect.id]
+            self[type, aspect.id, timestamp: timestamp]
         }
         set {
-            let changeManager = changeManager ?? graph.changeManager()
-            changeManager.action {
-                self[type, aspect.id] = newValue
-                self[role: aspect.role.id] = true
-            }
+            let timestamp = timestamp ?? Date()
+            self[type, aspect.id, timestamp: timestamp] = newValue
+            self[role: aspect.role.id, timestamp: timestamp] = true
         }
     }
 }
