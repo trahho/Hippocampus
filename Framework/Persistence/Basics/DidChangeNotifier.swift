@@ -14,13 +14,12 @@ protocol DidChangeNotifier {
         ObjectDidChangePublisher.Failure == Never
 
     var objectDidChange: ObjectDidChangePublisher { get }
-    
 }
 
-//protocol DidChangeNotifier<Key: String, V {
+// protocol DidChangeNotifier<Key: String, V {
 //    associatedtype ObjectDidChangePublisher: Publisher = ObservableObjectPublisher where
 ////        ObjectDidChangePublisher.Output == PersistentGraph<Key.Change,
 //        ObjectDidChangePublisher.Failure == Never
 //
 //    var objectDidChange: ObjectDidChangePublisher { get }
-//}
+// }

@@ -13,11 +13,11 @@ extension URL {
     }
 
     var isLocal: Bool {
-        return self.absoluteString.hasPrefix(URL.localDirecotry.absoluteString)
+        absoluteString.hasPrefix(URL.localDirecotry.absoluteString)
     }
-    
+
     var isiCloud: Bool {
-        return self.absoluteString.hasPrefix(URL.iCloudDirectory.absoluteString)
+        absoluteString.hasPrefix(URL.iCloudDirectory.absoluteString)
     }
 
     static var virtual: URL {
@@ -31,9 +31,9 @@ extension URL {
     static var localDirecotry: URL {
         FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     }
-    
+
     func ensureDirectory() {
-        if !FileManager.default.fileExists(atPath: self.path) {
+        if !FileManager.default.fileExists(atPath: path) {
             try! FileManager.default.createDirectory(at: self, withIntermediateDirectories: true)
         }
     }

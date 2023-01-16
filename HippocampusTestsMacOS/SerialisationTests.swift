@@ -7,17 +7,17 @@
 
 import XCTest
 
-//protocol Item {
+// protocol Item {
 //    var text: String {get set}
-//}
+// }
 //
 //
 //
-//extension PersistentData.Object: Item {
-//    
-//}
+// extension PersistentData.Object: Item {
 //
-//final class SerialisationTests: XCTestCase {
+// }
+//
+// final class SerialisationTests: XCTestCase {
 //    class Source: PersistentObject {
 //        @Serialized(reverse: \Target.source) var target: Target
 //        @Serialized(reverse: \Target.sources) var collection: Target {
@@ -58,8 +58,8 @@ import XCTest
 //
 //        XCTAssert(result.target.source === result, "Not linked")
 //    }
-//    
-//    
+//
+//
 //
 //    func testSetReference() throws {
 //        let testObject = Target()
@@ -76,4 +76,4 @@ import XCTest
 //        let result = try! CyclicDecoder().decode(Source.self, from: flattened)
 //        XCTAssert(result.collection.sources.contains(result))
 //    }
-//}
+// }

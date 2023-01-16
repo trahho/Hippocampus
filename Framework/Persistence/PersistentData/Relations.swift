@@ -22,13 +22,13 @@ import Foundation
     internal func getKey(from instance: PersistentData.Object) -> String {
         if let key, !key.isEmpty { return key }
 
-        self.key = instance.getKey(for: self)
-        return self.key!
+        key = instance.getKey(for: self)
+        return key!
     }
 
     public init(_ key: String? = nil, reverse: String? = nil) {
         self.key = key
-        self.reverseKey = reverse
+        reverseKey = reverse
     }
 
     public static subscript<Enclosing: PersistentData.Object>(_enclosingInstance instance: Enclosing,
@@ -53,7 +53,7 @@ import Foundation
             let removed = currentValue.subtracting(newValue)
 
             let timestamp = Date()
-            
+
             removed
                 .flatMap { item in
                     instance.edges.filter { edge in

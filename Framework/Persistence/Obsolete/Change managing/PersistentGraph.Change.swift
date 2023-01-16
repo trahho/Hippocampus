@@ -5,9 +5,9 @@
 ////  Created by Guido Kühn on 04.12.22.
 ////
 //
-//import Foundation
+// import Foundation
 //
-//extension PersistentGraph {
+// extension PersistentGraph {
 //    indirect enum Change {
 //        case node(Node)
 //        case edge(Edge)
@@ -36,4 +36,4 @@
 ////            }
 ////        }
 //    }
-//}
+// }

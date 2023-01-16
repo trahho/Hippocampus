@@ -115,7 +115,6 @@
 		C582B38628A2F00400F795F0 /* PersistentObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C582B38528A2F00400F795F0 /* PersistentObject.swift */; };
 		C582B38728A2F00400F795F0 /* PersistentObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C582B38528A2F00400F795F0 /* PersistentObject.swift */; };
 		C58FB453291F215500D0B713 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58FB452291F215500D0B713 /* ListView.swift */; };
-		C59B3CDB295BBD9A0053DE7D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E856295A652B002C7746 /* ContentView.swift */; };
 		C59B3CDC295CB9540053DE7D /* Structure.Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E85D295AFD4E002C7746 /* Structure.Role.swift */; };
 		C59B3CDD295CB9580053DE7D /* Structure.Aspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E860295AFD8E002C7746 /* Structure.Aspect.swift */; };
 		C59B3CDE295CB9710053DE7D /* Observed.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4F0289591320060A066 /* Observed.swift */; };
@@ -217,6 +216,13 @@
 		C5C8E86F295B50F8002C7746 /* PersistentGraph.Condition+operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E86D295B50F8002C7746 /* PersistentGraph.Condition+operators.swift */; };
 		C5C8E871295B5348002C7746 /* Structure.Query.Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E870295B5348002C7746 /* Structure.Query.Result.swift */; };
 		C5C8E872295B5348002C7746 /* Structure.Query.Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E870295B5348002C7746 /* Structure.Query.Result.swift */; };
+		C5D273522975D19100F32EB6 /* Information.Item+subscripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D273512975D19100F32EB6 /* Information.Item+subscripts.swift */; };
+		C5D273532975D19100F32EB6 /* Information.Item+subscripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D273512975D19100F32EB6 /* Information.Item+subscripts.swift */; };
+		C5D273542975D19100F32EB6 /* Information.Item+subscripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D273512975D19100F32EB6 /* Information.Item+subscripts.swift */; };
+		C5D2735C2975E08400F32EB6 /* HippocampusApp.DocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D2735B2975E08400F32EB6 /* HippocampusApp.DocumentView.swift */; };
+		C5D2735D2975E08400F32EB6 /* HippocampusApp.DocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D2735B2975E08400F32EB6 /* HippocampusApp.DocumentView.swift */; };
+		C5D2735E2975E08400F32EB6 /* HippocampusApp.DocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D2735B2975E08400F32EB6 /* HippocampusApp.DocumentView.swift */; };
+		C5D273602975E5C100F32EB6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E856295A652B002C7746 /* ContentView.swift */; };
 		C5D382E22967779100E31D69 /* PersistentGraph.ValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D382E12967779100E31D69 /* PersistentGraph.ValueStorage.swift */; };
 		C5D382E32967779100E31D69 /* PersistentGraph.ValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D382E12967779100E31D69 /* PersistentGraph.ValueStorage.swift */; };
 		C5D382E42967779100E31D69 /* PersistentGraph.ValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D382E12967779100E31D69 /* PersistentGraph.ValueStorage.swift */; };
@@ -372,6 +378,8 @@
 		C5D042BA28D4E8BF0088D6B0 /* Mind.Opinion+Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mind.Opinion+Operators.swift"; sourceTree = "<group>"; };
 		C5D042BD28D4E8E00088D6B0 /* Mind.Opinion.AboutMany.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mind.Opinion.AboutMany.swift; sourceTree = "<group>"; };
 		C5D042C028D4E91E0088D6B0 /* Mind.Opinion.AboutOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mind.Opinion.AboutOne.swift; sourceTree = "<group>"; };
+		C5D273512975D19100F32EB6 /* Information.Item+subscripts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Information.Item+subscripts.swift"; sourceTree = "<group>"; };
+		C5D2735B2975E08400F32EB6 /* HippocampusApp.DocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HippocampusApp.DocumentView.swift; sourceTree = "<group>"; };
 		C5D382E12967779100E31D69 /* PersistentGraph.ValueStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentGraph.ValueStorage.swift; sourceTree = "<group>"; };
 		C5D382E5296777E800E31D69 /* Encodable+typeName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+typeName.swift"; sourceTree = "<group>"; };
 		C5D382E92967786900E31D69 /* PersistentGraph.Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentGraph.Transaction.swift; sourceTree = "<group>"; };
@@ -456,8 +464,9 @@
 			isa = PBXGroup;
 			children = (
 				C54BE558289618300060A066 /* Hippocampus--iOS--Info.plist */,
-				C54BE557289617140060A066 /* Hippocampus--macOS--Info.plist */,
 				C54BE556289616680060A066 /* Hippocampus (iOS).entitlements */,
+				C54BE557289617140060A066 /* Hippocampus--macOS--Info.plist */,
+				C55AC5BC295A13E200F09326 /* Obsolete */,
 				C54BE4BF28958F470060A066 /* Framework */,
 				C54BE4A02894866A0060A066 /* Shared */,
 				C54BE4AF2894866C0060A066 /* macOS */,
@@ -470,7 +479,6 @@
 		C54BE4A02894866A0060A066 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				C55AC5BC295A13E200F09326 /* Obsolete */,
 				C55AC5D1295A4A0000F09326 /* Data Layer */,
 				C54BE5482895DCD50060A066 /* App Layer */,
 				C54BE4A32894866C0060A066 /* Assets.xcassets */,
@@ -627,9 +635,7 @@
 			isa = PBXGroup;
 			children = (
 				C54BE4A12894866A0060A066 /* HippocampusApp.swift */,
-				C55AC5CD295A34F900F09326 /* Document.swift */,
-				C54BE55028960EF10060A066 /* SelectMemoryView.swift */,
-				C54BE553289610A00060A066 /* ShowMemoryView.swift */,
+				C5D2735B2975E08400F32EB6 /* HippocampusApp.DocumentView.swift */,
 			);
 			path = "App Layer";
 			sourceTree = "<group>";
@@ -661,6 +667,8 @@
 		C55AC5BC295A13E200F09326 /* Obsolete */ = {
 			isa = PBXGroup;
 			children = (
+				C54BE55028960EF10060A066 /* SelectMemoryView.swift */,
+				C54BE553289610A00060A066 /* ShowMemoryView.swift */,
 				C509589328DCFBCD00068D37 /* Vision Layer */,
 				C54BE58528A1BD020060A066 /* Mind Layer */,
 				C54BE53E2895C4500060A066 /* Brain Layer */,
@@ -671,24 +679,11 @@
 		C55AC5D1295A4A0000F09326 /* Data Layer */ = {
 			isa = PBXGroup;
 			children = (
-				C55AC5D2295A4A3400F09326 /* Information.swift */,
-				C55AC5E2295A4B6900F09326 /* Structure */,
+				C55AC5CD295A34F900F09326 /* Document.swift */,
+				C5D273572975D6EB00F32EB6 /* Information */,
+				C5D273582975D70700F32EB6 /* Structure */,
 			);
 			path = "Data Layer";
-			sourceTree = "<group>";
-		};
-		C55AC5E2295A4B6900F09326 /* Structure */ = {
-			isa = PBXGroup;
-			children = (
-				C5C8E869295B02DA002C7746 /* Builder */,
-				C55AC5D6295A4A5F00F09326 /* Structure.swift */,
-				C5C8E860295AFD8E002C7746 /* Structure.Aspect.swift */,
-				C5C8E85D295AFD4E002C7746 /* Structure.Role.swift */,
-				C55AC5DA295A4A8100F09326 /* Structure.Query.swift */,
-				C55AC5DE295A4ACE00F09326 /* Structure.Query.Predicate.swift */,
-				C5C8E870295B5348002C7746 /* Structure.Query.Result.swift */,
-			);
-			name = Structure;
 			sourceTree = "<group>";
 		};
 		C58FB450291EF2AB00D0B713 /* iOS */ = {
@@ -702,9 +697,9 @@
 		C58FB451291F20BF00D0B713 /* App Layer */ = {
 			isa = PBXGroup;
 			children = (
+				C5C8E856295A652B002C7746 /* ContentView.swift */,
 				C58FB452291F215500D0B713 /* ListView.swift */,
 				C548BCBA292ADA8600DB6185 /* NoteView.swift */,
-				C5C8E856295A652B002C7746 /* ContentView.swift */,
 			);
 			path = "App Layer";
 			sourceTree = "<group>";
@@ -765,16 +760,6 @@
 			path = "App Layer";
 			sourceTree = "<group>";
 		};
-		C5C8E869295B02DA002C7746 /* Builder */ = {
-			isa = PBXGroup;
-			children = (
-				C5C8E863295AFDCA002C7746 /* Structure.Role.Builder.swift */,
-				C5C8E866295AFDEB002C7746 /* Structure.Aspect.Builder.swift */,
-				C5C8E86A295B041E002C7746 /* Structure.Query.Predicate.Builder.swift */,
-			);
-			name = Builder;
-			sourceTree = "<group>";
-		};
 		C5CD5A9528C40DA600DA9F7D /* Perspectives */ = {
 			isa = PBXGroup;
 			children = (
@@ -800,6 +785,47 @@
 				C5D382E92967786900E31D69 /* PersistentGraph.Transaction.swift */,
 			);
 			path = Obsolete;
+			sourceTree = "<group>";
+		};
+		C5D273572975D6EB00F32EB6 /* Information */ = {
+			isa = PBXGroup;
+			children = (
+				C55AC5D2295A4A3400F09326 /* Information.swift */,
+				C5D273512975D19100F32EB6 /* Information.Item+subscripts.swift */,
+			);
+			path = Information;
+			sourceTree = "<group>";
+		};
+		C5D273582975D70700F32EB6 /* Structure */ = {
+			isa = PBXGroup;
+			children = (
+				C55AC5D6295A4A5F00F09326 /* Structure.swift */,
+				C5D2735A2975D73600F32EB6 /* Roles and Aspects */,
+				C5D273592975D71E00F32EB6 /* Querying */,
+			);
+			path = Structure;
+			sourceTree = "<group>";
+		};
+		C5D273592975D71E00F32EB6 /* Querying */ = {
+			isa = PBXGroup;
+			children = (
+				C55AC5DA295A4A8100F09326 /* Structure.Query.swift */,
+				C55AC5DE295A4ACE00F09326 /* Structure.Query.Predicate.swift */,
+				C5C8E86A295B041E002C7746 /* Structure.Query.Predicate.Builder.swift */,
+				C5C8E870295B5348002C7746 /* Structure.Query.Result.swift */,
+			);
+			path = Querying;
+			sourceTree = "<group>";
+		};
+		C5D2735A2975D73600F32EB6 /* Roles and Aspects */ = {
+			isa = PBXGroup;
+			children = (
+				C5C8E85D295AFD4E002C7746 /* Structure.Role.swift */,
+				C5C8E863295AFDCA002C7746 /* Structure.Role.Builder.swift */,
+				C5C8E860295AFD8E002C7746 /* Structure.Aspect.swift */,
+				C5C8E866295AFDEB002C7746 /* Structure.Aspect.Builder.swift */,
+			);
+			path = "Roles and Aspects";
 			sourceTree = "<group>";
 		};
 		C5D382ED296A3B0D00E31D69 /* Structure */ = {
@@ -1008,6 +1034,7 @@
 				C5C4A106293B9E5000FF9AB8 /* Box.swift in Sources */,
 				C5C4A0ED293B9B0E00FF9AB8 /* PersistentGraph.Node.swift in Sources */,
 				C5D382F4296B345D00E31D69 /* PersistentGraph.ChangeManager.swift in Sources */,
+				C5D273542975D19100F32EB6 /* Information.Item+subscripts.swift in Sources */,
 				C5E4CB04294BDD4B00755959 /* Relation.swift in Sources */,
 				C5C4A117293C0D5500FF9AB8 /* PersistentGraph.Change.swift in Sources */,
 				C5D382EC2967786900E31D69 /* PersistentGraph.Transaction.swift in Sources */,
@@ -1034,6 +1061,7 @@
 				C55AC5E1295A4ACE00F09326 /* Structure.Query.Predicate.swift in Sources */,
 				C5576EB729510BB5005257A4 /* PersistentData.Object+getKey.swift in Sources */,
 				C5C4A12B2942701100FF9AB8 /* SerialisationTests.swift in Sources */,
+				C5D2735E2975E08400F32EB6 /* HippocampusApp.DocumentView.swift in Sources */,
 				C5C4A0FC293B9E4800FF9AB8 /* DecodableProperty.swift in Sources */,
 				C59B3CEB295CCE9A0053DE7D /* CGSize+Operators.swift in Sources */,
 				C5C4A0F9293B9E4800FF9AB8 /* PublishedSerialized.swift in Sources */,
@@ -1072,6 +1100,7 @@
 				C54BE4F3289591320060A066 /* Observed.swift in Sources */,
 				C54BE4F1289591320060A066 /* ObservedChangeReceiver.swift in Sources */,
 				C55AC5D3295A4A3400F09326 /* Information.swift in Sources */,
+				C5D273522975D19100F32EB6 /* Information.Item+subscripts.swift in Sources */,
 				C5C4A115293C0D4F00FF9AB8 /* PersistentGraph.Change.swift in Sources */,
 				C54BE503289591440060A066 /* CGFloat+Operators.swift in Sources */,
 				C54BE4E128958F910060A066 /* CycleBreaker.swift in Sources */,
@@ -1119,6 +1148,7 @@
 				C5E4CB02294BDD4B00755959 /* Relation.swift in Sources */,
 				C54BE501289591440060A066 /* CGSize+Operators.swift in Sources */,
 				C55AC5B52957C7C600F09326 /* PersistentGraph.Condition.swift in Sources */,
+				C5D2735C2975E08400F32EB6 /* HippocampusApp.DocumentView.swift in Sources */,
 				C5C4A0CB293A9F9400FF9AB8 /* IdentifiableObject.swift in Sources */,
 				C5C4A0DD293AB7D500FF9AB8 /* PersistentGraph.Node.swift in Sources */,
 				C5E35542294E630D0015CDFD /* PersistentGraph.TimeLine.swift in Sources */,
@@ -1155,6 +1185,7 @@
 				C54BE4F4289591320060A066 /* Observed.swift in Sources */,
 				C55AC5D4295A4A3400F09326 /* Information.swift in Sources */,
 				C5C4A116293C0D4F00FF9AB8 /* PersistentGraph.Change.swift in Sources */,
+				C5D273532975D19100F32EB6 /* Information.Item+subscripts.swift in Sources */,
 				C54BE4F2289591320060A066 /* ObservedChangeReceiver.swift in Sources */,
 				C54BE504289591440060A066 /* CGFloat+Operators.swift in Sources */,
 				C54BE4E228958F910060A066 /* CycleBreaker.swift in Sources */,
@@ -1171,7 +1202,6 @@
 				C548BCBC292ADA8600DB6185 /* NoteView.swift in Sources */,
 				C54BE500289591440060A066 /* CGPoint+Operators.swift in Sources */,
 				C5C4A0DB293AB3FC00FF9AB8 /* PersistentGraph.Item.swift in Sources */,
-				C59B3CDB295BBD9A0053DE7D /* ContentView.swift in Sources */,
 				C54BE55228960EF10060A066 /* SelectMemoryView.swift in Sources */,
 				C55AC5AE295262CD00F09326 /* Present.swift in Sources */,
 				C54BE4CA28958F820060A066 /* Transformable.swift in Sources */,
@@ -1202,10 +1232,12 @@
 				C5E4CB03294BDD4B00755959 /* Relation.swift in Sources */,
 				C54BE502289591440060A066 /* CGSize+Operators.swift in Sources */,
 				C55AC5B62957C7C600F09326 /* PersistentGraph.Condition.swift in Sources */,
+				C5D2735D2975E08400F32EB6 /* HippocampusApp.DocumentView.swift in Sources */,
 				C5C4A0CC293AA02700FF9AB8 /* IdentifiableObject.swift in Sources */,
 				C5C4A0DE293AB7D500FF9AB8 /* PersistentGraph.Node.swift in Sources */,
 				C5E35543294E630D0015CDFD /* PersistentGraph.TimeLine.swift in Sources */,
 				C5C8E862295AFD8E002C7746 /* Structure.Aspect.swift in Sources */,
+				C5D273602975E5C100F32EB6 /* ContentView.swift in Sources */,
 				C5C4A0D2293AAFDD00FF9AB8 /* DidChangeNotifier.swift in Sources */,
 				C5D382EB2967786900E31D69 /* PersistentGraph.Transaction.swift in Sources */,
 				C54BE4CE28958F820060A066 /* DecodableProperty.swift in Sources */,
@@ -1328,8 +1360,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1383,8 +1415,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;

@@ -18,4 +18,3 @@ public protocol DecodableProperty {
 
     func decodeValue(from container: DecodeContainer, propertyName: String) throws
 }
-

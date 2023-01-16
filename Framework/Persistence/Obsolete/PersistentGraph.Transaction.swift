@@ -5,10 +5,10 @@
 ////  Created by Guido Kühn on 05.01.23.
 ////
 //
-//import Combine
-//import Foundation
+// import Combine
+// import Foundation
 //
-//public extension PersistentGraph {
+// public extension PersistentGraph {
 //    class Transaction {
 //        var graph: PersistentGraph
 //        var timestamp: Date?
@@ -87,4 +87,4 @@
 //            changeObserver = graph.changeDidHappen.sink { self.addChange(change: $0) }
 //        }
 //    }
-//}
+// }

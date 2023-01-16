@@ -70,7 +70,7 @@ final class PersistentDataTests: XCTestCase {
         var container: SingleValueDecodingContainer?
         var _isSet = false
 
-        subscript<T: PersistentData.PersistentValue>(_ type: T.Type) -> T? {
+        subscript<T: PersistentData.PersistentValue>(_: T.Type) -> T? {
             get {
                 if _value == nil, !_isSet, let container {
                     _value = try? container.decode(T.self)
@@ -125,7 +125,7 @@ final class PersistentDataTests: XCTestCase {
 
         XCTAssert(y[String.self] == x[String.self])
     }
-    
+
     class TestClass: Codable {
         var x = "Hallo"
     }
@@ -134,9 +134,9 @@ final class PersistentDataTests: XCTestCase {
 //        var x = TestClass()
 //        var name = x.typeName
 //        let y =  NSClassFromString(name)!.init()
-////        let classe: AnyClass = NSClassFromString(name)!
-////        let y = classe.init()
-//        
+    ////        let classe: AnyClass = NSClassFromString(name)!
+    ////        let y = classe.init()
+//
 //    }
 
 //    enum DecoderStorage {

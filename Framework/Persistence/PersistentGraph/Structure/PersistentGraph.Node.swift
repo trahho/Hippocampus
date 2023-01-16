@@ -12,8 +12,8 @@ extension PersistentGraph {
         @Published internal var incomingEdges: Set<Edge> = []
         @Published internal var outgoingEdges: Set<Edge> = []
 
-        var incoming: Set<Edge> { incomingEdges.filter { $0.isActive }}
-        var outgoing: Set<Edge> { outgoingEdges.filter { $0.isActive }}
+        var incoming: Set<Edge> { incomingEdges.filter(\.isActive) }
+        var outgoing: Set<Edge> { outgoingEdges.filter(\.isActive) }
 
         var edges: Set<Edge> {
             incoming.union(outgoing)

@@ -36,13 +36,13 @@ import Foundation
     }
 
     public static subscript<Enclosing: PersistentData.Object>(_enclosingInstance instance: Enclosing,
-                                                              wrapped wrappedKeyPath: ReferenceWritableKeyPath<Enclosing, Value>,
+                                                              wrapped _: ReferenceWritableKeyPath<Enclosing, Value>,
                                                               storage storageKeyPath: ReferenceWritableKeyPath<Enclosing, Persistent>) -> Value
     {
         get {
             let storage = instance[keyPath: storageKeyPath]
             let key = storage.getKey(from: instance)
-            if let value =  instance[Value.self, key] {
+            if let value = instance[Value.self, key] {
                 return value
             } else {
                 return storage.defaultValue!()

@@ -29,7 +29,7 @@ import Foundation
     }
 
     public static subscript<Enclosing: PersistentData>(_enclosingInstance instance: Enclosing,
-                                                       wrapped wrappedKeyPath: ReferenceWritableKeyPath<Enclosing, TargetSet>,
+                                                       wrapped _: ReferenceWritableKeyPath<Enclosing, TargetSet>,
                                                        storage storageKeyPath: ReferenceWritableKeyPath<Enclosing, Present>) -> TargetSet
     {
         get {

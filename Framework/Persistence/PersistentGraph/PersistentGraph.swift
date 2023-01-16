@@ -23,8 +23,8 @@ open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable>:
     @Serialized private(set) var nodeStorage: [Item.ID: Node] = [:]
     @Serialized private(set) var edgeStorage: [Item.ID: Edge] = [:]
 
-    var nodes: Set<Node> { Set<Node>(nodeStorage.values.filter { $0.isActive }) }
-    var edges: Set<Edge> { Set<Edge>(edgeStorage.values.filter { $0.isActive }) }
+    var nodes: Set<Node> { Set<Node>(nodeStorage.values.filter(\.isActive)) }
+    var edges: Set<Edge> { Set<Edge>(edgeStorage.values.filter(\.isActive)) }
 
     // MARK: - Publishers
 
@@ -87,8 +87,8 @@ open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable>:
             }
     }
 
-    func purge(timestamp: Date = Date()) {}
-    
+    func purge(timestamp _: Date = Date()) {}
+
     func publishDidChange() {
         objectDidChange.send()
     }

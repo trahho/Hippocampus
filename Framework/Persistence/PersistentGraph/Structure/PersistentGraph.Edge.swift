@@ -11,23 +11,23 @@ extension PersistentGraph {
     open class Edge: Item {
         @PublishedSerialized private(set) var from: Node
         @PublishedSerialized private(set) var to: Node
-        
+
         public required init() {}
-        
+
         func getOther(for node: Node) -> Node {
             node == from ? to : from
         }
-        
+
         func connect() {
             from.outgoingEdges.insert(self)
             to.incomingEdges.insert(self)
         }
-        
+
         func disconnect() {
             from.outgoingEdges.remove(self)
             to.incomingEdges.remove(self)
         }
-        
+
         override func adopt(timestamp: Date?) {
             guard let graph else { return }
             objectWillChange.send()
@@ -38,7 +38,7 @@ extension PersistentGraph {
             to = graph.nodeStorage[to.id]!
             connect()
         }
-        
+
         init(from: Node, to: Node) {
             super.init()
             self.from = from

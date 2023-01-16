@@ -10,11 +10,9 @@ import Foundation
 
 extension PersistentData {
     open class Object: PersistentData.Node {
-        
-        required public init() {
+        public required init() {
             super.init()
             let mirror = Mirror(reflecting: self)
         }
-        
     }
 }

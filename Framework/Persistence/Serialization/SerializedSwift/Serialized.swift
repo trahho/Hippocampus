@@ -9,11 +9,11 @@ import Foundation
 
 public typealias Serializable = SerializableEncodable & SerializableDecodable
 
-//public protocol Referencable {
+// public protocol Referencable {
 //    func insertSelf<K>(into object: inout K, through keyPath: AnyKeyPath)
-//}
+// }
 //
-//extension PersistentObject: Referencable {
+// extension PersistentObject: Referencable {
 //    public func insertSelf<K>(into object: inout K, through keyPath: AnyKeyPath) {
 //        if let path = keyPath as? ReferenceWritableKeyPath<K, Self?> {
 //            object[keyPath: path] = self as? Self
@@ -23,19 +23,19 @@ public typealias Serializable = SerializableEncodable & SerializableDecodable
 //            object[keyPath: path].insert(self as! Self)
 //        }
 //    }
-//}
+// }
 //
-//public protocol ReverseReference {
+// public protocol ReverseReference {
 //    func restore(_ target: Referencable)
 ////    var reverseKeyPath: AnyKeyPath? { get }
-//}
+// }
 //
-//extension Serialized: ReverseReference {
+// extension Serialized: ReverseReference {
 //    public func restore(_ target: Referencable) {
 //        guard let reverse, let _ = _value else { return }
 //        target.insertSelf(into: &_value, through: reverse)
 //    }
-//}
+// }
 
 // @propertyWrapper
 // final class SerializedReverse<T: AnyObject>: ReverseReference  {

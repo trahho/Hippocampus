@@ -11,7 +11,7 @@ extension Array where Element: Hashable {
     var asSet: Set<Element> {
         Set(self)
     }
-    
+
     func asDictionary<Key: Hashable>(key: KeyPath<Self.Element, Key>) -> [Key: Self.Element] {
         reduce(into: [:]) { dictionary, element in
             dictionary[element[keyPath: key]] = element

@@ -8,5 +8,3 @@
 import Foundation
 
 public typealias CodableIdentifiable = Codable & Hashable
-
-

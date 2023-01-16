@@ -14,14 +14,14 @@ extension PersistentGraph {
 
         var value: (any PersistentGraph.PersistentValue)? {
             get {
-                return storage.value
+                storage.value
             }
             set {
                 storage = PersistentGraph.ValueStorage(newValue)
             }
         }
 
-        subscript<T: PersistentData.PersistentValue>(type type: T.Type) -> T? {
+        subscript<T: PersistentData.PersistentValue>(type _: T.Type) -> T? {
             let value = value
             return value as? T
         }

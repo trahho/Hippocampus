@@ -9,8 +9,6 @@ import Combine
 import Foundation
 
 protocol PersistentContent: Serializable, DidChangeNotifier {
-   
-
     func restore()
     func merge(other: Self) throws
 }

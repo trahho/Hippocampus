@@ -33,7 +33,7 @@ protocol PersistentRelationWrapper //: AnyObject
     }
 
     public static subscript<Enclosing: PersistentData.Object>(_enclosingInstance instance: Enclosing,
-                                                              wrapped wrappedKeyPath: ReferenceWritableKeyPath<Enclosing, Target?>,
+                                                              wrapped _: ReferenceWritableKeyPath<Enclosing, Target?>,
                                                               storage storageKeyPath: ReferenceWritableKeyPath<Enclosing, Relation>)
         -> Target?
     {
