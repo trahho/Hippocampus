@@ -30,14 +30,16 @@ class PersistentContainer<Content>: ObservableObject where Content: PersistentCo
             objectWillChange.send()
             _content = newValue
             hasChanges = true
-            contentSubscriber = newValue.objectDidChange.sink { [self] _ in
-                if commitOnChange {
-                    commit()
-                    hasChanges = false
-                } else {
-                    hasChanges = true
+            contentSubscriber = newValue.objectDidChange
+                .debounce(for: .seconds(0.5), scheduler: RunLoop.main)
+                .sink { [self] _ in
+                    if commitOnChange {
+                        commit()
+                        hasChanges = false
+                    } else {
+                        hasChanges = true
+                    }
                 }
-            }
         }
     }
 
@@ -57,7 +59,7 @@ class PersistentContainer<Content>: ObservableObject where Content: PersistentCo
     }
 
     func commit() {
-        guard let data = encode(), !url.isVirtual else { return }
+        guard !url.isVirtual, let data = encode() else { return }
 
         metadataQuery.stop()
         willCommit?()

@@ -122,7 +122,7 @@ struct NoteView: View {
             }
         }
         .onDisappear {
-            document.save()
+//            document.save()
         }
     }
 }

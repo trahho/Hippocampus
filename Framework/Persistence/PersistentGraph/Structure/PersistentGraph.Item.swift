@@ -28,7 +28,9 @@ extension PersistentGraph {
         
         public func isDeleted(_ value: Bool, timestamp: Date? = nil) {
             guard canChange else { return }
+            objectWillChange.send()
             deletedValue[type: Bool.self, at: writingTimestamp(timestamp)] = value
+            graph?.publishDidChange()
         }
         
         public subscript(role role: Role, timestamp timestamp: Date? = nil) -> Bool {
@@ -38,14 +40,17 @@ extension PersistentGraph {
             set {
                 guard canChange else { return }
                 
-                objectWillChange.send()
                 var newRoles = rolesValue[type: Set<Role>.self, at: readingTimestamp] ?? Set<Role>()
                 if newValue == true, !newRoles.contains(role) {
+                    objectWillChange.send()
                     newRoles.insert(role)
                     rolesValue[type: Set<Role>.self, at: writingTimestamp(timestamp)] = newRoles
+                    graph?.publishDidChange()
                 } else if newValue == false, newRoles.contains(role) {
+                    objectWillChange.send()
                     newRoles.remove(role)
                     rolesValue[type: Set<Role>.self, at: writingTimestamp(timestamp)] = newRoles
+                    graph?.publishDidChange()
                 }
             }
         }
@@ -62,6 +67,7 @@ extension PersistentGraph {
                     values[key] = TimeLine()
                 }
                 values[key]![type: T.self, at: writingTimestamp(timestamp)] = newValue
+                graph?.publishDidChange()
             }
         }
         
@@ -70,6 +76,8 @@ extension PersistentGraph {
         }
         
         // MARK: - Management
+        
+       
             
         public var isActive: Bool {
             if let added, added <= readingTimestamp, !isDeleted {

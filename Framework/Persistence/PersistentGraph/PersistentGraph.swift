@@ -88,6 +88,10 @@ open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable>:
     }
 
     func purge(timestamp: Date = Date()) {}
+    
+    func publishDidChange() {
+        objectDidChange.send()
+    }
 
     // MARK: - Modification
 
@@ -107,6 +111,7 @@ open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable>:
         edge.graph = self
         edgeStorage[edge.id] = edge
         edge.adopt(timestamp: timestamp)
+        publishDidChange()
     }
 
     func add(_ node: Node, timestamp: Date? = nil) {
@@ -121,5 +126,6 @@ open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable>:
         node.graph = self
         nodeStorage[node.id] = node
         node.adopt(timestamp: timestamp)
+        publishDidChange()
     }
 }
