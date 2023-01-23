@@ -20,6 +20,14 @@ struct ListView: View {
         query.apply(to: information)
     }
 
+    let listItem: Structure.Role.Representation = .horizontal([
+        .aspect(Structure.Role.note.name, editable: true),
+        .vertical([
+            .aspect(Structure.Role.note.name, editable: false),
+            .aspect(Structure.Role.note.text, editable: false)
+        ], alignment: .leading)
+    ], alignment: .center)
+
 //    var items: [Mind.Idea] {
 //        conclusion.ideas.values
 //            .sorted(using: Aspect.Comparator(order: .forward, aspect: Perspective.note.name))
@@ -44,7 +52,7 @@ struct ListView: View {
 //                .sorted(using: Aspect.Comparator(order: sortOrder, aspect: Perspective.note.name))
             ScrollView {
                 ForEach(items) { item in
-                    nameAspect.view(for: item.item, editable: false)
+                    listItem.view(for: item.item, editable: true)
                         .padding(2)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .contentShape(Rectangle())
@@ -71,7 +79,7 @@ struct ListView: View {
 
     func newNote() -> Information.Node {
         let note = Information.Node()
-        note[role: Structure.Role.note.id] = true
+        note[role: Structure.Role.note] = true
         information.add(note)
         return note
     }

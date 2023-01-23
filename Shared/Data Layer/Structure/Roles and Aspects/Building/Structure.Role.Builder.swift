@@ -23,5 +23,6 @@ extension Structure.Role {
         self.roleDescription = name
         self.aspects = aspects().asSet
         self.superRoles = superRoles.asSet
+        print ("Built role \(name)")
     }
 }

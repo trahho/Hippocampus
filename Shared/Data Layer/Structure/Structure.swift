@@ -16,6 +16,7 @@ class Structure: PersistentData {
             .forEach { add($0, timestamp: Date.distantPast) }
         [Query.notes]
             .forEach { add($0, timestamp: Date.distantPast) }
+        assert(Role.global.graph != nil)
         return self
     }
 }
