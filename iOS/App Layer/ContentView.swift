@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var document: Document
     var body: some View {
-        ListView(information: document.information, query: Structure.Query.notes)
+//        ListView(information: document.information, query: Structure.Query.notes)
+        DrawingView()
     }
 }

@@ -1,71 +1,32 @@
 //
-//  PersistentMemory.swift
+//  PersistentDataContainer.swift
 //  Hippocampus
 //
-//  Created by Guido Kühn on 15.07.22.
+//  Created by Guido Kühn on 26.02.23.
 //
 
-import Combine
 import Foundation
+import Combine
 
-class PersistentContainer<Content>: ObservableObject where Content: PersistentContent {
-    enum Error {
-        case mergeFailed
-    }
-
+class PersistentDataContainer: ObservableObject {
     let url: URL
     private var currentTimestamp: Date = .distantPast
     private let metadataQuery = NSMetadataQuery()
     private var querySubscriber: AnyCancellable?
     private var contentSubscriber: AnyCancellable?
+
     var didRefresh: (() -> Void)?
     var willCommit: (() -> Void)?
     var commitOnChange = false
     private(set) var hasChanges = false
 
-    private var _content: Content?
-    var content: Content {
-        get { _content! }
-        set {
-            objectWillChange.send()
-            _content = newValue
-            hasChanges = true
-            contentSubscriber = newValue.objectDidChange
-                .debounce(for: .seconds(0.5), scheduler: RunLoop.main)
-                .sink { [self] _ in
-                    if commitOnChange {
-                        commit()
-                        hasChanges = false
-                    } else {
-                        hasChanges = true
-                    }
-                }
-        }
-    }
+    var data: Data
 
-    func encode() -> Data? {
-        guard let flattened = try? CyclicEncoder().flatten(content),
-              let data = try? JSONEncoder().encode(flattened),
-              let compressedData = try? (data as NSData).compressed(using: .lzfse) as Data
-        else { return nil }
-
-        return compressedData
-
-//        guard // let flattened = try? CyclicEncoder().flatten(content),
-//              let data = try? JSONEncoder().encode(content)
-//        else { return nil }
-//
-//        return data
-    }
-
-    func commit() {
+    func save() {
         let fileQueue = DispatchQueue(label: "de.kuehnerleben.Hippocampus.file", qos: .background)
         fileQueue.async { [self] in
-            print("PersistentContainer: Commit")
-            guard !url.isVirtual, let data = encode() else {
-                print("PersistentContainer: Encoding failure")
-                return
-            }
+            print("PersistentDataContainer: Commit")
+            guard !url.isVirtual else { return }
 
             metadataQuery.stop()
             willCommit?()
@@ -81,34 +42,15 @@ class PersistentContainer<Content>: ObservableObject where Content: PersistentCo
         }
     }
 
-    func decode(_ compressedData: Data) {
-        guard let data = try? (compressedData as NSData).decompressed(using: .lzfse) as Data,
-              let flattened = try? JSONDecoder().decode(FlattenedContainer.self, from: data),
-              let newContent = try? CyclicDecoder().decode(Content.self, from: flattened)
-        else { return }
-        newContent.restore()
-        do {
-            try content.merge(other: newContent)
-        } catch {
-            content = newContent
-        }
-//        guard // let data = try? (compressedData as NSData).decompressed(using: .lzfse) as Data,
-//              let newContent = try? JSONDecoder().decode(Content.self, from: compressedData)
-        ////              let newContent = try? CyclicDecoder().decode(Content.self, from: flattened)
-//        else { return }
-//        content = newContent
-    }
-
-    func refresh() {
+    func load() {
         guard !url.isVirtual else { return }
         guard
             let modificationDate = try? FileManager.default.attributesOfItem(atPath: url.path(percentEncoded: false))[.modificationDate] as? Date,
             modificationDate > currentTimestamp,
-            let data = try? Data(contentsOf: url, options: [.uncached])
+            let readData = try? Data(contentsOf: url, options: [.uncached])
         else { return }
 
-//        print("MD: \(modificationDate), CTS: \(currentTimestamp)")
-        decode(data)
+        data = readData
         currentTimestamp = modificationDate
         hasChanges = false
         didRefresh?()
@@ -124,17 +66,14 @@ class PersistentContainer<Content>: ObservableObject where Content: PersistentCo
         querySubscriber = Publishers.MergeMany(publishers)
             .receive(on: DispatchQueue.main)
             .sink { [self] notification in
-//                print("Notification")
                 guard let query = notification.object as? NSMetadataQuery, query === self.metadataQuery else { return }
-//                print("My notification")
                 query.disableUpdates()
-//                let modificationDate = try? FileManager.default.attributesOfItem(atPath: self.url.path(percentEncoded: false))[.modificationDate] as? Date
-//                print("MD: \(modificationDate ?? Date.distantPast), CTS: \(currentTimestamp)")
-                self.refresh()
+                self.load()
                 query.enableUpdates()
             }
 
-        metadataQuery.notificationBatchingInterval = 1
+        metadataQuery.notificationBatchingInterval = 0.1
+        
         if let containerUrl = FileManager.default.url(forUbiquityContainerIdentifier: nil), url.path(percentEncoded: false).starts(with: containerUrl.path(percentEncoded: false)) {
             metadataQuery.searchScopes = [NSMetadataQueryUbiquitousDocumentsScope]
             if FileManager.default.fileExists(atPath: url.path(percentEncoded: false)) {
@@ -155,23 +94,18 @@ class PersistentContainer<Content>: ObservableObject where Content: PersistentCo
                                                   modifier: .direct,
                                                   type: .beginsWith)
         metadataQuery.predicate = pathPredicate
-
-//        metadataQuery.predicate = NSPredicate(format: "%K == %@", NSMetadataItemPathKey, url.path(percentEncoded: false))
-//        metadataQuery.predicate = NSPredicate(format: "%K == %@", NSMetadataItemURLKey, url as NSURL)
-
         metadataQuery.start()
         metadataQuery.enableUpdates()
     }
 
-    init(url: URL, content: Content, commitOnChange: Bool = false) {
+    init(url: URL, data: Data? = nil, commitOnChange: Bool = false) {
         if url.isiCloud {
             try? FileManager.default.startDownloadingUbiquitousItem(at: url.absoluteURL.deletingLastPathComponent())
         }
         self.url = url.absoluteURL
         self.commitOnChange = commitOnChange
-        content.restore()
-        self.content = content
-        refresh()
+        self.data = data ?? Data()
+        load()
         setupMetadataQuery()
     }
 
@@ -180,4 +114,3 @@ class PersistentContainer<Content>: ObservableObject where Content: PersistentCo
         metadataQuery.stop()
     }
 }
-

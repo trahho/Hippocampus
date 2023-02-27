@@ -17,9 +17,9 @@ extension Structure {
             Aspect("B6D7755C-210C-484D-B79B-ACD931D581C9", "Zeichnung", .drawing)
         }
 
-        static let topic = Role("3B681E4A-C42A-48D5-92E2-93F4B5C7CDD0", "Thema", [Role.global])
+        static let topic = Role("3B681E4A-C42A-48D5-92E2-93F4B5C7CDD0", "Thema", [.global])
 
-        static let note = Role("8AB172CF-2330-4861-B551-8728BA6062BF", "Notiz", [Role.global, Role.drawing]) {
+        static let note = Role("8AB172CF-2330-4861-B551-8728BA6062BF", "Notiz", [.global, .drawing]) {
             Aspect("B945443A-32D6-4FE7-A63F-65436CAAA3CA", "Titel", .text)
             Aspect("8C6872C7-9E9F-470F-9E23-3A7277B1A9ED", "Text", .text)
         }

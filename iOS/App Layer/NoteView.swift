@@ -90,12 +90,14 @@ struct NoteView: View {
 
     let textAspect = Structure.Role.note.text
     let titleAspect = Structure.Role.note.name
+    let drawingAspect = Structure.Role.note.zeichnung
 
     var body: some View {
         VStack(alignment: .leading) {
             if let note {
                 titleAspect.view(for: note, editable: editable)
                 textAspect.view(for: note, editable: editable)
+                drawingAspect.view(for: note, editable: editable)
             }
         }
         .toolbar {

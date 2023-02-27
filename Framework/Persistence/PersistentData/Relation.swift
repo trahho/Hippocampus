@@ -10,7 +10,7 @@ import Foundation
 protocol PersistentRelationWrapper //: AnyObject
 {}
 
-@propertyWrapper final class Relation<Target>: PersistentRelationWrapper where Target: PersistentData.Object {
+@propertyWrapper final class Relation<Target>: PersistentRelationWrapper where Target: PersistentObjectGraph.Object {
     @available(*, unavailable, message: "This property wrapper can only be applied to classes")
     public var wrappedValue: Target? {
         get { fatalError() }
@@ -20,7 +20,7 @@ protocol PersistentRelationWrapper //: AnyObject
     private var _key: String?
     private var inversekey: String?
 
-    internal func getKey(from instance: PersistentData.Object) -> String {
+    internal func getKey(from instance: PersistentObjectGraph.Object) -> String {
         if let key = _key, !key.isEmpty { return key }
 
         _key = instance.getKey(for: self)
@@ -32,7 +32,7 @@ protocol PersistentRelationWrapper //: AnyObject
         inversekey = inverse
     }
 
-    public static subscript<Enclosing: PersistentData.Object>(_enclosingInstance instance: Enclosing,
+    public static subscript<Enclosing: PersistentObjectGraph.Object>(_enclosingInstance instance: Enclosing,
                                                               wrapped _: ReferenceWritableKeyPath<Enclosing, Target?>,
                                                               storage storageKeyPath: ReferenceWritableKeyPath<Enclosing, Relation>)
         -> Target?
@@ -55,7 +55,7 @@ protocol PersistentRelationWrapper //: AnyObject
 
             guard let newValue else { return }
 
-            let edge = PersistentData.Edge(from: instance, to: newValue)
+            let edge = PersistentObjectGraph.Edge(from: instance, to: newValue)
             instance.graph.add(edge, timestamp: timestamp)
 
             edge[role: key, timestamp: timestamp] = true

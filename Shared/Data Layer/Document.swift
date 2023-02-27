@@ -10,6 +10,8 @@ import Foundation
 class Document: ObservableObject {
     @Observed var informationContainer: PersistentContainer<Information>
     @Observed var structureContainer: PersistentContainer<Structure>
+    
+    private (set) var url: URL
 
     var information: Information {
         informationContainer.content
@@ -24,6 +26,7 @@ class Document: ObservableObject {
     }
 
     init(url: URL) {
+        self.url = url
         let informationUrl = url.appendingPathComponent("Information" + HippocampusApp.persistentExtension)
         let structureUrl = url.appendingPathComponent("Structure" + HippocampusApp.persistentExtension)
         informationContainer = PersistentContainer(url: informationUrl, content: Information())

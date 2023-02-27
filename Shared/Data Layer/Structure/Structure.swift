@@ -7,13 +7,14 @@
 
 import Foundation
 
-class Structure: PersistentData {
+class Structure: PersistentObjectGraph {
     @Present var queries: Set<Query>
     @Present var roles: Set<Role>
 
     override func setup() -> Structure {
-        [Role.global, Role.drawing, Role.topic, Role.note]
-            .forEach { add($0, timestamp: Date.distantPast) }
+        let roles: [Role] = [.global, .drawing, .topic, .note]
+        roles.forEach { add($0, timestamp: Date.distantPast) }
+        
         [Query.notes]
             .forEach { add($0, timestamp: Date.distantPast) }
         assert(Role.global.graph != nil)

@@ -18,7 +18,7 @@ extension Structure.Aspect {
             case .text:
                 TextView(item: item, aspect: aspect, editable: editable)
             case .drawing:
-                EmptyView()
+                DrawingView(item: item, aspect: aspect, editable: editable)
             case .date:
                 HStack { EmptyView() }
             }

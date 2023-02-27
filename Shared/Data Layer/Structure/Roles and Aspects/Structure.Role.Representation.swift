@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-extension Structure.Role {
+extension Structure {
     indirect enum Representation {
         case horizontal([Representation], alignment: VerticalAlignment = VerticalAlignment.top)
         case vertical([Representation], alignment: HorizontalAlignment = HorizontalAlignment.leading)

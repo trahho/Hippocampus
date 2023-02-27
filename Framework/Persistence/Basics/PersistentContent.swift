@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-protocol PersistentContent: Serializable, DidChangeNotifier {
+protocol PersistentContent: Codable, DidChangeNotifier {
     func restore()
     func merge(other: Self) throws
 }

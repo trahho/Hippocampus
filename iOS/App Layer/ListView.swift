@@ -20,7 +20,7 @@ struct ListView: View {
         query.apply(to: information)
     }
 
-    let listItem: Structure.Role.Representation = .horizontal([
+    let listItem: Structure.Representation = .horizontal([
         .aspect(Structure.Role.note.name, editable: true),
         .vertical([
             .aspect(Structure.Role.note.name, editable: false),
