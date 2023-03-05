@@ -73,7 +73,9 @@ class PersistentContainer<Content: PersistentContent>: PersistentContainerRefere
         metadataQuery.stop()
         willCommit?()
         url.deletingLastPathComponent().ensureDirectory()
-        try! data.write(to: url, options: [.atomic])
+        measureDuration("Write data") {
+            try! data.write(to: url, options: [.atomic])
+        }
         currentTimestamp = try! FileManager.default.attributesOfItem(atPath: url.path)[.modificationDate] as! Date
         print("Modified \(currentTimestamp)")
         hasChanges = false
