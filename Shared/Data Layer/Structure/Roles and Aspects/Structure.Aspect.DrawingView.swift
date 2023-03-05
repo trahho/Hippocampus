@@ -28,12 +28,12 @@ extension Structure.Aspect.Representation {
 
         var body: some View {
             let dataUrl = document.url.appending(components: "drawing", "\(item.id)--\(aspect.id).persistentdrawing")
-            let data = PersistentContainer(url: dataUrl, content: PersistentDrawing())
+            let data = PersistentContainer(url: dataUrl, content: PersistentDrawingProperties())
             CanvasHostView(data: data, editable: editable)
         }
 
         struct CanvasHostView: View {
-            @ObservedObject var data: PersistentContainer<PersistentDrawing>
+            @ObservedObject var data: PersistentContainer<PersistentDrawingProperties>
 
             var editable: Bool
 
@@ -44,32 +44,87 @@ extension Structure.Aspect.Representation {
             }
         }
 
-        class PersistentDrawing: PersistentContent, ObservableObject {
-            var data: Data = .init()
-            
-            private var _drawing: PKDrawing?
-            
-            var drawing: PKDrawing {
-                get {
-                    guard let _drawing else {
-                        if let drawing = try? PKDrawing(data: data) {
-                            _drawing = drawing
-                        } else {
-                            _drawing = PKDrawing()
-                        }
-                        return _drawing!
-                    }
-                    return _drawing
+        class PersistentDrawing: ObservableObject {
+            @Observed private var drawingContainer: PersistentContainer<PersistentDrawingDrawing>
+            @Observed private var propertiesContainer: PersistentContainer<PersistentDrawingProperties>
+
+            var drawing: PersistentDrawingDrawing { drawingContainer.content }
+
+            var properties: PersistentDrawingProperties { propertiesContainer.content }
+        }
+
+        class PersistentDrawingDrawing: PersistentContent, ObservableObject {
+            private var isMerging = false
+
+            var objectDidChange = PassthroughSubject<Void, Never>()
+
+            var drawing: PKDrawing = .init() {
+                willSet {
+                    objectWillChange.send()
                 }
-                set {
-                    _drawing = newValue
-                    data = newValue.dataRepresentation()
+                didSet {
+                    guard !isMerging else { return }
+                    objectDidChange.send()
                 }
             }
 
-            @Published var center: CGPoint = .zero
-            @Published var pageFormat: PencilCanvasView.PageFormat = .A4
-            @Published var background: PencilCanvasView.Background = .shorthandGrid
+            func restore() {}
+
+            func merge(other: Structure.Aspect.Representation.DrawingView.PersistentDrawingDrawing) throws {
+                isMerging = true
+                drawing = other.drawing
+                isMerging = false
+            }
+
+            func encode() -> Data? {
+                drawing.dataRepresentation()
+            }
+
+            static func decode(persistentData: Data) -> Self? {
+                guard let drawing = try? PKDrawing(data: persistentData) else { return nil }
+                return (PersistentDrawingDrawing(drawing: drawing) as! Self)
+            }
+
+            private init(drawing: PKDrawing) {
+                self.drawing = drawing
+            }
+
+            init() {}
+        }
+
+        class PersistentDrawingProperties: PersistentContent, Serializable, ObservableObject {
+            @Serialized("center") private var _center: CGPoint = .zero
+
+            var center: CGPoint {
+                get { _center }
+                set {
+                    objectWillChange.send()
+                    _center = newValue
+                    objectDidChange.send()
+                }
+            }
+
+            @Serialized private var _pageFormat: PencilCanvasView.PageFormat = .A4
+
+            var pageFormat: PencilCanvasView.PageFormat {
+                get { _pageFormat }
+                set {
+                    objectWillChange.send()
+                    _pageFormat = newValue
+                    objectDidChange.send()
+                }
+            }
+
+            @Serialized private var _background: PencilCanvasView.Background = .shorthandGrid
+
+            var background: PencilCanvasView.Background {
+                get { _background }
+                set {
+                    objectWillChange.send()
+                    _background = newValue
+                    objectDidChange.send()
+                }
+            }
 
             // MARK: - Publishers
 
@@ -81,36 +136,14 @@ extension Structure.Aspect.Representation {
 
             // MARK: - Merging
 
-            func merge(other: PersistentDrawing) throws {
-                self.objectWillChange.send()
-                data = other.data
-                _drawing = nil
+            func merge(other: PersistentDrawingProperties) throws {
+                objectWillChange.send()
                 center = other.center
                 pageFormat = other.pageFormat
                 background = other.background
             }
 
             func restore() {}
-
-            enum CodingKeys: String, CodingKey {
-                case drawing, center, pageFormat, background
-            }
-
-            func encode(to encoder: Encoder) throws {
-                var container = encoder.container(keyedBy: CodingKeys.self)
-                try! container.encode(data, forKey: .drawing)
-                try container.encode(center, forKey: .center)
-                try container.encode(pageFormat, forKey: .pageFormat)
-                try container.encode(background, forKey: .background)
-            }
-
-            required init(from decoder: Decoder) throws {
-                let values = try decoder.container(keyedBy: CodingKeys.self)
-                data = try values.decode(Data.self, forKey: .drawing)
-                center = try values.decode(CGPoint.self, forKey: .center)
-                pageFormat = try values.decode(PencilCanvasView.PageFormat.self, forKey: .pageFormat)
-                background = try values.decode(PencilCanvasView.Background.self, forKey: .background)
-            }
         }
     }
 }

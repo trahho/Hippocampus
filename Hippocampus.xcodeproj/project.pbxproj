@@ -41,8 +41,6 @@
 		C54BE4E628958F910060A066 /* CyclicEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4DD28958F910060A066 /* CyclicEncoder.swift */; };
 		C54BE4E728958F910060A066 /* CyclicDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4DE28958F910060A066 /* CyclicDecoder.swift */; };
 		C54BE4E828958F910060A066 /* CyclicDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4DE28958F910060A066 /* CyclicDecoder.swift */; };
-		C54BE4EC28958FC70060A066 /* PersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4EB28958FC70060A066 /* PersistentContainer.swift */; };
-		C54BE4ED28958FC70060A066 /* PersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4EB28958FC70060A066 /* PersistentContainer.swift */; };
 		C54BE4F1289591320060A066 /* ObservedChangeReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4EF289591320060A066 /* ObservedChangeReceiver.swift */; };
 		C54BE4F2289591320060A066 /* ObservedChangeReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4EF289591320060A066 /* ObservedChangeReceiver.swift */; };
 		C54BE4F3289591320060A066 /* Observed.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4F0289591320060A066 /* Observed.swift */; };
@@ -193,7 +191,6 @@
 		C5C4A0F3293B9B0E00FF9AB8 /* PersistentObjectGraph.Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A0E2293AC7C600FF9AB8 /* PersistentObjectGraph.Object.swift */; };
 		C5C4A0F4293B9B0E00FF9AB8 /* PersistentGraph.Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A0D9293AB3FC00FF9AB8 /* PersistentGraph.Item.swift */; };
 		C5C4A0F5293B9B0E00FF9AB8 /* Persistent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A0E5293B78E000FF9AB8 /* Persistent.swift */; };
-		C5C4A0F6293B9B0E00FF9AB8 /* PersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4EB28958FC70060A066 /* PersistentContainer.swift */; };
 		C5C4A0F7293B9B0E00FF9AB8 /* DidChangeNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A0D0293AAFDD00FF9AB8 /* DidChangeNotifier.swift */; };
 		C5C4A0F8293B9E4000FF9AB8 /* URL+virtual.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A0C7293A83C100FF9AB8 /* URL+virtual.swift */; };
 		C5C4A0F9293B9E4800FF9AB8 /* PublishedSerialized.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE571289D64960060A066 /* PublishedSerialized.swift */; };
@@ -215,7 +212,6 @@
 		C5C4A115293C0D4F00FF9AB8 /* PersistentGraph.Change.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A114293C0D4F00FF9AB8 /* PersistentGraph.Change.swift */; };
 		C5C4A116293C0D4F00FF9AB8 /* PersistentGraph.Change.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A114293C0D4F00FF9AB8 /* PersistentGraph.Change.swift */; };
 		C5C4A117293C0D5500FF9AB8 /* PersistentGraph.Change.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A114293C0D4F00FF9AB8 /* PersistentGraph.Change.swift */; };
-		C5C4A12B2942701100FF9AB8 /* SerialisationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A12A2942701100FF9AB8 /* SerialisationTests.swift */; };
 		C5C8E857295A652B002C7746 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E856295A652B002C7746 /* ContentView.swift */; };
 		C5C8E85E295AFD4E002C7746 /* Structure.Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E85D295AFD4E002C7746 /* Structure.Role.swift */; };
 		C5C8E85F295AFD4E002C7746 /* Structure.Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E85D295AFD4E002C7746 /* Structure.Role.swift */; };
@@ -259,7 +255,6 @@
 		C5E4CB02294BDD4B00755959 /* Relation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E4CB01294BDD4B00755959 /* Relation.swift */; };
 		C5E4CB03294BDD4B00755959 /* Relation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E4CB01294BDD4B00755959 /* Relation.swift */; };
 		C5E4CB04294BDD4B00755959 /* Relation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E4CB01294BDD4B00755959 /* Relation.swift */; };
-		C5E4CB06294BDEA000755959 /* PersistentDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E4CB05294BDEA000755959 /* PersistentDataTests.swift */; };
 		C5E966B029A956ED009D81FF /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E966AF29A956ED009D81FF /* DrawingView.swift */; };
 		C5E966B429AAA931009D81FF /* PencilCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E966B329AAA931009D81FF /* PencilCanvasView.swift */; };
 		C5E966B829AAAA8A009D81FF /* PencilCanvasView.ArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E966B729AAAA8A009D81FF /* PencilCanvasView.ArrowView.swift */; };
@@ -282,6 +277,7 @@
 		C5E966DD29ABFCB2009D81FF /* PersistentDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E966DC29ABFCB2009D81FF /* PersistentDataContainer.swift */; };
 		C5E966DE29ABFCB2009D81FF /* PersistentDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E966DC29ABFCB2009D81FF /* PersistentDataContainer.swift */; };
 		C5E966DF29ABFCB2009D81FF /* PersistentDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E966DC29ABFCB2009D81FF /* PersistentDataContainer.swift */; };
+		C5E966E129AD41AF009D81FF /* DataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E966E029AD41AF009D81FF /* DataTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -444,6 +440,7 @@
 		C5E966CE29AAD47D009D81FF /* Font+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Font+Extension.swift"; sourceTree = "<group>"; };
 		C5E966CF29AAD47D009D81FF /* Raleway-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Italic.ttf"; sourceTree = "<group>"; };
 		C5E966DC29ABFCB2009D81FF /* PersistentDataContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentDataContainer.swift; sourceTree = "<group>"; };
+		C5E966E029AD41AF009D81FF /* DataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -492,6 +489,7 @@
 			isa = PBXGroup;
 			children = (
 				C5C4A12A2942701100FF9AB8 /* SerialisationTests.swift */,
+				C5E966E029AD41AF009D81FF /* DataTests.swift */,
 				C5E4CB05294BDEA000755959 /* PersistentDataTests.swift */,
 			);
 			path = HippocampusTestsMacOS;
@@ -1117,12 +1115,11 @@
 				C59B3CF2295CCEC80053DE7D /* Structure.Query.Predicate.Builder.swift in Sources */,
 				C5C4A103293B9E5000FF9AB8 /* CyclicDecoder.swift in Sources */,
 				C59B3CDC295CB9540053DE7D /* Structure.Role.swift in Sources */,
-				C5E4CB06294BDEA000755959 /* PersistentDataTests.swift in Sources */,
 				C59E28802979D394007375D5 /* Structure.Role.Representation.swift in Sources */,
-				C5C4A0F6293B9B0E00FF9AB8 /* PersistentContainer.swift in Sources */,
 				C5E966D829AAD47D009D81FF /* Font+Extension.swift in Sources */,
 				C5C4A0F2293B9B0E00FF9AB8 /* PersistentObjectGraph.swift in Sources */,
 				C59B3CEA295CCE950053DE7D /* NSPredicate+operators.swift in Sources */,
+				C5E966E129AD41AF009D81FF /* DataTests.swift in Sources */,
 				C59E28762978A921007375D5 /* Structure.Aspect+view.swift in Sources */,
 				C59E2884297B2434007375D5 /* Structure.Aspect.Representation.swift in Sources */,
 				C59B3CDF295CB9900053DE7D /* HippocampusApp.swift in Sources */,
@@ -1171,7 +1168,6 @@
 				C59B3CDD295CB9580053DE7D /* Structure.Aspect.swift in Sources */,
 				C55AC5E1295A4ACE00F09326 /* Structure.Query.Predicate.swift in Sources */,
 				C5576EB729510BB5005257A4 /* PersistentObjectGraph.Object+getKey.swift in Sources */,
-				C5C4A12B2942701100FF9AB8 /* SerialisationTests.swift in Sources */,
 				C5D2735E2975E08400F32EB6 /* HippocampusApp.DocumentView.swift in Sources */,
 				C5C4A0FC293B9E4800FF9AB8 /* DecodableProperty.swift in Sources */,
 				C59B3CEB295CCE9A0053DE7D /* CGSize+Operators.swift in Sources */,
@@ -1290,7 +1286,6 @@
 				C54BE516289591840060A066 /* InjectionKey.swift in Sources */,
 				C55AC5D7295A4A5F00F09326 /* Structure.swift in Sources */,
 				C54BE518289591840060A066 /* Injector.swift in Sources */,
-				C54BE4EC28958FC70060A066 /* PersistentContainer.swift in Sources */,
 				C54BE4E528958F910060A066 /* CyclicEncoder.swift in Sources */,
 				C54BE55A289698990060A066 /* View+If.swift in Sources */,
 			);
@@ -1382,7 +1377,6 @@
 				C54BE517289591840060A066 /* InjectionKey.swift in Sources */,
 				C55AC5D8295A4A5F00F09326 /* Structure.swift in Sources */,
 				C54BE519289591840060A066 /* Injector.swift in Sources */,
-				C54BE4ED28958FC70060A066 /* PersistentContainer.swift in Sources */,
 				C54BE4E628958F910060A066 /* CyclicEncoder.swift in Sources */,
 				C54BE55B289698990060A066 /* View+If.swift in Sources */,
 			);
@@ -1575,7 +1569,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1610,7 +1604,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1650,7 +1644,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = de.kuehnerleben.Hippocampus;
 				PRODUCT_NAME = Hippocampus;
@@ -1683,7 +1677,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = de.kuehnerleben.Hippocampus;
 				PRODUCT_NAME = Hippocampus;

@@ -9,7 +9,6 @@ import Combine
 import Foundation
 
 open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable>: PersistentContent, Serializable, ObservableObject {
-    
     // MARK: - Types
 
     public typealias PersistentValue = Codable & Equatable
@@ -36,7 +35,7 @@ open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable>:
 
     public required init() {}
 
-    // MARK: - Restoration
+    // MARK: - Persistence
 
     func setup() -> PersistentGraph {
         self
@@ -51,8 +50,6 @@ open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable>:
             edge.connect()
         }
     }
-
-    // MARK: - Merging
 
     func merge(other: PersistentGraph) throws {
         if nodeStorage.isEmpty {

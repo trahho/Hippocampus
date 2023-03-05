@@ -12,17 +12,23 @@ import SwiftUI
 struct PencilCanvasView: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> ViewController {
         let controller = ViewController()
-        controller.delegate = context.coordinator
+        controller.coordinator = context.coordinator
         return controller
     }
 
     func updateUIViewController(_ controller: ViewController, context: Context) {
-        print ("Coordinator: Update drawing")
+        guard !context.coordinator.isSending else { return }
         context.coordinator.isBlocked = true
-        controller.setDrawing(drawing: drawing)
-        controller.centerDrawing(at: center)
-        controller.setLineGridMode(mode: background)
-        controller.setPageFormat(format: format)
+        print("Drawing View -> Controller")
+        controller.drawing = drawing
+        if center != .zero {
+            print("Center View -> Controller")
+            controller.center = center
+        }
+        print("PageFormat View -> Controller")
+        controller.pageFormat = pageFormat
+        print("Background View -> Controller")
+        controller.background = background
         context.coordinator.isBlocked = false
     }
 
@@ -35,24 +41,30 @@ struct PencilCanvasView: UIViewControllerRepresentable {
     @Binding var drawing: PKDrawing
     @Binding var center: CGPoint
     @State var background: Background
-    @State var format: PageFormat
+    @State var pageFormat: PageFormat
+    var isBlocked = false
 }
 
 extension PencilCanvasView {
     final class Coordinator: NSObject {
-        var isBlocked = false
+        var isBlocked = true
+        var isSending = false
         var view: PencilCanvasView
 
         func drawingDidChange(_ controller: ViewController, drawing: PKDrawing) {
-            guard !isBlocked, drawing != view.drawing else { return }
-            print ("Coordinator: Drawing did change")
+            guard !isBlocked else { return }
+            isSending = true
+            print("Drawing Controller -> View")
             view.drawing = drawing
+            isSending = false
         }
 
         func centerDidChange(_ controller: ViewController, center: CGPoint) {
-            guard !isBlocked, center != view.center else { return }
-            print ("Coordinator: Center did change")
+            guard !isBlocked else { return }
+            isSending = true
+            print("Center Controller -> View")
             view.center = center
+            isSending = false
         }
 
         init(_ view: PencilCanvasView) {
@@ -157,295 +169,183 @@ extension PencilCanvasView {
 
 extension PencilCanvasView {
     final class ViewController: UIViewController, PKCanvasViewDelegate {
-        lazy var contentView: View = {
-            let this = View()
-            return this
-        }()
-
-        lazy var toolPicker: PKToolPicker = {
-            let this = PKToolPicker()
-            return this
-        }()
+        lazy var drawingView: View = .init()
+        lazy var toolPicker: PKToolPicker = .init()
 
         private let canvasSize = CGSize(width: 1_000_000, height: 1_000_000)
-        var delegate: Coordinator?
 
-        var contentNeedsBeingCentered = true
-        var isDrawing: Bool = false
+        var coordinator: Coordinator?
+
+        // MARK: - - View setup
 
         override func loadView() {
-            view = contentView
+            view = drawingView
         }
 
         override func viewDidLoad() {
             super.viewDidLoad()
+            toolPicker.addObserver(drawingView.canvasView)
+            drawingView.canvasView.delegate = self
+            drawingView.canvasView.contentSize = canvasSize
+            disableDrawing()
+        }
 
-            toolPicker.addObserver(contentView.canvasView)
-            contentView.canvasView.delegate = self
-            contentView.canvasView.contentSize = canvasSize
-            endDrawing()
+        override func viewDidAppear(_ animated: Bool) {
+            super.viewDidAppear(animated)
+            enableDrawing()
         }
 
         override func viewDidLayoutSubviews() {
             super.viewDidLayoutSubviews()
-            contentView.gridView.frame = contentView.canvasView.frame
-            contentView.gridView.setNeedsDisplay()
+            drawingView.gridView.frame = drawingView.canvasView.frame
+            drawingView.gridView.setNeedsDisplay()
             if contentNeedsBeingCentered {
                 centerDrawing()
             }
         }
 
-        override func viewDidAppear(_ animated: Bool) {
-            super.viewDidAppear(animated)
-            beginDrawing()
-//            delegate?.isReadyToWork(self)
+        // MARK: - - Drawing
+
+        var contentNeedsBeingCentered = true
+
+        var drawing: PKDrawing {
+            get { drawingView.canvasView.drawing }
+            set {
+                let currentValue = drawingView.canvasView.drawing
+                if newValue.strokes.isEmpty, currentValue.strokes.isEmpty {
+                    print("Drawing still empty")
+                    contentNeedsBeingCentered = true
+                } else if newValue != currentValue {
+                    contentNeedsBeingCentered = currentValue.strokes.isEmpty
+                    drawingView.canvasView.drawing = newValue
+                    print("Drawing accepted")
+                } else {
+//                    print("Drawing ignored")
+                }
+            }
+        }
+
+        var center: CGPoint {
+            get {
+                let canvasView = drawingView.canvasView
+                let offset = canvasView.contentOffset
+                let viewBounds = canvasView.bounds
+                let zoomScale = canvasView.zoomScale
+                return CGPoint(x: (offset.x + viewBounds.width / 2) / zoomScale, y: (offset.y + viewBounds.height / 2) / zoomScale)
+            }
+            set {
+                let canvasView = drawingView.canvasView
+                let gridView = drawingView.gridView
+
+                let viewBounds = canvasView.bounds
+                let zoomScale = canvasView.zoomScale
+
+                let offsetX = newValue.x * zoomScale - viewBounds.width / 2
+                let offsetY = newValue.y * zoomScale - viewBounds.height / 2
+                let offset = CGPoint(x: offsetX, y: offsetY)
+
+                canvasView.contentOffset = offset
+                gridView.offset = offset
+                contentNeedsBeingCentered = false
+            }
         }
 
         func centerDrawing() {
-            let drawing = contentView.canvasView.drawing
+            let canvasView = drawingView.canvasView
+            let drawing = canvasView.drawing
             if drawing.strokes.isEmpty {
-                let contentSize = contentView.canvasView.contentSize
-                centerDrawing(at: CGPoint(x: contentSize.width / 2, y: contentSize.height / 2))
+                let contentSize = canvasView.contentSize
+                center = CGPoint(x: contentSize.width / 2, y: contentSize.height / 2)
             } else {
-                centerDrawing(at: CGPoint(x: drawing.bounds.midX, y: drawing.bounds.midY))
+                center = CGPoint(x: drawing.bounds.midX, y: drawing.bounds.midY)
             }
         }
 
-        func centerDrawing(at position: CGPoint) {
-            let canvasView = contentView.canvasView
-            let gridView = contentView.gridView
+        // MARK: - - Activation
 
-            let viewBounds = canvasView.bounds
-            let zoomScale = canvasView.zoomScale
-
-            let offsetX = position.x * zoomScale - viewBounds.width / 2
-            let offsetY = position.y * zoomScale - viewBounds.height / 2
-            let offset = CGPoint(x: offsetX, y: offsetY)
-
-            canvasView.contentOffset = offset
-            gridView.offset = offset
-            contentNeedsBeingCentered = false
-        }
-
-        func setDrawing(drawing: PKDrawing) {
-            if drawing.strokes.isEmpty, contentView.canvasView.drawing.strokes.isEmpty {
-                print("Drawing empty")
-                contentNeedsBeingCentered = true
-            } else if drawing != contentView.canvasView.drawing {
-                contentNeedsBeingCentered = contentView.canvasView.drawing.strokes.isEmpty
-
-                contentView.canvasView.drawing = drawing
-
-                print("Drawing accepted")
-            } else {
-                //            contentNeedsBeingCentered = false
-                print("Drawing ignored")
+        private var drawingEnabled: Bool = false
+        var isActive: Bool {
+            get { drawingEnabled }
+            set(newState) {
+                if !drawingEnabled && newState == true {
+                    enableDrawing()
+                } else if drawingEnabled && newState == false {
+                    disableDrawing()
+                }
             }
         }
 
-        func setLineGridMode(mode: Background) {
-            contentView.gridView.mode = mode
-        }
-
-        func setPageFormat(format: PageFormat) {
-            contentView.gridView.page = format
-        }
-
-        //    func centerContent () {
-        //        let viewBounds = contentView.canvasView.bounds
-        //        guard !viewBounds.isEmpty else { return }
-        //
-        //        let contentBounds = CGRect(origin: CGPoint.zero, size: contentView.canvasView.contentSize)
-        //        let drawingBounds = contentView.canvasView.drawing.bounds
-        //        let bounds = drawingBounds.isEmpty ? contentBounds : drawingBounds
-        //
-        //
-        //        let centerX = (contentSize.width - viewSize.width) / 2
-        //        let centerY = (contentSize.height - viewSize.height) / 2
-        //
-        //        contentView.canvasView.contentOffset = CGPoint(x: centerX, y: centerY)
-        //        contentView.gridView.offset = contentView.canvasView.contentOffset
-        //        contentView.gridView.zoomScale = contentView.canvasView.zoomScale
-        //        contentNeedsBeingCentered = false
-        //        print("Content centered")
-        //    }
-
-        //    func centerDrawingObsolet() {
-        //        let canvasView = contentView.canvasView
-        //
-        //        let contentCenterX = canvasView.contentSize.width / 2
-        //        let contentCenterY = canvasView.contentSize.height / 2
-        //
-        //        let drawingCenterX = canvasView.drawing.bounds.midX
-        //        let drawingCenterY = canvasView.drawing.bounds.midY
-        //
-        //        let transform = CGAffineTransform(translationX: contentCenterX - drawingCenterX, y: contentCenterY - drawingCenterY)
-        //
-        //        canvasView.drawing.transform(using: transform)
-        //        print("Drawing centered")
-        //        centerContent()
-        //    }
-
-        func beginDrawing() {
-            guard !isDrawing else { return }
-            let canvasView = contentView.canvasView
-
-            //        guard !canvasView.drawingGestureRecognizer.isEnabled else { return }
-
+        private func enableDrawing() {
+            guard !drawingEnabled else { return }
+            let canvasView = drawingView.canvasView
             canvasView.drawingGestureRecognizer.isEnabled = true
             toolPicker.setVisible(true, forFirstResponder: canvasView)
             if !canvasView.isFirstResponder { canvasView.becomeFirstResponder() }
-            isDrawing = true
+            drawingEnabled = true
         }
 
-        func endDrawing() {
-            //        guard isDrawing else { return }
-
-            let canvasView = contentView.canvasView
-
-            //        guard canvasView.drawingGestureRecognizer.isEnabled else { return }
-
+        func disableDrawing() {
+            guard drawingEnabled else { return }
+            let canvasView = drawingView.canvasView
             canvasView.drawingGestureRecognizer.isEnabled = false
             toolPicker.setVisible(false, forFirstResponder: canvasView)
-            isDrawing = false
-            //        if canvasView.isFirstResponder { canvasView.resignFirstResponder() }
+            drawingEnabled = false
         }
 
-        func _centerContent() {
-            let contentSize = contentView.canvasView.contentSize
-            let viewSize = contentView.canvasView.bounds
+        // MARK: - - Grid properties
 
-            guard !viewSize.isEmpty else { return }
-
-            let centerX = (contentSize.width - viewSize.width) / 2
-            let centerY = (contentSize.height - viewSize.height) / 2
-
-            contentView.canvasView.contentOffset = CGPoint(x: centerX, y: centerY)
-            contentView.gridView.offset = contentView.canvasView.contentOffset
-            contentView.gridView.zoomScale = contentView.canvasView.zoomScale
-            contentNeedsBeingCentered = false
-            print("Content centered")
-        }
-
-        func showFullDrawing() {
-            let canvasView = contentView.canvasView
-            let gridView = contentView.gridView
-
-            let drawing = canvasView.drawing
-            let drawingBounds = drawing.bounds
-
-            guard !drawingBounds.isEmpty else { return }
-
-            let drawingSize = drawingBounds.size
-            let viewSize = canvasView.bounds.size
-
-            let widthScale = viewSize.width / drawingSize.width
-            let heightScale = viewSize.height / drawingSize.height
-            let scale = min(min(widthScale, heightScale), 1)
-
-            let scaledOffset = CGPoint(
-                x: drawingBounds.minX * scale + (drawingSize.width * scale - viewSize.width) / 2,
-                y: drawingBounds.minY * scale + (drawingSize.height * scale - viewSize.height) / 2
-            )
-
-            canvasView.minimumZoomScale = min(canvasView.minimumZoomScale, scale)
-            canvasView.zoomScale = scale
-            gridView.zoomScale = scale
-            canvasView.contentOffset = scaledOffset
-            gridView.offset = scaledOffset
-        }
-
-        func resetZoom() {
-            contentView.canvasView.zoomScale = 1
-            contentView.gridView.zoomScale = 1
-        }
-
-        var scaledDrawingBounds: CGRect {
-            let scale = contentView.canvasView.zoomScale
-            let drawing = contentView.canvasView.drawing
-            return CGRect(x: drawing.bounds.minX * scale, y: drawing.bounds.minY * scale, width: drawing.bounds.width * scale, height: drawing.bounds.height * scale)
-        }
-
-        func moveToEdge(horizontal: Int, vertical: Int) {
-            let canvasView = contentView.canvasView
-            let gridView = contentView.gridView
-
-            guard !scaledDrawingBounds.isEmpty else { return }
-
-            let viewSize = canvasView.bounds.size
-
-            let scaledOffsetX: CGFloat
-            let scaledOffsetY: CGFloat
-
-            switch horizontal {
-            case 0:
-                scaledOffsetX = scaledDrawingBounds.minX - viewSize.width * 0.05
-            case 1:
-                scaledOffsetX = scaledDrawingBounds.minX + (scaledDrawingBounds.size.width - viewSize.width) / 2
-            case 2:
-                scaledOffsetX = scaledDrawingBounds.minX + (scaledDrawingBounds.size.width - viewSize.width) + viewSize.width * 0.05
-            default:
-                return
+        var background: Background {
+            get { drawingView.gridView.mode }
+            set {
+                guard drawingView.gridView.mode != newValue else { return }
+                drawingView.gridView.mode = newValue
             }
-
-            switch vertical {
-            case 0:
-                scaledOffsetY = scaledDrawingBounds.minY - viewSize.height * 0.05
-            case 1:
-                scaledOffsetY = scaledDrawingBounds.minY + (scaledDrawingBounds.size.height - viewSize.height) / 2
-            case 2:
-                scaledOffsetY = scaledDrawingBounds.minY + (scaledDrawingBounds.size.height - viewSize.height) + viewSize.height * 0.05
-            default:
-                return
-            }
-
-            let scaledOffset = CGPoint(x: scaledOffsetX, y: scaledOffsetY)
-
-            canvasView.contentOffset = scaledOffset
-            gridView.offset = scaledOffset
         }
+
+        var pageFormat: PageFormat {
+            get { drawingView.gridView.page }
+            set {
+                guard drawingView.gridView.page != newValue else { return }
+                drawingView.gridView.page = newValue
+            }
+        }
+
+        // MARK: - - PKCanvasDelegate
 
         func canvasViewDrawingDidChange(_ canvasView: PKCanvasView) {
             updatePositionIndicators()
-            guard let delegate = delegate else { return }
-
-            delegate.drawingDidChange(self, drawing: canvasView.drawing)
+            guard let coordinator else { return }
+            coordinator.drawingDidChange(self, drawing: canvasView.drawing)
         }
 
         func scrollViewDidZoom(_ scrollView: UIScrollView) {
-            contentView.gridView.zoomScale = scrollView.zoomScale
+            drawingView.gridView.zoomScale = scrollView.zoomScale
             notifyCenterHasChanged()
             updatePositionIndicators()
         }
 
         func scrollViewDidScroll(_ scrollView: UIScrollView) {
             contentNeedsBeingCentered = false
-
-            contentView.gridView.offset = scrollView.contentOffset
+            drawingView.gridView.offset = scrollView.contentOffset
             notifyCenterHasChanged()
             updatePositionIndicators()
         }
 
         func notifyCenterHasChanged() {
-            guard let delegate = delegate else { return }
-
-            let offset = contentView.canvasView.contentOffset
-            let viewBounds = contentView.canvasView.bounds
-            let zoomScale = contentView.canvasView.zoomScale
-            let center = CGPoint(x: (offset.x + viewBounds.width / 2) / zoomScale, y: (offset.y + viewBounds.height / 2) / zoomScale)
-            //        let center = CGPoint(x: unscaledOffset.x + contentView.canvasView.bounds.width / 2, y: unscaledOffset.y + contentView.canvasView.bounds.height / 2)
-            delegate.centerDidChange(self, center: center)
+            guard let coordinator else { return }
+            coordinator.centerDidChange(self, center: center)
         }
 
         func updatePositionIndicators() {
-            let drawingBounds = contentView.canvasView.drawing.bounds
-            let viewBounds = contentView.bounds
+            let drawingBounds = drawing.bounds
+            let viewBounds = drawingView.bounds
+            let canvasView = drawingView.canvasView
 
             guard !drawingBounds.isEmpty, !viewBounds.isEmpty else { return }
-            let offset = contentView.canvasView.contentOffset
+            let offset = canvasView.contentOffset
 
             let minWidth: CGFloat = 12
-            let zoomScale = contentView.canvasView.zoomScale
+            let zoomScale = canvasView.zoomScale
             let zoomedDrawingBounds = CGRect(x: drawingBounds.minX * zoomScale, y: drawingBounds.minY * zoomScale, width: drawingBounds.width * zoomScale, height: drawingBounds.height * zoomScale)
 
             let horizontalLeading = viewBounds.minX - (zoomedDrawingBounds.minX - offset.x)
@@ -456,11 +356,8 @@ extension PencilCanvasView {
             let horizontalTrailingRatio = horizontalTrailing / zoomedDrawingBounds.width
             let horizontalTrailingOffset = viewBounds.maxX - viewBounds.width * horizontalTrailingRatio
 
-            contentView.topHorizontalIndicatorView.frame = CGRect(x: viewBounds.minX, y: viewBounds.minY, width: viewBounds.width, height: minWidth)
-            contentView.topHorizontalIndicatorView.setThumb(start: horizontalLeadingOffset, end: horizontalTrailingOffset)
-
-            //        contentView.bottomHorizontalIndicatorView.frame = CGRect(x: viewBounds.minX, y: viewBounds.maxY - minWidth, width: viewBounds.width, height: minWidth)
-            //        contentView.bottomHorizontalIndicatorView.setThumb(start: horizontalLeadingOffset, end: horizontalTrailingOffset)
+            drawingView.topHorizontalIndicatorView.frame = CGRect(x: viewBounds.minX, y: viewBounds.minY, width: viewBounds.width, height: minWidth)
+            drawingView.topHorizontalIndicatorView.setThumb(start: horizontalLeadingOffset, end: horizontalTrailingOffset)
 
             let verticalLeading = viewBounds.minY - (zoomedDrawingBounds.minY - offset.y)
             let verticalLeadingRatio = verticalLeading / zoomedDrawingBounds.height
@@ -470,11 +367,113 @@ extension PencilCanvasView {
             let verticalTrailingRatio = verticalTrailing / zoomedDrawingBounds.height
             let verticalTrailingOffset = viewBounds.maxY - viewBounds.height * verticalTrailingRatio
 
-            contentView.leftVerticalIndicatorView.frame = CGRect(x: viewBounds.minX, y: viewBounds.minY, width: minWidth, height: viewBounds.height)
-            contentView.leftVerticalIndicatorView.setThumb(start: verticalLeadingOffset, end: verticalTrailingOffset)
+            drawingView.leftVerticalIndicatorView.frame = CGRect(x: viewBounds.minX, y: viewBounds.minY, width: minWidth, height: viewBounds.height)
+            drawingView.leftVerticalIndicatorView.setThumb(start: verticalLeadingOffset, end: verticalTrailingOffset)
 
-            //        contentView.rightVerticalIndicatorView.frame = CGRect(x: viewBounds.maxX - minWidth, y: viewBounds.minY, width: minWidth, height: viewBounds.height)
-            //        contentView.rightVerticalIndicatorView.setThumb(start: verticalLeadingOffset, end: verticalTrailingOffset)
+            drawingView.gridView.setNeedsDisplay()
+        }
+
+        var scaledDrawingBounds: CGRect {
+            let scale = drawingView.canvasView.zoomScale
+            return CGRect(x: drawing.bounds.minX * scale, y: drawing.bounds.minY * scale, width: drawing.bounds.width * scale, height: drawing.bounds.height * scale)
         }
     }
+
+//    final class OldViewController: UIViewController, PKCanvasViewDelegate {
+//
+//
+//
+//
+//        func _centerContent() {
+//            let contentSize = contentView.canvasView.contentSize
+//            let viewSize = contentView.canvasView.bounds
+//
+//            guard !viewSize.isEmpty else { return }
+//
+//            let centerX = (contentSize.width - viewSize.width) / 2
+//            let centerY = (contentSize.height - viewSize.height) / 2
+//
+//            contentView.canvasView.contentOffset = CGPoint(x: centerX, y: centerY)
+//            contentView.gridView.offset = contentView.canvasView.contentOffset
+//            contentView.gridView.zoomScale = contentView.canvasView.zoomScale
+//            contentNeedsBeingCentered = false
+//            print("Content centered")
+//        }
+//
+//        func showFullDrawing() {
+//            let canvasView = contentView.canvasView
+//            let gridView = contentView.gridView
+//
+//            let drawing = canvasView.drawing
+//            let drawingBounds = drawing.bounds
+//
+//            guard !drawingBounds.isEmpty else { return }
+//
+//            let drawingSize = drawingBounds.size
+//            let viewSize = canvasView.bounds.size
+//
+//            let widthScale = viewSize.width / drawingSize.width
+//            let heightScale = viewSize.height / drawingSize.height
+//            let scale = min(min(widthScale, heightScale), 1)
+//
+//            let scaledOffset = CGPoint(
+//                x: drawingBounds.minX * scale + (drawingSize.width * scale - viewSize.width) / 2,
+//                y: drawingBounds.minY * scale + (drawingSize.height * scale - viewSize.height) / 2
+//            )
+//
+//            canvasView.minimumZoomScale = min(canvasView.minimumZoomScale, scale)
+//            canvasView.zoomScale = scale
+//            gridView.zoomScale = scale
+//            canvasView.contentOffset = scaledOffset
+//            gridView.offset = scaledOffset
+//        }
+//
+//        func resetZoom() {
+//            contentView.canvasView.zoomScale = 1
+//            contentView.gridView.zoomScale = 1
+//        }
+//
+//
+//
+//        func moveToEdge(horizontal: Int, vertical: Int) {
+//            let canvasView = contentView.canvasView
+//            let gridView = contentView.gridView
+//
+//            guard !scaledDrawingBounds.isEmpty else { return }
+//
+//            let viewSize = canvasView.bounds.size
+//
+//            let scaledOffsetX: CGFloat
+//            let scaledOffsetY: CGFloat
+//
+//            switch horizontal {
+//            case 0:
+//                scaledOffsetX = scaledDrawingBounds.minX - viewSize.width * 0.05
+//            case 1:
+//                scaledOffsetX = scaledDrawingBounds.minX + (scaledDrawingBounds.size.width - viewSize.width) / 2
+//            case 2:
+//                scaledOffsetX = scaledDrawingBounds.minX + (scaledDrawingBounds.size.width - viewSize.width) + viewSize.width * 0.05
+//            default:
+//                return
+//            }
+//
+//            switch vertical {
+//            case 0:
+//                scaledOffsetY = scaledDrawingBounds.minY - viewSize.height * 0.05
+//            case 1:
+//                scaledOffsetY = scaledDrawingBounds.minY + (scaledDrawingBounds.size.height - viewSize.height) / 2
+//            case 2:
+//                scaledOffsetY = scaledDrawingBounds.minY + (scaledDrawingBounds.size.height - viewSize.height) + viewSize.height * 0.05
+//            default:
+//                return
+//            }
+//
+//            let scaledOffset = CGPoint(x: scaledOffsetX, y: scaledOffsetY)
+//
+//            canvasView.contentOffset = scaledOffset
+//            gridView.offset = scaledOffset
+//        }
+//
+//
+//    }
 }

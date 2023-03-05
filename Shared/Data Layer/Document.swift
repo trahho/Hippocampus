@@ -29,10 +29,8 @@ class Document: ObservableObject {
         self.url = url
         let informationUrl = url.appendingPathComponent("Information" + HippocampusApp.persistentExtension)
         let structureUrl = url.appendingPathComponent("Structure" + HippocampusApp.persistentExtension)
-        informationContainer = PersistentContainer(url: informationUrl, content: Information())
-        informationContainer.commitOnChange = true
-        structureContainer = PersistentContainer(url: structureUrl, content: Structure().setup())
-        structureContainer.commitOnChange = true
+        informationContainer = PersistentContainer(url: informationUrl, content: Information(), commitOnChange: true)
+        structureContainer = PersistentContainer(url: structureUrl, content: Structure().setup(), commitOnChange: true)
     }
 
     convenience init(name: String, local: Bool) {
@@ -41,7 +39,7 @@ class Document: ObservableObject {
     }
 
     func save() {
-        informationContainer.commit()
-        structureContainer.commit()
+        informationContainer.save()
+        structureContainer.save()
     }
 }

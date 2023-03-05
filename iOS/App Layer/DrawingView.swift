@@ -10,42 +10,45 @@ import PencilKit
 import SwiftUI
 
 struct DrawingView: View {
-    typealias PersistentDrawing = Structure.Aspect.Representation.DrawingView.PersistentDrawing
-    
+    typealias PersistentDrawingPoperties = Structure.Aspect.Representation.DrawingView.PersistentDrawingProperties
+    typealias PersistentDrawingDrawing = Structure.Aspect.Representation.DrawingView.PersistentDrawingDrawing
+
     @EnvironmentObject var document: Document
     var body: some View {
-        let dataUrl = document.url.appending(components: "drawing", "Test.persistentdrawing")
+        let dataUrl = document.url.appending(components: "drawing", "Test.properties")
         let drawingUrl = document.url.appending(components: "drawing", "Test.drawing")
-        let content = PersistentDrawing()
+        let content = PersistentDrawingPoperties()
         let container = PersistentContainer(url: dataUrl, content: content, commitOnChange: true)
-        let drawing = PKDrawing()
-        let dataContainer = PersistentDataContainer(url: drawingUrl, data: drawing.dataRepresentation())
-        PersistentDrawingContainerView(persistentDrawingContainer: container, persistentDataContainer: dataContainer)
+        let drawing = PersistentDrawingDrawing()
+        let dataContainer = PersistentContainer(url: drawingUrl, content: drawing, commitOnChange: true)
+        PersistentDrawingContainerView(drawingPropertiesContainer: container, drawingDataContainer: dataContainer)
     }
     
     struct PersistentDrawingContainerView: View {
-        @ObservedObject var persistentDrawingContainer: PersistentContainer<PersistentDrawing>
-        @ObservedObject var persistentDataContainer: PersistentDataContainer
+        @ObservedObject var drawingPropertiesContainer: PersistentContainer<PersistentDrawingPoperties>
+        @ObservedObject var drawingDataContainer: PersistentContainer<PersistentDrawingDrawing>
 
         var body: some View {
-            PersistentDrawingView(content: persistentDrawingContainer.content, drawing: persistentDataContainer)
+            PersistentDrawingView(drawingDataContainer: drawingDataContainer, drawingPropertiesContainer: drawingPropertiesContainer)
         }
     }
     
     struct PersistentDrawingView: View {
-        @ObservedObject var content: PersistentDrawing
-        @ObservedObject var drawing: PersistentDataContainer
+//        @ObservedObject var content: PersistentDrawing
+        @ObservedObject var drawingDataContainer: PersistentContainer<PersistentDrawingDrawing>
+        @ObservedObject var drawingPropertiesContainer: PersistentContainer<PersistentDrawingPoperties>
         
-        var drawingBinding: Binding<PKDrawing> {
-            Binding(get: { try! PKDrawing(data: drawing.data) }, set: { drawing.data = $0.dataRepresentation(); drawing.save() })
-        }
-        
-        var center: Binding<CGPoint> {
-            Binding(get: { content.center }, set: { content.center = $0; content.objectDidChange.send() })
-        }
-        
+//        var drawingBinding: Binding<PKDrawing> {
+//            Binding(get: { try! PKDrawing(data: drawingDataContainer.data) },
+//                    set: { drawingDataContainer.data = $0.dataRepresentation() })
+//        }
+//
         var body: some View {
-            PencilCanvasView(drawing: drawingBinding, center: center, background: content.background, format: content.pageFormat)
+            PencilCanvasView(drawing: $drawingDataContainer.content.drawing, center: $drawingPropertiesContainer.content.center, background: drawingPropertiesContainer.content.background, pageFormat: drawingPropertiesContainer.content.pageFormat)
         }
+        
+        func save() {}
+        
+        func merge() {}
     }
 }

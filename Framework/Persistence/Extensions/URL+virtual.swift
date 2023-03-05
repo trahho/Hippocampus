@@ -32,8 +32,15 @@ extension URL {
         FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     }
 
+    func startDownloading() {
+        guard self.isiCloud else { return }
+        try? FileManager.default.startDownloadingUbiquitousItem(at: self)
+    }
+
     func ensureDirectory() {
-        if !FileManager.default.fileExists(atPath: path) {
+        guard self.hasDirectoryPath else { return }
+        let directory = self.path(percentEncoded: false)
+        if  !FileManager.default.fileExists(atPath: directory) {
             try! FileManager.default.createDirectory(at: self, withIntermediateDirectories: true)
         }
     }
