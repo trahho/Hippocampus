@@ -7,7 +7,7 @@
 
 import Foundation
 
-@propertyWrapper final class Present<Target> where Target: PersistentObjectGraph.Object {
+@propertyWrapper final class Present<Target> where Target: PersistentData.Object {
     typealias TargetSet = Set<Target>
 
     @available(*, unavailable, message: "This property wrapper can only be applied to classes")
@@ -16,7 +16,7 @@ import Foundation
         set { fatalError() }
     }
 
-    var condition: PersistentObjectGraph.Condition
+    var condition: PersistentData.Condition
 
 //    var include: KeyPath<PersistentData, Set<Value>>?
 //
@@ -24,11 +24,11 @@ import Foundation
 //        self.include = include
 //    }
 
-    init(_ condition: PersistentObjectGraph.Condition = .always(true)) {
+    init(_ condition: PersistentData.Condition = .always(true)) {
         self.condition = condition
     }
 
-    public static subscript<Enclosing: PersistentObjectGraph>(_enclosingInstance instance: Enclosing,
+    public static subscript<Enclosing: PersistentData>(_enclosingInstance instance: Enclosing,
                                                        wrapped _: ReferenceWritableKeyPath<Enclosing, TargetSet>,
                                                        storage storageKeyPath: ReferenceWritableKeyPath<Enclosing, Present>) -> TargetSet
     {

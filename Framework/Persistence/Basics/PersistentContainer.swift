@@ -8,12 +8,19 @@
 import Combine
 import Foundation
 
-class PersistentContainer<Content: PersistentContent>: ObservableObject {
+protocol PersistentContainerReference {
+    func save()
+}
+
+class PersistentContainer<Content: PersistentContent>: PersistentContainerReference, ObservableObject {
     let url: URL
+    private var isMerging = false
     private var currentTimestamp: Date = .distantPast
     private let metadataQuery = NSMetadataQuery()
     private var querySubscriber: AnyCancellable?
-    private var contentSubscribers: Set<AnyCancellable> = []
+    private var didChangeSubcriber: AnyCancellable?
+    private var willChangeSubscriber: AnyCancellable?
+    public var dependentContainers: [PersistentContainerReference] = []
 
     var didRefresh: (() -> Void)?
     var willCommit: (() -> Void)?
@@ -26,34 +33,42 @@ class PersistentContainer<Content: PersistentContent>: ObservableObject {
         set {
             objectWillChange.send()
             _content = newValue
-            hasChanges = true
-            _content!.objectDidChange
-                .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
-//                .collect(.byTime(RunLoop.main, .seconds(0.5)))
-                .sink { [self] _ in
-                    if commitOnChange {
-                        save()
-                        hasChanges = false
-                    } else {
-                        hasChanges = true
-                    }
+            registerChanges()
+        }
+    }
+
+    fileprivate func registerChanges() {
+        didChangeSubcriber = content.objectDidChange
+            .debounce(for: .seconds(1.5), scheduler: RunLoop.main)
+            .sink { [self] _ in
+                guard !isMerging else { return }
+                if commitOnChange {
+                    hasChanges = true
+                    save()
+                    hasChanges = false
+                    dependentContainers.forEach { $0.save() }
+                } else {
+                    hasChanges = true
                 }
-                .store(in: &contentSubscribers)
-            if let content = _content as? (any ObservableObject), let publisher = (content.objectWillChange as any Publisher) as? (ObservableObjectPublisher) {
-                publisher
-                    .sink { [self] in
-                        self.objectWillChange.send()
-                    }
-                    .store(in: &contentSubscribers)
             }
+
+        if let content = _content as? (any ObservableObject), let publisher = (content.objectWillChange as any Publisher) as? (ObservableObjectPublisher) {
+            willChangeSubscriber = publisher
+                .sink { [self] in
+                    self.objectWillChange.send()
+                    hasChanges = true
+                }
+        } else {
+            willChangeSubscriber?.cancel()
+            willChangeSubscriber = nil
         }
     }
 
     func save() {
 //        let fileQueue = DispatchQueue(label: "de.kuehnerleben.Hippocampus.file", qos: .background)
 //        fileQueue.async { [self] in
+        guard !url.isVirtual, hasChanges, let data = content.encode() else { return }
         print("PersistentDataContainer<\(String(reflecting: Content.self))>: Save")
-        guard !url.isVirtual, let data = content.encode() else { return }
 
         metadataQuery.stop()
         willCommit?()
@@ -77,7 +92,9 @@ class PersistentContainer<Content: PersistentContent>: ObservableObject {
         print("PersistentDataContainer<\(String(reflecting: Content.self))>: Load")
         newContent.restore()
         do {
+            isMerging = true
             try content.merge(other: newContent)
+            isMerging = false
         } catch {
             content = newContent
         }
@@ -141,9 +158,8 @@ class PersistentContainer<Content: PersistentContent>: ObservableObject {
     }
 }
 
-
 //
-//class __PersistentContainer<Content>: ObservableObject where Content: PersistentContent {
+// class __PersistentContainer<Content>: ObservableObject where Content: PersistentContent {
 //    enum Error {
 //        case mergeFailed
 //    }
@@ -314,5 +330,5 @@ class PersistentContainer<Content: PersistentContent>: ObservableObject {
 //        guard metadataQuery.isStarted else { return }
 //        metadataQuery.stop()
 //    }
-//}
+// }
 //

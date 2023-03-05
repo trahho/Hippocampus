@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Structure: PersistentObjectGraph {
+class Structure: PersistentData {
     @Present var queries: Set<Query>
     @Present var roles: Set<Role>
 

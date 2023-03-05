@@ -7,7 +7,7 @@
 
 import Foundation
 
-@propertyWrapper final class Relations<Target>: PersistentRelationWrapper where Target: PersistentObjectGraph.Object {
+@propertyWrapper final class Relations<Target>: PersistentRelationWrapper where Target: PersistentData.Object {
     typealias TargetSet = Set<Target>
 
     @available(*, unavailable, message: "This property wrapper can only be applied to classes")
@@ -19,7 +19,7 @@ import Foundation
     private var key: String?
     private var reverseKey: String?
 
-    internal func getKey(from instance: PersistentObjectGraph.Object) -> String {
+    internal func getKey(from instance: PersistentData.Object) -> String {
         if let key, !key.isEmpty { return key }
 
         key = instance.getKey(for: self)
@@ -31,7 +31,7 @@ import Foundation
         reverseKey = reverse
     }
 
-    public static subscript<Enclosing: PersistentObjectGraph.Object>(_enclosingInstance instance: Enclosing,
+    public static subscript<Enclosing: PersistentData.Object>(_enclosingInstance instance: Enclosing,
                                                               wrapped wrappedKeyPath: ReferenceWritableKeyPath<Enclosing, TargetSet>,
                                                               storage storageKeyPath: ReferenceWritableKeyPath<Enclosing, Relations>)
         -> TargetSet
@@ -69,7 +69,7 @@ import Foundation
 
             added
                 .forEach { item in
-                    let edge = PersistentObjectGraph.Edge(from: instance, to: item)
+                    let edge = PersistentData.Edge(from: instance, to: item)
                     edge[role: key, timestamp: timestamp] = true
                     if let inversekey = storage.reverseKey {
                         item.objectWillChange.send()

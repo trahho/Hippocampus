@@ -7,7 +7,7 @@
 
 import Foundation
 
-@propertyWrapper final class Persistent<Value> where Value: PersistentObjectGraph.PersistentValue {
+@propertyWrapper final class Persistent<Value> where Value: PersistentData.PersistentValue {
     @available(*, unavailable, message: "This property wrapper can only be applied to classes")
     public var wrappedValue: Value {
         get { fatalError() }
@@ -18,7 +18,7 @@ import Foundation
 
     private var _key: String?
 
-    internal func getKey(from instance: PersistentObjectGraph.Object) -> String {
+    internal func getKey(from instance: PersistentData.Object) -> String {
         if let _key { return _key }
 
         _key = instance.getKey(for: self)
@@ -35,7 +35,7 @@ import Foundation
         _key = key
     }
 
-    public static subscript<Enclosing: PersistentObjectGraph.Object>(_enclosingInstance instance: Enclosing,
+    public static subscript<Enclosing: PersistentData.Object>(_enclosingInstance instance: Enclosing,
                                                               wrapped _: ReferenceWritableKeyPath<Enclosing, Value>,
                                                               storage storageKeyPath: ReferenceWritableKeyPath<Enclosing, Persistent>) -> Value
     {

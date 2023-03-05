@@ -8,8 +8,8 @@
 import Combine
 import Foundation
 
-extension PersistentObjectGraph {
-    open class Object: PersistentObjectGraph.Node {
+extension PersistentData {
+    open class Object: PersistentData.Node {
         public required init() {}
     }
 }
