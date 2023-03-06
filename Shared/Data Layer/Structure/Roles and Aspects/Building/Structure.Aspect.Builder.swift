@@ -16,10 +16,10 @@ extension Structure.Aspect {
         }
     }
 
-    convenience init(_ id: String, _ name: String, _ representation: Representation) {
+    convenience init(_ id: String, _ name: String, _ presentation: Presentation) {
         self.init()
         self.id = UUID(uuidString: id)!
         self.name = name
-        self.representation = representation
+        self.presentation = presentation
     }
 }

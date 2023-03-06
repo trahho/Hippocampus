@@ -95,9 +95,9 @@ struct NoteView: View {
     var body: some View {
         VStack(alignment: .leading) {
             if let note {
-                titleAspect.view(for: note, editable: editable)
-                textAspect.view(for: note, editable: editable)
-                drawingAspect.view(for: note, editable: editable)
+                titleAspect.view(for: note, as: .small, editable: editable)
+                textAspect.view(for: note, as: .normal, editable: editable)
+                drawingAspect.view(for: note, as: .normal, editable: editable)
             }
         }
         .toolbar {

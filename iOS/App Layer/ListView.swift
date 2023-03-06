@@ -20,13 +20,19 @@ struct ListView: View {
         query.apply(to: information)
     }
 
-    let listItem: Structure.Representation = .horizontal([
-        .aspect(Structure.Role.note.name, editable: true),
-        .vertical([
-            .aspect(Structure.Role.note.name, editable: false),
-            .aspect(Structure.Role.note.text, editable: false)
-        ], alignment: .leading)
-    ], alignment: .center)
+//    let listItem: Structure.Representation = .horizontal([
+//        .aspect(Structure.Role.note.name, form: .small, editable: true),
+//        .vertical([
+//            .aspect(Structure.Role.note.name, form: .small, editable: false),
+//            .aspect(Structure.Role.note.text, form: .normal, editable: false)
+//        ], alignment: .leading)
+//    ], alignment: .center)
+    
+    let listItem: Structure.Representation = .vertical([
+        .aspect(Structure.Role.note.name, form: .small, editable: false),
+        .aspect(Structure.Role.note.text, form: .small, editable: false),
+        .aspect(Structure.Role.note.zeichnung, form: .small, editable: false)
+    ], alignment: .leading)
 
 //    var items: [Mind.Idea] {
 //        conclusion.ideas.values

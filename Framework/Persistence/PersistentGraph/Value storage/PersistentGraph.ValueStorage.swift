@@ -16,7 +16,7 @@ extension PersistentGraph {
         case date(Date)
         case roles([Role])
         case predicates([Structure.Query.Predicate])
-        case aspectRepresentation(Structure.Aspect.Representation)
+        case aspectPresentation(Structure.Aspect.Presentation)
         case queryPredicate(Structure.Query.Predicate)
 
         init(_ value: (any PersistentGraph.PersistentValue)?) {
@@ -27,7 +27,7 @@ extension PersistentGraph {
             else if let date = value as? Date { self = .date(date) }
             else if let roles = value as? Set<Role> { self = .roles(roles.asArray) }
             else if let predicates = value as? [Structure.Query.Predicate] { self = .predicates(predicates) }
-            else if let aspectRepresentation = value as? Structure.Aspect.Representation { self = .aspectRepresentation(aspectRepresentation) }
+            else if let aspectPresentation = value as? Structure.Aspect.Presentation { self = .aspectPresentation(aspectPresentation) }
             else if let predicate = value as? Structure.Query.Predicate { self = .queryPredicate(predicate) }
             else { fatalError("Storage for \(value?.typeName ?? "Hä?") not available") }
         }
@@ -48,7 +48,7 @@ extension PersistentGraph {
                 return value.asSet
             case let .predicates(value):
                 return value
-            case let .aspectRepresentation(value):
+            case let .aspectPresentation(value):
                 return value
             case let .queryPredicate(value):
                 return value

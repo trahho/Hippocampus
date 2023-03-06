@@ -18,7 +18,7 @@ extension PencilCanvasView {
         func drawingDidChange(_ controller: Controller, drawing: PKDrawing) {
             guard !isBlocked else { return }
             isSending = true
-            print("Drawing Controller -> View")
+//            print("Drawing Controller -> View")
             view.drawing = drawing
             isSending = false
         }
@@ -26,7 +26,7 @@ extension PencilCanvasView {
         func centerDidChange(_ controller: Controller, center: CGPoint) {
             guard !isBlocked else { return }
             isSending = true
-            print("Center Controller -> View")
+//            print("Center Controller -> View")
             view.center = center
             isSending = false
         }

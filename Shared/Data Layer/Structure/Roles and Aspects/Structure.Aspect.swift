@@ -11,7 +11,7 @@ import SwiftUI
 extension Structure {
     class Aspect: Object {
         @Persistent var name: String = ""
-        @Persistent var representation: Representation
+        @Persistent var presentation: Presentation
 //        @Persistent var defaultValue: (any PersistentValue)?
 
         @Relation(inverse: "aspects") var role: Role!

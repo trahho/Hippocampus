@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 extension Structure.Aspect {
-    func view(for item: Information.Item, editable: Bool) -> some View {
-        self.representation.view(for:  item, in: self, editable: editable)
+    func view(for item: Information.Item, as form: Presentation.Form, editable: Bool) -> some View {
+        self.presentation.view(for:  item, in: self, as: form, editable: editable)
     }
 }

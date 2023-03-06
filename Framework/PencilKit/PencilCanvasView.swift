@@ -25,15 +25,15 @@ struct PencilCanvasView: UIViewControllerRepresentable {
         guard !context.coordinator.isSending else { return }
         context.coordinator.isBlocked = true
         
-        print("Drawing View -> Controller")
+//        print("Drawing View -> Controller")
         controller.drawing = drawing
         if center != .zero {
-            print("Center View -> Controller")
+//            print("Center View -> Controller")
             controller.center = center
         }
-        print("PageFormat View -> Controller")
+//        print("PageFormat View -> Controller")
         controller.pageFormat = pageFormat
-        print("Background View -> Controller")
+//        print("Background View -> Controller")
         controller.background = background
         
         context.coordinator.isBlocked = false
