@@ -10,10 +10,10 @@ import PencilKit
 import SwiftUI
 
 struct DrawingView: View {
-    typealias PersistentDrawingPoperties = Structure.Aspect.Representation.DrawingView.PersistentData.Properties
-    typealias PersistentDrawingDrawing = Structure.Aspect.Representation.DrawingView.PersistentData.Drawing
+    typealias PersistentDrawingPoperties = Document.Drawing.Properties
+    typealias PersistentDrawingDrawing = Document.Drawing.Drawing
 
-    typealias PersistentDrawing = Structure.Aspect.Representation.DrawingView.PersistentData
+    typealias PersistentDrawing = Document.Drawing
 
     @EnvironmentObject var document: Document
     var body: some View {
@@ -24,7 +24,7 @@ struct DrawingView: View {
 //        let drawing = PersistentDrawingDrawing()
 //        let dataContainer = PersistentContainer(url: drawingUrl, content: drawing, commitOnChange: true)
 //        PersistentDrawingContainerView(drawingPropertiesContainer: container, drawingDataContainer: dataContainer)
-        let drawing = PersistentDrawing(url: document.url.appending(components: "drawing", "Test"))
+        let drawing = PersistentDrawing(document: document, name: "Test")
         PersistentDrawingView(persistentDrawing: drawing)
     }
 

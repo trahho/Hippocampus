@@ -87,7 +87,12 @@ class PersistentContainer<Content: PersistentContent>: PersistentContainerRefere
         guard !url.isVirtual else { return }
         guard
             let modificationDate = try? FileManager.default.attributesOfItem(atPath: url.path(percentEncoded: false))[.modificationDate] as? Date,
-            modificationDate > currentTimestamp,
+            modificationDate > currentTimestamp
+        else {
+            if url.isiCloud { url.deletingLastPathComponent().startDownloading() }
+            return
+        }
+        guard
             let data = try? Data(contentsOf: url, options: [.uncached]),
             let newContent = Content.decode(persistentData: data)
         else { return }
@@ -116,6 +121,7 @@ class PersistentContainer<Content: PersistentContent>: PersistentContainerRefere
             .receive(on: DispatchQueue.main)
             .sink { [self] notification in
                 guard let query = notification.object as? NSMetadataQuery, query === self.metadataQuery else { return }
+//                let items = query.results.compactMap { $0 as? NSMetadataItem }//.filter { $0.value(forAttribute: nsmetdata) as! Bool == false }
                 query.disableUpdates()
                 self.load()
                 query.enableUpdates()

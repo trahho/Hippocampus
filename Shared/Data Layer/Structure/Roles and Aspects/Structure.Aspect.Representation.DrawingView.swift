@@ -27,20 +27,17 @@ extension Structure.Aspect.Representation {
         //        }
         
         var body: some View {
-            let dataUrl = document.url.appending(components: "drawing", "\(item.id)--\(aspect.id)")
-            let data = PersistentData(url: document.url)
+            let data = Document.Drawing(document: document, name:  "\(item.id)--\(aspect.id)")
             CanvasHostView(data: data, editable: editable)
         }
         
         struct CanvasHostView: View {
-            @ObservedObject var data: PersistentData
+            @ObservedObject var data: Document.Drawing
             
             var editable: Bool
             
             var body: some View {
-                Rectangle()
-                    .foregroundColor(.blue)
-                    .frame(width: 100, height: 100)
+                PencilCanvasView(drawing: $data.drawing, center: $data.center, background: data.background, pageFormat: data.pageFormat)
             }
         }
     }

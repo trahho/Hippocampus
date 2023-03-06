@@ -9,7 +9,7 @@ import Foundation
 import PencilKit
 import Combine
 
-extension Structure.Aspect.Representation.DrawingView.PersistentData {
+extension Document.Drawing {
     class Drawing: PersistentContent, ObservableObject {
         private var isMerging = false
 

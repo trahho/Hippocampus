@@ -8,8 +8,8 @@
 import Foundation
 import PencilKit
 
-extension Structure.Aspect.Representation.DrawingView {
-    class PersistentData: ObservableObject {
+extension Document {
+    class Drawing: ObservableObject {
         @Observed private var drawingContainer: PersistentContainer<Drawing>
         @Observed private var propertiesContainer: PersistentContainer<Properties>
         
@@ -39,7 +39,8 @@ extension Structure.Aspect.Representation.DrawingView {
             }
         }
         
-        init(url: URL) {
+        init(document: Document, name: String) {
+            let url = document.url.appending(components: "drawings", name)
             drawingContainer = PersistentContainer(url: url.appending(component: "drawing"), content: Drawing(), commitOnChange: true)
             propertiesContainer = PersistentContainer(url: url.appending(component: "properties"), content: Properties(), commitOnChange: false)
             drawingContainer.dependentContainers.append(propertiesContainer)
