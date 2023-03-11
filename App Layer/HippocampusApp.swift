@@ -29,7 +29,7 @@ struct HippocampusApp: App {
     var body: some Scene {
         WindowGroup {
             DocumentView(document: document)
-//                .onOpenURL { self._document.wrappedValue = Document(url: $0) }
+//                .onOpenURL { document = Document(url: $0) }
         }
     }
 }

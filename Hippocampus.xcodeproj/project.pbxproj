@@ -286,7 +286,6 @@
 		C5E4CB02294BDD4B00755959 /* Relation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E4CB01294BDD4B00755959 /* Relation.swift */; };
 		C5E4CB03294BDD4B00755959 /* Relation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E4CB01294BDD4B00755959 /* Relation.swift */; };
 		C5E4CB04294BDD4B00755959 /* Relation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E4CB01294BDD4B00755959 /* Relation.swift */; };
-		C5E966B029A956ED009D81FF /* DrawingTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E966AF29A956ED009D81FF /* DrawingTestView.swift */; };
 		C5E966B429AAA931009D81FF /* PencilCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E966B329AAA931009D81FF /* PencilCanvasView.swift */; };
 		C5E966B829AAAA8A009D81FF /* PencilCanvasView.ArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E966B729AAAA8A009D81FF /* PencilCanvasView.ArrowView.swift */; };
 		C5E966BC29AAB465009D81FF /* PencilCanvasView.ScrollIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E966BB29AAB465009D81FF /* PencilCanvasView.ScrollIndicatorView.swift */; };
@@ -447,7 +446,6 @@
 		C5C4A114293C0D4F00FF9AB8 /* PersistentGraph.Change.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentGraph.Change.swift; sourceTree = "<group>"; };
 		C5C4A12A2942701100FF9AB8 /* SerialisationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialisationTests.swift; sourceTree = "<group>"; };
 		C5C8E856295A652B002C7746 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		C5C8E85A295A6574002C7746 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C5C8E85D295AFD4E002C7746 /* Structure.Role.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structure.Role.swift; sourceTree = "<group>"; };
 		C5C8E860295AFD8E002C7746 /* Structure.Aspect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structure.Aspect.swift; sourceTree = "<group>"; };
 		C5C8E863295AFDCA002C7746 /* Structure.Role.Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structure.Role.Builder.swift; sourceTree = "<group>"; };
@@ -472,7 +470,6 @@
 		C5E35545294E632F0015CDFD /* PersistentGraph.TimedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentGraph.TimedValue.swift; sourceTree = "<group>"; };
 		C5E4CB01294BDD4B00755959 /* Relation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relation.swift; sourceTree = "<group>"; };
 		C5E4CB05294BDEA000755959 /* PersistentDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentDataTests.swift; sourceTree = "<group>"; };
-		C5E966AF29A956ED009D81FF /* DrawingTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingTestView.swift; sourceTree = "<group>"; };
 		C5E966B329AAA931009D81FF /* PencilCanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilCanvasView.swift; sourceTree = "<group>"; };
 		C5E966B729AAAA8A009D81FF /* PencilCanvasView.ArrowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilCanvasView.ArrowView.swift; sourceTree = "<group>"; };
 		C5E966BB29AAB465009D81FF /* PencilCanvasView.ScrollIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilCanvasView.ScrollIndicatorView.swift; sourceTree = "<group>"; };
@@ -566,8 +563,8 @@
 				C55AC5BC295A13E200F09326 /* Obsolete */,
 				C54BE4BF28958F470060A066 /* Framework */,
 				C55AC5D1295A4A0000F09326 /* Data Layer */,
-				C54BE5482895DCD50060A066 /* App Layer */,
 				C5AAA0D029BBC261000DA6C3 /* Display Layer */,
+				C54BE5482895DCD50060A066 /* App Layer */,
 				C54BE4AF2894866C0060A066 /* macOS */,
 				C58FB450291EF2AB00D0B713 /* iOS */,
 				C528A18228CDE2A90027FA44 /* HippocampusTestsMacOS */,
@@ -730,6 +727,9 @@
 			children = (
 				C54BE4A12894866A0060A066 /* HippocampusApp.swift */,
 				C5D2735B2975E08400F32EB6 /* HippocampusApp.DocumentView.swift */,
+				C5C8E856295A652B002C7746 /* ContentView.swift */,
+				C58FB452291F215500D0B713 /* ListView.swift */,
+				C548BCBA292ADA8600DB6185 /* NoteView.swift */,
 			);
 			path = "App Layer";
 			sourceTree = "<group>";
@@ -823,10 +823,6 @@
 		C58FB451291F20BF00D0B713 /* App Layer */ = {
 			isa = PBXGroup;
 			children = (
-				C5C8E856295A652B002C7746 /* ContentView.swift */,
-				C5E966AF29A956ED009D81FF /* DrawingTestView.swift */,
-				C58FB452291F215500D0B713 /* ListView.swift */,
-				C548BCBA292ADA8600DB6185 /* NoteView.swift */,
 			);
 			path = "App Layer";
 			sourceTree = "<group>";
@@ -964,7 +960,6 @@
 		C5C8E859295A6559002C7746 /* App Layer */ = {
 			isa = PBXGroup;
 			children = (
-				C5C8E85A295A6574002C7746 /* ContentView.swift */,
 			);
 			path = "App Layer";
 			sourceTree = "<group>";
@@ -1408,7 +1403,6 @@
 				C55AC5B52957C7C600F09326 /* PersistentGraph.Condition.swift in Sources */,
 				C5AAA0EA29BD1F57000DA6C3 /* Document.Drawing.Background.swift in Sources */,
 				C5D2735C2975E08400F32EB6 /* HippocampusApp.DocumentView.swift in Sources */,
-				C5E966B029A956ED009D81FF /* DrawingTestView.swift in Sources */,
 				C5C4A0CB293A9F9400FF9AB8 /* IdentifiableObject.swift in Sources */,
 				C5C4A0DD293AB7D500FF9AB8 /* PersistentGraph.Node.swift in Sources */,
 				C564EB8C29B541F500F3E0AC /* measureDuration.swift in Sources */,
