@@ -27,7 +27,7 @@ struct ListView: View {
 //            .aspect(Structure.Role.note.text, form: .normal, editable: false)
 //        ], alignment: .leading)
 //    ], alignment: .center)
-    
+
     let listItem: Structure.Representation = .vertical([
         .aspect(Structure.Role.note.name, form: .small, editable: false),
         .aspect(Structure.Role.note.text, form: .small, editable: false),
@@ -56,17 +56,26 @@ struct ListView: View {
                     a.item[String.self, nameAspect] ?? "" < b.item[String.self, nameAspect] ?? ""
                 })
 //                .sorted(using: Aspect.Comparator(order: sortOrder, aspect: Perspective.note.name))
-            ScrollView {
-                ForEach(items) { item in
-                    listItem.view(for: item.item, editable: true)
-                        .padding(2)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            editSheetItem = item
-                        }
+//            ScrollView {
+//                VStack(alignment: .leading) {
+            ForEach(items) { item in
+//                listItem.view(for: item.item, editable: true)
+                VStack(alignment: .leading) {
+                    Structure.Role.note.name.view(for: item.item, as: .small, editable: false)
+                    Structure.Role.note.text.view(for: item.item, as: .small, editable: false)
+                    Structure.Role.note.zeichnung.view(for: item.item, as: .small, editable: false)
+                        .background(.red)
                 }
+                    .padding(2)
+//                            .frame(maxWidth: .infinity, alignment: .leading)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        editSheetItem = item
+                    }
             }
+//                }
+//            }
+            .frame(maxWidth: .infinity, alignment: .leading)
 //            .navigationDestination(for: Structure.Query.Result.Node.self) { note in
 //                EditNoteView(modification: information.transaction().started(), note: note.item as! Information.Node)
 //            }

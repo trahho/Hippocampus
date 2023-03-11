@@ -10,8 +10,8 @@ import Foundation
 class Document: ObservableObject {
     @Observed var informationContainer: PersistentContainer<Information>
     @Observed var structureContainer: PersistentContainer<Structure>
-    
-    private (set) var url: URL
+
+    private(set) var url: URL
 
     var information: Information {
         informationContainer.content
@@ -42,4 +42,46 @@ class Document: ObservableObject {
         informationContainer.save()
         structureContainer.save()
     }
+
+    struct Cache<Content: AnyObject> {
+        weak var content: Content?
+    }
+
+    private var drawings: [String: Cache<Drawing>] = [:]
+
+    func getDrawing(item: Information.Item, aspect: Structure.Aspect) -> Drawing {
+        let title = "\(item.id)--\(aspect.id)"
+        if let result = drawings[title]?.content {
+           return result
+        } else {
+            let drawing = Drawing(document: self, name: title)
+            drawings[title] = Cache(content: drawing)
+            return drawing
+        }
+    }
+    
+//    func getDrawing(item: Information.Item, aspect: Structure.Aspect) -> Drawing {
+//        let title = "\(item.id)--\(aspect.id)"
+//        if let result = drawings[title] {
+//            drawings[title] = (result.drawing, result.count + 1)
+//            print("Drawing added: \(drawings[title]?.count ?? 0)")
+//            return result.drawing
+//        } else {
+//            let drawing = Drawing(document: self, name: title)
+//            drawings[title] = (drawing, 1)
+//            print("Drawing added: \(drawings[title]?.count ?? 0)")
+//            return drawing
+//        }
+//    }
+
+//    func releaseDrawing(item: Information.Item, aspect: Structure.Aspect) {
+//        let title = "\(item.id)--\(aspect.id)"
+//        guard let result = drawings[title] else { return }
+//        if result.count == 1 {
+//            drawings.removeValue(forKey: title)
+//        } else {
+//            drawings[title] = (result.drawing, result.count - 1)
+//        }
+//        print("Drawing removed: \(drawings[title]?.count ?? 0)")
+//    }
 }

@@ -9,7 +9,7 @@ import Foundation
 import PencilKit
 import SwiftUI
 
-struct DrawingView: View {
+struct DrawingTestView: View {
     typealias PersistentDrawingPoperties = Document.Drawing.Properties
     typealias PersistentDrawingDrawing = Document.Drawing.Drawing
 

@@ -7,6 +7,7 @@
 
 import Foundation
 import PencilKit
+import Combine
 
 extension Document {
     class Drawing: ObservableObject {
@@ -41,6 +42,7 @@ extension Document {
         
         init(document: Document, name: String) {
             let url = document.url.appending(components: "drawings", name)
+//            objectWillChange.handleEvents()
             drawingContainer = PersistentContainer(url: url.appending(component: "drawing"), content: Drawing(), commitOnChange: true)
             propertiesContainer = PersistentContainer(url: url.appending(component: "properties"), content: Properties(), commitOnChange: false)
             drawingContainer.dependentContainers.append(propertiesContainer)
