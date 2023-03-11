@@ -14,8 +14,8 @@ extension Document.Drawing {
         private var isMerging = false
 
         @PublishedSerialized var center: CGPoint = .zero
-        @PublishedSerialized var pageFormat: PencilCanvasView.PageFormat = .A4
-        @PublishedSerialized var background: PencilCanvasView.Background = .shorthandGrid
+        @PublishedSerialized var pageFormat: PageFormat = .A4
+        @PublishedSerialized var background: Background = .shorthandGrid
 
         // MARK: - Publishers
 

@@ -104,6 +104,7 @@ class PersistentContainer<Content: PersistentContent>: PersistentContainerRefere
             isMerging = false
         } catch {
             content = newContent
+            isMerging = false
         }
         currentTimestamp = modificationDate
         hasChanges = false

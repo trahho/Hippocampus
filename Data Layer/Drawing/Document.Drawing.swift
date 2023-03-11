@@ -5,9 +5,9 @@
 //  Created by Guido Kühn on 05.03.23.
 //
 
+import Combine
 import Foundation
 import PencilKit
-import Combine
 
 extension Document {
     class Drawing: ObservableObject {
@@ -26,14 +26,14 @@ extension Document {
             set { propertiesContainer.content.center = newValue }
         }
         
-        var background: PencilCanvasView.Background {
+        var background: Background {
             get { propertiesContainer.content.background }
             set {
                 propertiesContainer.content.background = newValue
             }
         }
         
-        var pageFormat: PencilCanvasView.PageFormat {
+        var pageFormat: PageFormat {
             get { propertiesContainer.content.pageFormat }
             set {
                 propertiesContainer.content.pageFormat = newValue

@@ -41,10 +41,6 @@ struct ListView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Toggle(isOn: $refresh) {
-                Text("Refresh")
-            }
-            .hidden()
             Button {
                 addSheetIsPresented.toggle()
             } label: {
@@ -56,25 +52,18 @@ struct ListView: View {
                     a.item[String.self, nameAspect] ?? "" < b.item[String.self, nameAspect] ?? ""
                 })
 //                .sorted(using: Aspect.Comparator(order: sortOrder, aspect: Perspective.note.name))
-//            ScrollView {
-//                VStack(alignment: .leading) {
-            ForEach(items) { item in
-//                listItem.view(for: item.item, editable: true)
+            ScrollView {
                 VStack(alignment: .leading) {
-                    Structure.Role.note.name.view(for: item.item, as: .small, editable: false)
-                    Structure.Role.note.text.view(for: item.item, as: .small, editable: false)
-                    Structure.Role.note.zeichnung.view(for: item.item, as: .small, editable: false)
-                        .background(.red)
-                }
-                    .padding(2)
-//                            .frame(maxWidth: .infinity, alignment: .leading)
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        editSheetItem = item
+                    ForEach(items) { item in
+                        listItem.view(for: item.item, editable: false)
+                            .padding(2)
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                editSheetItem = item
+                            }
                     }
+                }
             }
-//                }
-//            }
             .frame(maxWidth: .infinity, alignment: .leading)
 //            .navigationDestination(for: Structure.Query.Result.Node.self) { note in
 //                EditNoteView(modification: information.transaction().started(), note: note.item as! Information.Node)

@@ -12,8 +12,8 @@ import SwiftUI
 struct PencilCanvasView: UIViewControllerRepresentable {
     @Binding var drawing: PKDrawing
     @Binding var center: CGPoint
-    @State var background: Background
-    @State var pageFormat: PageFormat
+    @State var background: Document.Drawing.Background
+    @State var pageFormat: Document.Drawing.PageFormat
 
     func makeUIViewController(context: Context) -> Controller {
         let controller = Controller()

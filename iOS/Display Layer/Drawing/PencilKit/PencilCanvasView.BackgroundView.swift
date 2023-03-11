@@ -23,13 +23,13 @@ extension PencilCanvasView {
             }
         }
         
-        var mode: Background = .squares {
+        var mode: Document.Drawing.Background = .squares {
             didSet {
                 setNeedsDisplay()
             }
         }
         
-        var page: PageFormat = .A4
+        var page: Document.Drawing.PageFormat = .A4
         var canvas: PKCanvasView!
         
         //    var lineDistance: CGFloat = 20

@@ -136,7 +136,7 @@ extension PencilCanvasView {
         
         // MARK: - - Grid properties
         
-        var background: Background {
+        var background: Document.Drawing.Background {
             get { drawingView.gridView.mode }
             set {
                 guard drawingView.gridView.mode != newValue else { return }
@@ -144,7 +144,7 @@ extension PencilCanvasView {
             }
         }
         
-        var pageFormat: PageFormat {
+        var pageFormat: Document.Drawing.PageFormat {
             get { drawingView.gridView.page }
             set {
                 guard drawingView.gridView.page != newValue else { return }

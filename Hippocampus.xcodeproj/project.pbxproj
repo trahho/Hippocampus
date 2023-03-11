@@ -174,11 +174,19 @@
 		C5A7929E29A4078400637C6C /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A7929D29A4078400637C6C /* DrawingView.swift */; };
 		C5A7929F29A4078400637C6C /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A7929D29A4078400637C6C /* DrawingView.swift */; };
 		C5A792A029A4078400637C6C /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A7929D29A4078400637C6C /* DrawingView.swift */; };
-		C5AAA0CE29BBC1E9000DA6C3 /* PencilCanvasView.Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E966BF29AAB6D8009D81FF /* PencilCanvasView.Background.swift */; };
-		C5AAA0CF29BBC1FC000DA6C3 /* PencilCanvasView.PageFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E966C329AAB7A0009D81FF /* PencilCanvasView.PageFormat.swift */; };
-		C5AAA0D429BD107D000DA6C3 /* DrawingView.CanvasView(iOS).swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AAA0D329BD107D000DA6C3 /* DrawingView.CanvasView(iOS).swift */; };
-		C5AAA0D529BD107D000DA6C3 /* DrawingView.CanvasView(iOS).swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AAA0D329BD107D000DA6C3 /* DrawingView.CanvasView(iOS).swift */; };
-		C5AAA0D629BD107D000DA6C3 /* DrawingView.CanvasView(iOS).swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AAA0D329BD107D000DA6C3 /* DrawingView.CanvasView(iOS).swift */; };
+		C5AAA0D429BD107D000DA6C3 /* DrawingView.CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AAA0D329BD107D000DA6C3 /* DrawingView.CanvasView.swift */; };
+		C5AAA0DB29BD12B1000DA6C3 /* DrawingView.CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AAA0DA29BD12B1000DA6C3 /* DrawingView.CanvasView.swift */; };
+		C5AAA0DC29BD12B1000DA6C3 /* DrawingView.CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AAA0DA29BD12B1000DA6C3 /* DrawingView.CanvasView.swift */; };
+		C5AAA0DE29BD12F1000DA6C3 /* DrawingView.ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AAA0DD29BD12F1000DA6C3 /* DrawingView.ImageView.swift */; };
+		C5AAA0E029BD1355000DA6C3 /* DrawingView.ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AAA0DF29BD1355000DA6C3 /* DrawingView.ImageView.swift */; };
+		C5AAA0E329BD1D47000DA6C3 /* Document.Drawing.PageFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AAA0E229BD1D47000DA6C3 /* Document.Drawing.PageFormat.swift */; };
+		C5AAA0E729BD1E3B000DA6C3 /* PkDrawing+strokesIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AAA0E629BD1E3B000DA6C3 /* PkDrawing+strokesIn.swift */; };
+		C5AAA0E829BD1E3B000DA6C3 /* PkDrawing+strokesIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AAA0E629BD1E3B000DA6C3 /* PkDrawing+strokesIn.swift */; };
+		C5AAA0EA29BD1F57000DA6C3 /* Document.Drawing.Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AAA0E929BD1F57000DA6C3 /* Document.Drawing.Background.swift */; };
+		C5AAA0EB29BD1F57000DA6C3 /* Document.Drawing.Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AAA0E929BD1F57000DA6C3 /* Document.Drawing.Background.swift */; };
+		C5AAA0EC29BD2136000DA6C3 /* Document.Drawing.PageFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AAA0E229BD1D47000DA6C3 /* Document.Drawing.PageFormat.swift */; };
+		C5AAA0EE29BD27DC000DA6C3 /* NSImage+scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AAA0ED29BD27DC000DA6C3 /* NSImage+scale.swift */; };
+		C5AAA0F029BD2B64000DA6C3 /* UIImage+scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AAA0EF29BD2B64000DA6C3 /* UIImage+scale.swift */; };
 		C5C4A0C8293A83C100FF9AB8 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A0C7293A83C100FF9AB8 /* URL.swift */; };
 		C5C4A0C9293A840300FF9AB8 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A0C7293A83C100FF9AB8 /* URL.swift */; };
 		C5C4A0CB293A9F9400FF9AB8 /* IdentifiableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A0CA293A9F9400FF9AB8 /* IdentifiableObject.swift */; };
@@ -282,8 +290,8 @@
 		C5E966B429AAA931009D81FF /* PencilCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E966B329AAA931009D81FF /* PencilCanvasView.swift */; };
 		C5E966B829AAAA8A009D81FF /* PencilCanvasView.ArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E966B729AAAA8A009D81FF /* PencilCanvasView.ArrowView.swift */; };
 		C5E966BC29AAB465009D81FF /* PencilCanvasView.ScrollIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E966BB29AAB465009D81FF /* PencilCanvasView.ScrollIndicatorView.swift */; };
-		C5E966C029AAB6D8009D81FF /* PencilCanvasView.Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E966BF29AAB6D8009D81FF /* PencilCanvasView.Background.swift */; };
-		C5E966C429AAB7A0009D81FF /* PencilCanvasView.PageFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E966C329AAB7A0009D81FF /* PencilCanvasView.PageFormat.swift */; };
+		C5E966C029AAB6D8009D81FF /* Document.Drawing.Background+draw.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E966BF29AAB6D8009D81FF /* Document.Drawing.Background+draw.swift */; };
+		C5E966C429AAB7A0009D81FF /* Document.Drawing.PageFormat+draw.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E966C329AAB7A0009D81FF /* Document.Drawing.PageFormat+draw.swift */; };
 		C5E966C829AAC23E009D81FF /* PencilCanvasView.BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E966C729AAC23E009D81FF /* PencilCanvasView.BackgroundView.swift */; };
 		C5E966D029AAD47D009D81FF /* Raleway-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C5E966CC29AAD47D009D81FF /* Raleway-SemiBold.ttf */; };
 		C5E966D129AAD47D009D81FF /* Raleway-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C5E966CC29AAD47D009D81FF /* Raleway-SemiBold.ttf */; };
@@ -415,7 +423,15 @@
 		C59E287D2979D394007375D5 /* Structure.Representation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structure.Representation.swift; sourceTree = "<group>"; };
 		C59E2881297B2434007375D5 /* Structure.Aspect.Presentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structure.Aspect.Presentation.swift; sourceTree = "<group>"; };
 		C5A7929D29A4078400637C6C /* DrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingView.swift; sourceTree = "<group>"; };
-		C5AAA0D329BD107D000DA6C3 /* DrawingView.CanvasView(iOS).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DrawingView.CanvasView(iOS).swift"; sourceTree = "<group>"; };
+		C5AAA0D329BD107D000DA6C3 /* DrawingView.CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingView.CanvasView.swift; sourceTree = "<group>"; };
+		C5AAA0DA29BD12B1000DA6C3 /* DrawingView.CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingView.CanvasView.swift; sourceTree = "<group>"; };
+		C5AAA0DD29BD12F1000DA6C3 /* DrawingView.ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingView.ImageView.swift; sourceTree = "<group>"; };
+		C5AAA0DF29BD1355000DA6C3 /* DrawingView.ImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingView.ImageView.swift; sourceTree = "<group>"; };
+		C5AAA0E229BD1D47000DA6C3 /* Document.Drawing.PageFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.Drawing.PageFormat.swift; sourceTree = "<group>"; };
+		C5AAA0E629BD1E3B000DA6C3 /* PkDrawing+strokesIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PkDrawing+strokesIn.swift"; sourceTree = "<group>"; };
+		C5AAA0E929BD1F57000DA6C3 /* Document.Drawing.Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.Drawing.Background.swift; sourceTree = "<group>"; };
+		C5AAA0ED29BD27DC000DA6C3 /* NSImage+scale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+scale.swift"; sourceTree = "<group>"; };
+		C5AAA0EF29BD2B64000DA6C3 /* UIImage+scale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+scale.swift"; sourceTree = "<group>"; };
 		C5C4A0C7293A83C100FF9AB8 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		C5C4A0CA293A9F9400FF9AB8 /* IdentifiableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableObject.swift; sourceTree = "<group>"; };
 		C5C4A0CD293AAEAF00FF9AB8 /* PersistentGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentGraph.swift; sourceTree = "<group>"; };
@@ -460,8 +476,8 @@
 		C5E966B329AAA931009D81FF /* PencilCanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilCanvasView.swift; sourceTree = "<group>"; };
 		C5E966B729AAAA8A009D81FF /* PencilCanvasView.ArrowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilCanvasView.ArrowView.swift; sourceTree = "<group>"; };
 		C5E966BB29AAB465009D81FF /* PencilCanvasView.ScrollIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilCanvasView.ScrollIndicatorView.swift; sourceTree = "<group>"; };
-		C5E966BF29AAB6D8009D81FF /* PencilCanvasView.Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilCanvasView.Background.swift; sourceTree = "<group>"; };
-		C5E966C329AAB7A0009D81FF /* PencilCanvasView.PageFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilCanvasView.PageFormat.swift; sourceTree = "<group>"; };
+		C5E966BF29AAB6D8009D81FF /* Document.Drawing.Background+draw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Document.Drawing.Background+draw.swift"; sourceTree = "<group>"; };
+		C5E966C329AAB7A0009D81FF /* Document.Drawing.PageFormat+draw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Document.Drawing.PageFormat+draw.swift"; sourceTree = "<group>"; };
 		C5E966C729AAC23E009D81FF /* PencilCanvasView.BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilCanvasView.BackgroundView.swift; sourceTree = "<group>"; };
 		C5E966CC29AAD47D009D81FF /* Raleway-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-SemiBold.ttf"; sourceTree = "<group>"; };
 		C5E966CD29AAD47D009D81FF /* Raleway-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Regular.ttf"; sourceTree = "<group>"; };
@@ -545,26 +561,18 @@
 				C54BE558289618300060A066 /* Hippocampus--iOS--Info.plist */,
 				C54BE556289616680060A066 /* Hippocampus (iOS).entitlements */,
 				C54BE557289617140060A066 /* Hippocampus--macOS--Info.plist */,
+				C54BE4A32894866C0060A066 /* Assets.xcassets */,
+				C5E966CB29AAD47D009D81FF /* Fonts */,
 				C55AC5BC295A13E200F09326 /* Obsolete */,
 				C54BE4BF28958F470060A066 /* Framework */,
-				C54BE4A02894866A0060A066 /* Shared */,
+				C55AC5D1295A4A0000F09326 /* Data Layer */,
+				C54BE5482895DCD50060A066 /* App Layer */,
+				C5AAA0D029BBC261000DA6C3 /* Display Layer */,
 				C54BE4AF2894866C0060A066 /* macOS */,
 				C58FB450291EF2AB00D0B713 /* iOS */,
 				C528A18228CDE2A90027FA44 /* HippocampusTestsMacOS */,
 				C54BE4A92894866C0060A066 /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		C54BE4A02894866A0060A066 /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-				C5E966CB29AAD47D009D81FF /* Fonts */,
-				C54BE5482895DCD50060A066 /* App Layer */,
-				C55AC5D1295A4A0000F09326 /* Data Layer */,
-				C5AAA0D029BBC261000DA6C3 /* Display Layer */,
-				C54BE4A32894866C0060A066 /* Assets.xcassets */,
-			);
-			path = Shared;
 			sourceTree = "<group>";
 		};
 		C54BE4A92894866C0060A066 /* Products */ = {
@@ -580,6 +588,7 @@
 		C54BE4AF2894866C0060A066 /* macOS */ = {
 			isa = PBXGroup;
 			children = (
+				C5AAA0F129BD3149000DA6C3 /* Display Layer */,
 				C54BE4B02894866C0060A066 /* macOS.entitlements */,
 				C5C8E859295A6559002C7746 /* App Layer */,
 			);
@@ -589,6 +598,7 @@
 		C54BE4BF28958F470060A066 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				C5AAA0E529BD1E28000DA6C3 /* PencilKit */,
 				C564EB8A29B541E300F3E0AC /* Global */,
 				C54BE510289591830060A066 /* Dependency Injection */,
 				C54BE50C289591700060A066 /* SwiftUI Technical */,
@@ -679,6 +689,8 @@
 				C54BE506289591530060A066 /* Set+asArray.swift */,
 				C54BE507289591530060A066 /* Array+asSet.swift */,
 				C504036A290DDE8D0083AC41 /* CaseIterable+StringConversion.swift */,
+				C5AAA0ED29BD27DC000DA6C3 /* NSImage+scale.swift */,
+				C5AAA0EF29BD2B64000DA6C3 /* UIImage+scale.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -781,6 +793,8 @@
 			isa = PBXGroup;
 			children = (
 				C564EB7E29B5326A00F3E0AC /* Document.Drawing.swift */,
+				C5AAA0E229BD1D47000DA6C3 /* Document.Drawing.PageFormat.swift */,
+				C5AAA0E929BD1F57000DA6C3 /* Document.Drawing.Background.swift */,
 				C564EB8229B5337700F3E0AC /* Document.Drawing.Drawing.swift */,
 				C564EB8629B533FE00F3E0AC /* Document.Drawing.Properties.swift */,
 			);
@@ -790,15 +804,9 @@
 		C564EB9229B5439E00F3E0AC /* Drawing */ = {
 			isa = PBXGroup;
 			children = (
-				C5E966B329AAA931009D81FF /* PencilCanvasView.swift */,
-				C564EB9329B5442200F3E0AC /* PencilCanvasView.Coordinator.swift */,
-				C564EB9729B5446600F3E0AC /* PencilCanvasView.View.swift */,
-				C564EB9B29B544CA00F3E0AC /* PencilCanvasView.Controller.swift */,
-				C5E966B729AAAA8A009D81FF /* PencilCanvasView.ArrowView.swift */,
-				C5E966BB29AAB465009D81FF /* PencilCanvasView.ScrollIndicatorView.swift */,
-				C5E966BF29AAB6D8009D81FF /* PencilCanvasView.Background.swift */,
-				C5E966C729AAC23E009D81FF /* PencilCanvasView.BackgroundView.swift */,
-				C5E966C329AAB7A0009D81FF /* PencilCanvasView.PageFormat.swift */,
+				C5AAA0E129BD152C000DA6C3 /* PencilKit */,
+				C5AAA0D329BD107D000DA6C3 /* DrawingView.CanvasView.swift */,
+				C5AAA0DD29BD12F1000DA6C3 /* DrawingView.ImageView.swift */,
 			);
 			path = Drawing;
 			sourceTree = "<group>";
@@ -859,26 +867,50 @@
 		C5AAA0D229BD0FF1000DA6C3 /* Drawing */ = {
 			isa = PBXGroup;
 			children = (
-				C5AAA0D829BD10B1000DA6C3 /* macOS */,
-				C5AAA0D729BD10A1000DA6C3 /* IOS */,
 				C5A7929D29A4078400637C6C /* DrawingView.swift */,
 			);
 			path = Drawing;
 			sourceTree = "<group>";
 		};
-		C5AAA0D729BD10A1000DA6C3 /* IOS */ = {
+		C5AAA0E129BD152C000DA6C3 /* PencilKit */ = {
 			isa = PBXGroup;
 			children = (
-				C5AAA0D329BD107D000DA6C3 /* DrawingView.CanvasView(iOS).swift */,
+				C5E966B329AAA931009D81FF /* PencilCanvasView.swift */,
+				C564EB9329B5442200F3E0AC /* PencilCanvasView.Coordinator.swift */,
+				C564EB9729B5446600F3E0AC /* PencilCanvasView.View.swift */,
+				C564EB9B29B544CA00F3E0AC /* PencilCanvasView.Controller.swift */,
+				C5E966B729AAAA8A009D81FF /* PencilCanvasView.ArrowView.swift */,
+				C5E966BB29AAB465009D81FF /* PencilCanvasView.ScrollIndicatorView.swift */,
+				C5E966C729AAC23E009D81FF /* PencilCanvasView.BackgroundView.swift */,
+				C5E966BF29AAB6D8009D81FF /* Document.Drawing.Background+draw.swift */,
+				C5E966C329AAB7A0009D81FF /* Document.Drawing.PageFormat+draw.swift */,
 			);
-			path = IOS;
+			path = PencilKit;
 			sourceTree = "<group>";
 		};
-		C5AAA0D829BD10B1000DA6C3 /* macOS */ = {
+		C5AAA0E529BD1E28000DA6C3 /* PencilKit */ = {
 			isa = PBXGroup;
 			children = (
+				C5AAA0E629BD1E3B000DA6C3 /* PkDrawing+strokesIn.swift */,
 			);
-			path = macOS;
+			path = PencilKit;
+			sourceTree = "<group>";
+		};
+		C5AAA0F129BD3149000DA6C3 /* Display Layer */ = {
+			isa = PBXGroup;
+			children = (
+				C5AAA0F229BD3155000DA6C3 /* Drawing */,
+			);
+			path = "Display Layer";
+			sourceTree = "<group>";
+		};
+		C5AAA0F229BD3155000DA6C3 /* Drawing */ = {
+			isa = PBXGroup;
+			children = (
+				C5AAA0DA29BD12B1000DA6C3 /* DrawingView.CanvasView.swift */,
+				C5AAA0DF29BD1355000DA6C3 /* DrawingView.ImageView.swift */,
+			);
+			path = Drawing;
 			sourceTree = "<group>";
 		};
 		C5C4A0C6293A83A400FF9AB8 /* Extensions */ = {
@@ -1060,8 +1092,8 @@
 			children = (
 				C5E966CC29AAD47D009D81FF /* Raleway-SemiBold.ttf */,
 				C5E966CD29AAD47D009D81FF /* Raleway-Regular.ttf */,
-				C5E966CE29AAD47D009D81FF /* Font+Extension.swift */,
 				C5E966CF29AAD47D009D81FF /* Raleway-Italic.ttf */,
+				C5E966CE29AAD47D009D81FF /* Font+Extension.swift */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -1205,7 +1237,6 @@
 			files = (
 				C5C4A113293B9FC400FF9AB8 /* ObservedChangeReceiver.swift in Sources */,
 				C59B3CF1295CCEC80053DE7D /* Structure.Role.Builder.swift in Sources */,
-				C5AAA0D629BD107D000DA6C3 /* DrawingView.CanvasView(iOS).swift in Sources */,
 				C5C4A102293B9E4800FF9AB8 /* SerializedCodingKeys.swift in Sources */,
 				C59B3CF0295CCEB70053DE7D /* PersistentGraph.Condition+operators.swift in Sources */,
 				C5C4A0F5293B9B0E00FF9AB8 /* Persistent.swift in Sources */,
@@ -1291,6 +1322,7 @@
 				C564EB8529B5337700F3E0AC /* Document.Drawing.Drawing.swift in Sources */,
 				C5C4A0FB293B9E4800FF9AB8 /* Transformable.swift in Sources */,
 				C59B3CE3295CCE8F0053DE7D /* MeasureSizeModifier.swift in Sources */,
+				C5AAA0DC29BD12B1000DA6C3 /* DrawingView.CanvasView.swift in Sources */,
 				C564EB7D29B5099400F3E0AC /* PersistentContainer.swift in Sources */,
 				C59B3CE4295CCE8F0053DE7D /* View+If.swift in Sources */,
 			);
@@ -1313,10 +1345,13 @@
 				C54BE4F1289591320060A066 /* ObservedChangeReceiver.swift in Sources */,
 				C55AC5D3295A4A3400F09326 /* Information.swift in Sources */,
 				C5E966B429AAA931009D81FF /* PencilCanvasView.swift in Sources */,
+				C5AAA0DE29BD12F1000DA6C3 /* DrawingView.ImageView.swift in Sources */,
 				C5D273522975D19100F32EB6 /* Information.Item+subscripts.swift in Sources */,
 				C5C4A115293C0D4F00FF9AB8 /* PersistentGraph.Change.swift in Sources */,
 				C54BE503289591440060A066 /* CGFloat+Operators.swift in Sources */,
 				C54BE4E128958F910060A066 /* CycleBreaker.swift in Sources */,
+				C5AAA0F029BD2B64000DA6C3 /* UIImage+scale.swift in Sources */,
+				C5AAA0E729BD1E3B000DA6C3 /* PkDrawing+strokesIn.swift in Sources */,
 				C54BE4D128958F820060A066 /* SerializedCodingKeys.swift in Sources */,
 				C54BE53C289591950060A066 /* NSPredicate+operators.swift in Sources */,
 				C54BE4DF28958F910060A066 /* Primitive.swift in Sources */,
@@ -1329,7 +1364,7 @@
 				C504036B290DDE8D0083AC41 /* CaseIterable+StringConversion.swift in Sources */,
 				C54BE4FF289591440060A066 /* CGPoint+Operators.swift in Sources */,
 				C548BCBB292ADA8600DB6185 /* NoteView.swift in Sources */,
-				C5E966C029AAB6D8009D81FF /* PencilCanvasView.Background.swift in Sources */,
+				C5E966C029AAB6D8009D81FF /* Document.Drawing.Background+draw.swift in Sources */,
 				C54BE55128960EF10060A066 /* SelectMemoryView.swift in Sources */,
 				C564EB7F29B5326A00F3E0AC /* Document.Drawing.swift in Sources */,
 				C5C4A0DA293AB3FC00FF9AB8 /* PersistentGraph.Item.swift in Sources */,
@@ -1365,11 +1400,13 @@
 				C5C4A0E0293AC3AE00FF9AB8 /* PersistentGraph.Edge.swift in Sources */,
 				C54BE575289D7A090060A066 /* ObservedSerialized.swift in Sources */,
 				C564EB8329B5337700F3E0AC /* Document.Drawing.Drawing.swift in Sources */,
-				C5AAA0D429BD107D000DA6C3 /* DrawingView.CanvasView(iOS).swift in Sources */,
+				C5AAA0D429BD107D000DA6C3 /* DrawingView.CanvasView.swift in Sources */,
 				C55AC5DB295A4A8100F09326 /* Structure.Query.swift in Sources */,
+				C5AAA0E329BD1D47000DA6C3 /* Document.Drawing.PageFormat.swift in Sources */,
 				C5E4CB02294BDD4B00755959 /* Relation.swift in Sources */,
 				C54BE501289591440060A066 /* CGSize+Operators.swift in Sources */,
 				C55AC5B52957C7C600F09326 /* PersistentGraph.Condition.swift in Sources */,
+				C5AAA0EA29BD1F57000DA6C3 /* Document.Drawing.Background.swift in Sources */,
 				C5D2735C2975E08400F32EB6 /* HippocampusApp.DocumentView.swift in Sources */,
 				C5E966B029A956ED009D81FF /* DrawingTestView.swift in Sources */,
 				C5C4A0CB293A9F9400FF9AB8 /* IdentifiableObject.swift in Sources */,
@@ -1387,7 +1424,7 @@
 				C564EB9C29B544CA00F3E0AC /* PencilCanvasView.Controller.swift in Sources */,
 				C5E966B829AAAA8A009D81FF /* PencilCanvasView.ArrowView.swift in Sources */,
 				C564EB7B29B5099200F3E0AC /* PersistentContainer.swift in Sources */,
-				C5E966C429AAB7A0009D81FF /* PencilCanvasView.PageFormat.swift in Sources */,
+				C5E966C429AAB7A0009D81FF /* Document.Drawing.PageFormat+draw.swift in Sources */,
 				C564EB9829B5446600F3E0AC /* PencilCanvasView.View.swift in Sources */,
 				C5C4A0D4293AB05900FF9AB8 /* PersistentContent.swift in Sources */,
 				C55AC5CE295A34F900F09326 /* Document.swift in Sources */,
@@ -1410,6 +1447,7 @@
 				C54BE4D828958F820060A066 /* SerializedTransformable.swift in Sources */,
 				C5C4A0EA293B9A8A00FF9AB8 /* PersistentData.swift in Sources */,
 				C55AC5AA29512E3400F09326 /* Relations.swift in Sources */,
+				C5AAA0EC29BD2136000DA6C3 /* Document.Drawing.PageFormat.swift in Sources */,
 				C54BE555289610A00060A066 /* ShowMemoryView.swift in Sources */,
 				C564EB8D29B541F500F3E0AC /* measureDuration.swift in Sources */,
 				C5C8E86F295B50F8002C7746 /* PersistentGraph.Condition+operators.swift in Sources */,
@@ -1418,9 +1456,11 @@
 				C54BE4F4289591320060A066 /* Observed.swift in Sources */,
 				C55AC5D4295A4A3400F09326 /* Information.swift in Sources */,
 				C5C4A116293C0D4F00FF9AB8 /* PersistentGraph.Change.swift in Sources */,
+				C5AAA0E829BD1E3B000DA6C3 /* PkDrawing+strokesIn.swift in Sources */,
 				C5D273532975D19100F32EB6 /* Information.Item+subscripts.swift in Sources */,
 				C54BE4F2289591320060A066 /* ObservedChangeReceiver.swift in Sources */,
 				C54BE504289591440060A066 /* CGFloat+Operators.swift in Sources */,
+				C5AAA0DB29BD12B1000DA6C3 /* DrawingView.CanvasView.swift in Sources */,
 				C54BE4E228958F910060A066 /* CycleBreaker.swift in Sources */,
 				C54BE4D228958F820060A066 /* SerializedCodingKeys.swift in Sources */,
 				C54BE53D289591950060A066 /* NSPredicate+operators.swift in Sources */,
@@ -1428,6 +1468,7 @@
 				C564EB7C29B5099300F3E0AC /* PersistentContainer.swift in Sources */,
 				C5C4A0CF293AAEAF00FF9AB8 /* PersistentGraph.swift in Sources */,
 				C5A7929F29A4078400637C6C /* DrawingView.swift in Sources */,
+				C5AAA0EE29BD27DC000DA6C3 /* NSImage+scale.swift in Sources */,
 				C54BE4E028958F910060A066 /* Primitive.swift in Sources */,
 				C5E35547294E632F0015CDFD /* PersistentGraph.TimedValue.swift in Sources */,
 				C55AC5B229560AF900F09326 /* Equatable+isEqualTo.swift in Sources */,
@@ -1438,6 +1479,8 @@
 				C548BCBC292ADA8600DB6185 /* NoteView.swift in Sources */,
 				C54BE500289591440060A066 /* CGPoint+Operators.swift in Sources */,
 				C5C4A0DB293AB3FC00FF9AB8 /* PersistentGraph.Item.swift in Sources */,
+				C5AAA0E029BD1355000DA6C3 /* DrawingView.ImageView.swift in Sources */,
+				C5AAA0EB29BD1F57000DA6C3 /* Document.Drawing.Background.swift in Sources */,
 				C54BE55228960EF10060A066 /* SelectMemoryView.swift in Sources */,
 				C55AC5AE295262CD00F09326 /* Present.swift in Sources */,
 				C54BE4CA28958F820060A066 /* Transformable.swift in Sources */,
@@ -1451,10 +1494,8 @@
 				C5C4A0D8293AB08C00FF9AB8 /* CodableIdentifiable.swift in Sources */,
 				C54BE4D028958F820060A066 /* SerializableDecodable.swift in Sources */,
 				C55AC5E0295A4ACE00F09326 /* Structure.Query.Predicate.swift in Sources */,
-				C5AAA0CE29BBC1E9000DA6C3 /* PencilCanvasView.Background.swift in Sources */,
 				C54BE4D428958F820060A066 /* EncodableProperty.swift in Sources */,
 				C5D382E32967779100E31D69 /* PersistentGraph.ValueStorage.swift in Sources */,
-				C5AAA0D529BD107D000DA6C3 /* DrawingView.CanvasView(iOS).swift in Sources */,
 				C5C8E865295AFDCA002C7746 /* Structure.Role.Builder.swift in Sources */,
 				C564EB8429B5337700F3E0AC /* Document.Drawing.Drawing.swift in Sources */,
 				C5C4A0C9293A840300FF9AB8 /* URL.swift in Sources */,
@@ -1477,7 +1518,6 @@
 				C5D2735D2975E08400F32EB6 /* HippocampusApp.DocumentView.swift in Sources */,
 				C5C4A0CC293AA02700FF9AB8 /* IdentifiableObject.swift in Sources */,
 				C5C4A0DE293AB7D500FF9AB8 /* PersistentGraph.Node.swift in Sources */,
-				C5AAA0CF29BBC1FC000DA6C3 /* PencilCanvasView.PageFormat.swift in Sources */,
 				C5E35543294E630D0015CDFD /* PersistentGraph.TimeLine.swift in Sources */,
 				C5C8E862295AFD8E002C7746 /* Structure.Aspect.swift in Sources */,
 				C5D273602975E5C100F32EB6 /* ContentView.swift in Sources */,
