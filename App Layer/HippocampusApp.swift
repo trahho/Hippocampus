@@ -28,6 +28,7 @@ struct HippocampusApp: App {
 
     var body: some Scene {
         WindowGroup {
+//            NavigationPoCView()
             DocumentView(document: document)
 //                .onOpenURL { document = Document(url: $0) }
         }

@@ -25,7 +25,7 @@ struct DrawingView: View {
         case .normal:
             CanvasView(data: document.getDrawing(item: item, aspect: aspect), editable: editable)
         case .small:
-            ImageView(data: document.getDrawing(item: item, aspect: aspect), scale: 0.25)
+            ImageView(data: document.getDrawing(item: item, aspect: aspect), scale: 0.5)
         }
     }
 }

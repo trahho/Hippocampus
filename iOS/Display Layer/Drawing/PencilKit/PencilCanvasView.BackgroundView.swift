@@ -48,10 +48,10 @@ extension PencilCanvasView {
             }
             
             if zoomScale > 0.3 {
-                mode.draw(bounds: bounds, offset: offset, scale: zoomScale)
+                mode.draw(bounds: bounds, offset: offset, scale: zoomScale, context: context)
             }
             
-            page.draw(bounds: bounds, offset: offset, scale: zoomScale, drawing: canvas.drawing)
+            page.draw(bounds: bounds, offset: offset, scale: zoomScale, drawing: canvas.drawing, context: context)
         }
     }
 }

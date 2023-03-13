@@ -93,11 +93,13 @@ struct NoteView: View {
     let drawingAspect = Structure.Role.note.zeichnung
 
     var body: some View {
-        VStack(alignment: .leading) {
+//        VStack(alignment: .leading) {
+        VStack {
             if let note {
                 titleAspect.view(for: note, as: .small, editable: editable)
                 textAspect.view(for: note, as: .normal, editable: editable)
                 drawingAspect.view(for: note, as: .normal, editable: editable)
+//                    .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
         .toolbar {

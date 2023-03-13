@@ -37,6 +37,10 @@ extension CGSize {
         CGSize(width: size.width * factor.width, height: size.height * factor.height)
     }
 
+    var isEmpty: Bool {
+        width + height == 0
+    }
+
     var length: CGFloat {
         sqrt(width * width + height * height)
     }
