@@ -9,6 +9,10 @@ import Foundation
 
 @propertyWrapper final class Relations<Target>: PersistentRelationWrapper where Target: PersistentData.Object {
     typealias TargetSet = Set<Target>
+    
+    enum Direction {
+        case reference, referenced
+    }
 
     @available(*, unavailable, message: "This property wrapper can only be applied to classes")
     public var wrappedValue: Set<Target> {
@@ -18,6 +22,7 @@ import Foundation
 
     private var key: String?
     private var reverseKey: String?
+    private var direction: Direction
 
     internal func getKey(from instance: PersistentData.Object) -> String {
         if let key, !key.isEmpty { return key }
@@ -26,9 +31,10 @@ import Foundation
         return key!
     }
 
-    public init(_ key: String? = nil, reverse: String? = nil) {
+    public init(_ key: String? = nil, reverse: String? = nil, direction: Direction = .reference) {
         self.key = key
-        reverseKey = reverse
+        self.reverseKey = reverse
+        self.direction = direction
     }
 
     public static subscript<Enclosing: PersistentData.Object>(_enclosingInstance instance: Enclosing,
@@ -39,7 +45,8 @@ import Foundation
         get {
             let storage = instance[keyPath: storageKeyPath]
             let key = storage.getKey(from: instance)
-            return instance.edges
+            let edges = storage.direction == .reference ? instance.outgoingEdges : instance.incomingEdges
+            return edges
                 .filter { $0[role: key] }
                 .map { $0.getOther(for: instance) as! Target }
                 .asSet
@@ -53,7 +60,7 @@ import Foundation
             let removed = currentValue.subtracting(newValue)
 
             let timestamp = Date()
-
+//            let edges = storage.direction == .reference ? instance.outgoingEdges : instance.incomingEdges
             removed
                 .flatMap { item in
                     instance.edges.filter { edge in

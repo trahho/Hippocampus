@@ -37,6 +37,19 @@ extension PencilCanvasView {
             enableDrawing()
         }
         
+        override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(animated)
+//            disableDrawing()
+        }
+        
+        
+        override func viewDidDisappear(_ animated: Bool) {
+            disableDrawing()
+            super.viewDidDisappear(animated)
+        }
+        
+       
+        
         override func viewDidLayoutSubviews() {
             super.viewDidLayoutSubviews()
             drawingView.gridView.frame = drawingView.canvasView.frame
@@ -154,6 +167,13 @@ extension PencilCanvasView {
         
         // MARK: - - PKCanvasDelegate
         
+        func canvasViewDidBeginUsingTool(_ canvasView: PKCanvasView) {
+            if !canvasView.isFirstResponder {
+                canvasView.becomeFirstResponder()
+                toolPicker.setVisible(true, forFirstResponder: canvasView)
+            }
+        }
+
         func canvasViewDrawingDidChange(_ canvasView: PKCanvasView) {
             updatePositionIndicators()
             guard let coordinator else { return }

@@ -9,8 +9,15 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var document: Document
+    @State var path : [Information.Item] = []
     var body: some View {
-        ListView(information: document.information, query: Structure.Query.notes)
-//        DrawingView()
+        NavigationStack(path: $path) {
+            ListView(information: document.information, query: Structure.Query.notes, path: $path)
+            //        DrawingView()
+            
+                .navigationDestination(for: Information.Item.self) { item in
+                    NoteView(editable: true, note: item)
+                }
+        }
     }
 }

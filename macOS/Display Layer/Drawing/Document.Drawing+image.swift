@@ -18,6 +18,7 @@ extension Document.Drawing {
         let result = NSImage(size: image.size)
         result.lockFocus()
         guard let context = NSGraphicsContext.current else { return image }
+//        context.isFlipped = true
 //        pageFormat.draw(bounds: rect, offset: bounds.topLeft, scale: 1, drawing: drawing, context: context)
         background.draw(bounds: rect, offset: bounds.topLeft, scale: 1, context: context)
         image.draw(in: rect)

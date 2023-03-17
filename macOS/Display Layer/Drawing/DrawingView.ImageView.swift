@@ -22,9 +22,11 @@ extension DrawingView {
                     .resizable()
                     .frame(width: 50, height: 50)
             } else {
-                Image(nsImage: image)
-                    .resizable()
-                    .frame(width: image.size.width * scale, height: image.size.height * scale)
+                ScrollView {
+                    Image(nsImage: image)
+                        .resizable()
+                        .frame(width: image.size.width * scale, height: image.size.height * scale)
+                }
             }
         }
     }

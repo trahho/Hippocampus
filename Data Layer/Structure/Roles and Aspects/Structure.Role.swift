@@ -28,7 +28,17 @@ extension Structure {
 
         @Relations(reverse: "role") var aspects: Set<Aspect>
         @Relations(reverse: "subRoles") var superRoles: Set<Role>
-        @Relations(reverse: "superRoles") var subRoles: Set<Role>
+        @Relations(reverse: "superRoles", direction: .referenced) var subRoles: Set<Role>
+        
+        var allAspects: Set<Aspect> {
+            superRoles.flatMap { superRole in
+                superRole.aspects
+            }.asSet.union(aspects)
+        }
+        
+        var isFinal: Bool {
+            subRoles.isEmpty
+        }
 
         subscript(dynamicMember dynamicMember: String) -> Aspect {
             let first: (Aspect) -> Bool = { $0.name.lowercased() == dynamicMember.lowercased() }

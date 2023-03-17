@@ -20,9 +20,8 @@ struct TextView: View {
             Image(systemName: "text.quote")
         default:
             if editable {
-                TextField(aspect.name, text: Binding(get: { item[String.self, aspect] ?? "" }, set: {
-                    item[String.self, aspect] = $0
-                }))
+                TextField(aspect.name, text: Binding(get: { item[String.self, aspect] ?? "" }, set: { item[String.self, aspect] = $0 }))
+                    .textFieldStyle(.roundedBorder)
             } else {
                 Text(item[String.self, aspect] ?? "")
             }

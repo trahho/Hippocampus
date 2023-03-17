@@ -15,6 +15,7 @@ struct ListView: View {
     @State var editSheetItem: Structure.Query.Result.Node?
     @State var sortOrder: SortOrder = .forward
     @State var refresh: Bool = false
+    @Binding var path: [Information.Item]
 
     var result: Structure.Query.Result {
         query.apply(to: information)
@@ -52,17 +53,25 @@ struct ListView: View {
                     a.item[String.self, nameAspect] ?? "" < b.item[String.self, nameAspect] ?? ""
                 })
 //                .sorted(using: Aspect.Comparator(order: sortOrder, aspect: Perspective.note.name))
-            ScrollView {
-                VStack(alignment: .leading) {
-                    ForEach(items) { item in
-                        listItem.view(for: item.item, editable: false)
-                            .padding(2)
-                            .contentShape(Rectangle())
-                            .onTapGesture {
-                                editSheetItem = item
-                            }
-                    }
-                }
+//            ScrollView {
+//                VStack(alignment: .leading) {
+                    List(items) { item in
+                        NavigationLink(value:item.item) {
+                            listItem.view(for: item.item, editable: false)
+                                .padding(2)
+//                                .onTapGesture {
+//                                    path.append(item.item)
+//                                }
+                            //                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        }
+//                        listItem.view(for: item.item, editable: false)
+//                            .padding(2)
+//                            .contentShape(Rectangle())
+//                            .onTapGesture {
+//                                editSheetItem = item
+//                            }
+//                    }
+//                }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
 //            .navigationDestination(for: Structure.Query.Result.Node.self) { note in

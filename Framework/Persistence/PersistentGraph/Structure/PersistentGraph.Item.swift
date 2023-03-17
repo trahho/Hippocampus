@@ -60,7 +60,7 @@ extension PersistentGraph {
                 values[key]?.timedValue(at: readingTimestamp)?[type: T.self]
             }
             set {
-                guard canChange else { return }
+                guard canChange, newValue != self[type, key] else { return }
 
                 objectWillChange.send()
                 if values[key] == nil {

@@ -37,7 +37,7 @@ extension Document.Drawing.PageFormat {
         }
             
         context.saveGraphicsState()
-        let color = NSColor.systemGray
+        let color = NSColor.lightGray
         color.withAlphaComponent(0.7).setStroke()
 //        NSColor.opaqueSeparator.withAlphaComponent(0.7).setStroke()
             
@@ -49,12 +49,15 @@ extension Document.Drawing.PageFormat {
         if self != .infinite {
             let viewBounds = CGRect(origin: offset, size: bounds.size)
             let pages = getPages(for: drawing)
+                .map { page in
+                    CGRect(x:page.minX,y:bounds.maxY-page.minY, width: page.width, height: page.height)
+                }
             let font = NSFont(name: "Raleway", size: 300 * scale)!
             for i in 0 ..< pages.count {
                 let page = pages[i]
                 let pageFrame = CGRect(x: page.minX * scale, y: page.minY * scale, width: page.width * scale, height: page.height * scale)
                 if pageFrame.intersects(viewBounds) {
-                    let pageOrigin = CGPoint(x: pageFrame.minX - offset.x, y: pageFrame.minY - offset.y)
+                    let pageOrigin = CGPoint(x: pageFrame.minX - offset.x, y:  pageFrame.minY - offset.y)
                     let pageBounds = CGRect(origin: pageOrigin, size: pageFrame.size)
                     let pageNumber = NSAttributedString(string: "\(i + 1)",
                                                         attributes: [

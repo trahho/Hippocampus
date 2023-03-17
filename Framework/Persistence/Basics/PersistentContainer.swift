@@ -65,22 +65,27 @@ class PersistentContainer<Content: PersistentContent>: PersistentContainerRefere
     }
 
     func save() {
-//        let fileQueue = DispatchQueue(label: "de.kuehnerleben.Hippocampus.file", qos: .background)
-//        fileQueue.async { [self] in
-        guard !url.isVirtual, hasChanges, let data = content.encode() else { return }
-        print("PersistentDataContainer<\(String(reflecting: Content.self))>: Save")
+        let fileQueue = DispatchQueue(label: "de.kuehnerleben.Hippocampus.file", qos: .background)
+        guard !url.isVirtual, hasChanges else { return }
+        fileQueue.async { [self] in
+            print("PersistentDataContainer<\(String(reflecting: Content.self))>: Save")
 
-        metadataQuery.stop()
-        willCommit?()
-        url.deletingLastPathComponent().ensureDirectory()
-        measureDuration("Write data") {
-            try! data.write(to: url, options: [.atomic])
+            willCommit?()
+            guard let data = content.encode() else { return }
+            metadataQuery.stop()
+            url.deletingLastPathComponent().ensureDirectory()
+            measureDuration("Write data") {
+                try! data.write(to: url, options: [.atomic])
+            }
+            currentTimestamp = try! FileManager.default.attributesOfItem(atPath: url.path)[.modificationDate] as! Date
+            print("Modified \(currentTimestamp)")
+            hasChanges = false
+            DispatchQueue.main.sync {
+                print("Reactivating")
+                metadataQuery.start()
+            }
+            print("Done")
         }
-        currentTimestamp = try! FileManager.default.attributesOfItem(atPath: url.path)[.modificationDate] as! Date
-        print("Modified \(currentTimestamp)")
-        hasChanges = false
-        metadataQuery.start()
-//        }
     }
 
     func load() {

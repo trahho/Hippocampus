@@ -93,31 +93,54 @@ struct NoteView: View {
     let drawingAspect = Structure.Role.note.zeichnung
 
     var body: some View {
-//        VStack(alignment: .leading) {
+//        VStawck(alignment: .leading) {
         VStack {
             if let note {
-                titleAspect.view(for: note, as: .small, editable: editable)
-                textAspect.view(for: note, as: .normal, editable: editable)
-                drawingAspect.view(for: note, as: .normal, editable: editable)
-//                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                ForEach(document.roles.sorted(by: {$0.roleDescription < $1.roleDescription})) { role in
+                    if role.isFinal, note[role: role] {
+                        Section(role.roleDescription) {
+//                            Form{
+                                ForEach(role.allAspects.asArray) { aspect in
+                                    aspect.view(for: note, as: .normal, editable: true)
+                                }
+//                            }
+                        }
+                    }
+//                    Form {
+//                        titleAspect.view(for: note, as: .small, editable: editable)
+//                        textAspect.view(for: note, as: .normal, editable: editable)
+//                    }
+//                    .tabItem {
+//                        Label("Text", systemImage: "doc.text")
+//                    }
+//                    drawingAspect.view(for: note, as: .normal, editable: editable)
+//                        .tabItem {
+//                            Label("Zeichnung", systemImage: "pencil.line")
+//                        }
+                }
+//                titleAspect.view(for: note, as: .small, editable: editable)
+//
+
+                //                    .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
-        .toolbar {
-            ToolbarItem(placement: .cancellationAction) {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "xmark")
-                }
-            }
-            ToolbarItem(placement: .confirmationAction) {
-                Button {
-                    dismiss()
-                } label: {
-                    Text("Done")
-                }
-            }
-        }
+
+//        .toolbar {
+//            ToolbarItem(placement: .cancellationAction) {
+//                Button {
+//                    dismiss()
+//                } label: {
+//                    Image(systemName: "xmark")
+//                }
+//            }
+//            ToolbarItem(placement: .confirmationAction) {
+//                Button {
+//                    dismiss()
+//                } label: {
+//                    Text("Done")
+//                }
+//            }
+//        }
         .onAppear {
             if editable {
                 if note == nil {
@@ -125,9 +148,9 @@ struct NoteView: View {
                 }
             }
         }
-        .onDisappear {
-//            document.save()
-        }
+//        .onDisappear {
+        ////            document.save()
+//        }
     }
 }
 
