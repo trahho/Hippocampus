@@ -21,16 +21,31 @@ struct HippocampusApp: App {
         let result = containerURL.appendingPathComponent("\(name)\(HippocampusApp.memoryExtension)")
         return result
     }
+    
+    static let locationService = LocationService()
 
     @ObservedObject var document: Document =
         //        .preview1
         .init(name: "Test", local: false)
+    
+    @StateObject var navigation = Navigation()
 
     var body: some Scene {
         WindowGroup {
 //            NavigationPoCView()
+//            TestView()
+//                .onAppear {
+//                    Self.locationService.start()
+//                }
             DocumentView(document: document)
+                .environmentObject(navigation)
 //                .onOpenURL { document = Document(url: $0) }
+        }
+    }
+    
+    struct TestView : View {
+        var body: some View {
+            Text("\(HippocampusApp.locationService.authorization.rawValue)")
         }
     }
 }

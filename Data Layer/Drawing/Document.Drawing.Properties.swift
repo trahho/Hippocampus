@@ -19,8 +19,6 @@ extension Document.Drawing {
 
         // MARK: - Publishers
 
-        var objectDidChange = PassthroughSubject<Void, Never>()
-
         // MARK: - Initialisation
 
         public required init() {}

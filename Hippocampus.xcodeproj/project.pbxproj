@@ -9,6 +9,21 @@
 /* Begin PBXBuildFile section */
 		C504036B290DDE8D0083AC41 /* CaseIterable+StringConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = C504036A290DDE8D0083AC41 /* CaseIterable+StringConversion.swift */; };
 		C504036C290DDE8D0083AC41 /* CaseIterable+StringConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = C504036A290DDE8D0083AC41 /* CaseIterable+StringConversion.swift */; };
+		C5167C3B29C5002900323F75 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5167C3A29C5002900323F75 /* Navigation.swift */; };
+		C5167C3C29C5002900323F75 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5167C3A29C5002900323F75 /* Navigation.swift */; };
+		C5167C3E29C628AB00323F75 /* Navigation.Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5167C3D29C628AB00323F75 /* Navigation.Detail.swift */; };
+		C5167C3F29C628AB00323F75 /* Navigation.Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5167C3D29C628AB00323F75 /* Navigation.Detail.swift */; };
+		C5167C4129C628D200323F75 /* Navigation.Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5167C4029C628D200323F75 /* Navigation.Sidebar.swift */; };
+		C5167C4229C628D200323F75 /* Navigation.Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5167C4029C628D200323F75 /* Navigation.Sidebar.swift */; };
+		C5167C4529C62BFB00323F75 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5167C4429C62BFB00323F75 /* SidebarView.swift */; };
+		C5167C4629C62BFB00323F75 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5167C4429C62BFB00323F75 /* SidebarView.swift */; };
+		C5167C4829C653A200323F75 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5167C4729C653A200323F75 /* DetailView.swift */; };
+		C5167C4B29C8F68C00323F75 /* Structure.Query.Presentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5167C4A29C8F68C00323F75 /* Structure.Query.Presentation.swift */; };
+		C5167C4C29C8F68C00323F75 /* Structure.Query.Presentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5167C4A29C8F68C00323F75 /* Structure.Query.Presentation.swift */; };
+		C5167C4F29C8F78100323F75 /* QueryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5167C4E29C8F78100323F75 /* QueryView.swift */; };
+		C5167C5029C8F78100323F75 /* QueryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5167C4E29C8F78100323F75 /* QueryView.swift */; };
+		C5167C5229C8FAD900323F75 /* QueryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5167C5129C8FAD900323F75 /* QueryListView.swift */; };
+		C5167C5329C8FAD900323F75 /* QueryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5167C5129C8FAD900323F75 /* QueryListView.swift */; };
 		C548BCBB292ADA8600DB6185 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C548BCBA292ADA8600DB6185 /* NoteView.swift */; };
 		C548BCBC292ADA8600DB6185 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C548BCBA292ADA8600DB6185 /* NoteView.swift */; };
 		C54BE4B12894866C0060A066 /* HippocampusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4A12894866A0060A066 /* HippocampusApp.swift */; };
@@ -171,6 +186,14 @@
 		C5A7929E29A4078400637C6C /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A7929D29A4078400637C6C /* DrawingView.swift */; };
 		C5A7929F29A4078400637C6C /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A7929D29A4078400637C6C /* DrawingView.swift */; };
 		C5A792A029A4078400637C6C /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A7929D29A4078400637C6C /* DrawingView.swift */; };
+		C5A84B6E29CFA4D10026F07E /* QueryItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A84B6D29CFA4D10026F07E /* QueryItemView.swift */; };
+		C5A84B6F29CFA4D10026F07E /* QueryItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A84B6D29CFA4D10026F07E /* QueryItemView.swift */; };
+		C5A84B7229CFAFC30026F07E /* Document.Presentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A84B7129CFAFC30026F07E /* Document.Presentation.swift */; };
+		C5A84B7329CFAFC30026F07E /* Document.Presentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A84B7129CFAFC30026F07E /* Document.Presentation.swift */; };
+		C5A84B7529CFB03D0026F07E /* Document.Presentation.Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A84B7429CFB03D0026F07E /* Document.Presentation.Properties.swift */; };
+		C5A84B7629CFB03D0026F07E /* Document.Presentation.Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A84B7429CFB03D0026F07E /* Document.Presentation.Properties.swift */; };
+		C5A84B7929D61FB10026F07E /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A84B7829D61FB10026F07E /* LocationService.swift */; };
+		C5A84B7A29D61FB10026F07E /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A84B7829D61FB10026F07E /* LocationService.swift */; };
 		C5AAA0D429BD107D000DA6C3 /* DrawingView.CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AAA0D329BD107D000DA6C3 /* DrawingView.CanvasView.swift */; };
 		C5AAA0DB29BD12B1000DA6C3 /* DrawingView.CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AAA0DA29BD12B1000DA6C3 /* DrawingView.CanvasView.swift */; };
 		C5AAA0DC29BD12B1000DA6C3 /* DrawingView.CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AAA0DA29BD12B1000DA6C3 /* DrawingView.CanvasView.swift */; };
@@ -186,12 +209,11 @@
 		C5AAA0F029BD2B64000DA6C3 /* UIImage+scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AAA0EF29BD2B64000DA6C3 /* UIImage+scale.swift */; };
 		C5AAA0F729BD34B2000DA6C3 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AAA0F529BD349F000DA6C3 /* TextView.swift */; };
 		C5AAA0F929BD34E3000DA6C3 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AAA0F829BD34E3000DA6C3 /* TextView.swift */; };
-		C5AAA0FB29BE6CE8000DA6C3 /* NavigationPoCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AAA0FA29BE6CE8000DA6C3 /* NavigationPoCView.swift */; };
-		C5AAA0FC29BE6CE8000DA6C3 /* NavigationPoCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AAA0FA29BE6CE8000DA6C3 /* NavigationPoCView.swift */; };
 		C5AAA0FE29BE7E37000DA6C3 /* Document.Drawing+image.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AAA0FD29BE7E37000DA6C3 /* Document.Drawing+image.swift */; };
 		C5AAA10029BE7EF3000DA6C3 /* Document.Drawing+image.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AAA0FF29BE7EF3000DA6C3 /* Document.Drawing+image.swift */; };
 		C5AAA10229BE7F69000DA6C3 /* Document.Drawing.Background+draw.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AAA10129BE7F69000DA6C3 /* Document.Drawing.Background+draw.swift */; };
 		C5AAA10429BE7F90000DA6C3 /* Document.Drawing.PageFormat+draw.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AAA10329BE7F90000DA6C3 /* Document.Drawing.PageFormat+draw.swift */; };
+		C5BA027529CE59C5009649C4 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BA027429CE59C5009649C4 /* DetailView.swift */; };
 		C5C4A0C8293A83C100FF9AB8 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A0C7293A83C100FF9AB8 /* URL.swift */; };
 		C5C4A0C9293A840300FF9AB8 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A0C7293A83C100FF9AB8 /* URL.swift */; };
 		C5C4A0CB293A9F9400FF9AB8 /* IdentifiableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A0CA293A9F9400FF9AB8 /* IdentifiableObject.swift */; };
@@ -266,9 +288,9 @@
 		C5D273522975D19100F32EB6 /* Information.Item+subscripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D273512975D19100F32EB6 /* Information.Item+subscripts.swift */; };
 		C5D273532975D19100F32EB6 /* Information.Item+subscripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D273512975D19100F32EB6 /* Information.Item+subscripts.swift */; };
 		C5D273542975D19100F32EB6 /* Information.Item+subscripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D273512975D19100F32EB6 /* Information.Item+subscripts.swift */; };
-		C5D2735C2975E08400F32EB6 /* HippocampusApp.DocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D2735B2975E08400F32EB6 /* HippocampusApp.DocumentView.swift */; };
-		C5D2735D2975E08400F32EB6 /* HippocampusApp.DocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D2735B2975E08400F32EB6 /* HippocampusApp.DocumentView.swift */; };
-		C5D2735E2975E08400F32EB6 /* HippocampusApp.DocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D2735B2975E08400F32EB6 /* HippocampusApp.DocumentView.swift */; };
+		C5D2735C2975E08400F32EB6 /* DocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D2735B2975E08400F32EB6 /* DocumentView.swift */; };
+		C5D2735D2975E08400F32EB6 /* DocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D2735B2975E08400F32EB6 /* DocumentView.swift */; };
+		C5D2735E2975E08400F32EB6 /* DocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D2735B2975E08400F32EB6 /* DocumentView.swift */; };
 		C5D273602975E5C100F32EB6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E856295A652B002C7746 /* ContentView.swift */; };
 		C5D382E22967779100E31D69 /* PersistentGraph.ValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D382E12967779100E31D69 /* PersistentGraph.ValueStorage.swift */; };
 		C5D382E32967779100E31D69 /* PersistentGraph.ValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D382E12967779100E31D69 /* PersistentGraph.ValueStorage.swift */; };
@@ -339,6 +361,14 @@
 		C50BEECD28D52C1700F9F6E6 /* Aspect+Comparisons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Aspect+Comparisons.swift"; sourceTree = "<group>"; };
 		C50BEED328D53EA300F9F6E6 /* Mind.Link.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mind.Link.swift; sourceTree = "<group>"; };
 		C50BEED628D673DA00F9F6E6 /* Mind.Thing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mind.Thing.swift; sourceTree = "<group>"; };
+		C5167C3A29C5002900323F75 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
+		C5167C3D29C628AB00323F75 /* Navigation.Detail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.Detail.swift; sourceTree = "<group>"; };
+		C5167C4029C628D200323F75 /* Navigation.Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.Sidebar.swift; sourceTree = "<group>"; };
+		C5167C4429C62BFB00323F75 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
+		C5167C4729C653A200323F75 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		C5167C4A29C8F68C00323F75 /* Structure.Query.Presentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structure.Query.Presentation.swift; sourceTree = "<group>"; };
+		C5167C4E29C8F78100323F75 /* QueryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryView.swift; sourceTree = "<group>"; };
+		C5167C5129C8FAD900323F75 /* QueryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryListView.swift; sourceTree = "<group>"; };
 		C5187E1828E63B7900C09EB4 /* Genes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genes.swift; sourceTree = "<group>"; };
 		C528A18128CDE2A90027FA44 /* HippocampusTestsMacOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HippocampusTestsMacOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5394A5829049969003B99BF /* Nachdenken.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Nachdenken.md; sourceTree = "<group>"; };
@@ -426,6 +456,10 @@
 		C59E287D2979D394007375D5 /* Structure.Representation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structure.Representation.swift; sourceTree = "<group>"; };
 		C59E2881297B2434007375D5 /* Structure.Aspect.Presentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structure.Aspect.Presentation.swift; sourceTree = "<group>"; };
 		C5A7929D29A4078400637C6C /* DrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingView.swift; sourceTree = "<group>"; };
+		C5A84B6D29CFA4D10026F07E /* QueryItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryItemView.swift; sourceTree = "<group>"; };
+		C5A84B7129CFAFC30026F07E /* Document.Presentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.Presentation.swift; sourceTree = "<group>"; };
+		C5A84B7429CFB03D0026F07E /* Document.Presentation.Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.Presentation.Properties.swift; sourceTree = "<group>"; };
+		C5A84B7829D61FB10026F07E /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		C5AAA0D329BD107D000DA6C3 /* DrawingView.CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingView.CanvasView.swift; sourceTree = "<group>"; };
 		C5AAA0DA29BD12B1000DA6C3 /* DrawingView.CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingView.CanvasView.swift; sourceTree = "<group>"; };
 		C5AAA0DD29BD12F1000DA6C3 /* DrawingView.ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingView.ImageView.swift; sourceTree = "<group>"; };
@@ -437,11 +471,11 @@
 		C5AAA0EF29BD2B64000DA6C3 /* UIImage+scale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+scale.swift"; sourceTree = "<group>"; };
 		C5AAA0F529BD349F000DA6C3 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		C5AAA0F829BD34E3000DA6C3 /* TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextView.swift; path = "iOS/Display Layer/Text/TextView.swift"; sourceTree = SOURCE_ROOT; };
-		C5AAA0FA29BE6CE8000DA6C3 /* NavigationPoCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationPoCView.swift; sourceTree = "<group>"; };
 		C5AAA0FD29BE7E37000DA6C3 /* Document.Drawing+image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Document.Drawing+image.swift"; sourceTree = "<group>"; };
 		C5AAA0FF29BE7EF3000DA6C3 /* Document.Drawing+image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Document.Drawing+image.swift"; sourceTree = "<group>"; };
 		C5AAA10129BE7F69000DA6C3 /* Document.Drawing.Background+draw.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Document.Drawing.Background+draw.swift"; sourceTree = "<group>"; };
 		C5AAA10329BE7F90000DA6C3 /* Document.Drawing.PageFormat+draw.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Document.Drawing.PageFormat+draw.swift"; sourceTree = "<group>"; };
+		C5BA027429CE59C5009649C4 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		C5C4A0C7293A83C100FF9AB8 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		C5C4A0CA293A9F9400FF9AB8 /* IdentifiableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableObject.swift; sourceTree = "<group>"; };
 		C5C4A0CD293AAEAF00FF9AB8 /* PersistentGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentGraph.swift; sourceTree = "<group>"; };
@@ -470,7 +504,7 @@
 		C5D042BD28D4E8E00088D6B0 /* Mind.Opinion.AboutMany.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mind.Opinion.AboutMany.swift; sourceTree = "<group>"; };
 		C5D042C028D4E91E0088D6B0 /* Mind.Opinion.AboutOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mind.Opinion.AboutOne.swift; sourceTree = "<group>"; };
 		C5D273512975D19100F32EB6 /* Information.Item+subscripts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Information.Item+subscripts.swift"; sourceTree = "<group>"; };
-		C5D2735B2975E08400F32EB6 /* HippocampusApp.DocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HippocampusApp.DocumentView.swift; sourceTree = "<group>"; };
+		C5D2735B2975E08400F32EB6 /* DocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentView.swift; sourceTree = "<group>"; };
 		C5D382E12967779100E31D69 /* PersistentGraph.ValueStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentGraph.ValueStorage.swift; sourceTree = "<group>"; };
 		C5D382E5296777E800E31D69 /* Encodable+typeName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+typeName.swift"; sourceTree = "<group>"; };
 		C5D382E92967786900E31D69 /* PersistentGraph.Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentGraph.Transaction.swift; sourceTree = "<group>"; };
@@ -534,6 +568,36 @@
 				C5E28A4F291842F300103AD4 /* Experiences */,
 			);
 			path = "Vision Layer";
+			sourceTree = "<group>";
+		};
+		C5167C3929C5001200323F75 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C5167C3A29C5002900323F75 /* Navigation.swift */,
+				C5167C4029C628D200323F75 /* Navigation.Sidebar.swift */,
+				C5167C3D29C628AB00323F75 /* Navigation.Detail.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C5167C4329C6291E00323F75 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				C5D2735B2975E08400F32EB6 /* DocumentView.swift */,
+				C5C8E856295A652B002C7746 /* ContentView.swift */,
+				C5167C4429C62BFB00323F75 /* SidebarView.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		C5167C4D29C8F75A00323F75 /* Query */ = {
+			isa = PBXGroup;
+			children = (
+				C5167C4E29C8F78100323F75 /* QueryView.swift */,
+				C5A84B6D29CFA4D10026F07E /* QueryItemView.swift */,
+				C5167C5129C8FAD900323F75 /* QueryListView.swift */,
+			);
+			path = Query;
 			sourceTree = "<group>";
 		};
 		C528A18228CDE2A90027FA44 /* HippocampusTestsMacOS */ = {
@@ -606,6 +670,7 @@
 		C54BE4BF28958F470060A066 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				C5A84B7729D61F860026F07E /* Location */,
 				C5AAA0E529BD1E28000DA6C3 /* PencilKit */,
 				C564EB8A29B541E300F3E0AC /* Global */,
 				C54BE510289591830060A066 /* Dependency Injection */,
@@ -736,10 +801,8 @@
 		C54BE5482895DCD50060A066 /* App Layer */ = {
 			isa = PBXGroup;
 			children = (
+				C5167C3929C5001200323F75 /* Model */,
 				C54BE4A12894866A0060A066 /* HippocampusApp.swift */,
-				C5AAA0FA29BE6CE8000DA6C3 /* NavigationPoCView.swift */,
-				C5D2735B2975E08400F32EB6 /* HippocampusApp.DocumentView.swift */,
-				C5C8E856295A652B002C7746 /* ContentView.swift */,
 				C58FB452291F215500D0B713 /* ListView.swift */,
 				C548BCBA292ADA8600DB6185 /* NoteView.swift */,
 			);
@@ -786,6 +849,7 @@
 			isa = PBXGroup;
 			children = (
 				C55AC5CD295A34F900F09326 /* Document.swift */,
+				C5A84B7029CFAF910026F07E /* Presentation */,
 				C564EB9129B542ED00F3E0AC /* Drawing */,
 				C5D273572975D6EB00F32EB6 /* Information */,
 				C5D273582975D70700F32EB6 /* Structure */,
@@ -859,9 +923,28 @@
 			path = Building;
 			sourceTree = "<group>";
 		};
+		C5A84B7029CFAF910026F07E /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				C5A84B7129CFAFC30026F07E /* Document.Presentation.swift */,
+				C5A84B7429CFB03D0026F07E /* Document.Presentation.Properties.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		C5A84B7729D61F860026F07E /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				C5A84B7829D61FB10026F07E /* LocationService.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
 		C5AAA0D029BBC261000DA6C3 /* Display Layer */ = {
 			isa = PBXGroup;
 			children = (
+				C5167C4329C6291E00323F75 /* Application */,
+				C5167C4D29C8F75A00323F75 /* Query */,
 				C5AAA0D229BD0FF1000DA6C3 /* Drawing */,
 			);
 			path = "Display Layer";
@@ -870,6 +953,7 @@
 		C5AAA0D129BBC2E1000DA6C3 /* Display Layer */ = {
 			isa = PBXGroup;
 			children = (
+				C5BA027629CE5A05009649C4 /* Application */,
 				C5AAA0F429BD3440000DA6C3 /* Text */,
 				C564EB9229B5439E00F3E0AC /* Drawing */,
 			);
@@ -909,6 +993,7 @@
 		C5AAA0F129BD3149000DA6C3 /* Display Layer */ = {
 			isa = PBXGroup;
 			children = (
+				C5BA027329CE59AD009649C4 /* Application */,
 				C5AAA0F329BD3438000DA6C3 /* Text */,
 				C5AAA0F229BD3155000DA6C3 /* Drawing */,
 			);
@@ -941,6 +1026,22 @@
 				C5AAA0F829BD34E3000DA6C3 /* TextView.swift */,
 			);
 			path = Text;
+			sourceTree = "<group>";
+		};
+		C5BA027329CE59AD009649C4 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				C5BA027429CE59C5009649C4 /* DetailView.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		C5BA027629CE5A05009649C4 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				C5167C4729C653A200323F75 /* DetailView.swift */,
+			);
+			path = Application;
 			sourceTree = "<group>";
 		};
 		C5C4A0C6293A83A400FF9AB8 /* Extensions */ = {
@@ -1049,6 +1150,7 @@
 			children = (
 				C59E287C2978AA9C007375D5 /* Building */,
 				C55AC5DA295A4A8100F09326 /* Structure.Query.swift */,
+				C5167C4A29C8F68C00323F75 /* Structure.Query.Presentation.swift */,
 				C55AC5DE295A4ACE00F09326 /* Structure.Query.Predicate.swift */,
 				C5C8E870295B5348002C7746 /* Structure.Query.Result.swift */,
 			);
@@ -1326,7 +1428,7 @@
 				C59B3CDD295CB9580053DE7D /* Structure.Aspect.swift in Sources */,
 				C55AC5E1295A4ACE00F09326 /* Structure.Query.Predicate.swift in Sources */,
 				C5576EB729510BB5005257A4 /* PersistentData.Object+getKey.swift in Sources */,
-				C5D2735E2975E08400F32EB6 /* HippocampusApp.DocumentView.swift in Sources */,
+				C5D2735E2975E08400F32EB6 /* DocumentView.swift in Sources */,
 				C5C4A0FC293B9E4800FF9AB8 /* DecodableProperty.swift in Sources */,
 				C59B3CEB295CCE9A0053DE7D /* CGSize+Operators.swift in Sources */,
 				C5C4A0F9293B9E4800FF9AB8 /* PublishedSerialized.swift in Sources */,
@@ -1359,8 +1461,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5A84B7529CFB03D0026F07E /* Document.Presentation.Properties.swift in Sources */,
 				C5C4A0E6293B78E000FF9AB8 /* Persistent.swift in Sources */,
 				C54BE4D728958F820060A066 /* SerializedTransformable.swift in Sources */,
+				C5A84B6E29CFA4D10026F07E /* QueryItemView.swift in Sources */,
 				C5C4A0E9293B9A8A00FF9AB8 /* PersistentData.swift in Sources */,
 				C55AC5A929512E3400F09326 /* Relations.swift in Sources */,
 				C54BE554289610A00060A066 /* ShowMemoryView.swift in Sources */,
@@ -1378,11 +1482,14 @@
 				C5AAA0F929BD34E3000DA6C3 /* TextView.swift in Sources */,
 				C54BE4E128958F910060A066 /* CycleBreaker.swift in Sources */,
 				C5AAA0F029BD2B64000DA6C3 /* UIImage+scale.swift in Sources */,
+				C5167C4F29C8F78100323F75 /* QueryView.swift in Sources */,
+				C5167C3B29C5002900323F75 /* Navigation.swift in Sources */,
+				C5167C4B29C8F68C00323F75 /* Structure.Query.Presentation.swift in Sources */,
 				C5AAA0E729BD1E3B000DA6C3 /* PkDrawing+strokesIn.swift in Sources */,
+				C5167C3E29C628AB00323F75 /* Navigation.Detail.swift in Sources */,
 				C54BE4D128958F820060A066 /* SerializedCodingKeys.swift in Sources */,
 				C54BE53C289591950060A066 /* NSPredicate+operators.swift in Sources */,
 				C54BE4DF28958F910060A066 /* Primitive.swift in Sources */,
-				C5AAA0FB29BE6CE8000DA6C3 /* NavigationPoCView.swift in Sources */,
 				C5A7929E29A4078400637C6C /* DrawingView.swift in Sources */,
 				C5C4A0CE293AAEAF00FF9AB8 /* PersistentGraph.swift in Sources */,
 				C54BE50E289591700060A066 /* MeasureSizeModifier.swift in Sources */,
@@ -1396,15 +1503,19 @@
 				C54BE55128960EF10060A066 /* SelectMemoryView.swift in Sources */,
 				C564EB7F29B5326A00F3E0AC /* Document.Drawing.swift in Sources */,
 				C5C4A0DA293AB3FC00FF9AB8 /* PersistentGraph.Item.swift in Sources */,
+				C5167C4829C653A200323F75 /* DetailView.swift in Sources */,
 				C55AC5AD295262CD00F09326 /* Present.swift in Sources */,
 				C54BE4C928958F820060A066 /* Transformable.swift in Sources */,
+				C5167C5229C8FAD900323F75 /* QueryListView.swift in Sources */,
 				C54BE4FB289591440060A066 /* CGRect+Functions.swift in Sources */,
+				C5167C4529C62BFB00323F75 /* SidebarView.swift in Sources */,
 				C54BE4E328958F910060A066 /* Box.swift in Sources */,
 				C54BE577289D7B0F0060A066 /* PublishedSerialized.swift in Sources */,
 				C54BE50A289591530060A066 /* Array+asSet.swift in Sources */,
 				C54BE514289591840060A066 /* InjectedPropertyWrapper.swift in Sources */,
 				C5576EB529510BB5005257A4 /* PersistentData.Object+getKey.swift in Sources */,
 				C54BE4CF28958F820060A066 /* SerializableDecodable.swift in Sources */,
+				C5A84B7929D61FB10026F07E /* LocationService.swift in Sources */,
 				C54BE4D328958F820060A066 /* EncodableProperty.swift in Sources */,
 				C5C4A0D7293AB08C00FF9AB8 /* CodableIdentifiable.swift in Sources */,
 				C55AC5DF295A4ACE00F09326 /* Structure.Query.Predicate.swift in Sources */,
@@ -1435,12 +1546,13 @@
 				C54BE501289591440060A066 /* CGSize+Operators.swift in Sources */,
 				C55AC5B52957C7C600F09326 /* PersistentGraph.Condition.swift in Sources */,
 				C5AAA0EA29BD1F57000DA6C3 /* Document.Drawing.Background.swift in Sources */,
-				C5D2735C2975E08400F32EB6 /* HippocampusApp.DocumentView.swift in Sources */,
+				C5D2735C2975E08400F32EB6 /* DocumentView.swift in Sources */,
 				C5C4A0CB293A9F9400FF9AB8 /* IdentifiableObject.swift in Sources */,
 				C5C4A0DD293AB7D500FF9AB8 /* PersistentGraph.Node.swift in Sources */,
 				C564EB8C29B541F500F3E0AC /* measureDuration.swift in Sources */,
 				C5E35542294E630D0015CDFD /* PersistentGraph.TimeLine.swift in Sources */,
 				C5C8E861295AFD8E002C7746 /* Structure.Aspect.swift in Sources */,
+				C5A84B7229CFAFC30026F07E /* Document.Presentation.swift in Sources */,
 				C5C4A0D1293AAFDD00FF9AB8 /* DidChangeNotifier.swift in Sources */,
 				C5D382EA2967786900E31D69 /* PersistentGraph.Transaction.swift in Sources */,
 				C59E28742978A921007375D5 /* Structure.Aspect+view.swift in Sources */,
@@ -1464,6 +1576,7 @@
 				C54BE518289591840060A066 /* Injector.swift in Sources */,
 				C54BE4E528958F910060A066 /* CyclicEncoder.swift in Sources */,
 				C54BE55A289698990060A066 /* View+If.swift in Sources */,
+				C5167C4129C628D200323F75 /* Navigation.Sidebar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1492,6 +1605,8 @@
 				C54BE4E228958F910060A066 /* CycleBreaker.swift in Sources */,
 				C54BE4D228958F820060A066 /* SerializedCodingKeys.swift in Sources */,
 				C54BE53D289591950060A066 /* NSPredicate+operators.swift in Sources */,
+				C5A84B7629CFB03D0026F07E /* Document.Presentation.Properties.swift in Sources */,
+				C5167C5329C8FAD900323F75 /* QueryListView.swift in Sources */,
 				C564EB8029B5326A00F3E0AC /* Document.Drawing.swift in Sources */,
 				C564EB7C29B5099300F3E0AC /* PersistentContainer.swift in Sources */,
 				C5C4A0CF293AAEAF00FF9AB8 /* PersistentGraph.swift in Sources */,
@@ -1509,18 +1624,22 @@
 				C54BE500289591440060A066 /* CGPoint+Operators.swift in Sources */,
 				C5C4A0DB293AB3FC00FF9AB8 /* PersistentGraph.Item.swift in Sources */,
 				C5AAA0E029BD1355000DA6C3 /* DrawingView.ImageView.swift in Sources */,
+				C5167C4C29C8F68C00323F75 /* Structure.Query.Presentation.swift in Sources */,
 				C5AAA0EB29BD1F57000DA6C3 /* Document.Drawing.Background.swift in Sources */,
 				C54BE55228960EF10060A066 /* SelectMemoryView.swift in Sources */,
 				C55AC5AE295262CD00F09326 /* Present.swift in Sources */,
 				C54BE4CA28958F820060A066 /* Transformable.swift in Sources */,
+				C5A84B7329CFAFC30026F07E /* Document.Presentation.swift in Sources */,
 				C54BE4FC289591440060A066 /* CGRect+Functions.swift in Sources */,
 				C54BE4E428958F910060A066 /* Box.swift in Sources */,
 				C54BE578289D7B0F0060A066 /* PublishedSerialized.swift in Sources */,
 				C54BE50B289591530060A066 /* Array+asSet.swift in Sources */,
+				C5A84B7A29D61FB10026F07E /* LocationService.swift in Sources */,
 				C5576EB629510BB5005257A4 /* PersistentData.Object+getKey.swift in Sources */,
 				C564EB8829B533FE00F3E0AC /* Document.Drawing.Properties.swift in Sources */,
 				C54BE515289591840060A066 /* InjectedPropertyWrapper.swift in Sources */,
 				C5C4A0D8293AB08C00FF9AB8 /* CodableIdentifiable.swift in Sources */,
+				C5167C3C29C5002900323F75 /* Navigation.swift in Sources */,
 				C54BE4D028958F820060A066 /* SerializableDecodable.swift in Sources */,
 				C55AC5E0295A4ACE00F09326 /* Structure.Query.Predicate.swift in Sources */,
 				C54BE4D428958F820060A066 /* EncodableProperty.swift in Sources */,
@@ -1529,6 +1648,7 @@
 				C5C8E865295AFDCA002C7746 /* Structure.Role.Builder.swift in Sources */,
 				C564EB8429B5337700F3E0AC /* Document.Drawing.Drawing.swift in Sources */,
 				C5C4A0C9293A840300FF9AB8 /* URL.swift in Sources */,
+				C5167C3F29C628AB00323F75 /* Navigation.Detail.swift in Sources */,
 				C54BE509289591530060A066 /* Set+asArray.swift in Sources */,
 				C5C8E86C295B041E002C7746 /* Structure.Query.Predicate.Builder.swift in Sources */,
 				C5C4A0E4293AC7C600FF9AB8 /* PersistentData.Object.swift in Sources */,
@@ -1536,6 +1656,8 @@
 				C54BE4D628958F820060A066 /* SerializableEncodable.swift in Sources */,
 				C5C8E872295B5348002C7746 /* Structure.Query.Result.swift in Sources */,
 				C59E2883297B2434007375D5 /* Structure.Aspect.Presentation.swift in Sources */,
+				C5167C4229C628D200323F75 /* Navigation.Sidebar.swift in Sources */,
+				C5A84B6F29CFA4D10026F07E /* QueryItemView.swift in Sources */,
 				C54BE4B22894866C0060A066 /* HippocampusApp.swift in Sources */,
 				C5C8E868295AFDEB002C7746 /* Structure.Aspect.Builder.swift in Sources */,
 				C54BE4CC28958F820060A066 /* Serialized.swift in Sources */,
@@ -1545,7 +1667,8 @@
 				C5E4CB03294BDD4B00755959 /* Relation.swift in Sources */,
 				C54BE502289591440060A066 /* CGSize+Operators.swift in Sources */,
 				C55AC5B62957C7C600F09326 /* PersistentGraph.Condition.swift in Sources */,
-				C5D2735D2975E08400F32EB6 /* HippocampusApp.DocumentView.swift in Sources */,
+				C5D2735D2975E08400F32EB6 /* DocumentView.swift in Sources */,
+				C5BA027529CE59C5009649C4 /* DetailView.swift in Sources */,
 				C5C4A0CC293AA02700FF9AB8 /* IdentifiableObject.swift in Sources */,
 				C5AAA0F729BD34B2000DA6C3 /* TextView.swift in Sources */,
 				C5C4A0DE293AB7D500FF9AB8 /* PersistentGraph.Node.swift in Sources */,
@@ -1556,11 +1679,12 @@
 				C5D382EB2967786900E31D69 /* PersistentGraph.Transaction.swift in Sources */,
 				C59E28752978A921007375D5 /* Structure.Aspect+view.swift in Sources */,
 				C5E966D729AAD47D009D81FF /* Font+Extension.swift in Sources */,
+				C5167C4629C62BFB00323F75 /* SidebarView.swift in Sources */,
+				C5167C5029C8F78100323F75 /* QueryView.swift in Sources */,
 				C54BE4CE28958F820060A066 /* DecodableProperty.swift in Sources */,
 				C5C4A0D5293AB05900FF9AB8 /* PersistentContent.swift in Sources */,
 				C54BE4E828958F910060A066 /* CyclicDecoder.swift in Sources */,
 				C55AC5CF295A34F900F09326 /* Document.swift in Sources */,
-				C5AAA0FC29BE6CE8000DA6C3 /* NavigationPoCView.swift in Sources */,
 				C54BE4FE289591440060A066 /* View+offset.swift in Sources */,
 				C5D382F3296B345D00E31D69 /* PersistentGraph.ChangeManager.swift in Sources */,
 				C582B38728A2F00400F795F0 /* PersistentObject.swift in Sources */,
@@ -1754,12 +1878,11 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Hippocampus--iOS--Info.plist";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1789,12 +1912,11 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Hippocampus--iOS--Info.plist";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1834,8 +1956,9 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
 				MARKETING_VERSION = 1.0;
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = de.kuehnerleben.Hippocampus;
 				PRODUCT_NAME = Hippocampus;
 				SDKROOT = macosx;
@@ -1867,7 +1990,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = de.kuehnerleben.Hippocampus;
 				PRODUCT_NAME = Hippocampus;

@@ -16,6 +16,7 @@ public class PublishedSerialized<T> {
     var key: String?
     var alternateKey: String?
     var cancellable: AnyCancellable?
+    var notifyChange: Bool
 
     @Published private var _value: T?
 
@@ -50,7 +51,11 @@ public class PublishedSerialized<T> {
                 publisher.send()
             }
             storage._value = newValue
-//            storage.registerObservation(instance)
+            if storage.notifyChange {
+                if let instance = instance as? (any DidChangeNotifier) {
+                    instance.objectDidChange.send()
+                }
+            }
         }
     }
 
@@ -59,15 +64,17 @@ public class PublishedSerialized<T> {
     ///   - key: The JSON decoding key to be used. If `nil` (or not passed), the property name gets used for decoding
     ///   - alternateKey: The alternative JSON decoding key to be used, if the primary decoding key fails
     ///   - value: The default value to be used, if the decoding fails. If not passed, `nil` is used.
-    public init(wrappedValue: @autoclosure @escaping () -> T, _ key: String? = nil, alternateKey: String? = nil) {
+    public init(wrappedValue: @autoclosure @escaping () -> T, _ key: String? = nil, alternateKey: String? = nil, notifiyChange: Bool = false) {
         self.key = key
         self.alternateKey = alternateKey
+        notifyChange = notifiyChange
         _value = wrappedValue()
     }
 
-    public init(_ key: String? = nil, alternateKey: String? = nil) {
+    public init(_ key: String? = nil, alternateKey: String? = nil, notifiyChange: Bool = false) {
         self.key = key
         self.alternateKey = alternateKey
+        notifyChange = notifiyChange
         _value = nil
     }
 }

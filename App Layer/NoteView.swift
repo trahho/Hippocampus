@@ -141,13 +141,13 @@ struct NoteView: View {
 //                }
 //            }
 //        }
-        .onAppear {
-            if editable {
-                if note == nil {
-                    note = document.information.createNode(roles: [Structure.Role.note])
-                }
-            }
-        }
+//        .onAppear {
+//            if editable {
+//                if note == nil {
+//                    note = document.information.createNode(roles: [Structure.Role.note])
+//                }
+//            }
+//        }
 //        .onDisappear {
         ////            document.save()
 //        }

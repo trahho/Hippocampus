@@ -2,19 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Raleway-Italic.ttf</string>
-		<string>Raleway-Regular.ttf</string>
-		<string>Raleway-SemiBold.ttf</string>
-	</array>
-	<key>UIApplicationSceneManifest</key>
-	<dict>
-		<key>UIApplicationSupportsMultipleScenes</key>
-		<false/>
-		<key>UISceneConfigurations</key>
-		<dict/>
-	</dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>In Usage</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Wat auch immer</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
@@ -30,6 +21,8 @@
 			<true/>
 		</dict>
 	</array>
+	<key>MKDirectionsApplicationSupportedModes</key>
+	<array/>
 	<key>NSUbiquitousContainers</key>
 	<dict>
 		<key>iCloud.de.kuehnerleben.Hippocampus</key>
@@ -41,6 +34,19 @@
 			<key>NSUbiquitousContainerSupportedFolderLevels</key>
 			<string>Any</string>
 		</dict>
+	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Raleway-Italic.ttf</string>
+		<string>Raleway-Regular.ttf</string>
+		<string>Raleway-SemiBold.ttf</string>
+	</array>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<false/>
+		<key>UISceneConfigurations</key>
+		<dict/>
 	</dict>
 	<key>UTExportedTypeDeclarations</key>
 	<array>

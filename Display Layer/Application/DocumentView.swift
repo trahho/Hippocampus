@@ -13,6 +13,7 @@ struct DocumentView: View {
 
     var body: some View {
         ContentView()
+            .font(.myText)
             .environmentObject(document)
     }
 }

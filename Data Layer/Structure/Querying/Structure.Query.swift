@@ -7,15 +7,23 @@
 
 import Foundation
 
+
+
 extension Structure {
     class Query: Object {
         static let notes = Query("89913172-022C-4EF0-95BA-76FF8E32F18B", "Notizen") {
 //            Predicate([.note, .topic], .hasRole(Role.note.id))
             Predicate([.note, .topic], .hasRole(Role.note.id) || .hasRole(Role.topic.id))
         }
+        
+        static let topics = Query("B7430903-0AC5-4C72-91E5-B54B73C8B5FD", "Themen") {
+//            Predicate([.note, .topic], .hasRole(Role.note.id))
+            Predicate([.note, .topic], .hasRole(Role.note.id) || .hasRole(Role.topic.id))
+        }
 
         @Persistent var name: String
         @Persistent var predicates: [Predicate]
+        @Persistent var presentation: Presentation = .list
 
         func apply(to information: Information) -> Result {
             let result = Result()

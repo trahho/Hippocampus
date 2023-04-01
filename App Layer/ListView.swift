@@ -10,12 +10,13 @@ import SwiftUI
 struct ListView: View {
     @ObservedObject var information: Information
     @ObservedObject var query: Structure.Query
+    @EnvironmentObject var document: Document
+    @EnvironmentObject var navigation: Navigation
 
     @State var addSheetIsPresented = false
     @State var editSheetItem: Structure.Query.Result.Node?
     @State var sortOrder: SortOrder = .forward
     @State var refresh: Bool = false
-    @Binding var path: [Information.Item]
 
     var result: Structure.Query.Result {
         query.apply(to: information)
@@ -32,7 +33,7 @@ struct ListView: View {
     let listItem: Structure.Representation = .vertical([
         .aspect(Structure.Role.note.name, form: .small, editable: false),
         .aspect(Structure.Role.note.text, form: .small, editable: false),
-        .aspect(Structure.Role.note.zeichnung, form: .small, editable: false)
+//        .aspect(Structure.Role.note.zeichnung, form: .small, editable: false)
     ], alignment: .leading)
 
 //    var items: [Mind.Idea] {
@@ -43,7 +44,7 @@ struct ListView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Button {
-                addSheetIsPresented.toggle()
+//                navigation.showItem(document.information.createNode(roles: [Structure.Role.note]))
             } label: {
                 Text("Add")
             }
@@ -56,14 +57,14 @@ struct ListView: View {
 //            ScrollView {
 //                VStack(alignment: .leading) {
                     List(items) { item in
-                        NavigationLink(value:item.item) {
+//                        NavigationLink(value:item.item) {
                             listItem.view(for: item.item, editable: false)
                                 .padding(2)
-//                                .onTapGesture {
-//                                    path.append(item.item)
-//                                }
+                                .onTapGesture {
+//                                    navigation.showItem(item.item)
+                                }
                             //                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        }
+//                        }
 //                        listItem.view(for: item.item, editable: false)
 //                            .padding(2)
 //                            .contentShape(Rectangle())

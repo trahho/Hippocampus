@@ -8,12 +8,20 @@
 import Combine
 import Foundation
 
-protocol DidChangeNotifier {
-    associatedtype ObjectDidChangePublisher: Publisher = Publisher where
-//        ObjectDidChangePublisher.Output == Any ,
-        ObjectDidChangePublisher.Failure == Never
+public protocol DidChangeNotifier {
+//    associatedtype ObjectDidChangePublisher: Publisher = Publisher where
+////        ObjectDidChangePublisher.Output == Any ,
+//        ObjectDidChangePublisher.Failure == Never
+    
+    typealias ObjectDidChangePublisher = Combine.ObservableObjectPublisher
 
     var objectDidChange: ObjectDidChangePublisher { get }
+}
+
+extension DidChangeNotifier {
+   public var objectDidChange: ObjectDidChangePublisher {
+        Combine.ObservableObjectPublisher()
+    }
 }
 
 // protocol DidChangeNotifier<Key: String, V {

@@ -39,8 +39,8 @@ class PersistentContainer<Content: PersistentContent>: PersistentContainerRefere
 
     fileprivate func registerChanges() {
         didChangeSubcriber = content.objectDidChange
-            .debounce(for: .seconds(1.5), scheduler: RunLoop.main)
-            .sink { [self] _ in
+            .debounce(for: .seconds(1.5), scheduler: DispatchQueue.main)
+            .sink { [self]  in
                 guard !isMerging else { return }
                 if commitOnChange {
                     hasChanges = true
@@ -68,23 +68,37 @@ class PersistentContainer<Content: PersistentContent>: PersistentContainerRefere
         let fileQueue = DispatchQueue(label: "de.kuehnerleben.Hippocampus.file", qos: .background)
         guard !url.isVirtual, hasChanges else { return }
         fileQueue.async { [self] in
-            print("PersistentDataContainer<\(String(reflecting: Content.self))>: Save")
+            #if TRACKPERSISTENCE
+                print("PersistentDataContainer<\(String(reflecting: Content.self))>: Save")
+            #endif
 
             willCommit?()
             guard let data = content.encode() else { return }
             metadataQuery.stop()
             url.deletingLastPathComponent().ensureDirectory()
-            measureDuration("Write data") {
-                try! data.write(to: url, options: [.atomic])
-            }
+
+            #if TRACKPERSISTENCE
+                measureDuration("Write data") {
+                    try! data.write(to: url, options: [.atomic])
+                }
+            #endif
+
             currentTimestamp = try! FileManager.default.attributesOfItem(atPath: url.path)[.modificationDate] as! Date
-            print("Modified \(currentTimestamp)")
+
+            #if TRACKPERSISTENCE
+                print("Modified \(currentTimestamp)")
+            #endif
+
             hasChanges = false
             DispatchQueue.main.sync {
-                print("Reactivating")
+                #if TRACKPERSISTENCE
+                    print("Reactivating")
+                #endif
                 metadataQuery.start()
             }
-            print("Done")
+            #if TRACKPERSISTENCE
+                print("Done")
+            #endif
         }
     }
 
@@ -101,7 +115,11 @@ class PersistentContainer<Content: PersistentContent>: PersistentContainerRefere
             let data = try? Data(contentsOf: url, options: [.uncached]),
             let newContent = Content.decode(persistentData: data)
         else { return }
-        print("PersistentDataContainer<\(String(reflecting: Content.self))>: Load")
+
+        #if TRACKPERSISTENCE
+            print("PersistentDataContainer<\(String(reflecting: Content.self))>: Load")
+        #endif
+
         newContent.restore()
         do {
             isMerging = true
@@ -114,7 +132,10 @@ class PersistentContainer<Content: PersistentContent>: PersistentContainerRefere
         currentTimestamp = modificationDate
         hasChanges = false
         didRefresh?()
-        print("Updated \(currentTimestamp)")
+
+        #if TRACKPERSISTENCE
+            print("Updated \(currentTimestamp)")
+        #endif
     }
 
     fileprivate func setupMetadataQuery() {

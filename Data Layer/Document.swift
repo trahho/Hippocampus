@@ -48,6 +48,7 @@ class Document: ObservableObject {
     }
 
     private var drawings: [String: Cache<Drawing>] = [:]
+//    private var views: [String: Cache<String>] = [:]
 
     func getDrawing(item: Information.Item, aspect: Structure.Aspect) -> Drawing {
         let title = "\(item.id)--\(aspect.id)"
@@ -59,6 +60,8 @@ class Document: ObservableObject {
             return drawing
         }
     }
+    
+  
     
 //    func getDrawing(item: Information.Item, aspect: Structure.Aspect) -> Drawing {
 //        let title = "\(item.id)--\(aspect.id)"

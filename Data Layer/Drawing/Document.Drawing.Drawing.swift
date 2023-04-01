@@ -13,7 +13,7 @@ extension Document.Drawing {
     class Drawing: PersistentContent, ObservableObject {
         private var isMerging = false
 
-        var objectDidChange = PassthroughSubject<Void, Never>()
+        var objectDidChange = Combine.ObservableObjectPublisher()
 
         var drawing: PKDrawing = .init() {
             willSet {
