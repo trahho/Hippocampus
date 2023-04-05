@@ -332,6 +332,10 @@
 		C5E966DA29AAD47D009D81FF /* Raleway-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C5E966CF29AAD47D009D81FF /* Raleway-Italic.ttf */; };
 		C5E966DB29AAD47D009D81FF /* Raleway-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C5E966CF29AAD47D009D81FF /* Raleway-Italic.ttf */; };
 		C5E966E129AD41AF009D81FF /* DataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E966E029AD41AF009D81FF /* DataTests.swift */; };
+		C5EECF5A29DDF7A3008608E4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C5EECF5829DDF7A3008608E4 /* Localizable.strings */; };
+		C5EECF5B29DDF7A3008608E4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C5EECF5829DDF7A3008608E4 /* Localizable.strings */; };
+		C5EECF5F29DDFBA9008608E4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C5EECF5D29DDFBA9008608E4 /* Localizable.strings */; };
+		C5EECF6029DDFBA9008608E4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C5EECF5D29DDFBA9008608E4 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -526,6 +530,8 @@
 		C5E966CE29AAD47D009D81FF /* Font+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Font+Extension.swift"; sourceTree = "<group>"; };
 		C5E966CF29AAD47D009D81FF /* Raleway-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Italic.ttf"; sourceTree = "<group>"; };
 		C5E966E029AD41AF009D81FF /* DataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTests.swift; sourceTree = "<group>"; };
+		C5EECF5929DDF7A3008608E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
+		C5EECF5E29DDFBA9008608E4 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -630,6 +636,8 @@
 		C54BE49B289486690060A066 = {
 			isa = PBXGroup;
 			children = (
+				C5EECF5C29DDFB81008608E4 /* de.lproj */,
+				C5EECF5729DDF774008608E4 /* en.lproj */,
 				C54BE558289618300060A066 /* Hippocampus--iOS--Info.plist */,
 				C54BE556289616680060A066 /* Hippocampus (iOS).entitlements */,
 				C54BE557289617140060A066 /* Hippocampus--macOS--Info.plist */,
@@ -1228,6 +1236,22 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		C5EECF5729DDF774008608E4 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				C5EECF5829DDF7A3008608E4 /* Localizable.strings */,
+			);
+			path = en.lproj;
+			sourceTree = "<group>";
+		};
+		C5EECF5C29DDFB81008608E4 /* de.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				C5EECF5D29DDFBA9008608E4 /* Localizable.strings */,
+			);
+			path = de.lproj;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1312,6 +1336,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = C54BE49B289486690060A066;
 			productRefGroup = C54BE4A92894866C0060A066 /* Products */;
@@ -1340,6 +1365,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5EECF5A29DDF7A3008608E4 /* Localizable.strings in Resources */,
+				C5EECF5F29DDFBA9008608E4 /* Localizable.strings in Resources */,
 				C54BE4B52894866C0060A066 /* Assets.xcassets in Resources */,
 				C5E966D329AAD47D009D81FF /* Raleway-Regular.ttf in Resources */,
 				C5E966D929AAD47D009D81FF /* Raleway-Italic.ttf in Resources */,
@@ -1351,6 +1378,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5EECF5B29DDF7A3008608E4 /* Localizable.strings in Resources */,
+				C5EECF6029DDFBA9008608E4 /* Localizable.strings in Resources */,
 				C54BE4B62894866C0060A066 /* Assets.xcassets in Resources */,
 				C5E966D429AAD47D009D81FF /* Raleway-Regular.ttf in Resources */,
 				C5E966DA29AAD47D009D81FF /* Raleway-Italic.ttf in Resources */,
@@ -1706,6 +1735,25 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		C5EECF5829DDF7A3008608E4 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C5EECF5929DDF7A3008608E4 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		C5EECF5D29DDFBA9008608E4 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C5EECF5E29DDFBA9008608E4 /* de */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		C528A18828CDE2A90027FA44 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1800,8 +1848,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1855,8 +1903,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1878,6 +1926,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Hippocampus--iOS--Info.plist";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Wat auch immer";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "In Usage";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1912,6 +1962,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Hippocampus--iOS--Info.plist";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Wat auch immer";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "In Usage";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

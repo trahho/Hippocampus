@@ -18,6 +18,8 @@ extension PersistentGraph {
         case predicates([Structure.Query.Predicate])
         case aspectPresentation(Structure.Aspect.Presentation)
         case queryPredicate(Structure.Query.Predicate)
+        case roleRepresentation(Structure.Role.Representation)
+        case roleRepresentations([Structure.Role.Representation])
 
         init(_ value: (any PersistentGraph.PersistentValue)?) {
             if value == nil { self = .nil }
@@ -29,6 +31,8 @@ extension PersistentGraph {
             else if let predicates = value as? [Structure.Query.Predicate] { self = .predicates(predicates) }
             else if let aspectPresentation = value as? Structure.Aspect.Presentation { self = .aspectPresentation(aspectPresentation) }
             else if let predicate = value as? Structure.Query.Predicate { self = .queryPredicate(predicate) }
+            else if let representation = value as? Structure.Role.Representation { self = .roleRepresentation(representation) }
+            else if let representations = value as? [Structure.Role.Representation] { self = .roleRepresentations(representations) }
             else { fatalError("Storage for \(value?.typeName ?? "Hä?") not available") }
         }
 
@@ -51,6 +55,10 @@ extension PersistentGraph {
             case let .aspectPresentation(value):
                 return value
             case let .queryPredicate(value):
+                return value
+            case let .roleRepresentation(value):
+                return value
+            case let .roleRepresentations(value):
                 return value
             }
         }

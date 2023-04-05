@@ -12,8 +12,8 @@ extension Structure {
     @dynamicMemberLookup
     class Role: Object {
         static let global = Role("D7812874-085B-4161-9ABB-C82D4A145634", "_Global") {
-            Aspect("8A81358C-2A7C-497D-A93D-306F776C217C", "_Name", .text)
-            Aspect("E851210E-7CCC-4D09-87C1-A7E75E04D7F4", "_Created", .date)
+            Aspect("8A81358C-2A7C-497D-A93D-306F776C217C", "/Name", .text)
+            Aspect("E851210E-7CCC-4D09-87C1-A7E75E04D7F4", "/Created", .date)
         } representations: {
             Representation("_Title", .aspect("E851210E-7CCC-4D09-87C1-A7E75E04D7F4", form: .normal, editable: false))
         }
