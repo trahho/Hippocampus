@@ -40,9 +40,8 @@ extension Document {
             }
         }
         
-        init(document: Document, name: String) {
-            let url = document.url.appending(components: "drawings", name)
-//            objectWillChange.handleEvents()
+        init(url: URL, name: String) {
+            let url = url.appending(components: "drawings", name)
             drawingContainer = PersistentContainer(url: url.appending(component: "drawing"), content: Drawing(), commitOnChange: true)
             propertiesContainer = PersistentContainer(url: url.appending(component: "properties"), content: Properties(), commitOnChange: false)
             drawingContainer.dependentContainers.append(propertiesContainer)

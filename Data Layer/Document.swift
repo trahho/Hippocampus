@@ -16,13 +16,17 @@ class Document: ObservableObject {
     var information: Information {
         informationContainer.content
     }
+    
+    var structure: Structure {
+        structureContainer.content
+    }
 
     var queries: Set<Structure.Query> {
-        structureContainer.content.queries
+        structure.queries
     }
 
     var roles: Set<Structure.Role> {
-        structureContainer.content.roles
+        structure.roles
     }
 
     init(url: URL) {
@@ -48,43 +52,27 @@ class Document: ObservableObject {
     }
 
     private var drawings: [String: Cache<Drawing>] = [:]
-//    private var views: [String: Cache<String>] = [:]
+    private var presentations: [String: Cache<Presentation>] = [:]
 
     func getDrawing(item: Information.Item, aspect: Structure.Aspect) -> Drawing {
         let title = "\(item.id)--\(aspect.id)"
         if let result = drawings[title]?.content {
-           return result
+            return result
         } else {
-            let drawing = Drawing(document: self, name: title)
-            drawings[title] = Cache(content: drawing)
-            return drawing
+            let result = Drawing(url: url, name: title)
+            drawings[title] = Cache(content: result)
+            return result
         }
     }
     
-  
-    
-//    func getDrawing(item: Information.Item, aspect: Structure.Aspect) -> Drawing {
-//        let title = "\(item.id)--\(aspect.id)"
-//        if let result = drawings[title] {
-//            drawings[title] = (result.drawing, result.count + 1)
-//            print("Drawing added: \(drawings[title]?.count ?? 0)")
-//            return result.drawing
-//        } else {
-//            let drawing = Drawing(document: self, name: title)
-//            drawings[title] = (drawing, 1)
-//            print("Drawing added: \(drawings[title]?.count ?? 0)")
-//            return drawing
-//        }
-//    }
-
-//    func releaseDrawing(item: Information.Item, aspect: Structure.Aspect) {
-//        let title = "\(item.id)--\(aspect.id)"
-//        guard let result = drawings[title] else { return }
-//        if result.count == 1 {
-//            drawings.removeValue(forKey: title)
-//        } else {
-//            drawings[title] = (result.drawing, result.count - 1)
-//        }
-//        print("Drawing removed: \(drawings[title]?.count ?? 0)")
-//    }
+    func getPresentation(query: Structure.Query) -> Presentation {
+        let title = "\(query.id)"
+        if let result = presentations[title]?.content {
+            return result
+        } else {
+            let result = Presentation(url: url, name: title)
+            presentations[title] = Cache(content: result)
+            return result
+        }
+    }
 }

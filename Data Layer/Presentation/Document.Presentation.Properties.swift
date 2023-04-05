@@ -34,10 +34,6 @@ extension Document.Presentation {
     class Properties: PersistentContent, Serializable, ObservableObject {
         @PublishedSerialized(notifiyChange: true) var globalValues: [Information.Item.ID: AnyObject] = [:]
 
-        // MARK: - Publishers
-
-        var objectDidChange = PassthroughSubject<Void, Never>()
-
         // MARK: - Initialisation
 
         public required init() {}

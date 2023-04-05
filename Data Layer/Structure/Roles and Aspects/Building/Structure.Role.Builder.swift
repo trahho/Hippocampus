@@ -17,12 +17,37 @@ extension Structure.Role {
         }
     }
 
-    convenience init(_ id: String, _ name: String, _ superRoles: [Structure.Role] = [], @Structure.Aspect.Builder aspects: () -> [Structure.Aspect] = { [] }) {
+    convenience init(_ id: String,
+                     _ name: String,
+                     _ subRoles: [Structure.Role] = [],
+                     @Structure.Aspect.Builder aspects: () -> [Structure.Aspect] = { [] },
+                     @Structure.Role.Representation.Builder representations: () -> [Representation] = { [] })
+    {
         self.init()
         self.id = UUID(uuidString: id)!
         self.roleDescription = name
         self.aspects = aspects().asSet
-        self.superRoles = superRoles.asSet
-        print ("Built role \(name)")
+        self.representations = representations()
+        self.subRoles = subRoles.asSet
+        print("Built role \(name)")
+    }
+
+    struct Representation: Structure.PersistentValue {
+        let name: String
+        let representation: Structure.Representation
+
+        init(_ name: String, _ representation: Structure.Representation) {
+            self.name = name
+            self.representation = representation
+        }
+
+        @resultBuilder
+        enum Builder {
+            static func buildBlock() -> [Structure.Role.Representation] { [] }
+
+            static func buildBlock(_ representations: Structure.Role.Representation...) -> [Structure.Role.Representation] {
+                representations
+            }
+        }
     }
 }

@@ -90,7 +90,7 @@ struct NoteView: View {
 
     let textAspect = Structure.Role.note.text
     let titleAspect = Structure.Role.note.name
-    let drawingAspect = Structure.Role.note.zeichnung
+    let drawingAspect = Structure.Role.note.drawing
 
     var body: some View {
 //        VStawck(alignment: .leading) {

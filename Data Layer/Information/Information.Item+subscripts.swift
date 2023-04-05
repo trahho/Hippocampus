@@ -13,7 +13,13 @@ extension Information.Item {
             self[role: role.id, timestamp: readingTimestamp]
         }
         set {
-            self[role: role.id, timestamp: writingTimestamp(timestamp)] = newValue
+            if newValue == true {
+                role.allRoles.forEach { role in
+                    self[role: role.id, timestamp: writingTimestamp(timestamp)] = true
+                }
+            } else {
+                self[role: role.id, timestamp: writingTimestamp(timestamp)] = false
+            }
         }
     }
 

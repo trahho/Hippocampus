@@ -31,8 +31,8 @@ struct ListView: View {
 //    ], alignment: .center)
 
     let listItem: Structure.Representation = .vertical([
-        .aspect(Structure.Role.note.name, form: .small, editable: false),
-        .aspect(Structure.Role.note.text, form: .small, editable: false),
+        .aspect(Structure.Role.global.name, form: .small, editable: false),
+        .aspect(Structure.Role.text.text, form: .small, editable: false),
 //        .aspect(Structure.Role.note.zeichnung, form: .small, editable: false)
     ], alignment: .leading)
 
@@ -48,7 +48,7 @@ struct ListView: View {
             } label: {
                 Text("Add")
             }
-            let nameAspect = Structure.Role.note.name
+            let nameAspect = Structure.Role.global.name
             let items = result.nodes.asArray
                 .sorted(by: { a, b in
                     a.item[String.self, nameAspect] ?? "" < b.item[String.self, nameAspect] ?? ""
@@ -56,14 +56,14 @@ struct ListView: View {
 //                .sorted(using: Aspect.Comparator(order: sortOrder, aspect: Perspective.note.name))
 //            ScrollView {
 //                VStack(alignment: .leading) {
-                    List(items) { item in
+            List(items) { item in
 //                        NavigationLink(value:item.item) {
-                            listItem.view(for: item.item, editable: false)
-                                .padding(2)
-                                .onTapGesture {
+                listItem.view(for: item.item, by: document.structure, editable: false)
+                    .padding(2)
+                    .onTapGesture {
 //                                    navigation.showItem(item.item)
-                                }
-                            //                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    }
+                //                                .frame(maxWidth: .infinity, maxHeight: .infinity)
 //                        }
 //                        listItem.view(for: item.item, editable: false)
 //                            .padding(2)
@@ -93,7 +93,8 @@ struct ListView: View {
 
     func newNote() -> Information.Node {
         let note = Information.Node()
-        note[role: Structure.Role.note] = true
+        note[role: Structure.Role.text] = true
+        note[role: Structure.Role.drawing] = true
         information.add(note)
         return note
     }

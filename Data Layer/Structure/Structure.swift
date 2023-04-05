@@ -11,8 +11,14 @@ class Structure: PersistentData {
     @Present var queries: Set<Query>
     @Present var roles: Set<Role>
 
+    var aspects: [Aspect.ID: Aspect] {
+        roles.filter { $0.isFinal }
+            .flatMap { $0.aspects }
+            .asDictionary(key: \.id)
+    }
+
     override func setup() -> Structure {
-        let roles: [Role] = [.global, .drawing, .topic, .note]
+        let roles: [Role] = [.global, .drawing, .text, .topic, .note]
         roles.forEach { add($0, timestamp: Date.distantPast) }
 
         let queries: [Query] = [.notes, .topics]

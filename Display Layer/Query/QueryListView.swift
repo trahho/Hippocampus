@@ -10,6 +10,7 @@ import SwiftUI
 
 struct QueryListView: View {
     @EnvironmentObject var navigation: Navigation
+    @EnvironmentObject var document: Document
     @ObservedObject var information: Information
     @ObservedObject var query: Structure.Query
 
@@ -45,7 +46,7 @@ struct QueryListView: View {
                 a.item[String.self, nameAspect] ?? "" < b.item[String.self, nameAspect] ?? ""
             })
         List(items, id:\.self, selection: $navigation.item) { item in
-            listItem.view(for: item.item, editable: false)
+            listItem.view(for: item.item, by: document.structure, editable: false)
                 .padding(2)
 //                .tapToSelectItem(item)
         }
