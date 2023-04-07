@@ -21,14 +21,13 @@ struct DetailView: View {
 
     var body: some View {
         ZStack {
-            if showQuery {
+            if showItem {
+                QueryItemView(item: navigation.item!)
+                    .background(.background)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            } else if showQuery {
                 QueryView(query: navigation.query!)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                if showItem {
-                    QueryItemView(item: navigation.item!)
-                        .background(.background)
-                        .frame(width: 200, alignment: .topTrailing)
-                }
             } else {
                 Text("Empty")
             }

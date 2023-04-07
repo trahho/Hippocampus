@@ -7,23 +7,52 @@
 
 import Foundation
 
-
-
 extension Structure {
     class Query: Object {
-        static let notes = Query("89913172-022C-4EF0-95BA-76FF8E32F18B", "Notizen") {
+        fileprivate enum Keys {
+            static let notes = "89913172-022C-4EF0-95BA-76FF8E32F18B"
+            static let topics = "B7430903-0AC5-4C72-91E5-B54B73C8B5FD"
+        }
+
+        static let roleRepresentations: [RoleRepresentation] = [RoleRepresentation(.global, "_Title")]
+
+        static let notes = Query(Keys.notes, "_Notes") {
 //            Predicate([.note, .topic], .hasRole(Role.note.id))
             Predicate([.note, .topic], .hasRole(Role.note.id) || .hasRole(Role.topic.id))
+        } representations: {
+            RoleRepresentation(.topic, "_Title")
+            RoleRepresentation(.drawing, "_Icon")
+            RoleRepresentation(.drawing, "_Card", [.gallery, .map, .canvas])
+            RoleRepresentation(.text, "_Introduction_Short")
         }
-        
-        static let topics = Query("B7430903-0AC5-4C72-91E5-B54B73C8B5FD", "Themen") {
+
+        static let topics = Query(Keys.topics, "_Topics") {
 //            Predicate([.note, .topic], .hasRole(Role.note.id))
             Predicate([.note, .topic], .hasRole(Role.note.id) || .hasRole(Role.topic.id))
         }
 
         @Persistent var name: String
-        @Persistent var predicates: [Predicate]
-        @Persistent var presentation: Presentation = .list
+        @PublishedSerialized var predicates: [Predicate]
+        @PublishedSerialized var roleRepresentations: [RoleRepresentation] = []
+        @PublishedSerialized var layout: Presentation.Layout = .list
+        @Serialized var isStatic = false
+
+        func getRepresentation(_ representations: any Sequence<RoleRepresentation>, for role: Structure.Role) -> Structure.Representation? {
+            let representation = roleRepresentations
+                .filter { $0.roleId == role.id }
+                .compactMap { $0.representation(for: layout) }
+                .first
+            if let representation {
+                return role.representation(for: representation)
+            }
+            return nil
+        }
+
+        func roleRepresentation(role: Structure.Role, layout: Presentation.Layout) -> Structure.Representation {
+            getRepresentation(roleRepresentations, for: role) ??
+            getRepresentation(Self.roleRepresentations, for: role) ??
+            Structure.Role.global.representation(for: "_Title")
+        }
 
         func apply(to information: Information) -> Result {
             let result = Result()

@@ -22,7 +22,7 @@ extension Structure {
         case label(String)
 
         @ViewBuilder
-        func view(for item: Information.Item, by structure: Structure, editable: Bool) -> some View {
+        func view(for item: Information.Item, by structure: Structure, editable: Bool = false) -> some View {
             switch self {
             case .empty:
                 EmptyView()

@@ -13,22 +13,26 @@ struct SidebarView: View {
     @EnvironmentObject var document: Document
 //    @State var selection: Structure.Query
 
+   
+
     var body: some View {
-        switch navigation.sidebar {
-        case .queries:
-            List(document.queries.asArray.sorted(by: { $0.name < $1.name }), id: \.self, selection: $navigation.query) { query in
-                Text(query.name)
-                    .font(.myText)
-                    .tapToSelectQuery(query)
-//                    .contentShape(Rectangle())
-//                    .onTapGesture {
-//                        navigation.details.append(.queryContent(query))
-//                    }
+        Group {
+            switch navigation.sidebar {
+            case .queries:
+                List(document.queries.asArray.sorted(by: { $0.name < $1.name }), id: \.self, selection: $navigation.query) { query in
+                    query.textView
+                        .font(.myText)
+                        .tapToSelectQuery(query)
+                    //                    .contentShape(Rectangle())
+                    //                    .onTapGesture {
+                    //                        navigation.details.append(.queryContent(query))
+                    //                    }
+                }
+                //            .listStyle(.sidebar)
+                .navigationTitle("Filter")
+            case .favorites:
+                EmptyView()
             }
-//            .listStyle(.sidebar)
-            .navigationTitle("Filter")
-        case .favorites:
-            EmptyView()
         }
     }
 }

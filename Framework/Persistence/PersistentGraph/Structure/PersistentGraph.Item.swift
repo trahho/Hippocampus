@@ -102,9 +102,10 @@ extension PersistentGraph {
             guard other.id == id else { return }
 
             objectWillChange.send()
-
+            
             rolesValue = rolesValue.merged(with: other.rolesValue)
             deletedValue = deletedValue.merged(with: other.deletedValue)
+            added = other.added
 
             Set(values.keys).intersection(Set(other.values.keys))
                 .forEach { key in

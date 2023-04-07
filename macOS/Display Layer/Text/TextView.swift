@@ -18,12 +18,26 @@ struct TextView: View {
         switch form {
         case .icon:
             Image(systemName: "text.quote")
+        case .firstParagraph:
+            let text = item[String.self, aspect] ?? ""
+            Text(text.prefix(while: { $0 != "\n" }))
         default:
             if editable {
-                TextField(aspect.name, text: Binding(get: { item[String.self, aspect] ?? "" }, set: { item[String.self, aspect] = $0 }))
-                    .textFieldStyle(.roundedBorder)
+                if aspect.role.isStatic {
+                    TextField(LocalizedStringKey(aspect.name), text: Binding(get: { item[String.self, aspect] ?? "" }, set: { item[String.self, aspect] = $0 }))
+                        .textFieldStyle(.roundedBorder)
+                } else {
+                    TextField(aspect.name, text: Binding(get: { item[String.self, aspect] ?? "" }, set: { item[String.self, aspect] = $0 }))
+                        .textFieldStyle(.roundedBorder)
+                }
             } else {
-                Text(item[String.self, aspect] ?? "")
+                if let value = item[String.self, aspect] {
+                    Text(value)
+                } else if aspect.role.isStatic {
+                    Text(LocalizedStringKey(aspect.name))
+                } else {
+                    Text(aspect.name)
+                }
             }
         }
     }

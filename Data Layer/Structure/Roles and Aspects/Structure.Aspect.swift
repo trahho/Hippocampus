@@ -12,8 +12,14 @@ extension Structure {
     class Aspect: Object {
         @Persistent var name: String = ""
         @Persistent var presentation: Presentation
+        @Serialized var index = 0
 //        @Persistent var defaultValue: (any PersistentValue)?
 
         @Relation(inverse: "aspects") var role: Role!
+        
+        override func mergeValues(other: PersistentData.Object) {
+            guard let other = other as? Aspect else { return }
+            index = other.index
+        }
     }
 }

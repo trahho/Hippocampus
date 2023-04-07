@@ -14,7 +14,7 @@ struct QueryView: View {
 
     @ViewBuilder
     var content: some View {
-        switch query.presentation {
+        switch query.layout {
         case .list:
             QueryListView(information: document.information, query: query)
         default:

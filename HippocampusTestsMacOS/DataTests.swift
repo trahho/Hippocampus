@@ -23,6 +23,16 @@ final class DataTests: XCTestCase {
 //        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
 //        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
 //    }
+    
+    struct Test {
+        var x = Set<Int>()
+    }
+    
+    func testStruct() throws {
+        var x = Test()
+        x.x.insert(0)
+        XCTAssert(x.x.contains(0))
+    }
 
     func testCombinedData() throws {
 //        let value1 = 42

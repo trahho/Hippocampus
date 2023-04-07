@@ -27,7 +27,7 @@ open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable>:
     var edges: Set<Edge> { Set<Edge>(edgeStorage.values.filter(\.isActive)) }
 
    
-//    var changeDidHappen: ChangePublisher = .init()
+    public var objectDidChange: ObjectDidChangePublisher = .init()
 
     // MARK: - Initialisation
 

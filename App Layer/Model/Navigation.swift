@@ -71,7 +71,7 @@ extension Navigation {
                 .contentShape(Rectangle())
                 .onTapGesture {
                     withAnimation {
-                        navigation.items = [item]
+                        navigation.items.append(item)
                     }
                 }
         }

@@ -1,0 +1,24 @@
+/* 
+  Localizable.strings
+  Hippocampus
+
+  Created by Guido Kühn on 05.04.23.
+  
+*/
+
+"_Global" = "Generell";
+"/Name" = "Name";
+"/Created" = "Erstellt";
+"_Drawing" = "Zeichnung";
+"/Drawing" = "Zeichnung";
+"_Text" = "Text";
+"/Text" = "Text";
+"_Topic" = "Thema";
+"_Note" = "Notiz";
+"/Headline" = "Überschrift";
+
+/* Queries */
+"_Notes" = "Notizen";
+"_Topics" = "Themen";
+
+

@@ -19,13 +19,14 @@ struct QueryItemView: View {
 
     func aspects(_ role: Structure.Role) -> [Structure.Aspect] {
         role.allAspects.sorted { a, b in
-            a.name < b.name
+            (a.index, a.name) < (b.index, b.name)
         }
     }
 
 //    var body: some View {
 //        Text("Depp")
 //    }
+
 
     var body: some View {
         ScrollView {
@@ -35,10 +36,10 @@ struct QueryItemView: View {
             ////        }
 //            VStack(alignment: .leading) {
                 ForEach(item.roles.sorted(by: { $0.roleDescription < $1.roleDescription })) { role in
-                    DisclosureGroup(role.roleDescription) {
+                    DisclosureGroup(LocalizedStringKey(role.roleDescription)) {
                         ForEach(aspects(role)) { aspect in
 //                                            Text(aspect.name)
-                            aspect.view(for: item.item, as: .small, editable: false)
+                            aspect.view(for: item.item, as: .small, editable: true)
                                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                         }
                     }

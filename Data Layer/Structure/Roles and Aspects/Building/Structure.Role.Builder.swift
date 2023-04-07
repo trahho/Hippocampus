@@ -20,13 +20,19 @@ extension Structure.Role {
     convenience init(_ id: String,
                      _ name: String,
                      _ subRoles: [Structure.Role] = [],
+                     addToMenu: Bool = false,
                      @Structure.Aspect.Builder aspects: () -> [Structure.Aspect] = { [] },
                      @Structure.Role.Representation.Builder representations: () -> [Representation] = { [] })
     {
         self.init()
         self.id = UUID(uuidString: id)!
         self.roleDescription = name
-        self.aspects = aspects().asSet
+        self.canBeCreated = addToMenu
+        let aspects = aspects()
+        for i in 0 ..< aspects.count {
+            aspects[i].index = i
+        }
+        self.aspects = aspects.asSet
         self.representations = representations()
         self.subRoles = subRoles.asSet
         print("Built role \(name)")

@@ -39,8 +39,8 @@ class PersistentContainer<Content: PersistentContent>: PersistentContainerRefere
 
     fileprivate func registerChanges() {
         didChangeSubcriber = content.objectDidChange
-            .debounce(for: .seconds(1.5), scheduler: DispatchQueue.main)
-            .sink { [self]  in
+            .debounce(for: .seconds(1.5), scheduler: RunLoop.main)
+            .sink { [self] in
                 guard !isMerging else { return }
                 if commitOnChange {
                     hasChanges = true
@@ -81,6 +81,8 @@ class PersistentContainer<Content: PersistentContent>: PersistentContainerRefere
                 measureDuration("Write data") {
                     try! data.write(to: url, options: [.atomic])
                 }
+            #else
+                try! data.write(to: url, options: [.atomic])
             #endif
 
             currentTimestamp = try! FileManager.default.attributesOfItem(atPath: url.path)[.modificationDate] as! Date

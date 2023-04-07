@@ -10,19 +10,22 @@ import Foundation
 
 public protocol DidChangeNotifier {
 //    associatedtype ObjectDidChangePublisher: Publisher = Publisher where
-////        ObjectDidChangePublisher.Output == Any ,
+    ////        ObjectDidChangePublisher.Output == Any ,
 //        ObjectDidChangePublisher.Failure == Never
-    
     typealias ObjectDidChangePublisher = Combine.ObservableObjectPublisher
+//    associatedtype ObjectDidChangePublisher: Publisher = ObservableObjectPublisher where Self.ObjectDidChangePublisher.Failure == Never
 
     var objectDidChange: ObjectDidChangePublisher { get }
 }
 
-extension DidChangeNotifier {
-   public var objectDidChange: ObjectDidChangePublisher {
-        Combine.ObservableObjectPublisher()
-    }
-}
+//extension DidChangeNotifier {
+//    //   public var objectDidChange: ObjectDidChangePublisher {
+////        Combine.ObservableObjectPublisher()
+////    }
+//    init() {
+//        self.objectDidChange = Combine.ObservableObjectPublisher()
+//    }
+//}
 
 // protocol DidChangeNotifier<Key: String, V {
 //    associatedtype ObjectDidChangePublisher: Publisher = ObservableObjectPublisher where

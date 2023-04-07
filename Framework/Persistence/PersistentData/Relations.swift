@@ -9,7 +9,7 @@ import Foundation
 
 @propertyWrapper final class Relations<Target>: PersistentRelationWrapper where Target: PersistentData.Object {
     typealias TargetSet = Set<Target>
-    
+
     enum Direction {
         case reference, referenced
     }
@@ -76,7 +76,7 @@ import Foundation
 
             added
                 .forEach { item in
-                    let edge = PersistentData.Edge(from: instance, to: item)
+                    let edge = storage.direction == .reference ? PersistentData.Edge(from: instance, to: item) : PersistentData.Edge(from: item, to: instance)
                     edge[role: key, timestamp: timestamp] = true
                     if let inversekey = storage.reverseKey {
                         item.objectWillChange.send()

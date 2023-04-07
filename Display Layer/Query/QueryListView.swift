@@ -29,26 +29,37 @@ struct QueryListView: View {
 
     let nameAspect = Structure.Role.global.name
 
-    let listItem: Structure.Representation = .aspect(Structure.Role.global.name, form: .small, editable: false)
+    var items: [Structure.Query.Result.Node] {
+        result.nodes
+            .sorted(by: { a, b in
+                a.item[String.self, nameAspect] ?? "" < b.item[String.self, nameAspect] ?? ""
+            })
+    }
 
 //    var items: [Mind.Idea] {
 //        conclusion.ideas.values
 //            .sorted(using: Aspect.Comparator(order: .forward, aspect: Perspective.note.name))
 //    }
-    
+
     @State var selection: Structure.Query.Result.Item?
 
+    @ViewBuilder
+    func representation(for item: Structure.Query.Result.Item) -> some View {
+        let representation = item.roles.compactMap { query.roleRepresentation(role: $0, layout: .list) }.first
+        if let representation {
+            representation.view(for: item.item, by: document.structure)
+        } else {
+            EmptyView()
+        }
+    }
+
     var body: some View {
-        let nameAspect = Structure.Role.note.name
-        let items = result.nodes
-            .map { $0 as Structure.Query.Result.Item }
-            .sorted(by: { a, b in
-                a.item[String.self, nameAspect] ?? "" < b.item[String.self, nameAspect] ?? ""
-            })
-        List(items, id:\.self, selection: $navigation.item) { item in
-            listItem.view(for: item.item, by: document.structure, editable: false)
+        List(items, id: \.self, selection: $navigation.item) { item in
+            representation(for: item)
+//            Text("Test")
+//            listItem.view(for: item.item, by: document.structure, editable: false)
                 .padding(2)
-//                .tapToSelectItem(item)
+                .tapToSelectItem(item)
         }
     }
 }

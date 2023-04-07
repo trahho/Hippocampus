@@ -8,12 +8,12 @@
 import Combine
 import Foundation
 
-extension Document.Presentation {
+extension Presentation {
     class Property<T: Codable>: PersistentObject, ObservableObject {
-        @PublishedSerialized private var modes: Set<Mode> = []
+        @PublishedSerialized private var modes: Set<Layout> = []
         @PublishedSerialized var value: T?
 
-        subscript(mode: Mode) -> Bool {
+        subscript(mode: Layout) -> Bool {
             get {
                 modes.isEmpty || modes.contains(mode)
             }
@@ -27,12 +27,13 @@ extension Document.Presentation {
         }
     }
 
-    enum Mode: Codable {
-        case list, tree, map
+    enum Layout: Codable {
+        case list, tree, map, gallery, canvas
     }
 
     class Properties: PersistentContent, Serializable, ObservableObject {
         @PublishedSerialized(notifiyChange: true) var globalValues: [Information.Item.ID: AnyObject] = [:]
+        var objectDidChange = ObjectDidChangePublisher()
 
         // MARK: - Initialisation
 

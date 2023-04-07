@@ -37,9 +37,9 @@ struct HippocampusApp: App {
 //                .onAppear {
 //                    Self.locationService.start()
 //                }
-            Text("hello_world")
-//            DocumentView(document: document)
-//                .environmentObject(navigation)
+//            Text("hello_world")
+            DocumentView(document: document)
+                .environmentObject(navigation)
 //                .onOpenURL { document = Document(url: $0) }
         }
     }

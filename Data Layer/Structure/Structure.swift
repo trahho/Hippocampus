@@ -19,10 +19,16 @@ class Structure: PersistentData {
 
     override func setup() -> Structure {
         let roles: [Role] = [.global, .drawing, .text, .topic, .note]
-        roles.forEach { add($0, timestamp: Date.distantPast) }
+        roles.forEach {
+            add($0, timestamp: Date.distantPast)
+            $0.isStatic = true
+        }
 
         let queries: [Query] = [.notes, .topics]
-        queries.forEach { add($0, timestamp: Date.distantPast) }
+        queries.forEach {
+            add($0, timestamp: Date.distantPast)
+            $0.isStatic = true
+        }
         assert(Role.global.graph != nil)
         return self
     }
