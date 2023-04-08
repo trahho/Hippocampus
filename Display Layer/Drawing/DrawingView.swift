@@ -24,6 +24,8 @@ struct DrawingView: View {
             Image(systemName: "square.and.pencil")
         case .normal:
             CanvasView(data: document.getDrawing(item: item, aspect: aspect), editable: editable)
+        case .edit:
+            CanvasView(data: document.getDrawing(item: item, aspect: aspect), editable: true)
         case .small:
             ImageView(data: document.getDrawing(item: item, aspect: aspect), scale: 0.5)
         default:

@@ -30,22 +30,12 @@ struct QueryItemView: View {
 
     var body: some View {
         ScrollView {
-//        List {
-//            Text("A")
-//            Text("B")
-            ////        }
-//            VStack(alignment: .leading) {
                 ForEach(item.roles.sorted(by: { $0.roleDescription < $1.roleDescription })) { role in
                     DisclosureGroup(LocalizedStringKey(role.roleDescription)) {
-                        ForEach(aspects(role)) { aspect in
-//                                            Text(aspect.name)
-                            aspect.view(for: item.item, as: .small, editable: true)
-                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                        }
+                        role.representation(for: "_Edit")
+                            .view(for: item.item, editable: true)
                     }
-//                Text("\(role.roleDescription)")
                 }
-//            }
         }
         .padding()
     }

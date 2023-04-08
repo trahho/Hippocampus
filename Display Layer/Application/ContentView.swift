@@ -28,6 +28,16 @@ struct ContentView: View {
                 Label("Add", systemImage: "plus")
             }
         }
+        ToolbarItemGroup (placement: .navigation) {
+            if let _ = navigation.item {
+                Button {
+                    navigation.removeItem()
+                } label: {
+                    Image (systemName: "chevron.left")
+                }
+
+            }
+        }
     }
 
     var body: some View {

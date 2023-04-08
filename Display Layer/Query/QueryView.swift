@@ -17,6 +17,8 @@ struct QueryView: View {
         switch query.layout {
         case .list:
             QueryListView(information: document.information, query: query)
+        case .tree:
+            QueryTreeView(information: document.information, query: query)
         default:
             Text("Not yet")
         }

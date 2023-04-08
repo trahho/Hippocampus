@@ -13,16 +13,16 @@ extension Structure {
         enum Alignment: Structure.PersistentValue {
             case leading, center, trailing, top, bottom
         }
-
+        
         case empty
         case undefined
         case horizontal([Representation], alignment: Alignment = Alignment.top)
         case vertical([Representation], alignment: Alignment = Alignment.leading)
         case aspect(Structure.Aspect.ID, form: Structure.Aspect.Presentation.Form, editable: Bool = true)
         case label(String)
-
+        
         @ViewBuilder
-        func view(for item: Information.Item, by structure: Structure, editable: Bool = false) -> some View {
+        func view(for item: Information.Item, editable: Bool = false) -> some View {
             switch self {
             case .empty:
                 EmptyView()
@@ -31,14 +31,14 @@ extension Structure {
             case let .label(label):
                 Text(label)
             case let .horizontal(children, alignment):
-                HorizontalView(structure: structure, item: item, children: children, alignment: alignment, editable: editable)
+                HorizontalView(item: item, children: children, alignment: alignment, editable: editable)
             case let .vertical(children, alignment):
-                VerticalView(structure: structure, item: item, children: children, alignment: alignment, editable: editable)
+                VerticalView( item: item, children: children, alignment: alignment, editable: editable)
             case let .aspect(aspectId, form, isEditable):
-                structure.aspects[aspectId]?.view(for: item, as: form, editable: isEditable && editable)
+                AspectView(item: item, aspectId: aspectId, form: form, editable: isEditable && editable)
             }
         }
-
+        
         static func aspect(_ aspect: Structure.Aspect, form: Structure.Aspect.Presentation.Form, editable: Bool = true) -> Representation {
             .aspect(aspect.id, form: form, editable: editable)
         }
@@ -46,10 +46,29 @@ extension Structure {
         static func aspect(_ aspect: String, form: Structure.Aspect.Presentation.Form, editable: Bool = true) -> Representation {
             .aspect(UUID(uuidString: aspect)!, form: form, editable: editable)
         }
+        
+        static func vertical(_ children: Representation..., alignment: Alignment = .leading) -> Representation {
+            .vertical(children, alignment: alignment)
+        }
     }
-
+    
+    struct AspectView: View {
+        @EnvironmentObject var structure: Structure
+        @ObservedObject var item: Information.Item
+        var aspectId: Structure.Aspect.ID
+        var form: Aspect.Presentation.Form
+        var editable = false
+        
+        var body: some View {
+            if let aspect =  structure.aspects[aspectId] {
+                aspect.view(for: item, as: form, editable: editable)
+            } else {
+                EmptyView()
+            }
+        }
+    }
+    
     struct HorizontalView: View {
-        @ObservedObject var structure: Structure
         @ObservedObject var item: Information.Item
         var children: [Representation]
         var alignment: Representation.Alignment
@@ -71,14 +90,13 @@ extension Structure {
         var body: some View {
             HStack(alignment: verticalAlignment) {
                 ForEach(0 ..< children.count, id: \.self) { index in
-                    children[index].view(for: item, by: structure, editable: editable)
+                    children[index].view(for: item,  editable: editable)
                 }
             }
         }
     }
 
     struct VerticalView: View {
-        @ObservedObject var structure: Structure
         @ObservedObject var item: Information.Item
         var children: [Representation]
         var alignment: Representation.Alignment
@@ -100,7 +118,7 @@ extension Structure {
         var body: some View {
             VStack(alignment: horizontalAlignment) {
                 ForEach(0 ..< children.count, id: \.self) { index in
-                    children[index].view(for: item, by: structure, editable: editable)
+                    children[index].view(for: item, editable: editable)
                 }
             }
         }

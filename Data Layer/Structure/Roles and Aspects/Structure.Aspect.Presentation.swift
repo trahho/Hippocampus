@@ -13,7 +13,7 @@ extension Structure.Aspect {
         case text, drawing, date
         
         enum Form: Structure.PersistentValue {
-            case icon, small, normal, firstParagraph, editFull
+            case icon, small, normal, firstParagraph, editFull, edit
         }
 
         @ViewBuilder

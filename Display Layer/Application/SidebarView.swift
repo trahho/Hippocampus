@@ -16,23 +16,28 @@ struct SidebarView: View {
    
 
     var body: some View {
-        Group {
-            switch navigation.sidebar {
-            case .queries:
-                List(document.queries.asArray.sorted(by: { $0.name < $1.name }), id: \.self, selection: $navigation.query) { query in
-                    query.textView
-                        .font(.myText)
-                        .tapToSelectQuery(query)
-                    //                    .contentShape(Rectangle())
-                    //                    .onTapGesture {
-                    //                        navigation.details.append(.queryContent(query))
-                    //                    }
+//        ScrollView {
+//            VStack(alignment: .leading) {
+                switch navigation.sidebar {
+                case .queries:
+                    List(document.queries.asArray.sorted(by: { $0.name < $1.name }), id: \.self, selection: $navigation.query) { query in
+                        query.textView
+                            .font(.myText)
+//                            .background(query == navigation.query ? Color.accentColor : Color.clear)
+                            .tapToSelectQuery(query)
+                        //                    .contentShape(Rectangle())
+                        //                    .onTapGesture {
+                        //                        navigation.details.append(.queryContent(query))
+                        //                    }
+                    }
+                    //            .listStyle(.sidebar)
+                    .navigationTitle("Filter")
+//                    .frame(maxWidth: .infinity)
+                case .favorites:
+                    EmptyView()
                 }
-                //            .listStyle(.sidebar)
-                .navigationTitle("Filter")
-            case .favorites:
-                EmptyView()
             }
-        }
-    }
+         
+//        }
+//    }
 }

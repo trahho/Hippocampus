@@ -18,7 +18,7 @@ extension Structure {
 
         static let notes = Query(Keys.notes, "_Notes") {
 //            Predicate([.note, .topic], .hasRole(Role.note.id))
-            Predicate([.note, .topic], .hasRole(Role.note.id) || .hasRole(Role.topic.id))
+            Predicate([.note], .hasRole(Role.note.id))
         } representations: {
             RoleRepresentation(.topic, "_Title")
             RoleRepresentation(.drawing, "_Icon")
@@ -28,30 +28,31 @@ extension Structure {
 
         static let topics = Query(Keys.topics, "_Topics") {
 //            Predicate([.note, .topic], .hasRole(Role.note.id))
-            Predicate([.note, .topic], .hasRole(Role.note.id) || .hasRole(Role.topic.id))
+            Predicate([ .topic], .hasRole(Role.topic.id) || .)
         }
 
         @Persistent var name: String
         @PublishedSerialized var predicates: [Predicate]
         @PublishedSerialized var roleRepresentations: [RoleRepresentation] = []
-        @PublishedSerialized var layout: Presentation.Layout = .list
+        @PublishedSerialized var layout: Presentation.Layout = .tree
         @Serialized var isStatic = false
 
-        func getRepresentation(_ representations: any Sequence<RoleRepresentation>, for role: Structure.Role) -> Structure.Representation? {
-            let representation = roleRepresentations
-                .filter { $0.roleId == role.id }
-                .compactMap { $0.representation(for: layout) }
+        func getRepresentation(_ representations: any Sequence<RoleRepresentation>, for role: Structure.Role) -> String? {
+            let specific = roleRepresentations
+                .filter { $0.roleId == role.id && $0.layouts.contains(layout) }
+                .compactMap { $0.representation }
                 .first
-            if let representation {
-                return role.representation(for: representation)
-            }
-            return nil
+            let general = roleRepresentations
+                .filter { $0.roleId == role.id && $0.layouts.isEmpty }
+                .compactMap { $0.representation }
+                .first
+            return specific ?? general
         }
 
-        func roleRepresentation(role: Structure.Role, layout: Presentation.Layout) -> Structure.Representation {
-            getRepresentation(roleRepresentations, for: role) ??
-            getRepresentation(Self.roleRepresentations, for: role) ??
-            Structure.Role.global.representation(for: "_Title")
+        static let defaultRepresentation = Structure.Representation.aspect(Structure.Role.global.name, form: .normal)
+
+        func roleRepresentation(role: Structure.Role, layout: Presentation.Layout) -> String? {
+            getRepresentation(roleRepresentations, for: role) ?? getRepresentation(Self.roleRepresentations, for: role)
         }
 
         func apply(to information: Information) -> Result {

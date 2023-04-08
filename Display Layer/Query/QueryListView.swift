@@ -20,13 +20,6 @@ struct QueryListView: View {
         query.apply(to: information)
     }
 
-    var content: [Structure.Query.Result.Item] {
-        result.nodes.asArray
-            .sorted { a, b in
-                a.item[String.self, nameAspect] ?? "" < b.item[String.self, nameAspect] ?? ""
-            }
-    }
-
     let nameAspect = Structure.Role.global.name
 
     var items: [Structure.Query.Result.Node] {
@@ -45,12 +38,14 @@ struct QueryListView: View {
 
     @ViewBuilder
     func representation(for item: Structure.Query.Result.Item) -> some View {
-        let representation = item.roles.compactMap { query.roleRepresentation(role: $0, layout: .list) }.first
-        if let representation {
-            representation.view(for: item.item, by: document.structure)
-        } else {
-            EmptyView()
-        }
+        let representation = item.roles.compactMap {
+            if let representation = query.roleRepresentation(role: $0, layout: .list) {
+                return $0.representation(for: representation)
+            }
+            return nil
+        }.first ?? Structure.Query.defaultRepresentation
+
+        representation.view(for: item.item)
     }
 
     var body: some View {
@@ -59,6 +54,8 @@ struct QueryListView: View {
 //            Text("Test")
 //            listItem.view(for: item.item, by: document.structure, editable: false)
                 .padding(2)
+//                .frame(maxWidth: .infinity)
+//                .background(.blue)
                 .tapToSelectItem(item)
         }
     }

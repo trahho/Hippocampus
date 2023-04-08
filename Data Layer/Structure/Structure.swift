@@ -12,7 +12,7 @@ class Structure: PersistentData {
     @Present var roles: Set<Role>
 
     var aspects: [Aspect.ID: Aspect] {
-        roles.filter { $0.isFinal }
+        roles.filter { !$0.aspects.isEmpty }
             .flatMap { $0.aspects }
             .asDictionary(key: \.id)
     }

@@ -9,7 +9,16 @@ import Foundation
 import SwiftUI
 
 extension Structure.Aspect {
+    @ViewBuilder
+    var textView: some View {
+        if role.isStatic {
+            Text(LocalizedStringKey(name))
+        } else {
+            Text(name)
+        }
+    }
+
     func view(for item: Information.Item, as form: Presentation.Form, editable: Bool) -> some View {
-        self.presentation.view(for:  item, in: self, as: form, editable: editable)
+        self.presentation.view(for: item, in: self, as: form, editable: editable)
     }
 }

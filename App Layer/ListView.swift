@@ -58,7 +58,7 @@ struct ListView: View {
 //                VStack(alignment: .leading) {
             List(items) { item in
 //                        NavigationLink(value:item.item) {
-                listItem.view(for: item.item, by: document.structure, editable: false)
+                listItem.view(for: item.item,  editable: false)
                     .padding(2)
                     .onTapGesture {
 //                                    navigation.showItem(item.item)

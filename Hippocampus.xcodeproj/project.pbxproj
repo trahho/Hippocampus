@@ -302,6 +302,8 @@
 		C5D382F2296B345D00E31D69 /* PersistentGraph.ChangeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D382F1296B345D00E31D69 /* PersistentGraph.ChangeManager.swift */; };
 		C5D382F3296B345D00E31D69 /* PersistentGraph.ChangeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D382F1296B345D00E31D69 /* PersistentGraph.ChangeManager.swift */; };
 		C5D382F4296B345D00E31D69 /* PersistentGraph.ChangeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D382F1296B345D00E31D69 /* PersistentGraph.ChangeManager.swift */; };
+		C5E1406C29E0EE4900464B92 /* QueryTreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E1406B29E0EE4900464B92 /* QueryTreeView.swift */; };
+		C5E1406D29E0EE4900464B92 /* QueryTreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E1406B29E0EE4900464B92 /* QueryTreeView.swift */; };
 		C5E35542294E630D0015CDFD /* PersistentGraph.TimeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E35541294E630D0015CDFD /* PersistentGraph.TimeLine.swift */; };
 		C5E35543294E630D0015CDFD /* PersistentGraph.TimeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E35541294E630D0015CDFD /* PersistentGraph.TimeLine.swift */; };
 		C5E35544294E630D0015CDFD /* PersistentGraph.TimeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E35541294E630D0015CDFD /* PersistentGraph.TimeLine.swift */; };
@@ -340,6 +342,8 @@
 		C5EECF6629DF7C74008608E4 /* Structure.Query+textView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EECF6429DF7C74008608E4 /* Structure.Query+textView.swift */; };
 		C5EECF6829DF7CD4008608E4 /* Structure.Role+textView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EECF6729DF7CD4008608E4 /* Structure.Role+textView.swift */; };
 		C5EECF6929DF7CD4008608E4 /* Structure.Role+textView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EECF6729DF7CD4008608E4 /* Structure.Role+textView.swift */; };
+		C5EECF6B29E0A9B1008608E4 /* Structure.Role+statics.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EECF6A29E0A9B1008608E4 /* Structure.Role+statics.swift */; };
+		C5EECF6C29E0A9B1008608E4 /* Structure.Role+statics.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EECF6A29E0A9B1008608E4 /* Structure.Role+statics.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -516,6 +520,7 @@
 		C5D382E5296777E800E31D69 /* Encodable+typeName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+typeName.swift"; sourceTree = "<group>"; };
 		C5D382E92967786900E31D69 /* PersistentGraph.Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentGraph.Transaction.swift; sourceTree = "<group>"; };
 		C5D382F1296B345D00E31D69 /* PersistentGraph.ChangeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentGraph.ChangeManager.swift; sourceTree = "<group>"; };
+		C5E1406B29E0EE4900464B92 /* QueryTreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryTreeView.swift; sourceTree = "<group>"; };
 		C5E28A492918425900103AD4 /* Consciousness.Experience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consciousness.Experience.swift; sourceTree = "<group>"; };
 		C5E28A4C2918427600103AD4 /* Mind.ThoughtsExperience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mind.ThoughtsExperience.swift; sourceTree = "<group>"; };
 		C5E35541294E630D0015CDFD /* PersistentGraph.TimeLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentGraph.TimeLine.swift; sourceTree = "<group>"; };
@@ -538,6 +543,7 @@
 		C5EECF6129DE1FCD008608E4 /* Structure.Query.RoleRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structure.Query.RoleRepresentation.swift; sourceTree = "<group>"; };
 		C5EECF6429DF7C74008608E4 /* Structure.Query+textView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Structure.Query+textView.swift"; sourceTree = "<group>"; };
 		C5EECF6729DF7CD4008608E4 /* Structure.Role+textView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Structure.Role+textView.swift"; sourceTree = "<group>"; };
+		C5EECF6A29E0A9B1008608E4 /* Structure.Role+statics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Structure.Role+statics.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -608,6 +614,7 @@
 				C5167C4E29C8F78100323F75 /* QueryView.swift */,
 				C5A84B6D29CFA4D10026F07E /* QueryItemView.swift */,
 				C5167C5129C8FAD900323F75 /* QueryListView.swift */,
+				C5E1406B29E0EE4900464B92 /* QueryTreeView.swift */,
 			);
 			path = Query;
 			sourceTree = "<group>";
@@ -1177,6 +1184,7 @@
 			children = (
 				C59E287B2978A992007375D5 /* Building */,
 				C5C8E85D295AFD4E002C7746 /* Structure.Role.swift */,
+				C5EECF6A29E0A9B1008608E4 /* Structure.Role+statics.swift */,
 				C5EECF6729DF7CD4008608E4 /* Structure.Role+textView.swift */,
 				C59E287D2979D394007375D5 /* Structure.Representation.swift */,
 				C5C8E860295AFD8E002C7746 /* Structure.Aspect.swift */,
@@ -1521,6 +1529,7 @@
 				C5AAA0F029BD2B64000DA6C3 /* UIImage+scale.swift in Sources */,
 				C5167C4F29C8F78100323F75 /* QueryView.swift in Sources */,
 				C5167C3B29C5002900323F75 /* Navigation.swift in Sources */,
+				C5E1406C29E0EE4900464B92 /* QueryTreeView.swift in Sources */,
 				C5AAA0E729BD1E3B000DA6C3 /* PkDrawing+strokesIn.swift in Sources */,
 				C5167C3E29C628AB00323F75 /* Navigation.Detail.swift in Sources */,
 				C54BE4D128958F820060A066 /* SerializedCodingKeys.swift in Sources */,
@@ -1535,6 +1544,7 @@
 				C504036B290DDE8D0083AC41 /* CaseIterable+StringConversion.swift in Sources */,
 				C54BE4FF289591440060A066 /* CGPoint+Operators.swift in Sources */,
 				C548BCBB292ADA8600DB6185 /* NoteView.swift in Sources */,
+				C5EECF6B29E0A9B1008608E4 /* Structure.Role+statics.swift in Sources */,
 				C5E966C029AAB6D8009D81FF /* Document.Drawing.Background+draw.swift in Sources */,
 				C54BE55128960EF10060A066 /* SelectMemoryView.swift in Sources */,
 				C564EB7F29B5326A00F3E0AC /* Document.Drawing.swift in Sources */,
@@ -1653,6 +1663,7 @@
 				C5A7929F29A4078400637C6C /* DrawingView.swift in Sources */,
 				C5AAA0EE29BD27DC000DA6C3 /* NSImage+scale.swift in Sources */,
 				C54BE4E028958F910060A066 /* Primitive.swift in Sources */,
+				C5EECF6C29E0A9B1008608E4 /* Structure.Role+statics.swift in Sources */,
 				C5E35547294E632F0015CDFD /* PersistentGraph.TimedValue.swift in Sources */,
 				C55AC5B229560AF900F09326 /* Equatable+isEqualTo.swift in Sources */,
 				C54BE50F289591700060A066 /* MeasureSizeModifier.swift in Sources */,
@@ -1730,6 +1741,7 @@
 				C5D382F3296B345D00E31D69 /* PersistentGraph.ChangeManager.swift in Sources */,
 				C582B38728A2F00400F795F0 /* PersistentObject.swift in Sources */,
 				C54BE517289591840060A066 /* InjectionKey.swift in Sources */,
+				C5E1406D29E0EE4900464B92 /* QueryTreeView.swift in Sources */,
 				C55AC5D8295A4A5F00F09326 /* Structure.swift in Sources */,
 				C54BE519289591840060A066 /* Injector.swift in Sources */,
 				C54BE4E628958F910060A066 /* CyclicEncoder.swift in Sources */,

@@ -15,5 +15,6 @@ struct DocumentView: View {
         ContentView()
             .font(.myText)
             .environmentObject(document)
+            .environmentObject(document.structure)
     }
 }
