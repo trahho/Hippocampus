@@ -7,9 +7,22 @@
 
 import Foundation
 
+//protocol TimedStorage : Serializable {
+//    associatedtype Storage: ValueStorage
+//
+//    var timestamp: Date? { get }
+//
+//    init(_ startValue: any Storage.PersistentValue)
+//    init(_ values: [Value])
+//}
+
 extension PersistentGraph {
-    struct TimeLine: Serializable {
-        @Serialized private var values: [TimedValue]
+
+    struct TimeLine<Storage: ValueStorage>: Serializable {
+        
+        typealias Value = TimedValue<Storage>
+        
+        @Serialized private var values: [Value]
 
         var timestamp: Date? {
             values.last?.time
@@ -20,10 +33,10 @@ extension PersistentGraph {
         }
 
         init(_ startValue: any PersistentGraph.PersistentValue) {
-            values = [TimedValue(time: Date.distantPast, value: startValue)]
+            values = [Value(time: Date.distantPast, value: startValue)]
         }
 
-        init(_ values: [TimedValue]) {
+        init(_ values: [Value]) {
             self.values = values
         }
 
@@ -34,7 +47,7 @@ extension PersistentGraph {
             let temp = (values + other.values).sorted { $0.time < $1.time }
             guard !temp.isEmpty else { return TimeLine() }
 
-            var result: [TimedValue] = [temp.first!]
+            var result: [Value] = [temp.first!]
             temp.forEach { current in
                 let last = result.last!
                 if current.time > last.time, !isEqual(last.value, current.value) {
@@ -44,7 +57,7 @@ extension PersistentGraph {
             return TimeLine(result)
         }
 
-        func timedValue(at timestamp: Date) -> TimedValue? {
+        func timedValue(at timestamp: Date) -> Value? {
             values.last(where: { $0.time <= timestamp })
         }
 
@@ -59,7 +72,7 @@ extension PersistentGraph {
                     if last.time == timestamp { values.removeLast() }
                 }
 
-                let newTimedValue = TimedValue(time: timestamp, value: newValue)
+                let newTimedValue = Value(time: timestamp, value: newValue)
                 values.append(newTimedValue)
             }
         }

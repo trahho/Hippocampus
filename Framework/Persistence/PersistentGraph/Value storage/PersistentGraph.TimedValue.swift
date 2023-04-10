@@ -7,22 +7,33 @@
 
 import Foundation
 
-extension PersistentGraph {
-    struct TimedValue: Serializable {
-        @Serialized private(set) var time: Date
-        @Serialized private(set) var storage: PersistentGraph.ValueStorage = .nil
+public protocol ValueStorage: Codable, Equatable {
+    typealias PersistentValue = Codable & Equatable
 
-        var value: (any PersistentGraph.PersistentValue)? {
+    init(_ value: (any PersistentValue)?)
+    var value: (any PersistentValue)? { get }
+}
+
+extension PersistentGraph {
+    struct TimedValue<Storage: ValueStorage>: Serializable {
+        @Serialized private(set) var time: Date
+        @Serialized private(set) var storage: Storage?
+
+        var value: (any Storage.PersistentValue)? {
             get {
-                storage.value
+                storage?.value
             }
             set {
-                storage = PersistentGraph.ValueStorage(newValue)
+                guard let newValue else {
+                    storage = nil
+                    return
+                }
+                storage = Storage(newValue)
             }
         }
 
-        subscript<T: PersistentData.PersistentValue>(type _: T.Type) -> T? {
-            let value = value
+        subscript<T: ValueStorage.PersistentValue>(type _: T.Type) -> T? {
+            guard let value else { return nil }
             return value as? T
         }
 

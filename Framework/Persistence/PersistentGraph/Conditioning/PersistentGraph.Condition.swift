@@ -13,7 +13,7 @@ infix operator <~: AdditionPrecedence
 extension PersistentGraph {
     indirect enum Condition: PersistentValue {
         typealias PersistentComparableValue = PersistentValue & Comparable
-        typealias Storage = PersistentGraph.ValueStorage
+        typealias Storage = GraphValueStorage<Role>
 
         struct Comparison: Serializable, Equatable {
             enum Relation: Int {

@@ -8,16 +8,14 @@
 import Foundation
 import SwiftUI
 
-
-
 extension Structure {
     @dynamicMemberLookup
     class Role: Object {
-        @Persistent var roleDescription: String = ""
-        @PublishedSerialized var representations: [Representation]
         @Serialized var isStatic = false
         @PublishedSerialized var canBeCreated = false
 
+        @Persistent var roleDescription: String = ""
+        @Persistent var representations: [Representation]
         @Relations(reverse: "role") var aspects: Set<Aspect>
         @Relations(reverse: "subRoles") var superRoles: Set<Role>
         @Relations(reverse: "superRoles", direction: .referenced) var subRoles: Set<Role>
@@ -59,7 +57,6 @@ extension Structure {
         override func mergeValues(other: Object) {
             guard let other = other as? Role else { return }
             self.isStatic = other.isStatic
-            self.representations = other.representations
             self.canBeCreated = other.canBeCreated
         }
     }

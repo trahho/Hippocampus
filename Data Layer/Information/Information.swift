@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Information: PersistentGraph<Structure.Role.ID, Structure.Aspect.ID> {
+class Information: PersistentGraph<Structure.Role.ID, Structure.Aspect.ID, GraphValueStorage<Structure.Role.ID>> {
     
     func createNode(roles: [Structure.Role] = [], timestamp: Date? = nil) -> Node {
         let timestamp = timestamp ?? Date()

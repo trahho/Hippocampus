@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable>: PersistentContent, Serializable, ObservableObject {
+open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable, Storage: ValueStorage>: PersistentContent, Serializable, ObservableObject {
     // MARK: - Types
 
     public typealias PersistentValue = Codable & Equatable

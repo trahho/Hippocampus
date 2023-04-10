@@ -10,9 +10,9 @@ import Foundation
 
 extension PersistentGraph {
     open class Item: PersistentObject, ObservableObject {
-        @Serialized private(set) var rolesValue = TimeLine(Set<Role>())
-        @Serialized private(set) var deletedValue = TimeLine()
-        @Serialized private(set) var values: [Key: TimeLine] = [:]
+        @Serialized private(set) var rolesValue = TimeLine<Storage>(Set<Role>())
+        @Serialized private(set) var deletedValue = TimeLine<Storage>()
+        @Serialized private(set) var values: [Key: TimeLine<Storage>] = [:]
         @Serialized var added: Date?
 
         var graph: PersistentGraph!
@@ -87,7 +87,7 @@ extension PersistentGraph {
 
         func adopt(timestamp _: Date?) {}
 
-        func reset(_ keyPath: KeyPath<Item, TimeLine>, before timestamp: Date) {
+        func reset(_ keyPath: KeyPath<Item, TimeLine<Storage>>, before timestamp: Date) {
             objectWillChange.send()
             self[keyPath: keyPath].reset(before: timestamp)
         }
