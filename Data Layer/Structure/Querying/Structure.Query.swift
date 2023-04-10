@@ -9,6 +9,7 @@ import Foundation
 
 extension Structure {
     class Query: Object {
+        typealias RoleRepresentation = Presentation.RoleRepresentation
         fileprivate enum Keys {
             static let notes = "89913172-022C-4EF0-95BA-76FF8E32F18B"
             static let topics = "B7430903-0AC5-4C72-91E5-B54B73C8B5FD"
@@ -22,13 +23,13 @@ extension Structure {
         } representations: {
             RoleRepresentation(.topic, "_Title")
             RoleRepresentation(.drawing, "_Icon")
-            RoleRepresentation(.drawing, "_Card", [.gallery, .map, .canvas])
+            RoleRepresentation(.drawing, "_Card")
             RoleRepresentation(.text, "_Introduction_Short")
         }
 
         static let topics = Query(Keys.topics, "_Topics") {
 //            Predicate([.note, .topic], .hasRole(Role.note.id))
-            Predicate([ .topic], .hasRole(Role.topic.id) || .)
+            Predicate([.topic], .hasRole(Role.topic.id))
         }
 
         @Persistent var name: String
@@ -39,11 +40,11 @@ extension Structure {
 
         func getRepresentation(_ representations: any Sequence<RoleRepresentation>, for role: Structure.Role) -> String? {
             let specific = roleRepresentations
-                .filter { $0.roleId == role.id && $0.layouts.contains(layout) }
+            .filter { $0.roleId == role.id } //&& $0.layouts.contains(layout) }
                 .compactMap { $0.representation }
                 .first
             let general = roleRepresentations
-                .filter { $0.roleId == role.id && $0.layouts.isEmpty }
+            .filter { $0.roleId == role.id } //&& $0.layouts.isEmpty }
                 .compactMap { $0.representation }
                 .first
             return specific ?? general

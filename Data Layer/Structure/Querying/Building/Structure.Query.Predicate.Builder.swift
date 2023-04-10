@@ -22,12 +22,12 @@ extension Structure.Query.Predicate {
     }
 }
 
-extension Structure.Query.RoleRepresentation {
+extension Presentation.RoleRepresentation {
     @resultBuilder
     enum Builder {
-        static func buildBlock() -> [Structure.Query.RoleRepresentation] { [] }
+        static func buildBlock() -> [Presentation.RoleRepresentation] { [] }
 
-        static func buildBlock(_ predicates: Structure.Query.RoleRepresentation...) -> [Structure.Query.RoleRepresentation] {
+        static func buildBlock(_ predicates: Presentation.RoleRepresentation...) -> [Presentation.RoleRepresentation] {
             predicates
         }
     }
@@ -37,7 +37,7 @@ extension Structure.Query {
     convenience init(_ id: String,
                      _ name: String,
                      @Structure.Query.Predicate.Builder predicates: () -> [Structure.Query.Predicate] = { [] },
-                     @Structure.Query.RoleRepresentation.Builder representations: () -> [Structure.Query.RoleRepresentation] = { [] })
+                     @Presentation.RoleRepresentation.Builder representations: () -> [Presentation.RoleRepresentation] = { [] })
     {
         self.init()
         self.id = UUID(uuidString: id)!

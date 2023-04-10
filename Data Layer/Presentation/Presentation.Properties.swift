@@ -27,9 +27,7 @@ extension Presentation {
         }
     }
 
-    enum Layout: Codable {
-        case list, tree, map, gallery, canvas
-    }
+  
 
     class Properties: PersistentContent, Serializable, ObservableObject {
         @PublishedSerialized(notifiyChange: true) var globalValues: [Information.Item.ID: AnyObject] = [:]
