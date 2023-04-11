@@ -312,12 +312,12 @@
 		C5E1406D29E0EE4900464B92 /* QueryTreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E1406B29E0EE4900464B92 /* QueryTreeView.swift */; };
 		C5E1406F29E218DD00464B92 /* Presentation.Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E1406E29E218DD00464B92 /* Presentation.Layout.swift */; };
 		C5E1407029E218DD00464B92 /* Presentation.Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E1406E29E218DD00464B92 /* Presentation.Layout.swift */; };
-		C5E35542294E630D0015CDFD /* PersistentGraph.TimeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E35541294E630D0015CDFD /* PersistentGraph.TimeLine.swift */; };
-		C5E35543294E630D0015CDFD /* PersistentGraph.TimeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E35541294E630D0015CDFD /* PersistentGraph.TimeLine.swift */; };
-		C5E35544294E630D0015CDFD /* PersistentGraph.TimeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E35541294E630D0015CDFD /* PersistentGraph.TimeLine.swift */; };
-		C5E35546294E632F0015CDFD /* PersistentGraph.TimedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E35545294E632F0015CDFD /* PersistentGraph.TimedValue.swift */; };
-		C5E35547294E632F0015CDFD /* PersistentGraph.TimedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E35545294E632F0015CDFD /* PersistentGraph.TimedValue.swift */; };
-		C5E35548294E632F0015CDFD /* PersistentGraph.TimedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E35545294E632F0015CDFD /* PersistentGraph.TimedValue.swift */; };
+		C5E35542294E630D0015CDFD /* TimeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E35541294E630D0015CDFD /* TimeLine.swift */; };
+		C5E35543294E630D0015CDFD /* TimeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E35541294E630D0015CDFD /* TimeLine.swift */; };
+		C5E35544294E630D0015CDFD /* TimeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E35541294E630D0015CDFD /* TimeLine.swift */; };
+		C5E35546294E632F0015CDFD /* TimedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E35545294E632F0015CDFD /* TimedValue.swift */; };
+		C5E35547294E632F0015CDFD /* TimedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E35545294E632F0015CDFD /* TimedValue.swift */; };
+		C5E35548294E632F0015CDFD /* TimedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E35545294E632F0015CDFD /* TimedValue.swift */; };
 		C5E4CB02294BDD4B00755959 /* Relation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E4CB01294BDD4B00755959 /* Relation.swift */; };
 		C5E4CB03294BDD4B00755959 /* Relation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E4CB01294BDD4B00755959 /* Relation.swift */; };
 		C5E4CB04294BDD4B00755959 /* Relation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E4CB01294BDD4B00755959 /* Relation.swift */; };
@@ -535,8 +535,8 @@
 		C5E1406E29E218DD00464B92 /* Presentation.Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presentation.Layout.swift; sourceTree = "<group>"; };
 		C5E28A492918425900103AD4 /* Consciousness.Experience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consciousness.Experience.swift; sourceTree = "<group>"; };
 		C5E28A4C2918427600103AD4 /* Mind.ThoughtsExperience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mind.ThoughtsExperience.swift; sourceTree = "<group>"; };
-		C5E35541294E630D0015CDFD /* PersistentGraph.TimeLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentGraph.TimeLine.swift; sourceTree = "<group>"; };
-		C5E35545294E632F0015CDFD /* PersistentGraph.TimedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentGraph.TimedValue.swift; sourceTree = "<group>"; };
+		C5E35541294E630D0015CDFD /* TimeLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLine.swift; sourceTree = "<group>"; };
+		C5E35545294E632F0015CDFD /* TimedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedValue.swift; sourceTree = "<group>"; };
 		C5E4CB01294BDD4B00755959 /* Relation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relation.swift; sourceTree = "<group>"; };
 		C5E4CB05294BDEA000755959 /* PersistentDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentDataTests.swift; sourceTree = "<group>"; };
 		C5E966B329AAA931009D81FF /* PencilCanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilCanvasView.swift; sourceTree = "<group>"; };
@@ -1233,8 +1233,8 @@
 			children = (
 				C5D382E12967779100E31D69 /* GraphValueStorage.swift */,
 				C5708D2429E5C8F500F4D4E1 /* ValueStorage.swift */,
-				C5E35545294E632F0015CDFD /* PersistentGraph.TimedValue.swift */,
-				C5E35541294E630D0015CDFD /* PersistentGraph.TimeLine.swift */,
+				C5E35545294E632F0015CDFD /* TimedValue.swift */,
+				C5E35541294E630D0015CDFD /* TimeLine.swift */,
 			);
 			path = "Value storage";
 			sourceTree = "<group>";
@@ -1474,14 +1474,14 @@
 				C564EB8929B533FE00F3E0AC /* Document.Drawing.Properties.swift in Sources */,
 				C5C4A0F1293B9B0E00FF9AB8 /* PersistentGraph.swift in Sources */,
 				C5C4A0F3293B9B0E00FF9AB8 /* PersistentData.Object.swift in Sources */,
-				C5E35544294E630D0015CDFD /* PersistentGraph.TimeLine.swift in Sources */,
+				C5E35544294E630D0015CDFD /* TimeLine.swift in Sources */,
 				C5C4A0FE293B9E4800FF9AB8 /* Serialized.swift in Sources */,
 				C55AC5B329560AF900F09326 /* Equatable+isEqualTo.swift in Sources */,
 				C59B3CE9295CCE950053DE7D /* Array+asSet.swift in Sources */,
 				C55AC5D9295A4A5F00F09326 /* Structure.swift in Sources */,
 				C5C4A100293B9E4800FF9AB8 /* SerializedTransformable.swift in Sources */,
 				C55AC5AF295262CD00F09326 /* Present.swift in Sources */,
-				C5E35548294E632F0015CDFD /* PersistentGraph.TimedValue.swift in Sources */,
+				C5E35548294E632F0015CDFD /* TimedValue.swift in Sources */,
 				C5C4A105293B9E5000FF9AB8 /* CyclicEncoder.swift in Sources */,
 				C59B3CF6295CCED00053DE7D /* SelectMemoryView.swift in Sources */,
 				C59B3CF3295CCEC80053DE7D /* Structure.Aspect.Builder.swift in Sources */,
@@ -1558,7 +1558,7 @@
 				C5C4A0CE293AAEAF00FF9AB8 /* PersistentGraph.swift in Sources */,
 				C5708D2129E590F200F4D4E1 /* Structure.Storage.swift in Sources */,
 				C54BE50E289591700060A066 /* MeasureSizeModifier.swift in Sources */,
-				C5E35546294E632F0015CDFD /* PersistentGraph.TimedValue.swift in Sources */,
+				C5E35546294E632F0015CDFD /* TimedValue.swift in Sources */,
 				C55AC5B129560AF900F09326 /* Equatable+isEqualTo.swift in Sources */,
 				C5C8E85E295AFD4E002C7746 /* Structure.Role.swift in Sources */,
 				C504036B290DDE8D0083AC41 /* CaseIterable+StringConversion.swift in Sources */,
@@ -1617,7 +1617,7 @@
 				C5C4A0CB293A9F9400FF9AB8 /* IdentifiableObject.swift in Sources */,
 				C5C4A0DD293AB7D500FF9AB8 /* PersistentGraph.Node.swift in Sources */,
 				C564EB8C29B541F500F3E0AC /* measureDuration.swift in Sources */,
-				C5E35542294E630D0015CDFD /* PersistentGraph.TimeLine.swift in Sources */,
+				C5E35542294E630D0015CDFD /* TimeLine.swift in Sources */,
 				C5C8E861295AFD8E002C7746 /* Structure.Aspect.swift in Sources */,
 				C5A84B7229CFAFC30026F07E /* Presentation.swift in Sources */,
 				C5C4A0D1293AAFDD00FF9AB8 /* DidChangeNotifier.swift in Sources */,
@@ -1687,7 +1687,7 @@
 				C5AAA0EE29BD27DC000DA6C3 /* NSImage+scale.swift in Sources */,
 				C54BE4E028958F910060A066 /* Primitive.swift in Sources */,
 				C5EECF6C29E0A9B1008608E4 /* Structure.Role+statics.swift in Sources */,
-				C5E35547294E632F0015CDFD /* PersistentGraph.TimedValue.swift in Sources */,
+				C5E35547294E632F0015CDFD /* TimedValue.swift in Sources */,
 				C55AC5B229560AF900F09326 /* Equatable+isEqualTo.swift in Sources */,
 				C54BE50F289591700060A066 /* MeasureSizeModifier.swift in Sources */,
 				C5EECF6929DF7CD4008608E4 /* Structure.Role+textView.swift in Sources */,
@@ -1747,7 +1747,7 @@
 				C5C4A0CC293AA02700FF9AB8 /* IdentifiableObject.swift in Sources */,
 				C5AAA0F729BD34B2000DA6C3 /* TextView.swift in Sources */,
 				C5C4A0DE293AB7D500FF9AB8 /* PersistentGraph.Node.swift in Sources */,
-				C5E35543294E630D0015CDFD /* PersistentGraph.TimeLine.swift in Sources */,
+				C5E35543294E630D0015CDFD /* TimeLine.swift in Sources */,
 				C5C8E862295AFD8E002C7746 /* Structure.Aspect.swift in Sources */,
 				C5D273602975E5C100F32EB6 /* ContentView.swift in Sources */,
 				C5C4A0D2293AAFDD00FF9AB8 /* DidChangeNotifier.swift in Sources */,
