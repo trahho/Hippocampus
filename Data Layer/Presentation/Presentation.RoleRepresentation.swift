@@ -9,15 +9,13 @@ import Foundation
 
 extension Presentation {
     struct RoleRepresentation: Serializable {
-
         @Serialized var roleId: Structure.Role.ID
         @Serialized var representation: String
 
-     
         init() {}
-        
+
         init(_ role: Structure.Role, _ representation: String) {
-            self.roleId = role.id
+            roleId = role.id
             self.representation = representation
         }
     }

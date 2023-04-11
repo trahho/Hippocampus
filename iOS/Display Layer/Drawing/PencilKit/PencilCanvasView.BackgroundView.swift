@@ -16,41 +16,41 @@ extension PencilCanvasView {
                 setNeedsDisplay()
             }
         }
-        
+
         var offset: CGPoint = .zero {
             didSet {
                 setNeedsDisplay()
             }
         }
-        
+
         var mode: Document.Drawing.Background = .squares {
             didSet {
                 setNeedsDisplay()
             }
         }
-        
+
         var page: Document.Drawing.PageFormat = .A4
         var canvas: PKCanvasView!
-        
+
         //    var lineDistance: CGFloat = 20
         //    var lineCount: CGFloat = 4
-        
+
         override func draw(_ rect: CGRect) {
             super.draw(rect)
             guard let context = UIGraphicsGetCurrentContext() else {
                 return
             }
             context.clear(rect)
-            
+
             if let backgroundColor = backgroundColor {
                 backgroundColor.setFill()
                 context.fill(rect)
             }
-            
+
             if zoomScale > 0.3 {
                 mode.draw(bounds: bounds, offset: offset, scale: zoomScale, context: context)
             }
-            
+
             page.draw(bounds: bounds, offset: offset, scale: zoomScale, drawing: canvas.drawing, context: context)
         }
     }

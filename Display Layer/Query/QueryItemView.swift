@@ -27,17 +27,15 @@ struct QueryItemView: View {
 //        Text("Depp")
 //    }
 
-
     var body: some View {
         ScrollView {
-                ForEach(item.roles.sorted(by: { $0.roleDescription < $1.roleDescription })) { role in
-                    DisclosureGroup(LocalizedStringKey(role.roleDescription)) {
-                        role.representation(for: "_Edit")
-                            .view(for: item.item, editable: true)
-                    }
+            ForEach(item.roles.sorted(by: { $0.roleDescription < $1.roleDescription })) { role in
+                DisclosureGroup(LocalizedStringKey(role.roleDescription)) {
+                    role.representation(for: "_Edit")
+                        .view(for: item.item, editable: true)
                 }
+            }
         }
         .padding()
     }
 }
-

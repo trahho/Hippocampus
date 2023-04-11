@@ -9,11 +9,10 @@ import Foundation
 import SwiftUI
 
 extension Structure.Role {
-    
     var localizedDescription: any ExpressibleByStringInterpolation {
         isStatic ? LocalizedStringKey(roleDescription) : roleDescription
     }
-    
+
     @ViewBuilder
     var textView: some View {
         if isStatic {

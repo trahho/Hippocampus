@@ -96,13 +96,13 @@ struct NoteView: View {
 //        VStawck(alignment: .leading) {
         VStack {
             if let note {
-                ForEach(document.roles.sorted(by: {$0.roleDescription < $1.roleDescription})) { role in
+                ForEach(document.roles.sorted(by: { $0.roleDescription < $1.roleDescription })) { role in
                     if role.isFinal, note[role: role] {
                         Section(role.roleDescription) {
 //                            Form{
-                                ForEach(role.allAspects.asArray) { aspect in
-                                    aspect.view(for: note, as: .normal, editable: true)
-                                }
+                            ForEach(role.allAspects.asArray) { aspect in
+                                aspect.view(for: note, as: .normal, editable: true)
+                            }
 //                            }
                         }
                     }

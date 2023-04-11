@@ -22,9 +22,9 @@ class LocationService: NSObject, CLLocationManagerDelegate {
         if authorization != CLAuthorizationStatus.authorizedAlways { locationManager.requestAlwaysAuthorization() }
         locationManager.startUpdatingLocation()
     }
-    
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        print ("\(authorization)")
+
+    func locationManagerDidChangeAuthorization(_: CLLocationManager) {
+        print("\(authorization)")
     }
 
     override init() {

@@ -24,7 +24,7 @@ struct PencilCanvasView: UIViewControllerRepresentable {
     func updateUIViewController(_ controller: Controller, context: Context) {
         guard !context.coordinator.isSending else { return }
         context.coordinator.isBlocked = true
-        
+
 //        print("Drawing View -> Controller")
         controller.drawing = drawing
         if center != .zero {
@@ -35,7 +35,7 @@ struct PencilCanvasView: UIViewControllerRepresentable {
         controller.pageFormat = pageFormat
 //        print("Background View -> Controller")
         controller.background = background
-        
+
         context.coordinator.isBlocked = false
     }
 

@@ -18,8 +18,8 @@ extension Document.Drawing {
         @PublishedSerialized var background: Background = .shorthandGrid
 
         // MARK: - Publishers
-        
-        var objectDidChange = ObjectDidChangePublisher ()
+
+        var objectDidChange = ObjectDidChangePublisher()
 
         // MARK: - Initialisation
 

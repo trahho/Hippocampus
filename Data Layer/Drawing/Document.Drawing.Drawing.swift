@@ -5,9 +5,9 @@
 //  Created by Guido Kühn on 05.03.23.
 //
 
+import Combine
 import Foundation
 import PencilKit
-import Combine
 
 extension Document.Drawing {
     class Drawing: PersistentContent, ObservableObject {

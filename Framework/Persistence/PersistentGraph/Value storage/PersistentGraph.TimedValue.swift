@@ -7,14 +7,7 @@
 
 import Foundation
 
-public protocol ValueStorage: Codable, Equatable {
-    typealias PersistentValue = Codable & Equatable
-
-    init(_ value: (any PersistentValue)?)
-    var value: (any PersistentValue)? { get }
-}
-
-extension PersistentGraph {
+//extension PersistentGraph {
     struct TimedValue<Storage: ValueStorage>: Serializable {
         @Serialized private(set) var time: Date
         @Serialized private(set) var storage: Storage?
@@ -44,4 +37,4 @@ extension PersistentGraph {
             self.value = value
         }
     }
-}
+//}

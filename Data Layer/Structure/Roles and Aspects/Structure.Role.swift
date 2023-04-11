@@ -21,11 +21,11 @@ extension Structure {
         @Relations(reverse: "superRoles", direction: .referenced) var subRoles: Set<Role>
 
         var allAspects: Set<Aspect> {
-            subRoles.flatMap { $0.allAspects }.asSet.union(aspects)
+            subRoles.flatMap(\.allAspects).asSet.union(aspects)
         }
 
         var allRoles: Set<Role> {
-            subRoles.flatMap { $0.allRoles }.asSet.union([self])
+            subRoles.flatMap(\.allRoles).asSet.union([self])
         }
 
         var isFinal: Bool {
@@ -34,7 +34,7 @@ extension Structure {
 
         subscript(dynamicMember dynamicMember: String) -> Aspect {
 //            let first: (Aspect) -> Bool = { $0.name.lowercased().dropFirst() == dynamicMember.lowercased() }
-            return allAspects.first { $0.name.lowercased().dropFirst() == dynamicMember.lowercased() }!
+            allAspects.first { $0.name.lowercased().dropFirst() == dynamicMember.lowercased() }!
         }
 
         fileprivate func findRepresentation(for name: String) -> Structure.Representation? {

@@ -15,7 +15,7 @@ struct ContentView: View {
     func toolbar() -> some ToolbarContent {
         ToolbarItemGroup(placement: .primaryAction) {
             Menu {
-                ForEach(document.roles.filter { $0.canBeCreated }.sorted(by: { $0.roleDescription < $1.roleDescription })) { role in
+                ForEach(document.roles.filter(\.canBeCreated).sorted(by: { $0.roleDescription < $1.roleDescription })) { role in
                     Button {
                         let node = document.information.createNode(roles: [role])
                         let item = Structure.Query.Result.Item(item: node, roles: [role])
@@ -28,14 +28,13 @@ struct ContentView: View {
                 Label("Add", systemImage: "plus")
             }
         }
-        ToolbarItemGroup (placement: .navigation) {
+        ToolbarItemGroup(placement: .navigation) {
             if let _ = navigation.item {
                 Button {
                     navigation.removeItem()
                 } label: {
-                    Image (systemName: "chevron.left")
+                    Image(systemName: "chevron.left")
                 }
-
             }
         }
     }

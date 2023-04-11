@@ -17,7 +17,7 @@ extension UIImage {
         guard targetSize != size else {
             return self
         }
-        
+
         let frame = CGRect(origin: .zero, size: targetSize)
         let renderer = UIGraphicsImageRenderer(bounds: frame)
 

@@ -21,14 +21,14 @@ extension PencilCanvasView {
             this.showsHorizontalScrollIndicator = false
             return this
         }()
-        
+
         lazy var gridView: BackgroundView = {
             let this = BackgroundView()
             this.canvas = canvasView
             this.backgroundColor = .systemBackground
             return this
         }()
-        
+
         lazy var topHorizontalIndicatorView: ScrollIndicatorView = {
             let this = ScrollIndicatorView()
             this.mode = .horizontal
@@ -36,7 +36,7 @@ extension PencilCanvasView {
             this.tintColor = .systemFill
             return this
         }()
-        
+
         lazy var bottomHorizontalIndicatorView: ScrollIndicatorView = {
             let this = ScrollIndicatorView()
             this.mode = .horizontal
@@ -44,7 +44,7 @@ extension PencilCanvasView {
             this.tintColor = .systemFill
             return this
         }()
-        
+
         lazy var leftVerticalIndicatorView: ScrollIndicatorView = {
             let this = ScrollIndicatorView()
             this.mode = .vertical
@@ -52,7 +52,7 @@ extension PencilCanvasView {
             this.tintColor = .systemFill
             return this
         }()
-        
+
         lazy var rightVerticalIndicatorView: ScrollIndicatorView = {
             let this = ScrollIndicatorView()
             this.mode = .vertical
@@ -60,18 +60,18 @@ extension PencilCanvasView {
             this.tintColor = .systemFill
             return this
         }()
-        
+
         init() {
             super.init(frame: .zero)
             setupView()
             setupLayout()
         }
-        
+
         @available(*, unavailable)
         required init?(coder _: NSCoder) {
             fatalError("init(coder:) has not been implemented")
         }
-        
+
         func setupView() {
             backgroundColor = .systemBackground
             addSubview(canvasView)
@@ -82,7 +82,7 @@ extension PencilCanvasView {
             addSubview(gridView)
             sendSubviewToBack(gridView)
         }
-        
+
         func setupLayout() {
             canvasView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
             canvasView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true

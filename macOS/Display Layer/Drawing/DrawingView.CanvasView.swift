@@ -11,9 +11,9 @@ import SwiftUI
 extension DrawingView {
     struct CanvasView: View {
         @ObservedObject var data: Document.Drawing
-        
+
         var editable: Bool
-        
+
         var body: some View {
             ImageView(data: data)
         }

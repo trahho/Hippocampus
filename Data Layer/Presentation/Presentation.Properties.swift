@@ -27,8 +27,6 @@ extension Presentation {
         }
     }
 
-  
-
     class Properties: PersistentContent, Serializable, ObservableObject {
         @PublishedSerialized(notifiyChange: true) var globalValues: [Information.Item.ID: AnyObject] = [:]
         var objectDidChange = ObjectDidChangePublisher()
@@ -39,7 +37,7 @@ extension Presentation {
 
         // MARK: - Merging
 
-        func merge(other: Properties) throws {}
+        func merge(other _: Properties) throws {}
 
         func restore() {}
     }

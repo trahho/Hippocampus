@@ -38,21 +38,21 @@ extension Structure {
         @PublishedSerialized var layout: Presentation.Layout = .tree
         @Serialized var isStatic = false
 
-        func getRepresentation(_ representations: any Sequence<RoleRepresentation>, for role: Structure.Role) -> String? {
+        func getRepresentation(_: any Sequence<RoleRepresentation>, for role: Structure.Role) -> String? {
             let specific = roleRepresentations
-            .filter { $0.roleId == role.id } //&& $0.layouts.contains(layout) }
-                .compactMap { $0.representation }
+                .filter { $0.roleId == role.id } // && $0.layouts.contains(layout) }
+                .map(\.representation)
                 .first
             let general = roleRepresentations
-            .filter { $0.roleId == role.id } //&& $0.layouts.isEmpty }
-                .compactMap { $0.representation }
+                .filter { $0.roleId == role.id } // && $0.layouts.isEmpty }
+                .map(\.representation)
                 .first
             return specific ?? general
         }
 
         static let defaultRepresentation = Structure.Representation.aspect(Structure.Role.global.name, form: .normal)
 
-        func roleRepresentation(role: Structure.Role, layout: Presentation.Layout) -> String? {
+        func roleRepresentation(role: Structure.Role, layout _: Presentation.Layout) -> String? {
             getRepresentation(roleRepresentations, for: role) ?? getRepresentation(Self.roleRepresentations, for: role)
         }
 

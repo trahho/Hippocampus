@@ -45,6 +45,6 @@ extension Structure.Query {
         let predicates = predicates()
         self.predicates = predicates
         let representations = representations()
-        self.roleRepresentations = representations
+        roleRepresentations = representations
     }
 }

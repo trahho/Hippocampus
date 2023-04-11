@@ -18,6 +18,6 @@ extension PersistentData {
             mergeValues(other: other)
         }
 
-        func mergeValues(other: Object) {}
+        func mergeValues(other _: Object) {}
     }
 }

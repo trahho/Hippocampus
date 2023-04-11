@@ -14,22 +14,22 @@ extension PencilCanvasView {
             case horizontal
             case vertical
         }
-        
+
         private var thumbFrame = CGRect.zero
-        
+
         var thumbMinWidth: CGFloat = 10
         var thumbMinHeight: CGFloat = 10
-        
+
         var mode = Direction.horizontal
-        
+
         func setThumb(start: CGFloat, end: CGFloat) {
             let frameMin = thumbMinWidth
             let frameMax = (mode == .horizontal ? bounds.width : bounds.height) - thumbMinWidth
-            
+
             var thumbStart = max(frameMin, min(frameMax, start))
             var thumbEnd = max(frameMin, min(frameMax, end))
             let thumbWidth = thumbEnd - thumbStart
-            
+
             if thumbWidth < thumbMinWidth {
                 if thumbStart == frameMin {
                     thumbEnd = thumbStart + thumbMinWidth
@@ -44,7 +44,7 @@ extension PencilCanvasView {
                 thumbStart = 0
                 thumbEnd = 0
             }
-            
+
             switch mode {
             case .horizontal:
                 thumbFrame = CGRect(x: thumbStart, y: bounds.minY, width: thumbEnd - thumbStart, height: bounds.height)
@@ -53,16 +53,16 @@ extension PencilCanvasView {
             }
             setNeedsDisplay()
         }
-        
+
         override func draw(_ rect: CGRect) {
             super.draw(rect)
-            
+
             guard let context = UIGraphicsGetCurrentContext() else { return }
-            
+
             context.clear(rect)
-            
+
             guard thumbFrame.width > 0, thumbFrame.height > 0 else { return }
-            
+
             if let tintColor = tintColor {
                 tintColor.setFill()
                 let path = UIBezierPath(roundedRect: thumbFrame, cornerRadius: min(thumbFrame.width, thumbFrame.height) / 2)

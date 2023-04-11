@@ -140,6 +140,12 @@
 		C564EB9429B5442200F3E0AC /* PencilCanvasView.Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C564EB9329B5442200F3E0AC /* PencilCanvasView.Coordinator.swift */; };
 		C564EB9829B5446600F3E0AC /* PencilCanvasView.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C564EB9729B5446600F3E0AC /* PencilCanvasView.View.swift */; };
 		C564EB9C29B544CA00F3E0AC /* PencilCanvasView.Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = C564EB9B29B544CA00F3E0AC /* PencilCanvasView.Controller.swift */; };
+		C5708D2129E590F200F4D4E1 /* Structure.Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5708D2029E590F100F4D4E1 /* Structure.Storage.swift */; };
+		C5708D2229E590F200F4D4E1 /* Structure.Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5708D2029E590F100F4D4E1 /* Structure.Storage.swift */; };
+		C5708D2329E590F200F4D4E1 /* Structure.Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5708D2029E590F100F4D4E1 /* Structure.Storage.swift */; };
+		C5708D2529E5C8F500F4D4E1 /* ValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5708D2429E5C8F500F4D4E1 /* ValueStorage.swift */; };
+		C5708D2629E5C8F500F4D4E1 /* ValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5708D2429E5C8F500F4D4E1 /* ValueStorage.swift */; };
+		C5708D2729E5C8F500F4D4E1 /* ValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5708D2429E5C8F500F4D4E1 /* ValueStorage.swift */; };
 		C5786DC32925A31F00865EFD /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58FB452291F215500D0B713 /* ListView.swift */; };
 		C582B38628A2F00400F795F0 /* PersistentObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C582B38528A2F00400F795F0 /* PersistentObject.swift */; };
 		C582B38728A2F00400F795F0 /* PersistentObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C582B38528A2F00400F795F0 /* PersistentObject.swift */; };
@@ -290,9 +296,9 @@
 		C5D2735D2975E08400F32EB6 /* DocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D2735B2975E08400F32EB6 /* DocumentView.swift */; };
 		C5D2735E2975E08400F32EB6 /* DocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D2735B2975E08400F32EB6 /* DocumentView.swift */; };
 		C5D273602975E5C100F32EB6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E856295A652B002C7746 /* ContentView.swift */; };
-		C5D382E22967779100E31D69 /* PersistentGraph.ValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D382E12967779100E31D69 /* PersistentGraph.ValueStorage.swift */; };
-		C5D382E32967779100E31D69 /* PersistentGraph.ValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D382E12967779100E31D69 /* PersistentGraph.ValueStorage.swift */; };
-		C5D382E42967779100E31D69 /* PersistentGraph.ValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D382E12967779100E31D69 /* PersistentGraph.ValueStorage.swift */; };
+		C5D382E22967779100E31D69 /* GraphValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D382E12967779100E31D69 /* GraphValueStorage.swift */; };
+		C5D382E32967779100E31D69 /* GraphValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D382E12967779100E31D69 /* GraphValueStorage.swift */; };
+		C5D382E42967779100E31D69 /* GraphValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D382E12967779100E31D69 /* GraphValueStorage.swift */; };
 		C5D382E6296777E800E31D69 /* Encodable+typeName.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D382E5296777E800E31D69 /* Encodable+typeName.swift */; };
 		C5D382E7296777E800E31D69 /* Encodable+typeName.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D382E5296777E800E31D69 /* Encodable+typeName.swift */; };
 		C5D382E8296777E800E31D69 /* Encodable+typeName.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D382E5296777E800E31D69 /* Encodable+typeName.swift */; };
@@ -459,6 +465,8 @@
 		C564EB9729B5446600F3E0AC /* PencilCanvasView.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilCanvasView.View.swift; sourceTree = "<group>"; };
 		C564EB9B29B544CA00F3E0AC /* PencilCanvasView.Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilCanvasView.Controller.swift; sourceTree = "<group>"; };
 		C5708D1F29E32F9800F4D4E1 /* Notizen.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Notizen.md; sourceTree = "<group>"; };
+		C5708D2029E590F100F4D4E1 /* Structure.Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structure.Storage.swift; sourceTree = "<group>"; };
+		C5708D2429E5C8F500F4D4E1 /* ValueStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueStorage.swift; sourceTree = "<group>"; };
 		C5786DC72926EBDF00865EFD /* Aspect.Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aspect.Point.swift; sourceTree = "<group>"; };
 		C582B38528A2F00400F795F0 /* PersistentObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentObject.swift; sourceTree = "<group>"; };
 		C582B38828A2FAAD00F795F0 /* Mind.Thought.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mind.Thought.swift; sourceTree = "<group>"; };
@@ -519,7 +527,7 @@
 		C5D042C028D4E91E0088D6B0 /* Mind.Opinion.AboutOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mind.Opinion.AboutOne.swift; sourceTree = "<group>"; };
 		C5D273512975D19100F32EB6 /* Information.Item+subscripts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Information.Item+subscripts.swift"; sourceTree = "<group>"; };
 		C5D2735B2975E08400F32EB6 /* DocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentView.swift; sourceTree = "<group>"; };
-		C5D382E12967779100E31D69 /* PersistentGraph.ValueStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentGraph.ValueStorage.swift; sourceTree = "<group>"; };
+		C5D382E12967779100E31D69 /* GraphValueStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphValueStorage.swift; sourceTree = "<group>"; };
 		C5D382E5296777E800E31D69 /* Encodable+typeName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+typeName.swift"; sourceTree = "<group>"; };
 		C5D382E92967786900E31D69 /* PersistentGraph.Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentGraph.Transaction.swift; sourceTree = "<group>"; };
 		C5D382F1296B345D00E31D69 /* PersistentGraph.ChangeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentGraph.ChangeManager.swift; sourceTree = "<group>"; };
@@ -1167,6 +1175,7 @@
 			isa = PBXGroup;
 			children = (
 				C55AC5D6295A4A5F00F09326 /* Structure.swift */,
+				C5708D2029E590F100F4D4E1 /* Structure.Storage.swift */,
 				C5D2735A2975D73600F32EB6 /* Roles and Aspects */,
 				C5D273592975D71E00F32EB6 /* Querying */,
 			);
@@ -1222,7 +1231,8 @@
 		C5D382EF296A3B8D00E31D69 /* Value storage */ = {
 			isa = PBXGroup;
 			children = (
-				C5D382E12967779100E31D69 /* PersistentGraph.ValueStorage.swift */,
+				C5D382E12967779100E31D69 /* GraphValueStorage.swift */,
+				C5708D2429E5C8F500F4D4E1 /* ValueStorage.swift */,
 				C5E35545294E632F0015CDFD /* PersistentGraph.TimedValue.swift */,
 				C5E35541294E630D0015CDFD /* PersistentGraph.TimeLine.swift */,
 			);
@@ -1434,7 +1444,7 @@
 				C59E28762978A921007375D5 /* Structure.Aspect+view.swift in Sources */,
 				C59E2884297B2434007375D5 /* Structure.Aspect.Presentation.swift in Sources */,
 				C59B3CDF295CB9900053DE7D /* HippocampusApp.swift in Sources */,
-				C5D382E42967779100E31D69 /* PersistentGraph.ValueStorage.swift in Sources */,
+				C5D382E42967779100E31D69 /* GraphValueStorage.swift in Sources */,
 				C59B3CEF295CCE9A0053DE7D /* CGPoint+Operators.swift in Sources */,
 				C59B3CE7295CCE950053DE7D /* Set+asArray.swift in Sources */,
 				C5C4A0FD293B9E4800FF9AB8 /* SerializableEncodable.swift in Sources */,
@@ -1459,6 +1469,7 @@
 				C5D382E8296777E800E31D69 /* Encodable+typeName.swift in Sources */,
 				C59B3CDE295CB9710053DE7D /* Observed.swift in Sources */,
 				C59B3CE2295CBA1A0053DE7D /* InjectionKey.swift in Sources */,
+				C5708D2729E5C8F500F4D4E1 /* ValueStorage.swift in Sources */,
 				C5C4A0F7293B9B0E00FF9AB8 /* DidChangeNotifier.swift in Sources */,
 				C564EB8929B533FE00F3E0AC /* Document.Drawing.Properties.swift in Sources */,
 				C5C4A0F1293B9B0E00FF9AB8 /* PersistentGraph.swift in Sources */,
@@ -1500,6 +1511,7 @@
 				C564EB8129B5326A00F3E0AC /* Document.Drawing.swift in Sources */,
 				C59B3CED295CCE9A0053DE7D /* CGFloat+Operators.swift in Sources */,
 				C564EB8529B5337700F3E0AC /* Document.Drawing.Drawing.swift in Sources */,
+				C5708D2329E590F200F4D4E1 /* Structure.Storage.swift in Sources */,
 				C5C4A0FB293B9E4800FF9AB8 /* Transformable.swift in Sources */,
 				C59B3CE3295CCE8F0053DE7D /* MeasureSizeModifier.swift in Sources */,
 				C5AAA0DC29BD12B1000DA6C3 /* DrawingView.CanvasView.swift in Sources */,
@@ -1544,6 +1556,7 @@
 				C54BE4DF28958F910060A066 /* Primitive.swift in Sources */,
 				C5A7929E29A4078400637C6C /* DrawingView.swift in Sources */,
 				C5C4A0CE293AAEAF00FF9AB8 /* PersistentGraph.swift in Sources */,
+				C5708D2129E590F200F4D4E1 /* Structure.Storage.swift in Sources */,
 				C54BE50E289591700060A066 /* MeasureSizeModifier.swift in Sources */,
 				C5E35546294E632F0015CDFD /* PersistentGraph.TimedValue.swift in Sources */,
 				C55AC5B129560AF900F09326 /* Equatable+isEqualTo.swift in Sources */,
@@ -1574,7 +1587,7 @@
 				C55AC5DF295A4ACE00F09326 /* Structure.Query.Predicate.swift in Sources */,
 				C58FB453291F215500D0B713 /* ListView.swift in Sources */,
 				C5C8E864295AFDCA002C7746 /* Structure.Role.Builder.swift in Sources */,
-				C5D382E22967779100E31D69 /* PersistentGraph.ValueStorage.swift in Sources */,
+				C5D382E22967779100E31D69 /* GraphValueStorage.swift in Sources */,
 				C5C4A0C8293A83C100FF9AB8 /* URL.swift in Sources */,
 				C5C8E857295A652B002C7746 /* ContentView.swift in Sources */,
 				C54BE508289591530060A066 /* Set+asArray.swift in Sources */,
@@ -1589,6 +1602,7 @@
 				C5C8E867295AFDEB002C7746 /* Structure.Aspect.Builder.swift in Sources */,
 				C54BE4CB28958F820060A066 /* Serialized.swift in Sources */,
 				C5E966C829AAC23E009D81FF /* PencilCanvasView.BackgroundView.swift in Sources */,
+				C5708D2529E5C8F500F4D4E1 /* ValueStorage.swift in Sources */,
 				C5C4A0E0293AC3AE00FF9AB8 /* PersistentGraph.Edge.swift in Sources */,
 				C54BE575289D7A090060A066 /* ObservedSerialized.swift in Sources */,
 				C564EB8329B5337700F3E0AC /* Document.Drawing.Drawing.swift in Sources */,
@@ -1651,6 +1665,7 @@
 				C5AAA10429BE7F90000DA6C3 /* Document.Drawing.PageFormat+draw.swift in Sources */,
 				C5C8E86F295B50F8002C7746 /* PersistentGraph.Condition+operators.swift in Sources */,
 				C5D382E7296777E800E31D69 /* Encodable+typeName.swift in Sources */,
+				C5708D2629E5C8F500F4D4E1 /* ValueStorage.swift in Sources */,
 				C54BE4F4289591320060A066 /* Observed.swift in Sources */,
 				C5EECF6629DF7C74008608E4 /* Structure.Query+textView.swift in Sources */,
 				C55AC5D4295A4A3400F09326 /* Information.swift in Sources */,
@@ -1704,7 +1719,7 @@
 				C55AC5E0295A4ACE00F09326 /* Structure.Query.Predicate.swift in Sources */,
 				C54BE4D428958F820060A066 /* EncodableProperty.swift in Sources */,
 				C5AAA10229BE7F69000DA6C3 /* Document.Drawing.Background+draw.swift in Sources */,
-				C5D382E32967779100E31D69 /* PersistentGraph.ValueStorage.swift in Sources */,
+				C5D382E32967779100E31D69 /* GraphValueStorage.swift in Sources */,
 				C5C8E865295AFDCA002C7746 /* Structure.Role.Builder.swift in Sources */,
 				C564EB8429B5337700F3E0AC /* Document.Drawing.Drawing.swift in Sources */,
 				C5C4A0C9293A840300FF9AB8 /* URL.swift in Sources */,
@@ -1744,6 +1759,7 @@
 				C54BE4CE28958F820060A066 /* DecodableProperty.swift in Sources */,
 				C5C4A0D5293AB05900FF9AB8 /* PersistentContent.swift in Sources */,
 				C54BE4E828958F910060A066 /* CyclicDecoder.swift in Sources */,
+				C5708D2229E590F200F4D4E1 /* Structure.Storage.swift in Sources */,
 				C55AC5CF295A34F900F09326 /* Document.swift in Sources */,
 				C54BE4FE289591440060A066 /* View+offset.swift in Sources */,
 				C5D382F3296B345D00E31D69 /* PersistentGraph.ChangeManager.swift in Sources */,

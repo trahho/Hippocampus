@@ -11,19 +11,19 @@ import Foundation
 extension Document.Drawing.Background {
     func draw(bounds: CGRect, offset: CGPoint, scale: CGFloat, context: NSGraphicsContext) {
         if self == .blank { return }
-            
+
         let lineCount: CGFloat = 4
         let lineDistance: CGFloat = Document.Drawing.PageFormat.lineDistance * Document.Drawing.PageFormat.pointsPerCm * scale / lineCount
-            
+
         let numberOfHorizontalLines = (bounds.height / lineDistance).rounded(.up) + lineCount
         let numberOfVerticalLines = (bounds.width / lineDistance).rounded(.up) + lineCount
-            
+
         let verticalOffset = offset.y.truncatingRemainder(dividingBy: lineDistance * lineCount)
         let horizontalOffset = offset.x.truncatingRemainder(dividingBy: lineDistance * lineCount)
-            
+
         let horizontalPaths = [NSBezierPath(), NSBezierPath(), NSBezierPath(), NSBezierPath()]
         let verticalPaths = [NSBezierPath(), NSBezierPath(), NSBezierPath(), NSBezierPath()]
-            
+
         for i in 0 ... Int(numberOfHorizontalLines) {
             let offset = (CGFloat(i) * lineDistance) - verticalOffset + bounds.minY
             let path = i % Int(4)
@@ -40,11 +40,11 @@ extension Document.Drawing.Background {
                 verticalPaths[path].line(to: CGPoint(x: offset, y: bounds.maxY))
             }
         }
-            
+
         context.saveGraphicsState()
         let color = NSColor.systemGray
         color.setStroke()
-            
+
         switch self {
         case .blank:
             break
@@ -74,7 +74,7 @@ extension Document.Drawing.Background {
             horizontalPaths[0].setLineDash([lineDistance / 4, lineDistance * 3 / 4], count: 2, phase: horizontalOffset + lineDistance / 8)
             horizontalPaths[0].stroke()
         }
-            
+
         switch self {
         case .blank,
              .shorthand,

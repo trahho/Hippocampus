@@ -11,7 +11,7 @@ import SwiftUI
 extension Structure.Aspect {
     enum Presentation: Structure.PersistentValue {
         case text, drawing, date
-        
+
         enum Form: Structure.PersistentValue {
             case icon, small, normal, firstParagraph, editFull, edit
         }
@@ -22,7 +22,7 @@ extension Structure.Aspect {
             case .text:
                 TextView(item: item, aspect: aspect, form: form, editable: editable)
             case .drawing:
-                DrawingView(item: item, aspect: aspect, form: form,  editable: editable)
+                DrawingView(item: item, aspect: aspect, form: form, editable: editable)
             case .date:
                 HStack { EmptyView() }
             }

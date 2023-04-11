@@ -7,7 +7,7 @@
 
 import Foundation
 
-func measureDuration(_ tag: String, _ action: () -> ()) {
+func measureDuration(_ tag: String, _ action: () -> Void) {
     let start = Date()
     action()
     let end = Date()

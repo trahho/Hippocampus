@@ -22,7 +22,7 @@ extension NSImage {
         guard let representation = bestRepresentation(for: frame, context: nil, hints: nil) else {
             return nil
         }
-        
+
         let image = NSImage(size: targetSize, flipped: false, drawingHandler: { _ -> Bool in
             representation.draw(in: frame)
         })

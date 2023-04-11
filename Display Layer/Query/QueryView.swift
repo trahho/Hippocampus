@@ -28,4 +28,3 @@ struct QueryView: View {
         content
     }
 }
-

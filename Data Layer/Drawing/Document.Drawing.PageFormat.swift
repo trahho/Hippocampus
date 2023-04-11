@@ -15,15 +15,15 @@ extension Document.Drawing {
         case A5
         case A4quer
         case A5quer
-        
+
         static var pointsPerCm: CGFloat {
             50
         }
-        
+
         static var lineDistance: CGFloat {
             1.2
         }
-        
+
         var size: CGSize {
             switch self {
             case .infinite:
@@ -38,7 +38,7 @@ extension Document.Drawing {
                 return CGSize(width: 21, height: 14.8)
             }
         }
-        
+
         var contentBounds: CGRect {
             switch self {
             case .infinite:
@@ -57,10 +57,10 @@ extension Document.Drawing {
                 return CGRect(x: 1, y: 0.5, width: 20, height: 13.5)
             }
         }
-        
+
         func getPages(for drawing: PKDrawing) -> [CGRect] {
             var result: [CGRect] = []
-            
+
             if self == .infinite {
                 result.append(drawing.bounds)
             } else {
@@ -78,19 +78,19 @@ extension Document.Drawing {
                     bounds = pageFrame(for: point)
                 } while bounds.minY < drawing.bounds.maxY
             }
-            
+
             return result
         }
-        
+
         func pageFrame(for point: CGPoint) -> CGRect {
             guard self != .infinite else { return CGRect.infinite }
-            
+
             let horizontalSize: CGFloat = Self.pointsPerCm * contentBounds.width
             let verticalSize: CGFloat = Self.pointsPerCm * contentBounds.height
-            
+
             let horizontalOffset = point.x.truncatingRemainder(dividingBy: horizontalSize)
             let verticalOffset = point.y.truncatingRemainder(dividingBy: verticalSize)
-            
+
             return CGRect(x: point.x - horizontalOffset, y: point.y - verticalOffset, width: horizontalSize, height: verticalSize)
         }
     }

@@ -9,7 +9,7 @@ import Foundation
 
 extension Set<Structure.Role> {
     func contains(_ memberId: Structure.Role.ID) -> Bool {
-        self.contains { role in
+        contains { role in
             role.id == memberId
         }
     }
@@ -27,7 +27,7 @@ extension Structure.Query {
             }
 
             init(item: Information.Item, roles: Set<Structure.Role>) {
-                self.roles = roles.filter{ item[role: $0] == true }
+                self.roles = roles.filter { item[role: $0] == true }
                 super.init()
                 self.item = item
             }

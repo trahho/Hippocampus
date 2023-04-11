@@ -13,33 +13,33 @@ extension Document {
     class Drawing: ObservableObject {
         @Observed private var drawingContainer: PersistentContainer<Drawing>
         @Observed private var propertiesContainer: PersistentContainer<Properties>
-        
+
         var drawing: PKDrawing {
             get { drawingContainer.content.drawing }
             set {
                 drawingContainer.content.drawing = newValue
             }
         }
-        
+
         var center: CGPoint {
             get { propertiesContainer.content.center }
             set { propertiesContainer.content.center = newValue }
         }
-        
+
         var background: Background {
             get { propertiesContainer.content.background }
             set {
                 propertiesContainer.content.background = newValue
             }
         }
-        
+
         var pageFormat: PageFormat {
             get { propertiesContainer.content.pageFormat }
             set {
                 propertiesContainer.content.pageFormat = newValue
             }
         }
-        
+
         init(url: URL, name: String) {
             let url = url.appending(components: "drawings", name)
             drawingContainer = PersistentContainer(url: url.appending(component: "drawing"), content: Drawing(), commitOnChange: true)

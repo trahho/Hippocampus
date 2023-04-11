@@ -16,34 +16,34 @@ extension PencilCanvasView {
             case bottom
             case right
         }
-        
+
         private let direction: Direction
-        
+
         init(direction: Direction) {
             self.direction = direction
             super.init(frame: .zero)
             backgroundColor = .clear
         }
-        
+
         @available(*, unavailable)
         required init?(coder _: NSCoder) {
             fatalError("init(coder:) has not been implemented")
         }
-        
+
         override func draw(_ rect: CGRect) {
             super.draw(rect)
-            
+
             guard let context = UIGraphicsGetCurrentContext() else {
                 return
             }
-            
+
             context.clear(rect)
-            
+
             if let backgroundColor = backgroundColor {
                 backgroundColor.setFill()
                 context.fill(rect)
             }
-            
+
             if let tintColor = tintColor {
                 context.setFillColor(tintColor.cgColor)
                 let path = arrowPath(in: rect)
@@ -51,12 +51,12 @@ extension PencilCanvasView {
                 context.fillPath()
             }
         }
-        
+
         override func tintColorDidChange() {
             super.tintColorDidChange()
             setNeedsDisplay()
         }
-        
+
         private func arrowPath(in rect: CGRect) -> UIBezierPath {
             let path = UIBezierPath()
             switch direction {

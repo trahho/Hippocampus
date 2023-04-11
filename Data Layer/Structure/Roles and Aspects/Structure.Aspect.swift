@@ -16,7 +16,5 @@ extension Structure {
 //        @Persistent var defaultValue: (any PersistentValue)?
 
         @Relation(inverse: "aspects") var role: Role!
-        
-   
     }
 }

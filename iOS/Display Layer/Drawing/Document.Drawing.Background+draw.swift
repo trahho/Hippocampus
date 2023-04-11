@@ -10,21 +10,20 @@ import UIKit
 
 extension Document.Drawing.Background {
     func draw(bounds: CGRect, offset: CGPoint, scale: CGFloat, context: CGContext) {
-            
         if self == .blank { return }
-            
+
         let lineCount: CGFloat = 4
         let lineDistance: CGFloat = Document.Drawing.PageFormat.lineDistance * Document.Drawing.PageFormat.pointsPerCm * scale / lineCount
-            
+
         let numberOfHorizontalLines = (bounds.height / lineDistance).rounded(.up) + lineCount
         let numberOfVerticalLines = (bounds.width / lineDistance).rounded(.up) + lineCount
-            
+
         let verticalOffset = offset.y.truncatingRemainder(dividingBy: lineDistance * lineCount)
         let horizontalOffset = offset.x.truncatingRemainder(dividingBy: lineDistance * lineCount)
-            
+
         let horizontalPaths = [UIBezierPath(), UIBezierPath(), UIBezierPath(), UIBezierPath()]
         let verticalPaths = [UIBezierPath(), UIBezierPath(), UIBezierPath(), UIBezierPath()]
-            
+
         for i in 0 ... Int(numberOfHorizontalLines) {
             let offset = (CGFloat(i) * lineDistance) - verticalOffset + bounds.minY
             let path = i % Int(4)
@@ -41,10 +40,10 @@ extension Document.Drawing.Background {
                 verticalPaths[path].addLine(to: CGPoint(x: offset, y: bounds.maxY))
             }
         }
-            
+
         context.saveGState()
         UIColor.gray.setStroke()
-            
+
         switch self {
         case .blank:
             break
@@ -72,7 +71,7 @@ extension Document.Drawing.Background {
             horizontalPaths[0].lineWidth = 0.75
             horizontalPaths[0].stroke()
         }
-            
+
         switch self {
         case .blank,
              .shorthand,

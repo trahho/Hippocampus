@@ -14,28 +14,28 @@ extension PersistentData.Object {
             get { fatalError() }
             set { fatalError() }
         }
-        
+
         private var defaultValue: (() -> Value)?
-        
+
         private var _key: String?
-        
+
         internal func getKey(from instance: PersistentData.Object) -> String {
             if let _key { return _key }
-            
+
             _key = instance.getKey(for: self)
-            
+
             return _key!
         }
-        
+
         public init(wrappedValue: @autoclosure @escaping () -> Value, _ key: String? = nil) {
             _key = key
             defaultValue = wrappedValue
         }
-        
+
         public init(_ key: String? = nil) {
             _key = key
         }
-        
+
         public static subscript<Enclosing: PersistentData.Object>(_enclosingInstance instance: Enclosing,
                                                                   wrapped _: ReferenceWritableKeyPath<Enclosing, Value>,
                                                                   storage storageKeyPath: ReferenceWritableKeyPath<Enclosing, Persistent>) -> Value

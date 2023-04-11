@@ -26,7 +26,6 @@ open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable, 
     var nodes: Set<Node> { Set<Node>(nodeStorage.values.filter(\.isActive)) }
     var edges: Set<Edge> { Set<Edge>(edgeStorage.values.filter(\.isActive)) }
 
-   
     public var objectDidChange: ObjectDidChangePublisher = .init()
 
     // MARK: - Initialisation

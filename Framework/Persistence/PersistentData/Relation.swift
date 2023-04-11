@@ -11,33 +11,32 @@ protocol PersistentRelationWrapper //: AnyObject
 {}
 
 extension PersistentData.Object {
-    
     @propertyWrapper final class Relation<Target>: PersistentRelationWrapper where Target: PersistentData.Object {
         @available(*, unavailable, message: "This property wrapper can only be applied to classes")
         public var wrappedValue: Target? {
             get { fatalError() }
             set { fatalError() }
         }
-        
+
         private var _key: String?
         private var inversekey: String?
-        
+
         internal func getKey(from instance: PersistentData.Object) -> String {
             if let key = _key, !key.isEmpty { return key }
-            
+
             _key = instance.getKey(for: self)
             return _key!
         }
-        
+
         public init(_ key: String? = nil, inverse: String? = nil) {
             _key = key
             inversekey = inverse
         }
-        
+
         public static subscript<Enclosing: PersistentData.Object>(_enclosingInstance instance: Enclosing,
                                                                   wrapped _: ReferenceWritableKeyPath<Enclosing, Target?>,
                                                                   storage storageKeyPath: ReferenceWritableKeyPath<Enclosing, Relation>)
-        -> Target?
+            -> Target?
         {
             get {
                 let storage = instance[keyPath: storageKeyPath]
@@ -49,19 +48,19 @@ extension PersistentData.Object {
             set {
                 let storage = instance[keyPath: storageKeyPath]
                 let key = storage.getKey(from: instance)
-                
+
                 let timestamp = Date()
                 instance.edges
                     .filter { $0[role: key] }
                     .forEach { $0.isDeleted(true, timestamp: timestamp) }
-                
+
                 guard let newValue else { return }
-                
+
                 let edge = PersistentData.Edge(from: instance, to: newValue)
                 instance.graph.add(edge, timestamp: timestamp)
-                
+
                 edge[role: key, timestamp: timestamp] = true
-                
+
                 if let inversekey = storage.inversekey {
                     newValue.objectWillChange.send()
                     edge[role: inversekey] = true

@@ -11,9 +11,9 @@ import SwiftUI
 class Navigation: ObservableObject {
     @Published var sidebar: Sidebar = .queries
     @Published var items: [Structure.Query.Result.Item] = []
-    
+
     //    @Published var query: Structure.Query?
-    
+
     @Published private var _query: Structure.Query?
     var query: Structure.Query? {
         get { _query }
@@ -23,7 +23,7 @@ class Navigation: ObservableObject {
             _query = newValue
         }
     }
-    
+
     var item: Structure.Query.Result.Item? {
         get { items.last }
         set {
@@ -36,11 +36,11 @@ class Navigation: ObservableObject {
             }
         }
     }
-    
+
     func addItem(_ item: Structure.Query.Result.Item) {
         items.append(item)
     }
-    
+
     func removeItem() {
         items.removeLast()
     }
@@ -50,7 +50,7 @@ extension Navigation {
     struct SelectQueryModifier: ViewModifier {
         @EnvironmentObject var navigation: Navigation
         var query: Structure.Query
-        
+
         func body(content: Content) -> some View {
             content
                 .contentShape(Rectangle())
@@ -61,11 +61,11 @@ extension Navigation {
                 }
         }
     }
-    
+
     struct SelectItemModifier: ViewModifier {
         @EnvironmentObject var navigation: Navigation
         var item: Structure.Query.Result.Item
-        
+
         func body(content: Content) -> some View {
             content
                 .contentShape(Rectangle())
@@ -76,10 +76,10 @@ extension Navigation {
                 }
         }
     }
-    
+
     struct RemoveItemModifier: ViewModifier {
         @EnvironmentObject var navigation: Navigation
-        
+
         func body(content: Content) -> some View {
             content
                 .contentShape(Rectangle())
@@ -96,11 +96,11 @@ extension View {
     func tapToSelectQuery(_ query: Structure.Query) -> some View {
         modifier(Navigation.SelectQueryModifier(query: query))
     }
-    
+
     func tapToSelectItem(_ item: Structure.Query.Result.Item) -> some View {
         modifier(Navigation.SelectItemModifier(item: item))
     }
-    
+
     func tapToRemoveLastSelectedItem() -> some View {
         modifier(Navigation.RemoveItemModifier())
     }

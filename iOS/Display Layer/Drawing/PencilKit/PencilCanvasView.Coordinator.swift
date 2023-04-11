@@ -6,8 +6,8 @@
 //
 
 import Foundation
-import SwiftUI
 import PencilKit
+import SwiftUI
 
 extension PencilCanvasView {
     final class Coordinator: NSObject {
@@ -15,7 +15,7 @@ extension PencilCanvasView {
         var isSending = false
         var view: PencilCanvasView
 
-        func drawingDidChange(_ controller: Controller, drawing: PKDrawing) {
+        func drawingDidChange(_: Controller, drawing: PKDrawing) {
             guard !isBlocked else { return }
             isSending = true
 //            print("Drawing Controller -> View")
@@ -23,7 +23,7 @@ extension PencilCanvasView {
             isSending = false
         }
 
-        func centerDidChange(_ controller: Controller, center: CGPoint) {
+        func centerDidChange(_: Controller, center: CGPoint) {
             guard !isBlocked else { return }
             isSending = true
 //            print("Center Controller -> View")

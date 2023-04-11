@@ -7,21 +7,19 @@
 
 import Foundation
 
-//protocol TimedStorage : Serializable {
+// protocol TimedStorage : Serializable {
 //    associatedtype Storage: ValueStorage
 //
 //    var timestamp: Date? { get }
 //
 //    init(_ startValue: any Storage.PersistentValue)
 //    init(_ values: [Value])
-//}
+// }
 
-extension PersistentGraph {
-
+//extension PersistentGraph {
     struct TimeLine<Storage: ValueStorage>: Serializable {
-        
         typealias Value = TimedValue<Storage>
-        
+
         @Serialized private var values: [Value]
 
         var timestamp: Date? {
@@ -81,4 +79,4 @@ extension PersistentGraph {
             values = values.filter { $0.time < timestamp }.sorted(by: { $0.time < $1.time })
         }
     }
-}
+//}

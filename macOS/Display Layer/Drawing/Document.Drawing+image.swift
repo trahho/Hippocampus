@@ -14,7 +14,7 @@ extension Document.Drawing {
         let bounds = drawing.bounds
         let image = drawing.image(from: bounds, scale: 1)
         let rect = CGRect(origin: .zero, size: image.size)
-        
+
         let result = NSImage(size: image.size)
         result.lockFocus()
         guard let context = NSGraphicsContext.current else { return image }

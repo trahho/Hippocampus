@@ -30,7 +30,7 @@ extension PersistentGraph {
 
             var value: (any PersistentComparableValue)? {
                 get {
-                    return storage.value as? (any PersistentComparableValue)
+                    storage.value as? (any PersistentComparableValue)
                 }
                 set {
                     storage = Storage(newValue)

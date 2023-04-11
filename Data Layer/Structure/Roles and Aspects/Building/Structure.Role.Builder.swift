@@ -26,8 +26,8 @@ extension Structure.Role {
     {
         self.init()
         self.id = UUID(uuidString: id)!
-        self.roleDescription = name
-        self.canBeCreated = addToMenu
+        roleDescription = name
+        canBeCreated = addToMenu
         let aspects = aspects()
         for i in 0 ..< aspects.count {
             aspects[i].index = i

@@ -12,19 +12,19 @@ import UIKit
 extension Document.Drawing.PageFormat {
     func draw(bounds: CGRect, offset: CGPoint, scale: CGFloat, drawing: PKDrawing, context: CGContext) {
         guard self != .infinite else { return }
-            
+
         let horizontalLinesDistance: CGFloat = Self.pointsPerCm * contentBounds.height
         let verticalLinesDistance: CGFloat = Self.pointsPerCm * contentBounds.width
-            
+
         let numberOfHorizontalLines = (bounds.height / (scale * horizontalLinesDistance)).rounded(.up)
         let numberOfVerticalLines = (bounds.width / (scale * verticalLinesDistance)).rounded(.up)
-            
+
         let horizontalOffset = offset.x.truncatingRemainder(dividingBy: verticalLinesDistance * scale)
         let verticalOffset = offset.y.truncatingRemainder(dividingBy: horizontalLinesDistance * scale)
-            
+
         let horizontalPath = UIBezierPath()
         let verticalPath = UIBezierPath()
-            
+
         for i in 0 ... Int(numberOfHorizontalLines) {
             let offset = (CGFloat(i) * horizontalLinesDistance * scale) - verticalOffset
             horizontalPath.move(to: CGPoint(x: bounds.minX, y: offset))
@@ -35,15 +35,15 @@ extension Document.Drawing.PageFormat {
             verticalPath.move(to: CGPoint(x: offset, y: bounds.minY))
             verticalPath.addLine(to: CGPoint(x: offset, y: bounds.maxY))
         }
-            
+
         context.saveGState()
         UIColor.opaqueSeparator.withAlphaComponent(0.7).setStroke()
-            
+
         horizontalPath.lineWidth = 5
         horizontalPath.stroke()
         verticalPath.lineWidth = 5
         verticalPath.stroke()
-            
+
         if self != .infinite {
             let viewBounds = CGRect(origin: offset, size: bounds.size)
             let pages = getPages(for: drawing)
@@ -66,7 +66,7 @@ extension Document.Drawing.PageFormat {
                 }
             }
         }
-            
+
         context.restoreGState()
     }
 }

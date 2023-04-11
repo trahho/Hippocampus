@@ -10,9 +10,9 @@ import SwiftUI
 
 struct DetailView: View {
     @EnvironmentObject var navigation: Navigation
-    
+
     var body: some View {
-        NavigationStack (path: $navigation.items) {
+        NavigationStack(path: $navigation.items) {
             if let query = navigation.query {
                 QueryView(query: query)
                     .navigationDestination(for: Structure.Query.Result.Item.self) { item in

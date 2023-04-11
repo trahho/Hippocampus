@@ -33,14 +33,14 @@ extension URL {
     }
 
     func startDownloading() {
-        guard self.isiCloud else { return }
+        guard isiCloud else { return }
         try? FileManager.default.startDownloadingUbiquitousItem(at: self)
     }
 
     func ensureDirectory() {
-        guard self.hasDirectoryPath else { return }
-        let directory = self.path(percentEncoded: false)
-        if  !FileManager.default.fileExists(atPath: directory) {
+        guard hasDirectoryPath else { return }
+        let directory = path(percentEncoded: false)
+        if !FileManager.default.fileExists(atPath: directory) {
             try! FileManager.default.createDirectory(at: self, withIntermediateDirectories: true)
         }
     }

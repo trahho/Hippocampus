@@ -24,7 +24,7 @@ struct QueryTreeView: View {
 
     var items: [Structure.Query.Result.Node] {
         result.nodes
-            .filter { $0.from.isEmpty }
+            .filter(\.from.isEmpty)
             .sorted(by: { a, b in
                 a.item[String.self, nameAspect] ?? "" < b.item[String.self, nameAspect] ?? ""
             })
@@ -37,10 +37,8 @@ struct QueryTreeView: View {
 
     @State var selection: Structure.Query.Result.Node?
 
-
-
     func subItems(for item: Structure.Query.Result.Node) -> [Structure.Query.Result.Item] {
-        item.to.map { $0.to }
+        item.to.map(\.to)
             .sorted(by: { a, b in
                 a.item[String.self, nameAspect] ?? "" < b.item[String.self, nameAspect] ?? ""
             })
@@ -73,21 +71,21 @@ struct QueryTreeView: View {
                 .tapToSelectItem(item)
         }
     }
-    
+
     struct RowView: View {
         @EnvironmentObject var navigation: Navigation
         @ObservedObject var query: Structure.Query
         @ObservedObject var item: Structure.Query.Result.Node
-        
+
         let nameAspect = Structure.Role.global.name
 
         var subItems: [Structure.Query.Result.Node] {
-            item.to.map { $0.to }
+            item.to.map(\.to)
                 .sorted(by: { a, b in
                     a.item[String.self, nameAspect] ?? "" < b.item[String.self, nameAspect] ?? ""
                 })
         }
-        
+
         @ViewBuilder
         func representation(for item: Structure.Query.Result.Item) -> some View {
             let representation = item.roles.compactMap {
@@ -99,7 +97,7 @@ struct QueryTreeView: View {
 
             representation.view(for: item.item)
         }
-        
+
         var body: some View {
             if subItems.isEmpty {
                 representation(for: item)

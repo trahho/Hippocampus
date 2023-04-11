@@ -13,5 +13,5 @@ extension Font {
     static let myHeader = Font.custom("Raleway-SemiBold", size: 16)
     static let myTitle = Font.custom("Raleway-SemiBold", size: 20)
     static let myTextItalic = Font.custom("Raleway-Italic", size: 16)
-    static let myLabel =  Font.custom("Raleway-Italic", size: 8)
+    static let myLabel = Font.custom("Raleway-Italic", size: 8)
 }

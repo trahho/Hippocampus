@@ -19,6 +19,6 @@ extension Structure.Aspect {
     }
 
     func view(for item: Information.Item, as form: Presentation.Form, editable: Bool) -> some View {
-        self.presentation.view(for: item, in: self, as: form, editable: editable)
+        presentation.view(for: item, in: self, as: form, editable: editable)
     }
 }

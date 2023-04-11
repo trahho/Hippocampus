@@ -16,7 +16,7 @@ class Document: ObservableObject {
     var information: Information {
         informationContainer.content
     }
-    
+
     var structure: Structure {
         structureContainer.content
     }
@@ -64,7 +64,7 @@ class Document: ObservableObject {
             return result
         }
     }
-    
+
     func getPresentation(query: Structure.Query) -> Presentation {
         let title = "\(query.id)"
         if let result = presentations[title]?.content {
