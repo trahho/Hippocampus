@@ -8,7 +8,6 @@
 import Foundation
 
 class Structure: PersistentData<Structure.Storage> {
-    @Present var queries: Set<Query>
     @Present var roles: Set<Role>
 
     var aspects: [Aspect.ID: Aspect] {
@@ -20,12 +19,6 @@ class Structure: PersistentData<Structure.Storage> {
     override func setup() -> Structure {
         let roles: [Role] = [.global, .drawing, .text, .topic, .note]
         roles.forEach {
-            add($0, timestamp: Date.distantPast)
-            $0.isStatic = true
-        }
-
-        let queries: [Query] = [.notes, .topics]
-        queries.forEach {
             add($0, timestamp: Date.distantPast)
             $0.isStatic = true
         }

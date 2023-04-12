@@ -12,6 +12,11 @@ protocol PersistentRelationWrapper //: AnyObject
 
 extension PersistentData.Object {
     @propertyWrapper final class Relation<Target>: PersistentRelationWrapper where Target: PersistentData.Object {
+        
+        enum Direction {
+            case reference, referenced
+        }
+        
         @available(*, unavailable, message: "This property wrapper can only be applied to classes")
         public var wrappedValue: Target? {
             get { fatalError() }
@@ -19,7 +24,9 @@ extension PersistentData.Object {
         }
 
         private var _key: String?
-        private var inversekey: String?
+        private var reverseKey: String?
+        private var direction: Direction
+
 
         internal func getKey(from instance: PersistentData.Object) -> String {
             if let key = _key, !key.isEmpty { return key }
@@ -28,9 +35,10 @@ extension PersistentData.Object {
             return _key!
         }
 
-        public init(_ key: String? = nil, inverse: String? = nil) {
+        public init(_ key: String? = nil, reverse: String? = nil, direction: Direction) {
             _key = key
-            inversekey = inverse
+            reverseKey = reverse
+            self.direction = direction
         }
 
         public static subscript<Enclosing: PersistentData.Object>(_enclosingInstance instance: Enclosing,
@@ -41,7 +49,8 @@ extension PersistentData.Object {
             get {
                 let storage = instance[keyPath: storageKeyPath]
                 let key = storage.getKey(from: instance)
-                return instance.edges
+                let edges = storage.direction == .reference ? instance.outgoingEdges : instance.incomingEdges
+                return edges
                     .first(where: { $0[role: key] })?
                     .getOther(for: instance) as? Target
             }
@@ -61,9 +70,9 @@ extension PersistentData.Object {
 
                 edge[role: key, timestamp: timestamp] = true
 
-                if let inversekey = storage.inversekey {
+                if let reverseKey = storage.reverseKey {
                     newValue.objectWillChange.send()
-                    edge[role: inversekey] = true
+                    edge[role: reverseKey] = true
                 }
             }
         }

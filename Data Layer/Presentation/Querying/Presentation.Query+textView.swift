@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-extension Structure.Query {
+extension Presentation.Query {
     @ViewBuilder
     var textView: some View {
         if isStatic {

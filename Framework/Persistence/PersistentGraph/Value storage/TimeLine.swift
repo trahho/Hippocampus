@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TimeLine<Storage: ValueStorage>: Serializable {
+struct TimeLine<Storage: TimedValueStorage>: Serializable {
     typealias Value = TimedValue<Storage>
 
     @Serialized private var values: [Value]

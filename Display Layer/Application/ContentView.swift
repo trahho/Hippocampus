@@ -18,7 +18,7 @@ struct ContentView: View {
                 ForEach(document.roles.filter(\.canBeCreated).sorted(by: { $0.roleDescription < $1.roleDescription })) { role in
                     Button {
                         let node = document.information.createNode(roles: [role])
-                        let item = Structure.Query.Result.Item(item: node, roles: [role])
+                        let item = Presentation.Query.Result.Item(item: node, roles: [role])
                         navigation.addItem(item)
                     } label: {
                         role.textView

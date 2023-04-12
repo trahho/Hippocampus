@@ -7,7 +7,7 @@
 
 import Foundation
 
-open class PersistentData<Storage: ValueStorage>: PersistentGraph<String, String, Storage> {
+open class PersistentData<Storage: TimedValueStorage>: PersistentGraph<String, String, Storage> {
     subscript<T>(_ id: Object.ID) -> T? {
         nodeStorage[id] as? T ?? edgeStorage[id] as? T
     }

@@ -7,6 +7,23 @@
 
 import Foundation
 
+extension Structure.RoleReference {
+    @resultBuilder
+    enum Builder {
+        static func buildBlock() -> [Structure.RoleReference] { [] }
+
+        static func buildBlock(_ references: Structure.RoleReference...) -> [Structure.RoleReference] {
+            references
+        }
+    }
+
+    convenience init(_ referenced: Structure.Role, _ referenceRole: Structure.Role? = nil) {
+        self.init()
+        self.referenced = referenced
+        self.referenceRole = referenceRole
+    }
+}
+
 extension Structure.Role {
     @resultBuilder
     enum Builder {
@@ -22,7 +39,8 @@ extension Structure.Role {
                      _ subRoles: [Structure.Role] = [],
                      addToMenu: Bool = false,
                      @Structure.Aspect.Builder aspects: () -> [Structure.Aspect] = { [] },
-                     @Structure.Role.Representation.Builder representations: () -> [Representation] = { [] })
+                     @Structure.Role.Representation.Builder representations: () -> [Representation] = { [] },
+                     @Structure.RoleReference.Builder associated: () -> [Structure.RoleReference] = { [] })
     {
         self.init()
         self.id = UUID(uuidString: id)!
@@ -35,6 +53,7 @@ extension Structure.Role {
         self.aspects = aspects.asSet
         self.representations = representations()
         self.subRoles = subRoles.asSet
+        self.references = associated().asSet
         print("Built role \(name)")
     }
 

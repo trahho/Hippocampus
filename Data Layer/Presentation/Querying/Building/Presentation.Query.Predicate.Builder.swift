@@ -6,12 +6,12 @@
 //
 
 import Foundation
-extension Structure.Query.Predicate {
+extension Presentation.Query.Predicate {
     @resultBuilder
     enum Builder {
-        static func buildBlock() -> [Structure.Query.Predicate] { [] }
+        static func buildBlock() -> [Presentation.Query.Predicate] { [] }
 
-        static func buildBlock(_ predicates: Structure.Query.Predicate...) -> [Structure.Query.Predicate] {
+        static func buildBlock(_ predicates: Presentation.Query.Predicate...) -> [Presentation.Query.Predicate] {
             predicates
         }
     }
@@ -33,10 +33,10 @@ extension Presentation.RoleRepresentation {
     }
 }
 
-extension Structure.Query {
+extension Presentation.Query {
     convenience init(_ id: String,
                      _ name: String,
-                     @Structure.Query.Predicate.Builder predicates: () -> [Structure.Query.Predicate] = { [] },
+                     @Presentation.Query.Predicate.Builder predicates: () -> [Presentation.Query.Predicate] = { [] },
                      @Presentation.RoleRepresentation.Builder representations: () -> [Presentation.RoleRepresentation] = { [] })
     {
         self.init()

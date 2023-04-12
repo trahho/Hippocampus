@@ -6,9 +6,9 @@
 //
 
 import Foundation
-public protocol ValueStorage: Codable, Equatable {
+public protocol TimedValueStorage: Codable, Equatable {
     typealias PersistentValue = Codable & Equatable
 
-    init(_ value: (any PersistentValue)?)
+    init?(_ value: (any PersistentValue)?)
     var value: (any PersistentValue)? { get }
 }

@@ -10,6 +10,7 @@ import Foundation
 class Document: ObservableObject {
     @Observed var informationContainer: PersistentContainer<Information>
     @Observed var structureContainer: PersistentContainer<Structure>
+    @Observed var presentationContainer: PersistentContainer<Presentation>
 
     private(set) var url: URL
 
@@ -20,9 +21,13 @@ class Document: ObservableObject {
     var structure: Structure {
         structureContainer.content
     }
+    
+    var presentation: Presentation {
+        presentationContainer.content
+    }
 
-    var queries: Set<Structure.Query> {
-        structure.queries
+    var queries: Set<Presentation.Query> {
+        presentation.queries
     }
 
     var roles: Set<Structure.Role> {
@@ -33,8 +38,11 @@ class Document: ObservableObject {
         self.url = url
         let informationUrl = url.appendingPathComponent("Information" + HippocampusApp.persistentExtension)
         let structureUrl = url.appendingPathComponent("Structure" + HippocampusApp.persistentExtension)
+        let presentationUrl = url.appendingPathComponent("Presentation" + HippocampusApp.persistentExtension)
+
         informationContainer = PersistentContainer(url: informationUrl, content: Information(), commitOnChange: true)
         structureContainer = PersistentContainer(url: structureUrl, content: Structure().setup(), commitOnChange: true)
+        presentationContainer = PersistentContainer(url: presentationUrl, content: Presentation().setup(), commitOnChange: true)
     }
 
     convenience init(name: String, local: Bool) {
@@ -52,7 +60,7 @@ class Document: ObservableObject {
     }
 
     private var drawings: [String: Cache<Drawing>] = [:]
-    private var presentations: [String: Cache<Presentation>] = [:]
+    private var presentations: [String: Cache<PersistentContainer<Presentation.Properties>>] = [:]
 
     func getDrawing(item: Information.Item, aspect: Structure.Aspect) -> Drawing {
         let title = "\(item.id)--\(aspect.id)"
@@ -65,14 +73,15 @@ class Document: ObservableObject {
         }
     }
 
-    func getPresentation(query: Structure.Query) -> Presentation {
+    func getPresentation(query: Presentation.Query) -> Presentation.Properties {
         let title = "\(query.id)"
         if let result = presentations[title]?.content {
-            return result
+            return result.content
         } else {
-            let result = Presentation(url: url, name: title)
-            presentations[title] = Cache(content: result)
-            return result
+            let url = url.appending(components: "presentations", title, "properties")
+            let propertiesContainer = PersistentContainer(url: url, content: Presentation.Properties(), commitOnChange: true)
+            presentations[title] = Cache(content: propertiesContainer)
+            return propertiesContainer.content
         }
     }
 }

@@ -10,9 +10,9 @@ import SwiftUI
 
 extension Navigation {
     enum Detail: Hashable {
-        case queryContent(Structure.Query)
-        case queryStructure(Structure.Query)
-        case queryItem(Structure.Query, Structure.Query.Result.Item)
+        case queryContent(Presentation.Query)
+        case queryStructure(Presentation.Query)
+        case queryItem(Presentation.Query, Presentation.Query.Result.Item)
         case informationItem(Information.Item)
         case test
 
@@ -22,7 +22,7 @@ extension Navigation {
                 .frame(width: 50, height: 50)
         }
 
-        var query: Structure.Query? {
+        var query: Presentation.Query? {
             switch self {
             case let .queryContent(query):
                 return query

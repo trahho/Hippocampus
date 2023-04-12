@@ -7,8 +7,8 @@
 
 import Foundation
 
-extension Structure.Query {
-    struct Predicate: Structure.PersistentValue, Serializable {
+extension Presentation.Query {
+    struct Predicate: Presentation.PersistentValue, Serializable {
         static func == (lhs: Predicate, rhs: Predicate) -> Bool {
             lhs.condition == rhs.condition && lhs.roles == rhs.roles
         }
@@ -18,10 +18,10 @@ extension Structure.Query {
 
         init() {}
 
-        init(condition: Information.Condition, roles: Set<Structure.Role>) {
-            self.condition = condition
-            self.roles = roles
-        }
+//        init(condition: Information.Condition, roles: Set<Structure.Role.ID>) {
+//            self.condition = condition
+//            self.roles = roles
+//        }
 
         func matches(for member: Information.Item) -> Bool {
             condition.matches(for: member)

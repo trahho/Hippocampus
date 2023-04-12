@@ -9,16 +9,16 @@ import SwiftUI
 
 struct ListView: View {
     @ObservedObject var information: Information
-    @ObservedObject var query: Structure.Query
+    @ObservedObject var query: Presentation.Query
     @EnvironmentObject var document: Document
     @EnvironmentObject var navigation: Navigation
 
     @State var addSheetIsPresented = false
-    @State var editSheetItem: Structure.Query.Result.Node?
+    @State var editSheetItem: Presentation.Query.Result.Node?
     @State var sortOrder: SortOrder = .forward
     @State var refresh: Bool = false
 
-    var result: Structure.Query.Result {
+    var result: Presentation.Query.Result {
         query.apply(to: information)
     }
 

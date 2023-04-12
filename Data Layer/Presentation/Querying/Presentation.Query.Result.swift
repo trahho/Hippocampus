@@ -15,7 +15,7 @@ extension Set<Structure.Role> {
     }
 }
 
-extension Structure.Query {
+extension Presentation.Query {
     class Result {
         class Item: IdentifiableObject, ObservableObject {
             @Observed var item: Information.Item

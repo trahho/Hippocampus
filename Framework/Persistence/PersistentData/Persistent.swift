@@ -8,7 +8,7 @@
 import Foundation
 
 extension PersistentData.Object {
-    @propertyWrapper final class Persistent<Value> where Value: ValueStorage.PersistentValue {
+    @propertyWrapper final class Persistent<Value> where Value: PersistentData.PersistentValue {
         @available(*, unavailable, message: "This property wrapper can only be applied to classes")
         public var wrappedValue: Value {
             get { fatalError() }

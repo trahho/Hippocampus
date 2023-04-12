@@ -54,5 +54,7 @@ extension Structure.Role {
             .aspect(Keys.noteHeadline, form: .edit),
             .aspect(Keys.textText, form: .edit)
         ))
+    } associated: {
+        Structure.RoleReference(topic)
     }
 }

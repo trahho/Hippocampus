@@ -16,6 +16,15 @@ extension Structure.Aspect {
             case icon, small, normal, firstParagraph, editFull, edit
         }
 
+        var defaultValue: (any Structure.PersistentValue)? {
+            switch self {
+            case .date:
+                return Date()
+            default:
+                return nil
+            }
+        }
+
         @ViewBuilder
         func view(for item: Information.Item, in aspect: Structure.Aspect, as form: Form, editable: Bool) -> some View {
             switch self {

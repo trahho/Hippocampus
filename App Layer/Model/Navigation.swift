@@ -10,12 +10,12 @@ import SwiftUI
 
 class Navigation: ObservableObject {
     @Published var sidebar: Sidebar = .queries
-    @Published var items: [Structure.Query.Result.Item] = []
+    @Published var items: [Presentation.Query.Result.Item] = []
 
     //    @Published var query: Structure.Query?
 
-    @Published private var _query: Structure.Query?
-    var query: Structure.Query? {
+    @Published private var _query: Presentation.Query?
+    var query: Presentation.Query? {
         get { _query }
         set {
             guard newValue != _query else { return }
@@ -24,7 +24,7 @@ class Navigation: ObservableObject {
         }
     }
 
-    var item: Structure.Query.Result.Item? {
+    var item: Presentation.Query.Result.Item? {
         get { items.last }
         set {
             withAnimation {
@@ -37,7 +37,7 @@ class Navigation: ObservableObject {
         }
     }
 
-    func addItem(_ item: Structure.Query.Result.Item) {
+    func addItem(_ item: Presentation.Query.Result.Item) {
         items.append(item)
     }
 
@@ -49,7 +49,7 @@ class Navigation: ObservableObject {
 extension Navigation {
     struct SelectQueryModifier: ViewModifier {
         @EnvironmentObject var navigation: Navigation
-        var query: Structure.Query
+        var query: Presentation.Query
 
         func body(content: Content) -> some View {
             content
@@ -64,7 +64,7 @@ extension Navigation {
 
     struct SelectItemModifier: ViewModifier {
         @EnvironmentObject var navigation: Navigation
-        var item: Structure.Query.Result.Item
+        var item: Presentation.Query.Result.Item
 
         func body(content: Content) -> some View {
             content
@@ -93,11 +93,11 @@ extension Navigation {
 }
 
 extension View {
-    func tapToSelectQuery(_ query: Structure.Query) -> some View {
+    func tapToSelectQuery(_ query: Presentation.Query) -> some View {
         modifier(Navigation.SelectQueryModifier(query: query))
     }
 
-    func tapToSelectItem(_ item: Structure.Query.Result.Item) -> some View {
+    func tapToSelectItem(_ item: Presentation.Query.Result.Item) -> some View {
         modifier(Navigation.SelectItemModifier(item: item))
     }
 

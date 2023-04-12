@@ -7,11 +7,15 @@
 
 import Foundation
 
-class Presentation: ObservableObject {
-    @Observed private var propertiesContainer: PersistentContainer<Properties>
+class Presentation: PersistentData<Presentation.Storage> {
+    @Present var queries: Set<Query>
 
-    init(url: URL, name: String) {
-        let url = url.appending(components: "presentations", name)
-        propertiesContainer = PersistentContainer(url: url.appending(component: "properties"), content: Properties(), commitOnChange: true)
+    override func setup() -> Presentation {
+        let queries: [Query] = [.notes, .topics]
+        queries.forEach {
+            add($0, timestamp: Date.distantPast)
+            $0.isStatic = true
+        }
+        return self
     }
 }

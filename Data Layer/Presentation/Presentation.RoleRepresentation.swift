@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Presentation {
+extension Structure {
     struct RoleRepresentation: Serializable {
         @Serialized var roleId: Structure.Role.ID
         @Serialized var representation: String

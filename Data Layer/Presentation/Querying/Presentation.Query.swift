@@ -7,9 +7,11 @@
 
 import Foundation
 
-extension Structure {
+extension Presentation {
     class Query: Object {
         typealias RoleRepresentation = Presentation.RoleRepresentation
+        typealias Role = Structure.Role
+//        typealias Predicate = Presentation.Predicate
         fileprivate enum Keys {
             static let notes = "89913172-022C-4EF0-95BA-76FF8E32F18B"
             static let topics = "B7430903-0AC5-4C72-91E5-B54B73C8B5FD"
@@ -64,8 +66,8 @@ extension Structure {
             return result
         }
 
-        func analyze(_ item: Information.Item) -> Set<Role>? {
-            var result = Set<Role>()
+        func analyze(_ item: Information.Item) -> Set<Structure.Role>? {
+            var result = Set<Structure.Role>()
             var matches = false
 
             for predicate in predicates {
@@ -78,7 +80,7 @@ extension Structure {
             return matches ? result : nil
         }
 
-        func analyze(_ item: Query.Result.Item) -> Set<Role>? {
+        func analyze(_ item: Query.Result.Item) -> Set<Structure.Role>? {
             analyze(item.item)
         }
 

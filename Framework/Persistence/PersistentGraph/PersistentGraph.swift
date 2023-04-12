@@ -8,10 +8,10 @@
 import Combine
 import Foundation
 
-open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable, Storage: ValueStorage>: PersistentContent, Serializable, ObservableObject {
+open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable, Storage: TimedValueStorage>: PersistentContent, Serializable, ObservableObject {
     // MARK: - Types
 
-    public typealias PersistentValue = Codable & Equatable
+    public typealias PersistentValue = TimedValueStorage.PersistentValue
 //    typealias ChangePublisher = PassthroughSubject<Change, Never>
 
     enum Fault: Error {

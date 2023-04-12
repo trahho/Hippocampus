@@ -10,7 +10,7 @@ import SwiftUI
 
 struct QueryView: View {
     @EnvironmentObject var document: Document
-    @ObservedObject var query: Structure.Query
+    @ObservedObject var query: Presentation.Query
 
     @ViewBuilder
     var content: some View {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TimedValue<Storage: ValueStorage>: Serializable {
+struct TimedValue<Storage: TimedValueStorage>: Serializable {
     @Serialized private(set) var time: Date
     @Serialized private(set) var storage: Storage?
 
@@ -24,7 +24,7 @@ struct TimedValue<Storage: ValueStorage>: Serializable {
         }
     }
 
-    subscript<T: ValueStorage.PersistentValue>(type _: T.Type) -> T? {
+    subscript<T: TimedValueStorage.PersistentValue>(type _: T.Type) -> T? {
         guard let value else { return nil }
         return value as? T
     }
