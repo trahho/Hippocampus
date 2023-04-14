@@ -8,11 +8,22 @@
 import Combine
 import Foundation
 
-protocol PersistentContainerReference {
+open class PersistentManager {
+    var container: [String: PersistentContainerReference] = [:]
+
+    public subscript<T>(_ type: T.Type, _ key: String) -> T? where T: PersistentContent {
+        let container = container[key] as? PersistentContainer<T>
+        return container?.content
+    }
+}
+
+public protocol PersistentContainerReference {
     func save()
 }
 
-class PersistentContainer<Content: PersistentContent>: PersistentContainerReference, ObservableObject {
+public class PersistentContainer<Content: PersistentContent>: PersistentContainerReference, ObservableObject {
+    typealias ContentDelegate = (Content) -> Void
+
     let url: URL
     private var isMerging = false
     private var currentTimestamp: Date = .distantPast
@@ -22,7 +33,7 @@ class PersistentContainer<Content: PersistentContent>: PersistentContainerRefere
     private var willChangeSubscriber: AnyCancellable?
     public var dependentContainers: [PersistentContainerReference] = []
 
-    var didRefresh: (() -> Void)?
+    var configureContent: ContentDelegate?
     var willCommit: (() -> Void)?
     var commitOnChange = false
     private(set) var hasChanges = false
@@ -33,12 +44,14 @@ class PersistentContainer<Content: PersistentContent>: PersistentContainerRefere
         set {
             objectWillChange.send()
             _content = newValue
+            if let _content, let configureContent { configureContent(_content) }
             registerChanges()
         }
     }
 
     fileprivate func registerChanges() {
-        didChangeSubcriber = content.objectDidChange
+        guard let _content else { return }
+        didChangeSubcriber = _content.objectDidChange
             .debounce(for: .seconds(1.5), scheduler: RunLoop.main)
             .sink { [self] in
                 guard !isMerging else { return }
@@ -64,7 +77,7 @@ class PersistentContainer<Content: PersistentContent>: PersistentContainerRefere
         }
     }
 
-    func save() {
+    public func save() {
         let fileQueue = DispatchQueue(label: "de.kuehnerleben.Hippocampus.file", qos: .background)
         guard !url.isVirtual, hasChanges else { return }
         fileQueue.async { [self] in
@@ -133,7 +146,6 @@ class PersistentContainer<Content: PersistentContent>: PersistentContainerRefere
         }
         currentTimestamp = modificationDate
         hasChanges = false
-        didRefresh?()
 
         #if TRACKPERSISTENCE
             print("Updated \(currentTimestamp)")
@@ -178,13 +190,15 @@ class PersistentContainer<Content: PersistentContent>: PersistentContainerRefere
         metadataQuery.enableUpdates()
     }
 
-    init(url: URL, content: Content, commitOnChange: Bool = false) {
+    init(url: URL, content: Content, commitOnChange: Bool = false, configureContent: ContentDelegate? = nil) {
         if url.isiCloud {
             url.deletingLastPathComponent().startDownloading()
         }
         self.url = url
         self.commitOnChange = commitOnChange
+        self.configureContent = configureContent
         self.content = content
+
         load()
         setupMetadataQuery()
     }

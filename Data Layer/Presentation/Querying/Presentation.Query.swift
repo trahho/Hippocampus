@@ -9,7 +9,6 @@ import Foundation
 
 extension Presentation {
     class Query: Object {
-        typealias RoleRepresentation = Presentation.RoleRepresentation
         typealias Role = Structure.Role
 //        typealias Predicate = Presentation.Predicate
         fileprivate enum Keys {
@@ -39,6 +38,8 @@ extension Presentation {
         @PublishedSerialized var roleRepresentations: [RoleRepresentation] = []
         @PublishedSerialized var layout: Presentation.Layout = .tree
         @Serialized var isStatic = false
+        
+        
 
         func getRepresentation(_: any Sequence<RoleRepresentation>, for role: Structure.Role) -> String? {
             let specific = roleRepresentations

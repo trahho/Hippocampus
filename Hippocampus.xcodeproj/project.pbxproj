@@ -26,6 +26,8 @@
 		C5445D1D29E74D000033A5AB /* Presentation.Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5445D1B29E74D000033A5AB /* Presentation.Storage.swift */; };
 		C5445D1F29E75D3B0033A5AB /* Information.Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5445D1E29E75D3B0033A5AB /* Information.Storage.swift */; };
 		C5445D2029E75D3B0033A5AB /* Information.Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5445D1E29E75D3B0033A5AB /* Information.Storage.swift */; };
+		C5445D2229E9F3EF0033A5AB /* Presentation.Query.RoleRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5445D2129E9F3EF0033A5AB /* Presentation.Query.RoleRepresentation.swift */; };
+		C5445D2329E9F3EF0033A5AB /* Presentation.Query.RoleRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5445D2129E9F3EF0033A5AB /* Presentation.Query.RoleRepresentation.swift */; };
 		C548BCBB292ADA8600DB6185 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C548BCBA292ADA8600DB6185 /* NoteView.swift */; };
 		C548BCBC292ADA8600DB6185 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C548BCBA292ADA8600DB6185 /* NoteView.swift */; };
 		C54BE4B12894866C0060A066 /* HippocampusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4A12894866A0060A066 /* HippocampusApp.swift */; };
@@ -348,8 +350,6 @@
 		C5EECF5B29DDF7A3008608E4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C5EECF5829DDF7A3008608E4 /* Localizable.strings */; };
 		C5EECF5F29DDFBA9008608E4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C5EECF5D29DDFBA9008608E4 /* Localizable.strings */; };
 		C5EECF6029DDFBA9008608E4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C5EECF5D29DDFBA9008608E4 /* Localizable.strings */; };
-		C5EECF6229DE1FCD008608E4 /* Presentation.RoleRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EECF6129DE1FCD008608E4 /* Presentation.RoleRepresentation.swift */; };
-		C5EECF6329DE1FCD008608E4 /* Presentation.RoleRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EECF6129DE1FCD008608E4 /* Presentation.RoleRepresentation.swift */; };
 		C5EECF6529DF7C74008608E4 /* Presentation.Query+textView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EECF6429DF7C74008608E4 /* Presentation.Query+textView.swift */; };
 		C5EECF6629DF7C74008608E4 /* Presentation.Query+textView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EECF6429DF7C74008608E4 /* Presentation.Query+textView.swift */; };
 		C5EECF6829DF7CD4008608E4 /* Structure.Role+textView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EECF6729DF7CD4008608E4 /* Structure.Role+textView.swift */; };
@@ -397,6 +397,7 @@
 		C5394A5829049969003B99BF /* Nachdenken.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Nachdenken.md; sourceTree = "<group>"; };
 		C5445D1B29E74D000033A5AB /* Presentation.Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presentation.Storage.swift; sourceTree = "<group>"; };
 		C5445D1E29E75D3B0033A5AB /* Information.Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Information.Storage.swift; sourceTree = "<group>"; };
+		C5445D2129E9F3EF0033A5AB /* Presentation.Query.RoleRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presentation.Query.RoleRepresentation.swift; sourceTree = "<group>"; };
 		C548BCBA292ADA8600DB6185 /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		C54BE4A12894866A0060A066 /* HippocampusApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HippocampusApp.swift; sourceTree = "<group>"; };
 		C54BE4A32894866C0060A066 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -558,7 +559,6 @@
 		C5E966E029AD41AF009D81FF /* DataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTests.swift; sourceTree = "<group>"; };
 		C5EECF5929DDF7A3008608E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		C5EECF5E29DDFBA9008608E4 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = Localizable.strings; sourceTree = "<group>"; };
-		C5EECF6129DE1FCD008608E4 /* Presentation.RoleRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presentation.RoleRepresentation.swift; sourceTree = "<group>"; };
 		C5EECF6429DF7C74008608E4 /* Presentation.Query+textView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Presentation.Query+textView.swift"; sourceTree = "<group>"; };
 		C5EECF6729DF7CD4008608E4 /* Structure.Role+textView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Structure.Role+textView.swift"; sourceTree = "<group>"; };
 		C5EECF6A29E0A9B1008608E4 /* Structure.Role+statics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Structure.Role+statics.swift"; sourceTree = "<group>"; };
@@ -971,7 +971,6 @@
 				C5445D1B29E74D000033A5AB /* Presentation.Storage.swift */,
 				C5A84B7429CFB03D0026F07E /* Presentation.Properties.swift */,
 				C5E1406E29E218DD00464B92 /* Presentation.Layout.swift */,
-				C5EECF6129DE1FCD008608E4 /* Presentation.RoleRepresentation.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -1196,6 +1195,7 @@
 				C59E287C2978AA9C007375D5 /* Building */,
 				C55AC5DA295A4A8100F09326 /* Presentation.Query.swift */,
 				C5EECF6429DF7C74008608E4 /* Presentation.Query+textView.swift */,
+				C5445D2129E9F3EF0033A5AB /* Presentation.Query.RoleRepresentation.swift */,
 				C55AC5DE295A4ACE00F09326 /* Presentation.Query.Predicate.swift */,
 				C5C8E870295B5348002C7746 /* Presentation.Query.Result.swift */,
 			);
@@ -1592,6 +1592,7 @@
 				C5576EB529510BB5005257A4 /* PersistentData.Object+getKey.swift in Sources */,
 				C54BE4CF28958F820060A066 /* SerializableDecodable.swift in Sources */,
 				C5A84B7929D61FB10026F07E /* LocationService.swift in Sources */,
+				C5445D2229E9F3EF0033A5AB /* Presentation.Query.RoleRepresentation.swift in Sources */,
 				C54BE4D328958F820060A066 /* EncodableProperty.swift in Sources */,
 				C5C4A0D7293AB08C00FF9AB8 /* CodableIdentifiable.swift in Sources */,
 				C55AC5DF295A4ACE00F09326 /* Presentation.Query.Predicate.swift in Sources */,
@@ -1632,7 +1633,6 @@
 				C5A84B7229CFAFC30026F07E /* Presentation.swift in Sources */,
 				C5C4A0D1293AAFDD00FF9AB8 /* DidChangeNotifier.swift in Sources */,
 				C5D382EA2967786900E31D69 /* PersistentGraph.Transaction.swift in Sources */,
-				C5EECF6229DE1FCD008608E4 /* Presentation.RoleRepresentation.swift in Sources */,
 				C59E28742978A921007375D5 /* Structure.Aspect+view.swift in Sources */,
 				C5E966D629AAD47D009D81FF /* Font+Extension.swift in Sources */,
 				C564EB8729B533FE00F3E0AC /* Document.Drawing.Properties.swift in Sources */,
@@ -1716,7 +1716,6 @@
 				C54BE4CA28958F820060A066 /* Transformable.swift in Sources */,
 				C5A84B7329CFAFC30026F07E /* Presentation.swift in Sources */,
 				C54BE4FC289591440060A066 /* CGRect+Functions.swift in Sources */,
-				C5EECF6329DE1FCD008608E4 /* Presentation.RoleRepresentation.swift in Sources */,
 				C54BE4E428958F910060A066 /* Box.swift in Sources */,
 				C54BE578289D7B0F0060A066 /* PublishedSerialized.swift in Sources */,
 				C54BE50B289591530060A066 /* Array+asSet.swift in Sources */,
@@ -1778,6 +1777,7 @@
 				C582B38728A2F00400F795F0 /* PersistentObject.swift in Sources */,
 				C54BE517289591840060A066 /* InjectionKey.swift in Sources */,
 				C5E1406D29E0EE4900464B92 /* QueryTreeView.swift in Sources */,
+				C5445D2329E9F3EF0033A5AB /* Presentation.Query.RoleRepresentation.swift in Sources */,
 				C55AC5D8295A4A5F00F09326 /* Structure.swift in Sources */,
 				C54BE519289591840060A066 /* Injector.swift in Sources */,
 				C54BE4E628958F910060A066 /* CyclicEncoder.swift in Sources */,

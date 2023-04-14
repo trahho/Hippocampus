@@ -8,6 +8,12 @@
 import Foundation
 
 class Presentation: PersistentData<Presentation.Storage> {
+    var structureContainer: PersistentContainer<Structure>!
+    
+    var structure: Structure {
+        structureContainer.content
+    }
+
     @Present var queries: Set<Query>
 
     override func setup() -> Presentation {

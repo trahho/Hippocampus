@@ -8,14 +8,15 @@
 import Combine
 import Foundation
 
-protocol PersistentContent: DidChangeNotifier {
+public protocol PersistentContent: DidChangeNotifier {
+//    var container: PersistentContainer<Self> { get set }
     func restore()
     func merge(other: Self) throws
     func encode() -> Data?
     static func decode(persistentData: Data) -> Self?
 }
 
-extension PersistentContent where Self: Serializable {
+public extension PersistentContent where Self: Serializable {
     func encode() -> Data? {
         guard let flattened = try? CyclicEncoder().flatten(self),
               let data = try? JSONEncoder().encode(flattened),

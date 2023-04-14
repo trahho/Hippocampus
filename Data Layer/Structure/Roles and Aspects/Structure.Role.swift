@@ -49,15 +49,15 @@ extension Structure {
         }
 
         fileprivate func findRepresentation(for name: String) -> Structure.Representation? {
-//            if let first = representations.first(where: { $0.name == name })?.representation { return first }
-//            if name == "_Edit" {
-//                let aspectPresentations = allAspects
-//                    .sorted { ($0.index, $0.name) < ($1.index, $1.name) }
-//                    .map { Structure.Representation.aspect($0, form: .edit, editable: true) }
-//                return Structure.Representation.vertical(aspectPresentations, alignment: .leading)
-//            }
-//            if let first = subRoles.compactMap({ $0.findRepresentation(for: name) }).first { return first }
-//            if let first = Role.global.findRepresentation(for: name) { return first }
+            if let first = representations.first(where: { $0.name == name })?.representation { return first }
+            if name == "_Edit" {
+                let aspectPresentations = allAspects
+                    .sorted { ($0.index, $0.name) < ($1.index, $1.name) }
+                    .map { Structure.Representation.aspect($0, form: .edit, editable: true) }
+                return Structure.Representation.vertical(aspectPresentations, alignment: .leading)
+            }
+            if let first = subRoles.compactMap({ $0.findRepresentation(for: name) }).first { return first }
+            if let first = Role.global.findRepresentation(for: name) { return first }
             return nil
         }
 

@@ -34,11 +34,11 @@ open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable, 
 
     // MARK: - Persistence
 
-    func setup() -> PersistentGraph {
+    public func setup() -> PersistentGraph {
         self
     }
 
-    func restore() {
+    public func restore() {
         nodeStorage.values.forEach { node in
             node.graph = self
         }
@@ -48,7 +48,7 @@ open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable, 
         }
     }
 
-    func merge(other: PersistentGraph) throws {
+    public func merge(other: PersistentGraph) throws {
         if nodeStorage.isEmpty {
             throw Fault.mergeFailed
         }

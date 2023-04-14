@@ -42,7 +42,9 @@ class Document: ObservableObject {
 
         informationContainer = PersistentContainer(url: informationUrl, content: Information(), commitOnChange: true)
         structureContainer = PersistentContainer(url: structureUrl, content: Structure().setup(), commitOnChange: true)
-        presentationContainer = PersistentContainer(url: presentationUrl, content: Presentation().setup(), commitOnChange: true)
+        presentationContainer = PersistentContainer(url: presentationUrl, content: Presentation().setup(), commitOnChange: true) { content in
+            content.structureContainer = self.structureContainer
+        }
     }
 
     convenience init(name: String, local: Bool) {

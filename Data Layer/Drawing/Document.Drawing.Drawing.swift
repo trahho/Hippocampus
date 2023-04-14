@@ -11,6 +11,7 @@ import PencilKit
 
 extension Document.Drawing {
     class Drawing: PersistentContent, ObservableObject {
+        
         private var isMerging = false
 
         var objectDidChange = Combine.ObservableObjectPublisher()
