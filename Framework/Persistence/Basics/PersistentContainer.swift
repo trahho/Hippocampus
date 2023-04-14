@@ -33,7 +33,7 @@ public class PersistentContainer<Content: PersistentContent>: PersistentContaine
     private var willChangeSubscriber: AnyCancellable?
     public var dependentContainers: [PersistentContainerReference] = []
 
-    var configureContent: ContentDelegate?
+    var contentChange: ContentDelegate?
     var willCommit: (() -> Void)?
     var commitOnChange = false
     private(set) var hasChanges = false
@@ -44,7 +44,7 @@ public class PersistentContainer<Content: PersistentContent>: PersistentContaine
         set {
             objectWillChange.send()
             _content = newValue
-            if let _content, let configureContent { configureContent(_content) }
+            if let _content, let contentChange { contentChange(_content) }
             registerChanges()
         }
     }
@@ -196,7 +196,7 @@ public class PersistentContainer<Content: PersistentContent>: PersistentContaine
         }
         self.url = url
         self.commitOnChange = commitOnChange
-        self.configureContent = configureContent
+        self.contentChange = configureContent
         self.content = content
 
         load()

@@ -41,9 +41,11 @@ class Document: ObservableObject {
         let presentationUrl = url.appendingPathComponent("Presentation" + HippocampusApp.persistentExtension)
 
         informationContainer = PersistentContainer(url: informationUrl, content: Information(), commitOnChange: true)
-        structureContainer = PersistentContainer(url: structureUrl, content: Structure().setup(), commitOnChange: true)
+        structureContainer = PersistentContainer(url: structureUrl, content: Structure().setup(), commitOnChange: true) { content in
+            self.presentation.structure = content
+        }
         presentationContainer = PersistentContainer(url: presentationUrl, content: Presentation().setup(), commitOnChange: true) { content in
-            content.structureContainer = self.structureContainer
+            content.structure = self.structure
         }
     }
 

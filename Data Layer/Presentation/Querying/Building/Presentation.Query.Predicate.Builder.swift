@@ -18,7 +18,7 @@ extension Presentation.Query.Predicate {
 
     init(_ roles: [Structure.Role], _ condition: Information.Condition) {
         self.condition = condition
-        self.roles = roles.asSet
+        self.roles = roles.map { $0.id }.asSet
     }
 }
 

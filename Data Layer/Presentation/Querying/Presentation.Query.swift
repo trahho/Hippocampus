@@ -10,7 +10,7 @@ import Foundation
 extension Presentation {
     class Query: Object {
         typealias Role = Structure.Role
-//        typealias Predicate = Presentation.Predicate
+        //        typealias Predicate = Presentation.Predicate
         fileprivate enum Keys {
             static let notes = "89913172-022C-4EF0-95BA-76FF8E32F18B"
             static let topics = "B7430903-0AC5-4C72-91E5-B54B73C8B5FD"
@@ -19,7 +19,7 @@ extension Presentation {
         static let roleRepresentations: [RoleRepresentation] = [RoleRepresentation(.global, "_Title")]
 
         static let notes = Query(Keys.notes, "_Notes") {
-//            Predicate([.note, .topic], .hasRole(Role.note.id))
+            //            Predicate([.note, .topic], .hasRole(Role.note.id))
             Predicate([.note], .hasRole(Role.note.id))
         } representations: {
             RoleRepresentation(.topic, "_Title")
@@ -29,7 +29,7 @@ extension Presentation {
         }
 
         static let topics = Query(Keys.topics, "_Topics") {
-//            Predicate([.note, .topic], .hasRole(Role.note.id))
+            //            Predicate([.note, .topic], .hasRole(Role.note.id))
             Predicate([.topic], .hasRole(Role.topic.id))
         }
 
@@ -38,24 +38,25 @@ extension Presentation {
         @PublishedSerialized var roleRepresentations: [RoleRepresentation] = []
         @PublishedSerialized var layout: Presentation.Layout = .tree
         @Serialized var isStatic = false
-        
-        
 
-        func getRepresentation(_: any Sequence<RoleRepresentation>, for role: Structure.Role) -> String? {
+        func role(id: Structure.Role.ID) -> Structure.Role? {
+            guard let database = graph as? Presentation, let role: Structure.Role = database.structure?[id] else { return nil }
+            return role
+        }
+
+        func getRepresentation(_: any Sequence<RoleRepresentation>, for role: Structure.Role) -> RoleRepresentation? {
             let specific = roleRepresentations
                 .filter { $0.roleId == role.id } // && $0.layouts.contains(layout) }
-                .map(\.representation)
                 .first
             let general = roleRepresentations
                 .filter { $0.roleId == role.id } // && $0.layouts.isEmpty }
-                .map(\.representation)
                 .first
             return specific ?? general
         }
 
         static let defaultRepresentation = Structure.Representation.aspect(Structure.Role.global.name, form: .normal)
 
-        func roleRepresentation(role: Structure.Role, layout _: Presentation.Layout) -> String? {
+        func roleRepresentation(role: Structure.Role, layout _: Presentation.Layout) -> RoleRepresentation? {
             getRepresentation(roleRepresentations, for: role) ?? getRepresentation(Self.roleRepresentations, for: role)
         }
 
@@ -74,7 +75,8 @@ extension Presentation {
             for predicate in predicates {
                 if predicate.matches(for: item) {
                     matches = true
-                    result.formUnion(predicate.roles)
+                    let roles = predicate.roles.compactMap { role(id: $0) }
+                    result.formUnion(roles)
                 }
             }
 

@@ -14,7 +14,7 @@ extension Presentation.Query {
         }
 
         @Serialized var condition: Information.Condition
-        @Serialized var roles: Set<Structure.Role>
+        @Serialized var roles: Set<Structure.Role.ID>
 
         init() {}
 

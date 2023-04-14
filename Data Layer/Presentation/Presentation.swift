@@ -8,11 +8,7 @@
 import Foundation
 
 class Presentation: PersistentData<Presentation.Storage> {
-    var structureContainer: PersistentContainer<Structure>!
-    
-    var structure: Structure {
-        structureContainer.content
-    }
+    var structure: Structure?
 
     @Present var queries: Set<Query>
 
@@ -24,4 +20,5 @@ class Presentation: PersistentData<Presentation.Storage> {
         }
         return self
     }
+
 }
