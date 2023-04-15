@@ -7,9 +7,21 @@
 
 import Foundation
 
+infix operator ~>: AdditionPrecedence
+infix operator <~: AdditionPrecedence
+
+
 extension PersistentGraph.Condition {
     static prefix func ! (rhs: PersistentGraph.Condition) -> PersistentGraph.Condition {
         .not(rhs)
+    }
+    
+    static func ~> (lhs: PersistentGraph.Condition, rhs: PersistentGraph.Condition) -> PersistentGraph.Condition {
+        lhs && .hasReference(rhs)
+    }
+    
+    static func <~ (lhs: PersistentGraph.Condition, rhs: PersistentGraph.Condition) -> PersistentGraph.Condition {
+        rhs && .isReferenced(lhs)
     }
 
     static func && (lhs: PersistentGraph.Condition, rhs: PersistentGraph.Condition) -> PersistentGraph.Condition {

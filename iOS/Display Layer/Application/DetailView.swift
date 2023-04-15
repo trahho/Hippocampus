@@ -15,7 +15,7 @@ struct DetailView: View {
         NavigationStack(path: $navigation.items) {
             if let query = navigation.query {
                 QueryView(query: query)
-                    .navigationDestination(for: Structure.Query.Result.Item.self) { item in
+                    .navigationDestination(for: Presentation.Query.Result.Item.self) { item in
                         QueryItemView(item: item)
                     }
             } else {
