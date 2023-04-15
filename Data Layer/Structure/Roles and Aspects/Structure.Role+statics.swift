@@ -10,6 +10,7 @@ extension Structure.Role {
     typealias Role = Structure.Role
     typealias Aspect = Structure.Aspect
     typealias Reference = Structure.Reference
+    typealias Form = Structure.Aspect.Presentation.Form
 
     fileprivate enum Keys {
         static let global = "D7812874-085B-4161-9ABB-C82D4A145634"
@@ -28,21 +29,21 @@ extension Structure.Role {
         Aspect(Keys.globalName, "/Name", .text)
         Aspect(Keys.globalCreated, "/Created", .date)
     } representations: {
-        Representation("_Title", .aspect(Keys.globalName, form: .normal))
+        Representation("_Title", .aspect(Keys.globalName, form: Form.normal))
     }
 
     static let drawing = Role(Keys.drawing, "_Drawing", addToMenu: true) {
         Aspect(Keys.drawingDrawing, "/Drawing", .drawing)
     } representations: {
-        Representation("_Icon", .aspect(Keys.drawingDrawing, form: .icon))
-        Representation("_Card", .aspect(Keys.drawingDrawing, form: .small))
-        Representation("_Canvas", .aspect(Keys.drawingDrawing, form: .normal))
+        Representation("_Icon", .aspect(Keys.drawingDrawing, form: Form.icon))
+        Representation("_Card", .aspect(Keys.drawingDrawing, form: Form.small))
+        Representation("_Canvas", .aspect(Keys.drawingDrawing, form: Form.normal))
     }
 
     static let text = Role(Keys.text, "_Text") {
         Aspect(Keys.textText, "/Text", .text)
     } representations: {
-        Representation("_Introduction_Short", .aspect(Keys.textText, form: .firstParagraph))
+        Representation("_Introduction_Short", .aspect(Keys.textText, form: Form.firstParagraph))
     }
 
     static let topic = Role(Keys.topic, "_Topic", [.global], addToMenu: true)
@@ -51,9 +52,9 @@ extension Structure.Role {
         Aspect(Keys.noteHeadline, "/Headline", .text)
     } representations: {
         Representation("_Edit", .vertical(
-            .aspect(Keys.globalName, form: .edit),
-            .aspect(Keys.noteHeadline, form: .edit),
-            .aspect(Keys.textText, form: .edit)
+            .aspect(Keys.globalName, form: Form.edit),
+            .aspect(Keys.noteHeadline, form: Form.edit),
+            .aspect(Keys.textText, form: Form.edit)
         ))
     } associated: {
         Reference(topic)

@@ -12,9 +12,7 @@ extension Structure {
         @Relation(reverse: "references", direction: .reference) var role: Structure.Role?
         @Relation(reverse: "referenced", direction: .reference) var referenced: Structure.Role?
         @Relation(direction: .reference) var referenceRole: Structure.Role?
-        
-        
-        public required init() {
-        }
+
+        public required init() {}
     }
 }

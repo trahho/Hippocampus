@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ListView: View {
+    
+    typealias Form = Structure.Aspect.Presentation.Form
+    
     @ObservedObject var information: Information
     @ObservedObject var query: Presentation.Query
     @EnvironmentObject var document: Document
@@ -31,8 +34,8 @@ struct ListView: View {
 //    ], alignment: .center)
 
     let listItem: Structure.Representation = .vertical([
-        .aspect(Structure.Role.global.name, form: .small, editable: false),
-        .aspect(Structure.Role.text.text, form: .small, editable: false),
+        .aspect(Structure.Role.global.name, form: Form.small, editable: false),
+        .aspect(Structure.Role.text.text, form: Form.small, editable: false),
 //        .aspect(Structure.Role.note.zeichnung, form: .small, editable: false)
     ], alignment: .leading)
 

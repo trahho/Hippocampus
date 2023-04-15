@@ -40,7 +40,7 @@ struct QueryListView: View {
     func representation(for item: Presentation.Query.Result.Item) -> some View {
         let representation = item.roles.compactMap {
             if let representation = query.roleRepresentation(role: $0, layout: .list) {
-                return representation.role?.representation(for: representation.representation)
+                return representation.role.representation(for: representation.representation)
             }
             return nil
         }.first ?? Presentation.Query.defaultRepresentation

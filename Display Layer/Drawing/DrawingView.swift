@@ -11,22 +11,24 @@ import PencilKit
 import SwiftUI
 
 struct DrawingView: View {
+    typealias Form = Structure.Aspect.Presentation.Form
+
     @ObservedObject var item: Information.Item
     @EnvironmentObject var document: Document
 
     var aspect: Structure.Aspect
-    var form: Structure.Aspect.Presentation.Form
+    var form: String
     var editable: Bool
 
     var body: some View {
         switch form {
-        case .icon:
+        case Form.icon:
             Image(systemName: "square.and.pencil")
-        case .normal:
+        case Form.normal:
             CanvasView(data: document.getDrawing(item: item, aspect: aspect), editable: editable)
-        case .edit:
+        case Form.edit:
             CanvasView(data: document.getDrawing(item: item, aspect: aspect), editable: true)
-        case .small:
+        case Form.small:
             ImageView(data: document.getDrawing(item: item, aspect: aspect), scale: 0.5)
         default:
             EmptyView()

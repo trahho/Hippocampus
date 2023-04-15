@@ -34,6 +34,9 @@
 		C531AE7D29EB35E500585073 /* Structure.Reference.swift in Sources */ = {isa = PBXBuildFile; fileRef = C531AE7C29EB35E500585073 /* Structure.Reference.swift */; };
 		C531AE7E29EB35E500585073 /* Structure.Reference.swift in Sources */ = {isa = PBXBuildFile; fileRef = C531AE7C29EB35E500585073 /* Structure.Reference.swift */; };
 		C531AE7F29EB35E500585073 /* Structure.Reference.swift in Sources */ = {isa = PBXBuildFile; fileRef = C531AE7C29EB35E500585073 /* Structure.Reference.swift */; };
+		C531AE8129EB564300585073 /* Presentation.Object+base.swift in Sources */ = {isa = PBXBuildFile; fileRef = C531AE8029EB564300585073 /* Presentation.Object+base.swift */; };
+		C531AE8229EB564300585073 /* Presentation.Object+base.swift in Sources */ = {isa = PBXBuildFile; fileRef = C531AE8029EB564300585073 /* Presentation.Object+base.swift */; };
+		C531AE8329EB564300585073 /* Presentation.Object+base.swift in Sources */ = {isa = PBXBuildFile; fileRef = C531AE8029EB564300585073 /* Presentation.Object+base.swift */; };
 		C5445D1C29E74D000033A5AB /* Presentation.Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5445D1B29E74D000033A5AB /* Presentation.Storage.swift */; };
 		C5445D1D29E74D000033A5AB /* Presentation.Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5445D1B29E74D000033A5AB /* Presentation.Storage.swift */; };
 		C5445D1F29E75D3B0033A5AB /* Information.Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5445D1E29E75D3B0033A5AB /* Information.Storage.swift */; };
@@ -410,6 +413,7 @@
 		C531AE7429EB349800585073 /* Structure.Reference.Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structure.Reference.Builder.swift; sourceTree = "<group>"; };
 		C531AE7829EB34CD00585073 /* Structure.Role.Representation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structure.Role.Representation.swift; sourceTree = "<group>"; };
 		C531AE7C29EB35E500585073 /* Structure.Reference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structure.Reference.swift; sourceTree = "<group>"; };
+		C531AE8029EB564300585073 /* Presentation.Object+base.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Presentation.Object+base.swift"; sourceTree = "<group>"; };
 		C5394A5829049969003B99BF /* Nachdenken.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Nachdenken.md; sourceTree = "<group>"; };
 		C5445D1B29E74D000033A5AB /* Presentation.Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presentation.Storage.swift; sourceTree = "<group>"; };
 		C5445D1E29E75D3B0033A5AB /* Information.Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Information.Storage.swift; sourceTree = "<group>"; };
@@ -984,6 +988,7 @@
 			isa = PBXGroup;
 			children = (
 				C5A84B7129CFAFC30026F07E /* Presentation.swift */,
+				C531AE8029EB564300585073 /* Presentation.Object+base.swift */,
 				C5445D1B29E74D000033A5AB /* Presentation.Storage.swift */,
 				C5D273592975D71E00F32EB6 /* Querying */,
 				C5A84B7429CFB03D0026F07E /* Presentation.Properties.swift */,
@@ -1201,6 +1206,7 @@
 			children = (
 				C55AC5D6295A4A5F00F09326 /* Structure.swift */,
 				C5708D2029E590F100F4D4E1 /* Structure.Storage.swift */,
+				C59E287B2978A992007375D5 /* Building */,
 				C5D2735A2975D73600F32EB6 /* Roles and Aspects */,
 			);
 			path = Structure;
@@ -1222,7 +1228,6 @@
 		C5D2735A2975D73600F32EB6 /* Roles and Aspects */ = {
 			isa = PBXGroup;
 			children = (
-				C59E287B2978A992007375D5 /* Building */,
 				C5C8E85D295AFD4E002C7746 /* Structure.Role.swift */,
 				C531AE7829EB34CD00585073 /* Structure.Role.Representation.swift */,
 				C5EECF6A29E0A9B1008608E4 /* Structure.Role+statics.swift */,
@@ -1486,6 +1491,7 @@
 				C55AC5D0295A34F900F09326 /* Document.swift in Sources */,
 				C564EB8E29B541F500F3E0AC /* measureDuration.swift in Sources */,
 				C59B3CEC295CCE9A0053DE7D /* CGRect+Functions.swift in Sources */,
+				C531AE8329EB564300585073 /* Presentation.Object+base.swift in Sources */,
 				C5C4A0EC293B9B0E00FF9AB8 /* PersistentObject.swift in Sources */,
 				C5C4A106293B9E5000FF9AB8 /* Box.swift in Sources */,
 				C5C4A0ED293B9B0E00FF9AB8 /* PersistentGraph.Node.swift in Sources */,
@@ -1664,6 +1670,7 @@
 				C59E28742978A921007375D5 /* Structure.Aspect+view.swift in Sources */,
 				C5E966D629AAD47D009D81FF /* Font+Extension.swift in Sources */,
 				C564EB8729B533FE00F3E0AC /* Document.Drawing.Properties.swift in Sources */,
+				C531AE8129EB564300585073 /* Presentation.Object+base.swift in Sources */,
 				C54BE4CD28958F820060A066 /* DecodableProperty.swift in Sources */,
 				C5EECF6829DF7CD4008608E4 /* Structure.Role+textView.swift in Sources */,
 				C54BE4E728958F910060A066 /* CyclicDecoder.swift in Sources */,
@@ -1787,6 +1794,7 @@
 				C5BA027529CE59C5009649C4 /* DetailView.swift in Sources */,
 				C5C4A0CC293AA02700FF9AB8 /* IdentifiableObject.swift in Sources */,
 				C5AAA0F729BD34B2000DA6C3 /* TextView.swift in Sources */,
+				C531AE8229EB564300585073 /* Presentation.Object+base.swift in Sources */,
 				C5C4A0DE293AB7D500FF9AB8 /* PersistentGraph.Node.swift in Sources */,
 				C5E35543294E630D0015CDFD /* TimeLine.swift in Sources */,
 				C531AE7229EB255800585073 /* PersistentGraph.Condition.Comparison.swift in Sources */,

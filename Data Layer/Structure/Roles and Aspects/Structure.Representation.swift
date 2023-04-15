@@ -18,7 +18,7 @@ extension Structure {
         case undefined
         case horizontal([Representation], alignment: Alignment = Alignment.top)
         case vertical([Representation], alignment: Alignment = Alignment.leading)
-        case aspect(Structure.Aspect.ID, form: Structure.Aspect.Presentation.Form, editable: Bool = true)
+        case aspect(Structure.Aspect.ID, form: String, editable: Bool = true)
         case label(String)
 
         @ViewBuilder
@@ -39,11 +39,11 @@ extension Structure {
             }
         }
 
-        static func aspect(_ aspect: Structure.Aspect, form: Structure.Aspect.Presentation.Form, editable: Bool = true) -> Representation {
+        static func aspect(_ aspect: Structure.Aspect, form: String, editable: Bool = true) -> Representation {
             .aspect(aspect.id, form: form, editable: editable)
         }
 
-        static func aspect(_ aspect: String, form: Structure.Aspect.Presentation.Form, editable: Bool = true) -> Representation {
+        static func aspect(_ aspect: String, form: String, editable: Bool = true) -> Representation {
             .aspect(UUID(uuidString: aspect)!, form: form, editable: editable)
         }
 
@@ -56,7 +56,7 @@ extension Structure {
         @EnvironmentObject var structure: Structure
         @ObservedObject var item: Information.Item
         var aspectId: Structure.Aspect.ID
-        var form: Aspect.Presentation.Form
+        var form: String
         var editable = false
 
         var body: some View {

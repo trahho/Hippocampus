@@ -13,16 +13,14 @@ extension Presentation.Query {
             lhs.roleId == rhs.roleId && lhs.representation == rhs.representation
         }
 
-        @Serialized var roleId: Structure.Role.ID
-        @Serialized var representation: String
+        @Persistent private var roleId: Structure.Role.ID
+        @Persistent var representation: String
 
-        var role: Structure.Role? {
+        var role: Structure.Role {
             get {
-                guard let database = graph as? Presentation, let role: Structure.Role = database.structure?[id] else { return nil }
-                return role
+                base.role(id: roleId)
             }
             set {
-                guard let newValue else { return }
                 roleId = newValue.id
             }
         }

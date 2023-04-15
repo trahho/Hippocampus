@@ -7,28 +7,26 @@
 
 import Foundation
 
-extension Presentation.Query {
-    struct Predicate: Presentation.PersistentValue, Serializable {
+extension Presentation {
+    class Predicate: Object {
         static func == (lhs: Predicate, rhs: Predicate) -> Bool {
-            lhs.condition == rhs.condition && lhs.roles == rhs.roles
+            lhs.condition == rhs.condition && lhs.roleIds == rhs.roleIds
         }
 
-        @Serialized var condition: Information.Condition
-        @Serialized var roles: Set<Structure.Role.ID>
-
-        init() {}
-
-//        init(condition: Information.Condition, roles: Set<Structure.Role.ID>) {
-//            self.condition = condition
-//            self.roles = roles
-//        }
+        @Persistent var condition: Information.Condition
+        @Persistent private var roleIds: Set<Structure.Role.ID>
+        
+        var roles: Set<Structure.Role> {
+            get {
+                base.roles(roleIds: roleIds)
+            }
+            set {
+                roleIds = base.roles(roles: newValue)
+            }
+        }
 
         func matches(for member: Information.Item) -> Bool {
             condition.matches(for: member)
         }
-
-//        func roles(for member: Information.Item) -> Set<Structure.Role.ID> {
-//            matches(for: member) ? roles : []
-//        }
     }
 }

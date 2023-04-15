@@ -12,8 +12,14 @@ extension Structure.Aspect {
     enum Presentation: Structure.PersistentValue {
         case text, drawing, date
 
-        enum Form: Structure.PersistentValue {
-            case icon, small, normal, firstParagraph, editFull, edit
+        enum Form {
+//            case icon, small, normal, firstParagraph, editFull, edit
+            static let icon = "_form-Icon"
+            static let small = "_form-Small"
+            static let normal = "_form-Normal"
+            static let firstParagraph = "_form-FirstParagraph"
+            static let edit = "_form-Edit"
+
         }
 
         var defaultValue: (any Structure.PersistentValue)? {
@@ -26,7 +32,7 @@ extension Structure.Aspect {
         }
 
         @ViewBuilder
-        func view(for item: Information.Item, in aspect: Structure.Aspect, as form: Form, editable: Bool) -> some View {
+        func view(for item: Information.Item, in aspect: Structure.Aspect, as form: String, editable: Bool) -> some View {
             switch self {
             case .text:
                 TextView(item: item, aspect: aspect, form: form, editable: editable)

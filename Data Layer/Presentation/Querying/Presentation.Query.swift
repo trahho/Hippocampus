@@ -10,6 +10,8 @@ import Foundation
 extension Presentation {
     class Query: Object {
         typealias Role = Structure.Role
+        typealias Form = Structure.Aspect.Presentation.Form
+
         //        typealias Predicate = Presentation.Predicate
         fileprivate enum Keys {
             static let notes = "89913172-022C-4EF0-95BA-76FF8E32F18B"
@@ -39,22 +41,17 @@ extension Presentation {
         @PublishedSerialized var layout: Presentation.Layout = .tree
         @Serialized var isStatic = false
 
-        func role(id: Structure.Role.ID) -> Structure.Role? {
-            guard let database = graph as? Presentation, let role: Structure.Role = database.structure?[id] else { return nil }
-            return role
-        }
-
         func getRepresentation(_: any Sequence<RoleRepresentation>, for role: Structure.Role) -> RoleRepresentation? {
             let specific = roleRepresentations
-                .filter { $0.roleId == role.id } // && $0.layouts.contains(layout) }
+                .filter { $0.role == role } // && $0.layouts.contains(layout) }
                 .first
             let general = roleRepresentations
-                .filter { $0.roleId == role.id } // && $0.layouts.isEmpty }
+                .filter { $0.role == role } // && $0.layouts.isEmpty }
                 .first
             return specific ?? general
         }
 
-        static let defaultRepresentation = Structure.Representation.aspect(Structure.Role.global.name, form: .normal)
+        static let defaultRepresentation = Structure.Representation.aspect(Structure.Role.global.name, form: Form.normal)
 
         func roleRepresentation(role: Structure.Role, layout _: Presentation.Layout) -> RoleRepresentation? {
             getRepresentation(roleRepresentations, for: role) ?? getRepresentation(Self.roleRepresentations, for: role)
@@ -75,8 +72,7 @@ extension Presentation {
             for predicate in predicates {
                 if predicate.matches(for: item) {
                     matches = true
-                    let roles = predicate.roles.compactMap { role(id: $0) }
-                    result.formUnion(roles)
+                    result.formUnion(predicate.roles)
                 }
             }
 

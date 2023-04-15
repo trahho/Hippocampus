@@ -101,7 +101,7 @@ struct NoteView: View {
                         Section(role.roleDescription) {
 //                            Form{
                             ForEach(role.allAspects.asArray) { aspect in
-                                aspect.view(for: note, as: .normal, editable: true)
+                                aspect.view(for: note, as: Structure.Aspect.Presentation.Form.normal, editable: true)
                             }
 //                            }
                         }

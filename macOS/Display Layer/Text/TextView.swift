@@ -9,9 +9,11 @@ import Foundation
 import SwiftUI
 
 struct TextView: View {
+    typealias Form = Structure.Aspect.Presentation.Form
+    
     @ObservedObject var item: Information.Item
     var aspect: Structure.Aspect
-    var form: Structure.Aspect.Presentation.Form
+    var form: String
     var editable: Bool
 
     @ViewBuilder
@@ -50,12 +52,12 @@ struct TextView: View {
 
     var body: some View {
         switch form {
-        case .icon:
+        case Form.icon:
             Image(systemName: "text.quote")
-        case .firstParagraph:
+        case Form.firstParagraph:
             let text = item[String.self, aspect] ?? ""
             Text(text.prefix(while: { $0 != "\n" }))
-        case .edit:
+        case Form.edit:
             editView
         default:
             if editable {

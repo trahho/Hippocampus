@@ -45,7 +45,7 @@ extension Structure {
             if name == "_Edit" {
                 let aspectPresentations = allAspects
                     .sorted { ($0.index, $0.name) < ($1.index, $1.name) }
-                    .map { Structure.Representation.aspect($0, form: .edit, editable: true) }
+                    .map { Structure.Representation.aspect($0, form: Structure.Aspect.Presentation.Form.edit, editable: true) }
                 return Structure.Representation.vertical(aspectPresentations, alignment: .leading)
             }
             if let first = subRoles.compactMap({ $0.findRepresentation(for: name) }).first { return first }
