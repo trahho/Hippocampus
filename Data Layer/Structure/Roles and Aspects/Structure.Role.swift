@@ -9,15 +9,7 @@ import Foundation
 import SwiftUI
 
 extension Structure {
-    class RoleReference: Object {
-        @Relation(reverse: "references", direction: .reference) var role: Structure.Role?
-        @Relation(reverse: "referenced", direction: .reference) var referenced: Structure.Role?
-        @Relation(direction: .reference) var referenceRole: Structure.Role?
-        
-        
-        public required init() {
-        }
-    }
+  
 
     @dynamicMemberLookup
     class Role: Object {
@@ -29,7 +21,7 @@ extension Structure {
         @Relations(reverse: "role", direction: .referenced) var aspects: Set<Aspect>
         @Relations(reverse: "subRoles") var superRoles: Set<Role>
         @Relations(reverse: "superRoles", direction: .referenced) var subRoles: Set<Role>
-        @Relations(reverse: "role", direction: .referenced) var references: Set<RoleReference>
+        @Relations(reverse: "role", direction: .referenced) var references: Set<Reference>
 
         var allAspects: Set<Aspect> {
             subRoles.flatMap(\.allAspects).asSet.union(aspects)

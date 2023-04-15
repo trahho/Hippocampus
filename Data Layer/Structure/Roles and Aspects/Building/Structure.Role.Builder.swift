@@ -7,23 +7,6 @@
 
 import Foundation
 
-extension Structure.RoleReference {
-    @resultBuilder
-    enum Builder {
-        static func buildBlock() -> [Structure.RoleReference] { [] }
-
-        static func buildBlock(_ references: Structure.RoleReference...) -> [Structure.RoleReference] {
-            references
-        }
-    }
-
-    convenience init(_ referenced: Structure.Role, _ referenceRole: Structure.Role? = nil) {
-        self.init()
-        self.referenced = referenced
-        self.referenceRole = referenceRole
-    }
-}
-
 extension Structure.Role {
     @resultBuilder
     enum Builder {
@@ -39,8 +22,8 @@ extension Structure.Role {
                      _ subRoles: [Structure.Role] = [],
                      addToMenu: Bool = false,
                      @Structure.Aspect.Builder aspects: () -> [Structure.Aspect] = { [] },
-                     @Structure.Role.Representation.Builder representations: () -> [Representation] = { [] },
-                     @Structure.RoleReference.Builder associated: () -> [Structure.RoleReference] = { [] })
+                     @Structure.Role.Representation.Builder representations: () -> [Structure.Role.Representation] = { [] },
+                     @Structure.Reference.Builder associated: () -> [Structure.Reference] = { [] })
     {
         self.init()
         self.id = UUID(uuidString: id)!
@@ -57,22 +40,5 @@ extension Structure.Role {
         print("Built role \(name)")
     }
 
-    struct Representation: Structure.PersistentValue {
-        let name: String
-        let representation: Structure.Representation
-
-        init(_ name: String, _ representation: Structure.Representation) {
-            self.name = name
-            self.representation = representation
-        }
-
-        @resultBuilder
-        enum Builder {
-            static func buildBlock() -> [Structure.Role.Representation] { [] }
-
-            static func buildBlock(_ representations: Structure.Role.Representation...) -> [Structure.Role.Representation] {
-                representations
-            }
-        }
-    }
+ 
 }

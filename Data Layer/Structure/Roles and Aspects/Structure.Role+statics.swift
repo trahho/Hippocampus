@@ -9,6 +9,7 @@ import Foundation
 extension Structure.Role {
     typealias Role = Structure.Role
     typealias Aspect = Structure.Aspect
+    typealias Reference = Structure.Reference
 
     fileprivate enum Keys {
         static let global = "D7812874-085B-4161-9ABB-C82D4A145634"
@@ -55,6 +56,6 @@ extension Structure.Role {
             .aspect(Keys.textText, form: .edit)
         ))
     } associated: {
-        Structure.RoleReference(topic)
+        Reference(topic)
     }
 }
