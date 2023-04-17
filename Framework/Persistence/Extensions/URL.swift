@@ -25,7 +25,7 @@ extension URL {
     }
 
     static var iCloudDirectory: URL {
-        FileManager.default.url(forUbiquityContainerIdentifier: nil)!
+        FileManager.default.url(forUbiquityContainerIdentifier: nil) ?? virtual
     }
 
     static var localDirecotry: URL {

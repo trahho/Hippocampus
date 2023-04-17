@@ -9,14 +9,16 @@ import Foundation
 import SwiftUI
 
 struct TextView: View {
+    typealias Form = Structure.Aspect.Presentation.Form
+    
     @ObservedObject var item: Information.Item
     var aspect: Structure.Aspect
-    var form: Structure.Aspect.Presentation.Form
+    var form: String
     var editable: Bool
 
     var body: some View {
         switch form {
-        case .icon:
+        case Form.icon:
             Image(systemName: "text.quote")
         default:
             if editable {

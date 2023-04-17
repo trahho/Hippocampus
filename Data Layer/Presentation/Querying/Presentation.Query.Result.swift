@@ -7,13 +7,13 @@
 
 import Foundation
 
-extension Set<Structure.Role> {
-    func contains(_ memberId: Structure.Role.ID) -> Bool {
-        contains { role in
-            role.id == memberId
-        }
-    }
-}
+//extension Set<Structure.Role> {
+//    func contains(_ memberId: Structure.Role.ID) -> Bool {
+//        contains { role in
+//            role.id == memberId
+//        }
+//    }
+//}
 
 extension Presentation.Query {
     class Result {

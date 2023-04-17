@@ -15,7 +15,7 @@ extension PersistentGraph {
         @Serialized private(set) var values: [Key: TimeLine<Storage>] = [:]
         @Serialized var added: Date?
 
-        var graph: PersistentGraph!
+        var graph: PersistentGraph?
         var readingTimestamp: Date { graph?.timestamp ?? Date.distantFuture }
         func writingTimestamp(_ timestamp: Date?) -> Date { graph == nil ? Date.distantPast : timestamp ?? Date() }
         var canChange: Bool { graph?.timestamp == nil }

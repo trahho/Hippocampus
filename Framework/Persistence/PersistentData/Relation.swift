@@ -66,7 +66,7 @@ extension PersistentData.Object {
                 guard let newValue else { return }
 
                 let edge = PersistentData.Edge(from: instance, to: newValue)
-                instance.graph.add(edge, timestamp: timestamp)
+                instance.graph?.add(edge, timestamp: timestamp)
 
                 edge[role: key, timestamp: timestamp] = true
 

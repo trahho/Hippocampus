@@ -22,7 +22,7 @@ public protocol PersistentContainerReference {
 }
 
 public class PersistentContainer<Content: PersistentContent>: PersistentContainerReference, ObservableObject {
-    typealias ContentDelegate = (Content) -> Void
+    typealias ContentDelegate = () -> Void
 
     let url: URL
     private var isMerging = false
@@ -44,7 +44,7 @@ public class PersistentContainer<Content: PersistentContent>: PersistentContaine
         set {
             objectWillChange.send()
             _content = newValue
-            if let _content, let contentChange { contentChange(_content) }
+            if  _content != nil, let contentChange { contentChange() }
             registerChanges()
         }
     }

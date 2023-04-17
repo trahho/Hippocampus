@@ -21,7 +21,7 @@ class Document: ObservableObject {
     var structure: Structure {
         structureContainer.content
     }
-    
+
     var presentation: Presentation {
         presentationContainer.content
     }
@@ -34,6 +34,10 @@ class Document: ObservableObject {
         structure.roles
     }
 
+    func syncContainers() {
+        presentation.structure = structure
+    }
+
     init(url: URL) {
         self.url = url
         let informationUrl = url.appendingPathComponent("Information" + HippocampusApp.persistentExtension)
@@ -41,12 +45,12 @@ class Document: ObservableObject {
         let presentationUrl = url.appendingPathComponent("Presentation" + HippocampusApp.persistentExtension)
 
         informationContainer = PersistentContainer(url: informationUrl, content: Information(), commitOnChange: true)
-        structureContainer = PersistentContainer(url: structureUrl, content: Structure().setup(), commitOnChange: true) { content in
-            self.presentation.structure = content
-        }
-        presentationContainer = PersistentContainer(url: presentationUrl, content: Presentation().setup(), commitOnChange: true) { content in
-            content.structure = self.structure
-        }
+        structureContainer = PersistentContainer(url: structureUrl, content: Structure().setup(), commitOnChange: true)
+        presentationContainer = PersistentContainer(url: presentationUrl, content: Presentation().setup(), commitOnChange: true)
+
+        syncContainers()
+        structureContainer.contentChange = syncContainers
+        presentationContainer.contentChange = syncContainers
     }
 
     convenience init(name: String, local: Bool) {

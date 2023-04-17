@@ -15,13 +15,13 @@ extension Presentation {
 
         @Persistent var condition: Information.Condition
         @Persistent private var roleIds: Set<Structure.Role.ID>
-        
+
         var roles: Set<Structure.Role> {
             get {
                 base.roles(roleIds: roleIds)
             }
             set {
-                roleIds = base.roles(roles: newValue)
+                roleIds = newValue.map { $0.id }.asSet
             }
         }
 

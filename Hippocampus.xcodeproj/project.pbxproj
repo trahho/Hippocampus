@@ -37,6 +37,8 @@
 		C531AE8129EB564300585073 /* Presentation.Object+base.swift in Sources */ = {isa = PBXBuildFile; fileRef = C531AE8029EB564300585073 /* Presentation.Object+base.swift */; };
 		C531AE8229EB564300585073 /* Presentation.Object+base.swift in Sources */ = {isa = PBXBuildFile; fileRef = C531AE8029EB564300585073 /* Presentation.Object+base.swift */; };
 		C531AE8329EB564300585073 /* Presentation.Object+base.swift in Sources */ = {isa = PBXBuildFile; fileRef = C531AE8029EB564300585073 /* Presentation.Object+base.swift */; };
+		C531AE8629ECA61C00585073 /* Design.NestedListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C531AE8529ECA61C00585073 /* Design.NestedListView.swift */; };
+		C531AE8729ECA61C00585073 /* Design.NestedListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C531AE8529ECA61C00585073 /* Design.NestedListView.swift */; };
 		C5445D1C29E74D000033A5AB /* Presentation.Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5445D1B29E74D000033A5AB /* Presentation.Storage.swift */; };
 		C5445D1D29E74D000033A5AB /* Presentation.Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5445D1B29E74D000033A5AB /* Presentation.Storage.swift */; };
 		C5445D1F29E75D3B0033A5AB /* Information.Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5445D1E29E75D3B0033A5AB /* Information.Storage.swift */; };
@@ -317,9 +319,9 @@
 		C5D2735D2975E08400F32EB6 /* DocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D2735B2975E08400F32EB6 /* DocumentView.swift */; };
 		C5D2735E2975E08400F32EB6 /* DocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D2735B2975E08400F32EB6 /* DocumentView.swift */; };
 		C5D273602975E5C100F32EB6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E856295A652B002C7746 /* ContentView.swift */; };
-		C5D382E22967779100E31D69 /* GraphValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D382E12967779100E31D69 /* GraphValueStorage.swift */; };
-		C5D382E32967779100E31D69 /* GraphValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D382E12967779100E31D69 /* GraphValueStorage.swift */; };
-		C5D382E42967779100E31D69 /* GraphValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D382E12967779100E31D69 /* GraphValueStorage.swift */; };
+		C5D382E22967779100E31D69 /* PersistentGraph.ValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D382E12967779100E31D69 /* PersistentGraph.ValueStorage.swift */; };
+		C5D382E32967779100E31D69 /* PersistentGraph.ValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D382E12967779100E31D69 /* PersistentGraph.ValueStorage.swift */; };
+		C5D382E42967779100E31D69 /* PersistentGraph.ValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D382E12967779100E31D69 /* PersistentGraph.ValueStorage.swift */; };
 		C5D382E6296777E800E31D69 /* Encodable+typeName.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D382E5296777E800E31D69 /* Encodable+typeName.swift */; };
 		C5D382E7296777E800E31D69 /* Encodable+typeName.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D382E5296777E800E31D69 /* Encodable+typeName.swift */; };
 		C5D382E8296777E800E31D69 /* Encodable+typeName.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D382E5296777E800E31D69 /* Encodable+typeName.swift */; };
@@ -414,6 +416,7 @@
 		C531AE7829EB34CD00585073 /* Structure.Role.Representation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structure.Role.Representation.swift; sourceTree = "<group>"; };
 		C531AE7C29EB35E500585073 /* Structure.Reference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structure.Reference.swift; sourceTree = "<group>"; };
 		C531AE8029EB564300585073 /* Presentation.Object+base.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Presentation.Object+base.swift"; sourceTree = "<group>"; };
+		C531AE8529ECA61C00585073 /* Design.NestedListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Design.NestedListView.swift; sourceTree = "<group>"; };
 		C5394A5829049969003B99BF /* Nachdenken.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Nachdenken.md; sourceTree = "<group>"; };
 		C5445D1B29E74D000033A5AB /* Presentation.Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presentation.Storage.swift; sourceTree = "<group>"; };
 		C5445D1E29E75D3B0033A5AB /* Information.Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Information.Storage.swift; sourceTree = "<group>"; };
@@ -554,7 +557,7 @@
 		C5D042C028D4E91E0088D6B0 /* Mind.Opinion.AboutOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mind.Opinion.AboutOne.swift; sourceTree = "<group>"; };
 		C5D273512975D19100F32EB6 /* Information.Item+subscripts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Information.Item+subscripts.swift"; sourceTree = "<group>"; };
 		C5D2735B2975E08400F32EB6 /* DocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentView.swift; sourceTree = "<group>"; };
-		C5D382E12967779100E31D69 /* GraphValueStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphValueStorage.swift; sourceTree = "<group>"; };
+		C5D382E12967779100E31D69 /* PersistentGraph.ValueStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentGraph.ValueStorage.swift; sourceTree = "<group>"; };
 		C5D382E5296777E800E31D69 /* Encodable+typeName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+typeName.swift"; sourceTree = "<group>"; };
 		C5D382E92967786900E31D69 /* PersistentGraph.Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentGraph.Transaction.swift; sourceTree = "<group>"; };
 		C5D382F1296B345D00E31D69 /* PersistentGraph.ChangeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentGraph.ChangeManager.swift; sourceTree = "<group>"; };
@@ -665,6 +668,14 @@
 				C5E4CB05294BDEA000755959 /* PersistentDataTests.swift */,
 			);
 			path = HippocampusTestsMacOS;
+			sourceTree = "<group>";
+		};
+		C531AE8429ECA5F700585073 /* Design */ = {
+			isa = PBXGroup;
+			children = (
+				C531AE8529ECA61C00585073 /* Design.NestedListView.swift */,
+			);
+			path = Design;
 			sourceTree = "<group>";
 		};
 		C5394A5929049B5A003B99BF /* Genes */ = {
@@ -1008,6 +1019,7 @@
 		C5AAA0D029BBC261000DA6C3 /* Display Layer */ = {
 			isa = PBXGroup;
 			children = (
+				C531AE8429ECA5F700585073 /* Design */,
 				C5167C4329C6291E00323F75 /* Application */,
 				C5167C4D29C8F75A00323F75 /* Query */,
 				C5AAA0D229BD0FF1000DA6C3 /* Drawing */,
@@ -1247,6 +1259,7 @@
 				C5C4A0D9293AB3FC00FF9AB8 /* PersistentGraph.Item.swift */,
 				C5C4A0DC293AB7D500FF9AB8 /* PersistentGraph.Node.swift */,
 				C5C4A0DF293AC3AE00FF9AB8 /* PersistentGraph.Edge.swift */,
+				C5D382E12967779100E31D69 /* PersistentGraph.ValueStorage.swift */,
 			);
 			path = Structure;
 			sourceTree = "<group>";
@@ -1264,7 +1277,6 @@
 		C5D382EF296A3B8D00E31D69 /* Value storage */ = {
 			isa = PBXGroup;
 			children = (
-				C5D382E12967779100E31D69 /* GraphValueStorage.swift */,
 				C5708D2429E5C8F500F4D4E1 /* TimedValueStorage.swift */,
 				C5E35545294E632F0015CDFD /* TimedValue.swift */,
 				C5E35541294E630D0015CDFD /* TimeLine.swift */,
@@ -1478,7 +1490,7 @@
 				C59E28762978A921007375D5 /* Structure.Aspect+view.swift in Sources */,
 				C59E2884297B2434007375D5 /* Structure.Aspect.Presentation.swift in Sources */,
 				C59B3CDF295CB9900053DE7D /* HippocampusApp.swift in Sources */,
-				C5D382E42967779100E31D69 /* GraphValueStorage.swift in Sources */,
+				C5D382E42967779100E31D69 /* PersistentGraph.ValueStorage.swift in Sources */,
 				C59B3CEF295CCE9A0053DE7D /* CGPoint+Operators.swift in Sources */,
 				C59B3CE7295CCE950053DE7D /* Set+asArray.swift in Sources */,
 				C5C4A0FD293B9E4800FF9AB8 /* SerializableEncodable.swift in Sources */,
@@ -1631,7 +1643,7 @@
 				C55AC5DF295A4ACE00F09326 /* Presentation.Query.Predicate.swift in Sources */,
 				C58FB453291F215500D0B713 /* ListView.swift in Sources */,
 				C5C8E864295AFDCA002C7746 /* Structure.Role.Builder.swift in Sources */,
-				C5D382E22967779100E31D69 /* GraphValueStorage.swift in Sources */,
+				C5D382E22967779100E31D69 /* PersistentGraph.ValueStorage.swift in Sources */,
 				C5C4A0C8293A83C100FF9AB8 /* URL.swift in Sources */,
 				C5C8E857295A652B002C7746 /* ContentView.swift in Sources */,
 				C54BE508289591530060A066 /* Set+asArray.swift in Sources */,
@@ -1661,6 +1673,7 @@
 				C5D2735C2975E08400F32EB6 /* DocumentView.swift in Sources */,
 				C5C4A0CB293A9F9400FF9AB8 /* IdentifiableObject.swift in Sources */,
 				C5C4A0DD293AB7D500FF9AB8 /* PersistentGraph.Node.swift in Sources */,
+				C531AE8629ECA61C00585073 /* Design.NestedListView.swift in Sources */,
 				C564EB8C29B541F500F3E0AC /* measureDuration.swift in Sources */,
 				C5E35542294E630D0015CDFD /* TimeLine.swift in Sources */,
 				C5C8E861295AFD8E002C7746 /* Structure.Aspect.swift in Sources */,
@@ -1731,6 +1744,7 @@
 				C5A7929F29A4078400637C6C /* DrawingView.swift in Sources */,
 				C5AAA0EE29BD27DC000DA6C3 /* NSImage+scale.swift in Sources */,
 				C54BE4E028958F910060A066 /* Primitive.swift in Sources */,
+				C531AE8729ECA61C00585073 /* Design.NestedListView.swift in Sources */,
 				C5EECF6C29E0A9B1008608E4 /* Structure.Role+statics.swift in Sources */,
 				C5E35547294E632F0015CDFD /* TimedValue.swift in Sources */,
 				C55AC5B229560AF900F09326 /* Equatable+isEqualTo.swift in Sources */,
@@ -1764,7 +1778,7 @@
 				C55AC5E0295A4ACE00F09326 /* Presentation.Query.Predicate.swift in Sources */,
 				C54BE4D428958F820060A066 /* EncodableProperty.swift in Sources */,
 				C5AAA10229BE7F69000DA6C3 /* Document.Drawing.Background+draw.swift in Sources */,
-				C5D382E32967779100E31D69 /* GraphValueStorage.swift in Sources */,
+				C5D382E32967779100E31D69 /* PersistentGraph.ValueStorage.swift in Sources */,
 				C5C8E865295AFDCA002C7746 /* Structure.Role.Builder.swift in Sources */,
 				C564EB8429B5337700F3E0AC /* Document.Drawing.Drawing.swift in Sources */,
 				C5445D2029E75D3B0033A5AB /* Information.Storage.swift in Sources */,
