@@ -9,10 +9,6 @@ import Foundation
 
 extension Presentation.Query {
     class RoleRepresentation: Presentation.Object {
-        static func == (lhs: Presentation.Query.RoleRepresentation, rhs: Presentation.Query.RoleRepresentation) -> Bool {
-            lhs.roleId == rhs.roleId && lhs.representation == rhs.representation
-        }
-
         @Persistent private var roleId: Structure.Role.ID
         @Persistent var representation: String
 

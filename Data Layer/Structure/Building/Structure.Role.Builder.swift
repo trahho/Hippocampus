@@ -22,7 +22,7 @@ extension Structure.Role {
                      _ subRoles: [Structure.Role] = [],
                      addToMenu: Bool = false,
                      @Structure.Aspect.Builder aspects: () -> [Structure.Aspect] = { [] },
-                     @Structure.Role.Representation.Builder representations: () -> [Structure.Role.Representation] = { [] },
+                     @Structure.Representation.Builder representations: () -> [Structure.Representation] = { [] },
                      @Structure.Reference.Builder associated: () -> [Structure.Reference] = { [] })
     {
         self.init()
@@ -34,7 +34,7 @@ extension Structure.Role {
             aspects[i].index = i
         }
         self.aspects = aspects.asSet
-        self.representations = representations()
+        self.representations = representations().asSet
         self.subRoles = subRoles.asSet
         self.references = associated().asSet
         print("Built role \(name)")

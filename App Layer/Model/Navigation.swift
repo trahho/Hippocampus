@@ -13,6 +13,8 @@ class Navigation: ObservableObject {
     @Published var items: [Presentation.Query.Result.Item] = []
 
     //    @Published var query: Structure.Query?
+    
+    // So bauen: Ein Struct
 
     @Published private var _query: Presentation.Query?
     var query: Presentation.Query? {

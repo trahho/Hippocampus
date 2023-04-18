@@ -33,7 +33,7 @@ struct ListView: View {
 //        ], alignment: .leading)
 //    ], alignment: .center)
 
-    let listItem: Structure.Representation = .vertical([
+    let listItem: Structure.Presentation = .vertical([
         .aspect(Structure.Role.global.name, form: Form.small, editable: false),
         .aspect(Structure.Role.text.text, form: Form.small, editable: false),
 //        .aspect(Structure.Role.note.zeichnung, form: .small, editable: false)

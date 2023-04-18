@@ -11,6 +11,7 @@ extension Structure.Role {
     typealias Aspect = Structure.Aspect
     typealias Reference = Structure.Reference
     typealias Form = Structure.Aspect.Presentation.Form
+    typealias Representation = Structure.Representation
 
     fileprivate enum Keys {
         static let global = "D7812874-085B-4161-9ABB-C82D4A145634"

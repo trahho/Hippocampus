@@ -51,7 +51,7 @@ extension Presentation {
             return specific ?? general
         }
 
-        static let defaultRepresentation = Structure.Representation.aspect(Structure.Role.global.name, form: Form.normal)
+        static let defaultRepresentation = Structure.Presentation.aspect(Structure.Role.global.name, form: Form.normal)
 
         func roleRepresentation(role: Structure.Role, layout _: Presentation.Layout) -> RoleRepresentation? {
             getRepresentation(roleRepresentations, for: role) ?? getRepresentation(Self.roleRepresentations, for: role)

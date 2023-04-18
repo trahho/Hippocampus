@@ -15,8 +15,10 @@ extension Presentation {
 
         init(_ value: (any PersistentValue)?) {
             if let basicValue = ValueStorage(value) { self = .v(basicValue) }
+         
             else if let condition = value as? Information.Condition { self = .condition(condition) }
             else if let roles = value as? Set<Structure.Role.ID> { self = .roles(roles.asArray) }
+         
             else { fatalError("Storage for \(value?.typeName ?? "Hä?") not available") }
         }
 

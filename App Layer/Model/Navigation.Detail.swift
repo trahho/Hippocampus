@@ -10,29 +10,18 @@ import SwiftUI
 
 extension Navigation {
     enum Detail: Hashable {
-        case queryContent(Presentation.Query)
-        case queryStructure(Presentation.Query)
-        case queryItem(Presentation.Query, Presentation.Query.Result.Item)
-        case informationItem(Information.Item)
-        case test
+        case query(Presentation.Query)
+        case item( Information.Item, Set<Structure.Role>)
 
         var view: some View {
-            Rectangle()
-                .fill(.red)
-                .frame(width: 50, height: 50)
-        }
-
-        var query: Presentation.Query? {
             switch self {
-            case let .queryContent(query):
-                return query
-            case let .queryStructure(query):
-                return query
-            case let .queryItem(query, _):
-                return query
-            default:
-                return nil
+            case let .query(query):
+                return QueryView(query: query)
+            case let .item(item, roles)
+                return QueryItemView(item: <#T##Presentation.Query.Result.Item#>)
             }
         }
+
+      
     }
 }

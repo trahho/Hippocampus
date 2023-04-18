@@ -9,10 +9,6 @@ import Foundation
 
 extension Presentation {
     class Predicate: Object {
-        static func == (lhs: Predicate, rhs: Predicate) -> Bool {
-            lhs.condition == rhs.condition && lhs.roleIds == rhs.roleIds
-        }
-
         @Persistent var condition: Information.Condition
         @Persistent private var roleIds: Set<Structure.Role.ID>
 

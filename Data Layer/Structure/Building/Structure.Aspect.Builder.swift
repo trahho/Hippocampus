@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 extension Structure.Aspect {
     @resultBuilder
     enum Builder {
