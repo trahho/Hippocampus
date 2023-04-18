@@ -15,11 +15,12 @@ struct ContentView: View {
     func toolbar() -> some ToolbarContent {
         ToolbarItemGroup(placement: .primaryAction) {
             Menu {
-                ForEach(document.roles.filter(\.canBeCreated).sorted(by: { $0.roleDescription < $1.roleDescription })) { role in
+                ForEach(document.roles
+//                    .filter(\.canBeCreated)
+                    .sorted(by: { $0.roleDescription < $1.roleDescription })) { role in
                     Button {
                         let node = document.information.createNode(roles: [role])
-                        let item = Presentation.Query.Result.Item(item: node, roles: [role])
-                        navigation.addItem(item)
+                        navigation.showItem(item: node, roles: [role])
                     } label: {
                         role.textView
                     }
@@ -29,9 +30,9 @@ struct ContentView: View {
             }
         }
         ToolbarItemGroup(placement: .navigation) {
-            if let _ = navigation.item {
+            if let _ = navigation.detail {
                 Button {
-                    navigation.removeItem()
+                    navigation.moveBack()
                 } label: {
                     Image(systemName: "chevron.left")
                 }

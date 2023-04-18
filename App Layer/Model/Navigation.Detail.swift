@@ -11,17 +11,16 @@ import SwiftUI
 extension Navigation {
     enum Detail: Hashable {
         case query(Presentation.Query)
-        case item( Information.Item, Set<Structure.Role>)
+        case item(Information.Item, Set<Structure.Role>)
 
+        @ViewBuilder
         var view: some View {
             switch self {
             case let .query(query):
-                return QueryView(query: query)
-            case let .item(item, roles)
-                return QueryItemView(item: <#T##Presentation.Query.Result.Item#>)
+                QueryView(query: query)
+            case let .item(item, roles):
+                ItemView(item: item, roles: roles)
             }
         }
-
-      
     }
 }

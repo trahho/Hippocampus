@@ -25,7 +25,7 @@ class Presentation: PersistentData<Presentation.Storage> {
     @Present var queries: Set<Query>
 
     override func setup() -> Presentation {
-        let queries: [Query] = [.notes, .topics]
+        let queries: [Query] = [.general, .notes, .topics]
         queries.forEach {
             add($0, timestamp: Date.distantPast)
             $0.isStatic = true

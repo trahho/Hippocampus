@@ -49,7 +49,7 @@ struct QueryListView: View {
     }
 
     var body: some View {
-        List(items, id: \.self, selection: $navigation.item) { item in
+        List(items, id: \.self) { item in
             representation(for: item)
 //            Text("Test")
 //            listItem.view(for: item.item, by: document.structure, editable: false)

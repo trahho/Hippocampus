@@ -10,41 +10,50 @@ import SwiftUI
 
 class Navigation: ObservableObject {
     @Published var sidebar: Sidebar = .queries
-    @Published var items: [Presentation.Query.Result.Item] = []
+    @Published var details: [Detail] = []
 
     //    @Published var query: Structure.Query?
-    
-    // So bauen: Ein Struct
 
-    @Published private var _query: Presentation.Query?
+    var detail: Detail? {
+        details.last
+    }
+
     var query: Presentation.Query? {
-        get { _query }
-        set {
-            guard newValue != _query else { return }
-            items = []
-            _query = newValue
-        }
-    }
-
-    var item: Presentation.Query.Result.Item? {
-        get { items.last }
-        set {
-            withAnimation {
-                if let newValue {
-                    items = [newValue]
+        get {
+            details.compactMap {
+                if case let Detail.query(query) = $0 {
+                    return query
                 } else {
-                    items = []
+                    return nil
                 }
-            }
+            }.last
+        }
+        set {
+            guard let newValue else { return }
+            showQuery(query: newValue)
         }
     }
 
-    func addItem(_ item: Presentation.Query.Result.Item) {
-        items.append(item)
+    func showQuery(query: Presentation.Query) {
+        guard query != self.query else { return }
+        withAnimation {
+            if case Detail.query? = detail {
+                details.removeLast()
+            }
+            details.append(.query(query))
+        }
     }
 
-    func removeItem() {
-        items.removeLast()
+    func showItem(item: Information.Item, roles: Set<Structure.Role>) {
+        withAnimation {
+            details.append(.item(item, roles))
+        }
+    }
+
+    func moveBack() {
+        withAnimation {
+            _ = details.removeLast()
+        }
     }
 }
 
@@ -58,7 +67,7 @@ extension Navigation {
                 .contentShape(Rectangle())
                 .onTapGesture {
                     withAnimation {
-                        navigation.query = query
+                        navigation.showQuery(query: query)
                     }
                 }
         }
@@ -72,23 +81,19 @@ extension Navigation {
             content
                 .contentShape(Rectangle())
                 .onTapGesture {
-                    withAnimation {
-                        navigation.items.append(item)
-                    }
+                    navigation.showItem(item: item.item, roles: item.roles)
                 }
         }
     }
 
-    struct RemoveItemModifier: ViewModifier {
+    struct MoveBackModifier: ViewModifier {
         @EnvironmentObject var navigation: Navigation
 
         func body(content: Content) -> some View {
             content
                 .contentShape(Rectangle())
                 .onTapGesture {
-                    withAnimation {
-                        navigation.removeItem()
-                    }
+                    navigation.moveBack()
                 }
         }
     }
@@ -104,6 +109,6 @@ extension View {
     }
 
     func tapToRemoveLastSelectedItem() -> some View {
-        modifier(Navigation.RemoveItemModifier())
+        modifier(Navigation.MoveBackModifier())
     }
 }

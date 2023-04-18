@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct QueryItemView: View {
+struct ItemView: View {
     @EnvironmentObject var document: Document
     @ObservedObject var item: Information.Item
     var roles: Set<Structure.Role>
@@ -32,15 +32,26 @@ struct QueryItemView: View {
 //    }
 
     var body: some View {
-        ScrollView {
+        //        ScrollView {
+        //            ForEach(sortedRoles) { role in
+        //                DisclosureGroup(LocalizedStringKey(role.roleDescription)) {
+        //                    role.representation(for: "_Edit")
+        //                        .view(for: item, editable: true)
+        //                }
+        //            }
+        //            EmptyView()
+        //        }
+        //        .padding()
+        TabView {
             ForEach(sortedRoles) { role in
-                DisclosureGroup(LocalizedStringKey(role.roleDescription)) {
+                VStack {
                     role.representation(for: "_Edit")
                         .view(for: item, editable: true)
                 }
+                .tabItem {
+                    Text(LocalizedStringKey(role.roleDescription))
+                }
             }
-            EmptyView()
         }
-        .padding()
     }
 }

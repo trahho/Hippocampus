@@ -44,8 +44,8 @@ extension Presentation.Query {
         self.id = UUID(uuidString: id)!
         self.name = name
         let predicates = predicates()
-        self.predicates = predicates
+        self.predicates = predicates.asSet
         let representations = representations()
-        roleRepresentations = representations
+        roleRepresentations = representations.asSet
     }
 }

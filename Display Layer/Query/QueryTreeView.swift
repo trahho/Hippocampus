@@ -60,7 +60,7 @@ struct QueryTreeView: View {
 //    }
 
     var body: some View {
-        List(items, id: \.self, selection: $navigation.item) { item in
+        List(items, id: \.self) { item in
             RowView(query: query, item: item)
 
 //            Text("Test")
@@ -103,7 +103,7 @@ struct QueryTreeView: View {
                 representation(for: item)
             } else {
                 DisclosureGroup {
-                    List(subItems, id: \.self, selection: $navigation.item) { item in
+                    List(subItems, id: \.self) { item in
                         RowView(query: query, item: item)
                     }
                 } label: {
