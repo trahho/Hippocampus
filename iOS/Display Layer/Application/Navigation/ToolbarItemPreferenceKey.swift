@@ -14,7 +14,7 @@ struct ToolBarItemPreferenceKey: PreferenceKey {
     static var defaultValue: Value = []
 
     static func reduce(value: inout Value, nextValue: () -> Value) {
-        print("append \(nextValue().count) to \(value.count)")
+//        print("append \(nextValue().count) to \(value.count)")
         value.append(contentsOf: nextValue())
     }
 }

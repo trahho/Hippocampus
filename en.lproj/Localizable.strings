@@ -20,3 +20,7 @@
 "_Notes" = "Notes";
 "_Topics" = "Topics";
 "_General" = "General";
+
+/* Groups */
+"_builtIn" = "Static";
+

@@ -22,4 +22,7 @@
 "_Topics" = "Themen";
 "_General" = "Alle";
 
+/* Groups */
+"_builtIn" = "Statisch";
+
 

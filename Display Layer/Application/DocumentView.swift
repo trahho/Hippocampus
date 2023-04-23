@@ -12,7 +12,7 @@ struct DocumentView: View {
     @ObservedObject var document: Document
 
     var body: some View {
-        ContentView()
+        NavigationView()
             .font(.myText)
             .environmentObject(document)
             .environmentObject(document.structure)

@@ -32,14 +32,13 @@ struct HippocampusApp: App {
 
     var body: some Scene {
         WindowGroup {
-//            NavigationPoCView()
 //            TestView()
 //                .onAppear {
 //                    Self.locationService.start()
 //                }
 //            Text("hello_world")
-//            DocumentView(document: document)
-            Design_ShellView()
+            DocumentView(document: document)
+//            Design_ShellView()
                 .environmentObject(navigation)
 //                .onOpenURL { document = Document(url: $0) }
         }

@@ -25,77 +25,53 @@ struct NavigationSplitView<SideBar: View, Content: View>: View {
     var header: some View {
         ZStack(alignment: .center) {
             HStack(alignment: .center) {
-                ForEach(toolbarItems.filter { $0.placement == .leading }) { item in
+                let items = toolbarItems.filter { $0.placement == .leading }
+                ForEach(items) { item in
                     item.view
                 }
-//                Text("\(toolbarItems.filter { $0.placement == .leading }.count)")
+//                Text("\(items.count)")
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .border(.red)
+//            .border(.red)
 
             HStack(alignment: .center) {
-                ForEach(toolbarItems.filter { $0.placement == .center }) { item in
+                let items = toolbarItems.filter { $0.placement == .center }
+                ForEach(items) { item in
                     item.view
                 }
-//                Text("\(toolbarItems.filter { $0.placement == .center }.count) - \(toolbarItems.count)")
+//                Text("\(items.count)")
             }
             .frame(maxWidth: .infinity, alignment: .center)
-            .border(.blue)
+//            .border(.blue)
 
             HStack(alignment: .center) {
-                ForEach(toolbarItems.filter { $0.placement == .trailing }) { item in
+                let items = toolbarItems.filter { $0.placement == .trailing }
+                ForEach(items) { item in
                     item.view
                 }
-//                Text("\(toolbarItems.filter { $0.placement == .trailing }.count)")
+//                Text("\(items.count)")
             }
             .frame(maxWidth: .infinity, alignment: .trailing)
         }
     }
 
-    @ViewBuilder
-    var fullContent: some View {
-        VStack(alignment: .leading) {
-            content()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-        }
-        .toolbarItem(placement: .leading) {
-            Button {
-                withAnimation {
-                    showSidebar.toggle()
-                }
-            } label: {
-                Image(systemName: "sidebar.left")
-                    .font(.system(size: 24))
-            }
-        }
-    }
-
     var body: some View {
         ZStack(alignment: .topLeading) {
-//            if showSidebar {
-//                content()
-//                    .background(Color.secondaryBackground)
-//                    .contentShape(Rectangle())
-//                    .onTapGesture {
-//                        withAnimation {
-//                            showSidebar.toggle()
-//                        }
-//                    }
-//            } else {
-                content()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .padding(EdgeInsets(top: 80, leading: 8, bottom: 10, trailing: 5))
+            content()
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                .padding(EdgeInsets(top: 64, leading: 10, bottom: 10, trailing: 10))
                 .background(showSidebar ? Color.secondaryBackground : Color.background)
-//            }
 
             sidebar()
+                .padding(EdgeInsets(top: 64, leading: 20, bottom: 10, trailing: 20))
                 .frame(maxWidth: sidebarWidth, maxHeight: .infinity, alignment: .topLeading)
 
                 .background(Color.background)
                 .offset(x: showSidebar ? 0.0 : -sidebarWidth)
                 .transition(.move(edge: .leading))
-            
+
             header
+                .padding(EdgeInsets(top: 12, leading: 20, bottom: 0, trailing: 20))
                 .toolbarItem(placement: .leading) {
                     Button {
                         withAnimation {
@@ -103,13 +79,13 @@ struct NavigationSplitView<SideBar: View, Content: View>: View {
                         }
                     } label: {
                         Image(systemName: "sidebar.left")
-                            .font(.system(size: 24))
+                            .font(.system(size: 20))
                     }
                 }
         }
         .onPreferenceChange(ToolBarItemPreferenceKey.self) { preferences in
             DispatchQueue.main.async {
-                print ("set \(preferences.count)")
+//                print ("set \(preferences.count)")
                 toolbarItems = preferences
             }
         }
@@ -118,24 +94,6 @@ struct NavigationSplitView<SideBar: View, Content: View>: View {
 
 struct NavigationSplitView_Previews: PreviewProvider {
     static var previews: some View {
-        @Environment(\.horizontalSizeClass) var horizontalSizeClass
-        @Environment(\.verticalSizeClass) var verticalSizeClass
-
-        NavigationSplitView {
-            VStack(alignment: .leading) {
-                Text("A")
-                Text("B")
-            }
-        } content: {
-            Text("\(horizontalSizeClass.debugDescription) - \(verticalSizeClass.debugDescription)")
-//            Text("Hallo")
-                .toolbarItem(placement: .center) {
-                    Text("Title")
-                        .font(.myTitle)
-                }
-                .toolbarItem(placement: .trailing) {
-                    Image(systemName: "plus")
-                }
-        }
+        Design_ShellView()
     }
 }

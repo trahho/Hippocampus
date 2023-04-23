@@ -10,7 +10,7 @@ import SwiftUI
 struct Design_ShellView: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.verticalSizeClass) var verticalSizeClass
-
+    
     var body: some View {
         NavigationSplitView {
             VStack(alignment: .leading) {
@@ -19,10 +19,13 @@ struct Design_ShellView: View {
             }
         } content: {
             Text("\(horizontalSizeClass.debugDescription) - \(verticalSizeClass.debugDescription)")
-//            Text("Hallo")
-                .toolbarItem(placement: .trailing) {
+            //            Text("Hallo")
+                .toolbarItem(placement: .center) {
                     Text("Title")
                         .font(.myTitle)
+                }
+                .toolbarItem(placement: .trailing) {
+                    Image(systemName: "plus")
                 }
         }
     }

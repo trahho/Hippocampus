@@ -41,6 +41,7 @@ extension Presentation.Query {
                      @Presentation.Query.RoleRepresentation.Builder representations: () -> [Presentation.Query.RoleRepresentation] = { [] })
     {
         self.init()
+        self.isStatic = true
         self.id = UUID(uuidString: id)!
         self.name = name
         let predicates = predicates()
