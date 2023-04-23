@@ -11,7 +11,7 @@ import SwiftUI
 struct ItemView: View {
     @EnvironmentObject var document: Document
     @ObservedObject var item: Information.Item
-    var roles: Set<Structure.Role>
+    var roles: [Structure.Role]
     @State var showAllRoles = false
 
     var sortedRoles: [Structure.Role] {

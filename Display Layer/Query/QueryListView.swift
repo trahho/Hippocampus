@@ -54,9 +54,12 @@ struct QueryListView: View {
 //            Text("Test")
 //            listItem.view(for: item.item, by: document.structure, editable: false)
                 .padding(2)
+                .onTapGesture {
+                    query.items.append(Presentation.ItemDetail(Item: item.item, Roles: item.roles.asArray))
+                }
 //                .frame(maxWidth: .infinity)
 //                .background(.blue)
-                .tapToSelectItem(item)
+//                .tapToSelectItem(item)
         }
     }
 }

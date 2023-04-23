@@ -17,7 +17,8 @@ struct ContentView: View {
             Menu {
                 ForEach(document.roles
 //                    .filter(\.canBeCreated)
-                    .sorted(by: { $0.roleDescription < $1.roleDescription })) { role in
+                    .sorted(by: { $0.roleDescription < $1.roleDescription }))
+                { role in
                     Button {
                         let node = document.information.createNode(roles: [role])
                         navigation.showItem(item: node, roles: [role])
@@ -29,13 +30,26 @@ struct ContentView: View {
                 Label("Add", systemImage: "plus")
             }
         }
-        ToolbarItemGroup(placement: .navigation) {
-            if let _ = navigation.detail {
-                Button {
-                    navigation.moveBack()
-                } label: {
-                    Image(systemName: "chevron.left")
-                }
+//        ToolbarItemGroup(placement: .navigation) {
+//            if let _ = navigation.detail {
+//                Button {
+//                    navigation.moveBack()
+//                } label: {
+//                    Image(systemName: "chevron.left")
+//                }
+//            }
+//        }
+    }
+
+    struct QueryNavigationStack: View {
+        @EnvironmentObject var navigation: Navigation
+        @ObservedObject var query: Presentation.Query
+        var body: some View {
+            NavigationStack(path: $navigation.items) {
+                QueryView(query: query)
+                    .navigationDestination(for: Presentation.ItemDetail.self) { itemDetail in
+                        ItemView(item: itemDetail.Item, roles: itemDetail.Roles)
+                    }
             }
         }
     }
@@ -43,10 +57,16 @@ struct ContentView: View {
     var body: some View {
         NavigationSplitView {
             SidebarView()
-        } detail: {
-            DetailView()
+        } content: {
+            Group {
+                if let query = navigation.query {
+                    QueryNavigationStack(query: query)
+                } else {
+                    Text("Select")
+                }
+
+            }.toolbar(content: toolbar)
         }
-        .toolbar(content: toolbar)
 
 //        NavigationSplitView {
 //            List(document.queries.asArray.sorted(by: { $0.name < $1.name }), id: \.self, selection: $navigation.query) { query in

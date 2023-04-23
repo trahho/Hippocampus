@@ -68,7 +68,10 @@ struct QueryTreeView: View {
                 .padding(2)
 //                .frame(maxWidth: .infinity)
 //                .background(.blue)
-                .tapToSelectItem(item)
+//                .tapToSelectItem(item)
+                .onTapGesture {
+                    query.items.append(Presentation.ItemDetail(Item: item.item, Roles: item.roles.asArray))
+                }
         }
     }
 

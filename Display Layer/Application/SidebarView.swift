@@ -22,7 +22,7 @@ struct SidebarView: View {
                 query.textView
                     .font(.myText)
 //                            .background(query == navigation.query ? Color.accentColor : Color.clear)
-                    .tapToSelectQuery(query)
+//                    .tapToSelectQuery(query)
                 //                    .contentShape(Rectangle())
                 //                    .onTapGesture {
                 //                        navigation.details.append(.queryContent(query))

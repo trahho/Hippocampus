@@ -8,6 +8,16 @@
 import Foundation
 
 extension Presentation {
+    struct ItemDetail: Hashable {
+        let id = UUID()
+        let Item: Information.Item
+        let Roles: [Structure.Role]
+        
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(id)
+        }
+    }
+
     class Query: Object {
         typealias Role = Structure.Role
         typealias Form = Structure.Aspect.Presentation.Form
@@ -24,7 +34,7 @@ extension Presentation {
         static let general = Query(Keys.general, "_General") {
             Predicate([.global], .always(true))
         }
-        
+
         static let notes = Query(Keys.notes, "_Notes") {
             //            Predicate([.note, .topic], .hasRole(Role.note.id))
             Predicate([.note], .hasRole(Role.note.id))
@@ -45,8 +55,10 @@ extension Presentation {
         @Relations var roleRepresentations: Set<RoleRepresentation>
         @PublishedSerialized var layout: Presentation.Layout = .tree
         @Serialized var isStatic = false
+        @Published var items: [ItemDetail] = []
 
-        func getRepresentation(_: any Sequence<RoleRepresentation>, for role: Structure.Role) -> RoleRepresentation? {
+        func getRepresentation(_: any Sequence<RoleRepresentation>, for role: Structure.Role) -> RoleRepresentation?
+        {
             let specific = roleRepresentations
                 .filter { $0.role == role } // && $0.layouts.contains(layout) }
                 .first

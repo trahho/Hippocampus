@@ -8,19 +8,20 @@
 import Foundation
 import SwiftUI
 
-extension Navigation {
-    enum Detail: Hashable {
-        case query(Presentation.Query)
-        case item(Information.Item, Set<Structure.Role>)
-
-        @ViewBuilder
-        var view: some View {
-            switch self {
-            case let .query(query):
-                QueryView(query: query)
-            case let .item(item, roles):
-                ItemView(item: item, roles: roles)
-            }
-        }
-    }
-}
+//extension Navigation {
+//    enum Detail: Hashable {
+//        case query(Presentation.Query)
+//        case item(Information.Item, Set<Structure.Role>)
+//
+//        @ViewBuilder
+//        var view: some View {
+//           let  _ = print("Selecting View")
+//            switch self {
+//            case let .query(query):
+//                QueryView(query: query)
+//            case let .item(item, roles):
+//                ItemView(item: item, roles: roles)
+//            }
+//        }
+//    }
+//}
