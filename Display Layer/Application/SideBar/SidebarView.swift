@@ -40,6 +40,7 @@ struct SidebarView: View {
                 Text("_allGroups")
                     .font(.myTitle)
 //                    .frame(maxWidth: .infinity, alignment: .center)
+                Spacer()
                 Button {
                     Presentation.Query.notes.groups = []
                 } label: {
@@ -52,6 +53,7 @@ struct SidebarView: View {
                     .listRowSeparator(.hidden)
             }
             .listStyle(.plain)
+            .padding(0)
             .sheet(item: $editItem) { item in
                 EditView(groupItem: item)
             }

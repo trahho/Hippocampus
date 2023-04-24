@@ -107,7 +107,7 @@ public class PersistentContainer<Content: PersistentContent>: PersistentContaine
             hasChanges = false
             DispatchQueue.main.sync {
                 #if TRACKPERSISTENCE
-                    print("Reactivating")
+                    print("Reactivating query")
                 #endif
                 metadataQuery.start()
             }

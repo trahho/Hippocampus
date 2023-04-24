@@ -9,8 +9,36 @@ import Foundation
 
 extension PersistentGraph {
     open class Edge: Item {
-        @PublishedSerialized private(set) var from: Node
-        @PublishedSerialized private(set) var to: Node
+        @PublishedSerialized private(set) var fromId: Node.ID
+        @PublishedSerialized private(set) var toId: Node.ID
+
+        private var _from: Node?
+        var from: Node {
+            get {
+                if let _from { return _from }
+                guard let graph else { fatalError("No graph, no from") }
+                _from = graph.nodeStorage[fromId]
+                return _from!
+            }
+            set {
+                _from = newValue
+                fromId = newValue.id
+            }
+        }
+
+        private var _to: Node?
+        var to: Node {
+            get {
+                if let _to { return _to }
+                guard let graph else { fatalError("No graph, no to") }
+                _to = graph.nodeStorage[toId]
+                return _to!
+            }
+            set {
+                _to = newValue
+                toId = newValue.id
+            }
+        }
 
         public required init() {}
 

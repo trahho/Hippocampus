@@ -20,10 +20,8 @@ class Structure: PersistentData<Structure.Storage> {
         let roles: [Role] = [.global, .drawing, .text, .topic, .note]
         roles.forEach {
             add($0, timestamp: Date.distantPast)
-            $0.isStatic = true
         }
-        assert(Role.global.graph != nil)
-        let x = try! CyclicEncoder().flatten(self)
+        
         return self
     }
 }

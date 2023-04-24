@@ -19,8 +19,9 @@ extension SidebarView {
                 Image(systemName: "doc.text.magnifyingglass")
                 QueryNameView(query: query)
             }
-            .padding([.leading], 0)
-            .padding([.top, .bottom], nil)
+            .padding()
+//            .padding([.leading], 0)
+//            .padding([.top, .bottom], nil)
             .frame(maxWidth: .infinity, alignment: .leading)
             .onTapGesture {
                 navigation.query = query

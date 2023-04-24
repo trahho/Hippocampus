@@ -20,8 +20,38 @@ open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable, 
 
     // MARK: - Data
 
+//    @Serialized private var storage: [Item.ID: Item] = [:]
     @Serialized private(set) var nodeStorage: [Item.ID: Node] = [:]
     @Serialized private(set) var edgeStorage: [Item.ID: Edge] = [:]
+
+////    @Serialized
+//    private(set) var edgeStorage: [Item.ID: Edge] {
+//        get {
+//            Dictionary(uniqueKeysWithValues: storage.values.compactMap { $0 as? Edge }.map { ($0.id, $0) })
+//        }
+//        set {
+//            storage.merge(newValue) { $1 }
+//        }
+//    }
+//
+//    private(set) var nodeStorage: [Item.ID: Node]  {
+//        get {
+//            Dictionary(uniqueKeysWithValues: storage.values.compactMap { $0 as? Node }.map { ($0.id, $0) })
+//        }
+//        set {
+//            storage.merge(newValue) { $1 }
+//        }
+//    }
+
+//    @Serialized
+//    private(set) var nodeStorage: [Item.ID: Node] = [:] {
+//        didSet {
+//            Set(nodeStorage.keys).subtracting(Set(storage.keys))
+//                .forEach { storage[$0] = edgeStorage[$0]! }
+//            Set(storage.keys).subtracting(Set(nodeStorage.keys))
+//                .forEach { storage.removeValue(forKey: $0) }
+//        }
+//    }
 
     var nodes: Set<Node> { Set<Node>(nodeStorage.values.filter(\.isActive)) }
     var edges: Set<Edge> { Set<Edge>(edgeStorage.values.filter(\.isActive)) }
@@ -81,16 +111,16 @@ open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable, 
                 node.adopt(timestamp: nil)
             }
 
-        let duplicateStorage = Dictionary(grouping: edgeStorage.values) { $0.from.id.uuidString + "-" + $0.to.id.uuidString }.values.filter { $0.count > 1 }
-        for duplicates in duplicateStorage {
-            let oldest = duplicates.min { $0.added! < $1.added! }!
-            for other in duplicates.filter({ $0 != oldest }) {
-                other.disconnect()
-                edgeStorage.removeValue(forKey: other.id)
-                other.id = oldest.id
-                oldest.merge(other: other)
-            }
-        }
+//        let duplicateStorage = Dictionary(grouping: edgeStorage.values) { $0.from.id.uuidString + "-" + $0.to.id.uuidString }.values.filter { $0.count > 1 }
+//        for duplicates in duplicateStorage {
+//            let oldest = duplicates.min { $0.added! < $1.added! }!
+//            for other in duplicates.filter({ $0 != oldest }) {
+//                other.disconnect()
+//                edgeStorage.removeValue(forKey: other.id)
+//                other.id = oldest.id
+//                oldest.merge(other: other)
+//            }
+//        }
     }
 
     func purge(timestamp _: Date = Date()) {}

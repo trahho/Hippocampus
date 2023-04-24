@@ -26,12 +26,14 @@ extension Structure.Role {
         static let noteHeadline = "B945443A-32D6-4FE7-A63F-65436CAAA3CA"
     }
 
-    static let global = Role(Keys.global, "_Global") {
+    static let global = Role(Keys.global, "_Global")
+    {
         Aspect(Keys.globalName, "/Name", .text)
         Aspect(Keys.globalCreated, "/Created", .date)
-    } representations: {
-        Representation("_Title", .aspect(Keys.globalName, form: Form.normal))
     }
+//representations: {
+//        Representation("_Title", .aspect(Keys.globalName, form: Form.normal))
+//    }
 
     static let drawing = Role(Keys.drawing, "_Drawing", addToMenu: true) {
         Aspect(Keys.drawingDrawing, "/Drawing", .drawing)

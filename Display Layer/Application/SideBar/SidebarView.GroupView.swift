@@ -38,7 +38,8 @@ extension SidebarView {
                     GroupIconView(group: group)
                     GroupNameView(group: group)
                 }
-                .padding([.leading], 0)
+                .padding()
+//                .padding([.leading], 0)
                 .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                     Button {
                         print("Edit Group")

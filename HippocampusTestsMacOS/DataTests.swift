@@ -65,6 +65,60 @@ final class DataTests: XCTestCase {
         
         XCTAssert(edges == document.presentation.edges.count + 1)
     }
+    
+    func testSerialization () throws {
+        let store = Information()
+        let node1 = Information.Node()
+        let node2 = Information.Node()
+        let edge = Information.Edge(from: node1, to: node2)
+        store.add(edge)
+        
+        let data = try? CyclicEncoder().flatten(store)
+        XCTAssertNotNil(data)
+    }
+    
+    func testSerializationPresentation () throws {
+        let store = Presentation()
+        let node1 = Presentation.Group()
+        let node2 = Presentation.Group()
+        node1.subGroups.insert(node2)
+        store.add(node1)
+        XCTAssert(store.nodeStorage.count == 2)
+        XCTAssert(store.edgeStorage.count == 1)
+        XCTAssert(node1.subGroups.contains(node2))
+        let data = try? CyclicEncoder().flatten(store)
+        XCTAssertNotNil(data)
+    }
+    
+    func testSerializationStructure () throws {
+        let store = Structure()
+        let node1 = Structure.Role()
+        let node2 = Structure.Aspect()
+        node2.role = node1
+        store.add(node1)
+        XCTAssert(store.nodeStorage.count == 2)
+        XCTAssert(store.edgeStorage.count == 1)
+        let data = try? CyclicEncoder().flatten(store)
+        XCTAssertNotNil(data)
+    }
+    
+    func testSerializationStructure2 () throws {
+        let store = Structure()
+        let node1 = Structure.Role()
+        let node2 = Structure.Aspect()
+        let node3 = Structure.Aspect()
+
+//        node2.role = node1
+//        node3.role = node1
+        let edge1 = Structure.Edge(from: node2, to: node1)
+        let edge2 = Structure.Edge(from: node3, to: node1)
+        
+        store.add(node1)
+        XCTAssert(store.nodeStorage.count == 3)
+        XCTAssert(store.edgeStorage.count == 2)
+        let data = try! CyclicEncoder().flatten(store)
+        XCTAssertNotNil(data)
+    }
 
 //    func testCombinedData() throws {
 ////        let value1 = 42
