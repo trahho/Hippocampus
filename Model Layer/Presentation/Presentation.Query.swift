@@ -10,8 +10,12 @@ import Foundation
 extension Presentation {
     struct ItemDetail: Hashable {
         let id = UUID()
-        let Item: Information.Item
-        let Roles: [Structure.Role]
+        let item: Information.Item
+        let roles: [Structure.Role]
+
+        var name: String {
+            item[String.self, Structure.Role.global.name] ?? ""
+        }
 
         func hash(into hasher: inout Hasher) {
             hasher.combine(id)

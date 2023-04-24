@@ -12,6 +12,7 @@ extension Presentation.Query {
     typealias Predicate = Presentation.Predicate
     typealias Role = Structure.Role
     typealias Form = Structure.Aspect.Presentation.Form
+    typealias RoleRepresentation = Presentation.RoleRepresentation
 
     //        typealias Predicate = Presentation.Predicate
     fileprivate enum Keys {

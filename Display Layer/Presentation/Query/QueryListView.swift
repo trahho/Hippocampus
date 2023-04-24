@@ -55,7 +55,7 @@ struct QueryListView: View {
 //            listItem.view(for: item.item, by: document.structure, editable: false)
                 .padding(2)
                 .onTapGesture {
-                    query.items.append(Presentation.ItemDetail(Item: item.item, Roles: item.roles.asArray))
+                    query.items.append(Presentation.ItemDetail(item: item.item, roles: item.roles.asArray))
                 }
 //                .frame(maxWidth: .infinity)
 //                .background(.blue)

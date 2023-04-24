@@ -48,6 +48,7 @@ extension PersistentData.Object {
                 let key = storage.getKey(from: instance)
                 let edges = storage.direction == .reference ? instance.outgoingEdges : instance.incomingEdges
                 return edges
+                    .filter { !$0.isDeleted }
                     .filter { $0[role: key] }
                     .map { $0.getOther(for: instance) as! Target }
                     .asSet
@@ -62,6 +63,7 @@ extension PersistentData.Object {
 
                 let timestamp = Date()
                 //            let edges = storage.direction == .reference ? instance.outgoingEdges : instance.incomingEdges
+                instance.objectWillChange.send()
                 removed
                     .flatMap { item in
                         instance.edges.filter { edge in

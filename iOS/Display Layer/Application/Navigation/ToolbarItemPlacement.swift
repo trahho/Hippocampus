@@ -8,5 +8,5 @@
 import Foundation
 
 enum ToolbarItemPlacement {
-    case leading, center, trailing
+    case leading, center, trailing, navigation
 }

@@ -29,6 +29,7 @@ extension PersistentGraph {
         public func isDeleted(_ value: Bool, timestamp: Date? = nil) {
             guard canChange else { return }
             objectWillChange.send()
+            graph?.objectWillChange.send()
             deletedValue[type: Bool.self, at: writingTimestamp(timestamp)] = value
             graph?.publishDidChange()
         }

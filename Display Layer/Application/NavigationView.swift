@@ -12,10 +12,14 @@ struct NavigationView: View {
     @EnvironmentObject var navigation: Navigation
 
     var body: some View {
+        #if os(iOS)
         NavigationSplitView {
-            SidebarView()
+            SidebarView(presentation: document.presentation)
         } content: {
             ContentView()
         }
+        #else
+        EmptyView()
+        #endif
     }
 }

@@ -18,6 +18,7 @@ public protocol PersistentContent: DidChangeNotifier {
 
 public extension PersistentContent where Self: Serializable {
     func encode() -> Data? {
+        let x = try! CyclicEncoder().flatten(self)
         guard let flattened = try? CyclicEncoder().flatten(self),
               let data = try? JSONEncoder().encode(flattened),
               let compressedData = try? (data as NSData).compressed(using: .lzfse) as Data

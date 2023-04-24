@@ -27,7 +27,13 @@ extension Presentation {
         @Relations(reverse: "groups", direction: .reference) var queries: Set<Query>
 
         var isTop: Bool { superGroups.isEmpty }
-        
+        var allSuperGroups: Set<Group> {
+            let moreSuperGroups = superGroups.reduce(Set<Group>()) { partialResult, group in
+                partialResult.union(group.allSuperGroups)
+            }
+            return superGroups.union(moreSuperGroups)
+        }
+
         @ViewBuilder
         var textView: some View {
             if isStatic {

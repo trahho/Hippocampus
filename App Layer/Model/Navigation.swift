@@ -16,7 +16,7 @@ class Navigation: ObservableObject {
 
     func showItem(item: Information.Item, roles: [Structure.Role]) {
 //        withAnimation {
-        query?.items.append(Presentation.ItemDetail(Item: item, Roles: roles))
+        query?.items.append(Presentation.ItemDetail(item: item, roles: roles))
 //        }
     }
 

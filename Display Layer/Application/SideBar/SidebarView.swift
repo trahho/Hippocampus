@@ -10,37 +10,61 @@ import SwiftUI
 
 struct SidebarView: View {
     @EnvironmentObject var navigation: Navigation
-    @EnvironmentObject var document: Document
-    
+    @ObservedObject var presentation: Presentation
+    @State var editItem: Presentation.Object?
+
     var groups: [Presentation.Group] {
-        document.presentation.groups
+        presentation.groups
             .filter { $0.isTop }
             .sorted { $0.name < $1.name }
     }
-    
+
     var queries: [Presentation.Query] {
-        document.presentation.queries
+        presentation.queries
             .filter { $0.isTop }
             .sorted { $0.name < $1.name }
     }
-    
+
     @ViewBuilder var content: some View {
         ForEach(groups) { group in
-            GroupView(group: group)
+            GroupView(group: group, editItem: $editItem)
         }
         ForEach(queries) { query in
-            QueryView(query: query)
+            QueryView(query: query, editItem: $editItem)
         }
     }
-    
+
     var body: some View {
-        List {
-            content
-                .listRowInsets(EdgeInsets())
-                .listRowSeparator(.hidden)
+        VStack(alignment: .leading) {
+            HStack {
+                Text("_allGroups")
+                    .font(.myTitle)
+//                    .frame(maxWidth: .infinity, alignment: .center)
+                Button {
+                    Presentation.Query.notes.groups = []
+                } label: {
+                    Image(systemName: "ellipsis.circle")
+                }
+            }
+            List {
+                content
+                    .listRowInsets(EdgeInsets())
+                    .listRowSeparator(.hidden)
+            }
+            .listStyle(.plain)
+            .sheet(item: $editItem) { item in
+                EditView(groupItem: item)
+            }
         }
-        .listStyle(.plain)
     }
-    
-   
+}
+
+struct SidebarView_Previews: PreviewProvider {
+    static let document = HippocampusApp.previewDocument()
+    static let navigation = Navigation()
+    static var previews: some View {
+        SidebarView(presentation: document.presentation)
+            .environmentObject(document)
+            .environmentObject(navigation)
+    }
 }

@@ -23,6 +23,7 @@ class Structure: PersistentData<Structure.Storage> {
             $0.isStatic = true
         }
         assert(Role.global.graph != nil)
+        let x = try! CyclicEncoder().flatten(self)
         return self
     }
 }

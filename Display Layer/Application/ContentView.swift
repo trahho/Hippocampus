@@ -9,7 +9,13 @@ import Foundation
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var navigation: Navigation
+    
     var body: some View {
-        Text("Hallo")
+        if let query = navigation.query {
+            QueryView(query: query)
+        } else {
+            EmptyView()
+        }
     }
 }

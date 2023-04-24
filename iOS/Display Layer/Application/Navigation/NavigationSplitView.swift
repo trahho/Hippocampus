@@ -25,8 +25,12 @@ struct NavigationSplitView<SideBar: View, Content: View>: View {
     var header: some View {
         ZStack(alignment: .center) {
             HStack(alignment: .center) {
-                let items = toolbarItems.filter { $0.placement == .leading }
-                ForEach(items) { item in
+                let leadingItems = toolbarItems.filter { $0.placement == .leading }
+                let navigationItems = toolbarItems.filter { $0.placement == .navigation }
+                ForEach(leadingItems) { item in
+                    item.view
+                }
+                ForEach(navigationItems) { item in
                     item.view
                 }
 //                Text("\(items.count)")
@@ -57,10 +61,47 @@ struct NavigationSplitView<SideBar: View, Content: View>: View {
 
     var body: some View {
         ZStack(alignment: .topLeading) {
-            content()
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                .padding(EdgeInsets(top: 64, leading: 10, bottom: 10, trailing: 10))
-                .background(showSidebar ? Color.secondaryBackground : Color.background)
+            ZStack(alignment: .topLeading) {
+                content()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                    .padding(EdgeInsets(top: 64, leading: 0, bottom: 0, trailing: 0))
+//                    .background(showSidebar ? Color.secondaryBackground : Color.background)
+//                    .background(Color.background)
+
+                header
+                    .padding(EdgeInsets(top: 12, leading: 50, bottom: 0, trailing: 20))
+//                    .toolbarItem(placement: .leading) {
+//                        Button {
+//                            withAnimation {
+//                                showSidebar.toggle()
+//                            }
+//                        } label: {
+//                            Image(systemName: "sidebar.left")
+//                                .font(.system(size: 20))
+//                        }
+//                    }
+
+                Rectangle()
+                    .fill(Color.secondaryBackground.opacity(showSidebar ? 0.6 : 0))
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .onTapGesture {
+                        withAnimation {
+                            showSidebar = false
+                        }
+                    }
+            }
+//                .overlay {
+//                    if showSidebar {
+//                        Rectangle()
+//                            .fill(.red)
+//                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+//                            .onTapGesture {
+//                                withAnimation {
+//                                    showSidebar.toggle()
+//                                }
+//                            }
+//                    }
+//                }
 
             sidebar()
                 .padding(EdgeInsets(top: 64, leading: 20, bottom: 10, trailing: 20))
@@ -70,18 +111,15 @@ struct NavigationSplitView<SideBar: View, Content: View>: View {
                 .offset(x: showSidebar ? 0.0 : -sidebarWidth)
                 .transition(.move(edge: .leading))
 
-            header
-                .padding(EdgeInsets(top: 12, leading: 20, bottom: 0, trailing: 20))
-                .toolbarItem(placement: .leading) {
-                    Button {
-                        withAnimation {
-                            showSidebar.toggle()
-                        }
-                    } label: {
-                        Image(systemName: "sidebar.left")
-                            .font(.system(size: 20))
-                    }
+            Button {
+                withAnimation {
+                    showSidebar.toggle()
                 }
+            } label: {
+                Image(systemName: "sidebar.left")
+                    .font(.system(size: 20))
+            }
+            .padding(EdgeInsets(top: 12, leading: 20, bottom: 0, trailing: 0))
         }
         .onPreferenceChange(ToolBarItemPreferenceKey.self) { preferences in
             DispatchQueue.main.async {

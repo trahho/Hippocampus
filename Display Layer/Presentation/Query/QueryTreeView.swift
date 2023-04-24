@@ -70,7 +70,7 @@ struct QueryTreeView: View {
 //                .background(.blue)
 //                .tapToSelectItem(item)
                 .onTapGesture {
-                    query.items.append(Presentation.ItemDetail(Item: item.item, Roles: item.roles.asArray))
+                    query.items.append(Presentation.ItemDetail(item: item.item, roles: item.roles.asArray))
                 }
         }
     }

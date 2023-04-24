@@ -80,6 +80,17 @@ open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable, 
                 node.graph = self
                 node.adopt(timestamp: nil)
             }
+
+        let duplicateStorage = Dictionary(grouping: edgeStorage.values) { $0.from.id.uuidString + "-" + $0.to.id.uuidString }.values.filter { $0.count > 1 }
+        for duplicates in duplicateStorage {
+            let oldest = duplicates.min { $0.added! < $1.added! }!
+            for other in duplicates.filter({ $0 != oldest }) {
+                other.disconnect()
+                edgeStorage.removeValue(forKey: other.id)
+                other.id = oldest.id
+                oldest.merge(other: other)
+            }
+        }
     }
 
     func purge(timestamp _: Date = Date()) {}

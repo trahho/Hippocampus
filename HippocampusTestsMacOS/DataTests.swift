@@ -33,22 +33,54 @@ final class DataTests: XCTestCase {
         x.x.insert(0)
         XCTAssert(x.x.contains(0))
     }
+    
+    func testRelation() throws {
+        typealias Group = Presentation.Group
+        let document = HippocampusApp.previewDocument()
+        let group1 = Group()
+        let group2 = Group()
+        print("Add")
+        document.presentation.add(group1)
+        document.presentation.add(group2)
+        group1.subGroups.insert(group2)
+        
+        let edges = document.presentation.edges.count
+        
+        XCTAssert(group2.superGroups.count == 1)
+        XCTAssert(group1.subGroups.count == 1)
+        XCTAssert(group2.superGroups.contains(group1))
+        XCTAssert(group1.subGroups.contains(group2))
+        XCTAssert(!group2.isTop)
+        XCTAssert(group1.isTop)
 
-    func testCombinedData() throws {
-//        let value1 = 42
-//        let value2 = "Gerhart-Hauptmann-Straße"
-//        var data = Data()
-//        withUnsafeBytes(of: value1) { bytes in
-//            data.append(contentsOf: bytes)
-//        }
-//        let data1  = value1.description.data(using: .utf8)
-//        let length = data.count
-//        let data2 = value2.data(using: .utf8)
-//        data.append(contentsOf: data1)
-//        data.append(contentsOf: data2)
-//
-//        let result1 = data.
+        
+        print("Remove")
+        group1.subGroups.remove(group2)
+        XCTAssert(group2.superGroups.count == 0)
+        XCTAssert(group1.subGroups.count == 0)
+        XCTAssert(!group2.superGroups.contains(group1))
+        XCTAssert(!group1.subGroups.contains(group2))
+        XCTAssert(group2.isTop)
+        XCTAssert(group1.isTop)
+        
+        XCTAssert(edges == document.presentation.edges.count + 1)
     }
+
+//    func testCombinedData() throws {
+////        let value1 = 42
+////        let value2 = "Gerhart-Hauptmann-Straße"
+////        var data = Data()
+////        withUnsafeBytes(of: value1) { bytes in
+////            data.append(contentsOf: bytes)
+////        }
+////        let data1  = value1.description.data(using: .utf8)
+////        let length = data.count
+////        let data2 = value2.data(using: .utf8)
+////        data.append(contentsOf: data1)
+////        data.append(contentsOf: data2)
+////
+////        let result1 = data.
+//    }
 
 //    func testPerformanceExample() throws {
 //        // This is an example of a performance test case.

@@ -7,8 +7,8 @@
 
 import Foundation
 
-extension Presentation.Query {
-    class RoleRepresentation: Presentation.Object {
+extension Presentation {
+    class RoleRepresentation: Object {
         @Persistent private var roleId: Structure.Role.ID
         @Persistent var representation: String
 

@@ -11,6 +11,7 @@ import SwiftUI
 extension SidebarView {
     struct GroupView: View {
         @ObservedObject var group: Presentation.Group
+        @Binding var editItem: Presentation.Object?
         
         var groups: [Presentation.Group] {
             group.subGroups.sorted {
@@ -27,17 +28,25 @@ extension SidebarView {
         var body: some View {
             DisclosureGroup {
                 ForEach(groups) { group in
-                    GroupView(group: group)
+                    GroupView(group: group, editItem: $editItem)
                 }
                 ForEach(queries) { query in
-                    QueryView(query: query)
+                    QueryView(query: query, editItem: $editItem)
                 }
             } label: {
                 HStack {
-                    Image(systemName: group.subGroups.isEmpty ? "tray" : "tray.2")
-                    group.textView
+                    GroupIconView(group: group)
+                    GroupNameView(group: group)
                 }
                 .padding([.leading], 0)
+                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                    Button {
+                        print("Edit Group")
+                        editItem = group
+                    } label: {
+                        Label("_editGroups", systemImage: "tray.and.arrow.down")
+                    }
+                }
             }
         }
     }

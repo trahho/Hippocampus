@@ -21,6 +21,13 @@ struct HippocampusApp: App {
         let result = containerURL.appendingPathComponent("\(name)\(HippocampusApp.memoryExtension)")
         return result
     }
+    
+    static func previewDocument() -> Document {
+        let containerURL = URL.virtual
+        let url = containerURL.appendingPathComponent("Preview\(HippocampusApp.memoryExtension)")
+        let document = Document(url: url)
+        return document
+    }
 
     static let locationService = LocationService()
 

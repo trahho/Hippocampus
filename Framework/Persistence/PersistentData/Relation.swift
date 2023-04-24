@@ -42,7 +42,7 @@ extension PersistentData.Object {
         }
 
         public static subscript<Enclosing: PersistentData.Object>(_enclosingInstance instance: Enclosing,
-                                                                  wrapped _: ReferenceWritableKeyPath<Enclosing, Target?>,
+                                                                  wrapped wrappedKeyPath: ReferenceWritableKeyPath<Enclosing, Target?>,
                                                                   storage storageKeyPath: ReferenceWritableKeyPath<Enclosing, Relation>)
             -> Target?
         {
@@ -51,15 +51,19 @@ extension PersistentData.Object {
                 let key = storage.getKey(from: instance)
                 let edges = storage.direction == .reference ? instance.outgoingEdges : instance.incomingEdges
                 return edges
+                    .filter { !$0.isDeleted }
                     .first(where: { $0[role: key] })?
                     .getOther(for: instance) as? Target
             }
             set {
+                guard  newValue != Relation[_enclosingInstance: instance, wrapped: wrappedKeyPath, storage: storageKeyPath] else { return }
                 let storage = instance[keyPath: storageKeyPath]
                 let key = storage.getKey(from: instance)
 
+                instance.objectWillChange.send()
                 let timestamp = Date()
                 instance.edges
+                    .filter { !$0.isDeleted }
                     .filter { $0[role: key] }
                     .forEach { $0.isDeleted(true, timestamp: timestamp) }
 

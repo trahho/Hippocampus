@@ -23,12 +23,12 @@ extension Presentation.Predicate {
     }
 }
 
-extension Presentation.Query.RoleRepresentation {
+extension Presentation.RoleRepresentation {
     @resultBuilder
     enum Builder {
-        static func buildBlock() -> [Presentation.Query.RoleRepresentation] { [] }
+        static func buildBlock() -> [Presentation.RoleRepresentation] { [] }
 
-        static func buildBlock(_ predicates: Presentation.Query.RoleRepresentation...) -> [Presentation.Query.RoleRepresentation] {
+        static func buildBlock(_ predicates: Presentation.RoleRepresentation...) -> [Presentation.RoleRepresentation] {
             predicates
         }
     }
@@ -38,7 +38,7 @@ extension Presentation.Query {
     convenience init(_ id: String,
                      _ name: String,
                      @Presentation.Predicate.Builder predicates: () -> [Presentation.Predicate] = { [] },
-                     @Presentation.Query.RoleRepresentation.Builder representations: () -> [Presentation.Query.RoleRepresentation] = { [] })
+                     @Presentation.RoleRepresentation.Builder representations: () -> [Presentation.RoleRepresentation] = { [] })
     {
         self.init()
         self.isStatic = true
