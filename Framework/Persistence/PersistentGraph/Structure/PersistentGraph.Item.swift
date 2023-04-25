@@ -106,7 +106,7 @@ extension PersistentGraph {
 
             rolesValue = rolesValue.merged(with: other.rolesValue)
             deletedValue = deletedValue.merged(with: other.deletedValue)
-            added = other.added
+            if let added, let otherAdded = other.added, added < otherAdded { self.added = other.added }
 
             Set(values.keys).intersection(Set(other.values.keys))
                 .forEach { key in

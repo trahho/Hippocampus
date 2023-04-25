@@ -24,7 +24,7 @@ open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable, 
     @Serialized private(set) var nodeStorage: [Item.ID: Node] = [:]
     @Serialized private(set) var edgeStorage: [Item.ID: Edge] = [:]
 
-////    @Serialized
+    ////    @Serialized
 //    private(set) var edgeStorage: [Item.ID: Edge] {
 //        get {
 //            Dictionary(uniqueKeysWithValues: storage.values.compactMap { $0 as? Edge }.map { ($0.id, $0) })
@@ -98,9 +98,14 @@ open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable, 
         Set(other.edgeStorage.keys).subtracting(Set(edgeStorage.keys))
             .forEach { key in
                 let edge = other.edgeStorage[key]!
-                edgeStorage[key] = edge
-                edge.graph = self
-                edge.adopt(timestamp: nil)
+                if let sameEdge = edgeStorage.values.filter({ $0.fromId == edge.fromId && $0.toId == edge.toId }).first {
+                    edge.id = sameEdge.id
+                    edgeStorage[sameEdge.id]?.merge(other: edge)
+                } else {
+                    edgeStorage[key] = edge
+                    edge.graph = self
+                    edge.adopt(timestamp: nil)
+                }
             }
 
         Set(other.nodeStorage.keys).subtracting(Set(nodeStorage.keys))
@@ -135,19 +140,25 @@ open class PersistentGraph<Role: CodableIdentifiable, Key: CodableIdentifiable, 
 
     // MARK: - Function
 
-    func add(_ edge: Edge, timestamp: Date? = nil) {
-        guard edgeStorage[edge.id] == nil else { return }
+    @discardableResult func add(_ edge: Edge, timestamp: Date? = nil) -> Edge {
+        guard edgeStorage[edge.id] == nil else { return edgeStorage[edge.id]! }
         objectWillChange.send()
 
         let timestamp = timestamp ?? Date()
 
-        if edge.added == nil {
-            edge.added = timestamp
+        if let sameEdge = edgeStorage.values.filter({ $0.fromId == edge.fromId && $0.toId == edge.toId }).first {
+            edge.id = sameEdge.id
+            edgeStorage[sameEdge.id]?.merge(other: edge)
+        } else {
+            if edge.added == nil {
+                edge.added = timestamp
+            }
+            edge.graph = self
+            edgeStorage[edge.id] = edge
+            edge.adopt(timestamp: timestamp)
         }
-        edge.graph = self
-        edgeStorage[edge.id] = edge
-        edge.adopt(timestamp: timestamp)
         publishDidChange()
+        return edgeStorage[edge.id]!
     }
 
     func add(_ node: Node, timestamp: Date? = nil) {

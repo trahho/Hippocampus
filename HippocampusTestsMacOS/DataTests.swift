@@ -53,7 +53,6 @@ final class DataTests: XCTestCase {
         XCTAssert(!group2.isTop)
         XCTAssert(group1.isTop)
 
-        
         print("Remove")
         group1.subGroups.remove(group2)
         XCTAssert(group2.superGroups.count == 0)
@@ -66,7 +65,7 @@ final class DataTests: XCTestCase {
         XCTAssert(edges == document.presentation.edges.count + 1)
     }
     
-    func testSerialization () throws {
+    func testSerialization() throws {
         let store = Information()
         let node1 = Information.Node()
         let node2 = Information.Node()
@@ -77,7 +76,31 @@ final class DataTests: XCTestCase {
         XCTAssertNotNil(data)
     }
     
-    func testSerializationPresentation () throws {
+    func testSerializationMergeEdges() throws {
+        let store = Information()
+        let node1 = Information.Node()
+        let node2 = Information.Node()
+        let edge = Information.Edge(from: node1, to: node2)
+        let role1 = UUID()
+        let role2 = UUID()
+        edge[role: role1,timestamp: Date()] = true
+        store.add(edge)
+        
+        XCTAssert(store.nodeStorage.count == 2)
+        XCTAssert(store.edgeStorage.count == 1)
+        
+        let edge2 = Information.Edge(from: node1, to: node2)
+        edge2[role: role2,timestamp: Date()] = true
+        let result = store.add(edge2)
+        
+        XCTAssert(store.nodeStorage.count == 2)
+        XCTAssert(store.edgeStorage.count == 1)
+        
+        XCTAssert(result[role: role1] == true)
+        XCTAssert(result[role: role2] == true)
+    }
+    
+    func testSerializationPresentation() throws {
         let store = Presentation()
         let node1 = Presentation.Group()
         let node2 = Presentation.Group()
@@ -90,7 +113,7 @@ final class DataTests: XCTestCase {
         XCTAssertNotNil(data)
     }
     
-    func testSerializationStructure () throws {
+    func testSerializationStructure() throws {
         let store = Structure()
         let node1 = Structure.Role()
         let node2 = Structure.Aspect()
@@ -102,7 +125,7 @@ final class DataTests: XCTestCase {
         XCTAssertNotNil(data)
     }
     
-    func testSerializationStructure2 () throws {
+    func testSerializationStructure2() throws {
         let store = Structure()
         let node1 = Structure.Role()
         let node2 = Structure.Aspect()
@@ -119,21 +142,21 @@ final class DataTests: XCTestCase {
         let data = try! CyclicEncoder().flatten(store)
         XCTAssertNotNil(data)
     }
-
+    
 //    func testCombinedData() throws {
-////        let value1 = 42
-////        let value2 = "Gerhart-Hauptmann-Straße"
-////        var data = Data()
-////        withUnsafeBytes(of: value1) { bytes in
-////            data.append(contentsOf: bytes)
-////        }
-////        let data1  = value1.description.data(using: .utf8)
-////        let length = data.count
-////        let data2 = value2.data(using: .utf8)
-////        data.append(contentsOf: data1)
-////        data.append(contentsOf: data2)
-////
-////        let result1 = data.
+    ////        let value1 = 42
+    ////        let value2 = "Gerhart-Hauptmann-Straße"
+    ////        var data = Data()
+    ////        withUnsafeBytes(of: value1) { bytes in
+    ////            data.append(contentsOf: bytes)
+    ////        }
+    ////        let data1  = value1.description.data(using: .utf8)
+    ////        let length = data.count
+    ////        let data2 = value2.data(using: .utf8)
+    ////        data.append(contentsOf: data1)
+    ////        data.append(contentsOf: data2)
+    ////
+    ////        let result1 = data.
 //    }
 
 //    func testPerformanceExample() throws {
