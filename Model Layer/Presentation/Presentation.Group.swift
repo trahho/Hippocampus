@@ -22,9 +22,9 @@ extension Presentation {
         @Persistent var name: String
         @Serialized var isStatic = false
 
-        @Relations(reverse: "subGroups") var superGroups: Set<Group>
-        @Relations(reverse: "superGroups", direction: .referenced) var subGroups: Set<Group>
-        @Relations(reverse: "groups", direction: .reference) var queries: Set<Query>
+        @Relations var superGroups: Set<Group>
+        @Relations var subGroups: Set<Group>
+        @Relations var queries: Set<Query>
 
         var isTop: Bool { superGroups.isEmpty }
         var allSuperGroups: Set<Group> {

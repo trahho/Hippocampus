@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Presentation: PersistentData<Presentation.Storage> {
+class Presentation: PersistentModel<Presentation.Storage> {
     @Observed var structure: Structure
 
     func role(id: Structure.Role.ID) -> Structure.Role {
@@ -34,4 +34,14 @@ class Presentation: PersistentData<Presentation.Storage> {
         add(Group.builtIn, timestamp: Date.distantPast)
         return self
     }
+
+//    override func storageKeyPath<T>(_: T.Type) -> ReferenceWritableKeyPath<PersistentGraph<String, String, Storage>, [PersistentGraph<String, String, Storage>.Item.ID : PersistentGraph<String, String, Storage>.Item]>? where T : PersistentGraph<String, String, Storage>.Item {
+//        if let result = super.storageKeyPath(T.self) { return result }
+//        
+//        switch T.self {
+//        case is Group.Type: return \Presentation.groupStorage
+//        case is Query.Type: return \Presentation.queryStorage
+//        default: return nil
+//        }
+//    }
 }

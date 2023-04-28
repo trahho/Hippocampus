@@ -7,8 +7,8 @@
 
 import Foundation
 
-extension PersistentData {
-    @propertyWrapper final class Present<Target> where Target: PersistentData.Object {
+extension PersistentModel {
+    @propertyWrapper final class Present<Target> where Target: PersistentModel.Object {
         typealias TargetSet = Set<Target>
 
         @available(*, unavailable, message: "This property wrapper can only be applied to classes")
@@ -17,7 +17,7 @@ extension PersistentData {
             set { fatalError() }
         }
 
-        var condition: PersistentData.Condition
+        var condition: PersistentModel.Condition
 
         //    var include: KeyPath<PersistentData, Set<Value>>?
         //
@@ -25,11 +25,11 @@ extension PersistentData {
         //        self.include = include
         //    }
 
-        init(_ condition: PersistentData.Condition = .always(true)) {
+        init(_ condition: PersistentModel.Condition = .always(true)) {
             self.condition = condition
         }
 
-        public static subscript<Enclosing: PersistentData>(_enclosingInstance instance: Enclosing,
+        public static subscript<Enclosing: PersistentModel>(_enclosingInstance instance: Enclosing,
                                                            wrapped _: ReferenceWritableKeyPath<Enclosing, TargetSet>,
                                                            storage storageKeyPath: ReferenceWritableKeyPath<Enclosing, Present>) -> TargetSet
         {

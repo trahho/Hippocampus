@@ -16,10 +16,10 @@ extension Structure {
 
         @Persistent var roleDescription: String = ""
         @Relations var representations: Set<Representation>
-        @Relations(reverse: "role", direction: .referenced) var aspects: Set<Aspect>
-        @Relations(reverse: "subRoles") var superRoles: Set<Role>
-        @Relations(reverse: "superRoles", direction: .referenced) var subRoles: Set<Role>
-        @Relations(reverse: "role", direction: .referenced) var references: Set<Reference>
+        @Relations var aspects: Set<Aspect>
+        @Relations var superRoles: Set<Role>
+        @Relations var subRoles: Set<Role>
+        @Relations var references: Set<Reference>
 
         var allAspects: Set<Aspect> {
             subRoles.flatMap(\.allAspects).asSet.union(aspects)

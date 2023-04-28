@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension PersistentData.Object {
+extension PersistentModel.Object {
     func getKey<T: AnyObject>(for value: T) -> String {
         var mirror: Mirror? = Mirror(reflecting: self)
         repeat {

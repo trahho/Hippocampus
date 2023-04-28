@@ -77,3 +77,51 @@ import XCTest
 //        XCTAssert(result.collection.sources.contains(result))
 //    }
 // }
+
+final class SerialisationTests: XCTestCase {
+    class B: Codable {
+        var name: String
+        
+        init(name: String) {
+            self.name = name
+        }
+    }
+
+    class A: B {
+        var value: Int
+        
+        init(name: String, value: Int) {
+            self.value = value
+            super.init(name: name)
+        }
+        
+        private enum CodingKeys: String, CodingKey {
+            case value
+        }
+        
+        required init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            self.value = try container.decode(Int.self, forKey: .value)
+            try super.init(from: decoder)
+        }
+        
+        override func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(value, forKey: .value)
+            try super.encode(to: encoder)
+        }
+    }
+    
+    func testSubclasses() throws {
+        let objects: [B] = [B(name: "Object 1"), A(name: "Object 2", value: 42)]
+        let encoder = JSONEncoder()
+        let data = try encoder.encode(objects)
+        
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        let decodedObjects = try decoder.decode([B].self, from: data)
+        
+        XCTAssert(decodedObjects[0] is B)
+        XCTAssert(decodedObjects[1] is A)
+    }
+}

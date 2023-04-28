@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Structure: PersistentData<Structure.Storage> {
+class Structure: PersistentModel<Structure.Storage> {
     @Present var roles: Set<Role>
 
     var aspects: [Aspect.ID: Aspect] {

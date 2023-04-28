@@ -24,7 +24,7 @@ extension Presentation {
 
     class Query: Object {
         @Persistent var name: String
-        @Relations(reverse: "queries", direction: .referenced) var groups: Set<Group>
+        @Relations var groups: Set<Group>
 
         var isTop: Bool { groups.isEmpty }
 

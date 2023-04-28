@@ -44,7 +44,7 @@ public class PersistentContainer<Content: PersistentContent>: PersistentContaine
         set {
             objectWillChange.send()
             _content = newValue
-            if  _content != nil, let contentChange { contentChange() }
+            if _content != nil, let contentChange { contentChange() }
             registerChanges()
         }
     }
@@ -117,6 +117,27 @@ public class PersistentContainer<Content: PersistentContent>: PersistentContaine
         }
     }
 
+    fileprivate func updateContent(_ newContent: Content) where Content: MergeableContent {
+        do {
+            isMerging = true
+            try content.merge(other: newContent)
+            isMerging = false
+        } catch {
+            content = newContent
+            isMerging = false
+        }
+    }
+
+    fileprivate func updateContent(_ newContent: Content) {
+        content = newContent
+    }
+
+    fileprivate func restoreContent(_ content: Content) where Content: RestorableContent {
+        content.restore(content: nil)
+    }
+
+    fileprivate func restoreContent(_ content: Content) {}
+
     func load() {
         guard !url.isVirtual else { return }
         guard
@@ -135,15 +156,9 @@ public class PersistentContainer<Content: PersistentContent>: PersistentContaine
             print("PersistentDataContainer<\(String(reflecting: Content.self))>: Load")
         #endif
 
-        newContent.restore()
-        do {
-            isMerging = true
-            try content.merge(other: newContent)
-            isMerging = false
-        } catch {
-            content = newContent
-            isMerging = false
-        }
+        restoreContent(newContent)
+        updateContent(newContent)
+
         currentTimestamp = modificationDate
         hasChanges = false
 
@@ -197,6 +212,7 @@ public class PersistentContainer<Content: PersistentContent>: PersistentContaine
         self.url = url
         self.commitOnChange = commitOnChange
         self.contentChange = configureContent
+        restoreContent(content)
         self.content = content
 
         load()

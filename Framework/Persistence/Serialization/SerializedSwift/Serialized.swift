@@ -106,7 +106,6 @@ public final class Serialized<T> {
         }
     }
 
-    // TODO: InverseRelation
     /// Defualt init for Serialized wrapper
     /// - Parameters:
     ///   - key: The JSON decoding key to be used. If `nil` (or not passed), the property name gets used for decoding

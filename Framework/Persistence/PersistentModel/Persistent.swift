@@ -7,8 +7,8 @@
 
 import Foundation
 
-extension PersistentData.Object {
-    @propertyWrapper final class Persistent<Value> where Value: PersistentData.PersistentValue {
+extension PersistentModel.Object {
+    @propertyWrapper final class Persistent<Value> where Value: PersistentModel.PersistentValue {
         @available(*, unavailable, message: "This property wrapper can only be applied to classes")
         public var wrappedValue: Value {
             get { fatalError() }
@@ -19,7 +19,7 @@ extension PersistentData.Object {
 
         private var _key: String?
 
-        internal func getKey(from instance: PersistentData.Object) -> String {
+        internal func getKey(from instance: PersistentModel.Object) -> String {
             if let _key { return _key }
 
             _key = instance.getKey(for: self)
@@ -36,7 +36,7 @@ extension PersistentData.Object {
             _key = key
         }
 
-        public static subscript<Enclosing: PersistentData.Object>(_enclosingInstance instance: Enclosing,
+        public static subscript<Enclosing: PersistentModel.Object>(_enclosingInstance instance: Enclosing,
                                                                   wrapped _: ReferenceWritableKeyPath<Enclosing, Value>,
                                                                   storage storageKeyPath: ReferenceWritableKeyPath<Enclosing, Persistent>) -> Value
         {

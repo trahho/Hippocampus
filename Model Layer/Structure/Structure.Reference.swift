@@ -9,9 +9,9 @@ import Foundation
 
 extension Structure {
     class Reference: Object {
-        @Relation(reverse: "references", direction: .reference) var role: Structure.Role?
-        @Relation(reverse: "referenced", direction: .reference) var referenced: Structure.Role?
-        @Relation(direction: .reference) var referenceRole: Structure.Role?
+        @Relation var role: Structure.Role?
+        @Relation var referenced: Structure.Role?
+        @Relation var referenceRole: Structure.Role?
 
         public required init() {}
     }
