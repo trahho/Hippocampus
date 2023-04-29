@@ -8,5 +8,9 @@
 import Foundation
 
 public protocol RestorableContent {
-    func restore(content: RestorableContent?)
+    func restore(container: ContentContainer?)
+}
+
+public protocol ContentContainer {
+    
 }

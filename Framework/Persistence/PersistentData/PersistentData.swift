@@ -9,7 +9,7 @@ import Foundation
 
 open class PersistentDynamicData: PersistentData {}
 
-open class PersistentData: PersistentContent, Serializable, RestorableContent, MergeableContent, ObservableObject {
+open class PersistentData: PersistentContent, Serializable, RestorableContent, MergeableContent, ContentContainer, ObservableObject, Reflectable {
     // MARK: - Types
 
     enum Fault: Error {
@@ -31,10 +31,10 @@ open class PersistentData: PersistentContent, Serializable, RestorableContent, M
         self
     }
 
-    public func restore(content: RestorableContent?) {
+    public func restore(container: ContentContainer?) {
         let mirror = mirror(for: RestorableContent.self)
         mirror.forEach {
-            $0.value.restore(content: self)
+            $0.value.restore(container: self)
         }
     }
 
@@ -43,48 +43,13 @@ open class PersistentData: PersistentContent, Serializable, RestorableContent, M
 
         for (own, other) in zip(mirror(for: MergeableContent.self), other.mirror(for: MergeableContent.self)) {
             try own.value.merge(other: other.value)
-            if let restorable = own.value as? RestorableContent { restorable.restore(content: self) }
+            if let restorable = own.value as? RestorableContent { restorable.restore(container: self) }
         }
     }
 
-//    func merge<T>(own: [T.ID: T], other: [T.ID: T]) where T: Item {
-//        Set(own.keys).intersection(Set(other.keys))
-//            .forEach { key in
-//                own[key]!.merge(other: other[key]!)
-//            }
-//
-//        Set(other.keys).subtracting(Set(own.keys))
-//            .forEach { key in
-//                let edge = other[key]!
-//                self[key] = edge
-//                edge.adopt(timestamp: nil)
-//            }
-//    }
 
-//    public func merge(other: PersistentData) throws {
-//        guard type(of: other) == type(of: self) else { throw Fault.wrongMatch }
-//        objectWillChange.send()
-//
-//        let selfMirror = mirror(for: Storage.self)
-//        let otherMirror = other.mirror(for: Storage.self)
-//    }
 
     // MARK: - Function
-
-    private func mirror<T>(for _: T.Type) -> [(label: String?, value: T)] {
-        var result: [(label: String?, value: T)] = []
-        var mirror: Mirror? = Mirror(reflecting: self)
-        repeat {
-            guard let children = mirror?.children else { break }
-            for child in children {
-                if let value = child.value as? T {
-                    result.append((label: child.label, value: value))
-                }
-            }
-            mirror = mirror?.superclassMirror
-        } while mirror != nil
-        return result
-    }
 
     public func add<T>(item: T) where T: Object {
         guard

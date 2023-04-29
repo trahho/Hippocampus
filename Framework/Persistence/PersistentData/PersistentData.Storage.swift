@@ -64,8 +64,8 @@ public extension PersistentData {
                 }
         }
 
-        public func restore(content: RestorableContent?) {
-            storage.values.forEach { $0.data = content as? PersistentData }
+        public func restore(container: ContentContainer?) {
+            storage.values.forEach { $0.data = container as? PersistentData }
         }
     }
 }
