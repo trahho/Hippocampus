@@ -5,6 +5,7 @@
 //  Created by Guido Kühn on 08.12.22.
 //
 
+import Foundation
 import XCTest
 
 // protocol Item {
@@ -122,6 +123,36 @@ final class SerialisationTests: XCTestCase {
         let decodedObjects = try decoder.decode([B].self, from: data)
         
         XCTAssert(decodedObjects[0] is B)
-        XCTAssert(decodedObjects[1] is A)
+        XCTAssert(decodedObjects[1] is B)
+    }
+    
+    func testUUIDStrings() throws {
+        let uuid = UUID()
+        let x1 = uuid.key
+        let x2 = uuid.key
+        
+        XCTAssertEqual(x1, x2)
+        
+        let data = try! JSONEncoder().encode(x1)
+        let x3 = try! JSONDecoder().decode(String.self, from: data)
+        
+        XCTAssertEqual(x1, x3)
+        print ("\(uuid) = '\(x1)'")
+    }
+    
+    func uuidString(uuid: UUID) -> String {
+        var chunks: [UInt16] = []
+        let uuidBytes = uuid.uuid
+        
+        chunks.append(UInt16(uuidBytes.0 << 8 + uuidBytes.1 ))
+        chunks.append(UInt16(uuidBytes.2 << 8 + uuidBytes.3 ))
+        chunks.append(UInt16(uuidBytes.4 << 8 + uuidBytes.5 ))
+        chunks.append(UInt16(uuidBytes.6 << 8 + uuidBytes.7 ))
+        chunks.append(UInt16(uuidBytes.8 << 8 + uuidBytes.9 ))
+        chunks.append(UInt16(uuidBytes.10 << 8 + uuidBytes.11))
+        chunks.append(UInt16(uuidBytes.12 << 8 + uuidBytes.13))
+        chunks.append(UInt16(uuidBytes.14 << 8 + uuidBytes.15))
+
+        return String(utf16CodeUnits: chunks, count: 8)
     }
 }

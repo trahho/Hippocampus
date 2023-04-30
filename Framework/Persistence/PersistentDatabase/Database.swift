@@ -7,6 +7,9 @@
 
 import Foundation
 
+/// Jetzt kommt eine database, die aus mehreren databases besteht. Das wird ein Document. Und einen eigenen Container DatabaseContainer
+/// Das restore verliert wieder den content, denn der Container weiß es selber. Er gibt der Database sich selbst, und erhält vom Document 
+
 open class Database<ValueStorage: TimedValueStorage>: PersistentData {
     public typealias PersistentValue = TimedValueStorage.PersistentValue
     public typealias Key = String

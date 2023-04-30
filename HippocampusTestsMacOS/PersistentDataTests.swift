@@ -40,7 +40,7 @@ final class PersistentDataTests: XCTestCase {
         XCTAssertNotNil(json)
 
         let newData = TestData.decode(persistentData: json!)
-        newData?.restore(content: nil)
+        newData?.restore()
         XCTAssertNotNil(newData)
 
         let newItem = newData![TestItem.self, item.id]

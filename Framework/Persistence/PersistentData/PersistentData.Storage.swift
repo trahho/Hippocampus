@@ -10,8 +10,13 @@ import Foundation
 protocol PersistenDataStorageWrapper {}
 
 public extension PersistentData {
+    class StorageWrapper: MergeableContent {
+        public func setContainer(container: PersistentData) {}
+        public func merge(other: MergeableContent) throws {}
+    }
+
     @propertyWrapper
-    final class Storage<T>: MergeableContent, RestorableContent where T: Object {
+    final class Storage<T>: StorageWrapper  where T: Object {
         typealias StorageDictionary = [T.ID: T]
 
         var key: String?
@@ -40,9 +45,8 @@ public extension PersistentData {
             storage[item.id] = item
         }
 
-        public func merge(other: MergeableContent) throws {
+        public override func merge(other: MergeableContent) throws {
             guard let other = other as? Self else { return }
-
             try mergeItems(other)
             importItems(other)
         }
@@ -64,8 +68,8 @@ public extension PersistentData {
                 }
         }
 
-        public func restore(container: ContentContainer?) {
-            storage.values.forEach { $0.data = container as? PersistentData }
+        public override func setContainer(container: PersistentData) {
+            storage.values.forEach { $0.data = container }
         }
     }
 }

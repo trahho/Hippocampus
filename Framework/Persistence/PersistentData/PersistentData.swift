@@ -17,9 +17,10 @@ open class PersistentData: PersistentContent, Serializable, RestorableContent, M
         case mergeFailed
     }
 
-    // MARK: - Data
+    // MARK: - Enclosing
 
     public var objectDidChange: ObjectDidChangePublisher = .init()
+    var document: DatabaseDocument!
 
     // MARK: - Initialisation
 
@@ -31,23 +32,21 @@ open class PersistentData: PersistentContent, Serializable, RestorableContent, M
         self
     }
 
-    public func restore(container: ContentContainer?) {
-        let mirror = mirror(for: RestorableContent.self)
+    public func restore() {
+        let mirror = mirror(for: StorageWrapper.self)
         mirror.forEach {
-            $0.value.restore(container: self)
+            $0.value.setContainer(container: self)
         }
     }
 
     public func merge(other: MergeableContent) throws {
         guard let other = other as? Self else { throw MergeableContentMergeError.wrongMatch }
 
-        for (own, other) in zip(mirror(for: MergeableContent.self), other.mirror(for: MergeableContent.self)) {
+        for (own, other) in zip(mirror(for: StorageWrapper.self), other.mirror(for: StorageWrapper.self)) {
             try own.value.merge(other: other.value)
-            if let restorable = own.value as? RestorableContent { restorable.restore(container: self) }
+            own.value.setContainer(container: self)
         }
     }
-
-
 
     // MARK: - Function
 
@@ -63,8 +62,12 @@ open class PersistentData: PersistentContent, Serializable, RestorableContent, M
         objectDidChange.send()
     }
 
-    public subscript<T>(_: T.Type, _ id: Object.ID) -> T? where T: Object {
+    public func getObject<T>(_ type: T.Type, _ id: T.ID) -> T? where T: Object {
         guard let storage = mirror(for: Storage<T>.self).first?.value else { return nil }
         return storage.get(id: id) as? T
+    }
+
+    public subscript<T>(_ type: T.Type, _ id: T.ID) -> T? where T: Object {
+        self.getObject(type, id) ?? document[type, id]
     }
 }

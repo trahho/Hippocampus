@@ -133,7 +133,7 @@ public class PersistentContainer<Content: PersistentContent>: PersistentContaine
     }
 
     fileprivate func restoreContent(_ content: Content) where Content: RestorableContent {
-        content.restore(container: nil)
+        content.restore()
     }
 
     fileprivate func restoreContent(_ content: Content) {}

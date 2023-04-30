@@ -14,32 +14,32 @@ extension Database.Object {
             get { fatalError() }
             set { fatalError() }
         }
-
+        
         private var defaultValue: (() -> Value)?
-
+        
         private var key: String?
-
+        
         internal func getKey(from instance: Database.Object) -> String {
             if let key { return key }
-
+            
             guard let mirror = instance.mirror(for: Self.self).first(where: { $0.value === self }) else { fatalError("wrapper not found") }
-            key =  String((mirror.label ?? "").dropFirst())
-
+            key = String((mirror.label ?? "").dropFirst())
+            
             return key!
         }
-
+        
         public init(wrappedValue: @autoclosure @escaping () -> Value, _ key: String? = nil) {
             self.key = key
             defaultValue = wrappedValue
         }
-
+        
         public init(_ key: String? = nil) {
             self.key = key
         }
-
+        
         public static subscript<Enclosing: Database.Object>(_enclosingInstance instance: Enclosing,
-                                                                   wrapped _: ReferenceWritableKeyPath<Enclosing, Value>,
-                                                                   storage storageKeyPath: ReferenceWritableKeyPath<Enclosing, Property>) -> Value
+                                                            wrapped _: ReferenceWritableKeyPath<Enclosing, Value>,
+                                                            storage storageKeyPath: ReferenceWritableKeyPath<Enclosing, Property>) -> Value
         {
             get {
                 let storage = instance[keyPath: storageKeyPath]
@@ -57,4 +57,5 @@ extension Database.Object {
             }
         }
     }
+    
 }
