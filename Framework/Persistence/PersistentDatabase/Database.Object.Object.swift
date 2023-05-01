@@ -22,7 +22,7 @@ extension Database.Object {
             if let _key { return _key }
 
             guard let mirror = instance.mirror(for: Self.self).first(where: { $0.value === self }) else { fatalError("wrapper not found") }
-            _key = String((mirror.label ?? "").dropFirst())
+            _key = String(mirror.label!.dropFirst())
 
             return _key!
         }
@@ -46,6 +46,9 @@ extension Database.Object {
                 guard value != newValue else { return }
                 instance[Value.ID.self, key] = newValue?.id
                 _value = newValue
+                if let database = instance.database, let newValue {
+                    database.add(item: newValue)
+                }
             }
         }
 

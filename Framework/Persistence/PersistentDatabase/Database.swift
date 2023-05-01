@@ -27,8 +27,8 @@ open class Database<ValueStorage: TimedValueStorage>: PersistentData {
     }
 
     public func add<T>(item: T, timestamp: Date? = nil) where T : Database.Object {
-        item.added = item.added ?? timestamp
         super.add(item: item)
+        item.added = item.added ?? timestamp
 //        item.adopt(timestamp: timestamp)
     }
     

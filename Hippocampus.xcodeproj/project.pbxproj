@@ -331,6 +331,18 @@
 		C5BE4F7429FEF70100B27B48 /* DatabaseDocument.Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE4F7329FEF70100B27B48 /* DatabaseDocument.Data.swift */; };
 		C5BE4F7529FEF70100B27B48 /* DatabaseDocument.Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE4F7329FEF70100B27B48 /* DatabaseDocument.Data.swift */; };
 		C5BE4F7629FEF70100B27B48 /* DatabaseDocument.Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE4F7329FEF70100B27B48 /* DatabaseDocument.Data.swift */; };
+		C5BE4F7829FF0D7B00B27B48 /* UUID+key.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE4F7729FF0D7B00B27B48 /* UUID+key.swift */; };
+		C5BE4F7929FF0D7B00B27B48 /* UUID+key.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE4F7729FF0D7B00B27B48 /* UUID+key.swift */; };
+		C5BE4F7A29FF0D7B00B27B48 /* UUID+key.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE4F7729FF0D7B00B27B48 /* UUID+key.swift */; };
+		C5BE4F7C29FF176100B27B48 /* DatabaseDocument.Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE4F7B29FF176100B27B48 /* DatabaseDocument.Cache.swift */; };
+		C5BE4F7D29FF176100B27B48 /* DatabaseDocument.Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE4F7B29FF176100B27B48 /* DatabaseDocument.Cache.swift */; };
+		C5BE4F7E29FF176100B27B48 /* DatabaseDocument.Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE4F7B29FF176100B27B48 /* DatabaseDocument.Cache.swift */; };
+		C5BE4F8029FF1C4A00B27B48 /* DatabaseDocument.Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE4F7F29FF1C4A00B27B48 /* DatabaseDocument.Content.swift */; };
+		C5BE4F8129FF1C4A00B27B48 /* DatabaseDocument.Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE4F7F29FF1C4A00B27B48 /* DatabaseDocument.Content.swift */; };
+		C5BE4F8229FF1C4A00B27B48 /* DatabaseDocument.Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE4F7F29FF1C4A00B27B48 /* DatabaseDocument.Content.swift */; };
+		C5BE4F8429FF3E3500B27B48 /* Database.ValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE4F8329FF3E3500B27B48 /* Database.ValueStorage.swift */; };
+		C5BE4F8529FF3E3500B27B48 /* Database.ValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE4F8329FF3E3500B27B48 /* Database.ValueStorage.swift */; };
+		C5BE4F8629FF3E3500B27B48 /* Database.ValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE4F8329FF3E3500B27B48 /* Database.ValueStorage.swift */; };
 		C5BEFC2129EDFF4F00332347 /* Structure.Representation.Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BEFC2029EDFF4F00332347 /* Structure.Representation.Builder.swift */; };
 		C5BEFC2229EDFF4F00332347 /* Structure.Representation.Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BEFC2029EDFF4F00332347 /* Structure.Representation.Builder.swift */; };
 		C5BEFC2329EDFF4F00332347 /* Structure.Representation.Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BEFC2029EDFF4F00332347 /* Structure.Representation.Builder.swift */; };
@@ -653,6 +665,10 @@
 		C5BE4F6929FEC46900B27B48 /* DatabaseDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseDocument.swift; sourceTree = "<group>"; };
 		C5BE4F7129FEDE6E00B27B48 /* DatabaseDocumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseDocumentTests.swift; sourceTree = "<group>"; };
 		C5BE4F7329FEF70100B27B48 /* DatabaseDocument.Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseDocument.Data.swift; sourceTree = "<group>"; };
+		C5BE4F7729FF0D7B00B27B48 /* UUID+key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UUID+key.swift"; sourceTree = "<group>"; };
+		C5BE4F7B29FF176100B27B48 /* DatabaseDocument.Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseDocument.Cache.swift; sourceTree = "<group>"; };
+		C5BE4F7F29FF1C4A00B27B48 /* DatabaseDocument.Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseDocument.Content.swift; sourceTree = "<group>"; };
+		C5BE4F8329FF3E3500B27B48 /* Database.ValueStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.ValueStorage.swift; sourceTree = "<group>"; };
 		C5BEFC2029EDFF4F00332347 /* Structure.Representation.Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structure.Representation.Builder.swift; sourceTree = "<group>"; };
 		C5C4A0C7293A83C100FF9AB8 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		C5C4A0CA293A9F9400FF9AB8 /* IdentifiableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableObject.swift; sourceTree = "<group>"; };
@@ -1327,6 +1343,7 @@
 			isa = PBXGroup;
 			children = (
 				C5BE4F5029FDACE700B27B48 /* Database.swift */,
+				C5BE4F8329FF3E3500B27B48 /* Database.ValueStorage.swift */,
 				C5BE4F5429FDAFB900B27B48 /* Database.Object.swift */,
 				C5BE4F6029FDBEFB00B27B48 /* Database.Object.Property.swift */,
 				C5BE4F5829FDBD3400B27B48 /* Database.Object.Object.swift */,
@@ -1349,6 +1366,7 @@
 				C5C4A0C7293A83C100FF9AB8 /* URL.swift */,
 				C55AC5B029560AF900F09326 /* Equatable+isEqualTo.swift */,
 				C5D382E5296777E800E31D69 /* Encodable+typeName.swift */,
+				C5BE4F7729FF0D7B00B27B48 /* UUID+key.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1357,8 +1375,8 @@
 			isa = PBXGroup;
 			children = (
 				C5C4A0D6293AB08C00FF9AB8 /* CodableIdentifiable.swift */,
-				C5C4A0D0293AAFDD00FF9AB8 /* DidChangeNotifier.swift */,
 				C5C4A0CA293A9F9400FF9AB8 /* IdentifiableObject.swift */,
+				C5C4A0D0293AAFDD00FF9AB8 /* DidChangeNotifier.swift */,
 				C582B38528A2F00400F795F0 /* PersistentObject.swift */,
 				C5BE4F3C29FC38E400B27B48 /* MergeableContent.swift */,
 				C5C4A0D3293AB05900FF9AB8 /* PersistentContent.swift */,
@@ -1367,6 +1385,8 @@
 				C5BE4F5C29FDBDF800B27B48 /* Reflectable.swift */,
 				C5BE4F6929FEC46900B27B48 /* DatabaseDocument.swift */,
 				C5BE4F7329FEF70100B27B48 /* DatabaseDocument.Data.swift */,
+				C5BE4F7F29FF1C4A00B27B48 /* DatabaseDocument.Content.swift */,
+				C5BE4F7B29FF176100B27B48 /* DatabaseDocument.Cache.swift */,
 			);
 			path = Basics;
 			sourceTree = "<group>";
@@ -1707,6 +1727,7 @@
 				C531AE7B29EB34CD00585073 /* Structure.Representation.swift in Sources */,
 				C59B3CDC295CB9540053DE7D /* Structure.Role.swift in Sources */,
 				C59E28802979D394007375D5 /* Structure.Presentation.swift in Sources */,
+				C5BE4F7A29FF0D7B00B27B48 /* UUID+key.swift in Sources */,
 				C5BE4F2A29F6758E00B27B48 /* Navigation.swift in Sources */,
 				C5E966D829AAD47D009D81FF /* Font+Extension.swift in Sources */,
 				C5C4A0F2293B9B0E00FF9AB8 /* PersistentModel.swift in Sources */,
@@ -1747,6 +1768,7 @@
 				C5D273542975D19100F32EB6 /* Information.Item+subscripts.swift in Sources */,
 				C5E4CB04294BDD4B00755959 /* Relation.swift in Sources */,
 				C5BE4F1A29F6727B00B27B48 /* Document.Drawing.PageFormat+draw.swift in Sources */,
+				C5BE4F7E29FF176100B27B48 /* DatabaseDocument.Cache.swift in Sources */,
 				C5A792A029A4078400637C6C /* DrawingView.swift in Sources */,
 				C5C4A117293C0D5500FF9AB8 /* PersistentGraph.Change.swift in Sources */,
 				C5D382EC2967786900E31D69 /* PersistentGraph.Transaction.swift in Sources */,
@@ -1803,6 +1825,7 @@
 				C531AE7729EB349800585073 /* Structure.Reference.Builder.swift in Sources */,
 				C59B3CE0295CB9E30053DE7D /* Injector.swift in Sources */,
 				C5C4A0FA293B9E4800FF9AB8 /* EncodableProperty.swift in Sources */,
+				C5BE4F8229FF1C4A00B27B48 /* DatabaseDocument.Content.swift in Sources */,
 				C59B3CEE295CCE9A0053DE7D /* View+offset.swift in Sources */,
 				C5BE4F2129F6736B00B27B48 /* TextView.swift in Sources */,
 				C5C4A104293B9E5000FF9AB8 /* CycleBreaker.swift in Sources */,
@@ -1821,6 +1844,7 @@
 				C5BE4F5F29FDBDF800B27B48 /* Reflectable.swift in Sources */,
 				C564EB7D29B5099400F3E0AC /* PersistentContainer.swift in Sources */,
 				C59B3CE4295CCE8F0053DE7D /* View+If.swift in Sources */,
+				C5BE4F8629FF3E3500B27B48 /* Database.ValueStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1842,12 +1866,14 @@
 				C5C8E86E295B50F8002C7746 /* PersistentGraph.Condition+operators.swift in Sources */,
 				C5D382E6296777E800E31D69 /* Encodable+typeName.swift in Sources */,
 				C54BE4F3289591320060A066 /* Observed.swift in Sources */,
+				C5BE4F8029FF1C4A00B27B48 /* DatabaseDocument.Content.swift in Sources */,
 				C54BE4F1289591320060A066 /* ObservedChangeReceiver.swift in Sources */,
 				C55AC5D3295A4A3400F09326 /* Information.swift in Sources */,
 				C5E966B429AAA931009D81FF /* PencilCanvasView.swift in Sources */,
 				C5AAA0DE29BD12F1000DA6C3 /* DrawingView.ImageView.swift in Sources */,
 				C5D273522975D19100F32EB6 /* Information.Item+subscripts.swift in Sources */,
 				C5C4A115293C0D4F00FF9AB8 /* PersistentGraph.Change.swift in Sources */,
+				C5BE4F7829FF0D7B00B27B48 /* UUID+key.swift in Sources */,
 				C54BE503289591440060A066 /* CGFloat+Operators.swift in Sources */,
 				C52E723929F49484001A5821 /* NavigationSplitView.swift in Sources */,
 				C5AAA0F929BD34E3000DA6C3 /* TextView.swift in Sources */,
@@ -1920,6 +1946,7 @@
 				C5C4A0E3293AC7C600FF9AB8 /* PersistentModel.Object.swift in Sources */,
 				C5BE4F4B29FC74C500B27B48 /* RestorableContent.swift in Sources */,
 				C54BE4D528958F820060A066 /* SerializableEncodable.swift in Sources */,
+				C5BE4F8429FF3E3500B27B48 /* Database.ValueStorage.swift in Sources */,
 				C59E2882297B2434007375D5 /* Structure.Aspect.Presentation.swift in Sources */,
 				C5BE4F3D29FC38E400B27B48 /* MergeableContent.swift in Sources */,
 				C5BE4EFF29F5AF3100B27B48 /* SidebarView.GroupView.swift in Sources */,
@@ -1965,6 +1992,7 @@
 				C54BE4E728958F910060A066 /* CyclicDecoder.swift in Sources */,
 				C564EB9C29B544CA00F3E0AC /* PencilCanvasView.Controller.swift in Sources */,
 				C5E966B829AAAA8A009D81FF /* PencilCanvasView.ArrowView.swift in Sources */,
+				C5BE4F7C29FF176100B27B48 /* DatabaseDocument.Cache.swift in Sources */,
 				C564EB7B29B5099200F3E0AC /* PersistentContainer.swift in Sources */,
 				C5E966C429AAB7A0009D81FF /* Document.Drawing.PageFormat+draw.swift in Sources */,
 				C564EB9829B5446600F3E0AC /* PencilCanvasView.View.swift in Sources */,
@@ -2007,6 +2035,7 @@
 				C564EB8D29B541F500F3E0AC /* measureDuration.swift in Sources */,
 				C5AAA10429BE7F90000DA6C3 /* Document.Drawing.PageFormat+draw.swift in Sources */,
 				C5C8E86F295B50F8002C7746 /* PersistentGraph.Condition+operators.swift in Sources */,
+				C5BE4F7D29FF176100B27B48 /* DatabaseDocument.Cache.swift in Sources */,
 				C5D382E7296777E800E31D69 /* Encodable+typeName.swift in Sources */,
 				C5BE4F0A29F5DC7A00B27B48 /* GroupNameView.swift in Sources */,
 				C5708D2629E5C8F500F4D4E1 /* TimedValueStorage.swift in Sources */,
@@ -2044,6 +2073,7 @@
 				C5AAA0FE29BE7E37000DA6C3 /* Document.Drawing+image.swift in Sources */,
 				C5BE4F4C29FC74C500B27B48 /* RestorableContent.swift in Sources */,
 				C504036C290DDE8D0083AC41 /* CaseIterable+StringConversion.swift in Sources */,
+				C5BE4F8529FF3E3500B27B48 /* Database.ValueStorage.swift in Sources */,
 				C5445D1D29E74D000033A5AB /* Presentation.Storage.swift in Sources */,
 				C54BE500289591440060A066 /* CGPoint+Operators.swift in Sources */,
 				C5BE4F6229FDBEFB00B27B48 /* Database.Object.Property.swift in Sources */,
@@ -2068,7 +2098,9 @@
 				C5167C3C29C5002900323F75 /* Navigation.swift in Sources */,
 				C54BE4D028958F820060A066 /* SerializableDecodable.swift in Sources */,
 				C55AC5E0295A4ACE00F09326 /* Presentation.Predicate.swift in Sources */,
+				C5BE4F7929FF0D7B00B27B48 /* UUID+key.swift in Sources */,
 				C54BE4D428958F820060A066 /* EncodableProperty.swift in Sources */,
+				C5BE4F8129FF1C4A00B27B48 /* DatabaseDocument.Content.swift in Sources */,
 				C5AAA10229BE7F69000DA6C3 /* Document.Drawing.Background+draw.swift in Sources */,
 				C5D382E32967779100E31D69 /* PersistentGraph.ValueStorage.swift in Sources */,
 				C5C8E865295AFDCA002C7746 /* Structure.Role.Builder.swift in Sources */,

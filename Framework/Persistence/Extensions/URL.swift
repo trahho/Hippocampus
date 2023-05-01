@@ -37,6 +37,12 @@ extension URL {
         try? FileManager.default.startDownloadingUbiquitousItem(at: self)
     }
 
+    func appending(pathComponents: [String]) -> URL {
+        var result = self
+        pathComponents.forEach { result.append(component: $0) }
+        return result
+    }
+
     func ensureDirectory() {
         guard hasDirectoryPath else { return }
         let directory = path(percentEncoded: false)

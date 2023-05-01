@@ -16,7 +16,7 @@ public extension PersistentData {
     }
 
     @propertyWrapper
-    final class Storage<T>: StorageWrapper  where T: Object {
+    final class Objects<T>: StorageWrapper  where T: Object {
         typealias StorageDictionary = [T.ID: T]
 
         var key: String?
@@ -51,7 +51,7 @@ public extension PersistentData {
             importItems(other)
         }
 
-        fileprivate func importItems(_ other: PersistentData.Storage<T>) {
+        fileprivate func importItems(_ other: PersistentData.Objects<T>) {
             Set(other.storage.keys).subtracting(Set(storage.keys))
                 .forEach { key in
                     guard let item = other.storage[key] else { return }
@@ -59,9 +59,9 @@ public extension PersistentData {
                 }
         }
 
-        fileprivate func mergeItems(_ other: PersistentData.Storage<T>) throws {}
+        fileprivate func mergeItems(_ other: PersistentData.Objects<T>) throws {}
 
-        fileprivate func mergeItems(_ other: PersistentData.Storage<T>) throws where T: MergeableContent {
+        fileprivate func mergeItems(_ other: PersistentData.Objects<T>) throws where T: MergeableContent {
             try Set(storage.keys).intersection(Set(other.storage.keys))
                 .forEach { key in
                     try storage[key]!.merge(other: other.storage[key]!)
@@ -74,7 +74,7 @@ public extension PersistentData {
     }
 }
 
-extension PersistentData.Storage: EncodableProperty where T: Encodable {
+extension PersistentData.Objects: EncodableProperty where T: Encodable {
     public func encodeValue(from container: inout EncodeContainer, propertyName: String) throws {
         guard !storage.isEmpty else { return }
         let codingKey = SerializedCodingKeys(key: key ?? propertyName)
@@ -83,7 +83,7 @@ extension PersistentData.Storage: EncodableProperty where T: Encodable {
     }
 }
 
-extension PersistentData.Storage: DecodableProperty where T: Decodable {
+extension PersistentData.Objects: DecodableProperty where T: Decodable {
     public func decodeValue(from container: DecodeContainer, propertyName: String) throws {
         let codingKey = SerializedCodingKeys(key: key ?? propertyName)
         if let value = try? container.decodeIfPresent([T].self, forKey: codingKey) {

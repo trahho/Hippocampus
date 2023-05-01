@@ -1,5 +1,5 @@
 //
-//  DatabaseDocument.Data.swift
+//  DatabaseDocument.Content.swift
 //  Hippocampus
 //
 //  Created by Guido Kühn on 30.04.23.
@@ -9,18 +9,10 @@ import Combine
 import Foundation
 
 public extension DatabaseDocument {
-    class PersistentWrapper {
-        func setup(url: URL, name: String, document: DatabaseDocument) {}
-    }
-}
-
-public extension DatabaseDocument {
-    class PersistentDataWrapper: PersistentWrapper {
-        var data: PersistentData! { nil }
-    }
+    class PersistentContentWrapper: PersistentWrapper {}
 
     @propertyWrapper
-    final class Data<T>: PersistentDataWrapper where T: PersistentData {
+    final class Content<T>: PersistentContentWrapper where T: PersistentContent {
         // MARK: - Initialization
 
         public init(wrappedValue: @autoclosure @escaping () -> T, publishChange: Bool = true, commitOnChange: Bool = true) {
@@ -37,11 +29,10 @@ public extension DatabaseDocument {
         var publishChange: Bool
         var document: DatabaseDocument!
         var cancellable: AnyCancellable!
-        override var data: PersistentData { container.content }
 
         override func setup(url: URL, name: String, document: DatabaseDocument) {
             let content = content()
-            content.document = document
+            self.document = document
             let url = url.appending(component: name + ".persistent")
             container = PersistentContainer(url: url, content: content, commitOnChange: commitOnChange)
             if publishChange {
@@ -59,7 +50,7 @@ public extension DatabaseDocument {
 
         public static subscript<Enclosing: DatabaseDocument>(_enclosingInstance instance: Enclosing,
                                                              wrapped _: ReferenceWritableKeyPath<Enclosing, T>,
-                                                             storage storageKeyPath: ReferenceWritableKeyPath<Enclosing, Data>) -> T
+                                                             storage storageKeyPath: ReferenceWritableKeyPath<Enclosing, Content>) -> T
         {
             get {
                 let storage = instance[keyPath: storageKeyPath]

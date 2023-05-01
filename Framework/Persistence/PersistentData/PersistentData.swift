@@ -28,9 +28,9 @@ open class PersistentData: PersistentContent, Serializable, RestorableContent, M
 
     // MARK: - Persistence
 
-    public func setup() -> Self {
-        self
-    }
+//    public func setup() -> Self {
+//        self
+//    }
 
     public func restore() {
         let mirror = mirror(for: StorageWrapper.self)
@@ -50,9 +50,9 @@ open class PersistentData: PersistentContent, Serializable, RestorableContent, M
 
     // MARK: - Function
 
-    public func add<T>(item: T) where T: Object {
+    public func add<T>(_ item: T) where T: Object {
         guard
-            let storage = mirror(for: Storage<T>.self).first?.value,
+            let storage = mirror(for: Objects<T>.self).first?.value,
             storage.get(id: item.id) == nil
         else { return }
 
@@ -63,7 +63,7 @@ open class PersistentData: PersistentContent, Serializable, RestorableContent, M
     }
 
     public func getObject<T>(_ type: T.Type, _ id: T.ID) -> T? where T: Object {
-        guard let storage = mirror(for: Storage<T>.self).first?.value else { return nil }
+        guard let storage = mirror(for: Objects<T>.self).first?.value else { return nil }
         return storage.get(id: id) as? T
     }
 
