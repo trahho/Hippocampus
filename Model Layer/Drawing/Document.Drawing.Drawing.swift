@@ -8,6 +8,7 @@
 import Combine
 import Foundation
 import PencilKit
+import Smaug
 
 extension Document.Drawing {
     class Drawing: PersistentContent, ObservableObject {
@@ -34,11 +35,11 @@ extension Document.Drawing {
             isMerging = false
         }
 
-        func encode() -> Data? {
+        func encode() -> Foundation.Data? {
             drawing.dataRepresentation()
         }
 
-        static func decode(persistentData: Data) -> Self? {
+        static func decode(persistentData: Foundation.Data) -> Self? {
             guard let drawing = try? PKDrawing(data: persistentData) else { return nil }
             return (Drawing(drawing: drawing) as! Self)
         }

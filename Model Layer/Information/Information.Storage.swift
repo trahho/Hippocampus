@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Smaug
 
 extension Information {
     indirect enum Storage: TimedValueStorage {
@@ -14,7 +15,7 @@ extension Information {
         init(_ value: (any PersistentValue)?) {
             if let basicValue = ValueStorage(value) { self = .v(basicValue) }
 
-            else { fatalError("Storage for \(value?.typeName ?? "Hä?") not available") }
+            else { fatalError("Storage for \(value.self ?? "Hä?") not available") }
         }
 
         var value: (any PersistentValue)? {

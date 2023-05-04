@@ -20,7 +20,7 @@ struct TimeLine<Storage: TimedValueStorage>: Serializable {
         values = []
     }
 
-    init(_ startValue: any PersistentGraph.PersistentValue) {
+    init(_ startValue: any TimedValueStorage.PersistentValue) {
         values = [Value(time: Date.distantPast, value: startValue)]
     }
 
@@ -46,7 +46,7 @@ struct TimeLine<Storage: TimedValueStorage>: Serializable {
         values.last(where: { $0.time <= timestamp })
     }
 
-    subscript<T>(type type: T.Type, at timestamp: Date) -> T? where T: PersistentGraph.PersistentValue {
+    subscript<T>(type type: T.Type, at timestamp: Date) -> T? where T: TimedValueStorage.PersistentValue {
         get {
             timedValue(at: timestamp)?[type: T.self]
         }

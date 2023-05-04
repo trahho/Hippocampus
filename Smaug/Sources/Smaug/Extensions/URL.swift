@@ -7,13 +7,13 @@
 
 import Foundation
 
-extension URL {
+public extension URL {
     var isVirtual: Bool {
         scheme == "virtual"
     }
 
     var isLocal: Bool {
-        absoluteString.hasPrefix(URL.localDirecotry.absoluteString)
+        absoluteString.hasPrefix(URL.localDirectory.absoluteString)
     }
 
     var isiCloud: Bool {
@@ -28,7 +28,7 @@ extension URL {
         FileManager.default.url(forUbiquityContainerIdentifier: nil) ?? virtual
     }
 
-    static var localDirecotry: URL {
+    static var localDirectory: URL {
         FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     }
 

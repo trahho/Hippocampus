@@ -14,7 +14,7 @@ struct HippocampusApp: App {
 
     static var iCloudContainerUrl: URL { URL.iCloudDirectory.appendingPathComponent("Documents") }
 
-    static var localContainerUrl: URL { URL.localDirecotry.appendingPathComponent("Hippocampus") }
+    static var localContainerUrl: URL { URL.localDirectory.appendingPathComponent("Hippocampus") }
 
     static func documentURL(name: String, local: Bool) -> URL {
         let containerURL = local ? HippocampusApp.localContainerUrl : HippocampusApp.iCloudContainerUrl

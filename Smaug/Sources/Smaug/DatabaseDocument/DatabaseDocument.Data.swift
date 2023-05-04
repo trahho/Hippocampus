@@ -8,22 +8,6 @@
 import Combine
 import Foundation
 
-extension DatabaseDocument {
-    class ObjectStoreContainer<T>: PersistentContainer<T> where T: ObjectStore {
-        var document: DatabaseDocument
-
-        init(document: DatabaseDocument, url: URL, content: T, commitOnChange: Bool = false, configureContent: PersistentContainer<T>.ContentDelegate? = nil) {
-            self.document = document
-            super.init(url: url, content: content, commitOnChange: commitOnChange, configureContent: configureContent)
-        }
-
-        override func restore(content: T) {
-            super.restore(content: content)
-            content.document = document
-        }
-    }
-}
-
 public extension DatabaseDocument {
     @propertyWrapper
     final class Data<T>: DataStorage where T: ObjectStore {

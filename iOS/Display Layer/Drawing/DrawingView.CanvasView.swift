@@ -15,7 +15,7 @@ extension DrawingView {
         var editable: Bool
 
         var body: some View {
-            PencilCanvasView(drawing: $data.drawing, center: $data.center, background: data.background, pageFormat: data.pageFormat)
+            PencilCanvasView(drawing: $data.drawing.drawing, center: $data.properties.center, background: data.properties.background, pageFormat: data.properties.pageFormat)
         }
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension DataStore {
+public extension DataStore {
     indirect enum ValueStorage: TimedValueStorage {
         case a(Int)
         case b(Bool)
@@ -17,7 +17,7 @@ extension DataStore {
         case f([UUID])
         case g(UUID)
 
-        init?(_ value: (any PersistentGraph.PersistentValue)?) {
+        public init?(_ value: (any TimedValueStorage.PersistentValue)?) {
             if value == nil { return nil }
             else if let value = value as? Int { self = .a(value) }
             else if let value = value as? Bool { self = .b(value) }
@@ -30,7 +30,7 @@ extension DataStore {
             //        else { fatalError("Storage for \(value?.typeName ?? "Hä?") not available") }
         }
 
-        var value: (any PersistentGraph.PersistentValue)? {
+        public var value: (any TimedValueStorage.PersistentValue)? {
             switch self {
             case let .a(value): return value
             case let .b(value): return value

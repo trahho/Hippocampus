@@ -8,6 +8,7 @@
 import Combine
 import Foundation
 import PencilKit
+import Smaug
 
 extension Document.Drawing {
     class Properties: PersistentContent, Serializable, ObservableObject {

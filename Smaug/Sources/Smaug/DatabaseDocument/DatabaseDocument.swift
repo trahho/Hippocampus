@@ -18,7 +18,7 @@ open class DatabaseDocument: Reflectable, ObservableObject {
 
     // MARK: - Initialization
 
-    public required init(url: URL, containerDocument: DatabaseDocument?) {
+    public required init(url: URL, containerDocument: DatabaseDocument? = nil) {
         self.containerDocument = containerDocument
         mirror(for: Storage.self).forEach {
             let name = String($0.label!.dropFirst())
@@ -44,7 +44,7 @@ open class DatabaseDocument: Reflectable, ObservableObject {
             }
         }
     }
-    
+
     private var _writingTimestamp: Date?
     private(set) var writingTimestamp: Date? {
         get { containerDocument?.writingTimestamp ?? _writingTimestamp }
@@ -64,7 +64,7 @@ open class DatabaseDocument: Reflectable, ObservableObject {
 
     func change(by change: () -> ()) {
         guard readingTimestamp == nil else { return }
-        
+
         let didStart = writingTimestamp == nil
         if didStart {
             writingTimestamp = Date()

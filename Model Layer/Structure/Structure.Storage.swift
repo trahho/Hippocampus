@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import Smaug
+
 extension Structure {
     indirect enum Storage: TimedValueStorage {
         case v(ValueStorage)
@@ -18,7 +20,7 @@ extension Structure {
             else if let presentation = value as? Structure.Presentation { self = .presentation(presentation) }
             else if let aspectPresentation = value as? Structure.Aspect.Presentation { self = .aspectPresentation(aspectPresentation) }
 
-            else { fatalError("Storage for \(value?.typeName ?? "Hä?") not available") }
+            else { fatalError("Storage for \(value.self ?? "Hä?") not available") }
         }
 
         var value: (any PersistentValue)? {

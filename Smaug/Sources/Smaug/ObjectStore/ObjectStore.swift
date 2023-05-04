@@ -14,8 +14,8 @@ open class ObjectStore: PersistentContent, Serializable, RestorableContent, Merg
         case wrongMatch
         case mergeFailed
     }
-    
-    var document: DatabaseDocument!
+
+    public private(set) var document: DatabaseDocument!
 
     // MARK: - Enclosing
 
@@ -70,7 +70,7 @@ open class ObjectStore: PersistentContent, Serializable, RestorableContent, Merg
     func addObject<T>(item: T) throws where T: ObjectStore.Object {
         guard let storage = storage(type: T.self) else { throw DatabaseDocument.Failure.typeNotFound }
         guard storage.getObject(id: item.id) == nil else { return }
-        
+
         objectWillChange.send()
         storage.addObject(item: item)
         objectDidChange.send()

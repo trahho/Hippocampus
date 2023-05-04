@@ -6,22 +6,18 @@
 //
 
 import Foundation
+import Smaug
 
-class Structure: PersistentModel<Structure.Storage> {
-    @Present var roles: Set<Role>
+class Structure: DataStore<Structure.Storage> {
+    @Objects var roles: Set<Role>
+    @Objects var aspects: Set<Aspect>
 
-    var aspects: [Aspect.ID: Aspect] {
-        roles.filter { !$0.aspects.isEmpty }
-            .flatMap(\.aspects)
-            .asDictionary(key: \.id)
-    }
-
-    override func setup() -> Structure {
+    func setup() -> Structure {
         let roles: [Role] = [.global, .drawing, .text, .topic, .note]
         roles.forEach {
-            add($0, timestamp: Date.distantPast)
+            document.add($0)
         }
-        
+
         return self
     }
 }

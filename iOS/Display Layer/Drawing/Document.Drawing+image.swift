@@ -10,8 +10,8 @@ import UIKit
 
 extension Document.Drawing {
     var image: UIImage {
-        let bounds = drawing.bounds
-        let image = drawing.image(from: bounds, scale: 1)
+        let bounds = drawing.drawing.bounds
+        let image = drawing.drawing.image(from: bounds, scale: 1)
 
         UIGraphicsBeginImageContext(image.size)
 
@@ -21,7 +21,7 @@ extension Document.Drawing {
 
         let rect = CGRect(origin: .zero, size: image.size)
 //        pageFormat.draw(bounds: rect, offset: bounds.topLeft, scale: 1, drawing: drawing, context: context)
-        background.draw(bounds: rect, offset: bounds.topLeft, scale: 1, context: context)
+        properties.background.draw(bounds: rect, offset: bounds.topLeft, scale: 1, context: context)
         image.draw(in: rect)
 
         let result = UIGraphicsGetImageFromCurrentImageContext()

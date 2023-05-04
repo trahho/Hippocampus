@@ -31,7 +31,7 @@ struct TimedValue<Storage: TimedValueStorage>: Serializable {
 
     init() {}
 
-    init(time: Date, value: (any PersistentGraph.PersistentValue)?) {
+    init(time: Date, value: (any TimedValueStorage.PersistentValue)?) {
         self.time = time
         self.value = value
     }
