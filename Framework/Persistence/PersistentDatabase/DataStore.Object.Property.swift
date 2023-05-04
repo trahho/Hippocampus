@@ -7,8 +7,8 @@
 
 import Foundation
 
-extension Database.Object {
-    @propertyWrapper final class Property<Value> where Value: Database.PersistentValue {
+extension DataStore.Object {
+    @propertyWrapper final class Property<Value> where Value: DataStore.PersistentValue {
         @available(*, unavailable, message: "This property wrapper can only be applied to classes")
         public var wrappedValue: Value {
             get { fatalError() }
@@ -19,7 +19,7 @@ extension Database.Object {
         
         private var key: String?
         
-        internal func getKey(from instance: Database.Object) -> String {
+        internal func getKey(from instance: DataStore.Object) -> String {
             if let key { return key }
             
             guard let mirror = instance.mirror(for: Self.self).first(where: { $0.value === self }) else { fatalError("wrapper not found") }
@@ -37,7 +37,7 @@ extension Database.Object {
             self.key = key
         }
         
-        public static subscript<Enclosing: Database.Object>(_enclosingInstance instance: Enclosing,
+        public static subscript<Enclosing: DataStore.Object>(_enclosingInstance instance: Enclosing,
                                                             wrapped _: ReferenceWritableKeyPath<Enclosing, Value>,
                                                             storage storageKeyPath: ReferenceWritableKeyPath<Enclosing, Property>) -> Value
         {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Database {
+extension DataStore {
     indirect enum ValueStorage: TimedValueStorage {
         case a(Int)
         case b(Bool)

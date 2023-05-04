@@ -1,15 +1,18 @@
 //
-//  Database.Relation.swift
+//  Database.Object.Object.swift
 //  Hippocampus
 //
-//  Created by Guido Kühn on 29.04.23.
+//  Created by Guido Kühn on 30.04.23.
 //
 
 import Combine
 import Foundation
 
-extension Database.Object {
-    @propertyWrapper final class Object<Value> where Value: ObjectStore.Object {
+extension DataStore.Object {
+    @propertyWrapper final class Objects<Value> where Value: ObjectStore.Object {
+        typealias ValueSet = Set<Value>
+        typealias IDSet = Set<Value.ID>
+
         @available(*, unavailable, message: "This property wrapper can only be applied to classes")
         public var wrappedValue: Value {
             get { fatalError() }
@@ -29,31 +32,28 @@ extension Database.Object {
 
         private var cancellable: AnyCancellable?
 
-        private var _value: Value?
-        var value: Value? {
+        private var _value: ValueSet?
+        var value: ValueSet {
             get {
                 if let _value { return _value }
                 guard
-                    let document = instance.document,
-                    let id = instance[Value.ID.self, key],
-                    let value = document[Value.self, id]
-                else { return nil }
+                    let database = instance.document,
+                    let ids = instance[IDSet.self, key]
+                else { return [] }
 
-                _value = value
-                return _value
+                _value = ids.compactMap { database[Value.self, $0] }.asSet
+                return _value!
             }
             set {
                 guard value != newValue else { return }
-                instance[Value.ID.self, key] = newValue?.id
+                let ids = newValue.map { $0.id }.asSet
+                instance[IDSet.self, key] = ids
                 _value = newValue
-                if let document = instance.document, let newValue {
-                    document.add(newValue)
-                }
             }
         }
 
-        private weak var _instance: Database.Object?
-        private var instance: Database.Object {
+        private weak var _instance: DataStore.Object?
+        private var instance: DataStore.Object {
             get { _instance! }
             set {
                 guard newValue != _instance else { return }
@@ -66,9 +66,9 @@ extension Database.Object {
             }
         }
 
-        public static subscript<Enclosing: Database.Object>(_enclosingInstance instance: Enclosing,
+        public static subscript<Enclosing: DataStore.Object>(_enclosingInstance instance: Enclosing,
                                                             wrapped _: ReferenceWritableKeyPath<Enclosing, Value>,
-                                                            storage storageKeyPath: ReferenceWritableKeyPath<Enclosing, Object>) -> Value?
+                                                            storage storageKeyPath: ReferenceWritableKeyPath<Enclosing, Objects>) -> Set<Value>
         {
             get {
                 let storage = instance[keyPath: storageKeyPath]

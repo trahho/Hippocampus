@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Database {
+extension DataStore {
     open class Object: ObjectStore.Object, MergeableContent, Reflectable {
         @Serialized private(set) var values: [Key: TimeLine<ValueStorage>] = [:]
         @Serialized var added: Date?
