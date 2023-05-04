@@ -977,7 +977,7 @@
 				C5C4A127293CD74E00FF9AB8 /* Basics */,
 				C558645B2A0309C1005EA6FD /* DatabaseDocument */,
 				C5BE4F3329FC100C00B27B48 /* ObjectStore */,
-				C5BE4F4F29FD473F00B27B48 /* PersistentDatabase */,
+				C5BE4F4F29FD473F00B27B48 /* DataStore */,
 				C5C4A128293CD78D00FF9AB8 /* PersistentGraph */,
 				C5C4A129293CD7B000FF9AB8 /* PersistentModel */,
 			);
@@ -1366,7 +1366,7 @@
 			path = ObjectStore;
 			sourceTree = "<group>";
 		};
-		C5BE4F4F29FD473F00B27B48 /* PersistentDatabase */ = {
+		C5BE4F4F29FD473F00B27B48 /* DataStore */ = {
 			isa = PBXGroup;
 			children = (
 				C5D382EF296A3B8D00E31D69 /* Value storage */,
@@ -1377,7 +1377,7 @@
 				C5BE4F5829FDBD3400B27B48 /* DataStore.Object.Object.swift */,
 				C5BE4F6429FDD05700B27B48 /* DataStore.Object.Objects.swift */,
 			);
-			path = PersistentDatabase;
+			path = DataStore;
 			sourceTree = "<group>";
 		};
 		C5BEFC2529EF3B7800332347 /* Item */ = {
