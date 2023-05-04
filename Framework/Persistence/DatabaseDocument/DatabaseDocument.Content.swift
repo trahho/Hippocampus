@@ -9,10 +9,9 @@ import Combine
 import Foundation
 
 public extension DatabaseDocument {
-    class PersistentContentWrapper: PersistentWrapper {}
 
     @propertyWrapper
-    final class Content<T>: PersistentContentWrapper where T: PersistentContent {
+    final class Content<T>: Storage where T: PersistentContent {
         // MARK: - Initialization
 
         public init(wrappedValue: @autoclosure @escaping () -> T, publishChange: Bool = true, commitOnChange: Bool = true) {
@@ -27,7 +26,6 @@ public extension DatabaseDocument {
         var content: () -> T
         var commitOnChange: Bool
         var publishChange: Bool
-        var document: DatabaseDocument!
         var cancellable: AnyCancellable!
 
         override func setup(url: URL, name: String, document: DatabaseDocument) {

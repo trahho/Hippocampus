@@ -9,7 +9,7 @@ import Combine
 import Foundation
 
 extension Database.Object {
-    @propertyWrapper final class Object<Value> where Value: PersistentData.Object {
+    @propertyWrapper final class Object<Value> where Value: ObjectStore.Object {
         @available(*, unavailable, message: "This property wrapper can only be applied to classes")
         public var wrappedValue: Value {
             get { fatalError() }
@@ -34,9 +34,9 @@ extension Database.Object {
             get {
                 if let _value { return _value }
                 guard
-                    let database = instance.database,
+                    let document = instance.document,
                     let id = instance[Value.ID.self, key],
-                    let value = database[Value.self, id]
+                    let value = document[Value.self, id]
                 else { return nil }
 
                 _value = value
@@ -46,8 +46,8 @@ extension Database.Object {
                 guard value != newValue else { return }
                 instance[Value.ID.self, key] = newValue?.id
                 _value = newValue
-                if let database = instance.database, let newValue {
-                    database.add(item: newValue)
+                if let document = instance.document, let newValue {
+                    document.add(newValue)
                 }
             }
         }
@@ -59,7 +59,7 @@ extension Database.Object {
                 guard newValue != _instance else { return }
                 _instance = newValue
                 cancellable = _instance!.objectWillChange.sink { [self] in
-                    if instance.database != nil {
+                    if instance.document != nil {
                         _value = nil
                     }
                 }

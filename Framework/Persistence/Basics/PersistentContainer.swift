@@ -128,15 +128,11 @@ public class PersistentContainer<Content: PersistentContent>: PersistentContaine
         }
     }
 
-    fileprivate func updateContent(_ newContent: Content) {
-        content = newContent
+    func restore(content: Content) {
+        if let restorable = content as? RestorableContent {
+            restorable.restore()
+        }
     }
-
-    fileprivate func restoreContent(_ content: Content) where Content: RestorableContent {
-        content.restore()
-    }
-
-    fileprivate func restoreContent(_ content: Content) {}
 
     func load() {
         guard !url.isVirtual else { return }
@@ -156,8 +152,8 @@ public class PersistentContainer<Content: PersistentContent>: PersistentContaine
             print("PersistentDataContainer<\(String(reflecting: Content.self))>: Load")
         #endif
 
-        restoreContent(newContent)
-        updateContent(newContent)
+        restore(content: newContent)
+        content = newContent
 
         currentTimestamp = modificationDate
         hasChanges = false
@@ -212,7 +208,7 @@ public class PersistentContainer<Content: PersistentContent>: PersistentContaine
         self.url = url
         self.commitOnChange = commitOnChange
         self.contentChange = configureContent
-        restoreContent(content)
+        restore(content: content)
         self.content = content
 
         load()

@@ -8,19 +8,25 @@
 import Combine
 import Foundation
 
-public extension DatabaseDocument {
-    class PersistentWrapper {
-        func setup(url: URL, name: String, document: DatabaseDocument) {}
+extension DatabaseDocument {
+    class ObjectStoreContainer<T>: PersistentContainer<T> where T: ObjectStore {
+        var document: DatabaseDocument
+
+        init(document: DatabaseDocument, url: URL, content: T, commitOnChange: Bool = false, configureContent: PersistentContainer<T>.ContentDelegate? = nil) {
+            self.document = document
+            super.init(url: url, content: content, commitOnChange: commitOnChange, configureContent: configureContent)
+        }
+
+        override func restore(content: T) {
+            super.restore(content: content)
+            content.document = document
+        }
     }
 }
 
 public extension DatabaseDocument {
-    class PersistentDataWrapper: PersistentWrapper {
-        var data: PersistentData! { nil }
-    }
-
     @propertyWrapper
-    final class Data<T>: PersistentDataWrapper where T: PersistentData {
+    final class Data<T>: DataStorage where T: ObjectStore {
         // MARK: - Initialization
 
         public init(wrappedValue: @autoclosure @escaping () -> T, publishChange: Bool = true, commitOnChange: Bool = true) {
@@ -35,18 +41,30 @@ public extension DatabaseDocument {
         var content: () -> T
         var commitOnChange: Bool
         var publishChange: Bool
-        var document: DatabaseDocument!
         var cancellable: AnyCancellable!
-        override var data: PersistentData { container.content }
 
         override func setup(url: URL, name: String, document: DatabaseDocument) {
+            self.document = document
             let content = content()
-            content.document = document
             let url = url.appending(component: name + ".persistent")
-            container = PersistentContainer(url: url, content: content, commitOnChange: commitOnChange)
+            container = ObjectStoreContainer(document: document, url: url, content: content, commitOnChange: commitOnChange)
             if publishChange {
                 cancellable = container.objectWillChange.sink { document.objectWillChange.send() }
             }
+        }
+
+        // MARK: - Storage
+
+        override func getObject<T>(type: T.Type, id: T.ID) throws -> T? where T: ObjectStore.Object {
+            try container.content.getObject(type: type, id: id)
+        }
+
+        override func getObjects<T>(type: T.Type) throws -> Set<T> where T: ObjectStore.Object {
+            try container.content.getObjects(type: type)
+        }
+
+        override func addObject<T>(item: T) throws where T: ObjectStore.Object {
+            try container.content.addObject(item: item)
         }
 
         // MARK: - Wrapping

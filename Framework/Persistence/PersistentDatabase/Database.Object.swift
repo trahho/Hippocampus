@@ -8,30 +8,41 @@
 import Foundation
 
 extension Database {
-    open class Object: PersistentData.Object, MergeableContent, Reflectable {
+    open class Object: ObjectStore.Object, MergeableContent, Reflectable {
         @Serialized private(set) var values: [Key: TimeLine<ValueStorage>] = [:]
         @Serialized var added: Date?
         @Property var deleted: Bool = false
 
-        var database: Database? { data as? Database }
+        var document: DatabaseDocument? { store?.document }
 
         // MARK: - Changes
 
-        var canChange: Bool { database?.timestamp == nil }
+        func change(by change: @escaping () -> ()) {
+            let action = { [self] in
+                objectWillChange.send()
+                store?.willChange()
+                change()
+                store?.didChange()
+            }
 
+            if let document {
+                if document.readingTimestamp != nil { return }
+                document.change {
+                    action()
+                }
+            } else {
+                action()
+            }
+        }
+        
         func willChange() {
             objectWillChange.send()
-            database?.willChange()
-        }
-
-        func didChange(timestamp: Date) {
-            database?.didChange(timestamp: timestamp)
         }
 
         // MARK: - Timing
 
-        var readingTimestamp: Date { database?.timestamp ?? Date.distantFuture }
-        func writingTimestamp(_ timestamp: Date?) -> Date { database == nil ? Date.distantPast : timestamp ?? Date() }
+        var readingTimestamp: Date { document?.readingTimestamp ?? Date.distantFuture }
+        var writingTimestamp: Date { document?.writingTimestamp ?? Date.distantPast }
 
         // MARK: - State
 
@@ -40,14 +51,13 @@ extension Database {
                 values[key]?.timedValue(at: readingTimestamp)?[type: T.self]
             }
             set {
-                guard canChange, newValue != self[type, key] else { return }
-                let timestamp = writingTimestamp(timestamp)
-                willChange()
-                if values[key] == nil {
-                    values[key] = TimeLine()
+                guard newValue != self[type, key] else { return }
+                change { [self] in
+                    if values[key] == nil {
+                        values[key] = TimeLine()
+                    }
+                    values[key]![type: T.self, at: writingTimestamp] = newValue
                 }
-                values[key]![type: T.self, at: timestamp] = newValue
-                didChange(timestamp: timestamp)
             }
         }
 

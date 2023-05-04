@@ -7,16 +7,9 @@
 
 import Foundation
 
-protocol PersistenDataStorageWrapper {}
-
-public extension PersistentData {
-    class StorageWrapper: MergeableContent {
-        public func setContainer(container: PersistentData) {}
-        public func merge(other: MergeableContent) throws {}
-    }
-
+public extension ObjectStore {
     @propertyWrapper
-    final class Objects<T>: StorageWrapper  where T: Object {
+    final class Objects<T>: ObjectsStorage where T: Object {
         typealias StorageDictionary = [T.ID: T]
 
         var key: String?
@@ -36,22 +29,13 @@ public extension PersistentData {
             self.alternateKey = alternateKey
         }
 
-        internal func get(id: PersistentObject.ID) -> PersistentData.Object? {
-            storage[id]
-        }
-
-        internal func add(item: PersistentData.Object) {
-            guard let item = item as? T else { return }
-            storage[item.id] = item
-        }
-
-        public override func merge(other: MergeableContent) throws {
+        override public func merge(other: MergeableContent) throws {
             guard let other = other as? Self else { return }
             try mergeItems(other)
             importItems(other)
         }
 
-        fileprivate func importItems(_ other: PersistentData.Objects<T>) {
+        fileprivate func importItems(_ other: ObjectStore.Objects<T>) {
             Set(other.storage.keys).subtracting(Set(storage.keys))
                 .forEach { key in
                     guard let item = other.storage[key] else { return }
@@ -59,22 +43,37 @@ public extension PersistentData {
                 }
         }
 
-        fileprivate func mergeItems(_ other: PersistentData.Objects<T>) throws {}
+        fileprivate func mergeItems(_ other: ObjectStore.Objects<T>) throws {}
 
-        fileprivate func mergeItems(_ other: PersistentData.Objects<T>) throws where T: MergeableContent {
+        fileprivate func mergeItems(_ other: ObjectStore.Objects<T>) throws where T: MergeableContent {
             try Set(storage.keys).intersection(Set(other.storage.keys))
                 .forEach { key in
                     try storage[key]!.merge(other: other.storage[key]!)
                 }
         }
 
-        public override func setContainer(container: PersistentData) {
-            storage.values.forEach { $0.data = container }
+        override public func setStore(store: ObjectStore) {
+            storage.values.forEach { $0.store = store }
+        }
+
+        // MARK: - Storage
+
+        func getObject(id: T.ID) -> T? {
+            storage[id]
+        }
+
+        func getObjects() -> Set<T> {
+            Set(storage.values)
+        }
+
+        func addObject(item: T) {
+            guard storage[item.id] == nil else { return }
+            storage[item.id] = item
         }
     }
 }
 
-extension PersistentData.Objects: EncodableProperty where T: Encodable {
+extension ObjectStore.Objects: EncodableProperty where T: Encodable {
     public func encodeValue(from container: inout EncodeContainer, propertyName: String) throws {
         guard !storage.isEmpty else { return }
         let codingKey = SerializedCodingKeys(key: key ?? propertyName)
@@ -83,7 +82,7 @@ extension PersistentData.Objects: EncodableProperty where T: Encodable {
     }
 }
 
-extension PersistentData.Objects: DecodableProperty where T: Decodable {
+extension ObjectStore.Objects: DecodableProperty where T: Decodable {
     public func decodeValue(from container: DecodeContainer, propertyName: String) throws {
         let codingKey = SerializedCodingKeys(key: key ?? propertyName)
         if let value = try? container.decodeIfPresent([T].self, forKey: codingKey) {

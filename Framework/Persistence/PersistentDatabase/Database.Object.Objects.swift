@@ -9,7 +9,7 @@ import Combine
 import Foundation
 
 extension Database.Object {
-    @propertyWrapper final class Objects<Value> where Value: PersistentData.Object {
+    @propertyWrapper final class Objects<Value> where Value: ObjectStore.Object {
         typealias ValueSet = Set<Value>
         typealias IDSet = Set<Value.ID>
 
@@ -37,7 +37,7 @@ extension Database.Object {
             get {
                 if let _value { return _value }
                 guard
-                    let database = instance.database,
+                    let database = instance.document,
                     let ids = instance[IDSet.self, key]
                 else { return [] }
 
@@ -59,7 +59,7 @@ extension Database.Object {
                 guard newValue != _instance else { return }
                 _instance = newValue
                 cancellable = _instance!.objectWillChange.sink { [self] in
-                    if instance.database != nil {
+                    if instance.document != nil {
                         _value = nil
                     }
                 }

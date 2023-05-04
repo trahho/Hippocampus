@@ -14,7 +14,7 @@ extension Database {
         case c(String)
         case d(Date)
 //        case e([Role])
-        case f([Object.ID])
+        case f([UUID])
         case g(UUID)
 
         init?(_ value: (any PersistentGraph.PersistentValue)?) {

@@ -9,10 +9,8 @@ import Combine
 import Foundation
 
 public extension DatabaseDocument {
-    class PersistentCacheWrapper: PersistentWrapper {}
-
     @propertyWrapper
-    final class Cache<T>: PersistentCacheWrapper where T: DatabaseDocument {
+    final class Cache<T>: Storage where T: DatabaseDocument {
         // MARK: - Types
 
         struct CacheItem {

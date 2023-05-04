@@ -8,8 +8,8 @@
 import Combine
 import Foundation
 
-extension PersistentData {
+extension ObjectStore {
     open class Object: PersistentObject, ObservableObject {
-        var data: PersistentData?
+        var store: ObjectStore?
     }
 }
