@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Smaug
 
 extension Presentation {
     struct ItemDetail: Hashable {
@@ -23,8 +24,8 @@ extension Presentation {
     }
 
     class Query: Object {
-        @Persistent var name: String
-        @Relations var groups: Set<Group>
+        @Property var name: String
+        @References(\Group.queries) var groups: Set<Group>
 
         var isTop: Bool { groups.isEmpty }
 

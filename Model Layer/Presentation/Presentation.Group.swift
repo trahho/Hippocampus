@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Smaug
 
 extension Presentation {
     class Group: Object {
@@ -19,12 +20,12 @@ extension Presentation {
             return result
         }()
 
-        @Persistent var name: String
+        @Property var name: String
         @Serialized var isStatic = false
 
-        @Relations var superGroups: Set<Group>
-        @Relations var subGroups: Set<Group>
-        @Relations var queries: Set<Query>
+        @Objects var superGroups: Set<Group>
+        @Reference(\Group.superGroups) var subGroups: Set<Group>
+        @Reference(\Query.groups) var queries: Set<Query>
 
         var isTop: Bool { superGroups.isEmpty }
         var allSuperGroups: Set<Group> {

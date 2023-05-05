@@ -6,24 +6,12 @@
 //
 
 import Foundation
+import Smaug
 
-class Presentation: PersistentModel<Presentation.Storage> {
-    @Observed var structure: Structure
-
-    func role(id: Structure.Role.ID) -> Structure.Role {
-        structure[id]!
-    }
-
-    func roles(roleIds: Set<Structure.Role.ID>) -> Set<Structure.Role> {
-        roleIds.compactMap { role(id: $0) }.asSet
-    }
-
-    func roles(roles: Set<Structure.Role>) -> Set<Structure.Role.ID> {
-        roles.map { $0.id }.asSet
-    }
-
-    @Present var queries: Set<Query>
-    @Present var groups: Set<Group>
+class Presentation: DataStore<Presentation.Storage> {
+   
+    @Objects var queries: Set<Query>
+    @Objects var groups: Set<Group>
 
     override func setup() -> Presentation {
 //        let queries: [Query] = [.general, .notes, .topics]

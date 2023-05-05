@@ -15,7 +15,7 @@ struct ItemView: View {
     @State var showAllRoles = false
 
     var sortedRoles: [Structure.Role] {
-        let roles = showAllRoles ? document.roles.filter { item[role: $0] } : roles
+        let roles = showAllRoles ? document.structure.roles.filter { item[role: $0] } : roles
         return roles.sorted { a, b in
             a.roleDescription < b.roleDescription
         }

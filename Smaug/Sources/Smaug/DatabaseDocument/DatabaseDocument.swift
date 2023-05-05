@@ -50,6 +50,7 @@ open class DatabaseDocument: Reflectable, ObservableObject {
         let timestamp = containerDocument?.writingTimestamp ?? _writingTimestamp
         return timestamp != nil
     }
+
     private(set) var writingTimestamp: Date! {
         get { containerDocument?.writingTimestamp ?? _writingTimestamp ?? Date() }
         set {
@@ -138,9 +139,10 @@ open class DatabaseDocument: Reflectable, ObservableObject {
         }
     }
 
-    public subscript<T>(_ type: T.Type, _ name: String) -> T? where T: DatabaseDocument {
+    public subscript<T>(_ type: T.Type, _ name: String) -> T where T: DatabaseDocument {
         guard let mirror = mirror(for: Cache<T>.self).first else {
-            return containerDocument?[type, name]
+            guard let document = containerDocument?[type, name] else { fatalError("Cache for \(T.self) not found") }
+            return document
         }
         return mirror.value[name]
     }

@@ -25,11 +25,11 @@ struct DrawingView: View {
         case Form.icon:
             Image(systemName: "square.and.pencil")
         case Form.normal:
-            CanvasView(data: document.getDrawing(item: item, aspect: aspect), editable: editable)
+            CanvasView(data: document[Document.Drawing.self, "\(item.id) - \(aspect.id)"], editable: editable)
         case Form.edit:
-            CanvasView(data: document.getDrawing(item: item, aspect: aspect), editable: true)
+            CanvasView(data: document[Document.Drawing.self, "\(item.id) - \(aspect.id)"], editable: true)
         case Form.small:
-            ImageView(data: document.getDrawing(item: item, aspect: aspect), scale: 0.5)
+            ImageView(data: document[Document.Drawing.self, "\(item.id) - \(aspect.id)"], scale: 0.5)
         default:
             EmptyView()
         }

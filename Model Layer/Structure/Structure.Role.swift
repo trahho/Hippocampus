@@ -18,8 +18,8 @@ extension Structure {
         @Property var roleDescription: String = ""
         @Objects var representations: Set<Representation>
         @Objects var aspects: Set<Aspect>
-        @Objects var superRoles: Set<Role>
         @Objects var subRoles: Set<Role>
+        @References(\Role.subRoles) var superRoles: Set<Role>
         @Objects var references: Set<Reference>
 
         var allAspects: Set<Aspect> {

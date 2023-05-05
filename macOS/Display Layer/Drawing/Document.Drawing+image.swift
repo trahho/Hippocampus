@@ -11,8 +11,8 @@ import Foundation
 
 extension Document.Drawing {
     var image: NSImage {
-        let bounds = drawing.bounds
-        let image = drawing.image(from: bounds, scale: 1)
+        let bounds = drawing.drawing.bounds
+        let image = drawing.drawing.image(from: bounds, scale: 1)
         let rect = CGRect(origin: .zero, size: image.size)
 
         let result = NSImage(size: image.size)
@@ -20,7 +20,7 @@ extension Document.Drawing {
         guard let context = NSGraphicsContext.current else { return image }
 //        context.isFlipped = true
 //        pageFormat.draw(bounds: rect, offset: bounds.topLeft, scale: 1, drawing: drawing, context: context)
-        background.draw(bounds: rect, offset: bounds.topLeft, scale: 1, context: context)
+        properties.background.draw(bounds: rect, offset: bounds.topLeft, scale: 1, context: context)
         image.draw(in: rect)
         result.unlockFocus()
         return result

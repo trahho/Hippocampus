@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension UUID {
+public extension UUID {
     var key: String {
         String(utf16CodeUnits: [
             UInt16(uuid.0 << 8 + uuid.1),

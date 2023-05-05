@@ -9,6 +9,12 @@ import Foundation
 import Smaug
 
 class Information: DataStore<Information.Storage> {
+    @Objects private var allItems: Set<Item>
+
+    var items: Set<Item> {
+        allItems.filter { !$0.deleted }.asSet
+    }
+
 //    func createNode(roles: [Structure.Role] = [], timestamp: Date? = nil) -> Node {
 //        let timestamp = timestamp ?? Date()
 //        let node = Node()

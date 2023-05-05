@@ -12,6 +12,7 @@ class Document: DatabaseDocument {
     @Data var information = Information()
     @Data var structure = Structure().setup()
     @Data var presentation = Presentation().setup()
+    @Cache var drawing: Document.Drawing
 
     convenience init(name: String,local: Bool) {
         let containerURL = local ? HippocampusApp.localContainerUrl : HippocampusApp.iCloudContainerUrl
