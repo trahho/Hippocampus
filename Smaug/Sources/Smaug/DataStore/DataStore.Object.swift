@@ -26,7 +26,6 @@ extension DataStore {
             }
 
             if let document {
-                if document.readingTimestamp != nil { return }
                 document.change {
                     action()
                 }
@@ -66,6 +65,10 @@ extension DataStore {
         }
 
         // MARK: - Merging
+        
+        func adopt(document: DatabaseDocument) {
+            mirror(for: ReferenceStorage.self).map { $0.value }.forEach { $0.adopt(document: document) }
+        }
 
         public func merge(other: MergeableContent) throws {
             guard let other = other as? Self, other.id == id else { return }

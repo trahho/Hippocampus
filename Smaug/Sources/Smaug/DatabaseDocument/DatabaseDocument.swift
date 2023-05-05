@@ -29,8 +29,8 @@ open class DatabaseDocument: Reflectable, ObservableObject {
     // MARK: - Transactional change
 
     private var _readingTimestamp: Date?
-    private(set) var readingTimestamp: Date? {
-        get { containerDocument?.readingTimestamp ?? _readingTimestamp }
+    private(set) var readingTimestamp: Date! {
+        get { containerDocument?.readingTimestamp ?? _readingTimestamp ?? Date.distantFuture }
         set {
             if let containerDocument {
                 containerDocument.readingTimestamp = newValue
@@ -46,8 +46,12 @@ open class DatabaseDocument: Reflectable, ObservableObject {
     }
 
     private var _writingTimestamp: Date?
-    private(set) var writingTimestamp: Date? {
-        get { containerDocument?.writingTimestamp ?? _writingTimestamp }
+    private var isActive: Bool {
+        let timestamp = containerDocument?.writingTimestamp ?? _writingTimestamp
+        return timestamp != nil
+    }
+    private(set) var writingTimestamp: Date! {
+        get { containerDocument?.writingTimestamp ?? _writingTimestamp ?? Date() }
         set {
             if let containerDocument {
                 containerDocument.writingTimestamp = newValue
@@ -63,9 +67,9 @@ open class DatabaseDocument: Reflectable, ObservableObject {
     }
 
     func change(by change: () -> ()) {
-        guard readingTimestamp == nil else { return }
+        guard readingTimestamp == Date.distantFuture else { return }
 
-        let didStart = writingTimestamp == nil
+        let didStart = !isActive
         if didStart {
             writingTimestamp = Date()
         }

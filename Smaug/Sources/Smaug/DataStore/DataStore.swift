@@ -14,27 +14,19 @@ open class DataStore<ValueStorage: TimedValueStorage>: ObjectStore {
     public typealias PersistentValue = TimedValueStorage.PersistentValue
     public typealias Key = String
 
-   
-
     @Serialized var timestamps: Set<Date>
 
-    
+    override func addObject<T>(item: T) throws where T: ObjectStore.Object {
+        guard let storage = storage(type: T.self) else { throw DatabaseDocument.Failure.typeNotFound }
+        guard storage.getObject(id: item.id) == nil else { return }
 
-    
-    
-
-//    func add(_ node: Node, timestamp: Date? = nil) {
-//        guard nodeStorage[node.id] == nil else { return }
-//        objectWillChange.send()
-//
-//        let timestamp = timestamp ?? Date()
-//
-//        if node.added == nil {
-//            node.added = timestamp
-//        }
-//        node.graph = self
-//        nodeStorage[node.id] = node
-//        node.adopt(timestamp: timestamp)
-//        publishDidChange()
-//    }
+        objectWillChange.send()
+        storage.addObject(item: item)
+        item.store = self
+        if let data = item as? Object {
+            data.added = document.writingTimestamp
+            data.adopt(document: document)
+        }
+        objectDidChange.send()
+    }
 }

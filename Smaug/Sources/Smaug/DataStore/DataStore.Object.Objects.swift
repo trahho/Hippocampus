@@ -8,8 +8,8 @@
 import Combine
 import Foundation
 
-extension DataStore.Object {
-    @propertyWrapper final class Objects<Value> where Value: ObjectStore.Object {
+public extension DataStore.Object {
+    @propertyWrapper final class Objects<Value>: ReferenceStorage where Value: ObjectStore.Object {
         typealias ValueSet = Set<Value>
         typealias IDSet = Set<Value.ID>
 
@@ -66,9 +66,13 @@ extension DataStore.Object {
             }
         }
 
+        override func adopt(document: DatabaseDocument) {
+            if let _value { _value.forEach { document.add($0) }}
+        }
+
         public static subscript<Enclosing: DataStore.Object>(_enclosingInstance instance: Enclosing,
-                                                            wrapped _: ReferenceWritableKeyPath<Enclosing, Value>,
-                                                            storage storageKeyPath: ReferenceWritableKeyPath<Enclosing, Objects>) -> Set<Value>
+                                                             wrapped _: ReferenceWritableKeyPath<Enclosing, Value>,
+                                                             storage storageKeyPath: ReferenceWritableKeyPath<Enclosing, Objects>) -> Set<Value>
         {
             get {
                 let storage = instance[keyPath: storageKeyPath]

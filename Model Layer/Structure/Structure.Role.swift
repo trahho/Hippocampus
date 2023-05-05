@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Smaug
 
 extension Structure {
     @dynamicMemberLookup
@@ -14,12 +15,12 @@ extension Structure {
         @Serialized var isStatic = false
         @PublishedSerialized var canBeCreated = false
 
-        @Persistent var roleDescription: String = ""
-        @Relations var representations: Set<Representation>
-        @Relations var aspects: Set<Aspect>
-        @Relations var superRoles: Set<Role>
-        @Relations var subRoles: Set<Role>
-        @Relations var references: Set<Reference>
+        @Property var roleDescription: String = ""
+        @Objects var representations: Set<Representation>
+        @Objects var aspects: Set<Aspect>
+        @Objects var superRoles: Set<Role>
+        @Objects var subRoles: Set<Role>
+        @Objects var references: Set<Reference>
 
         var allAspects: Set<Aspect> {
             subRoles.flatMap(\.allAspects).asSet.union(aspects)

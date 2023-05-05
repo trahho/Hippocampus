@@ -7,12 +7,13 @@
 
 import Foundation
 import SwiftUI
+import Smaug
 
 extension Structure {
     class Aspect: Object {
-        @Persistent var name: String = ""
-        @Persistent var presentation: Presentation
-        @Persistent var index = 0
+        @Property var name: String = ""
+        @Property var presentation: Presentation
+        @Property var index = 0
 //        @Persistent var defaultValue: (any PersistentValue)?
 
         @Relation var role: Role!

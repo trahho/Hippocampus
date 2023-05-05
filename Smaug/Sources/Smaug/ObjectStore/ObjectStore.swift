@@ -15,7 +15,7 @@ open class ObjectStore: PersistentContent, Serializable, RestorableContent, Merg
         case mergeFailed
     }
 
-    public private(set) var document: DatabaseDocument!
+    public internal(set) var document: DatabaseDocument!
 
     // MARK: - Enclosing
 
@@ -53,8 +53,8 @@ open class ObjectStore: PersistentContent, Serializable, RestorableContent, Merg
 
     // MARK: - Storage
 
-    func storage<T>(type: T.Type) -> Objects<T>? {
-        mirror(for: Objects<T>.self).first?.value
+    func storage<T>(type: T.Type) -> ObjectsStorageBase<T>? {
+        mirror(for: ObjectsStorageBase<T>.self).first?.value
     }
 
     func getObject<T>(type: T.Type, id: T.ID) throws -> T? where T: ObjectStore.Object {
@@ -73,6 +73,7 @@ open class ObjectStore: PersistentContent, Serializable, RestorableContent, Merg
 
         objectWillChange.send()
         storage.addObject(item: item)
+        item.store = self
         objectDidChange.send()
     }
 }

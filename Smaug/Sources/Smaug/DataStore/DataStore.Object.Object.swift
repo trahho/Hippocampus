@@ -8,10 +8,14 @@
 import Combine
 import Foundation
 
-extension DataStore.Object {
-    @propertyWrapper final class Object<Value> where Value: ObjectStore.Object {
+public extension DataStore.Object {
+    class ReferenceStorage {
+        func adopt(document _: DatabaseDocument) {}
+    }
+
+    @propertyWrapper final class Object<Value>: ReferenceStorage where Value: ObjectStore.Object {
         @available(*, unavailable, message: "This property wrapper can only be applied to classes")
-        public var wrappedValue: Value {
+        public var wrappedValue: Value? {
             get { fatalError() }
             set { fatalError() }
         }
@@ -65,10 +69,14 @@ extension DataStore.Object {
                 }
             }
         }
+        
+        override func adopt(document: DatabaseDocument) {
+            if let _value { document.add(_value) }
+        }
 
         public static subscript<Enclosing: DataStore.Object>(_enclosingInstance instance: Enclosing,
-                                                            wrapped _: ReferenceWritableKeyPath<Enclosing, Value>,
-                                                            storage storageKeyPath: ReferenceWritableKeyPath<Enclosing, Object>) -> Value?
+                                                             wrapped _: ReferenceWritableKeyPath<Enclosing, Value?>,
+                                                             storage storageKeyPath: ReferenceWritableKeyPath<Enclosing, Object>) -> Value?
         {
             get {
                 let storage = instance[keyPath: storageKeyPath]

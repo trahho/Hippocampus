@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension DataStore.Object {
+public extension DataStore.Object {
     @propertyWrapper final class Property<Value> where Value: DataStore.PersistentValue {
         @available(*, unavailable, message: "This property wrapper can only be applied to classes")
         public var wrappedValue: Value {
