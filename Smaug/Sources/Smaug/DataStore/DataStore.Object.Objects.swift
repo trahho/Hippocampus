@@ -10,11 +10,10 @@ import Foundation
 
 public extension DataStore.Object {
     @propertyWrapper final class Objects<Value>: ReferenceStorage where Value: ObjectStore.Object {
-        typealias ValueSet = Set<Value>
-        typealias IDSet = Set<Value.ID>
+    
 
         @available(*, unavailable, message: "This property wrapper can only be applied to classes")
-        public var wrappedValue: Value {
+        public var wrappedValue: Set<Value> {
             get { fatalError() }
             set { fatalError() }
         }
@@ -32,13 +31,13 @@ public extension DataStore.Object {
 
         private var cancellable: AnyCancellable?
 
-        private var _value: ValueSet?
-        var value: ValueSet {
+        private var _value: Set<Value>?
+        var value: Set<Value> {
             get {
                 if let _value { return _value }
                 guard
                     let database = instance.document,
-                    let ids = instance[IDSet.self, key]
+                    let ids = instance[Set<Value.ID>.self, key]
                 else { return [] }
 
                 _value = ids.compactMap { database[Value.self, $0] }.asSet
@@ -47,7 +46,7 @@ public extension DataStore.Object {
             set {
                 guard value != newValue else { return }
                 let ids = newValue.map { $0.id }.asSet
-                instance[IDSet.self, key] = ids
+                instance[Set<Value.ID>.self, key] = ids
                 _value = newValue
             }
         }
@@ -71,7 +70,7 @@ public extension DataStore.Object {
         }
 
         public static subscript<Enclosing: DataStore.Object>(_enclosingInstance instance: Enclosing,
-                                                             wrapped _: ReferenceWritableKeyPath<Enclosing, Value>,
+                                                             wrapped _: ReferenceWritableKeyPath<Enclosing, Set<Value>>,
                                                              storage storageKeyPath: ReferenceWritableKeyPath<Enclosing, Objects>) -> Set<Value>
         {
             get {

@@ -47,7 +47,7 @@
 //            let result = storage._wrappedValue(T.self)
 //            if storage.cancellable == nil {
 //                storage.cancellable = result.objectWillChange.sink(receiveValue: { _ in
-//                    if let receiver = instance as? ObservedChangesReceiver {
+//                    if let receiver = instance as? ObservedC hangesReceiver {
 //                        receiver.willChange(observedObject: result)
 //                        return
 //                    }

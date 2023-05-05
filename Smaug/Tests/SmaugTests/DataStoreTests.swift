@@ -63,6 +63,20 @@ final class DataStoreTests: XCTestCase {
 
         XCTAssertEqual(b.a, a)
     }
+    
+    func testReverses() throws {
+        let doc = Document(url: .virtual)
+        let a = AA.A()
+        let b = BB.B()
+        b.c = a
+        doc.add(a)
+        
+        serialize(doc: doc)
+
+        XCTAssertEqual(b.c, a)
+        XCTAssert(a.c.contains(b))
+        XCTAssert(b.cc.contains(a))
+    }
 
     func testAdopt() throws {
         let doc = Document(url: .virtual)

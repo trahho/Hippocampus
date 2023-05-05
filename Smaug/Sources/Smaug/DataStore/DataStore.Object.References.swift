@@ -13,20 +13,15 @@ public extension DataStore.Object {
         private var objectKeyPath: ReferenceWritableKeyPath<Value, Enclosing?>?
         private var objectsKeyPath: ReferenceWritableKeyPath<Value, Set<Enclosing>>?
 
-        init(_ objectKeyPath: ReferenceWritableKeyPath<Value, Enclosing?>) {
+        public init(_ objectKeyPath: ReferenceWritableKeyPath<Value, Enclosing?>) {
             self.objectKeyPath = objectKeyPath
         }
 
-        init(_ objectsKeyPath: ReferenceWritableKeyPath<Value, Set<Enclosing>>) {
+        public init(_ objectsKeyPath: ReferenceWritableKeyPath<Value, Set<Enclosing>>) {
             self.objectsKeyPath = objectsKeyPath
         }
 
-        @available(*, unavailable, message: "This property wrapper can only be applied to classes")
-        public var wrappedValue: Value {
-            get { fatalError() }
-            set { fatalError() }
-        }
-
+      
         private var cancellable: AnyCancellable?
 
         private var _value: Set<Value>?
@@ -88,6 +83,12 @@ public extension DataStore.Object {
 
         override func adopt(document: DatabaseDocument) {
             if let _value { _value.forEach { document.add($0) }}
+        }
+
+        @available(*, unavailable, message: "This property wrapper can only be applied to classes")
+        public var wrappedValue: Set<Value> {
+            get { fatalError() }
+            set { fatalError() }
         }
 
         public static subscript(_enclosingInstance instance: Enclosing,
