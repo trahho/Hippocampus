@@ -14,22 +14,22 @@ public extension DatabaseDocument {
         // MARK: - Initialization
 
         public init(wrappedValue: @autoclosure @escaping () -> T, publishChange: Bool = true, commitOnChange: Bool = true) {
-            content = wrappedValue
+            defaultContent = wrappedValue
             self.commitOnChange = commitOnChange
             self.publishChange = publishChange
         }
 
         // MARK: - Content
 
-        var container: PersistentContainer<T>!
-        var content: () -> T
+        var container: ObjectStoreContainer<T>!
+        var defaultContent: () -> T
         var commitOnChange: Bool
         var publishChange: Bool
         var cancellable: AnyCancellable!
 
         override func setup(url: URL, name: String, document: DatabaseDocument) {
             self.document = document
-            let content = content()
+            let content = defaultContent()
             let url = url.appending(component: name + ".persistent")
             container = ObjectStoreContainer(document: document, url: url, content: content, commitOnChange: commitOnChange)
             if publishChange {
@@ -68,6 +68,15 @@ public extension DatabaseDocument {
                 return storage.container.content
             }
             set {}
+        }
+
+        public var projectedValue: Data<T> {
+            return self
+        }
+
+        public var content: T {
+            get { container.content }
+            set { container.setContent(content: newValue) }
         }
     }
 }

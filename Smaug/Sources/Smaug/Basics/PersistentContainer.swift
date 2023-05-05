@@ -117,16 +117,16 @@ public class PersistentContainer<Content: PersistentContent>: PersistentContaine
         }
     }
 
-    fileprivate func updateContent(_ newContent: Content) where Content: MergeableContent {
-        do {
-            isMerging = true
-            try content.merge(other: newContent)
-            isMerging = false
-        } catch {
-            content = newContent
-            isMerging = false
-        }
-    }
+//    fileprivate func updateContent(_ newContent: Content) where Content: MergeableContent {
+//        do {
+//            isMerging = true
+//            try content.merge(other: newContent)
+//            isMerging = false
+//        } catch {
+//            content = newContent
+//            isMerging = false
+//        }
+//    }
 
     func restore(content: Content) {
         if let restorable = content as? RestorableContent {

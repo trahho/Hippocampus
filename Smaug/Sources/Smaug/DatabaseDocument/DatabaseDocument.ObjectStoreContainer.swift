@@ -20,5 +20,10 @@ extension DatabaseDocument {
             super.restore(content: content)
             content.document = document
         }
+        
+        public func setContent(content: T) {
+            restore(content: content)
+            self.content = content
+        }
     }
 }
