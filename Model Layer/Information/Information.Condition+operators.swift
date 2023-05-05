@@ -12,19 +12,19 @@ infix operator <~: AdditionPrecedence
 
 
 extension Information.Condition {
-    static prefix func ! (rhs: PersistentGraph.Condition) -> PersistentGraph.Condition {
+    static prefix func ! (rhs: Information.Condition) -> Information.Condition {
         .not(rhs)
     }
     
-    static func ~> (lhs: PersistentGraph.Condition, rhs: PersistentGraph.Condition) -> PersistentGraph.Condition {
+    static func ~> (lhs: Information.Condition, rhs: Information.Condition) -> Information.Condition {
         lhs && .hasReference(rhs)
     }
     
-    static func <~ (lhs: PersistentGraph.Condition, rhs: PersistentGraph.Condition) -> PersistentGraph.Condition {
+    static func <~ (lhs: Information.Condition, rhs: Information.Condition) -> Information.Condition {
         rhs && .isReferenced(lhs)
     }
 
-    static func && (lhs: PersistentGraph.Condition, rhs: PersistentGraph.Condition) -> PersistentGraph.Condition {
+    static func && (lhs: Information.Condition, rhs: Information.Condition) -> Information.Condition {
         if case let .all(lhsConditions) = lhs, case let .all(rhsConditions) = rhs {
             return .all(lhsConditions + rhsConditions)
         } else if case let .all(lhsConditions) = lhs {
@@ -36,7 +36,7 @@ extension Information.Condition {
         }
     }
 
-    static func || (lhs: PersistentGraph.Condition, rhs: PersistentGraph.Condition) -> PersistentGraph.Condition {
+    static func || (lhs: Information.Condition, rhs: Information.Condition) -> Information.Condition {
         if case let .any(lhsConditions) = lhs, case let .any(rhsConditions) = rhs {
             return .any(lhsConditions + rhsConditions)
         } else if case let .any(lhsConditions) = lhs {
