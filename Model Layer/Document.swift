@@ -10,8 +10,8 @@ import Smaug
 
 class Document: DatabaseDocument {
     @Data var information = Information()
-    @Data var structure = Structure().setup()
-    @Data var presentation = Presentation().setup()
+    @Data var structure = Structure()
+    @Data var presentation = Presentation()
     @Cache var drawing: Document.Drawing
 
     convenience init(name: String,local: Bool) {

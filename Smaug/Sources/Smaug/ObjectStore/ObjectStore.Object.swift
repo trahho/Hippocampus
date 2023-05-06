@@ -11,5 +11,21 @@ import Foundation
 extension ObjectStore {
     open class Object: PersistentObject, ObservableObject {
         var store: ObjectStore?
+        
+        public subscript<T>(_ type: T.Type, _ id: T.ID) -> T? where T: ObjectStore.Object {
+            store![type, id]
+        }
+
+        public subscript<T>(_ type: T.Type) -> Set<T> where T: ObjectStore.Object {
+            store![type]
+        }
+
+        public func add<T>(_ item: T) where T: ObjectStore.Object {
+            store!.add(item)
+        }
+
+        public subscript<T>(_ type: T.Type, _ name: String) -> T where T: DatabaseDocument {
+            store![type, name]
+        }
     }
 }

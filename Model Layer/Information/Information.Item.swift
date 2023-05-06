@@ -13,7 +13,7 @@ extension Information {
         @Objects var roles: Set<Structure.Role>
 
         @Objects var to: Set<Item>
-        @References(\Item.to) var from: Set<Item>
+        @Relations(\Item.to) var from: Set<Item>
 
         subscript(role role: Structure.Role) -> Bool {
             get {
@@ -28,6 +28,15 @@ extension Information {
                 } else {
                     roles.remove(role)
                 }
+            }
+        }
+
+        subscript(role role: Structure.Role.ID) -> Bool {
+            get {
+                self[role: self[Structure.Role.self, role]!]
+            }
+            set {
+                self[role: self[Structure.Role.self, role]!] = newValue
             }
         }
 

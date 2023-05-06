@@ -29,7 +29,7 @@ extension Presentation.Query {
 
     static let notes = Query(Keys.notes, "_Notes") {
         //            Predicate([.note, .topic], .hasRole(Role.note.id))
-        Predicate([.note], .hasRole(Role.note.id))
+        Predicate([.note], .hasRole(Role.note))
     } representations: {
         RoleRepresentation(.topic, "_Title")
         RoleRepresentation(.drawing, "_Icon")
@@ -39,6 +39,6 @@ extension Presentation.Query {
 
     static let topics = Query(Keys.topics, "_Topics") {
         //            Predicate([.note, .topic], .hasRole(Role.note.id))
-        Predicate([.topic], .hasRole(Role.topic.id))
+        Predicate([.topic], .hasRole(Role.topic))
     }
 }

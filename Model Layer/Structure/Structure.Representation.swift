@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import Smaug
 
 extension Structure {
     class Representation: Object {
-        @Persistent var name: String
-        @Persistent var presentation: Structure.Presentation
+        @Property var name: String
+        @Property var presentation: Structure.Presentation
 
    
     }

@@ -70,7 +70,7 @@ extension DataStore {
             mirror(for: ReferenceStorage.self).map { $0.value }.forEach { $0.adopt(document: document) }
         }
 
-        public func merge(other: MergeableContent) throws {
+        open func merge(other: MergeableContent) throws {
             guard let other = other as? Self, other.id == id else { return }
 
             willChange()

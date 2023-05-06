@@ -6,8 +6,8 @@
 //
 
 import Foundation
-import SwiftUI
 import Smaug
+import SwiftUI
 
 extension Structure {
     @dynamicMemberLookup
@@ -19,7 +19,7 @@ extension Structure {
         @Objects var representations: Set<Representation>
         @Objects var aspects: Set<Aspect>
         @Objects var subRoles: Set<Role>
-        @References(\Role.subRoles) var superRoles: Set<Role>
+        @Relations(\Role.subRoles) var superRoles: Set<Role>
         @Objects var references: Set<Reference>
 
         var allAspects: Set<Aspect> {
@@ -56,8 +56,9 @@ extension Structure {
             findRepresentation(for: name) ?? .vertical([.undefined, .label(name)], alignment: .center)
         }
 
-        override func mergeValues(other: Object) {
-            guard let other = other as? Role else { return }
+        override func merge(other: MergeableContent) throws {
+            try super.merge(other: other)
+            guard let other = other as? Role else { throw MergeableContentMergeError.wrongMatch  }
             self.isStatic = other.isStatic
             self.canBeCreated = other.canBeCreated
         }

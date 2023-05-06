@@ -12,12 +12,10 @@ class Structure: DataStore<Structure.Storage> {
     @Objects var roles: Set<Role>
     @Objects var aspects: Set<Aspect>
 
-    func setup() -> Structure {
+    override func setup() {
         let roles: [Role] = [.global, .drawing, .text, .topic, .note]
         roles.forEach {
             document.add($0)
         }
-
-        return self
     }
 }

@@ -9,23 +9,14 @@ import Foundation
 
 extension Presentation {
     class RoleRepresentation: Object {
-        @Persistent private var roleId: Structure.Role.ID
-        @Persistent var representation: String
-
-        var role: Structure.Role {
-            get {
-                base.role(id: roleId)
-            }
-            set {
-                roleId = newValue.id
-            }
-        }
+        @Object  var role: Structure.Role!
+        @Property var representation: String
 
         required init() {}
 
         init(_ role: Structure.Role, _ representation: String) {
             super.init()
-            self.roleId = role.id
+            self.role = role
             self.representation = representation
         }
     }

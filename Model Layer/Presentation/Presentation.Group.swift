@@ -24,8 +24,8 @@ extension Presentation {
         @Serialized var isStatic = false
 
         @Objects var superGroups: Set<Group>
-        @Reference(\Group.superGroups) var subGroups: Set<Group>
-        @Reference(\Query.groups) var queries: Set<Query>
+        @Relations(\Group.superGroups) var subGroups: Set<Group>
+        @Objects var queries: Set<Query>
 
         var isTop: Bool { superGroups.isEmpty }
         var allSuperGroups: Set<Group> {

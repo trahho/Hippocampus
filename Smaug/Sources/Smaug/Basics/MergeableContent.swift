@@ -11,11 +11,6 @@ public protocol MergeableContent {
     func merge(other: any MergeableContent) throws
 }
 
-enum MergeableContentMergeError: Error {
-    case wrongMatch
-    case mergeFailed
-}
-
 public extension MergeableContent {
     func merge(other: any MergeableContent) throws {
         throw MergeableContentMergeError.mergeFailed

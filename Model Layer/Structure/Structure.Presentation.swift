@@ -60,7 +60,7 @@ extension Structure {
         var editable = false
 
         var body: some View {
-            if let aspect = structure.aspects[aspectId] {
+            if let aspect = structure[Aspect.self , aspectId] {
                 aspect.view(for: item, as: form, editable: editable)
             } else {
                 EmptyView()

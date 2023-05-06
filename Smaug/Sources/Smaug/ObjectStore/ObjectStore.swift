@@ -51,6 +51,8 @@ open class ObjectStore: PersistentContent, Serializable, RestorableContent, Merg
         }
     }
 
+    open func setup() {}
+
     // MARK: - Storage
 
     func storage<T>(type: T.Type) -> ObjectsStorageBase<T>? {
@@ -75,5 +77,23 @@ open class ObjectStore: PersistentContent, Serializable, RestorableContent, Merg
         storage.addObject(item: item)
         item.store = self
         objectDidChange.send()
+    }
+    
+    // MARK: - Access
+    
+    public subscript<T>(_ type: T.Type, _ id: T.ID) -> T? where T: ObjectStore.Object {
+        document[type, id]
+    }
+
+    public subscript<T>(_ type: T.Type) -> Set<T> where T: ObjectStore.Object {
+        document[type]
+    }
+
+    public func add<T>(_ item: T) where T: ObjectStore.Object {
+        document.add(item)
+    }
+
+    public subscript<T>(_ type: T.Type, _ name: String) -> T where T: DatabaseDocument {
+        document[type, name]
     }
 }

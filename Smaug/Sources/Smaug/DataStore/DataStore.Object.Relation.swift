@@ -9,7 +9,7 @@ import Combine
 import Foundation
 
 public extension DataStore.Object {
-    @propertyWrapper final class References<Enclosing, Value>: ReferenceStorage where Value: ObjectStore.Object, Enclosing: DataStore.Object {
+    @propertyWrapper final class Relation<Enclosing, Value>: ReferenceStorage where Value: ObjectStore.Object, Enclosing: DataStore.Object {
         private var objectKeyPath: ReferenceWritableKeyPath<Value, Enclosing?>?
         private var objectsKeyPath: ReferenceWritableKeyPath<Value, Set<Enclosing>>?
 
@@ -21,48 +21,42 @@ public extension DataStore.Object {
             self.objectsKeyPath = objectsKeyPath
         }
 
-      
+        @available(*, unavailable, message: "This property wrapper can only be applied to classes")
+        public var wrappedValue: Value? {
+            get { fatalError() }
+            set { fatalError() }
+        }
+
         private var cancellable: AnyCancellable?
 
-        private var _value: Set<Value>?
-        var value: Set<Value> {
+        private var _value: Value?
+        var value: Value? {
             get {
                 if let _value { return _value }
                 guard
                     let document = instance.document
-                else { return [] }
+                else { return nil }
                 if let objectKeyPath {
-                    _value = document[Value.self].filter { $0[keyPath: objectKeyPath] == instance }
+                    _value = document[Value.self].first(where: { $0[keyPath: objectKeyPath] == instance })
                 }
                 if let objectsKeyPath {
-                    _value = document[Value.self].filter { $0[keyPath: objectsKeyPath].contains(instance) }
+                    _value = document[Value.self].first(where: { $0[keyPath: objectsKeyPath].contains(instance) })
                 }
-                return _value ?? []
+                return _value
             }
             set {
-                let value = value
-                value.subtracting(newValue).forEach { value in
-                    if let objectKeyPath {
-                        value[keyPath: objectKeyPath] = nil
-                    }
-                    if let objectsKeyPath {
-                        value[keyPath: objectsKeyPath].remove(instance)
-                    }
+                guard value != newValue else { return }
+                if let objectKeyPath {
+                    if let value { value[keyPath: objectKeyPath] = nil }
+                    if let newValue { newValue[keyPath: objectKeyPath] = instance }
                 }
-                newValue.subtracting(value).forEach { value in
-                    if let objectKeyPath {
-                        value[keyPath: objectKeyPath] = instance
-                    }
-                    if let objectsKeyPath {
-                        value[keyPath: objectsKeyPath].insert(instance)
-                    }
+                if let objectsKeyPath {
+                    if let value { value[keyPath: objectsKeyPath].remove(instance) }
+                    if let newValue { newValue[keyPath: objectsKeyPath].insert(instance) }
                 }
-
                 _value = newValue
-                if let document = instance.document {
-                    newValue.subtracting(value).forEach { value in
-                        document.add(value)
-                    }
+                if let document = instance.document, let newValue {
+                    document.add(newValue)
                 }
             }
         }
@@ -82,18 +76,12 @@ public extension DataStore.Object {
         }
 
         override func adopt(document: DatabaseDocument) {
-            if let _value { _value.forEach { document.add($0) }}
-        }
-
-        @available(*, unavailable, message: "This property wrapper can only be applied to classes")
-        public var wrappedValue: Set<Value> {
-            get { fatalError() }
-            set { fatalError() }
+            if let _value { document.add(_value) }
         }
 
         public static subscript(_enclosingInstance instance: Enclosing,
-                                wrapped _: ReferenceWritableKeyPath<Enclosing, Set<Value>>,
-                                storage storageKeyPath: ReferenceWritableKeyPath<Enclosing, References>) -> Set<Value>
+                                wrapped _: ReferenceWritableKeyPath<Enclosing, Value?>,
+                                storage storageKeyPath: ReferenceWritableKeyPath<Enclosing, Relation>) -> Value?
         {
             get {
                 let storage = instance[keyPath: storageKeyPath]

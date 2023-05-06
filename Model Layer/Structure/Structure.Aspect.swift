@@ -16,6 +16,6 @@ extension Structure {
         @Property var index = 0
 //        @Persistent var defaultValue: (any PersistentValue)?
 
-        @Reference(\Role.aspects) var role: Role!
+        @Relation(\Role.aspects) var role: Role!
     }
 }

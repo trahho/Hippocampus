@@ -6,57 +6,62 @@
 //
 
 import Foundation
+import Smaug
 
-//extension Set<Structure.Role> {
+// extension Set<Structure.Role> {
 //    func contains(_ memberId: Structure.Role.ID) -> Bool {
 //        contains { role in
 //            role.id == memberId
 //        }
 //    }
-//}
+// }
 
 extension Presentation.Query {
     class Result {
-        class Item: IdentifiableObject, ObservableObject {
+//        class Item: IdentifiableObject, ObservableObject {
+        class Item: Presentation.Object {
             @Observed var item: Information.Item
-            var roles: Set<Structure.Role>
-
-            override var id: Information.Item.ID {
-                get { item.id }
-                set {}
-            }
+            @Objects var roles: Set<Structure.Role>
+            @Objects var next: Set<Item>
 
             init(item: Information.Item, roles: Set<Structure.Role>) {
-                self.roles = roles.filter { item[role: $0] == true }
                 super.init()
+                self.roles = roles.intersection(item.roles)
                 self.item = item
+                self.id = item.id
             }
+
+            required init() {}
         }
 
         class Node: Item {
-            var from: Set<Edge> = []
-            var to: Set<Edge> = []
-
-            init(node: Information.Node, roles: Set<Structure.Role>) {
-                super.init(item: node, roles: roles)
-            }
+//            var from: Set<Edge> = []
+//            var to: Set<Edge> = []
+//            
+//            required init() {super.init()}
+//
+//            init(node: Information.Item, roles: Set<Structure.Role>) {
+//                super.init(item: node, roles: roles)
+//            }
         }
 
         class Edge: Item {
-            var from: Node
-            var to: Node
-
-            init(edge: Information.Edge, roles: Set<Structure.Role>, from: Node, to: Node) {
-                self.from = from
-                self.to = to
-                super.init(item: edge, roles: roles)
-                from.to.insert(self)
-                to.from.insert(self)
-            }
+//            var from: Node
+//            var to: Node
+//
+//            required init() {.init()}
+//
+//            init(edge: Information.Item, roles: Set<Structure.Role>, from: Node, to: Node) {
+//                self.from = from
+//                self.to = to
+//                super.init(item: edge, roles: roles)
+//                from.to.insert(self)
+//                to.from.insert(self)
+//            }
         }
 
-        var nodeStorage: [Information.Node.ID: Node] = [:]
-        var edgeStorage: [Information.Edge.ID: Edge] = [:]
+        var nodeStorage: [Information.Item.ID: Node] = [:]
+        var edgeStorage: [Information.Item.ID: Edge] = [:]
 
         var nodes: Set<Node> {
             Set(nodeStorage.values)

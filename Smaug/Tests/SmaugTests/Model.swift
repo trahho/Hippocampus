@@ -68,9 +68,9 @@ extension AA {
 extension BB {
     class B: Object {
         @Property var b: String
-        @Reference(\AA.A.b) var a: AA.A!
-        @Reference(\AA.A.c) var c: AA.A!
-        @References(\AA.A.c) var cc: Set<AA.A>
+        @Relation(\AA.A.b) var a: AA.A!
+        @Relation(\AA.A.c) var c: AA.A!
+        @Relations(\AA.A.c) var cc: Set<AA.A>
 
     }
 }

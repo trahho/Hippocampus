@@ -9,17 +9,8 @@ import Foundation
 
 extension Presentation {
     class Predicate: Object {
-        @Persistent var condition: Information.Condition
-        @Persistent private var roleIds: Set<Structure.Role.ID>
-
-        var roles: Set<Structure.Role> {
-            get {
-                base.roles(roleIds: roleIds)
-            }
-            set {
-                roleIds = newValue.map { $0.id }.asSet
-            }
-        }
+        @Property var condition: Information.Condition
+        @Objects var roles: Set<Structure.Role>
 
         func matches(for member: Information.Item) -> Bool {
             condition.matches(for: member)

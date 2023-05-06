@@ -12,13 +12,17 @@ extension Information {
         typealias PersistentComparableValue = PersistentValue & Comparable
 
         case always(Bool)
-        case hasRole(Structure.Role)
+        case hasRole(Structure.Role.ID)
         case hasValue(Comparison)
         case isReferenced(Condition)
         case hasReference(Condition)
         case not(Condition)
         case any([Condition])
         case all([Condition])
+
+        static func hasRole(_ role: Structure.Role) -> Self {
+            .hasRole(role.id)
+        }
 
         func matches(for item: Item) -> Bool {
             switch self {
@@ -29,21 +33,9 @@ extension Information {
             case let .hasValue(comparison):
                 return comparison.calculate(for: item)
             case let .isReferenced(condition):
-                if let node = item as? Node {
-                    return node.incoming.contains(where: { condition.matches(for: $0) })
-                } else if let edge = item as? Edge {
-                    return condition.matches(for: edge.from)
-                } else {
-                    return false
-                }
+                return item.from.contains(where: { condition.matches(for: $0) })
             case let .hasReference(condition):
-                if let node = item as? Node {
-                    return node.outgoing.contains(where: { condition.matches(for: $0) })
-                } else if let edge = item as? Edge {
-                    return condition.matches(for: edge.to)
-                } else {
-                    return false
-                }
+                return item.to.contains(where: { condition.matches(for: $0) })
             case let .not(condition):
                 return !condition.matches(for: item)
             case let .any(conditions):
@@ -63,4 +55,39 @@ extension Information {
             }
         }
     }
+}
+
+extension Equatable {
+    func isEqualTo(_ other: (any Equatable)?) -> Bool {
+        if let other = other as? Self, other == self {
+            return true
+        } else {
+            return false
+        }
+    }
+}
+
+func isEqual(_ a: (any Equatable)?, _ b: (any Equatable)?) -> Bool {
+    if a == nil, b == nil { return true }
+    else if let a, a.isEqualTo(b) { return true }
+    else if let b, b.isEqualTo(a) { return true }
+    else { return false }
+}
+
+extension Comparable {
+    func isBelow(_ other: (any Equatable)?) -> Bool {
+        if let other = other as? Self, self < other {
+            return true
+        } else {
+            return false
+        }
+    }
+}
+
+func isBelow(_ a: (any Comparable)?, _ b: (any Comparable)?) -> Bool {
+    if a == nil, b != nil { return true }
+    if a != nil, b == nil { return false }
+    else if let a, a.isBelow(b) { return true }
+    else if let b, b.isBelow(a) || b.isEqualTo(a) { return false }
+    else { return false }
 }

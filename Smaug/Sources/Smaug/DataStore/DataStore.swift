@@ -29,4 +29,4 @@ open class DataStore<ValueStorage: TimedValueStorage>: ObjectStore {
         }
         objectDidChange.send()
     }
-}
+    }

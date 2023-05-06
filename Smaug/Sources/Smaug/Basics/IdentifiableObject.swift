@@ -20,5 +20,6 @@ open class IdentifiableObject: Identifiable, Hashable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
+    
+    public init() {}
 }
-

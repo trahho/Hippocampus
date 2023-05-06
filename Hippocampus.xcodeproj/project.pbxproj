@@ -707,8 +707,6 @@
 			isa = PBXGroup;
 			children = (
 				C5D2734F2974810600F32EB6 /* Obsolete */,
-				C5C4A128293CD78D00FF9AB8 /* PersistentGraph */,
-				C5C4A129293CD7B000FF9AB8 /* PersistentModel */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -1137,8 +1135,10 @@
 		C5D2734F2974810600F32EB6 /* Obsolete */ = {
 			isa = PBXGroup;
 			children = (
+				C5C4A129293CD7B000FF9AB8 /* PersistentModel */,
 				C5D382F0296A3C2A00E31D69 /* Change managing */,
 				C5D382E92967786900E31D69 /* PersistentGraph.Transaction.swift */,
+				C5C4A128293CD78D00FF9AB8 /* PersistentGraph */,
 			);
 			path = Obsolete;
 			sourceTree = "<group>";
