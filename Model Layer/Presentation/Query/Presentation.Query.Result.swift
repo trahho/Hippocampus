@@ -16,36 +16,34 @@ import Smaug
 //    }
 // }
 
-extension Presentation.Query {
-    class Result {
-//        class Item: IdentifiableObject, ObservableObject {
-        class Item: Presentation.Object {
-            @Observed var item: Information.Item
-            @Objects var roles: Set<Structure.Role>
-            @Objects var next: Set<Item>
+extension Presentation {
+    class Item: Presentation.Object {
+        @Observed var item: Information.Item
+        @Objects var roles: Set<Structure.Role>
+        @Objects var next: Set<Item>
 
-            init(item: Information.Item, roles: Set<Structure.Role>) {
-                super.init()
-                self.roles = roles.intersection(item.roles)
-                self.item = item
-                self.id = item.id
-            }
-
-            required init() {}
+        init(item: Information.Item, roles: Set<Structure.Role>) {
+            super.init()
+            self.roles = roles.intersection(item.roles)
+            self.item = item
+            self.id = item.id
         }
 
-        class Node: Item {
+        required init() {}
+    }
+
+    class Node: Item {
 //            var from: Set<Edge> = []
 //            var to: Set<Edge> = []
-//            
+//
 //            required init() {super.init()}
 //
 //            init(node: Information.Item, roles: Set<Structure.Role>) {
 //                super.init(item: node, roles: roles)
 //            }
-        }
+    }
 
-        class Edge: Item {
+    class Edge: Item {
 //            var from: Node
 //            var to: Node
 //
@@ -58,7 +56,10 @@ extension Presentation.Query {
 //                from.to.insert(self)
 //                to.from.insert(self)
 //            }
-        }
+    }
+
+    class Result {
+//        class Item: IdentifiableObject, ObservableObject {
 
         var nodeStorage: [Information.Item.ID: Node] = [:]
         var edgeStorage: [Information.Item.ID: Edge] = [:]

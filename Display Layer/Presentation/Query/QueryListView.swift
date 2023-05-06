@@ -16,13 +16,13 @@ struct QueryListView: View {
 
     @State var sortOrder: SortOrder = .forward
 
-    var result: Presentation.Query.Result {
+    var result: Presentation.Result {
         query.apply(to: information)
     }
 
     let nameAspect = Structure.Role.global.name
 
-    var items: [Presentation.Query.Result.Node] {
+    var items: [Presentation.Node] {
         result.nodes
             .sorted(by: { a, b in
                 a.item[String.self, nameAspect] ?? "" < b.item[String.self, nameAspect] ?? ""
@@ -34,10 +34,10 @@ struct QueryListView: View {
 //            .sorted(using: Aspect.Comparator(order: .forward, aspect: Perspective.note.name))
 //    }
 
-    @State var selection: Presentation.Query.Result.Item?
+    @State var selection: Presentation.Item?
 
     @ViewBuilder
-    func representation(for item: Presentation.Query.Result.Item) -> some View {
+    func representation(for item: Presentation.Item) -> some View {
         let representation = item.roles.compactMap {
             if let representation = query.roleRepresentation(role: $0, layout: .list) {
                 return representation.role.representation(for: representation.representation)

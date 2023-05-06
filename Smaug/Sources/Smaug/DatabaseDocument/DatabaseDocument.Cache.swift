@@ -62,20 +62,20 @@ public extension DatabaseDocument {
 
         // MARK: - Wrapping
 
-        @available(*, unavailable, message: "This property wrapper can only be applied to classes")
+//        @available(*, unavailable, message: "This property wrapper can only be applied to classes")
         public var wrappedValue: T {
             get { fatalError() }
             set { fatalError() }
         }
 
-        public static subscript<Enclosing: DatabaseDocument>(_enclosingInstance instance: Enclosing,
-                                                             wrapped _: ReferenceWritableKeyPath<Enclosing, T>,
-                                                             storage storageKeyPath: ReferenceWritableKeyPath<Enclosing, Cache>) -> T?
-        {
-            get {
-                return nil
-            }
-            set {}
-        }
+//        public static subscript<Enclosing: DatabaseDocument>(_enclosingInstance instance: Enclosing,
+//                                                             wrapped _: ReferenceWritableKeyPath<Enclosing, T>,
+//                                                             storage storageKeyPath: ReferenceWritableKeyPath<Enclosing, Cache>) -> T
+//        {
+//            get {
+//                fatal
+//            }
+//            set {}
+//        }
     }
 }

@@ -74,7 +74,7 @@ extension Presentation {
             return matches ? result : nil
         }
 
-        func analyze(_ item: Query.Result.Item) -> Set<Structure.Role>? {
+        func analyze(_ item: Item) -> Set<Structure.Role>? {
             analyze(item.item)
         }
 
