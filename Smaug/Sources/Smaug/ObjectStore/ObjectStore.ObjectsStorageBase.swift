@@ -7,11 +7,7 @@
 
 import Foundation
 public extension ObjectStore {
-    class ObjectsStorageBase<T>: ObjectsStorage where T: Object {
-        // MARK: - Types
-
-        typealias StorageDictionary = [T.ID: T]
-
+    class ObjectsStorageAbstract<T>: ObjectsStorage where T: Object {
         // MARK: - Key
 
         var key: String?
@@ -23,6 +19,18 @@ public extension ObjectStore {
             self.key = key
             self.alternateKey = alternateKey
         }
+
+        func getObject(id: T.ID) -> T? { fatalError() }
+
+        func getObjects() -> Set<T> { fatalError() }
+
+        func addObject(item: T) { fatalError() }
+    }
+
+    class ObjectsStorageBase<T>: ObjectsStorageAbstract<T> where T: Object {
+        // MARK: - Types
+
+        typealias StorageDictionary = [T.ID: T]
 
         // MARK: - Restoration
 
@@ -56,44 +64,19 @@ public extension ObjectStore {
 
         // MARK: - Storage
 
-        var store: ObjectStore!
         var storage: StorageDictionary = [:]
 
-        func getObject(id: T.ID) -> T? {
+        override func getObject(id: T.ID) -> T? {
             storage[id]
         }
 
-        func getObjects() -> Set<T> {
+        override func getObjects() -> Set<T> {
             Set(storage.values)
         }
 
-        func addObject(item: T) {
+        override func addObject(item: T) {
             guard storage[item.id] == nil else { return }
             storage[item.id] = item
-        }
-    }
-}
-
-extension ObjectStore.ObjectsStorageBase: EncodableProperty where T: Encodable {
-    public func encodeValue(from container: inout EncodeContainer, propertyName: String) throws {
-        guard !storage.isEmpty else { return }
-        let codingKey = SerializedCodingKeys(key: key ?? propertyName)
-        let value = Array(storage.values)
-        try container.encodeIfPresent(value, forKey: codingKey)
-    }
-}
-
-extension ObjectStore.ObjectsStorageBase: DecodableProperty where T: Decodable {
-    public func decodeValue(from container: DecodeContainer, propertyName: String) throws {
-        let codingKey = SerializedCodingKeys(key: key ?? propertyName)
-        if let value = try? container.decodeIfPresent([T].self, forKey: codingKey) {
-            storage = Dictionary(uniqueKeysWithValues: value.map { ($0.id, $0) })
-        } else {
-            guard let altKey = alternateKey else { return }
-            let altCodingKey = SerializedCodingKeys(key: altKey)
-            if let value = try? container.decodeIfPresent(Set<T>.self, forKey: altCodingKey) {
-                storage = Dictionary(uniqueKeysWithValues: value.map { ($0.id, $0) })
-            }
         }
     }
 }

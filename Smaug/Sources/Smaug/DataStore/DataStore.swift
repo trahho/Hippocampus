@@ -17,16 +17,9 @@ open class DataStore<ValueStorage: TimedValueStorage>: ObjectStore {
     @Serialized var timestamps: Set<Date>
 
     override func addObject<T>(item: T) throws where T: ObjectStore.Object {
-        guard let storage = storage(type: T.self) else { throw DatabaseDocument.Failure.typeNotFound }
-        guard storage.getObject(id: item.id) == nil else { return }
-
-        objectWillChange.send()
-        storage.addObject(item: item)
-        item.store = self
-        if let data = item as? Object {
-            data.added = document.writingTimestamp
-            data.adopt(document: document)
+        if let item = item as? Object {
+            item.added = document.writingTimestamp
         }
-        objectDidChange.send()
+        try super.addObject(item: item)
     }
-    }
+}

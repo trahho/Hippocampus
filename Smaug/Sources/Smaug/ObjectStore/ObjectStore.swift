@@ -55,8 +55,8 @@ open class ObjectStore: PersistentContent, Serializable, RestorableContent, Merg
 
     // MARK: - Storage
 
-    func storage<T>(type: T.Type) -> ObjectsStorageBase<T>? {
-        mirror(for: ObjectsStorageBase<T>.self).first?.value
+    func storage<T>(type: T.Type) -> ObjectsStorageAbstract<T>? {
+        mirror(for: ObjectsStorageAbstract<T>.self).first?.value
     }
 
     func getObject<T>(type: T.Type, id: T.ID) throws -> T? where T: ObjectStore.Object {
@@ -69,6 +69,8 @@ open class ObjectStore: PersistentContent, Serializable, RestorableContent, Merg
         return storage.getObjects()
     }
 
+    
+
     func addObject<T>(item: T) throws where T: ObjectStore.Object {
         guard let storage = storage(type: T.self) else { throw DatabaseDocument.Failure.typeNotFound }
         guard storage.getObject(id: item.id) == nil else { return }
@@ -76,11 +78,12 @@ open class ObjectStore: PersistentContent, Serializable, RestorableContent, Merg
         objectWillChange.send()
         storage.addObject(item: item)
         item.store = self
+        item.adopt(document: document)
         objectDidChange.send()
     }
-    
+
     // MARK: - Access
-    
+
     public subscript<T>(_ type: T.Type, _ id: T.ID) -> T? where T: ObjectStore.Object {
         document[type, id]
     }

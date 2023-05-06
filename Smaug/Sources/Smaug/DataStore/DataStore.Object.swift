@@ -8,12 +8,10 @@
 import Foundation
 
 extension DataStore {
-    open class Object: ObjectStore.Object, MergeableContent, Reflectable {
+    open class Object: ObjectStore.Object, MergeableContent {
         @Serialized private(set) var values: [Key: TimeLine<ValueStorage>] = [:]
         @Serialized var added: Date?
         @Property var deleted: Bool = false
-
-        var document: DatabaseDocument? { store?.document }
 
         // MARK: - Changes
 
@@ -33,7 +31,7 @@ extension DataStore {
                 action()
             }
         }
-        
+
         func willChange() {
             objectWillChange.send()
         }
@@ -65,10 +63,6 @@ extension DataStore {
         }
 
         // MARK: - Merging
-        
-        func adopt(document: DatabaseDocument) {
-            mirror(for: ReferenceStorage.self).map { $0.value }.forEach { $0.adopt(document: document) }
-        }
 
         open func merge(other: MergeableContent) throws {
             guard let other = other as? Self, other.id == id else { return }

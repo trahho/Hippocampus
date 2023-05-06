@@ -24,7 +24,7 @@ struct QueryTreeView: View {
 
     var items: [Presentation.Query.Result.Node] {
         result.nodes
-            .filter(\.from.isEmpty)
+//            .filter(\.from.isEmpty)
             .sorted(by: { a, b in
                 a.item[String.self, nameAspect] ?? "" < b.item[String.self, nameAspect] ?? ""
             })
@@ -38,10 +38,12 @@ struct QueryTreeView: View {
     @State var selection: Presentation.Query.Result.Node?
 
     func subItems(for item: Presentation.Query.Result.Node) -> [Presentation.Query.Result.Item] {
-        item.to.map(\.to)
-            .sorted(by: { a, b in
-                a.item[String.self, nameAspect] ?? "" < b.item[String.self, nameAspect] ?? ""
-            })
+//        item.to
+////            .map(\.to)
+//            .sorted(by: { a, b in
+//                a.item[String.self, nameAspect] ?? "" < b.item[String.self, nameAspect] ?? ""
+//            })
+        []
     }
 
 //    @ViewBuilder
@@ -83,10 +85,11 @@ struct QueryTreeView: View {
         let nameAspect = Structure.Role.global.name
 
         var subItems: [Presentation.Query.Result.Node] {
-            item.to.map(\.to)
-                .sorted(by: { a, b in
-                    a.item[String.self, nameAspect] ?? "" < b.item[String.self, nameAspect] ?? ""
-                })
+//            item.to.map(\.to)
+//                .sorted(by: { a, b in
+//                    a.item[String.self, nameAspect] ?? "" < b.item[String.self, nameAspect] ?? ""
+//                })
+            []
         }
 
         @ViewBuilder

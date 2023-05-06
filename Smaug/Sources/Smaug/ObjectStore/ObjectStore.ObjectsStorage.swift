@@ -11,5 +11,7 @@ public extension ObjectStore {
     class ObjectsStorage: MergeableContent {
         public func setStore(store: ObjectStore) {}
         public func merge(other: MergeableContent) throws {}
+        var store: ObjectStore!
+        public init() {}
     }
 }

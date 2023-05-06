@@ -8,8 +8,8 @@
 import Combine
 import Foundation
 
-public extension DataStore.Object {
-    @propertyWrapper final class Relation<Enclosing, Value>: ReferenceStorage where Value: ObjectStore.Object, Enclosing: DataStore.Object {
+public extension ObjectStore.Object {
+    @propertyWrapper final class Relation<Enclosing, Value>: ReferenceStorage where Value: ObjectStore.Object, Enclosing: ObjectStore.Object {
         private var objectKeyPath: ReferenceWritableKeyPath<Value, Enclosing?>?
         private var objectsKeyPath: ReferenceWritableKeyPath<Value, Set<Enclosing>>?
 

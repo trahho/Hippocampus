@@ -9,9 +9,14 @@ import Combine
 import Foundation
 
 extension ObjectStore {
-    open class Object: PersistentObject, ObservableObject {
+    open class Object: PersistentObject, ObservableObject, Reflectable {
         var store: ObjectStore?
-        
+        var document: DatabaseDocument? { store?.document }
+
+        func adopt(document: DatabaseDocument) {
+            mirror(for: ReferenceStorage.self).map { $0.value }.forEach { $0.adopt(document: document) }
+        }
+
         public subscript<T>(_ type: T.Type, _ id: T.ID) -> T? where T: ObjectStore.Object {
             store![type, id]
         }

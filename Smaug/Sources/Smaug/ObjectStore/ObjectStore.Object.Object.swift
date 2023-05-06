@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-public extension DataStore.Object {
+public extension ObjectStore.Object {
     @propertyWrapper final class Object<Value>: ReferenceStorage where Value: ObjectStore.Object {
         @available(*, unavailable, message: "This property wrapper can only be applied to classes")
         public var wrappedValue: Value? {
@@ -16,26 +16,16 @@ public extension DataStore.Object {
             set { fatalError() }
         }
 
-        private var _key: String?
-
-        var key: String {
-            if let _key { return _key }
-
-            guard let mirror = instance.mirror(for: Self.self).first(where: { $0.value === self }) else { fatalError("wrapper not found") }
-            _key = String(mirror.label!.dropFirst())
-
-            return _key!
-        }
-
         private var cancellable: AnyCancellable?
 
+        private var _id: Value.ID?
         private var _value: Value?
         var value: Value? {
             get {
                 if let _value { return _value }
                 guard
                     let document = instance.document,
-                    let id = instance[Value.ID.self, key],
+                    let id = _id,
                     let value = document[Value.self, id]
                 else { return nil }
 
@@ -44,7 +34,8 @@ public extension DataStore.Object {
             }
             set {
                 guard value != newValue else { return }
-                instance[Value.ID.self, key] = newValue?.id
+                instance.objectWillChange.send()
+                _id = newValue?.id
                 _value = newValue
                 if let document = instance.document, let newValue {
                     document.add(newValue)
@@ -52,8 +43,8 @@ public extension DataStore.Object {
             }
         }
 
-        private weak var _instance: DataStore.Object?
-        private var instance: DataStore.Object {
+        private weak var _instance: ObjectStore.Object?
+        private var instance: ObjectStore.Object {
             get { _instance! }
             set {
                 guard newValue != _instance else { return }
@@ -70,9 +61,9 @@ public extension DataStore.Object {
             if let _value { document.add(_value) }
         }
 
-        public static subscript<Enclosing: DataStore.Object>(_enclosingInstance instance: Enclosing,
-                                                             wrapped _: ReferenceWritableKeyPath<Enclosing, Value?>,
-                                                             storage storageKeyPath: ReferenceWritableKeyPath<Enclosing, Object>) -> Value?
+        public static subscript<Enclosing: ObjectStore.Object>(_enclosingInstance instance: Enclosing,
+                                                               wrapped _: ReferenceWritableKeyPath<Enclosing, Value?>,
+                                                               storage storageKeyPath: ReferenceWritableKeyPath<Enclosing, Object>) -> Value?
         {
             get {
                 let storage = instance[keyPath: storageKeyPath]
@@ -84,10 +75,6 @@ public extension DataStore.Object {
                 storage.instance = instance
                 storage.value = newValue
             }
-        }
-
-        public init(_ key: String? = nil) {
-            self._key = key
         }
     }
 }
