@@ -13,42 +13,55 @@ public extension DatabaseDocument {
     final class Data<T>: DataStorage where T: ObjectStore {
         // MARK: - Initialization
 
-        public init(wrappedValue: @autoclosure @escaping () -> T, publishChange: Bool = true, commitOnChange: Bool = true) {
-            defaultContent = wrappedValue
+        public init(publishChange: Bool = true, commitOnChange: Bool = true) {
             self.commitOnChange = commitOnChange
             self.publishChange = publishChange
         }
 
         // MARK: - Content
 
-        var container: ObjectStoreContainer<T>!
-        var defaultContent: () -> T
+        var container: ObjectStoreContainer<T>?
         var commitOnChange: Bool
         var publishChange: Bool
         var cancellable: AnyCancellable!
 
+        var _content: T!
+        public var content: T {
+            get { container?.content ?? _content }
+            set { container?.setContent(content: newValue) }
+        }
+
         override func setup(url: URL, name: String, document: DatabaseDocument) {
             self.document = document
-            let content = defaultContent()
+            _content = T()
             let url = url.appending(component: name + ".persistent")
             container = ObjectStoreContainer(document: document, url: url, content: content, commitOnChange: commitOnChange)
             if publishChange {
-                cancellable = container.objectWillChange.sink { document.objectWillChange.send() }
+                cancellable = container!.objectWillChange.sink { document.objectWillChange.send() }
             }
+        }
+
+        override func initializeContent() {
+            _content.document = document
+            _content.setup()
+        }
+
+        override func start() {
+            container!.start()
         }
 
         // MARK: - Storage
 
         override func getObject<T>(type: T.Type, id: T.ID) throws -> T? where T: ObjectStore.Object {
-            try container.content.getObject(type: type, id: id)
+            try content.getObject(type: type, id: id)
         }
 
         override func getObjects<T>(type: T.Type) throws -> Set<T> where T: ObjectStore.Object {
-            try container.content.getObjects(type: type)
+            try content.getObjects(type: type)
         }
 
         override func addObject<T>(item: T) throws where T: ObjectStore.Object {
-            try container.content.addObject(item: item)
+            try content.addObject(item: item)
         }
 
         // MARK: - Wrapping
@@ -65,18 +78,13 @@ public extension DatabaseDocument {
         {
             get {
                 let storage = instance[keyPath: storageKeyPath]
-                return storage.container.content
+                return storage.content
             }
             set {}
         }
 
         public var projectedValue: Data<T> {
             return self
-        }
-
-        public var content: T {
-            get { container.content }
-            set { container.setContent(content: newValue) }
         }
     }
 }

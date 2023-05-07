@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum MergeableContentMergeError: Error {
+public enum MergeError: Error {
     case wrongMatch
     case mergeFailed
 }

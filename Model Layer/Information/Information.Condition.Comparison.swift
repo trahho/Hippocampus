@@ -19,7 +19,7 @@ extension Information.Condition {
         }
         
         @Serialized var key: String
-        @Serialized var storage: Information.ValueStorage?
+        @Serialized var storage: Document.Storage?
         @Serialized var condition: Relation
         
         var value: (any PersistentComparableValue)? {
@@ -27,7 +27,7 @@ extension Information.Condition {
                 storage?.value as? (any PersistentComparableValue)
             }
             set {
-                storage = Information.ValueStorage(newValue)
+                storage = Document.Storage(newValue)
             }
         }
         

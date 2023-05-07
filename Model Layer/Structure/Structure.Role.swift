@@ -56,9 +56,9 @@ extension Structure {
             findRepresentation(for: name) ?? .vertical([.undefined, .label(name)], alignment: .center)
         }
 
-        override func merge(other: MergeableContent) throws {
+        override func merge(other: Mergeable) throws {
             try super.merge(other: other)
-            guard let other = other as? Role else { throw MergeableContentMergeError.wrongMatch  }
+            guard let other = other as? Role else { throw MergeError.wrongMatch  }
             self.isStatic = other.isStatic
             self.canBeCreated = other.canBeCreated
         }

@@ -52,8 +52,9 @@ extension Presentation {
             getRepresentation(roleRepresentations, for: role) ?? getRepresentation(Self.roleRepresentations, for: role)
         }
 
-        func apply(to information: Information) -> Result {
-            let result = Result()
+        func apply(to information: Information) -> PresentationResult.Result {
+            let result = PresentationResult.Result()
+            self.add(result)
             for node in information.items {
                 analyze(node: node, in: information, for: result)
             }
@@ -74,11 +75,11 @@ extension Presentation {
             return matches ? result : nil
         }
 
-        func analyze(_ item: Item) -> Set<Structure.Role>? {
+        func analyze(_ item: PresentationResult.Item) -> Set<Structure.Role>? {
             analyze(item.item)
         }
 
-        func analyze(node: Information.Item, in information: Information, for result: Result) {
+        func analyze(node: Information.Item, in information: Information, for result: PresentationResult.Result) {
 //            guard result.nodeStorage[node.id] == nil else { return }
 //            let roles = analyze(node)
 //            if let roles {
@@ -90,7 +91,7 @@ extension Presentation {
 //            }
         }
 
-        func analyze(edge: Information.Item, in information: Information, for result: Result) {
+        func analyze(edge: Information.Item, in information: Information, for result: PresentationResult.Result) {
 //            guard result.edgeStorage[edge.id] == nil else { return }
 //            analyze(node: edge.to.first!, in: information, for: result)
 //            guard let from = result.nodeStorage[edge.from.id], let to = result.nodeStorage[edge.to.id] else { return }

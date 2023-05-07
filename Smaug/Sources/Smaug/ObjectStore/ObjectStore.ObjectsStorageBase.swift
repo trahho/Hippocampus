@@ -34,8 +34,8 @@ public extension ObjectStore {
 
         // MARK: - Restoration
 
-        override public func merge(other: MergeableContent) throws {
-            guard Self.self is MergeableContent, let other = other as? Self else { return }
+        override public func merge(other: Mergeable) throws {
+            guard Self.self is Mergeable, let other = other as? Self else { return }
             try mergeItems(other)
             importItems(other)
         }
@@ -43,8 +43,8 @@ public extension ObjectStore {
         fileprivate func mergeItems(_ other: ObjectStore.ObjectsStorageBase<T>) throws {
             try Set(storage.keys).intersection(Set(other.storage.keys))
                 .forEach { key in
-                    let ownMergeable = storage[key] as! MergeableContent
-                    let otherMergeable = other.storage[key] as! MergeableContent
+                    let ownMergeable = storage[key] as! Mergeable
+                    let otherMergeable = other.storage[key] as! Mergeable
                     try ownMergeable.merge(other: otherMergeable)
                 }
         }

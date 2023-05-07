@@ -8,7 +8,7 @@
 import Foundation
 import Smaug
 
-class Information: DataStore<Information.Storage> {
+class Information: DataStore<Document.Storage> {
     @Objects private var allItems: Set<Item>
 
     var items: Set<Item> {

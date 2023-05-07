@@ -29,7 +29,7 @@ public extension ObjectMemory {
 
         // MARK: - Restoration
 
-        override public func merge(other: MergeableContent) throws {}
+        override public func merge(other: Mergeable) throws {}
 
         override public func setStore(store: ObjectStore) {
             self.store = store

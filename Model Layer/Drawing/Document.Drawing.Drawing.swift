@@ -11,7 +11,7 @@ import PencilKit
 import Smaug
 
 extension Document.Drawing {
-    class Drawing: PersistentContent, ObservableObject {
+    class Drawing: Persistent, ObservableObject {
         
         private var isMerging = false
 

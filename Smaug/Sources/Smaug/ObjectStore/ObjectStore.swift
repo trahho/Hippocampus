@@ -7,7 +7,7 @@
 
 import Foundation
 
-open class ObjectStore: PersistentContent, Serializable, RestorableContent, MergeableContent, ContentContainer, ObservableObject, Reflectable {
+open class ObjectStore: Persistent, Serializable, Restorable, Mergeable, ContentContainer, ObservableObject, Reflectable {
     // MARK: - Types
 
     enum Fault: Error {
@@ -42,8 +42,8 @@ open class ObjectStore: PersistentContent, Serializable, RestorableContent, Merg
         }
     }
 
-    public func merge(other: MergeableContent) throws {
-        guard let other = other as? Self else { throw MergeableContentMergeError.wrongMatch }
+    public func merge(other: Mergeable) throws {
+        guard let other = other as? Self else { throw MergeError.wrongMatch }
 
         for (own, other) in zip(mirror(for: ObjectsStorage.self), other.mirror(for: ObjectsStorage.self)) {
             try own.value.merge(other: other.value)

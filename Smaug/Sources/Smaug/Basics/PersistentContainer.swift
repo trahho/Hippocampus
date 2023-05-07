@@ -8,20 +8,8 @@
 import Combine
 import Foundation
 
-open class PersistentManager {
-    var container: [String: PersistentContainerReference] = [:]
 
-    public subscript<T>(_ type: T.Type, _ key: String) -> T? where T: PersistentContent {
-        let container = container[key] as? PersistentContainer<T>
-        return container?.content
-    }
-}
-
-public protocol PersistentContainerReference {
-    func save()
-}
-
-public class PersistentContainer<Content: PersistentContent>: PersistentContainerReference, ObservableObject {
+public class PersistentContainer<Content: Persistent>: ObservableObject {
     typealias ContentDelegate = () -> Void
 
     let url: URL
@@ -31,7 +19,6 @@ public class PersistentContainer<Content: PersistentContent>: PersistentContaine
     private var querySubscriber: AnyCancellable?
     private var didChangeSubcriber: AnyCancellable?
     private var willChangeSubscriber: AnyCancellable?
-    public var dependentContainers: [PersistentContainerReference] = []
 
     var contentChange: ContentDelegate?
     var willCommit: (() -> Void)?
@@ -59,7 +46,6 @@ public class PersistentContainer<Content: PersistentContent>: PersistentContaine
                     hasChanges = true
                     save()
                     hasChanges = false
-                    dependentContainers.forEach { $0.save() }
                 } else {
                     hasChanges = true
                 }
@@ -129,7 +115,7 @@ public class PersistentContainer<Content: PersistentContent>: PersistentContaine
 //    }
 
     func restore(content: Content) {
-        if let restorable = content as? RestorableContent {
+        if let restorable = content as? Restorable {
             restorable.restore()
         }
     }
@@ -211,6 +197,9 @@ public class PersistentContainer<Content: PersistentContent>: PersistentContaine
         restore(content: content)
         self.content = content
 
+    }
+    
+    func start() {
         load()
         setupMetadataQuery()
     }

@@ -11,7 +11,7 @@ import PencilKit
 import Smaug
 
 extension Document.Drawing {
-    class Properties: PersistentContent, Serializable, ObservableObject {
+    class Properties: Persistent, Serializable, ObservableObject {
         private var isMerging = false
 
         @PublishedSerialized var center: CGPoint = .zero

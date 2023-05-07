@@ -10,17 +10,17 @@ import SwiftUI
 
 struct SidebarView: View {
     @EnvironmentObject var navigation: Navigation
-    @ObservedObject var presentation: Presentation
+    @EnvironmentObject var document: Document
     @State var editItem: Presentation.Object?
 
     var groups: [Presentation.Group] {
-        presentation.groups
+        document.presentation.groups
             .filter { $0.isTop }
             .sorted { $0.name < $1.name }
     }
 
     var queries: [Presentation.Query] {
-        presentation.queries
+        document.presentation.queries
             .filter { $0.isTop }
             .sorted { $0.name < $1.name }
     }
@@ -65,7 +65,7 @@ struct SidebarView_Previews: PreviewProvider {
     static let document = HippocampusApp.previewDocument()
     static let navigation = Navigation()
     static var previews: some View {
-        SidebarView(presentation: document.presentation)
+        SidebarView()
             .environmentObject(document)
             .environmentObject(navigation)
     }

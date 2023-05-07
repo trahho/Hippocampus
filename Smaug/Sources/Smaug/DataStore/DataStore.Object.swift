@@ -8,7 +8,7 @@
 import Foundation
 
 extension DataStore {
-    open class Object: ObjectStore.Object, MergeableContent {
+    open class Object: ObjectStore.Object, Mergeable {
         @Serialized private(set) var values: [Key: TimeLine<ValueStorage>] = [:]
         @Serialized var added: Date?
         @Property var deleted: Bool = false
@@ -64,7 +64,7 @@ extension DataStore {
 
         // MARK: - Merging
 
-        open func merge(other: MergeableContent) throws {
+        open func merge(other: Mergeable) throws {
             guard let other = other as? Self, other.id == id else { return }
 
             willChange()

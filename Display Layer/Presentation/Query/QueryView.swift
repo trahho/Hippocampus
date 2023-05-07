@@ -16,7 +16,7 @@ struct QueryView: View {
     var content: some View {
         if let item = query.items.last {
             ItemView(item: item.item, roles: item.roles)
-                .toolbarItem(placement: .navigation) {
+                .toolbar {
                     Button {
                         query.items.removeLast()
                     } label: {

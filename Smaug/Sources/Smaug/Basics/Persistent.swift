@@ -8,13 +8,13 @@
 import Combine
 import Foundation
 
-public protocol PersistentContent: DidChangeNotifier {
+public protocol Persistent: DidChangeNotifier {
 //    var container: PersistentContainer<Self> { get set }
     func encode() -> Data?
     static func decode(persistentData: Data) -> Self?
 }
 
-public extension PersistentContent where Self: Serializable {
+public extension Persistent where Self: Serializable {
     func encode() -> Data? {
         guard
             let data = try? JSONEncoder().encode(self),

@@ -23,11 +23,12 @@ extension Presentation {
         @Property var name: String
         @Serialized var isStatic = false
 
-        @Objects var superGroups: Set<Group>
-        @Relations(\Group.superGroups) var subGroups: Set<Group>
+        @Relations(\Group.subGroups) var superGroups: Set<Group>
+        @Objects var subGroups: Set<Group>
         @Objects var queries: Set<Query>
 
         var isTop: Bool { superGroups.isEmpty }
+        
         var allSuperGroups: Set<Group> {
             let moreSuperGroups = superGroups.reduce(Set<Group>()) { partialResult, group in
                 partialResult.union(group.allSuperGroups)

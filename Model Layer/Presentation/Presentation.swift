@@ -8,11 +8,13 @@
 import Foundation
 import Smaug
 
-class Presentation: DataStore<Presentation.Storage> {
+class Presentation: DataStore<Document.Storage> {
     @Objects var queries: Set<Query>
     @Objects var groups: Set<Group>
+    @Objects var predicats: Set<Predicate>
+    @Objects var roleRepresentations: Set<RoleRepresentation>
 
-    override func setup()  {
+    override func setup() {
 //        let queries: [Query] = [.general, .notes, .topics]
 //        queries.forEach {
 //            add($0, timestamp: Date.distantPast)

@@ -28,7 +28,7 @@ extension Presentation {
 //        }
 //    }
 
-    class Properties: PersistentContent, Serializable, ObservableObject {
+    class Properties: Persistent, Serializable, ObservableObject {
         @PublishedSerialized(notifiyChange: true) var globalValues: [Information.Item.ID: AnyObject] = [:]
         var objectDidChange = ObjectDidChangePublisher()
 

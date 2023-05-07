@@ -9,16 +9,16 @@ import Foundation
 import Smaug
 
 class Document: DatabaseDocument {
-    @Data var a = A()
-    @Data var b = B()
-    @Transient var c = C()
+    @Data var a: A
+    @Data var b: B
+    @Transient var c: C
 }
 
-class A: DataStore<A.Storage> {
+class A: DataStore<ValueStorage> {
     @Objects var aa: Set<A>
 }
 
-class B: DataStore<B.Storage> {
+class B: DataStore<ValueStorage> {
     @Objects var bb: Set<B>
 }
 
@@ -26,41 +26,6 @@ class C: ObjectMemory {
     @Objects var cc: Set<C>
 }
 
-extension A {
-    enum Storage: TimedValueStorage {
-        case a(ValueStorage)
-
-        init?(_ value: (any PersistentValue)?) {
-            if value == nil { return nil }
-            else if let value = ValueStorage(value) { self = .a(value) }
-            else { fatalError() }
-        }
-
-        var value: (any PersistentValue)? {
-            switch self {
-            case let .a(value): return value.value
-            }
-        }
-    }
-}
-
-extension B {
-    enum Storage: TimedValueStorage {
-        case a(ValueStorage)
-
-        init?(_ value: (any PersistentValue)?) {
-            if value == nil { return nil }
-            else if let value = ValueStorage(value) { self = .a(value) }
-            else { fatalError() }
-        }
-
-        var value: (any PersistentValue)? {
-            switch self {
-            case let .a(value): return value.value
-            }
-        }
-    }
-}
 
 extension A {
     class A: Object {
@@ -86,4 +51,3 @@ extension C {
         @Object var a: A.A!
     }
 }
-

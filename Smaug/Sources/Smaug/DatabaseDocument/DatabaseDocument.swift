@@ -20,10 +20,14 @@ open class DatabaseDocument: Reflectable, ObservableObject {
 
     public required init(url: URL, containerDocument: DatabaseDocument? = nil) {
         self.containerDocument = containerDocument
-        mirror(for: Storage.self).forEach {
+        let storages = mirror(for: Storage.self)
+        storages.forEach {
             let name = String($0.label!.dropFirst())
             $0.value.setup(url: url, name: name, document: self)
         }
+
+        storages.forEach { $0.value.initializeContent() }
+        storages.forEach { $0.value.start() }
     }
 
     // MARK: - Transactional change

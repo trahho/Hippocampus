@@ -13,21 +13,20 @@ public extension DatabaseDocument {
     final class Transient<T>: DataStorage where T: ObjectMemory {
         // MARK: - Initialization
 
-        public init(wrappedValue: @autoclosure @escaping () -> T, publishChange: Bool = true) {
-            defaultContent = wrappedValue
+        public init(publishChange: Bool = true) {
             self.publishChange = publishChange
         }
 
         // MARK: - Content
 
-        var defaultContent: () -> T
         var content: T!
         var publishChange: Bool
         var cancellable: AnyCancellable!
 
         override func setup(url: URL, name: String, document: DatabaseDocument) {
             self.document = document
-            content = defaultContent()
+            content = T()
+            content.setup()
             content.document = document
             if publishChange {
                 cancellable = content.objectWillChange.sink { document.objectWillChange.send() }

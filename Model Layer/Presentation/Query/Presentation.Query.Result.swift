@@ -16,8 +16,8 @@ import Smaug
 //    }
 // }
 
-extension Presentation {
-    class Item: Presentation.Object {
+extension PresentationResult {
+    class Item: Object {
         @Observed var item: Information.Item
         @Objects var roles: Set<Structure.Role>
         @Objects var next: Set<Item>
@@ -33,19 +33,19 @@ extension Presentation {
     }
 
     class Node: Item {
-//            var from: Set<Edge> = []
-//            var to: Set<Edge> = []
-//
-//            required init() {super.init()}
-//
-//            init(node: Information.Item, roles: Set<Structure.Role>) {
-//                super.init(item: node, roles: roles)
-//            }
+        @Relations(\Edge.to) var from: Set<Edge>
+        @Relations(\Edge.to) var to: Set<Edge>
+
+        required init() { super.init() }
+
+        init(node: Information.Item, roles: Set<Structure.Role>) {
+            super.init(item: node, roles: roles)
+        }
     }
 
     class Edge: Item {
-//            var from: Node
-//            var to: Node
+        @Object var from: Node!
+        @Object var to: Node!
 //
 //            required init() {.init()}
 //
@@ -58,18 +58,10 @@ extension Presentation {
 //            }
     }
 
-    class Result {
+    class Result: Object {
 //        class Item: IdentifiableObject, ObservableObject {
 
-        var nodeStorage: [Information.Item.ID: Node] = [:]
-        var edgeStorage: [Information.Item.ID: Edge] = [:]
-
-        var nodes: Set<Node> {
-            Set(nodeStorage.values)
-        }
-
-        var edges: Set<Edge> {
-            Set(edgeStorage.values)
-        }
+        @Objects var nodes: Set<Node>
+        @Objects var edges: Set<Edge>
     }
 }

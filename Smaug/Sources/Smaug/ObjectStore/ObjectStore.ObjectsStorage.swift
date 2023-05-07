@@ -8,9 +8,9 @@
 import Foundation
 
 public extension ObjectStore {
-    class ObjectsStorage: MergeableContent {
+    class ObjectsStorage: Mergeable {
         public func setStore(store: ObjectStore) {}
-        public func merge(other: MergeableContent) throws {}
+        public func merge(other: Mergeable) throws {}
         var store: ObjectStore!
         public init() {}
     }

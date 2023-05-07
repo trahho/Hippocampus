@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol RestorableContent {
+public protocol Restorable {
     func restore()
 }
 
