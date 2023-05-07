@@ -26,9 +26,14 @@ open class DatabaseDocument: Reflectable, ObservableObject {
             $0.value.setup(url: url, name: name, document: self)
         }
 
-        storages.forEach { $0.value.initializeContent() }
+        inSetup = true
+        setup()
+        inSetup = false
+
         storages.forEach { $0.value.start() }
     }
+
+    open func setup() {}
 
     // MARK: - Transactional change
 
@@ -71,8 +76,14 @@ open class DatabaseDocument: Reflectable, ObservableObject {
         }
     }
 
+    var readOnly: Bool {
+        readingTimestamp < Date.distantFuture
+    }
+
+    private(set) var inSetup: Bool = false
+
     func change(by change: () -> ()) {
-        guard readingTimestamp == Date.distantFuture else { return }
+        guard !readOnly else { return }
 
         let didStart = !isActive
         if didStart {

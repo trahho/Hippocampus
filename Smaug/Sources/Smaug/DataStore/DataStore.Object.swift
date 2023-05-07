@@ -16,6 +16,8 @@ extension DataStore {
         // MARK: - Changes
 
         func change(by change: @escaping () -> ()) {
+            guard !readOnly else { return }
+
             let action = { [self] in
                 objectWillChange.send()
                 store?.willChange()

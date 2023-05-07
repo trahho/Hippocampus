@@ -12,6 +12,13 @@ extension ObjectStore {
     open class Object: PersistentObject, ObservableObject, Reflectable {
         var store: ObjectStore?
         var document: DatabaseDocument? { store?.document }
+        public internal(set) var isStatic = false
+
+        var readOnly: Bool {
+            if let document {
+                return document.readOnly || (!document.inSetup && isStatic)
+            } else { return false }
+        }
 
         func adopt(document: DatabaseDocument) {
             print("Adopt \(Self.self)")

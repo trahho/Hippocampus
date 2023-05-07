@@ -44,7 +44,7 @@ public extension DataStore.Object {
                 return _value!
             }
             set {
-                guard value != newValue else { return }
+                guard !instance.readOnly, value != newValue else { return }
                 let ids = newValue.map { $0.id }.asSet
                 instance[Set<Value.ID>.self, key] = ids
                 _value = newValue

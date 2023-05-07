@@ -12,7 +12,6 @@ import SwiftUI
 extension Structure {
     @dynamicMemberLookup
     class Role: Object {
-        @Serialized var isStatic = false
         @PublishedSerialized var canBeCreated = false
 
         @Property var roleDescription: String = ""
@@ -59,7 +58,6 @@ extension Structure {
         override func merge(other: Mergeable) throws {
             try super.merge(other: other)
             guard let other = other as? Role else { throw MergeError.wrongMatch  }
-            self.isStatic = other.isStatic
             self.canBeCreated = other.canBeCreated
         }
     }

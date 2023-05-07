@@ -10,8 +10,8 @@ import Foundation
 public extension DataStore {
     @propertyWrapper
     final class Objects<T>: ObjectsStorageBase<T> where T: Object {
-        var value: Set<T> {
-            storage.values.filter { $0.added! <= store.document.readingTimestamp }.asSet
+        override var value: Set<T> {
+            super.value.filter { $0.added! <= store.document.readingTimestamp }.asSet
         }
 
         @available(*, unavailable, message: "This property wrapper can only be applied to classes")
@@ -26,6 +26,7 @@ public extension DataStore {
         {
             get {
                 let storage = instance[keyPath: storageKeyPath]
+                storage.instance = instance
                 return storage.value
             }
             set {}

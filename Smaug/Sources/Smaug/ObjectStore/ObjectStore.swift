@@ -51,8 +51,6 @@ open class ObjectStore: Persistent, Serializable, Restorable, Mergeable, Content
         }
     }
 
-    open func setup() {}
-
     // MARK: - Storage
 
     func storage<T>(type: T.Type) -> ObjectsStorageAbstract<T>? {

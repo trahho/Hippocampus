@@ -12,6 +12,13 @@ public extension ObjectStore {
 
         var key: String?
         var alternateKey: String?
+        
+        internal var instance: ObjectStore!
+        
+        var value: Set<T> {
+            instance.document[T.self]
+        }
+        
 
         // MARK: - Initialization
 

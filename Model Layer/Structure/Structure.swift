@@ -14,10 +14,10 @@ class Structure: DataStore<Document.Storage> {
     @Objects var representations: Set<Representation>
     @Objects var references: Set<Reference>
 
-    override func setup() {
-        let roles: [Role] = [.global, .drawing, .text, .topic, .note]
-        roles.forEach {
-            self.add($0)
-        }
-    }
+//    override func setup() {
+//        let roles: [Role] = [.global, .drawing, .text, .topic, .note]
+//        roles.forEach {
+//            self.add($0)
+//        }
+//    }
 }

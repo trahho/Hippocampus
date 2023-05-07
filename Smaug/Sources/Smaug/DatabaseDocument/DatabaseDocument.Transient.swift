@@ -26,7 +26,6 @@ public extension DatabaseDocument {
         override func setup(url: URL, name: String, document: DatabaseDocument) {
             self.document = document
             content = T()
-            content.setup()
             content.document = document
             if publishChange {
                 cancellable = content.objectWillChange.sink { document.objectWillChange.send() }

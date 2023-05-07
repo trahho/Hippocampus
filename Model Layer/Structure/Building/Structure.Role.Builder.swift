@@ -27,7 +27,6 @@ extension Structure.Role {
     {
         self.init()
         self.id = UUID(uuidString: id)!
-        self.isStatic = true
         roleDescription = name
         canBeCreated = addToMenu
         let aspects = aspects()

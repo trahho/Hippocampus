@@ -37,6 +37,7 @@ public extension ObjectStore.Object {
                 }
             }
             set {
+                guard !instance.readOnly else { return }
                 let storage = instance[keyPath: storageKeyPath]
                 storage.value = newValue
             }

@@ -12,7 +12,6 @@ public extension DatabaseDocument {
         var document: DatabaseDocument!
 
         func setup(url: URL, name: String, document: DatabaseDocument) {}
-        func initializeContent(){}
         func start() {}
     
     }

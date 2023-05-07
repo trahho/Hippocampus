@@ -32,7 +32,6 @@ extension Presentation {
         @Objects var predicates: Set<Predicate>
         @Objects var roleRepresentations: Set<RoleRepresentation>
         @PublishedSerialized var layout: Presentation.Layout = .tree
-        @Serialized var isStatic = false
         @Published var items: [ItemDetail] = []
 
         func getRepresentation(_: any Sequence<RoleRepresentation>, for role: Structure.Role) -> RoleRepresentation?

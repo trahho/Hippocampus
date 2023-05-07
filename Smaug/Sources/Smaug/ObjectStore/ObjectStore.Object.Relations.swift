@@ -21,7 +21,6 @@ public extension ObjectStore.Object {
             self.objectsKeyPath = objectsKeyPath
         }
 
-      
         private var cancellable: AnyCancellable?
 
         private var _value: Set<Value>?
@@ -40,6 +39,7 @@ public extension ObjectStore.Object {
                 return _value ?? []
             }
             set {
+                guard !instance.readOnly else { return }
                 let value = value
                 value.subtracting(newValue).forEach { value in
                     if let objectKeyPath {

@@ -38,8 +38,8 @@ public extension DataStore.Object {
         }
         
         public static subscript<Enclosing: DataStore.Object>(_enclosingInstance instance: Enclosing,
-                                                            wrapped _: ReferenceWritableKeyPath<Enclosing, Value>,
-                                                            storage storageKeyPath: ReferenceWritableKeyPath<Enclosing, Property>) -> Value
+                                                             wrapped _: ReferenceWritableKeyPath<Enclosing, Value>,
+                                                             storage storageKeyPath: ReferenceWritableKeyPath<Enclosing, Property>) -> Value
         {
             get {
                 let storage = instance[keyPath: storageKeyPath]
@@ -51,6 +51,7 @@ public extension DataStore.Object {
                 }
             }
             set {
+                guard !instance.readOnly else { return }
                 let storage = instance[keyPath: storageKeyPath]
                 let key = storage.getKey(from: instance)
                 instance[Value.self, key] = newValue

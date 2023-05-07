@@ -43,7 +43,7 @@ public extension DataStore.Object {
                 return _value
             }
             set {
-                guard value != newValue else { return }
+                guard !instance.readOnly, value != newValue else { return }
                 instance[Value.ID.self, key] = newValue?.id
                 _value = newValue
                 if let document = instance.document, let newValue {

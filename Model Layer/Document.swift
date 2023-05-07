@@ -20,4 +20,10 @@ class Document: DatabaseDocument {
         let url = containerURL.appendingPathComponent("\(name)\(HippocampusApp.memoryExtension)")
         self.init(url: url)
     }
+
+    override func setup() {
+        [Structure.Role]([.global, .drawing, .text, .topic, .note]).forEach { add($0) }
+        [Presentation.Query]([.general, .notes, .topics]).forEach { add($0) }
+        [Presentation.Group]([.builtIn]).forEach { add($0) }
+    }
 }

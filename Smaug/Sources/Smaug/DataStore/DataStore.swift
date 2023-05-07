@@ -17,6 +17,7 @@ open class DataStore<ValueStorage: TimedValueStorage>: ObjectStore {
     @Serialized var timestamps: Set<Date>
 
     override func addObject<T>(item: T) throws where T: ObjectStore.Object {
+        guard !document.readOnly else { return }
         if let item = item as? Object {
             item.added = document.writingTimestamp
         }

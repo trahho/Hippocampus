@@ -20,30 +20,26 @@ public extension DatabaseDocument {
 
         // MARK: - Content
 
-        var container: ObjectStoreContainer<T>?
+        var container: ObjectStoreContainer<T>!
         var commitOnChange: Bool
         var publishChange: Bool
         var cancellable: AnyCancellable!
 
-        var _content: T!
+        var staticContent: T!
         public var content: T {
-            get { container?.content ?? _content }
-            set { container?.setContent(content: newValue) }
+            get { container.content }
+            set { container.setContent(content: newValue) }
         }
 
         override func setup(url: URL, name: String, document: DatabaseDocument) {
             self.document = document
-            _content = T()
+            staticContent = T()
+            staticContent.document = document
             let url = url.appending(component: name + ".persistent")
-            container = ObjectStoreContainer(document: document, url: url, content: content, commitOnChange: commitOnChange)
+            container = ObjectStoreContainer(document: document, url: url, content: T(), commitOnChange: commitOnChange)
             if publishChange {
                 cancellable = container!.objectWillChange.sink { document.objectWillChange.send() }
             }
-        }
-
-        override func initializeContent() {
-            _content.document = document
-            _content.setup()
         }
 
         override func start() {
@@ -53,15 +49,27 @@ public extension DatabaseDocument {
         // MARK: - Storage
 
         override func getObject<T>(type: T.Type, id: T.ID) throws -> T? where T: ObjectStore.Object {
-            try content.getObject(type: type, id: id)
+            do {
+                return try staticContent.getObject(type: type, id: id)
+            } catch {}
+            return try content.getObject(type: type, id: id)
         }
 
         override func getObjects<T>(type: T.Type) throws -> Set<T> where T: ObjectStore.Object {
-            try content.getObjects(type: type)
+            let staticObjects = try staticContent.getObjects(type: type)
+            let dynamicObjects = try content.getObjects(type: type)
+            return staticObjects.union(dynamicObjects)
         }
 
         override func addObject<T>(item: T) throws where T: ObjectStore.Object {
+            guard !document.inSetup else {
+                try staticContent.addObject(item: item)
+                item.isStatic = true
+                print("Static added \(T.self)")
+                return
+            }
             try content.addObject(item: item)
+            print("Persistent added \(T.self)")
         }
 
         // MARK: - Wrapping

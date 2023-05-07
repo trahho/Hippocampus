@@ -45,7 +45,7 @@ public extension ObjectStore.Object {
                 return _value
             }
             set {
-                guard value != newValue else { return }
+                guard !instance.readOnly,  value != newValue else { return }
                 if let objectKeyPath {
                     if let value { value[keyPath: objectKeyPath] = nil }
                     if let newValue { newValue[keyPath: objectKeyPath] = instance }
