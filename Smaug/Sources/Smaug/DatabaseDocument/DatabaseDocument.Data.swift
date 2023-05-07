@@ -65,7 +65,7 @@ public extension DatabaseDocument {
             guard !document.inSetup else {
                 try staticContent.addObject(item: item)
                 item.isStatic = true
-                print("Static added \(T.self)")
+//                print("Static added \(T.self)")
                 return
             }
             try content.addObject(item: item)

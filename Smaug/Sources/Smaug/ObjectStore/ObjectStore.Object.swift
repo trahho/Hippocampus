@@ -21,7 +21,6 @@ extension ObjectStore {
         }
 
         func adopt(document: DatabaseDocument) {
-            print("Adopt \(Self.self)")
             mirror(for: ReferenceStorage.self).map { $0.value }.forEach { $0.adopt(document: document) }
         }
 
