@@ -26,34 +26,34 @@ struct SidebarView: View {
     }
 
     @ViewBuilder var content: some View {
-        ForEach(groups) { group in
-            GroupView(group: group, editItem: $editItem)
-        }
-        ForEach(queries) { query in
+//        ForEach(groups) { group in
+//            GroupView(group: group, editItem: $editItem)
+//        }
+        ForEach(document.presentation.queries.sorted(by: { $0.name < $1.name })) { query in
             QueryView(query: query, editItem: $editItem)
         }
     }
 
     var body: some View {
         VStack(alignment: .leading) {
-            HStack {
-                Text("_allGroups")
-                    .font(.myTitle)
-//                    .frame(maxWidth: .infinity, alignment: .center)
-                Spacer()
-                Button {
-                    Presentation.Query.notes.groups = []
-                } label: {
-                    Image(systemName: "ellipsis.circle")
-                }
-            }
-            List {
+//            HStack {
+//                Text("_allGroups")
+//                    .font(.myTitle)
+////                    .frame(maxWidth: .infinity, alignment: .center)
+//                Spacer()
+//                Button {
+//                    Presentation.Query.notes.groups = []
+//                } label: {
+//                    Image(systemName: "ellipsis.circle")
+//                }
+//            }
+            List (selection: $navigation.query) {
                 content
-                    .listRowInsets(EdgeInsets())
+//                    .listRowInsets(EdgeInsets())
                     .listRowSeparator(.hidden)
             }
-            .listStyle(.plain)
-            .padding(0)
+            .listStyle(.sidebar)
+//            .padding(0)
             .sheet(item: $editItem) { item in
                 EditView(groupItem: item)
             }

@@ -37,8 +37,9 @@ extension SidebarView {
                 HStack {
                     GroupIconView(group: group)
                     GroupNameView(group: group)
+                    Text(" (\(groups.count), \(queries.count))")
                 }
-                .padding()
+//                .padding()
 //                .padding([.leading], 0)
                 .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                     Button {

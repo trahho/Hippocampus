@@ -19,13 +19,13 @@ extension SidebarView {
                 Image(systemName: "doc.text.magnifyingglass")
                 QueryNameView(query: query)
             }
-            .padding()
+//            .padding()
 //            .padding([.leading], 0)
 //            .padding([.top, .bottom], nil)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .onTapGesture {
-                navigation.query = query
-            }
+//            .onTapGesture {
+//                navigation.query = query
+//            }
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                 Button {
                     print("Edit Query")
@@ -34,10 +34,10 @@ extension SidebarView {
                     Label("_editGroups", systemImage: "tray.and.arrow.down")
                 }
             }
-            .background {
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(query == navigation.query ? Color.accentColor.opacity(0.8) : Color.clear)
-            }
+//            .background {
+//                RoundedRectangle(cornerRadius: 8)
+//                    .fill(query == navigation.query ? Color.accentColor.opacity(0.8) : Color.clear)
+//            }
         }
     }
 }
