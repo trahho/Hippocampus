@@ -28,7 +28,7 @@ extension Structure.Role {
         self.init()
         self.id = UUID(uuidString: id)!
         roleDescription = name
-        canBeCreated = addToMenu
+//        canBeCreated = addToMenu
         let aspects = aspects()
         for i in 0 ..< aspects.count {
             aspects[i].index = i
@@ -37,7 +37,7 @@ extension Structure.Role {
         self.representations = representations().asSet
         self.subRoles = subRoles.asSet
         self.references = associated().asSet
-        print("Built role \(name)")
+//        print("Built role \(name)")
     }
 
  

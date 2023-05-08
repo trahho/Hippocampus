@@ -21,7 +21,7 @@ struct HippocampusApp: App {
         let result = containerURL.appendingPathComponent("\(name)\(HippocampusApp.memoryExtension)")
         return result
     }
-    
+
     static func previewDocument() -> Document {
         let containerURL = URL.virtual
         let url = containerURL.appendingPathComponent("Preview\(HippocampusApp.memoryExtension)")
@@ -33,7 +33,8 @@ struct HippocampusApp: App {
 
     @ObservedObject var document: Document =
         //        .preview1
-        .init(name: "Test", local: false)
+//        .init(name: "Test", local: false)
+        Self.previewDocument()
 
     @StateObject var navigation = Navigation()
 

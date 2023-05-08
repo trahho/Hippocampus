@@ -46,3 +46,9 @@ Rezept
  - Schritt { -> Schritt }
  
  Es entspricht dem Modell, damit kann bestimmt werden, welche Daten angezeigt werden, und welche Elemente man erstellen kann.
+
+# Nächster Schritt
+
+Das Dokument kriegt @DocumentProperty, das wird sofort geladen. Der Rest passiert erst, wenn .open(). Dann kommt das Setup, damit können die statischen Elemente (Groups).hidden werden. In den Settings kann man wählen, was angezeigt werden kann, das kommt in die properties.
+
+Navigation wird standard, man kann die Groups, Queries, Items pinnen. Das ist eine weitere Liste mit einem Objekt, das eine Referenz auf andere hat. 

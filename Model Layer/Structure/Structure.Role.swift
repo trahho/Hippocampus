@@ -12,13 +12,11 @@ import SwiftUI
 extension Structure {
     @dynamicMemberLookup
     class Role: Object {
-        @PublishedSerialized var canBeCreated = false
-
         @Property var roleDescription: String = ""
         @Objects var representations: Set<Representation>
         @Objects var aspects: Set<Aspect>
         @Objects var subRoles: Set<Role>
-        @Relations(\Role.subRoles) var superRoles: Set<Role>
+//        @Relations(\Role.subRoles) var superRoles: Set<Role>
         @Objects var references: Set<Reference>
 
         var allAspects: Set<Aspect> {
@@ -55,10 +53,10 @@ extension Structure {
             findRepresentation(for: name) ?? .vertical([.undefined, .label(name)], alignment: .center)
         }
 
-        override func merge(other: Mergeable) throws {
-            try super.merge(other: other)
-            guard let other = other as? Role else { throw MergeError.wrongMatch  }
-            self.canBeCreated = other.canBeCreated
-        }
+//        override func merge(other: Mergeable) throws {
+//            try super.merge(other: other)
+//            guard let other = other as? Role else { throw MergeError.wrongMatch  }
+//            self.canBeCreated = other.canBeCreated
+//        }
     }
 }

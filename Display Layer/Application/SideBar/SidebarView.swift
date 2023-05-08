@@ -12,6 +12,7 @@ struct SidebarView: View {
     @EnvironmentObject var navigation: Navigation
     @EnvironmentObject var document: Document
     @State var editItem: Presentation.Object?
+    @State var selection: Presentation.Query?
 
     var groups: [Presentation.Group] {
         document.presentation.groups
@@ -26,34 +27,21 @@ struct SidebarView: View {
     }
 
     @ViewBuilder var content: some View {
-//        ForEach(groups) { group in
-//            GroupView(group: group, editItem: $editItem)
-//        }
-        ForEach(document.presentation.queries.sorted(by: { $0.name < $1.name })) { query in
+        ForEach(groups) { group in
+            GroupView(group: group, editItem: $editItem)
+        }
+        ForEach(queries) { query in
             QueryView(query: query, editItem: $editItem)
         }
     }
 
     var body: some View {
         VStack(alignment: .leading) {
-//            HStack {
-//                Text("_allGroups")
-//                    .font(.myTitle)
-////                    .frame(maxWidth: .infinity, alignment: .center)
-//                Spacer()
-//                Button {
-//                    Presentation.Query.notes.groups = []
-//                } label: {
-//                    Image(systemName: "ellipsis.circle")
-//                }
-//            }
-            List (selection: $navigation.query) {
+            List(selection: $selection) {
                 content
-//                    .listRowInsets(EdgeInsets())
                     .listRowSeparator(.hidden)
             }
             .listStyle(.sidebar)
-//            .padding(0)
             .sheet(item: $editItem) { item in
                 EditView(groupItem: item)
             }
