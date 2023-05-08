@@ -487,10 +487,10 @@
 		C5167C4329C6291E00323F75 /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				C5BE4EFD29F5AF0900B27B48 /* SideBar */,
 				C5D2735B2975E08400F32EB6 /* DocumentView.swift */,
 				C5C8E856295A652B002C7746 /* NavigationView.swift */,
 				C52E724929F54B31001A5821 /* ContentView.swift */,
+				C5BE4EFD29F5AF0900B27B48 /* SideBar */,
 			);
 			path = Application;
 			sourceTree = "<group>";

@@ -10,12 +10,17 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var navigation: Navigation
-    
+
     var body: some View {
-        if let query = navigation.query {
-            QueryView(query: query)
-        } else {
-            EmptyView()
+        NavigationStack(path: $navigation.path) {
+            if let query = navigation.query {
+                QueryView(query: query)
+                    .navigationDestination(for: PresentationResult.Item.self) { item in
+                        ItemView(item: item.item, roles: item.roles.asArray)
+                    }
+            } else {
+                EmptyView()
+            }
         }
     }
 }

@@ -20,9 +20,9 @@ final class DataStoreTests: XCTestCase {
         let doc = Document(url: .virtual)
         let a = A.A()
         doc.add(a)
-        serialize(doc: doc)
+//        serialize(doc: doc)
 
-        let a1 = doc[A.A.self, a.id]
+        let a1 = doc[A.A.self, a.id]!
         XCTAssertEqual(a1, a)
     }
 
@@ -84,6 +84,28 @@ final class DataStoreTests: XCTestCase {
         let b = B.B()
         a.b = b
         doc.add(a)
+        XCTAssertNotNil(doc[B.B.self, b.id])
+        serialize(doc: doc)
+        XCTAssertNotNil(doc[B.B.self, b.id])
+    }
+
+    func testSubscript() throws {
+        let doc = Document(url: .virtual)
+        let a = A.A()
+        let b = B.B()
+        a.b = b
+        doc[] = a
+        XCTAssertNotNil(doc[B.B.self, b.id])
+        serialize(doc: doc)
+        XCTAssertNotNil(doc[B.B.self, b.id])
+    }
+    
+    func testCreate() throws {
+        let doc = Document(url: .virtual)
+        let a = doc.add(A.A.self)
+        let b = doc.add(B.B.self)
+        a.b = b
+        doc[] = a
         XCTAssertNotNil(doc[B.B.self, b.id])
         serialize(doc: doc)
         XCTAssertNotNil(doc[B.B.self, b.id])

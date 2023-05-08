@@ -19,11 +19,14 @@ extension SidebarView {
                 Image(systemName: "doc.text.magnifyingglass")
                 QueryNameView(query: query)
             }
-            .listRowBackground(RoundedRectangle(cornerRadius: 8).fill(query == navigation.query ? Color.accentColor.opacity(0.8) : Color.clear))
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .onTapGesture {
-                navigation.query = query
-            }
+            .tag(query)
+//            #if os(iOS)
+//            .listRowBackground(RoundedRectangle(cornerRadius: 8).fill(query == navigation.query ? Color.accentColor.opacity(0.8) : Color.clear))
+//            #endif
+//            .frame(maxWidth: .infinity, alignment: .leading)
+//            .onTapGesture {
+//                navigation.query = query
+//            }
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                 Button {
                     print("Edit Query")

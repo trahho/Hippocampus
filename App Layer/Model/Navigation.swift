@@ -11,6 +11,7 @@ import SwiftUI
 class Navigation: ObservableObject {
    
     @Published var query: Presentation.Query?
+    @Published var path = NavigationPath()
     
     @Published var queries: [Presentation.Query] = []
 

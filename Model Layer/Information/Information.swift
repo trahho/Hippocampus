@@ -9,7 +9,7 @@ import Foundation
 import Smaug
 
 class Information: DataStore<Document.Storage> {
-    @Objects private var allItems: Set<Item>
+    @Objects(key: "items") private var allItems: Set<Item>
 
     var items: Set<Item> {
         allItems.filter { !$0.deleted }.asSet

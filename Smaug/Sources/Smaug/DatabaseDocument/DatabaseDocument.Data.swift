@@ -45,11 +45,11 @@ public extension DatabaseDocument {
         override func start() {
             container.start()
         }
-        
+
         override func load() {
             container.load()
         }
-        
+
         override func save() {
             container.save()
         }
@@ -57,10 +57,10 @@ public extension DatabaseDocument {
         // MARK: - Storage
 
         override func getObject<T>(type: T.Type, id: T.ID) throws -> T? where T: ObjectStore.Object {
-            do {
+            guard let result = try content.getObject(type: type, id: id) else {
                 return try staticContent.getObject(type: type, id: id)
-            } catch {}
-            return try content.getObject(type: type, id: id)
+            }
+            return result
         }
 
         override func getObjects<T>(type: T.Type) throws -> Set<T> where T: ObjectStore.Object {

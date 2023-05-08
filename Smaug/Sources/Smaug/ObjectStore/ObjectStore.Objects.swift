@@ -8,9 +8,9 @@
 import Foundation
 
 public extension ObjectStore {
+    
     @propertyWrapper
     final class Objects<T>: ObjectsStorageBase<T> where T: Object {
-        
      
         @available(*, unavailable, message: "This property wrapper can only be applied to classes")
         public var wrappedValue: Set<T> {

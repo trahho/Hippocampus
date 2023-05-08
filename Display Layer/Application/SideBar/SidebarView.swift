@@ -37,7 +37,7 @@ struct SidebarView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            List(selection: $selection) {
+            List(selection: $navigation.query) {
                 content
                     .listRowSeparator(.hidden)
             }
