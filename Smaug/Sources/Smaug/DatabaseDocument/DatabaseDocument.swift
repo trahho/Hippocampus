@@ -30,7 +30,10 @@ open class DatabaseDocument: Reflectable, ObservableObject {
         setup()
         inSetup = false
 
-        storages.forEach { $0.value.start() }
+        storages.forEach {
+            $0.value.load()
+            $0.value.start()
+        }
     }
 
     open func setup() {}

@@ -16,6 +16,12 @@ open class DataStore<ValueStorage: TimedValueStorage>: ObjectStore {
 
     @Serialized var timestamps: Set<Date>
 
+    override public func merge(other: Mergeable) throws {
+        guard let other = other as? Self else { throw MergeError.wrongMatch }
+        try super.merge(other: other)
+        timestamps = timestamps.union(other.timestamps)
+    }
+    
     override func addObject<T>(item: T) throws where T: ObjectStore.Object {
         guard !document.readOnly else { return }
         if let item = item as? Object {

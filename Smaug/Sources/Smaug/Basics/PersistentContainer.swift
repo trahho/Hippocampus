@@ -8,7 +8,6 @@
 import Combine
 import Foundation
 
-
 public class PersistentContainer<Content: Persistent>: ObservableObject {
     typealias ContentDelegate = () -> Void
 
@@ -103,16 +102,16 @@ public class PersistentContainer<Content: Persistent>: ObservableObject {
         }
     }
 
-//    fileprivate func updateContent(_ newContent: Content) where Content: MergeableContent {
-//        do {
-//            isMerging = true
-//            try content.merge(other: newContent)
-//            isMerging = false
-//        } catch {
-//            content = newContent
-//            isMerging = false
-//        }
-//    }
+    fileprivate func updateContent(_ newContent: Content) {
+        if let newContent = newContent as? Mergeable, let content = content as? Mergeable {
+            do {
+                isMerging = true
+                try content.merge(other: newContent)
+                isMerging = false
+            } catch {}
+        }
+        content = newContent
+    }
 
     func restore(content: Content) {
         if let restorable = content as? Restorable {
@@ -120,7 +119,7 @@ public class PersistentContainer<Content: Persistent>: ObservableObject {
         }
     }
 
-    func load() {
+    public func load() {
         guard !url.isVirtual else { return }
         guard
             let modificationDate = try? FileManager.default.attributesOfItem(atPath: url.path(percentEncoded: false))[.modificationDate] as? Date,
@@ -139,7 +138,7 @@ public class PersistentContainer<Content: Persistent>: ObservableObject {
         #endif
 
         restore(content: newContent)
-        content = newContent
+        updateContent(newContent)
 
         currentTimestamp = modificationDate
         hasChanges = false
@@ -196,11 +195,9 @@ public class PersistentContainer<Content: Persistent>: ObservableObject {
         self.contentChange = configureContent
         restore(content: content)
         self.content = content
-
     }
-    
+
     func start() {
-        load()
         setupMetadataQuery()
     }
 

@@ -12,6 +12,8 @@ public extension DatabaseDocument {
         var document: DatabaseDocument!
 
         func setup(url: URL, name: String, document: DatabaseDocument) {}
+        func load() {}
+        func save() {}
         func start() {}
     
     }

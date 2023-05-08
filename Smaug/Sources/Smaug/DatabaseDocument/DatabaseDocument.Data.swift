@@ -35,7 +35,7 @@ public extension DatabaseDocument {
             self.document = document
             staticContent = T()
             staticContent.document = document
-            let url = url.appending(component: name + ".persistent")
+            let url = url.appending(component: name + ".data")
             container = ObjectStoreContainer(document: document, url: url, content: T(), commitOnChange: commitOnChange)
             if publishChange {
                 cancellable = container!.objectWillChange.sink { document.objectWillChange.send() }
@@ -43,7 +43,15 @@ public extension DatabaseDocument {
         }
 
         override func start() {
-            container!.start()
+            container.start()
+        }
+        
+        override func load() {
+            container.load()
+        }
+        
+        override func save() {
+            container.save()
         }
 
         // MARK: - Storage

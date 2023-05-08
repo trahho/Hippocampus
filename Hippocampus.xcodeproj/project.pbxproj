@@ -406,6 +406,15 @@
 		C5BE4F3129F8794C00B27B48 /* PropertyWrapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyWrapperTests.swift; sourceTree = "<group>"; };
 		C5BE4F4029FC433300B27B48 /* PersistentDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentDataTests.swift; sourceTree = "<group>"; };
 		C5BE4F7129FEDE6E00B27B48 /* DatabaseDocumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseDocumentTests.swift; sourceTree = "<group>"; };
+		C5BE89F52A09687800CE601F /* Icon1024-256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon1024-256.png"; sourceTree = "<group>"; };
+		C5BE89F62A09687800CE601F /* Icon1024-16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon1024-16.png"; sourceTree = "<group>"; };
+		C5BE89F72A09687800CE601F /* Icon1024-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon1024-64.png"; sourceTree = "<group>"; };
+		C5BE89F82A09687800CE601F /* Icon1024-1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon1024-1024.png"; sourceTree = "<group>"; };
+		C5BE89F92A09687800CE601F /* Contents.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Contents.json; sourceTree = "<group>"; };
+		C5BE89FA2A09687800CE601F /* Icon1024-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon1024-32.png"; sourceTree = "<group>"; };
+		C5BE89FB2A09687800CE601F /* Icon1024-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon1024-128.png"; sourceTree = "<group>"; };
+		C5BE89FC2A09687800CE601F /* Icon1024-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon1024-512.png"; sourceTree = "<group>"; };
+		C5BE89FD2A096A5400CE601F /* IconMac.vectornator */ = {isa = PBXFileReference; lastKnownFileType = file; path = IconMac.vectornator; sourceTree = "<group>"; };
 		C5BEFC2029EDFF4F00332347 /* Structure.Representation.Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structure.Representation.Builder.swift; sourceTree = "<group>"; };
 		C5C4A12A2942701100FF9AB8 /* SerialisationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialisationTests.swift; sourceTree = "<group>"; };
 		C5C8E856295A652B002C7746 /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
@@ -897,10 +906,36 @@
 		C5BE4F1029F5DE9E00B27B48 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				C5BE89F32A09687800CE601F /* macOS */,
 				C5BE4F0429F5B9DB00B27B48 /* Icon.vectornator */,
+				C5BE89FD2A096A5400CE601F /* IconMac.vectornator */,
 				C5BE4F0729F5C0AF00B27B48 /* Icon1024.png */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		C5BE89F32A09687800CE601F /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				C5BE89F42A09687800CE601F /* AppIcon.appiconset */,
+			);
+			name = macOS;
+			path = Generated/macOS;
+			sourceTree = "<group>";
+		};
+		C5BE89F42A09687800CE601F /* AppIcon.appiconset */ = {
+			isa = PBXGroup;
+			children = (
+				C5BE89F52A09687800CE601F /* Icon1024-256.png */,
+				C5BE89F62A09687800CE601F /* Icon1024-16.png */,
+				C5BE89F72A09687800CE601F /* Icon1024-64.png */,
+				C5BE89F82A09687800CE601F /* Icon1024-1024.png */,
+				C5BE89F92A09687800CE601F /* Contents.json */,
+				C5BE89FA2A09687800CE601F /* Icon1024-32.png */,
+				C5BE89FB2A09687800CE601F /* Icon1024-128.png */,
+				C5BE89FC2A09687800CE601F /* Icon1024-512.png */,
+			);
+			path = AppIcon.appiconset;
 			sourceTree = "<group>";
 		};
 		C5BEFC2529EF3B7800332347 /* Item */ = {
