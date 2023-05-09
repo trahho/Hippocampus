@@ -12,7 +12,7 @@ class Document: DatabaseDocument {
     @Data var information: Information
     @Data var structure: Structure
     @Data var presentation: Presentation
-    @Transient var result: PresentationResult
+    @Transient var result: Presentation.PresentationResult
     @Cache var drawing: Document.Drawing
 
     convenience init(name: String, local: Bool) {
@@ -22,8 +22,18 @@ class Document: DatabaseDocument {
     }
 
     override func setup() {
-        [Structure.Role]([.global, .drawing, .text, .topic, .note]).forEach { add($0) }
-        [Presentation.Query]([.general, .notes, .topics]).forEach { add($0) }
-        [Presentation.Group]([.builtIn]).forEach { add($0) }
+        [Structure.Role]([.global, .drawing, .text, .topic, .note]).forEach {  self[]=$0  }
+        [Presentation.Query]([.general, .notes, .topics]).forEach {  self[]=$0  }
+        [Presentation.Group]([.builtIn]).forEach { self[]=$0 }
+        
+        let a = add(Information.Item.self)
+        a[String.self, Structure.Role.global.name] = "Hallo"
+        let b = add(Information.Item.self)
+        b[String.self, Structure.Role.global.name] = "liebe"
+        a.to.insert(b)
+        let c = add(Information.Item.self)
+        c[String.self, Structure.Role.global.name] = "Welt"
+        b.to.insert(c)
+        c.to.insert(a)
     }
 }

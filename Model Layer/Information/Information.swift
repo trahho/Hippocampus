@@ -14,6 +14,7 @@ class Information: DataStore<Document.Storage> {
     var items: Set<Item> {
         allItems.filter { !$0.deleted }.asSet
     }
+    
 
 //    func createNode(roles: [Structure.Role] = [], timestamp: Date? = nil) -> Node {
 //        let timestamp = timestamp ?? Date()

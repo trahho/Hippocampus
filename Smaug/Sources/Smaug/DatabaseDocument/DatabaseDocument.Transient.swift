@@ -13,7 +13,7 @@ public extension DatabaseDocument {
     final class Transient<T>: DataStorage where T: ObjectMemory {
         // MARK: - Initialization
 
-        public init(publishChange: Bool = true) {
+        public init(publishChange: Bool = false) {
             self.publishChange = publishChange
         }
 

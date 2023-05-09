@@ -8,8 +8,9 @@
 import Foundation
 import Smaug
 
-class PresentationResult: ObjectMemory {
-    @Objects var nodes: Set<Node>
-    @Objects var edges: Set<Edge>
-    @Objects var results: Set<Result>
+extension Presentation {
+    class PresentationResult: ObjectMemory {
+        @Objects var items: Set<Item>
+        @Objects var results: Set<Result>
+    }
 }

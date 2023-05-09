@@ -53,9 +53,9 @@ extension Presentation {
 
         func apply(to information: Information) -> PresentationResult.Result {
             let result = PresentationResult.Result()
-            self.add(result)
-            for node in information.items {
-                analyze(node: node, in: information, for: result)
+            add(result)
+            for item in information.items {
+                analyze(item: item, in: information, for: result)
             }
             return result
         }
@@ -78,25 +78,27 @@ extension Presentation {
             analyze(item.item)
         }
 
-        func analyze(node: Information.Item, in information: Information, for result: PresentationResult.Result) {
-//            guard result.nodeStorage[node.id] == nil else { return }
-//            let roles = analyze(node)
-//            if let roles {
-//                let item = Result.Node(node: node, roles: roles)
-//                result.nodeStorage[node.id] = item
-//                for edge in node.to {
-//                    analyze(edge: edge, in: information, for: result)
-//                }
-//            }
+        func analyze(item: Information.Item, in information: Information, for result: PresentationResult.Result) {
+            guard !result.items.contains(where: { $0.item == item }) else { return }
+            print ("Analyze \(item[String.self, Structure.Role.global.name] ?? "Nix")")
+            let roles = analyze(item)
+            if let roles {
+                let resultItem = PresentationResult.Item(item: item, roles: roles)
+                result.items.insert(resultItem)
+
+                item.to.forEach { item in
+                    analyze(item: item, in: information, for: result)
+                }
+            }
         }
 
-        func analyze(edge: Information.Item, in information: Information, for result: PresentationResult.Result) {
-//            guard result.edgeStorage[edge.id] == nil else { return }
-//            analyze(node: edge.to.first!, in: information, for: result)
-//            guard let from = result.nodeStorage[edge.from.id], let to = result.nodeStorage[edge.to.id] else { return }
-//            let roles = analyze(edge)
-//            let item = Result.Edge(edge: edge, roles: roles ?? [], from: from, to: to)
-//            result.edgeStorage[edge.id] = item
-        }
+//        func analyze(edge: Information.Item, in information: Information, for result: PresentationResult.Result) {
+        ////            guard result.edgeStorage[edge.id] == nil else { return }
+        ////            analyze(node: edge.to.first!, in: information, for: result)
+        ////            guard let from = result.nodeStorage[edge.from.id], let to = result.nodeStorage[edge.to.id] else { return }
+        ////            let roles = analyze(edge)
+        ////            let item = Result.Edge(edge: edge, roles: roles ?? [], from: from, to: to)
+        ////            result.edgeStorage[edge.id] = item
+//        }
     }
 }

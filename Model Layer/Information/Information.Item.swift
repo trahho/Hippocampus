@@ -9,7 +9,7 @@ import Foundation
 
 extension Information {
     class Item: Object {
-        @Property var deleted: Bool
+        @Property var deleted: Bool = false
         @Objects var roles: Set<Structure.Role>
 
         @Objects var to: Set<Item>

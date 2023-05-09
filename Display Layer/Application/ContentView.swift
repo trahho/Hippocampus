@@ -15,7 +15,7 @@ struct ContentView: View {
         NavigationStack(path: $navigation.path) {
             if let query = navigation.query {
                 QueryView(query: query)
-                    .navigationDestination(for: PresentationResult.Item.self) { item in
+                    .navigationDestination(for: Presentation.PresentationResult.Item.self) { item in
                         ItemView(item: item.item, roles: item.roles.asArray)
                     }
             } else {

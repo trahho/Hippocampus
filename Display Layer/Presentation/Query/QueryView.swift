@@ -32,8 +32,8 @@ struct QueryView: View {
                 }
         } else {
             switch query.layout {
-            case .list:
-                QueryListView(information: document.information, query: query)
+            case .list, .tree:
+                QueryListView(query: query)
 //            case .tree:
 //                QueryTreeView(information: document.information, query: query)
             default:
