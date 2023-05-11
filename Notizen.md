@@ -52,3 +52,16 @@ Rezept
 Das Dokument kriegt @DocumentProperty, das wird sofort geladen. Der Rest passiert erst, wenn .open(). Dann kommt das Setup, damit können die statischen Elemente (Groups).hidden werden. In den Settings kann man wählen, was angezeigt werden kann, das kommt in die properties.
 
 Navigation wird standard, man kann die Groups, Queries, Items pinnen. Das ist eine weitere Liste mit einem Objekt, das eine Referenz auf andere hat. 
+
+
+# Layout
+Ich möchte das Strukturmodell wie ein Datenmodell anzeigen.
+Rolle: 
+- Enthalten (geerbt) - oben (als Baum)
+- Eigenschaften
+- Verbindungen (to/from, Rolle) to rechts, from links
+
+Das entspricht einem Graphlayout. Daraus wird eine Package :-)
+DisplayView - ZStack mit Scroll und Zoom, Nodes und Edges. Die werden z. B. vom QueryView berechnet und gesetzt.
+LayoutProtocol - Vielleicht DisplayView als Layout mit $Positions
+LayoutEngine - Berechnet die Positions und wenn fertig, dann Published Werte setzen. 

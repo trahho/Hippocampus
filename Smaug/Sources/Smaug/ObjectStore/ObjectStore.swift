@@ -10,6 +10,8 @@ import Foundation
 open class ObjectStore: Persistent, Serializable, Restorable, Mergeable, ContentContainer, ObservableObject, Reflectable {
     // MARK: - Types
 
+    public typealias PersistentValue = Codable & Equatable
+
     enum Fault: Error {
         case wrongMatch
         case mergeFailed
@@ -66,8 +68,6 @@ open class ObjectStore: Persistent, Serializable, Restorable, Mergeable, Content
         guard let storage = storage(type: type) else { throw DatabaseDocument.Failure.typeNotFound }
         return storage.getObjects()
     }
-
-    
 
     func addObject<T>(item: T) throws where T: ObjectStore.Object {
         guard let storage = storage(type: T.self) else { throw DatabaseDocument.Failure.typeNotFound }

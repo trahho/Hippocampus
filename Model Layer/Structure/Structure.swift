@@ -8,7 +8,8 @@
 import Foundation
 import Smaug
 
-class Structure: DataStore<Document.Storage> {
+//class Structure: DataStore<Document.Storage> {
+class Structure: ObjectStore {
     @Objects var roles: Set<Role>
     @Objects var aspects: Set<Aspect>
     @Objects var representations: Set<Representation>

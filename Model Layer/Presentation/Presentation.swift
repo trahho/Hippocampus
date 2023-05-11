@@ -8,7 +8,7 @@
 import Foundation
 import Smaug
 
-class Presentation: DataStore<Document.Storage> {
+class Presentation: ObjectStore {
     @Objects var queries: Set<Query>
     @Objects var groups: Set<Group>
     @Objects var predicats: Set<Predicate>
