@@ -34,6 +34,6 @@ class Document: DatabaseDocument {
         let c = add(Information.Item.self)
         c[String.self, Structure.Role.global.name] = "Welt"
         b.to.insert(c)
-        c.to.insert(a)
+//        c.to.insert(a)
     }
 }

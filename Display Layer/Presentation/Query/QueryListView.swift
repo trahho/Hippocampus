@@ -49,17 +49,25 @@ struct QueryListView: View {
     }
 
     var body: some View {
-        List(items, id: \.self) { item in
-            representation(for: item)
-//            Text("Test")
-//            listItem.view(for: item.item, by: document.structure, editable: false)
-                .padding(2)
-                .onTapGesture {
-                    query.items.append(Presentation.ItemDetail(item: item.item, roles: item.roles.asArray))
-                }
-//                .frame(maxWidth: .infinity)
-//                .background(.blue)
-//                .tapToSelectItem(item)
+        List {
+            ForEach(items, id: \.self) { item in
+//                NavigationLink(value: item) { representation(for: item) }
+                representation(for: item)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        navigation.path.append(item)
+                    }
+                //            Text("Test")
+                //            listItem.view(for: item.item, by: document.structure, editable: false)
+                //                .padding(2)
+                //                .onTapGesture {
+                //                    query.items.append(Presentation.ItemDetail(item: item.item, roles: item.roles.asArray))
+                //                }
+                //                .frame(maxWidth: .infinity)
+                //                .background(.blue)
+                //                .tapToSelectItem(item)
+            }
         }
     }
 }

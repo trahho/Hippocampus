@@ -33,6 +33,7 @@ extension Presentation {
         @Objects var roleRepresentations: Set<RoleRepresentation>
         @PublishedSerialized var layout: Presentation.Layout = .tree
         @Published var items: [ItemDetail] = []
+        @Relations(\PresentationResult.Result.query) var results: Set<PresentationResult.Result>
 
         func getRepresentation(_: any Sequence<RoleRepresentation>, for role: Structure.Role) -> RoleRepresentation?
         {
@@ -53,9 +54,12 @@ extension Presentation {
 
         func apply(to information: Information) -> PresentationResult.Result {
             let result = PresentationResult.Result()
-            add(result)
+//            results.insert(result)
             for item in information.items {
                 analyze(item: item, in: information, for: result)
+            }
+            result.items.forEach { item in
+                item.next = result.items.filter { item.item.to.contains($0.item) }.asSet
             }
             return result
         }
@@ -78,17 +82,13 @@ extension Presentation {
             analyze(item.item)
         }
 
-        func analyze(item: Information.Item, in information: Information, for result: PresentationResult.Result) {
+        func analyze(item: Information.Item, in _: Information, for result: PresentationResult.Result) {
             guard !result.items.contains(where: { $0.item == item }) else { return }
-            print ("Analyze \(item[String.self, Structure.Role.global.name] ?? "Nix")")
+            print("Analyze \(item[String.self, Structure.Role.global.name] ?? "Nix")")
             let roles = analyze(item)
             if let roles {
                 let resultItem = PresentationResult.Item(item: item, roles: roles)
                 result.items.insert(resultItem)
-
-                item.to.forEach { item in
-                    analyze(item: item, in: information, for: result)
-                }
             }
         }
 

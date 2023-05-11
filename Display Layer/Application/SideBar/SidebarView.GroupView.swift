@@ -37,7 +37,7 @@ extension SidebarView {
                 HStack {
                     GroupIconView(group: group)
                     GroupNameView(group: group)
-                    Text(" (\(groups.count), \(queries.count))")
+//                    Text(" (\(groups.count), \(queries.count))")
                 }
 //                .padding()
 //                .padding([.leading], 0)

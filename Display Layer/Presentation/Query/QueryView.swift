@@ -32,10 +32,11 @@ struct QueryView: View {
                 }
         } else {
             switch query.layout {
-            case .list, .tree:
-                QueryListView(query: query)
-//            case .tree:
-//                QueryTreeView(information: document.information, query: query)
+            case .list:
+                QueryTreeView(query:query)
+//                QueryListView(query: query)
+            case .tree:
+                QueryTreeView(query:query)
             default:
                 Text("Not yet")
             }
@@ -43,6 +44,14 @@ struct QueryView: View {
     }
 
     var body: some View {
-        content
+        switch query.layout {
+        case .list:
+            QueryTreeView(query:query)
+//                QueryListView(query: query)
+        case .tree:
+            QueryTreeView(query:query)
+        default:
+            Text("Not yet")
+        }
     }
 }

@@ -18,6 +18,7 @@ import Smaug
 
 extension Presentation.PresentationResult {
     class Result: Object {
+        @Object var query: Presentation.Query!
         @Objects var items: Set<Item>
     }
 }
