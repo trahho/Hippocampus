@@ -102,10 +102,19 @@ final class DataStoreTests: XCTestCase {
     
     func testCreate() throws {
         let doc = Document(url: .virtual)
-        let a = doc.add(A.A.self)
-        let b = doc.add(B.B.self)
+        let a = doc.create(A.A.self)
+        let b = doc.create(B.B.self)
         a.b = b
-        doc[] = a
+        XCTAssertNotNil(doc[B.B.self, b.id])
+        serialize(doc: doc)
+        XCTAssertNotNil(doc[B.B.self, b.id])
+    }
+    
+    func testCreateAsFunc() throws {
+        let doc = Document(url: .virtual)
+        let a = doc(A.A.self)
+        let b = doc(B.B.self)
+        a.b = b
         XCTAssertNotNil(doc[B.B.self, b.id])
         serialize(doc: doc)
         XCTAssertNotNil(doc[B.B.self, b.id])

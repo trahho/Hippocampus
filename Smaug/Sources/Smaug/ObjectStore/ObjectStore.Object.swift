@@ -36,6 +36,10 @@ extension ObjectStore {
             store!.add(item)
         }
 
+        public func callAsFunction<T>(_ type: T.Type) -> T where T: ObjectStore.Object {
+            store!.create(type)
+        }
+
         public subscript<T>(_ type: T.Type, _ name: String) -> T where T: DatabaseDocument {
             store![type, name]
         }

@@ -93,6 +93,12 @@ open class ObjectStore: Persistent, Serializable, Restorable, Mergeable, Content
     public func add<T>(_ item: T) where T: ObjectStore.Object {
         document.add(item)
     }
+    
+    public func create<T>(_ type: T.Type) -> T where T: ObjectStore.Object {
+        let object = T()
+        add(object)
+        return object
+    }
 
     public subscript<T>(_ type: T.Type, _ name: String) -> T where T: DatabaseDocument {
         document[type, name]

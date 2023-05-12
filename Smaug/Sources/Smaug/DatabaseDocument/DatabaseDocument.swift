@@ -168,7 +168,7 @@ open class DatabaseDocument: Reflectable, ObservableObject {
         }
     }
     
-    public func add<T>(_ type: T.Type) -> T where T: ObjectStore.Object {
+    public func create<T>(_ type: T.Type) -> T where T: ObjectStore.Object {
         let object = T()
         add(object)
         return object
@@ -181,10 +181,8 @@ open class DatabaseDocument: Reflectable, ObservableObject {
         }
         return mirror.value[name]
     }
-    
-    public static func + <T>(lhs: DatabaseDocument, rhs: T.Type) -> T where T: ObjectStore.Object {
-        let object = T()
-        lhs.add(object)
-        return object
+  
+    public func callAsFunction<T>(_ type: T.Type) -> T where T: ObjectStore.Object {
+        create(type)
     }
 }

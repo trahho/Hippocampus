@@ -26,12 +26,12 @@ class Document: DatabaseDocument {
         [Presentation.Query]([.general, .notes, .topics]).forEach {  self[]=$0  }
         [Presentation.Group]([.builtIn]).forEach { self[]=$0 }
         
-        let a = add(Information.Item.self)
+        let a = create(Information.Item.self)
         a[String.self, Structure.Role.global.name] = "Hallo"
-        let b = add(Information.Item.self)
+        let b = create(Information.Item.self)
         b[String.self, Structure.Role.global.name] = "liebe"
         a.to.insert(b)
-        let c = add(Information.Item.self)
+        let c = create(Information.Item.self)
         c[String.self, Structure.Role.global.name] = "Welt"
         b.to.insert(c)
 //        c.to.insert(a)
