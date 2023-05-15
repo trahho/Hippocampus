@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension SidebarView {
-    struct EditView: View {
+    struct QueryEditView: View {
         @EnvironmentObject var document: Document
         @ObservedObject var groupItem: Presentation.Object
         @State var name: String = ""
@@ -54,7 +54,7 @@ extension SidebarView {
     }
 }
 
-extension SidebarView.EditView {
+extension SidebarView.QueryEditView {
     struct RowView: View {
         @ObservedObject var rowItem: Presentation.Group
         @ObservedObject var groupItem: Presentation.Object
@@ -144,7 +144,7 @@ struct Sidebar_EditGroupingView_Previews: PreviewProvider {
     static let navigation = Navigation()
 
     static var previews: some View {
-        SidebarView.EditView(groupItem: Presentation.Query.notes)
+        SidebarView.QueryEditView(groupItem: Presentation.Query.notes)
             .environmentObject(document)
             .environmentObject(navigation)
     }

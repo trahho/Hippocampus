@@ -10,22 +10,12 @@ import SwiftUI
 
 class Navigation: ObservableObject {
    
+    @Published var sidebarMode: SidebarMode = .roles
+    @Published var role: Structure.Role?
     @Published var query: Presentation.Query?
     @Published var path = NavigationPath()
     
-    @Published var queries: [Presentation.Query] = []
 
-    func showItem(item: Information.Item, roles: [Structure.Role]) {
-//        withAnimation {
-        query?.items.append(Presentation.ItemDetail(item: item, roles: roles))
-//        }
-    }
-
-    func moveBack() {
-//        withAnimation {
-        query?.items.removeLast()
-//        }
-    }
 }
 
 //extension Navigation {

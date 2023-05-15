@@ -13,11 +13,16 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack(path: $navigation.path) {
-            if let query = navigation.query {
+            if navigation.sidebarMode == .queries, let query = navigation.query {
                 QueryView(query: query)
                     .navigationDestination(for: Presentation.PresentationResult.Item.self) { item in
                         ItemView(item: item.item, roles: item.roles.asArray)
                     }
+            } else if navigation.sidebarMode == .roles, let role = navigation.role {
+                RoleView(role: role)
+//                    .navigationDestination(for: Structure.Role.self) { item in
+//                        ItemView(item: item.item, roles: item.roles.asArray)
+//                    }
             } else {
                 EmptyView()
             }

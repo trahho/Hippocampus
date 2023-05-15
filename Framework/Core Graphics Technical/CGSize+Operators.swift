@@ -13,6 +13,10 @@ extension CGSize {
         CGSize(width: a.width - b.width, height: a.height - b.height)
     }
 
+    static func + (a: CGSize, b: CGSize) -> CGSize {
+        CGSize(width: a.width + b.width, height: a.height + b.height)
+    }
+
     static func * (size: CGSize, factor: CGFloat) -> CGSize {
         CGSize(width: size.width * factor, height: size.height * factor)
     }

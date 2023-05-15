@@ -13,4 +13,8 @@ extension View {
     func offset(position: CGPoint) -> some View {
         offset(x: position.x, y: position.y)
     }
+    
+    func position(position: CGPoint) -> some View {
+        self.position(x: position.x, y: position.y)
+    }
 }

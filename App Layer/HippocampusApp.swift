@@ -33,8 +33,8 @@ struct HippocampusApp: App {
 
     @ObservedObject var document: Document =
         //        .preview1
-//        .init(name: "Test", local: false)
-        Self.previewDocument()
+//
+        inPreview ? Self.previewDocument() : .init(name: "Test", local: false)
 
     @StateObject var navigation = Navigation()
 

@@ -25,5 +25,6 @@
 "_builtIn" = "Static";
 
 /* SideBar */
-"_allGroups" = "Topics";
-
+":queries" = "Topics";
+":roles" = "Roles";
+":pinned" = "Favorites";

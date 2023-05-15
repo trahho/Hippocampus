@@ -26,7 +26,11 @@
 "_builtIn" = "Statisch";
 
 /* SideBar */
-"_allGroups" = "Themen";
+":queries" = "Themen";
+":roles" = "Arten";
+":pinned" = "Favoriten";
+
+
 
 
 
