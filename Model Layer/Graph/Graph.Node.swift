@@ -11,9 +11,8 @@ import SwiftUI
 
 
 extension Graph {
-    class GraphNode: IdentifiableObject, ObservableObject {
+    class Node: IdentifiableObject, ObservableObject {
         var type: GraphNodeType = .knot
-        var alignment: Alignment?
 
 
         @ViewBuilder

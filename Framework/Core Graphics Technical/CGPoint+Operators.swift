@@ -78,6 +78,10 @@ extension CGPoint {
     static var infinite: CGPoint {
         CGPoint(x: CGFloat.infinity, y: CGFloat.infinity)
     }
+    
+    static func < (lhs:CGPoint, rhs:CGPoint) -> Bool {
+        lhs.x < rhs.x && lhs.y < rhs.y
+    }
 
     // MARK: - Initialization
 

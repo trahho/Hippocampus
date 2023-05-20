@@ -14,7 +14,7 @@ protocol GraphLayouter {
 }
 
 class Graph: IdentifiableObject, ObservableObject {
-    @Published var nodes: [GraphNode] = []
+    @Published var nodes: [Node] = []
     var edges: [Edge] {
         nodes.compactMap { $0 as? Edge }
     }
@@ -22,6 +22,7 @@ class Graph: IdentifiableObject, ObservableObject {
     var layouter: GraphLayouter?
     @Published var isLayouting = false
     @Published var layoutPaused = false
+    var velocity: CGPoint = .zero
 //    @Published var bounds: CGRect = .zero
 
     func resetVelocity() {
@@ -44,6 +45,7 @@ class Graph: IdentifiableObject, ObservableObject {
             $0.stability = 1
             $0.moving = true
         }
+        velocity = .zero
 
         doLayout()
     }
@@ -54,6 +56,8 @@ class Graph: IdentifiableObject, ObservableObject {
         }
     }
 
+    var movement: CGFloat = .infinity
+    
     func doLayout() {
         guard let layouter, isLayouting, !layoutPaused else {
             return
@@ -62,10 +66,20 @@ class Graph: IdentifiableObject, ObservableObject {
         objectWillChange.send()
         layouter.layout(graph: self)
 
+        let lastVelocity = velocity
+
         for node in nodes {
             node.position = node.position + node.velocity
+            velocity = velocity + node.velocity
             node.velocity = .zero
         }
+
+        let action = (lastVelocity - velocity).length
+//        print("\(size.length)")
+
+        if action < 0.06 //|| action > 2 * movement
+        { stopLayout() }
+        movement = action
 
         DispatchQueue.main.asyncAfter(deadline: .now().advanced(by: .milliseconds(1))) {
             self.doLayout()

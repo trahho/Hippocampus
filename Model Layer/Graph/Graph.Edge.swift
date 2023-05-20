@@ -9,15 +9,16 @@ import Foundation
 import SwiftUI
 
 extension Graph {
-    class Edge: GraphNode {
-        var to: GraphNode
-        var from: GraphNode
-        var controlPoint: CGPoint = .zero
+    class Edge: Node {
+        @Observed var to: Node
+        @Observed var from: Node
 
-        init(from: GraphNode, to: GraphNode) {
+        var alignment: Alignment?
+
+        init(from: Node, to: Node) {
+            super.init()
             self.from = from
             self.to = to
-            super.init()
             self.type = .trial
         }
 
@@ -25,15 +26,15 @@ extension Graph {
         let pointerLineLength: CGFloat = 10
         let arrowAngle: CGFloat = 120
 
-        @ViewBuilder
-        override var body: AnyView {
-            AnyView(
-                Text("Hallo")
-//                Circle()
-//                    .frame(width: 5, height: 5)
-//                    .background(Color.red)
-            )
-        }
+//        @ViewBuilder
+//        override var body: AnyView {
+//            AnyView(
+//                Text("Hallo\nWelt")
+////                Circle()
+////                    .frame(width: 5, height: 5)
+////                    .background(Color.red)
+//            )
+//        }
 
         var path: Path {
             let start = from.bounds.borderPoint(to: position)

@@ -15,18 +15,19 @@ class ComplexSpringLayouter: GraphLayouter {
     let maximumStartingVelocity: CGFloat = 5
     let startingVelocityDelta: CGFloat = 4
     let stiffness = 1.0
+    var speed = 5.0
 
-    func attract(from: Graph.GraphNode, to: Graph.GraphNode) {
+    func attract(from: Graph.Node, to: Graph.Node) {
         let fromPoint = from.layoutBounds.borderPoint(to: to.position)
         let toPoint = to.layoutBounds.borderPoint(to: from.position)
-        let attracting = (fromPoint - toPoint) * ((from.mass + to.mass) / 2) * attractionConstant
+        let attracting = speed * (fromPoint - toPoint) * ((from.mass + to.mass) / 2) * attractionConstant
         let fromAttracting = attracting / from.stability
         let toAttracting = attracting / to.stability
         from.velocity = from.velocity - (from.fixed ? .zero : fromAttracting)
         to.velocity = to.velocity + (to.fixed ? .zero : toAttracting)
     }
 
-    func repell(from: Graph.GraphNode, to: Graph.GraphNode) {
+    func repell(from: Graph.Node, to: Graph.Node) {
         let fromPosition = from.position + from.velocity
         let toPosition = to.position + to.velocity
         let fromBounds = CGRect(center: fromPosition, size: from.size)
@@ -34,7 +35,7 @@ class ComplexSpringLayouter: GraphLayouter {
         let fromPoint = fromBounds.borderPoint(to: toPosition)
         let toPoint = toBounds.borderPoint(to: fromPosition)
         let distanceSquare = (fromPoint - toPoint).length.square
-        let repelling = (fromPoint - toPoint) * (((from.charge + to.charge) / 2) / distanceSquare)
+        let repelling = speed * (fromPoint - toPoint) * (((from.charge + to.charge) / 2) / distanceSquare)
         let fromRepelling = repelling / from.stability
         let toRepelling = (CGSize.zero - repelling) / to.stability
 
@@ -47,39 +48,43 @@ class ComplexSpringLayouter: GraphLayouter {
         }
     }
 
-    func align(node: Graph.GraphNode, bounds: CGRect) {
-        guard let alignment = node.alignment else { return }
-
+    func align(edge: Graph.Edge, bounds: CGRect) {
+        guard let alignment = edge.alignment else { return }
+        return
         var targetPoint: CGPoint = .zero
 
         switch alignment {
         case .topLeading:
-            targetPoint = bounds.topLeft
-        case .topTrailing:
-            targetPoint = bounds.topRight
-        case .bottomLeading:
-            targetPoint = bounds.bottomLeft
-        case .bottomTrailing:
-            targetPoint = bounds.bottomRight
-        case .top:
-            targetPoint = bounds.topLeft + CGPoint(x: node.position.x, y: 0)
-        case .leading:
-            targetPoint = bounds.topLeft + CGPoint(x: 0, y: node.position.y)
-        case .bottom:
-            targetPoint = bounds.bottomLeft + CGPoint(x: node.position.x, y: 0)
-        case .trailing:
-            targetPoint = bounds.topRight + CGPoint(x: 0, y: node.position.y)
-        case .center:
-            targetPoint = bounds.center
+            let from = edge.from.bounds.topLeft
+            let to = edge.to.bounds.bottomRight
+            if to.x >= from.x, to.y >= from.y {
+                edge.to.velocity = edge.to.velocity + CGPoint(x: -10, y: -10)
+            }
+//        case .topTrailing:
+//            targetPoint = bounds.topRight
+//        case .bottomLeading:
+//            targetPoint = bounds.bottomLeft
+//        case .bottomTrailing:
+//            targetPoint = bounds.bottomRight
+//        case .top:
+//            targetPoint = bounds.topLeft + CGPoint(x: node.position.x, y: 0)
+//        case .leading:
+//            targetPoint = bounds.topLeft + CGPoint(x: 0, y: node.position.y)
+//        case .bottom:
+//            targetPoint = bounds.bottomLeft + CGPoint(x: node.position.x, y: 0)
+//        case .trailing:
+//            targetPoint = bounds.topRight + CGPoint(x: 0, y: node.position.y)
+//        case .center:
+//            targetPoint = bounds.center
         default:
             fatalError("No layout for alignment")
         }
 
-        let nodePoint = node.bounds.borderPoint(to: targetPoint)
-//        let attracting = nodePoint - targetPoint * node.mass * attractionConstant / node.stability
-        let attracting = (nodePoint - targetPoint) * attractionConstant * 2 / node.stability
-
-        node.velocity = node.velocity - (node.fixed ? .zero : attracting)
+//        let nodePoint = node.bounds.borderPoint(to: targetPoint)
+        ////        let attracting = nodePoint - targetPoint * node.mass * attractionConstant / node.stability
+//        let attracting = (nodePoint - targetPoint) * attractionConstant * 2 / node.stability
+//
+//        node.velocity = node.velocity - (node.fixed ? .zero : attracting)
     }
 
     func layout(graph: Graph) {
@@ -96,6 +101,7 @@ class ComplexSpringLayouter: GraphLayouter {
         for edge in graph.edges {
             if edge.to.visible, edge.from.visible {
                 attract(from: edge.from, to: edge.to)
+                align(edge: edge, bounds: graph.bounds.padding(0))
                 let start = edge.from.bounds.borderPoint(to: edge.position)
                 let end = edge.to.bounds.padding(20).borderPoint(to: edge.position)
                 let curvature = stiffness / (start - end).length
@@ -110,12 +116,10 @@ class ComplexSpringLayouter: GraphLayouter {
                 numberOfStoppedNodes += 1
             }
 
-            for j in i + 1 ..< graph.nodes.count {
+            for j in (i + 1 ..< graph.nodes.count).reversed() {
                 let otherNode = graph.nodes[j]
                 repell(from: otherNode, to: node)
             }
-
-            align(node: node, bounds: graph.bounds.padding(0))
 
             node.velocity = node.velocity * damping
 

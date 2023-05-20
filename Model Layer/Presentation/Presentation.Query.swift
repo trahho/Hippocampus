@@ -31,7 +31,7 @@ extension Presentation {
 
         @Objects var predicates: Set<Predicate>
         @Objects var roleRepresentations: Set<RoleRepresentation>
-        @PublishedSerialized var layout: Presentation.Layout = .tree
+        @PublishedSerialized var layout: Presentation.Layout = .map
         @Published var items: [ItemDetail] = []
         @Relations(\PresentationResult.Result.query) var results: Set<PresentationResult.Result>
 

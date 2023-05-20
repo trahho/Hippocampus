@@ -66,13 +66,13 @@ struct EdgeView: View {
 
 struct EdgeView_Previews: PreviewProvider {
     static let node1 = {
-        let result = Graph.GraphNode()
+        let result = Graph.Node()
         result.position = CGPoint(x: 10, y: 10)
         return result
     }()
 
     static let node2 = {
-        let result = Graph.GraphNode()
+        let result = Graph.Node()
         result.position = CGPoint(x: 310, y: 310)
         return result
     }()

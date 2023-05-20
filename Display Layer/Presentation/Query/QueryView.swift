@@ -50,6 +50,8 @@ struct QueryView: View {
 //                QueryListView(query: query)
         case .tree:
             QueryTreeView(query:query)
+        case .map:
+            QueryMapView(query: query)
         default:
             Text("Not yet")
         }

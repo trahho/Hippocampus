@@ -17,8 +17,29 @@ extension Presentation.PresentationResult {
 }
 
 extension Presentation.PresentationResult {
-    class Node: Graph.GraphNode {
+    class PresentationNode: Graph.Node {
+        var query: Presentation.Query!
         var item: Item?
+
+        @ViewBuilder
+        var representation: some View {
+            if let item {
+                let representation = item.roles.compactMap {
+                    if let representation = query.roleRepresentation(role: $0, layout: .list) {
+                        return representation.role.representation(for: representation.representation)
+                    }
+                    return nil
+                }.first ?? Presentation.Query.defaultRepresentation
+                
+                representation.view(for: item.item)
+            } else {
+                EmptyView()
+            }
+        }
+
+        override var body: AnyView {
+            AnyView(representation)
+        }
 
         init(item: Item?) {
             self.item = item
@@ -26,8 +47,8 @@ extension Presentation.PresentationResult {
         }
     }
 
-    class Edge: Graph.Edge {
-        convenience init(item: Presentation.PresentationResult.Item? = nil, from: Node, to: Node) {
+    class PresentationEdge: Graph.Edge {
+        convenience init(item: Presentation.PresentationResult.Item? = nil, from: PresentationNode, to: PresentationNode) {
             self.init(from: from, to: to)
         }
     }
@@ -36,26 +57,29 @@ extension Presentation.PresentationResult {
 extension Presentation.PresentationResult {
     class PresentationGraph: Graph {
         func getNode(item: Item) -> Node {
-            if let node = nodes.compactMap({ $0 as? Node }).first(where: { $0.item == item }) { return node }
+            if let node = nodes.compactMap({ $0 as? PresentationNode }).first(where: { $0.item == item }) { return node }
 
-            let node = Node(item: item)
+            let node = PresentationNode(item: item)
             nodes.append(node)
             return node
         }
 
-        func build(for items: Set<Presentation.PresentationResult.Item>) {
+        func build(_ query: Presentation.Query, for items: Set<Presentation.PresentationResult.Item>) {
             for item in items {
-                let node = getNode(item: item)
+                let node = getNode(item: item) as! PresentationNode
+                node.query = query
                 for next in item.next {
-                    let nextNode = getNode(item: next)
-                    nodes.append(Edge(from: node, to: nextNode))
+                    let nextNode = getNode(item: next) as! PresentationNode
+                    node.query = query
+                    nodes.append(PresentationEdge(from: node, to: nextNode))
                 }
             }
         }
 
-        init(result: Result) {
+        init(query: Presentation.Query, result: Result) {
             super.init()
-            build(for: result.items)
+            layouter = ComplexSpringLayouter()
+            build(query, for: result.items)
         }
     }
 }

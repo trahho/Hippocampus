@@ -17,7 +17,6 @@ struct GraphView: View {
 
     var zoomGesture: some Gesture { MagnificationGesture()
         .onChanged { value in
-//            graph.pauseLayout()
             if originalScale == 0 {
                 originalScale = scale
                 originalLocation = location
@@ -30,13 +29,11 @@ struct GraphView: View {
             location = originalLocation * value
             originalScale = 0
             originalLocation = .zero
-//            graph.resumeLayout()
         }
     }
 
     var scrollGesture: some Gesture { DragGesture()
         .onChanged { value in
-//            graph.pauseLayout()
             if originalLocation == .zero {
                 originalLocation = location
             }
@@ -45,7 +42,6 @@ struct GraphView: View {
         .onEnded { value in
             location = originalLocation + value.translation
             originalLocation = .zero
-//            graph.resumeLayout()
         }
     }
 
@@ -55,11 +51,7 @@ struct GraphView: View {
                 edge.path.stroke(style: edge.strokeStyle)
                     .foregroundColor(.cyan)
             }
-//            ForEach(graph.edges, id: \.self) { edge in
-//                edge.body
-//                    .offset(position: edge.bounds.topLeft)
-//                    .measureSize(in: Binding(get: { edge.size }, set: { edge.size = $0 }))
-//            }
+
             ForEach($graph.nodes, id: \.self) { $node in
                 if let edge = node as? Graph.Edge {
                     edge.body
@@ -69,14 +61,13 @@ struct GraphView: View {
                     node.body
                         .padding(10)
                         .background(Color.pink)
-//                        .offset(position: node.position)
                         .measureSize(in: $node.size)
                         .position(node.position)
                         .gesture(DragGesture()
                             .onChanged { value in
                                 node.fixed = true
                                 node.position = value.location // - node.size / 2
-                                if !graph.layoutPaused { graph.startLayout() }
+                                graph.startLayout()
                             }
                             .onEnded { value in
                                 node.fixed = false
@@ -89,11 +80,24 @@ struct GraphView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .scaleEffect(scale)
         .offset(position: location)
-//        .background(graph.isLayouting ? Color.gray : Color.white)
-        .background(Color.background)
+        .background( Color.background)
+        .ignoresSafeArea()
+        #if os(iOS)
+            .toolbar {
+                if graph.isLayouting {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        ProgressView()
+                            .onTapGesture {
+                                graph.stopLayout()
+                            }
+                    }
+                }
+            }
+        #endif
+        #if os(macOS)
         .toolbar {
             if graph.isLayouting {
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .status) {
                     if graph.layoutPaused {
                         Image(systemName: "pause.circle")
                             .onTapGesture {
@@ -101,6 +105,7 @@ struct GraphView: View {
                             }
                     } else {
                         ProgressView()
+                            .scaleEffect(0.5)
                             .onTapGesture {
                                 graph.pauseLayout()
                             }
@@ -108,7 +113,7 @@ struct GraphView: View {
                 }
             }
         }
-
+        #endif
         .gesture(scrollGesture)
         .gesture(zoomGesture)
         .onLongPressGesture(perform: {

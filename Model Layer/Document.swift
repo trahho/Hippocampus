@@ -34,6 +34,14 @@ class Document: DatabaseDocument {
         let c = create(Information.Item.self)
         c[String.self, Structure.Role.global.name] = "Welt"
         b.to.insert(c)
-//        c.to.insert(a)
+        c.to.insert(a)
+        
+        let d = create(Information.Item.self)
+        d[String.self, Structure.Role.global.name] = "wie"
+        a.to.insert(d)
+        let e = create(Information.Item.self)
+        e[String.self, Structure.Role.global.name] = "geht"
+//        e.to.insert(e)
+        d.to.insert(e)
     }
 }

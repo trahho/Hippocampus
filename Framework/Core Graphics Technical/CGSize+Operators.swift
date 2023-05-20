@@ -40,6 +40,8 @@ extension CGSize {
     static func * (size: CGSize, factor: CGSize) -> CGSize {
         CGSize(width: size.width * factor.width, height: size.height * factor.height)
     }
+    
+   
 
     var isEmpty: Bool {
         width + height == 0
