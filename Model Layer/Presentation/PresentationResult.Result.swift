@@ -56,7 +56,7 @@ extension Presentation.PresentationResult {
 
 extension Presentation.PresentationResult {
     class PresentationGraph: Graph {
-        func getNode(item: Item) -> Node {
+        func getNode(item: Item) -> PresentationNode {
             if let node = nodes.compactMap({ $0 as? PresentationNode }).first(where: { $0.item == item }) { return node }
 
             let node = PresentationNode(item: item)
@@ -66,10 +66,10 @@ extension Presentation.PresentationResult {
 
         func build(_ query: Presentation.Query, for items: Set<Presentation.PresentationResult.Item>) {
             for item in items {
-                let node = getNode(item: item) as! PresentationNode
+                let node = getNode(item: item)
                 node.query = query
                 for next in item.next {
-                    let nextNode = getNode(item: next) as! PresentationNode
+                    let nextNode = getNode(item: next)
                     node.query = query
                     nodes.append(PresentationEdge(from: node, to: nextNode))
                 }
@@ -78,7 +78,7 @@ extension Presentation.PresentationResult {
 
         init(query: Presentation.Query, result: Result) {
             super.init()
-            layouter = ComplexSpringLayouter()
+            layouter = MySpringLayouter()
             build(query, for: result.items)
         }
     }

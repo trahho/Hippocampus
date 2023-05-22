@@ -9,42 +9,19 @@ import Foundation
 import Smaug
 import SwiftUI
 
-
 extension Graph {
     class Node: IdentifiableObject, ObservableObject {
         var type: GraphNodeType = .knot
-
-
-        @ViewBuilder
-        var body: AnyView {
-            AnyView(EmptyView())
-        }
-
-
-//        func callAsFuntion() -> some View {
-//            body
-//        }
-
-//        func b() -> some View {
-//
-//        }
-
         @Published var position: CGPoint = .init(x: Int.random(in: -100...100), y: Int.random(in: -100...100))
-        var size: CGSize = .zero
-        var bounds: CGRect {
-            CGRect(center: position, size: size)
-        }
-        
-        internal var layoutBounds: CGRect {
-            CGRect(center: position + velocity, size: size)
-        }
-
         var velocity: CGPoint = .zero
+        var size: CGSize = .zero
+
         var moving = true
-        var stability: CGFloat = 1
         var unstoppable = false
         @Published var fixed = false
-        var visible = true
+        @Published var visible = true
+        var stability: CGFloat = 1
+        var links: [Node] = []
 
         var mass: CGFloat {
             CGFloat(type.mass)
@@ -52,6 +29,24 @@ extension Graph {
 
         var charge: CGFloat {
             CGFloat(type.charge)
+        }
+
+        var bounds: CGRect {
+            CGRect(center: position, size: size)
+        }
+
+        func start() {
+            moving = true
+            links.forEach { $0.start() }
+        }
+
+        func stop() {
+            moving = unstoppable
+        }
+
+        @ViewBuilder
+        var body: AnyView {
+            AnyView(EmptyView())
         }
     }
 }

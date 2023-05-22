@@ -80,7 +80,7 @@ struct GraphView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .scaleEffect(scale)
         .offset(position: location)
-        .background( Color.background)
+        .background(Color.background)
         .ignoresSafeArea()
         #if os(iOS)
             .toolbar {
@@ -116,13 +116,6 @@ struct GraphView: View {
         #endif
         .gesture(scrollGesture)
         .gesture(zoomGesture)
-        .onLongPressGesture(perform: {
-            if graph.isLayouting, !graph.layoutPaused {
-                graph.pauseLayout()
-            } else {
-                graph.resumeLayout()
-            }
-        })
         .onAppear { graph.startLayout() }
         .onChange(of: graph) { [graph] newGraph in
             graph.stopLayout()

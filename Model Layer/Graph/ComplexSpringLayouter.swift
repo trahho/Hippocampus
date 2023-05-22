@@ -2,144 +2,171 @@
 //  ComplexSpringLayouter.swift
 //  Hippocampus
 //
-//  Created by Guido Kühn on 13.05.23.
+//  Created by Guido Kühn on 21.05.23.
 //
 
 import Foundation
 
 class ComplexSpringLayouter: GraphLayouter {
-    let attractionConstant: CGFloat = 1 / (20 * 20 * 20)
+    let normalDistance: CGFloat = 30
+    let attractionConstant: CGFloat
     let damping: CGFloat = 0.96
-    let stoppingVelocity: CGFloat = 0.001
+    let stoppingVelocity: CGFloat = 0.1
     let minimumStartingVelocity: CGFloat = 1
     let maximumStartingVelocity: CGFloat = 5
-    let startingVelocityDelta: CGFloat = 4
+    let startingVelocityDelta: CGFloat
     let stiffness = 1.0
-    var speed = 5.0
+    var fuzziness: CGFloat = 0.1
+    var fuzz: CGFloat
+    var fuzzing: CGFloat = 0
+    var partitionSize: CGFloat
+    var partitionFactor: CGFloat = 15
+    var longRangeEffect = 0.25
 
-    func attract(from: Graph.Node, to: Graph.Node) {
-        let fromPoint = from.layoutBounds.borderPoint(to: to.position)
-        let toPoint = to.layoutBounds.borderPoint(to: from.position)
-        let attracting = speed * (fromPoint - toPoint) * ((from.mass + to.mass) / 2) * attractionConstant
-        let fromAttracting = attracting / from.stability
-        let toAttracting = attracting / to.stability
-        from.velocity = from.velocity - (from.fixed ? .zero : fromAttracting)
-        to.velocity = to.velocity + (to.fixed ? .zero : toAttracting)
+    init() {
+        attractionConstant = 1 / (normalDistance * normalDistance * normalDistance)
+        startingVelocityDelta = maximumStartingVelocity - minimumStartingVelocity
+        partitionSize = partitionFactor * normalDistance
+        fuzz = partitionSize * fuzziness
     }
 
-    func repell(from: Graph.Node, to: Graph.Node) {
-        let fromPosition = from.position + from.velocity
-        let toPosition = to.position + to.velocity
-        let fromBounds = CGRect(center: fromPosition, size: from.size)
-        let toBounds = CGRect(center: toPosition, size: to.size)
-        let fromPoint = fromBounds.borderPoint(to: toPosition)
-        let toPoint = toBounds.borderPoint(to: fromPosition)
-        let distanceSquare = (fromPoint - toPoint).length.square
-        let repelling = speed * (fromPoint - toPoint) * (((from.charge + to.charge) / 2) / distanceSquare)
-        let fromRepelling = repelling / from.stability
-        let toRepelling = (CGSize.zero - repelling) / to.stability
+    struct Partition {
+        var nodes: [Graph.Node] = []
 
-        if fromBounds.intersects(toBounds) {
-            from.velocity = from.velocity - (from.fixed ? .zero : fromRepelling)
-            to.velocity = to.velocity - (to.fixed ? .zero : toRepelling)
+        var position: CGPoint = .zero
+        var velocity: CGPoint = .zero
+        var bounds: CGRect
+        var mass: CGFloat = 0
+        var charge: CGFloat = 0
+
+        init(node: Graph.Node) {
+            bounds = CGRect(center: node.position, size: .zero)
+            position = node.position
+            add(node: node)
+        }
+
+        mutating func add(node: Graph.Node) {
+            nodes.append(node)
+            position = (position * mass + node.position * node.mass) / (mass + node.mass)
+            bounds = bounds.union(CGRect(center: node.position, size: .zero))
+            mass += node.mass
+            charge += node.charge
+        }
+
+        mutating func addVelocity(_ velocity: CGPoint) {
+            self.velocity += velocity
+        }
+    }
+
+    func repelling(point: CGPoint, charge: CGFloat, otherPoint: CGPoint, otherCharge: CGFloat) -> CGPoint {
+        CGPoint((charge + otherCharge) / 2 *
+            (point - otherPoint) /
+            (point - otherPoint).length.square)
+    }
+
+    func repelling(node: Graph.Node, other: Graph.Node) -> CGPoint {
+        let nodePoint = node.position // node.bounds.borderPoint(to: other.position)
+        let otherPoint = other.position // other.bounds.borderPoint(to: node.position)
+        let repelling = (node.charge + other.charge) / 2 *
+            (nodePoint - otherPoint) /
+            (nodePoint - otherPoint).length.square
+
+        if node.bounds.intersects(other.bounds) {
+            return CGPoint.zero - (node.fixed ? .zero : repelling)
         } else {
-            from.velocity = from.velocity + (from.fixed ? .zero : fromRepelling)
-            to.velocity = to.velocity + (to.fixed ? .zero : toRepelling)
+            return node.fixed ? CGPoint.zero : CGPoint(repelling)
         }
     }
 
-    func align(edge: Graph.Edge, bounds: CGRect) {
-        guard let alignment = edge.alignment else { return }
-        return
-        var targetPoint: CGPoint = .zero
+    func attracting(node: Graph.Node, other: Graph.Node) -> CGPoint {
+        let nodePoint = node.bounds.borderPoint(to: other.position)
+        let otherPoint = other.bounds.borderPoint(to: node.position)
+        let attracting = (node.mass + other.mass) / 2 * attractionConstant *
+            (nodePoint - otherPoint) /
+            (nodePoint - otherPoint).length
 
-        switch alignment {
-        case .topLeading:
-            let from = edge.from.bounds.topLeft
-            let to = edge.to.bounds.bottomRight
-            if to.x >= from.x, to.y >= from.y {
-                edge.to.velocity = edge.to.velocity + CGPoint(x: -10, y: -10)
-            }
-//        case .topTrailing:
-//            targetPoint = bounds.topRight
-//        case .bottomLeading:
-//            targetPoint = bounds.bottomLeft
-//        case .bottomTrailing:
-//            targetPoint = bounds.bottomRight
-//        case .top:
-//            targetPoint = bounds.topLeft + CGPoint(x: node.position.x, y: 0)
-//        case .leading:
-//            targetPoint = bounds.topLeft + CGPoint(x: 0, y: node.position.y)
-//        case .bottom:
-//            targetPoint = bounds.bottomLeft + CGPoint(x: node.position.x, y: 0)
-//        case .trailing:
-//            targetPoint = bounds.topRight + CGPoint(x: 0, y: node.position.y)
-//        case .center:
-//            targetPoint = bounds.center
-        default:
-            fatalError("No layout for alignment")
-        }
-
-//        let nodePoint = node.bounds.borderPoint(to: targetPoint)
-        ////        let attracting = nodePoint - targetPoint * node.mass * attractionConstant / node.stability
-//        let attracting = (nodePoint - targetPoint) * attractionConstant * 2 / node.stability
-//
-//        node.velocity = node.velocity - (node.fixed ? .zero : attracting)
+//        if node.bounds.intersects(other.bounds) {
+//            return CGPoint.zero - (node.fixed ? .zero : attracting)
+//        } else {
+        return node.fixed ? CGPoint.zero : CGPoint(attracting)
+//        }
     }
 
     func layout(graph: Graph) {
-        guard graph.nodes.count > 1 else {
-            graph.stopLayout()
-            return
-        }
-        let numberOfNodes = CGFloat(graph.nodes.count)
-//        let attractionFactor = sqrt((1000 * 1000) / numberOfNodes)
-        var numberOfStoppedNodes: CGFloat = 0
+        var stoppedNodes = 0
+        var energy: Double = 0
 
-        var energy = 0.0
+        fuzzing = (fuzzing + 1).truncatingRemainder(dividingBy: 3)
+        let size = partitionSize - fuzz + fuzzing * fuzz
+        var partitions: [CGPoint: Partition] = [:]
 
-        for edge in graph.edges {
-            if edge.to.visible, edge.from.visible {
-                attract(from: edge.from, to: edge.to)
-                align(edge: edge, bounds: graph.bounds.padding(0))
-                let start = edge.from.bounds.borderPoint(to: edge.position)
-                let end = edge.to.bounds.padding(20).borderPoint(to: edge.position)
-                let curvature = stiffness / (start - end).length
-                let controlPoint = CGRect(firstPoint: start, secondPoint: end).controlPoint(for: edge.position)
-                edge.velocity = edge.velocity - curvature * (controlPoint - edge.position)
-            }
-        }
-
-        for i in 0 ..< graph.nodes.count - 1 {
-            let node = graph.nodes[i]
+        for node in graph.nodes {
             if !node.moving || node.fixed {
-                numberOfStoppedNodes += 1
+                stoppedNodes += 1
             }
-
-            for j in (i + 1 ..< graph.nodes.count).reversed() {
-                let otherNode = graph.nodes[j]
-                repell(from: otherNode, to: node)
-            }
-
-            node.velocity = node.velocity * damping
-
-            let nodeVelocity: CGFloat = abs(node.velocity.x) + abs(node.velocity.y)
-            if nodeVelocity <= stoppingVelocity {
-                node.moving = false
-            } else if nodeVelocity > minimumStartingVelocity + startingVelocityDelta * numberOfStoppedNodes / numberOfNodes {
-                node.moving = true
-            }
-
-            if node.moving, !node.fixed {
-                energy += nodeVelocity
+            let key = (node.position / size).rounded(.down)
+            if var partition = partitions[key] {
+                partition.add(node: node)
+            } else {
+                partitions[key] = Partition(node: node)
             }
         }
 
-        if energy < Double(numberOfNodes - numberOfStoppedNodes) * stoppingVelocity {
-            graph.nodes.forEach {
-                $0.stability = 10
+        for partition in partitions {
+            for other in partitions {
+                guard partition.key != other.key else { continue }
+
+                let charge = CGFloat(other.value.nodes.count) * ((partition.value.charge + other.value.charge) / 2)
+                let force = (partition.value.position - other.value.position).length.square
+                let distance = partition.value.position - other.value.position
+
+                partitions[partition.key]!.addVelocity(CGPoint((charge * distance) / force))
             }
-            graph.stopLayout()
+        }
+
+        for partition in partitions.values {
+            for node in partition.nodes {
+                node.velocity += longRangeEffect * partition.velocity
+
+                for otherNode in partition.nodes {
+                    guard node != otherNode else { continue }
+                    node.velocity += repelling(node: node, other: otherNode)
+                }
+
+                if let edge = node as? Graph.Edge {
+                    if edge.to.visible, edge.from.visible {
+                        let start = edge.from.bounds.borderPoint(to: edge.position)
+                        let end = edge.to.bounds.padding(20).borderPoint(to: edge.position)
+                        let curvature = stiffness / (start - end).length
+                        let controlPoint = CGRect(firstPoint: start, secondPoint: end).controlPoint(for: edge.position)
+                        edge.velocity -= curvature * (controlPoint - edge.position)
+                    }
+                }
+
+                for edge in node.links {
+                    if edge.visible {
+                        node.velocity += attracting(node: node, other: edge) / edge.links.count
+                    }
+                }
+
+                node.velocity *= damping
+
+                let velocity = abs(node.velocity.x) + abs(node.velocity.y)
+                if velocity <= stoppingVelocity {
+                    node.stop()
+                    node.velocity = .zero
+                } else if velocity > minimumStartingVelocity + startingVelocityDelta * CGFloat(stoppedNodes) / CGFloat(graph.nodes.count) {
+                    node.start()
+                }
+
+                if node.moving && !node.fixed {
+                    energy += velocity
+                }
+            }
+        }
+
+        if energy < Double(graph.nodes.count - stoppedNodes) * stoppingVelocity {
+//            graph.stopLayout()
         }
     }
 }

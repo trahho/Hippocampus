@@ -9,8 +9,8 @@ import Foundation
 
 extension Graph {
     enum GraphNodeType: Int {
-        private static let masses = [0, 2, 3, 5, 5, 2, 0, 8]
-        private static let charges = [0, 1, 1, 1, 1, 4, 0, 1]
+        private static let masses = [0, 2, 3, 5, 5, 2, 0, 10]
+        private static let charges = [0, 1, 1, 1, 1, 4, 0, 0]
 
         case unknown = 0
         case anchor = 1

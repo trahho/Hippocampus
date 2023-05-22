@@ -168,7 +168,7 @@ open class DatabaseDocument: Reflectable, ObservableObject {
         }
     }
     
-    public func create<T>(_ type: T.Type) -> T where T: ObjectStore.Object {
+  @discardableResult  public func create<T>(_ type: T.Type) -> T where T: ObjectStore.Object {
         let object = T()
         add(object)
         return object

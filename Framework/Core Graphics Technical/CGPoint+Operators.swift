@@ -73,20 +73,51 @@ extension CGPoint {
         point / CGFloat(factor)
     }
 
+    static func += (lhs: inout CGPoint, rhs: CGPoint) {
+        lhs = lhs + rhs
+    }
+
+    static func += (lhs: inout CGPoint, rhs: CGSize) {
+        lhs = lhs + rhs
+    }
+
+    static func *= (lhs: inout CGPoint, rhs: CGFloat) {
+        lhs = lhs * rhs
+    }
+
+    static func -= (lhs: inout CGPoint, rhs: CGPoint) {
+        lhs = CGPoint(lhs - rhs)
+    }
+
+    static func -= (lhs: inout CGPoint, rhs: CGSize) {
+        lhs = lhs - rhs
+    }
+
     // MARK: - Functions
 
     static var infinite: CGPoint {
         CGPoint(x: CGFloat.infinity, y: CGFloat.infinity)
     }
-    
-    static func < (lhs:CGPoint, rhs:CGPoint) -> Bool {
+
+    static func < (lhs: CGPoint, rhs: CGPoint) -> Bool {
         lhs.x < rhs.x && lhs.y < rhs.y
+    }
+
+    func rounded(_ rule: FloatingPointRoundingRule) -> CGPoint {
+        CGPoint(x: x.rounded(rule), y: y.rounded(rule))
     }
 
     // MARK: - Initialization
 
     init(_ size: CGSize) {
         self.init(x: size.width, y: size.height)
+    }
+}
+
+extension CGPoint: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(x)
+        hasher.combine(y)
     }
 }
 

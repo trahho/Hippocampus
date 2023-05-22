@@ -17,9 +17,22 @@ extension Graph {
 
         init(from: Node, to: Node) {
             super.init()
+            self.type = .edge
             self.from = from
             self.to = to
-            self.type = .trial
+            self.position = CGRect(firstPoint: from.position, secondPoint: to.position).center
+            from.links.append(self)
+            to.links.append(self)
+            links.append(from)
+            links.append(to)
+        }
+
+        override func start() {
+            moving = true
+        }
+        
+        override func stop() {
+            moving = from.moving || to.moving
         }
 
         let strokeStyle = StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round, miterLimit: .zero, dash: [], dashPhase: 0)
@@ -30,9 +43,9 @@ extension Graph {
 //        override var body: AnyView {
 //            AnyView(
 //                Text("Hallo\nWelt")
-////                Circle()
-////                    .frame(width: 5, height: 5)
-////                    .background(Color.red)
+        ////                Circle()
+        ////                    .frame(width: 5, height: 5)
+        ////                    .background(Color.red)
 //            )
 //        }
 
@@ -40,9 +53,6 @@ extension Graph {
             let start = from.bounds.borderPoint(to: position)
             let end = to.bounds.padding(6).borderPoint(to: position)
             let mid = CGRect(firstPoint: start, secondPoint: end).controlPoint(for: position)
-//            var mid = 2 * position
-//            mid = CGPoint(mid - (start / 2))
-//            mid = CGPoint(mid - (end / 2))
 
             var path = Path()
             path.move(to: start)

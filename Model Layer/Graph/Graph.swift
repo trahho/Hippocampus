@@ -21,7 +21,6 @@ class Graph: IdentifiableObject, ObservableObject {
 
     var layouter: GraphLayouter?
     @Published var isLayouting = false
-    @Published var layoutPaused = false
     var velocity: CGPoint = .zero
 //    @Published var bounds: CGRect = .zero
 
@@ -33,12 +32,11 @@ class Graph: IdentifiableObject, ObservableObject {
     }
 
     func startLayout() {
-        guard !isLayouting, !layoutPaused else { return }
+        guard !isLayouting else { return }
 
         print("Layout started")
 
         isLayouting = true
-        layoutPaused = false
 
         nodes.forEach {
             $0.velocity = .zero
@@ -57,9 +55,9 @@ class Graph: IdentifiableObject, ObservableObject {
     }
 
     var movement: CGFloat = .infinity
-    
+
     func doLayout() {
-        guard let layouter, isLayouting, !layoutPaused else {
+        guard let layouter, isLayouting else {
             return
         }
 
@@ -77,7 +75,7 @@ class Graph: IdentifiableObject, ObservableObject {
         let action = (lastVelocity - velocity).length
 //        print("\(size.length)")
 
-        if action < 0.06 //|| action > 2 * movement
+        if action < 0.06 // || action > 2 * movement
         { stopLayout() }
         movement = action
 
@@ -88,22 +86,7 @@ class Graph: IdentifiableObject, ObservableObject {
 
     func stopLayout() {
         isLayouting = false
-        layoutPaused = false
         print("Layout stopped")
-    }
-
-    func pauseLayout() {
-        guard isLayouting, !layoutPaused else { return }
-        layoutPaused = true
-        print("Layout paused")
-    }
-
-    func resumeLayout() {
-        guard layoutPaused else { return }
-        layoutPaused = false
-        isLayouting = false
-        print("Layout resuming")
-        startLayout()
     }
 
     deinit {

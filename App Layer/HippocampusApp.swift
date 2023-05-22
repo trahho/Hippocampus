@@ -37,6 +37,21 @@ struct HippocampusApp: App {
         inPreview ? Self.previewDocument() : .init(name: "Test", local: false)
 
     @StateObject var navigation = Navigation()
+    
+    static var graph: AnchorGraph = {
+        let result = AnchorGraph()
+        let a = AnchorGraph.Node()
+        let b = AnchorGraph.Node()
+        let c = AnchorGraph.Node()
+        result.nodes.append(a)
+        result.nodes.append(b)
+        result.nodes.append(c)
+        result.nodes.append( AnchorGraph.Edge(node: a, otherNode: b))
+        result.nodes.append( AnchorGraph.Edge(node: b, otherNode: c))
+        result.nodes.append( AnchorGraph.Edge(node: c, otherNode: a))
+
+        return result
+    }()
 
     var body: some Scene {
         WindowGroup {
@@ -45,7 +60,8 @@ struct HippocampusApp: App {
 //                    Self.locationService.start()
 //                }
 //            Text("hello_world")
-            DocumentView(document: document)
+//            DocumentView(document: document)
+            AnchorGraphView(graph: HippocampusApp.graph)
 //            Design_ShellView()
                 .environmentObject(navigation)
 //                .onOpenURL { document = Document(url: $0) }
