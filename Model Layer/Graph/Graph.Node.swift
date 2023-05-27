@@ -11,8 +11,8 @@ import SwiftUI
 
 extension Graph {
     class Node: IdentifiableObject, ObservableObject {
-        var type: GraphNodeType = .knot
-        @Published var position: CGPoint = .init(x: Int.random(in: -100...100), y: Int.random(in: -100...100))
+        var type: GraphNodeType = .testNode
+        @Published var position: CGPoint = .random(in: 100 ..< 600)
         var velocity: CGPoint = .zero
         var size: CGSize = .zero
 
@@ -46,7 +46,9 @@ extension Graph {
 
         @ViewBuilder
         var body: AnyView {
-            AnyView(EmptyView())
+            AnyView(bodyCreator())
         }
+
+        var bodyCreator: () -> any View = { EmptyView() }
     }
 }

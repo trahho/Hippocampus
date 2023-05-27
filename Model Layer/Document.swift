@@ -43,6 +43,9 @@ class Document: DatabaseDocument {
         e[String.self, Structure.Role.global.name] = "geht"
         //        e.to.insert(e)
         d.to.insert(e)
+//        e.to.insert(a)
+        
+        
 //        create(Information.Item.self)[String.self, Structure.Role.global.name] = "Hallo Welt"
 //        let texts = ["Hallo", "liebe", "Welt", "wie", "geht", "es","dir", "??"]
 //        for _ in 0..<30 {

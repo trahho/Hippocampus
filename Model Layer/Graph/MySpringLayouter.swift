@@ -8,6 +8,8 @@
 import Foundation
 
 class MySpringLayouter: GraphLayouter {
+    var equilibrium: Bool = false
+
     let normalDistance: CGFloat = 20
     let attractionConstant: CGFloat
     let damping: CGFloat = 0.96
@@ -91,9 +93,10 @@ class MySpringLayouter: GraphLayouter {
 
     func layout(graph: Graph) {
         guard graph.nodes.count > 1 else {
-            graph.stopLayout()
+            equilibrium = true
             return
         }
+        equilibrium = false
         let numberOfNodes = CGFloat(graph.nodes.count)
 //        let attractionFactor = sqrt((1000 * 1000) / numberOfNodes)
         var numberOfStoppedNodes: CGFloat = 0
@@ -137,11 +140,6 @@ class MySpringLayouter: GraphLayouter {
             }
         }
 
-        if energy < Double(numberOfNodes - numberOfStoppedNodes) * stoppingVelocity {
-            graph.nodes.forEach {
-                $0.stability = 10
-            }
-            graph.stopLayout()
-        }
+        equilibrium = energy < Double(numberOfNodes - numberOfStoppedNodes) * stoppingVelocity
     }
 }

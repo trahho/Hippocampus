@@ -17,3 +17,7 @@ extension CGFloat {
         self < 0 ? -1 : 1
     }
 }
+
+func mid (_ lhs: CGFloat, _ rhs: CGFloat) -> CGFloat {
+    (lhs + rhs) / 2
+}

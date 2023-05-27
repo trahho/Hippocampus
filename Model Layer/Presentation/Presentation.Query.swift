@@ -84,7 +84,7 @@ extension Presentation {
 
         func analyze(item: Information.Item, in _: Information, for result: PresentationResult.Result) {
             guard !result.items.contains(where: { $0.item == item }) else { return }
-            print("Analyze \(item[String.self, Structure.Role.global.name] ?? "Nix")")
+//            print("Analyze \(item[String.self, Structure.Role.global.name] ?? "Nix")")
             let roles = analyze(item)
             if let roles {
                 let resultItem = PresentationResult.Item(item: item, roles: roles)

@@ -8,6 +8,8 @@
 import Foundation
 
 class ComplexSpringLayouter: GraphLayouter {
+    var equilibrium: Bool = false
+
     let normalDistance: CGFloat = 30
     let attractionConstant: CGFloat
     let damping: CGFloat = 0.96
@@ -95,6 +97,7 @@ class ComplexSpringLayouter: GraphLayouter {
     func layout(graph: Graph) {
         var stoppedNodes = 0
         var energy: Double = 0
+        equilibrium = false
 
         fuzzing = (fuzzing + 1).truncatingRemainder(dividingBy: 3)
         let size = partitionSize - fuzz + fuzzing * fuzz
@@ -165,8 +168,6 @@ class ComplexSpringLayouter: GraphLayouter {
             }
         }
 
-        if energy < Double(graph.nodes.count - stoppedNodes) * stoppingVelocity {
-//            graph.stopLayout()
-        }
+        equilibrium = energy < Double(graph.nodes.count - stoppedNodes) * stoppingVelocity
     }
 }

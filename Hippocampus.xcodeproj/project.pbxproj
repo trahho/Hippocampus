@@ -55,6 +55,12 @@
 		C53793032A1AAA330085D24B /* AnchorGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53793022A1AAA330085D24B /* AnchorGraphView.swift */; };
 		C53793042A1AAA330085D24B /* AnchorGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53793022A1AAA330085D24B /* AnchorGraphView.swift */; };
 		C53793052A1AAA330085D24B /* AnchorGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53793022A1AAA330085D24B /* AnchorGraphView.swift */; };
+		C53793072A1C15BC0085D24B /* MyComplexSpringLayouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53793062A1C15BC0085D24B /* MyComplexSpringLayouter.swift */; };
+		C53793082A1C15BC0085D24B /* MyComplexSpringLayouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53793062A1C15BC0085D24B /* MyComplexSpringLayouter.swift */; };
+		C53793092A1C15BC0085D24B /* MyComplexSpringLayouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53793062A1C15BC0085D24B /* MyComplexSpringLayouter.swift */; };
+		C537930B2A1ECAAC0085D24B /* Design.MathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C537930A2A1ECAAC0085D24B /* Design.MathView.swift */; };
+		C537930C2A1ECAAC0085D24B /* Design.MathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C537930A2A1ECAAC0085D24B /* Design.MathView.swift */; };
+		C537930D2A1ECAAC0085D24B /* Design.MathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C537930A2A1ECAAC0085D24B /* Design.MathView.swift */; };
 		C5445D1F29E75D3B0033A5AB /* Document.Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5445D1E29E75D3B0033A5AB /* Document.Storage.swift */; };
 		C5445D2029E75D3B0033A5AB /* Document.Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5445D1E29E75D3B0033A5AB /* Document.Storage.swift */; };
 		C5445D2229E9F3EF0033A5AB /* Presentation.Query.RoleRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5445D2129E9F3EF0033A5AB /* Presentation.Query.RoleRepresentation.swift */; };
@@ -391,6 +397,8 @@
 		C53792FA2A19824E0085D24B /* ComplexSpringLayouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexSpringLayouter.swift; sourceTree = "<group>"; };
 		C53792FE2A1A8C710085D24B /* AnchorGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnchorGraph.swift; sourceTree = "<group>"; };
 		C53793022A1AAA330085D24B /* AnchorGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnchorGraphView.swift; sourceTree = "<group>"; };
+		C53793062A1C15BC0085D24B /* MyComplexSpringLayouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyComplexSpringLayouter.swift; sourceTree = "<group>"; };
+		C537930A2A1ECAAC0085D24B /* Design.MathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Design.MathView.swift; sourceTree = "<group>"; };
 		C5445D1E29E75D3B0033A5AB /* Document.Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.Storage.swift; sourceTree = "<group>"; };
 		C5445D2129E9F3EF0033A5AB /* Presentation.Query.RoleRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presentation.Query.RoleRepresentation.swift; sourceTree = "<group>"; };
 		C54BE4A12894866A0060A066 /* HippocampusApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HippocampusApp.swift; sourceTree = "<group>"; };
@@ -623,6 +631,7 @@
 		C531AE8429ECA5F700585073 /* Design */ = {
 			isa = PBXGroup;
 			children = (
+				C537930A2A1ECAAC0085D24B /* Design.MathView.swift */,
 				C531AE8529ECA61C00585073 /* Design.NestedListView.swift */,
 				C51D5D5929F313F30081669A /* Design.ShellView.swift */,
 				C52E725229F56AB2001A5821 /* Design.ListView.swift */,
@@ -1130,6 +1139,7 @@
 				C5B4DB212A10249000A80F5A /* EdgeView.swift */,
 				C5E7F9252A0EF7AA00FE1F0F /* MySpringLayouter.swift */,
 				C53792FA2A19824E0085D24B /* ComplexSpringLayouter.swift */,
+				C53793062A1C15BC0085D24B /* MyComplexSpringLayouter.swift */,
 				C5B4DB2D2A11720200A80F5A /* GraphView.swift */,
 				C53792F52A197C140085D24B /* AnchorLayouter.md */,
 				C53792FE2A1A8C710085D24B /* AnchorGraph.swift */,
@@ -1335,6 +1345,7 @@
 				C5E966D829AAD47D009D81FF /* Font+Extension.swift in Sources */,
 				C59B3CEA295CCE950053DE7D /* NSPredicate+operators.swift in Sources */,
 				C59E28762978A921007375D5 /* Structure.Aspect+view.swift in Sources */,
+				C537930D2A1ECAAC0085D24B /* Design.MathView.swift in Sources */,
 				C582241A2A080FCF000FB877 /* SidebarView.swift in Sources */,
 				C59E2884297B2434007375D5 /* Structure.Aspect.Presentation.swift in Sources */,
 				C53793052A1AAA330085D24B /* AnchorGraphView.swift in Sources */,
@@ -1367,6 +1378,7 @@
 				C5D273542975D19100F32EB6 /* Information.Item.swift in Sources */,
 				C58224212A080FD7000FB877 /* GroupNameView.swift in Sources */,
 				C53793012A1A8C710085D24B /* AnchorGraph.swift in Sources */,
+				C53793092A1C15BC0085D24B /* MyComplexSpringLayouter.swift in Sources */,
 				C5BE4F1A29F6727B00B27B48 /* Document.Drawing.PageFormat+draw.swift in Sources */,
 				C5A792A029A4078400637C6C /* DrawingView.swift in Sources */,
 				C5BE4F1B29F6727B00B27B48 /* Document.Drawing+image.swift in Sources */,
@@ -1448,6 +1460,7 @@
 				C5167C3B29C5002900323F75 /* Navigation.swift in Sources */,
 				C5E1406F29E218DD00464B92 /* Presentation.Layout.swift in Sources */,
 				C51D5D5A29F313F30081669A /* Design.ShellView.swift in Sources */,
+				C537930B2A1ECAAC0085D24B /* Design.MathView.swift in Sources */,
 				C52E725329F56AB2001A5821 /* Design.ListView.swift in Sources */,
 				C5E1406C29E0EE4900464B92 /* QueryTreeView.swift in Sources */,
 				C5AAA0E729BD1E3B000DA6C3 /* PkDrawing+strokesIn.swift in Sources */,
@@ -1515,6 +1528,7 @@
 				C5B4DB2A2A11525900A80F5A /* Design.BorderPointView.swift in Sources */,
 				C5A84B7229CFAFC30026F07E /* Presentation.swift in Sources */,
 				C59E28742978A921007375D5 /* Structure.Aspect+view.swift in Sources */,
+				C53793072A1C15BC0085D24B /* MyComplexSpringLayouter.swift in Sources */,
 				C5E966D629AAD47D009D81FF /* Font+Extension.swift in Sources */,
 				C564EB8729B533FE00F3E0AC /* Document.Drawing.Properties.swift in Sources */,
 				C5EECF6829DF7CD4008608E4 /* Structure.Role+textView.swift in Sources */,
@@ -1569,6 +1583,7 @@
 				C54BE53D289591950060A066 /* NSPredicate+operators.swift in Sources */,
 				C5A84B7629CFB03D0026F07E /* Presentation.Properties.swift in Sources */,
 				C5167C5329C8FAD900323F75 /* QueryListView.swift in Sources */,
+				C537930C2A1ECAAC0085D24B /* Design.MathView.swift in Sources */,
 				C564EB8029B5326A00F3E0AC /* Document.Drawing.swift in Sources */,
 				C52E725429F56AB2001A5821 /* Design.ListView.swift in Sources */,
 				C53793042A1AAA330085D24B /* AnchorGraphView.swift in Sources */,
@@ -1601,6 +1616,7 @@
 				C5167C3C29C5002900323F75 /* Navigation.swift in Sources */,
 				C55AC5E0295A4ACE00F09326 /* Presentation.Predicate.swift in Sources */,
 				C53793002A1A8C710085D24B /* AnchorGraph.swift in Sources */,
+				C53793082A1C15BC0085D24B /* MyComplexSpringLayouter.swift in Sources */,
 				C5AAA10229BE7F69000DA6C3 /* Document.Drawing.Background+draw.swift in Sources */,
 				C5C8E865295AFDCA002C7746 /* Structure.Role.Builder.swift in Sources */,
 				C564EB8429B5337700F3E0AC /* Document.Drawing.Drawing.swift in Sources */,

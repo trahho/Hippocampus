@@ -94,6 +94,10 @@ extension CGPoint {
     }
 
     // MARK: - Functions
+    
+    static func random(in range: Range<Int>) -> CGPoint {
+        CGPoint(x: Int.random(in: range), y: Int.random(in: range))
+    }
 
     static var infinite: CGPoint {
         CGPoint(x: CGFloat.infinity, y: CGFloat.infinity)
@@ -105,6 +109,10 @@ extension CGPoint {
 
     func rounded(_ rule: FloatingPointRoundingRule) -> CGPoint {
         CGPoint(x: x.rounded(rule), y: y.rounded(rule))
+    }
+    
+    var isNaN: Bool {
+        x.isNaN || y.isNaN
     }
 
     // MARK: - Initialization
@@ -132,3 +140,4 @@ func max(_ a: CGPoint, _ b: CGPoint) -> CGPoint {
 func abs(_ point: CGPoint) -> CGPoint {
     CGPoint(x: abs(point.x), y: abs(point.y))
 }
+

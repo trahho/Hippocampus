@@ -14,38 +14,9 @@ struct Design_BorderPointView: View {
 
     var circlePoint: CGPoint {
         let size = size / 2
-        let circlePoint =  CGPoint(.zero + (offset - rect.center) / (offset - rect.center).length)
+        let circlePoint = CGPoint(.zero + (offset - rect.center) / (offset - rect.center).length)
         return circlePoint * size
     }
-
-//    var borderPoint: CGPoint {
-//        let direction = offset - rect.center
-//        if direction.x == 0 {
-//            if direction.y < 0 {
-//                return CGPoint(x: rect.center.x, y: rect.minY)
-//            } else {
-//                return CGPoint(x: rect.center.x, y: rect.maxY)
-//            }
-//        } else if direction.y == 0 {
-//            if direction.x < 0 {
-//                return CGPoint(x: rect.minX, y: rect.center.y)
-//            } else {
-//                return CGPoint(x: rect.maxX, y: rect.center.y)
-//            }
-//        } else if abs((direction.y / direction.x) * rect.width) < rect.height { // wir müssen oben oder unten ansetzen
-//            if direction.x > 0 {
-//                return CGPoint(x: rect.maxX, y: ((direction.y / direction.x) * (rect.width / 2)) + rect.center.y)
-//            } else {
-//                return CGPoint(x: rect.minY, y: ((direction.y / direction.x) * (-rect.width / 2)) + rect.center.y)
-//            }
-//        } else { // links oder rechts
-//            if direction.y > 0 {
-//                return CGPoint(x: ((direction.x / direction.y) * (rect.height / 2)) + rect.center.x, y: rect.maxY)
-//            } else {
-//                return CGPoint(x: ((direction.x / direction.y) * (-rect.height / 2)) + rect.center.x, y: rect.minY)
-//            }
-//        }
-//    }
 
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -94,7 +65,6 @@ struct Design_BorderPointView: View {
                 .foregroundColor(.orange)
                 .frame(width: 10, height: 10)
                 .position(rect.oppositeBorderPoint(to: offset))
-          
         }
     }
 }

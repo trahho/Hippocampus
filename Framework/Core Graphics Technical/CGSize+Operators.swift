@@ -12,9 +12,21 @@ extension CGSize {
     static func - (a: CGSize, b: CGSize) -> CGSize {
         CGSize(width: a.width - b.width, height: a.height - b.height)
     }
+    
+    static func - (a: CGSize, b: CGPoint) -> CGSize {
+        a - CGSize(b)
+    }
+
+    static prefix func - (a: CGSize) -> CGSize {
+        CGSize.zero - a
+    }
 
     static func + (a: CGSize, b: CGSize) -> CGSize {
         CGSize(width: a.width + b.width, height: a.height + b.height)
+    }
+    
+    static func + (a: CGSize, b: CGPoint) -> CGSize {
+        a + CGSize(b)
     }
 
     static func * (size: CGSize, factor: CGFloat) -> CGSize {
@@ -41,14 +53,40 @@ extension CGSize {
         CGSize(width: size.width * factor.width, height: size.height * factor.height)
     }
     
-   
+    static func += (lhs: inout CGSize, rhs: CGPoint) {
+        lhs = lhs + rhs
+    }
+
+    static func += (lhs: inout CGSize, rhs: CGSize) {
+        lhs = lhs + rhs
+    }
+
+    static func *= (lhs: inout CGSize, rhs: CGFloat) {
+        lhs = lhs * rhs
+    }
+
+    static func -= (lhs: inout CGSize, rhs: CGPoint) {
+        lhs = lhs - rhs
+    }
+
+    static func -= (lhs: inout CGSize, rhs: CGSize) {
+        lhs = lhs - rhs
+    }
 
     var isEmpty: Bool {
         width + height == 0
     }
+    
+    var isNaN: Bool {
+        width.isNaN || height.isNaN
+    }
 
     var length: CGFloat {
         sqrt(width * width + height * height)
+    }
+
+    static var infinity: CGSize {
+        CGSize(width: CGFloat.infinity, height: CGFloat.infinity)
     }
 
     init(_ point: CGPoint) {

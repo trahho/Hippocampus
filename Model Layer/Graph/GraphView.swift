@@ -53,27 +53,34 @@ struct GraphView: View {
             }
 
             ForEach($graph.nodes, id: \.self) { $node in
-                if let edge = node as? Graph.Edge {
-                    edge.body
-                        .measureSize(in: $node.size)
-                        .position(node.position)
-                } else {
-                    node.body
-                        .padding(10)
-                        .background(Color.pink)
-                        .measureSize(in: $node.size)
-                        .position(node.position)
-                        .gesture(DragGesture()
-                            .onChanged { value in
-                                node.fixed = true
-                                node.position = value.location // - node.size / 2
-                                graph.startLayout()
+                if !node.bounds.isNaN {
+                    if let edge = node as? Graph.Edge {
+                        edge.body
+                            .measureSize(in: $node.size)
+                            .position(node.position)
+                    } else {
+                        node.body
+                            .padding(10)
+                            .background(Color.pink)
+                            .measureSize(in: $node.size)
+                            .position(node.position)
+                            .gesture(DragGesture()
+                                .onChanged { value in
+                                    node.fixed = true
+                                    node.position = value.location // - node.size / 2
+                                    graph.startLayout()
+                                }
+                                .onEnded { value in
+                                    node.fixed = false
+                                    node.position = value.location // - node.size / 2
+                                }
+                            )
+                            .if(node.fixed) { v in
+                                v.overlay {
+                                    Image(systemName: "pin")
+                                }
                             }
-                            .onEnded { value in
-                                node.fixed = false
-                                node.position = value.location // - node.size / 2
-                            }
-                        )
+                    }
                 }
             }
         }
@@ -98,25 +105,26 @@ struct GraphView: View {
         .toolbar {
             if graph.isLayouting {
                 ToolbarItem(placement: .status) {
-                    if graph.layoutPaused {
-                        Image(systemName: "pause.circle")
-                            .onTapGesture {
-                                graph.resumeLayout()
+                    ProgressView()
+                        .scaleEffect(0.5)
+                        .onTapGesture {
+                            graph.stopLayout()
+                        }
+                        .onLongPressGesture {
+                            graph.nodes.forEach {
+                                $0.position = .random(-1000 ..< 1000)
                             }
-                    } else {
-                        ProgressView()
-                            .scaleEffect(0.5)
-                            .onTapGesture {
-                                graph.pauseLayout()
-                            }
-                    }
+                        }
                 }
             }
         }
         #endif
         .gesture(scrollGesture)
         .gesture(zoomGesture)
-        .onAppear { graph.startLayout() }
+        .onAppear {
+            graph.layouter = MyComplexSpringLayouter()
+            graph.startLayout()
+        }
         .onChange(of: graph) { [graph] newGraph in
             graph.stopLayout()
             newGraph.startLayout()

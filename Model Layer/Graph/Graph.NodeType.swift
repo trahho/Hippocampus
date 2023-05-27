@@ -8,25 +8,53 @@
 import Foundation
 
 extension Graph {
-    enum GraphNodeType: Int {
-        private static let masses = [0, 2, 3, 5, 5, 2, 0, 10]
-        private static let charges = [0, 1, 1, 1, 1, 4, 0, 0]
+    enum GraphNodeType {
+        case unknown, anchor, knot, attribute, tie, edge, partition, testNode, testEdge
 
-        case unknown = 0
-        case anchor = 1
-        case knot = 2
-        case attribute = 3
-        case tie = 4
-        case edge = 5
-        case partition = 6
-        case trial = 7
-
-        var mass: Int {
-            Self.masses[rawValue]
+        var mass: CGFloat {
+            switch self {
+            case .unknown:
+                return 0
+            case .anchor:
+                return 2
+            case .knot:
+                return 3
+            case .attribute:
+                return 5
+            case .tie:
+                return 5
+            case .edge:
+                return 2
+            case .partition:
+                return 0
+            case .testNode:
+                return 1
+            case .testEdge:
+                return 5
+            }
         }
 
-        var charge: Int {
-            Self.charges[rawValue]
+        var charge: CGFloat {
+            switch self {
+            case .unknown:
+                return 0
+            case .anchor:
+                return 1
+            case .knot:
+                return 1
+            case .attribute:
+                return 1
+            case .tie:
+                return 1
+            case .edge:
+                return 4
+            case .partition:
+                return 0
+            case .testNode:
+                return 5
+            case .testEdge:
+                return 1
+            }
         }
     }
     

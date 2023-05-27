@@ -10,6 +10,7 @@ import Smaug
 import SwiftUI
 
 protocol GraphLayouter {
+    var equilibrium: Bool { get }
     func layout(graph: Graph)
 }
 
@@ -56,6 +57,12 @@ class Graph: IdentifiableObject, ObservableObject {
 
     var movement: CGFloat = .infinity
 
+    func dispatch(_ closure: @escaping () -> ()) {
+        DispatchQueue.main.asyncAfter(deadline: .now().advanced(by: .milliseconds(1))) {
+            closure()
+        }
+    }
+
     func doLayout() {
         guard let layouter, isLayouting else {
             return
@@ -65,6 +72,7 @@ class Graph: IdentifiableObject, ObservableObject {
         layouter.layout(graph: self)
 
         let lastVelocity = velocity
+        velocity = .zero
 
         for node in nodes {
             node.position = node.position + node.velocity
@@ -75,12 +83,16 @@ class Graph: IdentifiableObject, ObservableObject {
         let action = (lastVelocity - velocity).length
 //        print("\(size.length)")
 
-        if action < 0.06 // || action > 2 * movement
-        { stopLayout() }
+//        if action < 0.06 // || action > 2 * movement
+//        { stopLayout() }
         movement = action
 
-        DispatchQueue.main.asyncAfter(deadline: .now().advanced(by: .milliseconds(1))) {
-            self.doLayout()
+        if layouter.equilibrium {
+            stopLayout()
+        } else {
+            dispatch {
+                self.doLayout()
+            }
         }
     }
 

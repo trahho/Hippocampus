@@ -17,7 +17,7 @@ extension Graph {
 
         init(from: Node, to: Node) {
             super.init()
-            self.type = .edge
+            self.type = .testEdge
             self.from = from
             self.to = to
             self.position = CGRect(firstPoint: from.position, secondPoint: to.position).center
@@ -30,7 +30,7 @@ extension Graph {
         override func start() {
             moving = true
         }
-        
+
         override func stop() {
             moving = from.moving || to.moving
         }
@@ -39,20 +39,22 @@ extension Graph {
         let pointerLineLength: CGFloat = 10
         let arrowAngle: CGFloat = 120
 
-//        @ViewBuilder
-//        override var body: AnyView {
-//            AnyView(
-//                Text("Hallo\nWelt")
-        ////                Circle()
-        ////                    .frame(width: 5, height: 5)
-        ////                    .background(Color.red)
-//            )
-//        }
+        @ViewBuilder
+        override var body: AnyView {
+            AnyView(
+                //                Text("Hallo\nWelt")
+                Circle()
+                    .frame(width: 50, height: 20)
+                    .foregroundColor(Color.blue)
+            )
+        }
 
         var path: Path {
             let start = from.bounds.borderPoint(to: position)
             let end = to.bounds.padding(6).borderPoint(to: position)
             let mid = CGRect(firstPoint: start, secondPoint: end).controlPoint(for: position)
+
+            guard !start.isNaN, !end.isNaN, !mid.isNaN else { return Path() }
 
             var path = Path()
             path.move(to: start)

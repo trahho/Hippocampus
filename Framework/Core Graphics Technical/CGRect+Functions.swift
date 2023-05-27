@@ -28,6 +28,10 @@ extension CGRect {
     var bottomRight: CGPoint {
         CGPoint(x: maxX, y: maxY)
     }
+    
+    var isNaN: Bool {
+        origin.isNaN || size.isNaN
+    }
 
     func borderPoint(to: CGPoint) -> CGPoint {
         let direction = to - center
