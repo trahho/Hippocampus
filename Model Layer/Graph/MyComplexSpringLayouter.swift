@@ -7,21 +7,6 @@
 
 import Foundation
 
-extension MyComplexSpringLayouter {
-    struct Partition {
-        var charge: CGFloat = .zero
-        var mass: CGFloat = .zero
-        var bounds: CGRect = .null
-        var position: CGPoint = .zero
-        var nodes: [Graph.Node] = []
-        var velocity: CGPoint = .zero
-
-        mutating func addVelocity(_ velocity: CGSize) {
-            self.velocity += velocity
-        }
-    }
-}
-
 class MyComplexSpringLayouter: GraphLayouter {
     var equilibrium: Bool = false
 
@@ -40,6 +25,7 @@ class MyComplexSpringLayouter: GraphLayouter {
     var partitionFactor: CGFloat = 15
     var longRangeEffect = 0.25
     var speed: CGFloat = 10
+    var velocity: CGSize = .zero
 
     init() {
         attractionConstant = 1 / (normalDistance * normalDistance * normalDistance)
@@ -69,99 +55,60 @@ class MyComplexSpringLayouter: GraphLayouter {
                 $0.position = .random(in: -100 ..< 600)
             }
         }
-        let partitions = Dictionary(grouping: graph.nodes, by: { ($0.position / CGFloat.infinity).rounded(.down) })
-//        var partitions = Dictionary(grouping: graph.nodes, by: { CGPoint.zero })
-            .values
-            .map { nodes in
-                nodes.reduce(into: Partition(nodes: nodes)) { partition, node in
-                    partition.bounds = partition.bounds.isNull ? node.bounds : partition.bounds.union(node.bounds)
-                    partition.position = (partition.position * partition.mass + node.position * node.mass) / (partition.mass + node.mass)
-                    partition.charge += node.charge
-                    partition.mass += node.mass
+
+        for i in graph.nodes.indices {
+            let node = graph.nodes[i]
+            guard node.moving, !node.fixed else { continue }
+
+            for j in graph.nodes.indices {
+                guard i != j else { continue }
+                let other = graph.nodes[j]
+                let nodePoint = node.bounds.borderPoint(to: other.position)
+                let otherPoint = other.bounds.borderPoint(to: node.position)
+                let charge = (node.charge + other.charge) / 2
+                let distance = nodePoint - otherPoint
+                let force = distance.length.square
+                let velocity = distance * speed * (charge / force)
+
+                if node.bounds.intersects(other.bounds) {
+                    node.velocity -= velocity
+                } else {
+                    node.velocity += velocity
                 }
             }
 
-        for i in partitions.indices {
-            var partition = partitions[i]
-            for j in partitions.indices {
-                guard i != j else { continue }
-                let other = partitions[j]
-                let nodes = CGFloat(other.nodes.count)
-                let partitionPoint = partition.bounds.borderPoint(to: other.position)
-                let otherPoint = other.bounds.borderPoint(to: partition.position)
-                let charge = nodes * ((partition.charge + other.charge) / 2)
-                let distance = partitionPoint - otherPoint
-                let force = distance.length.square
+            for edge in node.links {
+                if edge.visible {
+                    let nodePoint = node.bounds.borderPoint(to: edge.position)
+                    let edgePoint = edge.bounds.borderPoint(to: node.position)
+                    let mass = (node.mass + edge.mass) / 2
+                    let distance = edgePoint - nodePoint
+                    let force = distance.length / CGFloat(edge.links.count)
+                    let velocity = distance * speed * (mass * force * attractionConstant)
 
-                partition.addVelocity(distance * speed * (charge / force))
-            }
-        }
-
-        for partition in partitions {
-            for i in partition.nodes.indices {
-                let node = partition.nodes[i]
-                guard node.moving, !node.fixed else { continue }
-                node.velocity += longRangeEffect * partition.velocity
-
-                for j in partition.nodes.indices {
-                    guard i != j else { continue }
-                    let other = partition.nodes[j]
-                    let nodePoint = node.bounds.borderPoint(to: other.position)
-                    let otherPoint = other.bounds.borderPoint(to: node.position)
-                    let charge = (node.charge + other.charge) / 2
-                    let distance = nodePoint - otherPoint
-                    let force = distance.length.square
-                    let velocity = distance * speed * (charge / force)
-
-                    if node.bounds.intersects(other.bounds) {
+                    if node.bounds.intersects(edge.bounds) {
                         node.velocity -= velocity
                     } else {
                         node.velocity += velocity
                     }
                 }
 
-//                if let edge = node as? Graph.Edge {
-//                    if edge.to.visible, edge.from.visible {
-//                        let nodePoint = edge.from.bounds.borderPoint(to: edge.position)
-//                        let edgePoint = edge.to.bounds.padding(20).borderPoint(to: edge.position)
-//                        let curvature = stiffness / (nodePoint - edgePoint).length
-//                        let controlPoint = CGRect(firstPoint: nodePoint, secondPoint: edgePoint).controlPoint(for: edge.position)
-//                        edge.velocity -= curvature * (controlPoint - edge.position)
-//                    }
-//                }
-
-                for edge in node.links {
-                    if edge.visible {
-                        let nodePoint = node.bounds.borderPoint(to: edge.position)
-                        let edgePoint = edge.bounds.borderPoint(to: node.position)
-                        let mass = (node.mass + edge.mass) / 2
-                        let distance = edgePoint - nodePoint
-                        let force = distance.length / CGFloat(edge.links.count)
-                        let velocity = distance * speed * (mass * force * attractionConstant)
-
-                        if node.bounds.intersects(edge.bounds) {
-                            node.velocity -= velocity
-                        } else {
-                            node.velocity += velocity
-                        }
-                    }
-                }
-
                 node.velocity *= damping
-                
+
                 velocity += node.velocity
 
                 energy += abs(node.velocity.x) + abs(node.velocity.y)
             }
         }
 
-        print("Velocity: \(velocity)")
-        
+//        print("Velocitydiff: \((velocity - self.velocity).length)")
+
         if energy < 20, speed < 20 {
             speed += 1
             print("Speed: \(speed)")
         }
 
-        equilibrium = energy < (nodes - stoppedNodes) * stoppingVelocity  || velocity.length > 2
+        equilibrium = energy < (nodes - stoppedNodes) * stoppingVelocity || (velocity - self.velocity).length < 0.0001
+        self.velocity = velocity
     }
 }
