@@ -30,7 +30,7 @@ extension Graph {
             case .testNode:
                 return 1
             case .testEdge:
-                return 5
+                return 2
             }
         }
 
@@ -51,7 +51,7 @@ extension Graph {
             case .partition:
                 return 0
             case .testNode:
-                return 5
+                return 3
             case .testEdge:
                 return 1
             }

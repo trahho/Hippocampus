@@ -21,6 +21,9 @@
 		C5167C5029C8F78100323F75 /* QueryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5167C4E29C8F78100323F75 /* QueryView.swift */; };
 		C5167C5229C8FAD900323F75 /* QueryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5167C5129C8FAD900323F75 /* QueryListView.swift */; };
 		C5167C5329C8FAD900323F75 /* QueryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5167C5129C8FAD900323F75 /* QueryListView.swift */; };
+		C51779F72A2548B1001944B2 /* ExperimentSpringLayouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51779F62A2548B1001944B2 /* ExperimentSpringLayouter.swift */; };
+		C51779F82A2548B1001944B2 /* ExperimentSpringLayouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51779F62A2548B1001944B2 /* ExperimentSpringLayouter.swift */; };
+		C51779F92A2548B1001944B2 /* ExperimentSpringLayouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51779F62A2548B1001944B2 /* ExperimentSpringLayouter.swift */; };
 		C51D5D5A29F313F30081669A /* Design.ShellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51D5D5929F313F30081669A /* Design.ShellView.swift */; };
 		C51D5D5D29F3501B0081669A /* Color+background.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51D5D5C29F3501B0081669A /* Color+background.swift */; };
 		C51D5D5E29F3501B0081669A /* Color+background.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51D5D5C29F3501B0081669A /* Color+background.swift */; };
@@ -376,6 +379,7 @@
 		C5167C4429C62BFB00323F75 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		C5167C4E29C8F78100323F75 /* QueryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryView.swift; sourceTree = "<group>"; };
 		C5167C5129C8FAD900323F75 /* QueryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryListView.swift; sourceTree = "<group>"; };
+		C51779F62A2548B1001944B2 /* ExperimentSpringLayouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentSpringLayouter.swift; sourceTree = "<group>"; };
 		C51D5D5929F313F30081669A /* Design.ShellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Design.ShellView.swift; sourceTree = "<group>"; };
 		C51D5D5C29F3501B0081669A /* Color+background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+background.swift"; sourceTree = "<group>"; };
 		C528A18128CDE2A90027FA44 /* HippocampusTestsMacOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HippocampusTestsMacOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1140,6 +1144,7 @@
 				C5E7F9252A0EF7AA00FE1F0F /* MySpringLayouter.swift */,
 				C53792FA2A19824E0085D24B /* ComplexSpringLayouter.swift */,
 				C53793062A1C15BC0085D24B /* MyComplexSpringLayouter.swift */,
+				C51779F62A2548B1001944B2 /* ExperimentSpringLayouter.swift */,
 				C5B4DB2D2A11720200A80F5A /* GraphView.swift */,
 				C53792F52A197C140085D24B /* AnchorLayouter.md */,
 				C53792FE2A1A8C710085D24B /* AnchorGraph.swift */,
@@ -1372,6 +1377,7 @@
 				C564EB8E29B541F500F3E0AC /* measureDuration.swift in Sources */,
 				C59B3CEC295CCE9A0053DE7D /* CGRect+Functions.swift in Sources */,
 				C558647B2A058A91005EA6FD /* Information.Condition+operators.swift in Sources */,
+				C51779F92A2548B1001944B2 /* ExperimentSpringLayouter.swift in Sources */,
 				C5BE4F3229F8794C00B27B48 /* PropertyWrapperTests.swift in Sources */,
 				C5B4DB302A11720200A80F5A /* GraphView.swift in Sources */,
 				C5B4DB342A12CA3B00A80F5A /* Graph.Edge.swift in Sources */,
@@ -1496,6 +1502,7 @@
 				C5445D2229E9F3EF0033A5AB /* Presentation.Query.RoleRepresentation.swift in Sources */,
 				C55AC5DF295A4ACE00F09326 /* Presentation.Predicate.swift in Sources */,
 				C5BE4F0229F5AF7600B27B48 /* SidebarView.QueryView.swift in Sources */,
+				C51779F72A2548B1001944B2 /* ExperimentSpringLayouter.swift in Sources */,
 				C5C8E864295AFDCA002C7746 /* Structure.Role.Builder.swift in Sources */,
 				C5C8E857295A652B002C7746 /* NavigationView.swift in Sources */,
 				C54BE508289591530060A066 /* Set+asArray.swift in Sources */,
@@ -1610,6 +1617,7 @@
 				C5A84B7A29D61FB10026F07E /* LocationService.swift in Sources */,
 				C558647A2A058A91005EA6FD /* Information.Condition+operators.swift in Sources */,
 				C564EB8829B533FE00F3E0AC /* Document.Drawing.Properties.swift in Sources */,
+				C51779F82A2548B1001944B2 /* ExperimentSpringLayouter.swift in Sources */,
 				C54BE515289591840060A066 /* InjectedPropertyWrapper.swift in Sources */,
 				C5B4DB2F2A11720200A80F5A /* GraphView.swift in Sources */,
 				C5B4DB332A12CA3B00A80F5A /* Graph.Edge.swift in Sources */,

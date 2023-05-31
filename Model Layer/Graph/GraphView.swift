@@ -75,11 +75,6 @@ struct GraphView: View {
                                     node.position = value.location // - node.size / 2
                                 }
                             )
-                            .if(node.fixed) { v in
-                                v.overlay {
-                                    Image(systemName: "pin")
-                                }
-                            }
                     }
                 }
             }
@@ -122,7 +117,7 @@ struct GraphView: View {
         .gesture(scrollGesture)
         .gesture(zoomGesture)
         .onAppear {
-            graph.layouter = MyComplexSpringLayouter()
+            graph.layouter = ExperimentSpringLayouter()
             graph.startLayout()
         }
         .onChange(of: graph) { [graph] newGraph in

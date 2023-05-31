@@ -18,17 +18,18 @@ struct Design_MathView: View {
     }
 
     var attractingSize: CGFloat {
-        attracting.length * 100
+        attracting.length * 0.1
     }
+
     var repellingSize: CGFloat {
-        repelling.length * 100
+        repelling.length * 1
     }
 
     var repelling: CGSize {
         let point = rect.borderPoint(to: bounds.center)
         let otherPoint = bounds.borderPoint(to: rect.center)
         
-        let force = (point - otherPoint).length.square
+        let force = (otherPoint - point).length.square
         let repelling = (otherPoint - point) * charge / force
         
         return repelling
@@ -37,10 +38,11 @@ struct Design_MathView: View {
     var attracting: CGSize {
         let point = rect.borderPoint(to: bounds.center)
         let otherPoint = bounds.borderPoint(to: rect.center)
+        let attractionConstant: CGFloat = 1 / (30 * 30 * 30)
         
         let force = (point - otherPoint).length
         print("force: \(force)")
-        let attracting = mass * (otherPoint - point) / force
+        let attracting = mass * (otherPoint - point) * force * attractionConstant
         return attracting
     }
     
@@ -93,20 +95,25 @@ struct Design_MathView: View {
                 .foregroundColor(.pink)
                 .frame(width: 10, height: 10)
                 .position(bounds.borderPoint(to: rect.center))
+//            Rectangle()
+//                .foregroundColor(.green)
+//                .frame(maxWidth: 500, maxHeight: 500)
+//                .frame(width: attractingSize, height: 20)
             Grid(alignment: .topLeading) {
                 GridRow {
                     Image(systemName: "square.and.arrow.down")
                     picker(selection: $mass)
-                    Rectangle()
-                        .foregroundColor(.green)
-                        .frame(width: attractingSize, height: 20)
+                    Text("\(attracting.width), \(attracting.height)")
                 }
                 GridRow {
                     Image(systemName: "square.and.arrow.up")
                     picker(selection: $charge)
-                    Rectangle()
-                        .foregroundColor(.red)
-                        .frame(width: repellingSize, height: 20)
+                    Text("\(repelling.width), \(repelling.height)")
+
+//                    Rectangle()
+//                        .foregroundColor(.red)
+//                        .frame(width: repellingSize, height: 20)
+//                        .clipped()
                 }
 //                Path { path in
 //                    let start = rect.borderPoint(to: bounds.center)

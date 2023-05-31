@@ -45,8 +45,8 @@ class MyComplexSpringLayouter: GraphLayouter {
         var energy: CGFloat = 0
         var velocity: CGSize = .zero
 
-        fuzzing = (fuzzing + 1).truncatingRemainder(dividingBy: 3)
-        let size = partitionSize - fuzz + fuzzing * fuzz
+//        fuzzing = (fuzzing + 1).truncatingRemainder(dividingBy: 3)
+//        let size = partitionSize - fuzz + fuzzing * fuzz
 
         let crashedNodes = graph.nodes.filter { $0.bounds.isNaN }
         if !crashedNodes.isEmpty {
@@ -92,13 +92,12 @@ class MyComplexSpringLayouter: GraphLayouter {
                         node.velocity += velocity
                     }
                 }
-
-                node.velocity *= damping
-
-                velocity += node.velocity
-
-                energy += abs(node.velocity.x) + abs(node.velocity.y)
             }
+            node.velocity *= damping
+
+            velocity += node.velocity
+
+            energy += abs(node.velocity.x) + abs(node.velocity.y)
         }
 
 //        print("Velocitydiff: \((velocity - self.velocity).length)")
@@ -108,7 +107,7 @@ class MyComplexSpringLayouter: GraphLayouter {
             print("Speed: \(speed)")
         }
 
-        equilibrium = energy < (nodes - stoppedNodes) * stoppingVelocity || (velocity - self.velocity).length < 0.0001
+        equilibrium = energy < (nodes - stoppedNodes) * stoppingVelocity || (velocity - self.velocity).length < 0.00000001
         self.velocity = velocity
     }
 }

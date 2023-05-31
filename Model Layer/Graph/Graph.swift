@@ -74,11 +74,11 @@ class Graph: IdentifiableObject, ObservableObject {
         let lastVelocity = velocity
         velocity = .zero
 
-        for node in nodes {
-            node.position = node.position + node.velocity
-            velocity = velocity + node.velocity
-            node.velocity = .zero
-        }
+//        for node in nodes {
+//            node.position = node.position + node.velocity
+//            velocity = velocity + node.velocity
+//            node.velocity = .zero
+//        }
 
         let action = (lastVelocity - velocity).length
 //        print("\(size.length)")
