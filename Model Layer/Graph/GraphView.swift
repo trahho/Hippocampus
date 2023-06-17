@@ -107,7 +107,7 @@ struct GraphView: View {
                         }
                         .onLongPressGesture {
                             graph.nodes.forEach {
-                                $0.position = .random(-1000 ..< 1000)
+                                $0.position = .random(in: -1000 ..< 1000)
                             }
                         }
                 }

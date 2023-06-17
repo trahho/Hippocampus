@@ -58,7 +58,7 @@ class Graph: IdentifiableObject, ObservableObject {
     var movement: CGFloat = .infinity
 
     func dispatch(_ closure: @escaping () -> ()) {
-        DispatchQueue.main.asyncAfter(deadline: .now().advanced(by: .milliseconds(1))) {
+        DispatchQueue.main.asyncAfter(deadline: .now().advanced(by: .milliseconds(1000))) {
             closure()
         }
     }

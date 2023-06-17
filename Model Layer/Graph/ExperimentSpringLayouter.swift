@@ -91,6 +91,7 @@ class ExperimentSpringLayouter: GraphLayouter {
         if !crashedNodes.isEmpty {
             speed -= 1
             crashedNodes.forEach {
+                $0.fixed = false
                 $0.position = .random(in: -100 ..< 600)
             }
         }
@@ -129,15 +130,26 @@ class ExperimentSpringLayouter: GraphLayouter {
                 guard i != j else { continue }
                 let other = edges[j]
                 repell(node: edge, from: other, charge: 0.1)
+                if let before = edge.sortBefore, edge.from == before.from {
+                    let edgeSize = (edge.to.position - edge.from.position)
+                    let beforeSize = (before.to.position - before.from.position)
+                    if (edgeSize.angle.radians - beforeSize.angle.radians) < 0 {
+                        
+                    }
+                }
             }
 
             for node in nodes + edges {
-                node.velocity *= damping
+                if node.fixed {
+                    node.velocity = .zero
+                } else {
+                    node.velocity *= damping
 
-                velocity += node.velocity
-                energy += abs(node.velocity.x) + abs(node.velocity.y)
-                node.position += node.velocity
-                node.velocity = .zero
+                    velocity += node.velocity
+                    energy += abs(node.velocity.x) + abs(node.velocity.y)
+                    node.position += node.velocity
+                    node.velocity = .zero
+                }
             }
         }
 

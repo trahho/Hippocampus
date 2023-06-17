@@ -7,12 +7,13 @@
 
 import CoreGraphics
 import Foundation
+import SwiftUI
 
 extension CGSize {
     static func - (a: CGSize, b: CGSize) -> CGSize {
         CGSize(width: a.width - b.width, height: a.height - b.height)
     }
-    
+
     static func - (a: CGSize, b: CGPoint) -> CGSize {
         a - CGSize(b)
     }
@@ -24,7 +25,7 @@ extension CGSize {
     static func + (a: CGSize, b: CGSize) -> CGSize {
         CGSize(width: a.width + b.width, height: a.height + b.height)
     }
-    
+
     static func + (a: CGSize, b: CGPoint) -> CGSize {
         a + CGSize(b)
     }
@@ -52,7 +53,7 @@ extension CGSize {
     static func * (size: CGSize, factor: CGSize) -> CGSize {
         CGSize(width: size.width * factor.width, height: size.height * factor.height)
     }
-    
+
     static func += (lhs: inout CGSize, rhs: CGPoint) {
         lhs = lhs + rhs
     }
@@ -76,13 +77,21 @@ extension CGSize {
     var isEmpty: Bool {
         width + height == 0
     }
-    
+
     var isNaN: Bool {
         width.isNaN || height.isNaN
     }
 
     var length: CGFloat {
         sqrt(width * width + height * height)
+    }
+
+    var angle: Angle {
+        Angle(radians: atan2(height, width))
+    }
+    
+    func rotate(by angle: Angle) -> CGSize {
+        CGSize(width: width * cos(angle.radians), height: height * sin(angle.radians))
     }
 
     static var infinity: CGSize {

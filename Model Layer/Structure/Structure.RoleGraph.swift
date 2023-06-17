@@ -44,12 +44,16 @@ extension Structure {
         func build(for role: Role) {
             let node = getNode(role: role)
 //            node.alignment = .center
+            let subroles = role.subRoles.sorted { $0.roleDescription < $1.roleDescription }
+            var lastEdge: Edge? = nil
             for sub in role.subRoles {
                 let subNode = getNode(role: sub)
 //                subNode.alignment = .top
                 let edge = RoleEdge(from: node, to: subNode)
                 edge.alignment = .topLeading
+                edge.sortBefore = lastEdge
                 nodes.append(edge)
+                lastEdge = edge
             }
         }
 

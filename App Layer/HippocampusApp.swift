@@ -63,6 +63,7 @@ struct HippocampusApp: App {
             DocumentView(document: document)
 //            AnchorGraphView(graph: HippocampusApp.graph)
 //            Design_ShellView()
+//            Design_ContextMenuView()
                 .environmentObject(navigation)
 //                .onOpenURL { document = Document(url: $0) }
         }

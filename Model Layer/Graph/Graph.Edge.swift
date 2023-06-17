@@ -12,6 +12,8 @@ extension Graph {
     class Edge: Node {
         @Observed var to: Node
         @Observed var from: Node
+        
+        var sortBefore: Edge?
 
         var alignment: Alignment?
 
