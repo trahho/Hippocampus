@@ -65,3 +65,18 @@ Das entspricht einem Graphlayout. Daraus wird eine Package :-)
 DisplayView - ZStack mit Scroll und Zoom, Nodes und Edges. Die werden z. B. vom QueryView berechnet und gesetzt.
 LayoutProtocol - Vielleicht DisplayView als Layout mit $Positions
 LayoutEngine - Berechnet die Positions und wenn fertig, dann Published Werte setzen. 
+
+
+# Idee
+
+Jetzt kommt die Idee:
+
+Rollen bestimmen die Struktur. Die Queries beruhen auf der Struktur der Rollen und können filtern
+
+Beispiel
+
+General: Name
+Rezept: General -> Menge (Einheit) -> Nahrungsmittel (General)
+Ereignis: General, Beginn, Ende
+
+Zeige alle Rezepte an, zeige alle Ereignisse an, die auch Rezepte waren, zeige alle Generell an, die heute erstellt wurden etc. etc.

@@ -120,7 +120,7 @@ struct GraphView: View {
             graph.layouter = ExperimentSpringLayouter()
             graph.startLayout()
         }
-        .onChange(of: graph) { [graph] newGraph in
+        .onChange(of: graph) { graph, newGraph in
             graph.stopLayout()
             newGraph.startLayout()
         }

@@ -17,9 +17,9 @@ extension Structure.Reference {
         }
     }
 
-    convenience init(_ referenced: Structure.Role, _ referenceRole: Structure.Role? = nil) {
+    convenience init(_ to: Structure.Role, _ role: Structure.Role? = nil) {
         self.init()
-        self.referenced = referenced
-        self.referenceRole = referenceRole
+        self.to = to
+        self.role = role
     }
 }

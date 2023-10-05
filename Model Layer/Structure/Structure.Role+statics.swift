@@ -12,7 +12,7 @@ extension Structure.Role {
     typealias Reference = Structure.Reference
     typealias Form = Structure.Aspect.Presentation.Form
     typealias Representation = Structure.Representation
-
+    
     fileprivate enum Keys {
         static let global = "D7812874-085B-4161-9ABB-C82D4A145634"
         static let globalName = "8A81358C-2A7C-497D-A93D-306F776C217C"
@@ -24,17 +24,20 @@ extension Structure.Role {
         static let textText = "F0C2B7D0-E71A-4296-9190-8EF2D540338F"
         static let note = "8AB172CF-2330-4861-B551-8728BA6062BF"
         static let noteHeadline = "B945443A-32D6-4FE7-A63F-65436CAAA3CA"
+        static let miniMindMap = "8ECEA3AE-1E0B-4DDD-BABE-5836C577FE08"
+        static let miniMindMapTopic = "873BD3D8-525C-45F1-8B66-74DB0F433BB5"
+        static let miniMindMapAspect = "F5DC22EC-A54E-428E-8C2A-99A543521AA5"
     }
-
+    
     static let global = Role(Keys.global, "_Global")
     {
         Aspect(Keys.globalName, "/Name", .text)
         Aspect(Keys.globalCreated, "/Created", .date)
     }
-//representations: {
-//        Representation("_Title", .aspect(Keys.globalName, form: Form.normal))
-//    }
-
+    //representations: {
+    //        Representation("_Title", .aspect(Keys.globalName, form: Form.normal))
+    //    }
+    
     static let drawing = Role(Keys.drawing, "_Drawing", addToMenu: true) {
         Aspect(Keys.drawingDrawing, "/Drawing", .drawing)
     } representations: {
@@ -42,15 +45,15 @@ extension Structure.Role {
         Representation("_Card", .aspect(Keys.drawingDrawing, form: Form.small))
         Representation("_Canvas", .aspect(Keys.drawingDrawing, form: Form.normal))
     }
-
+    
     static let text = Role(Keys.text, "_Text") {
         Aspect(Keys.textText, "/Text", .text)
     } representations: {
         Representation("_Introduction_Short", .aspect(Keys.textText, form: Form.firstParagraph))
     }
-
+    
     static let topic = Role(Keys.topic, "_Topic", [.global], addToMenu: true)
-
+    
     static let note = Role(Keys.note, "_Note", [.global, .drawing, .text], addToMenu: true) {
         Aspect(Keys.noteHeadline, "/Headline", .text)
     } representations: {
@@ -62,4 +65,20 @@ extension Structure.Role {
     } associated: {
         Reference(topic)
     }
+    
+    static let miniMindMap = Role(Keys.miniMindMap, "_MiniMindMap", [.global, .text]) {
+    } representations: {
+    }
+    
+//    static let miniMindMapTopic = Role(Keys.miniMindMapTopic, "_MiniMindMapTopic", [.miniMindMap]) {
+//    } representations: {
+//    } associated: {
+//        Reference(miniMindMap)
+//    }
+//    
+//    static let miniMindMapTopic = Role(Keys.miniMindMapTopic, "_MiniMindMapAspect", [.miniMindMap]) {
+//    } representations: {
+//    } associated: {
+//        Reference(miniMindMapTopic)
+//    }
 }

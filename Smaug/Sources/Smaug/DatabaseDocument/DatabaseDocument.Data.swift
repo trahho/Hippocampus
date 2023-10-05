@@ -56,20 +56,20 @@ public extension DatabaseDocument {
 
         // MARK: - Storage
 
-        override func getObject<T>(type: T.Type, id: T.ID) throws -> T? where T: ObjectStore.Object {
+        override func getObject<Result>(type: Result.Type, id: Result.ID) throws -> Result? where Result: ObjectStore.Object {
             guard let result = try content.getObject(type: type, id: id) else {
                 return try staticContent.getObject(type: type, id: id)
             }
             return result
         }
 
-        override func getObjects<T>(type: T.Type) throws -> Set<T> where T: ObjectStore.Object {
+        override func getObjects<Result>(type: Result.Type) throws -> Set<Result> where Result: ObjectStore.Object {
             let staticObjects = try staticContent.getObjects(type: type)
             let dynamicObjects = try content.getObjects(type: type)
             return staticObjects.union(dynamicObjects)
         }
 
-        override func addObject<T>(item: T) throws where T: ObjectStore.Object {
+        override func addObject<Result>(item: Result) throws where Result: ObjectStore.Object {
             guard !document.inSetup else {
                 try staticContent.addObject(item: item)
                 item.isStatic = true

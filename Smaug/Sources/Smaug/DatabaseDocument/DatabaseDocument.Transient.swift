@@ -34,15 +34,15 @@ public extension DatabaseDocument {
 
         // MARK: - Storage
 
-        override func getObject<T>(type: T.Type, id: T.ID) throws -> T? where T: ObjectStore.Object {
+        override func getObject<Result>(type: Result.Type, id: Result.ID) throws -> Result? where Result: ObjectStore.Object {
             try content.getObject(type: type, id: id)
         }
 
-        override func getObjects<T>(type: T.Type) throws -> Set<T> where T: ObjectStore.Object {
+        override func getObjects<Result>(type: Result.Type) throws -> Set<Result> where Result: ObjectStore.Object {
             try content.getObjects(type: type)
         }
 
-        override func addObject<T>(item: T) throws where T: ObjectStore.Object {
+        override func addObject<Result>(item: Result) throws where Result: ObjectStore.Object {
             try content.addObject(item: item)
         }
 

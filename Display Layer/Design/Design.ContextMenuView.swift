@@ -13,10 +13,10 @@ struct Design_ContextMenuView: View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
             .padding()
             .background(color)
-            .editMenu {
-                EditMenuItem("Clear", action: { color = .clear})
-                EditMenuItem("Cyan", action: { color = .cyan})
-            }
+//            .editMenu {
+//                EditMenuItem("Clear", action: { color = .clear})
+//                EditMenuItem("Cyan", action: { color = .cyan})
+//            }
     }
 }
 

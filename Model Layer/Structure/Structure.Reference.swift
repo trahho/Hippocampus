@@ -9,9 +9,9 @@ import Foundation
 
 extension Structure {
     class Reference: Object {
-        @Object var role: Structure.Role!
-        @Object var referenced: Structure.Role!
-        @Object var referenceRole: Structure.Role?
+        @Object var from: Structure.Role!
+        @Object var to: Structure.Role!
+        @Object var role: Structure.Role?
 
         public required init() {}
     }
