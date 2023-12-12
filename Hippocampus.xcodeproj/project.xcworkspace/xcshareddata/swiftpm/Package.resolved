@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "smaug",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/trahho/Smaug.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "a8cf55a4a53450cc4b372fccb7a84602c89d501a"
+      }
+    }
+  ],
+  "version" : 2
+}

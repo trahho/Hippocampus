@@ -91,7 +91,7 @@ extension CGSize {
     }
     
     func rotate(by angle: Angle) -> CGSize {
-        CGSize(width: width * cos(angle.radians), height: height * sin(angle.radians))
+        CGSize(width: width * cos(CGFloat(angle.radians)), height: height * sin(angle.radians))
     }
 
     static var infinity: CGSize {

@@ -106,8 +106,6 @@
 		C54BE53D289591950060A066 /* NSPredicate+operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE527289591950060A066 /* NSPredicate+operators.swift */; };
 		C54BE55A289698990060A066 /* View+If.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE559289698990060A066 /* View+If.swift */; };
 		C54BE55B289698990060A066 /* View+If.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE559289698990060A066 /* View+If.swift */; };
-		C558646B2A03DBD3005EA6FD /* Smaug in Frameworks */ = {isa = PBXBuildFile; productRef = C558646A2A03DBD3005EA6FD /* Smaug */; };
-		C558646F2A03E326005EA6FD /* Smaug in Frameworks */ = {isa = PBXBuildFile; productRef = C558646E2A03E326005EA6FD /* Smaug */; };
 		C55864712A0588D0005EA6FD /* Information.Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55864702A0588D0005EA6FD /* Information.Condition.swift */; };
 		C55864722A0588D0005EA6FD /* Information.Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55864702A0588D0005EA6FD /* Information.Condition.swift */; };
 		C55864732A0588D0005EA6FD /* Information.Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55864702A0588D0005EA6FD /* Information.Condition.swift */; };
@@ -153,6 +151,8 @@
 		C5728D392A2935EC004968D3 /* ArrayBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5728D342A2935EC004968D3 /* ArrayBuilder.swift */; };
 		C5728D3A2A2935EC004968D3 /* ArrayBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5728D342A2935EC004968D3 /* ArrayBuilder.swift */; };
 		C5728D3B2A2935EC004968D3 /* ArrayBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5728D342A2935EC004968D3 /* ArrayBuilder.swift */; };
+		C57FBA172B28D4C700E3C645 /* Smaug in Frameworks */ = {isa = PBXBuildFile; productRef = C57FBA162B28D4C700E3C645 /* Smaug */; };
+		C57FBA192B28D4D200E3C645 /* Smaug in Frameworks */ = {isa = PBXBuildFile; productRef = C57FBA182B28D4D200E3C645 /* Smaug */; };
 		C58224182A080FCF000FB877 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52E724929F54B31001A5821 /* ContentView.swift */; };
 		C58224192A080FCF000FB877 /* SidebarView.QueryEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE4F1129F5E71100B27B48 /* SidebarView.QueryEditView.swift */; };
 		C582241A2A080FCF000FB877 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5167C4429C62BFB00323F75 /* SidebarView.swift */; };
@@ -445,7 +445,6 @@
 		C54BE557289617140060A066 /* Hippocampus--macOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Hippocampus--macOS--Info.plist"; sourceTree = "<group>"; };
 		C54BE558289618300060A066 /* Hippocampus--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Hippocampus--iOS--Info.plist"; sourceTree = "<group>"; };
 		C54BE559289698990060A066 /* View+If.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+If.swift"; sourceTree = "<group>"; };
-		C55864682A03DA3D005EA6FD /* Smaug */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Smaug; sourceTree = "<group>"; };
 		C55864702A0588D0005EA6FD /* Information.Condition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Information.Condition.swift; sourceTree = "<group>"; };
 		C55864742A058A67005EA6FD /* Information.Condition.Comparison.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Information.Condition.Comparison.swift; sourceTree = "<group>"; };
 		C55864782A058A91005EA6FD /* Information.Condition+operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Information.Condition+operators.swift"; sourceTree = "<group>"; };
@@ -570,6 +569,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C57FBA192B28D4D200E3C645 /* Smaug in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -577,7 +577,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C558646B2A03DBD3005EA6FD /* Smaug in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -585,7 +584,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C558646F2A03E326005EA6FD /* Smaug in Frameworks */,
+				C57FBA172B28D4C700E3C645 /* Smaug in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -671,7 +670,6 @@
 		C54BE49B289486690060A066 = {
 			isa = PBXGroup;
 			children = (
-				C55864682A03DA3D005EA6FD /* Smaug */,
 				C5708D1F29E32F9800F4D4E1 /* Notizen.md */,
 				C54BE558289618300060A066 /* Hippocampus--iOS--Info.plist */,
 				C54BE556289616680060A066 /* Hippocampus (iOS).entitlements */,
@@ -1232,6 +1230,9 @@
 				C528A18628CDE2A90027FA44 /* PBXTargetDependency */,
 			);
 			name = HippocampusTestsMacOS;
+			packageProductDependencies = (
+				C57FBA182B28D4D200E3C645 /* Smaug */,
+			);
 			productName = HippocampusTestsMacOS;
 			productReference = C528A18128CDE2A90027FA44 /* HippocampusTestsMacOS.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -1250,7 +1251,6 @@
 			);
 			name = "Hippocampus (iOS)";
 			packageProductDependencies = (
-				C558646A2A03DBD3005EA6FD /* Smaug */,
 			);
 			productName = "Hippocampus (iOS)";
 			productReference = C54BE4A82894866C0060A066 /* Hippocampus.app */;
@@ -1270,7 +1270,7 @@
 			);
 			name = "Hippocampus (macOS)";
 			packageProductDependencies = (
-				C558646E2A03E326005EA6FD /* Smaug */,
+				C57FBA162B28D4C700E3C645 /* Smaug */,
 			);
 			productName = "Hippocampus (macOS)";
 			productReference = C54BE4AE2894866C0060A066 /* Hippocampus.app */;
@@ -1308,6 +1308,9 @@
 				de,
 			);
 			mainGroup = C54BE49B289486690060A066;
+			packageReferences = (
+				C57FBA152B28D4B900E3C645 /* XCRemoteSwiftPackageReference "Smaug" */,
+			);
 			productRefGroup = C54BE4A92894866C0060A066 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -2110,13 +2113,26 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		C57FBA152B28D4B900E3C645 /* XCRemoteSwiftPackageReference "Smaug" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/trahho/Smaug.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
-		C558646A2A03DBD3005EA6FD /* Smaug */ = {
+		C57FBA162B28D4C700E3C645 /* Smaug */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = C57FBA152B28D4B900E3C645 /* XCRemoteSwiftPackageReference "Smaug" */;
 			productName = Smaug;
 		};
-		C558646E2A03E326005EA6FD /* Smaug */ = {
+		C57FBA182B28D4D200E3C645 /* Smaug */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = C57FBA152B28D4B900E3C645 /* XCRemoteSwiftPackageReference "Smaug" */;
 			productName = Smaug;
 		};
 /* End XCSwiftPackageProductDependency section */
