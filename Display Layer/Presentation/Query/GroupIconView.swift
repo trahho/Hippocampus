@@ -1,22 +1,22 @@
+////
+////  GroupIconView.swift
+////  Hippocampus
+////
+////  Created by Guido Kühn on 24.04.23.
+////
 //
-//  GroupIconView.swift
-//  Hippocampus
+//import Foundation
+//import SwiftUI
 //
-//  Created by Guido Kühn on 24.04.23.
+//struct GroupIconView: View {
+//    @ObservedObject var group: Presentation.Group
+//    
+//    var body: some View {
+//        if group.subGroups.isEmpty && group.queries.isEmpty {
+//            Image(systemName: "tray")
+//        } else {
+//            Image(systemName: "tray.2")
+//        }
+//    }
+//}
 //
-
-import Foundation
-import SwiftUI
-
-struct GroupIconView: View {
-    @ObservedObject var group: Presentation.Group
-    
-    var body: some View {
-        if group.subGroups.isEmpty && group.queries.isEmpty {
-            Image(systemName: "tray")
-        } else {
-            Image(systemName: "tray.2")
-        }
-    }
-}
-

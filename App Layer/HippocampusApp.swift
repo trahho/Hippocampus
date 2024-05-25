@@ -31,27 +31,27 @@ struct HippocampusApp: App {
 
     static let locationService = LocationService()
 
-    @ObservedObject var document: Document =
+    var document: Document =
         //        .preview1
 //
         inPreview ? Self.previewDocument() : .init(name: "Test", local: false)
 
-    @StateObject var navigation = Navigation()
+//    @StateObject var navigation = Navigation()
     
-    static var graph: AnchorGraph = {
-        let result = AnchorGraph()
-        let a = AnchorGraph.Node()
-        let b = AnchorGraph.Node()
-        let c = AnchorGraph.Node()
-        result.nodes.append(a)
-        result.nodes.append(b)
-        result.nodes.append(c)
-        result.nodes.append( AnchorGraph.Edge(node: a, otherNode: b))
-        result.nodes.append( AnchorGraph.Edge(node: b, otherNode: c))
-        result.nodes.append( AnchorGraph.Edge(node: c, otherNode: a))
-
-        return result
-    }()
+//    static var graph: AnchorGraph = {
+//        let result = AnchorGraph()
+//        let a = AnchorGraph.Node()
+//        let b = AnchorGraph.Node()
+//        let c = AnchorGraph.Node()
+//        result.nodes.append(a)
+//        result.nodes.append(b)
+//        result.nodes.append(c)
+//        result.nodes.append( AnchorGraph.Edge(node: a, otherNode: b))
+//        result.nodes.append( AnchorGraph.Edge(node: b, otherNode: c))
+//        result.nodes.append( AnchorGraph.Edge(node: c, otherNode: a))
+//
+//        return result
+//    }()
 
     var body: some Scene {
         WindowGroup {
@@ -59,12 +59,12 @@ struct HippocampusApp: App {
 //                .onAppear {
 //                    Self.locationService.start()
 //                }
-//            Text("hello_world")
-            DocumentView(document: document)
+            Text("hello_world")
+//            DocumentView(document: document)
 //            AnchorGraphView(graph: HippocampusApp.graph)
 //            Design_ShellView()
 //            Design_ContextMenuView()
-                .environmentObject(navigation)
+//                .environmentObject(navigation)
 //                .onOpenURL { document = Document(url: $0) }
         }
     }

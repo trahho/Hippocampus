@@ -1,40 +1,40 @@
+////
+////  SidebarView.QueryView.swift
+////  Hippocampus
+////
+////  Created by Guido Kühn on 23.04.23.
+////
 //
-//  SidebarView.QueryView.swift
-//  Hippocampus
+//import Foundation
+//import SwiftUI
 //
-//  Created by Guido Kühn on 23.04.23.
+//extension SidebarView {
+//    struct QueryView: View {
+//        @EnvironmentObject var navigation: Navigation
+//        @ObservedObject var query: Presentation.Query
+//        @Binding var editItem: Presentation.Object?
 //
-
-import Foundation
-import SwiftUI
-
-extension SidebarView {
-    struct QueryView: View {
-        @EnvironmentObject var navigation: Navigation
-        @ObservedObject var query: Presentation.Query
-        @Binding var editItem: Presentation.Object?
-
-        var body: some View {
-            HStack {
-                Image(systemName: "doc.text.magnifyingglass")
-                QueryNameView(query: query)
-            }
-            .tag(query)
-//            #if os(iOS)
-//            .listRowBackground(RoundedRectangle(cornerRadius: 8).fill(query == navigation.query ? Color.accentColor.opacity(0.8) : Color.clear))
-//            #endif
-//            .frame(maxWidth: .infinity, alignment: .leading)
-//            .onTapGesture {
-//                navigation.query = query
+//        var body: some View {
+//            HStack {
+//                Image(systemName: "doc.text.magnifyingglass")
+//                QueryNameView(query: query)
 //            }
-            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                Button {
-                    print("Edit Query")
-                    editItem = query
-                } label: {
-                    Label("_editGroups", systemImage: "tray.and.arrow.down")
-                }
-            }
-        }
-    }
-}
+//            .tag(query)
+////            #if os(iOS)
+////            .listRowBackground(RoundedRectangle(cornerRadius: 8).fill(query == navigation.query ? Color.accentColor.opacity(0.8) : Color.clear))
+////            #endif
+////            .frame(maxWidth: .infinity, alignment: .leading)
+////            .onTapGesture {
+////                navigation.query = query
+////            }
+//            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+//                Button {
+//                    print("Edit Query")
+//                    editItem = query
+//                } label: {
+//                    Label("_editGroups", systemImage: "tray.and.arrow.down")
+//                }
+//            }
+//        }
+//    }
+//}

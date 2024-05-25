@@ -7,19 +7,19 @@
 
 import Foundation
 
-extension Structure.Representation {
-    @resultBuilder
-    enum Builder {
-        static func buildBlock() -> [Structure.Representation] { [] }
-
-        static func buildBlock(_ representations: Structure.Representation...) -> [Structure.Representation] {
-            representations
-        }
-    }
-
-    convenience init(_ name: String, _ representation: Structure.Presentation) {
-        self.init()
-        self.name = name
-        self.presentation = representation
-    }
-}
+//extension Structure.Representation {
+//    @resultBuilder
+//    enum Builder {
+//        static func buildBlock() -> [Structure.Representation] { [] }
+//
+//        static func buildBlock(_ representations: Structure.Representation...) -> [Structure.Representation] {
+//            representations
+//        }
+//    }
+//
+//    convenience init(_ name: String, _ representation: Structure.Presentation) {
+//        self.init()
+//        self.name = name
+//        self.presentation = representation
+//    }
+//}

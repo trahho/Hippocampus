@@ -17,10 +17,9 @@ extension Structure.Aspect {
         }
     }
 
-    convenience init(_ id: String, _ name: String, _ presentation: Presentation) {
-        self.init()
-        self.id = UUID(uuidString: id)!
+    convenience init(_ id: String, _ name: String, _ kind: Kind) {
+        self.init(id: UUID(uuidString: id)!)
         self.name = name
-        self.presentation = presentation
+        self.kind = kind
     }
 }

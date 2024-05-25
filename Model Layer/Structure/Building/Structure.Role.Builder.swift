@@ -19,26 +19,28 @@ extension Structure.Role {
 
     convenience init(_ id: String,
                      _ name: String,
-                     _ subRoles: [Structure.Role] = [],
+                     _ roles: [Structure.Role] = [],
                      addToMenu: Bool = false,
                      @Structure.Aspect.Builder aspects: () -> [Structure.Aspect] = { [] },
-                     @Structure.Representation.Builder representations: () -> [Structure.Representation] = { [] },
-                     @Structure.Reference.Builder associated: () -> [Structure.Reference] = { [] })
+                     @Structure.Role.Builder references: () -> [Structure.Role] = { [] },
+                     presentations: () -> [Presentation] = { [] })
+//                     @Structure.Representation.Builder representations: () -> [Structure.Representation] = { [] },
+//                     @Structure.Reference.Builder associated: () -> [Structure.Reference] = { [] }
+
     {
-        self.init()
-        self.id = UUID(uuidString: id)!
-        roleDescription = name
+        self.init(id: UUID(uuidString: id)!)
+        self.name = name
 //        canBeCreated = addToMenu
         let aspects = aspects()
         for i in 0 ..< aspects.count {
             aspects[i].index = i
         }
         self.aspects = aspects.asSet
-        self.representations = representations().asSet
-        self.subRoles = subRoles.asSet
-        self.references = associated().asSet
+        self.roles = roles.map { $0 == Role.same ? self : $0 }.asSet
+        self.references = references().asSet
+//        self.representations = representations().asSet
+//        self.subRoles = subRoles.asSet
+//        self.references = associated().asSet
 //        print("Built role \(name)")
     }
-
- 
 }

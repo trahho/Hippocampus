@@ -8,15 +8,15 @@
 import Foundation
 import SwiftUI
 
-class Navigation: ObservableObject {
-   
-    @Published var sidebarMode: SidebarMode = .roles
-    @Published var role: Structure.Role?
-    @Published var query: Presentation.Query?
-    @Published var path = NavigationPath()
-    
-
-}
+//class Navigation: ObservableObject {
+//   
+//    @Published var sidebarMode: SidebarMode = .roles
+//    @Published var role: Structure.Role?
+//    @Published var query: Presentation.Query?
+//    @Published var path = NavigationPath()
+//    
+//
+//}
 
 //extension Navigation {
 //    struct SelectQueryModifier: ViewModifier {

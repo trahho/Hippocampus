@@ -1,23 +1,23 @@
+////
+////  Presentation.Query.RoleRepresentation.swift
+////  Hippocampus
+////
+////  Created by Guido Kühn on 14.04.23.
+////
 //
-//  Presentation.Query.RoleRepresentation.swift
-//  Hippocampus
+//import Foundation
 //
-//  Created by Guido Kühn on 14.04.23.
+//extension Presentation {
+//    class RoleRepresentation: Object {
+//        @Object  var role: Structure.Role!
+//        @Property var representation: String
 //
-
-import Foundation
-
-extension Presentation {
-    class RoleRepresentation: Object {
-        @Object  var role: Structure.Role!
-        @Property var representation: String
-
-        required init() {}
-
-        init(_ role: Structure.Role, _ representation: String) {
-            super.init()
-            self.role = role
-            self.representation = representation
-        }
-    }
-}
+//        required init() {}
+//
+//        init(_ role: Structure.Role, _ representation: String) {
+//            super.init()
+//            self.role = role
+//            self.representation = representation
+//        }
+//    }
+//}

@@ -9,9 +9,41 @@ import Foundation
 
 extension Information {
     indirect enum Condition: PersistentValue {
+//        static func == (lhs: Information.Condition, rhs: Information.Condition) -> Bool {
+//            switch lhs {
+//            case let .always(lhsValue):
+//                guard let .always(rhsValue) = lhs
+//            case let .hasRole(role):
+//                guard let role = item[Structure.Role.self, role] else {return false}
+//                return item.roles.contains { $0.conforms(to: role) }
+//            case let .hasValue(comparison):
+//                return comparison.calculate(for: item)
+//            case let .isReferenced(condition):
+//                return item.from.contains(where: { condition.matches(for: $0) })
+//            case let .hasReference(condition):
+//                return item.to.contains(where: { condition.matches(for: $0) })
+//            case let .not(condition):
+//                return !condition.matches(for: item)
+//            case let .any(conditions):
+//                for condition in conditions {
+//                    if condition.matches(for: item) {
+//                        return true
+//                    }
+//                }
+//                return false
+//            case let .all(conditions):
+//                for condition in conditions {
+//                    if !condition.matches(for: item) {
+//                        return false
+//                    }
+//                }
+//                return true
+//            }
+//        }
+        
         typealias PersistentComparableValue = PersistentValue & Comparable
 
-        case always(Bool)
+        case always(Bool) 
         case hasRole(Structure.Role.ID)
         case hasValue(Comparison)
         case isReferenced(Condition)
@@ -29,9 +61,10 @@ extension Information {
             case let .always(value):
                 return value
             case let .hasRole(role):
-                return item[role: role]
+                guard let role = item[Structure.Role.self, role] else {return false}
+                return item.roles.contains { $0.conforms(to: role) }
             case let .hasValue(comparison):
-                return comparison.calculate(for: item)
+                return comparison.matches(for: item)
             case let .isReferenced(condition):
                 return item.from.contains(where: { condition.matches(for: $0) })
             case let .hasReference(condition):

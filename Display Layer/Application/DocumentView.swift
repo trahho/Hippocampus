@@ -1,20 +1,20 @@
+////
+////  HippocampusApp.DocumentView.swift
+////  Hippocampus
+////
+////  Created by Guido Kühn on 16.01.23.
+////
 //
-//  HippocampusApp.DocumentView.swift
-//  Hippocampus
+//import Foundation
+//import SwiftUI
 //
-//  Created by Guido Kühn on 16.01.23.
+//struct DocumentView: View {
+//    @State var document: Document
 //
-
-import Foundation
-import SwiftUI
-
-struct DocumentView: View {
-    @ObservedObject var document: Document
-
-    var body: some View {
-        NavigationView()
-            .font(.myText)
-            .environmentObject(document)
-            .environmentObject(document.structure)
-    }
-}
+//    var body: some View {
+//        NavigationView()
+//            .font(.myText)
+//            .environment(document)
+//            .environment(document.structure)
+//    }
+//}

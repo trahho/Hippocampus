@@ -1,21 +1,21 @@
+////
+////  DrawingView.CanvasView(iOS).swift
+////  Hippocampus
+////
+////  Created by Guido Kühn on 11.03.23.
+////
 //
-//  DrawingView.CanvasView(iOS).swift
-//  Hippocampus
+//import Foundation
+//import SwiftUI
 //
-//  Created by Guido Kühn on 11.03.23.
+//extension DrawingView {
+//    struct CanvasView: View {
+//        @ObservedObject var data: Document.Drawing
 //
-
-import Foundation
-import SwiftUI
-
-extension DrawingView {
-    struct CanvasView: View {
-        @ObservedObject var data: Document.Drawing
-
-        var editable: Bool
-
-        var body: some View {
-            ImageView(data: data)
-        }
-    }
-}
+//        var editable: Bool
+//
+//        var body: some View {
+//            ImageView(data: data)
+//        }
+//    }
+//}
