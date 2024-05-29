@@ -13,11 +13,12 @@ extension Structure {
     @dynamicMemberLookup
     class Role: Object {
         @Property var name = ""
-        @Objects var roles: Set<Role>
-        @Relations(\Role.roles) var compatible: Set<Role>
-        @Objects var aspects: Set<Aspect>
-        @Objects var references: Set<Role>
-        @Relations(\Role.references) var referencedBy: Set<Role>
+        @Objects var roles: [Role]
+        @Relations(\Role.roles) var compatible: [Role]
+        @Objects var aspects: [Aspect]
+        @Objects var references: [Role]
+        @Relations(\Role.references) var referencedBy: [Role]
+        @Property var presentations: [Presentation] = []
 
         subscript(dynamicMember dynamicMember: String) -> Aspect {
             if let result = aspects.first(where: { $0.name.lowercased().dropFirst() == dynamicMember.lowercased() }) {
@@ -27,34 +28,38 @@ extension Structure {
             }
         }
 
+        var allRoles: [Role] {
+            (roles.flatMap { $0.allRoles } + [self]).asSet.asArray
+        }
+
         func conforms(to role: Role) -> Bool {
             role == self || !roles.filter { $0.conforms(to: role) }.isEmpty
         }
 
-        var to: Set<Role> {
-            references.union(roles.flatMap { $0.to }.map { self.conforms(to: $0) ? self : $0 })
+        var to: [Role] {
+            references.asSet.union(roles.flatMap { $0.to }.map { self.conforms(to: $0) ? self : $0 }).asArray
         }
 
-        var from: Set<Role> {
-            referencedBy.union(roles.flatMap { $0.from }.map { self.conforms(to: $0) ? self : $0 })
+        var from: [Role] {
+            referencedBy.asSet.union(roles.flatMap { $0.from }.map { self.conforms(to: $0) ? self : $0 }).asArray
         }
 
-        var allAspects: Set<Aspect> {
-            aspects.union(roles.flatMap { $0.allAspects })
+        var allAspects: [Aspect] {
+            aspects.asSet.union(roles.flatMap { $0.allAspects }).asArray
         }
 
         //        @Property var roleDescription: String = ""
         //        @Objects var representations: Set<Representation>
-        //        @Objects var aspects: Set<Aspect>
-        //        @Objects var subRoles: Set<Role>
-        ////        @Relations(\Role.subRoles) var superRoles: Set<Role>
+        //        @Objects var aspects: [Aspect]
+        //        @Objects var subRoles: [Role]
+        ////        @Relations(\Role.subRoles) var superRoles: [Role]
         //        @Objects var references: Set<Reference>
         //
-        //        var allAspects: Set<Aspect> {
+        //        var allAspects: [Aspect] {
         //            subRoles.flatMap(\.allAspects).asSet.union(aspects)
         //        }
         //
-        //        var allRoles: Set<Role> {
+        //        var allRoles: [Role] {
         //            subRoles.flatMap(\.allRoles).asSet.union([self])
         //        }
         //

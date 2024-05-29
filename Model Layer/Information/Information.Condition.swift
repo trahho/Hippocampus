@@ -40,10 +40,10 @@ extension Information {
 //                return true
 //            }
 //        }
-        
-        typealias PersistentComparableValue = PersistentValue & Comparable
 
-        case always(Bool) 
+        typealias PersistentComparableValue = Comparable & PersistentValue
+
+        case always(Bool)
         case hasRole(Structure.Role.ID)
         case hasValue(Comparison)
         case isReferenced(Condition)
@@ -56,12 +56,23 @@ extension Information {
             .hasRole(role.id)
         }
 
+        var roles: Set<Structure.Role.ID> {
+            switch self {
+            case let .hasRole(role):
+                return [role]
+            case let .any(conditions), let .all(conditions):
+                return conditions.flatMap { $0.roles }.asSet
+            default:
+                return []
+            }
+        }
+
         func matches(for item: Item) -> Bool {
             switch self {
             case let .always(value):
                 return value
             case let .hasRole(role):
-                guard let role = item[Structure.Role.self, role] else {return false}
+                guard let role = item[Structure.Role.self, role] else { return false }
                 return item.roles.contains { $0.conforms(to: role) }
             case let .hasValue(comparison):
                 return comparison.matches(for: item)

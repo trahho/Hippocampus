@@ -21,6 +21,16 @@ indirect enum Presentation: Structure.PersistentValue {
         case normal(Presentation)
         case percent(Presentation, Int)
         case full(Presentation)
+
+        var presentation: Presentation {
+            switch self {
+            case .normal(let presentation),
+                 .full(let presentation):
+                presentation
+            case .percent(let presentation, let int):
+                presentation
+            }
+        }
     }
 
     enum Layout: Structure.PersistentValue {
@@ -30,11 +40,24 @@ indirect enum Presentation: Structure.PersistentValue {
         case miniMindMiap
         case gallery
     }
-    
-    enum Sequence: Structure.PersistentValue {
-        case simple
+
+    enum Order: Structure.PersistentValue {
         case sorted(Structure.Aspect.ID, ascending: Bool = true)
-        case multiSorted([Sequence])
+        case multiSorted([Order])
+    }
+
+    enum Sequence: Structure.PersistentValue {
+        case ordered(Information.Condition, order: [Order])
+        case unordered(Information.Condition)
+
+        var roles: Set<Structure.Role.ID> {
+            switch self {
+            case .ordered(let condition, let order):
+                condition.roles
+            case .unordered(let condition):
+                condition.roles
+            }
+        }
     }
 
     case empty
@@ -43,12 +66,30 @@ indirect enum Presentation: Structure.PersistentValue {
     case aspect(Structure.Aspect.ID, appearance: Appearance = .normal, editable: Bool = true)
     case horizontal([Space], alignment: Alignment = Alignment.top)
     case vertical([Space], alignment: Alignment = Alignment.leading)
-    case collection(Information.Condition, order: Sequence, layout: Layout = .list)
+    case sequence([Sequence], layout: Layout)
     case exclosing(Presentation, header: Presentation)
-    case named(String, Presentation)
+    case named(String, Presentation, [Layout])
+    case indirect([Structure.Role.ID])
 
-    init(_ name: String, _ presentation: Presentation) {
-        self = .named(name, presentation)
+    var roles: [Structure.Role.ID] {
+        switch self {
+        case .horizontal(let spaces, let alignment), .vertical(let spaces, let alignment):
+            return spaces.flatMap { $0.presentation.roles }
+        case .sequence(let sequences, let layout):
+            return sequences.flatMap { $0.roles }
+        case .exclosing(let presentation, let header):
+            return header.roles
+        case .named(let string, let presentation, let array):
+            return presentation.roles
+        case .indirect(let roles):
+            return roles
+        default:
+            return []
+        }
+    }
+
+    init(_ name: String, _ layout: [Layout], _ presentation: Presentation) {
+        self = .named(name, presentation, layout)
     }
 
     init(_ aspectId: String, appearance: Appearance = .normal, editable: Bool = true) {

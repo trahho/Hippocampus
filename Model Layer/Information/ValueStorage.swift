@@ -15,6 +15,7 @@ indirect enum ValueStorage: Codable & Equatable & Comparable {
     
     typealias PersistentValue = Codable & Equatable
     
+    case `nil`
     case a(Int)
     case b(Bool)
     case c(String)
@@ -35,6 +36,7 @@ indirect enum ValueStorage: Codable & Equatable & Comparable {
     
     public var value: (any PersistentValue)? {
         switch self {
+        case .nil: return nil
         case let .a(value): return value
         case let .b(value): return value
         case let .c(value): return value

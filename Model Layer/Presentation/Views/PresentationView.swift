@@ -30,8 +30,8 @@ struct ItemPresentationView: View {
             HorizontalLayoutView(item: item, elements: elements, alignment: alignment)
         case .vertical(let elements, let alignment):
             VerticalLayoutView(item: item, elements: elements, alignment: alignment)
-        case .collection(let condition, let order, let layout):
-            CollectionView(items: item.to, condition: condition, sequence: order,  layout: layout)
+        case .sequence(let sequences, let layout):
+            SequenceView(items: item.to, sequences: sequences, layout: layout)
         case .exclosing(let content, let header):
             DisclosureGroup {
                 ItemPresentationView(presentation: content, item: item)
@@ -39,13 +39,17 @@ struct ItemPresentationView: View {
             } label: {
                 ItemPresentationView(presentation: header, item: item)
             }
-        case .named(_, let presentation):
-            ItemPresentationView(presentation: presentation, item: item)
+        case .indirect(let roles):
+            EmptyView()
+//        case .named(_, let presentation):
+//            ItemPresentationView(presentation: presentation, item: item)
+        default:
+            EmptyView()
         }
     }
 }
 
-#Preview {
+ #Preview {
     let document = HippocampusApp.previewDocument()
     let item = Information.Item()
     let presentation =
@@ -59,4 +63,4 @@ struct ItemPresentationView: View {
     item[String.self, Structure.Role.text.text] = "Hallo Welt🤩"
     return ItemPresentationView(presentation: presentation, item: item)
         .environment(document.structure)
-}
+ }

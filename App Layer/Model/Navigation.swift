@@ -8,17 +8,40 @@
 import Foundation
 import SwiftUI
 
-//class Navigation: ObservableObject {
-//   
+@Observable class Navigation {
+    var selectedFilter: Structure.Filter? {
+        didSet {
+            if let selectedFilter {
+                if selectedFilter.layouts.contains(.list) {
+                    path.removeLast(path.count)
+                    listFilter = selectedFilter
+                } else {
+                    listFilter = nil
+                    path.removeLast(path.count)
+                    path.append(selectedFilter)
+                }
+            } else {
+                path.removeLast(path.count)
+                listFilter = nil
+            }
+        }
+    }
+
+    var listFilter: Structure.Filter?
+    var path = NavigationPath()
+}
+
+// class Navigation: ObservableObject {
+//
 //    @Published var sidebarMode: SidebarMode = .roles
 //    @Published var role: Structure.Role?
 //    @Published var query: Presentation.Query?
 //    @Published var path = NavigationPath()
-//    
 //
-//}
+//
+// }
 
-//extension Navigation {
+// extension Navigation {
 //    struct SelectQueryModifier: ViewModifier {
 //        @EnvironmentObject var navigation: Navigation
 //        var query: Presentation.Query
@@ -58,9 +81,9 @@ import SwiftUI
 //                }
 //        }
 //    }
-//}
+// }
 //
-//extension View {
+// extension View {
 //    func tapToSelectQuery(_ query: Presentation.Query) -> some View {
 //        modifier(Navigation.SelectQueryModifier(query: query))
 //    }
@@ -72,4 +95,4 @@ import SwiftUI
 //    func tapToRemoveLastSelectedItem() -> some View {
 //        modifier(Navigation.MoveBackModifier())
 //    }
-//}
+// }

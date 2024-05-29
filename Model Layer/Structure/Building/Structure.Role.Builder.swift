@@ -35,9 +35,10 @@ extension Structure.Role {
         for i in 0 ..< aspects.count {
             aspects[i].index = i
         }
-        self.aspects = aspects.asSet
-        self.roles = roles.map { $0 == Role.same ? self : $0 }.asSet
-        self.references = references().asSet
+        self.aspects = aspects
+        self.roles = roles.map { $0 == Role.same ? self : $0 }
+        self.references = references()
+        self.presentations = presentations()
 //        self.representations = representations().asSet
 //        self.subRoles = subRoles.asSet
 //        self.references = associated().asSet

@@ -11,6 +11,7 @@ import Smaug
 class Structure: ObjectStore {
     @Objects var roles: Set<Role>
     @Objects var aspects: Set<Aspect>
+    @Objects var filters: Set<Filter>
 
     //    override func setup() {
 //        let roles: [Role] = [.global, .drawing, .text, .topic, .note]

@@ -15,7 +15,7 @@ extension Structure {
         @Property var kind: Kind = .text
         @Property var index = 0
         @Property var computed = false
-        
+
         @Relation(\Role.aspects) var role: Role!
 
         subscript<T>(_ type: T.Type, _ item: Information.Item) -> T? where T: Information.Item.Value {
@@ -25,6 +25,12 @@ extension Structure {
             set {
                 guard !computed else { return }
                 item[T.self, self] = newValue
+            }
+        }
+
+        subscript(_ item: Information.Item) -> ValueStorage? {
+            get {
+                item[id]
             }
         }
     }

@@ -35,12 +35,16 @@ extension Information {
         }
 
         @Property var deleted: Bool = false
-        @Objects var roles: Set<Structure.Role>
+        @Objects var roles: [Structure.Role]
 
-        @Objects var to: Set<Item>
-        @Relations(\Self.to) var from: Set<Item>
+        @Objects var to: [Item]
+        @Relations(\Self.to) var from: [Item]
 
         @Property private var values: [Structure.Aspect.ID: TimedValue] = [:]
+        
+        var presentRoles: [Structure.Role] {
+            values.keys.compactMap { self[Structure.Aspect.self, $0]?.role }.asSet.asArray
+        }
 
         subscript<T>(_ type: T.Type, _ aspect: Structure.Aspect) -> T? where T: Value {
             get {

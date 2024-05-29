@@ -44,7 +44,7 @@ extension Structure.Role {
         Aspect(Keys.textText, "/Text", .text)
     } presentations: {
         [
-            .named("", .aspect(Keys.textText.uuid, appearance: .normal, editable: true))
+            .named("", .aspect(Keys.textText.uuid, appearance: .normal, editable: true), [.list])
         ]
     }
     
@@ -60,7 +60,7 @@ extension Structure.Role {
         Role.note
     }
     
-    static let note = Role(Keys.note, "_Note", [.named, .tracked, .text, .drawing]) 
+    static let note = Role(Keys.note, "_Note", [.named, .tracked, .text, .drawing])
     
     // representations: {
     //        Representation("_Title", .aspect(Keys.globalName, form: Form.normal))
@@ -113,5 +113,5 @@ extension Structure.Role {
 }
 
 extension String {
-    var uuid: UUID { UUID(uuidString: self)!}
+    var uuid: UUID { UUID(uuidString: self)! }
 }
