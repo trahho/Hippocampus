@@ -9,12 +9,10 @@ import Foundation
 import SwiftUI
 
 indirect enum Presentation: Structure.PersistentValue {
-    enum Alignment: Structure.PersistentValue {
-        case leading, center, trailing, top, bottom
-    }
+  
 
     enum Appearance: Structure.PersistentValue {
-        case icon, small, full, normal
+        case icon, small, full, normal, line
     }
 
     enum Space: Structure.PersistentValue {
@@ -27,7 +25,7 @@ indirect enum Presentation: Structure.PersistentValue {
             case .normal(let presentation),
                  .full(let presentation):
                 presentation
-            case .percent(let presentation, let int):
+            case .percent(let presentation, _):
                 presentation
             }
         }
@@ -52,7 +50,7 @@ indirect enum Presentation: Structure.PersistentValue {
 
         var roles: Set<Structure.Role.ID> {
             switch self {
-            case .ordered(let condition, let order):
+            case .ordered(let condition, _):
                 condition.roles
             case .unordered(let condition):
                 condition.roles
@@ -67,29 +65,50 @@ indirect enum Presentation: Structure.PersistentValue {
     case horizontal([Space], alignment: Alignment = Alignment.top)
     case vertical([Space], alignment: Alignment = Alignment.leading)
     case sequence([Sequence], layout: Layout)
-    case exclosing(Presentation, header: Presentation)
-    case named(String, Presentation, [Layout])
+//    case exclosing(Presentation, header: Presentation? = nil)
+    case named(String, Presentation, [Layout], [Appearance])
     case indirect([Structure.Role.ID])
+    case present(Structure.Role.ID)
+    case reference(Sequence)
 
-    var roles: [Structure.Role.ID] {
+//    var roles: [Structure.Role.ID] {
+//        switch self {
+//        case .horizontal(let spaces, _), .vertical(let spaces, _):
+//            return spaces.flatMap { $0.presentation.roles }
+//        case .sequence(let sequences, _):
+//            return sequences.flatMap { $0.roles }
+//        case .exclosing(_, let header):
+//            return header.roles
+//        case .named(_, let presentation, _):
+//            return presentation.roles
+//        case .indirect(let roles):
+//            return roles
+//        case .present(let role):
+//            return [role]
+//        default:
+//            return []
+//        }
+//    }
+
+    var containsSequence: Bool {
         switch self {
         case .horizontal(let spaces, let alignment), .vertical(let spaces, let alignment):
-            return spaces.flatMap { $0.presentation.roles }
-        case .sequence(let sequences, let layout):
-            return sequences.flatMap { $0.roles }
-        case .exclosing(let presentation, let header):
-            return header.roles
-        case .named(let string, let presentation, let array):
-            return presentation.roles
-        case .indirect(let roles):
-            return roles
+            return spaces.first { $0.presentation.containsSequence } != nil ? true : false
+        case .sequence(_, _):
+            return true
+        case .reference(_):
+            return true
+//        case .exclosing(let presentation, let header):
+//            return presentation.containsSequence 
+        case .named(_, let presentation, _, _):
+            return presentation.containsSequence
         default:
-            return []
+            return false
         }
     }
 
-    init(_ name: String, _ layout: [Layout], _ presentation: Presentation) {
-        self = .named(name, presentation, layout)
+    init(_ name: String, layout: [Layout], appearance: [Appearance], _ presentation: Presentation) {
+        self = .named(name, presentation, layout, appearance)
     }
 
     init(_ aspectId: String, appearance: Appearance = .normal, editable: Bool = true) {

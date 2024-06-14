@@ -29,6 +29,14 @@ extension AspectView {
                 } else {
                     Text(verbatim: textBinding.wrappedValue)
                 }
+            case .line:
+                if editable {
+                    TextField("", text: textBinding)
+                        .lineLimit(1)
+                } else {
+                    Text(verbatim: textBinding.wrappedValue)
+                        .lineLimit(1)
+                }
             }
         }
     }

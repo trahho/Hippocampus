@@ -9,11 +9,13 @@ import Foundation
 import SwiftUI
 
 struct CollectionView: View {
+    @Environment(Structure.Role.self) var role: Structure.Role
     @Environment(Structure.self) var structure
     @State var items: [Information.Item]
     @State var condition: Information.Condition
     @State var order: Presentation.Order?
     @State var layout: Presentation.Layout
+    @State var appearance: Presentation.Appearance
 
     func compare(lhs: Information.Item, rhs: Information.Item, order: Presentation.Order) -> Bool {
         switch order {
@@ -34,18 +36,18 @@ struct CollectionView: View {
     }
 
     var content: [Information.Item] {
-        let items = items.filter { condition.matches(for: $0) }
+        let items = items.filter { condition.matches(for: $0, sameRole: role) }
         guard let order else { return items }
         return items.sorted(by: { compare(lhs: $0, rhs: $1, order: order) })
     }
 
-    var roles: [Structure.Role] {
-        condition.roles.compactMap { structure[Structure.Role.self, $0] }
-    }
-
     var body: some View {
         ForEach(content, id: \.self) { item in
-            LayoutItemView(item: item, layout: layout, roles: roles)
+            if item.conforms(to: role) {
+                LayoutItemView(item: item, layout: layout, appearance: appearance)
+            } else {
+                Image(systemName: "eye.trianglebadge.exclamationmark")
+            }
         }
     }
 }

@@ -8,26 +8,38 @@
 import Foundation
 import SwiftUI
 
-@Observable class Navigation {
-    var selectedFilter: Structure.Filter? {
+@Observable class Navigation_ {
+    var filter: Structure.Filter?
+    {
         didSet {
-            if let selectedFilter {
-                if selectedFilter.layouts.contains(.list) {
-                    path.removeLast(path.count)
-                    listFilter = selectedFilter
-                } else {
-                    listFilter = nil
-                    path.removeLast(path.count)
-                    path.append(selectedFilter)
-                }
-            } else {
-                path.removeLast(path.count)
-                listFilter = nil
-            }
+            print(filter?.name ?? "Leer")
         }
     }
+//    {
+//        didSet {
+//            if let selectedFilter, let role = selectedFilter.role {
+//                if selectedFilter.layouts.contains(.list) {
+//                    path.removeLast(path.count)
+////                    path = NavigationPath()
+//                    listFilter = selectedFilter
+//                    detailFilter = nil
+//                } else {
+//                    listFilter = nil
+//                    detailFilter = selectedFilter
+//                    path.removeLast(path.count)
+////                    path = NavigationPath()
+//                }
+//            } else {
+//                path.removeLast(path.count)
+////                path = NavigationPath()
+//                listFilter = nil
+//                detailFilter = nil
+//            }
+//        }
+//    }
 
-    var listFilter: Structure.Filter?
+    var layout: Presentation.Layout? = .list
+ 
     var path = NavigationPath()
 }
 

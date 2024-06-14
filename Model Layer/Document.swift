@@ -22,7 +22,9 @@ class Document: DatabaseDocument {
     }
 
     override func setup() {
-        [Structure.Role]([.drawing, .hierarchical, .named, .text, .topic, .tracked]).forEach { self[] = $0 }
+        [Structure.Role]([.drawing, .hierarchical, .named, .text, .topic, .tracked]).forEach {
+            self[] = $0
+        }
 //        [Presentation.Query]([.general, .notes, .topics]).forEach { self[] = $0 }
 //        [Presentation.Group]([.builtIn]).forEach { self[] = $0 }
 

@@ -2,9 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Hippocampus.xcodeproj">
+      location = "group:../../Library/Smaug">
    </FileRef>
    <FileRef
-      location = "group:../../Library/Smaug">
+      location = "group:Hippocampus.xcodeproj">
    </FileRef>
 </Workspace>

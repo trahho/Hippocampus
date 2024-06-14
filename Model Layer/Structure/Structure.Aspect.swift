@@ -13,7 +13,6 @@ extension Structure {
     class Aspect: Object {
         @Property var name: String = ""
         @Property var kind: Kind = .text
-        @Property var index = 0
         @Property var computed = false
 
         @Relation(\Role.aspects) var role: Role!

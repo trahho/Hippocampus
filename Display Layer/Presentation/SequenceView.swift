@@ -13,6 +13,7 @@ struct SequenceView: View {
     @State var items: [Information.Item]
     @State var sequences: [Presentation.Sequence]
     @State var layout: Presentation.Layout
+    @State var appearance: Presentation.Appearance
 
     var body: some View {
 //        Text("\(sequences.count)")
@@ -20,12 +21,14 @@ struct SequenceView: View {
             ForEach(0 ..< sequences.count, id: \.self) { index in
                 switch sequences[index] {
                 case .ordered(let condition, let orders):
-                    CollectionView(items: items, condition: condition, order: orders.first, layout: layout)
+                    CollectionView(items: items, condition: condition, order: orders.first, layout: layout, appearance: appearance)
                 case .unordered(let condition):
-                    CollectionView(items: items, condition: condition, layout: layout)
+                    CollectionView(items: items, condition: condition, layout: layout, appearance: appearance)
                 }
             }
+            .listRowSeparator(.hidden)
         }
+        .listStyle(.plain)
     }
 }
 
@@ -50,6 +53,6 @@ struct SequenceView: View {
 
 
 
-    return SequenceView(items: document.information.items.asArray, sequences: sequences, layout: .list)
+    return SequenceView(items: document.information.items.asArray, sequences: sequences, layout: .list, appearance: .normal)
         .environment(document.structure)
 }

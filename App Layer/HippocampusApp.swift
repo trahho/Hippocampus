@@ -32,25 +32,34 @@ struct HippocampusApp: App {
             document[] = filter
             filter.name = "Group \(i)"
             filter.layouts = [.list]
+            filter.role = Structure.Role.named
             for j in 1 ..< 4 {
                 let subFilter = Structure.Filter()
                 document[] = subFilter
                 subFilter.filter.append(filter)
+                subFilter.layouts = [.list]
                 subFilter.name = "Filter \(j)"
+                subFilter.role = Structure.Role.hierarchical
             }
         }
 
         for filter in document.structure.filters {
-            filter.order = [.sorted(Structure.Role.text.text.id, ascending: true)]
+            filter.order = [.sorted(Structure.Role.named[dynamicMember: "name"].id, ascending: true)]
             filter.condition = .always(true)
-            filter.role = Structure.Role.text
         }
 
         for i in 0 ..< 10 {
             let item = Information.Item()
-            item[String.self, Structure.Role.text.text] = "\(i + 1). Hallo Welt🤩"
-            item.roles.append(Structure.Role.text)
+            item[String.self, Structure.Role.named[dynamicMember: "name"]] = "\(i + 1). Hallo Welt🤩"
+            item.roles.append(Structure.Role.named)
+            item.roles.append(Structure.Role.hierarchical)
             document[] = item
+            for j in 0..<5 {
+                let subItem = Information.Item()
+                subItem[String.self, Structure.Role.named[dynamicMember: "name"]] = "\(i + 1). Hallo Welt🤩"
+                subItem.roles.append(Structure.Role.named)
+                item.to.append(subItem)
+            }
         }
 
         return document
@@ -80,7 +89,7 @@ struct HippocampusApp: App {
 //        return result
 //    }()
 
-    let navigation = Navigation()
+//    let navigation = Navigation()
 
     var body: some Scene {
         WindowGroup {
@@ -90,8 +99,9 @@ struct HippocampusApp: App {
 //                }
 //            Text("hello_world")
             DocumentView(document: document)
-                .environment(navigation)
-
+//                .environment(navigation)
+//Design_NavigationView()
+//                .environment(Design_NavigationView.Navigation())
 //            AnchorGraphView(graph: HippocampusApp.graph)
 //            Design_ShellView()
 //            Design_ContextMenuView()

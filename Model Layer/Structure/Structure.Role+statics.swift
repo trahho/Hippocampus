@@ -13,7 +13,7 @@ extension Structure.Role {
 //    typealias Form = Structure.Aspect.Presentation.Form
 //    typealias Representation = Structure.Representation
     
-    fileprivate enum Keys {
+    enum Keys {
         static let same = "00000000-0000-0000-0000-000000000000"
         static let tracked = "D7812874-085B-4161-9ABB-C82D4A145634"
         static let named = "8A81358C-2A7C-497D-A93D-306F776C217C"
@@ -38,13 +38,17 @@ extension Structure.Role {
     
     static let named = Role(Keys.named, "_Named") {
         Aspect(Keys.namedName, "/Name", .text)
+    } presentations: {
+        [
+            .named("", .aspect(Keys.namedName.uuid, appearance: .normal, editable: true), [], [])
+        ]
     }
     
     static let text = Role(Keys.text, "_Text") {
         Aspect(Keys.textText, "/Text", .text)
     } presentations: {
         [
-            .named("", .aspect(Keys.textText.uuid, appearance: .normal, editable: true), [.list])
+            .named("", .aspect(Keys.textText.uuid, appearance: .normal, editable: true), [.list], [])
         ]
     }
     
@@ -52,8 +56,14 @@ extension Structure.Role {
         Aspect(Keys.namedName, "/Drawing", .drawing)
     }
     
-    static let hierarchical = Role(Keys.hierarchical, "_Hierarchy") {} references: {
+    static let hierarchical = Role(Keys.hierarchical, "_Hierarchy", [.named]) {} references: {
         Role.same
+    } presentations: {
+        [.named("",
+                    .sequence([
+                        .ordered(.hasRole(Role.same), order: [.sorted(Keys.namedName.uuid, ascending: true)])
+                    ], layout: .list), [], [.full, .normal])]
+            
     }
     
     static let topic = Role(Keys.topic, "_Topic", [.hierarchical, .named, .tracked]) {} references: {

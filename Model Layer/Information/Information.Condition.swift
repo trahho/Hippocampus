@@ -67,31 +67,32 @@ extension Information {
             }
         }
 
-        func matches(for item: Item) -> Bool {
+        func matches(for item: Item, sameRole: Structure.Role? = nil) -> Bool {
             switch self {
             case let .always(value):
                 return value
             case let .hasRole(role):
+                if role == Structure.Role.same.id, let sameRole { return item.roles.contains { $0.conforms(to: sameRole) } }
                 guard let role = item[Structure.Role.self, role] else { return false }
                 return item.roles.contains { $0.conforms(to: role) }
             case let .hasValue(comparison):
                 return comparison.matches(for: item)
             case let .isReferenced(condition):
-                return item.from.contains(where: { condition.matches(for: $0) })
+                return item.from.contains(where: { condition.matches(for: $0, sameRole: sameRole) })
             case let .hasReference(condition):
-                return item.to.contains(where: { condition.matches(for: $0) })
+                return item.to.contains(where: { condition.matches(for: $0, sameRole: sameRole) })
             case let .not(condition):
-                return !condition.matches(for: item)
+                return !condition.matches(for: item, sameRole: sameRole)
             case let .any(conditions):
                 for condition in conditions {
-                    if condition.matches(for: item) {
+                    if condition.matches(for: item, sameRole: sameRole) {
                         return true
                     }
                 }
                 return false
             case let .all(conditions):
                 for condition in conditions {
-                    if !condition.matches(for: item) {
+                    if !condition.matches(for: item, sameRole: sameRole) {
                         return false
                     }
                 }

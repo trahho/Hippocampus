@@ -8,7 +8,7 @@
 import Foundation
 import Smaug
 
-extension [Structure.Aspect.ID: Information.Item.TimedValue]: Mergeable {
+extension [Structure.Aspect.ID: Information.TimedValue]: Mergeable {
     public mutating func merge(other: any Mergeable) throws {
         guard let other = other as? Self else { return }
         Set(self.keys).intersection(Set(other.keys))
@@ -26,24 +26,51 @@ extension [Structure.Aspect.ID: Information.Item.TimedValue]: Mergeable {
 }
 
 extension Information {
+    struct TimedValue: Codable {
+        let date: Date
+        let value: ValueStorage
+    }
+    
+    class Particle: ObjectPersistence.Object {
+        typealias Value = ValueStorage.PersistentValue
+        
+        @Property var particleRole: Structure.Role.ID!
+        @Property private var values: [Structure.Aspect.ID: TimedValue] = [:]
+        
+        subscript<T>(_ type: T.Type, _ aspect: Structure.Aspect) -> T? where T: Value {
+            get {
+                guard let timedValue = values[aspect.id], let value = timedValue.value.value as? T? else { return aspect.kind.defaultValue as? T }
+                return value
+            }
+            set {
+                self.values[aspect.id] = TimedValue(date: Date(), value: ValueStorage(newValue)!)
+            }
+        }
+
+        subscript(_ aspectId: Structure.Aspect.ID) -> ValueStorage? {
+            self.values[aspectId]?.value
+        }
+    }
+    
     class Item: Object {
         typealias Value = ValueStorage.PersistentValue
 
-        struct TimedValue: Codable {
-            let date: Date
-            let value: ValueStorage
-        }
+   
 
         @Property var deleted: Bool = false
         @Objects var roles: [Structure.Role]
-
+        @Property var particles: [Particle] = []
         @Objects var to: [Item]
         @Relations(\Self.to) var from: [Item]
 
         @Property private var values: [Structure.Aspect.ID: TimedValue] = [:]
-        
+
         var presentRoles: [Structure.Role] {
-            values.keys.compactMap { self[Structure.Aspect.self, $0]?.role }.asSet.asArray
+            self.values.keys.compactMap { self[Structure.Aspect.self, $0]?.role }.asSet.asArray
+        }
+
+        func conforms(to role: Structure.Role) -> Bool {
+            return self.roles.first { $0.conforms(to: role) } != nil
         }
 
         subscript<T>(_ type: T.Type, _ aspect: Structure.Aspect) -> T? where T: Value {

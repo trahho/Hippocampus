@@ -9,32 +9,95 @@ import SwiftUI
 
 struct NavigationView: View {
 //    @State var document: Document
-    @Environment(Navigation.self) var navigation
+    @Environment(Information.self) var information
+//    @Bindable var navigation: Navigation
     @State var cv: NavigationSplitViewVisibility = .automatic
     @State var expansions: [Structure.Filter.ID: Bool] = [:]
+    @State var filter: Structure.Filter?
+    @State var index: Int = 0
+    @State var path = NavigationPath()
+
+    var twoColumn: Bool {
+        return if let filter = filter, let role = filter.role, filter.layouts.contains(.list) { true } else { false }
+    }
+    
+    var filterId: UUID {
+        filter?.id ?? Structure.Role.same.id
+    }
+
+    @ViewBuilder var filtersList: some View {
+        FiltersView(expansions: $expansions, selection: $filter)
+    }
+
+    @ViewBuilder var filterResultList: some View {
+        if let filter = filter, let _ = filter.role, filter.layouts.contains(.list) {
+            FilterResultView(items: information.items.asArray, filter: filter, index: index)
+        } else {
+            EmptyView()
+        }
+    }
+
+    @ViewBuilder var detailView: some View {
+        NavigationStack(path: $path) {
+            ZStack {
+//                if let filter = filter, let layout = navigation.layout, layout != .list, filter.layouts.contains(layout) {
+                if let filter {
+                    FilterResultView(items: information.items.asArray, filter: filter, index: index)
+                } else {
+                    EmptyView()
+                }
+            }
+        }
+    }
 
     var body: some View {
+        Group {
+            if twoColumn {
+                NavigationSplitView(columnVisibility: $cv) {
+                    filtersList
+                } content: {
+                    filterResultList
+                } detail: {
+                    detailView
+                }
+                .id(filterId)
+            } else {
+                NavigationSplitView(columnVisibility: $cv) {
+                    filtersList
+                } detail: {
+                    detailView
+                }
+                .id(filterId)
+            }
+        }
+        .onChange(of: filter) { oldValue, newValue in
+            print (filter?.name ?? "Nix")
+            index += 1
+        }
+          
 //        if let filter = navigation.listFilter {
-        NavigationSplitView(columnVisibility: $cv) {
-            if let filter = navigation.listFilter {
-                SidebarView(navigation: navigation, expansions: $expansions)
-            } else {
-                Color.red
-            }
-        } content: {
-            if let filter = navigation.listFilter {
-                ContentView(navigation: navigation)
-            } else {
-                SidebarView(navigation: navigation, expansions: $expansions)
-            }
-        } detail: {
-            DetailView(navigation: navigation)
-        }
-        .onAppear {
-            cv = .automatic
-        }
-    
-//        } else {
+//        NavigationSplitView(columnVisibility: $cv) {
+//            if let filter = filter, let layout = navigation.layout, layout == .list, filter.layouts.contains(.list) {
+//                FiltersView(expansions: $expansions)
+//            } else {
+//                EmptyView()
+//            }
+//        } content: {
+//            if let filter = filter, let layout = navigation.layout, layout == .list, filter.layouts.contains(.list) {
+//                FilterResultView(items: information.items.asArray, filter: navigation.filter!)
+//            } else {
+//                FiltersView(expansions: $expansions)
+//            }
+//        } detail: {}
+//            .onAppear {
+//                cv = .automatic
+//            }
+//            .onChange(of: navigation.filter) { _, _ in
+//                print("Selected \(navigation.filter?.name ?? "None")")
+//                filter = navigation.filter
+//            }
+//
+        ////        } else {
 //            NavigationSplitView {
 //                SidebarView(navigation: navigation)
 //            } detail: {
@@ -59,9 +122,10 @@ struct NavigationView: View {
 
 #Preview {
     let document = HippocampusApp.previewDocument()
+//    let navigation = Navigation()
 
     return NavigationView()
-        .environment(Navigation())
+//        .environment(navigation)
         .environment(document)
         .environment(document.information)
         .environment(document.structure)
