@@ -20,11 +20,11 @@ struct CollectionView: View {
     func compare(lhs: Information.Item, rhs: Information.Item, order: Presentation.Order) -> Bool {
         switch order {
         case .sorted(let aspect, let ascending):
-            guard let aspect = structure[Structure.Aspect.self, aspect] else { return false }
+//            guard let aspect = structure[Structure.Aspect.self, aspect] else { return false }
             if ascending {
-                return aspect[lhs] ?? .nil < aspect[rhs] ?? .nil
+                return lhs[aspect] ?? .nil < rhs[aspect] ?? .nil
             } else {
-                return aspect[rhs] ?? .nil < aspect[lhs] ?? .nil
+                return lhs[aspect] ?? .nil > rhs[aspect] ?? .nil
             }
         case .multiSorted(let sorters):
             for sorter in sorters {

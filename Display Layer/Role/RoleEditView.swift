@@ -145,10 +145,6 @@ struct RoleEditView: View {
                     TextField("Name", text: aspect.name)
                     EnumPicker("Kind", selection: aspect.kind)
                     Toggle("Computed", isOn: aspect.computed)
-                } createItem: {
-                    document(Structure.Aspect.self)
-                } deleteItem: {
-                    document.structure.delete($0)
                 }
             }
 
@@ -164,11 +160,7 @@ struct RoleEditView: View {
                             TextField("Name", text: aspect.name)
                             EnumPicker("Kind", selection: aspect.kind)
                             Toggle("Computed", isOn: aspect.computed)
-                        } createItem: {
-                            document(Structure.Aspect.self)
-                        } deleteItem: {
-                            document.structure.delete($0)
-                        }
+                        } 
                     }
                 } createItem: {
                     document(Structure.Particle.self)

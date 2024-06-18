@@ -24,11 +24,11 @@ struct ItemPresentationView: View {
         case .label(let string):
             Text(string)
         case .aspect(let id, let appearance, let editable):
-            if let aspect = structure[Structure.Aspect.self, id] {
-                AspectView(item: item, aspect: aspect, appearance: appearance, editable: editable)
-            } else {
+//            if let aspect = structure[Structure.Aspect.self, id] {
+//                AspectView(item: item, aspect: aspect, appearance: appearance, editable: editable)
+//            } else {
                 Image(systemName: "eye.trianglebadge.exclamationmark")
-            }
+//            }
         case .horizontal(let elements, let alignment):
             HorizontalLayoutView(item: item, elements: elements, alignment: alignment, layout: layout, appearance: appearance)
         case .vertical(let elements, let alignment):

@@ -31,7 +31,7 @@ extension Structure.Role {
         self.init(id: UUID(uuidString: id)!)
         self.name = name
 //        canBeCreated = addToMenu
-        self.aspects = aspects()
+//        self.aspects = aspects()
         self.roles = roles.map { $0 == Role.same ? self : $0 }
         self.references = references()
         self.presentations = presentations()

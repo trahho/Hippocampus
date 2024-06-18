@@ -36,16 +36,10 @@
     "%lld" : {
 
     },
-    "AAa" : {
+    "Aspects" : {
 
     },
-    "ABC" : {
-
-    },
-    "BBB" : {
-
-    },
-    "Bla" : {
+    "Computed" : {
 
     },
     "Count: %lld" : {

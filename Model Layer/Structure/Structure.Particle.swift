@@ -13,7 +13,7 @@ extension Structure {
     @dynamicMemberLookup
     class Particle: Object, EditableListItem {
         @Property var name = ""
-        @Objects var aspects: [Aspect]
+        @Property var aspects: [Aspect] = []
 
         subscript(dynamicMember dynamicMember: String) -> Aspect {
             aspects.first(where: { $0.name.lowercased() == dynamicMember.lowercased() })!

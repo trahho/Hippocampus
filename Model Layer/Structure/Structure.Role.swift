@@ -16,7 +16,7 @@ extension Structure {
         @Property var name = ""
         @Objects var roles: [Role]
         @Relations(\Role.roles) var compatible: [Role]
-        @Objects var aspects: [Aspect]
+        @Property var aspects: [Aspect] = []
         @Objects var references: [Role]
         @Relations(\Role.references) var referencedBy: [Role]
         @Property var presentations: [Presentation] = []
