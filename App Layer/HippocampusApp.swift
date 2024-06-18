@@ -54,7 +54,7 @@ struct HippocampusApp: App {
             item.roles.append(Structure.Role.named)
             item.roles.append(Structure.Role.hierarchical)
             document[] = item
-            for j in 0..<5 {
+            for _ in 0 ..< 5 {
                 let subItem = Information.Item()
                 subItem[String.self, Structure.Role.named[dynamicMember: "name"]] = "\(i + 1). Hallo Welt🤩"
                 subItem.roles.append(Structure.Role.named)
@@ -93,14 +93,23 @@ struct HippocampusApp: App {
 
     var body: some Scene {
         WindowGroup {
+           EmptyView()
+        }
+        Window("Edit Role", id: "whatever") {
 //            TestView()
 //                .onAppear {
 //                    Self.locationService.start()
 //                }
-//            Text("hello_world")
-            DocumentView(document: document)
+//            Design_Localization()
+            RolesView()
+                .environment({
+                    let document = HippocampusApp.previewDocument()
+                    document.structure.roles.forEach { $0.toggleStatic() }
+                    return document
+                }())
+//            DocumentView(document: document)
 //                .environment(navigation)
-//Design_NavigationView()
+            // Design_NavigationView()
 //                .environment(Design_NavigationView.Navigation())
 //            AnchorGraphView(graph: HippocampusApp.graph)
 //            Design_ShellView()
@@ -108,6 +117,7 @@ struct HippocampusApp: App {
 //                .environmentObject(navigation)
 //                .onOpenURL { document = Document(url: $0) }
         }
+        .keyboardShortcut("r", modifiers: [.command, .control, .shift, .option])
     }
 
     struct TestView: View {

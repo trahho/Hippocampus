@@ -6,16 +6,17 @@
 //
 
 import Foundation
+import Grisu
 import Smaug
 import SwiftUI
 
 extension Structure {
-    class Aspect: Object {
+    class Aspect: ObjectPersistence.Object, EditableListItem {
         @Property var name: String = ""
         @Property var kind: Kind = .text
         @Property var computed = false
 
-        @Relation(\Role.aspects) var role: Role!
+//        @Relation(\Role.aspects) var role: Role!
 
         subscript<T>(_ type: T.Type, _ item: Information.Item) -> T? where T: Information.Item.Value {
             get {
@@ -28,9 +29,7 @@ extension Structure {
         }
 
         subscript(_ item: Information.Item) -> ValueStorage? {
-            get {
-                item[id]
-            }
+            item[id]
         }
     }
 }

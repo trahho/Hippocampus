@@ -17,60 +17,83 @@ extension Structure.Role {
         static let same = "00000000-0000-0000-0000-000000000000"
         static let tracked = "D7812874-085B-4161-9ABB-C82D4A145634"
         static let named = "8A81358C-2A7C-497D-A93D-306F776C217C"
-        static let trackedCreated = "E851210E-7CCC-4D09-87C1-A7E75E04D7F4"
         static let namedName = "6247260E-624C-48A1-985C-CDEDDFA5D3AD"
+        static let trackedCreated = "E851210E-7CCC-4D09-87C1-A7E75E04D7F4"
         static let hierarchical = "B6D7755C-210C-484D-B79B-ACD931D581C9"
         static let topic = "3B681E4A-C42A-48D5-92E2-93F4B5C7CDD0"
         static let text = "73874A60-423C-4128-9A5A-708D4350FEF3"
         static let textText = "F0C2B7D0-E71A-4296-9190-8EF2D540338F"
         static let note = "8AB172CF-2330-4861-B551-8728BA6062BF"
         static let noteHeadline = "B945443A-32D6-4FE7-A63F-65436CAAA3CA"
-        static let miniMindMap = "8ECEA3AE-1E0B-4DDD-BABE-5836C577FE08"
+        static let drawing = "8ECEA3AE-1E0B-4DDD-BABE-5836C577FE08"
         static let miniMindMapTopic = "873BD3D8-525C-45F1-8B66-74DB0F433BB5"
         static let miniMindMapAspect = "F5DC22EC-A54E-428E-8C2A-99A543521AA5"
     }
     
-    static let same = Role(Keys.same, "")
+    static let same = Role(Keys.same, "same")
     
-    static let tracked = Role(Keys.tracked, "_Global") {
-        Aspect(Keys.trackedCreated, "/Created", .date)
+    static let tracked = Role(Keys.tracked, "tracked") {
+        Aspect(Keys.trackedCreated, "created", .date)
     }
     
-    static let named = Role(Keys.named, "_Named") {
-        Aspect(Keys.namedName, "/Name", .text)
+    static let named = Role(Keys.named, "named") {
+        Aspect(Keys.namedName, "name", .text)
     } presentations: {
         [
             .named("", .aspect(Keys.namedName.uuid, appearance: .normal, editable: true), [], [])
         ]
     }
     
-    static let text = Role(Keys.text, "_Text") {
-        Aspect(Keys.textText, "/Text", .text)
+    static let text = Role(Keys.text, "text") {
+        Aspect(Keys.textText, "text", .text)
     } presentations: {
         [
             .named("", .aspect(Keys.textText.uuid, appearance: .normal, editable: true), [.list], [])
         ]
     }
     
-    static let drawing = Role(Keys.named, "_Drawing") {
-        Aspect(Keys.namedName, "/Drawing", .drawing)
+    static let drawing = Role(Keys.drawing, "drawing") {
+        Aspect(Keys.namedName, "drawing", .drawing)
     }
     
-    static let hierarchical = Role(Keys.hierarchical, "_Hierarchy", [.named]) {} references: {
+    /// *    */static let drawing = Role(Keys.drawing, "drawing", roles:)
+    
+//    static let note = {
+//        var result = Role(id: Keys.note.uuid)
+//        result.name = "note"
+//        result.roles = [.named, .tracked, .text, .drawing]
+//        return result
+//    }()
+    
+    static let hierarchical = Role(Keys.hierarchical, "hierarchical", [.named]) {} references: {
         Role.same
     } presentations: {
         [.named("",
-                    .sequence([
-                        .ordered(.hasRole(Role.same), order: [.sorted(Keys.namedName.uuid, ascending: true)])
-                    ], layout: .list), [], [.full, .normal])]
-            
+                .sequence([
+                    .ordered(.hasRole(Role.same), order: [.sorted(Keys.namedName.uuid, ascending: true)])
+                ], layout: .list), [], [.full, .normal])]
     }
     
-    static let topic = Role(Keys.topic, "_Topic", [.hierarchical, .named, .tracked]) {} references: {
-        Role.note
-    }
+    static let topic = {
+        var role = Role(id: "3B681E4A-C42A-48D5-92E2-93F4B5C7CDD0".uuid)
+        role.name = "topic"
+        role.roles = [.hierarchical, .named, .tracked]
+        role.references = [.same, .note]
+        role.aspects = [
+            {
+                let aspect = Aspect(id: "B945443A-32D6-4FE7-A63F-65436CAAA3CA".uuid)
+                aspect.name = "titel"
+                aspect.kind = .text
+                aspect.computed = false
+                return aspect
+            }()
+        ]
+        return role
+    }()
     
-    static let note = Role(Keys.note, "_Note", [.named, .tracked, .text, .drawing])
+  
+    
+    static let note = Role(Keys.note, "note", [.named, .tracked, .text, .drawing])
     
     // representations: {
     //        Representation("_Title", .aspect(Keys.globalName, form: Form.normal))

@@ -7,11 +7,22 @@
 
 import Foundation
 import SwiftUI
+import Grisu
 
 extension Structure.Aspect {
-    enum Kind: Structure.PersistentValue {
+    enum Kind: Structure.PersistentValue, PickableEnum {
         case text, drawing, date
 
+        var description: String {
+            switch self {
+            case .text:
+                "text"
+            case .drawing:
+                "drawing"
+            case .date:
+                "date"
+            }
+        }
 //        enum Form {
         ////            case icon, small, normal, firstParagraph, editFull, edit
 //            static let icon = "_form-Icon"

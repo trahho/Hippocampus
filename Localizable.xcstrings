@@ -1,0 +1,108 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+
+    },
+    "(%lf, %lf)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "(%1$lf, %2$lf)"
+          }
+        }
+      }
+    },
+    "%@" : {
+
+    },
+    "%d" : {
+
+    },
+    "%lf" : {
+
+    },
+    "%lf, %lf" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lf, %2$lf"
+          }
+        }
+      }
+    },
+    "%lld" : {
+
+    },
+    "AAa" : {
+
+    },
+    "ABC" : {
+
+    },
+    "BBB" : {
+
+    },
+    "Bla" : {
+
+    },
+    "Count: %lld" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anzahl: %lld"
+          }
+        }
+      }
+    },
+    "Edit Role" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rolle bearbeiten"
+          }
+        }
+      }
+    },
+    "Hello, World!" : {
+
+    },
+    "Name" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        }
+      }
+    },
+    "named" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "mit Name"
+          }
+        }
+      }
+    },
+    "Remove" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entfernen"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

@@ -65,9 +65,9 @@ extension Information {
 
         @Property private var values: [Structure.Aspect.ID: TimedValue] = [:]
 
-        var presentRoles: [Structure.Role] {
-            self.values.keys.compactMap { self[Structure.Aspect.self, $0]?.role }.asSet.asArray
-        }
+//        var presentRoles: [Structure.Role] {
+//            self.values.keys.compactMap { self[Structure.Aspect.self, $0]?.role }.asSet.asArray
+//        }
 
         func conforms(to role: Structure.Role) -> Bool {
             return self.roles.first { $0.conforms(to: role) } != nil
