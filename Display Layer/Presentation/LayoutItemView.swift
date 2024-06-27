@@ -15,25 +15,25 @@ struct LayoutItemView: View {
     @State var appearance: Presentation.Appearance
     @State var selectedRole: Structure.Role?
 
-    func findPresentation(roles: [Structure.Role]) -> Presentation? {
-        let presentations = roles
-            .flatMap { $0.presentations }
-            .filter {
-                switch $0 {
-                case let .named(_, _, layouts, appearances):
-                    (layouts.isEmpty || layouts.contains(layout)) && (appearances.isEmpty || appearances.contains(appearance))
-                default:
-                    false
-                }
-            }
-
-        if presentations.isEmpty {
-            let roles = roles.flatMap { $0.roles }.asSet.asArray
-            return findPresentation(roles: roles)
-        } else {
-            return presentations.first
-        }
-    }
+//    func findPresentation(roles: [Structure.Role]) -> Presentation? {
+//        let presentations = roles
+//            .flatMap { $0.presentations }
+////            .filter {
+////                switch $0 {
+////                case let .named(_, _, layouts, appearances):
+////                    (layouts.isEmpty || layouts.contains(layout)) && (appearances.isEmpty || appearances.contains(appearance))
+////                default:
+////                    false
+////                }
+////            }
+//
+//        if presentations.isEmpty {
+//            let roles = roles.flatMap { $0.roles }.asSet.asArray
+//            return findPresentation(roles: roles)
+//        } else {
+//            return presentations.first
+//        }
+//    }
 
     var roles: [Structure.Role] {
         item.roles.filter { $0.conforms(to: role) }
@@ -43,33 +43,33 @@ struct LayoutItemView: View {
         selectedRole ?? roles.first
     }
 
-    var presentation: Presentation {
-        guard let role = presentedRole,
-              let presentation = findPresentation(roles: [role])
-        else { return .empty }
-        return presentation
-    }
+//    var presentation: Presentation {
+//        guard let role = presentedRole,
+//              let presentation = findPresentation(roles: [role])
+//        else { return .empty }
+//        return presentation
+//    }
 
     var body: some View {
         ZStack {
-            let presentation = presentation
-            if presentation != .empty {
-                if !presentation.containsSequence {
-                    RoundedRectangle(cornerRadius: 6, style: .circular)
-                        .stroke(Color.gray)
-                }
-                ItemPresentationView(presentation: presentation, item: item, layout: layout, appearance: appearance)
-                    .environment(presentedRole)
-                    .padding(6)
-
-            } else {
-                Image(systemName: "viewfinder.trianglebadge.exclamationmark")
-            }
+//            let presentation = presentation
+//            if presentation != .empty {
+//                if !presentation.containsSequence {
+//                    RoundedRectangle(cornerRadius: 6, style: .circular)
+//                        .stroke(Color.gray)
+//                }
+//                ItemPresentationView(presentation: presentation, item: item, layout: layout, appearance: appearance)
+//                    .environment(presentedRole)
+//                    .padding(6)
+//
+//            } else {
+            Image(systemName: "viewfinder.trianglebadge.exclamationmark")
+//            }
         }
     }
 }
 
-//#Preview {
+// #Preview {
 //    let document = HippocampusApp.previewDocument()
 //    let item = Information.Item()
 //    let presentation =
@@ -87,4 +87,4 @@ struct LayoutItemView: View {
 //    return LayoutItemView(item: item, layout: .list, appearance: .normal)
 //        .environment(Structure.Role.text)
 //        .environment(document.structure)
-//}
+// }

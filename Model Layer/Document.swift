@@ -22,7 +22,7 @@ class Document: DatabaseDocument {
     }
 
     override func setup() {
-        [Structure.Role]([.drawing, .hierarchical, .named, .text, .topic, .tracked]).forEach {
+        Structure.Role.statics.forEach {
             self[] = $0
         }
 //        [Presentation.Query]([.general, .notes, .topics]).forEach { self[] = $0 }

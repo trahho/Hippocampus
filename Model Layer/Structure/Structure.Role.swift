@@ -15,12 +15,13 @@ extension Structure {
     class Role: Object, EditableListItem {
         @Property var name = ""
         @Objects var roles: [Role]
-        @Relations(\Role.roles) var compatible: [Role]
         @Property var aspects: [Aspect] = []
+        @Property var particles: [Particle] = []
+
+        @Relations(\Role.roles) var compatible: [Role]
         @Objects var references: [Role]
         @Relations(\Role.references) var referencedBy: [Role]
-        @Property var presentations: [Presentation] = []
-        @Objects var particles: [Particle]
+        @Property var representations: [Representation] = []
 
         subscript(dynamicMember dynamicMember: String) -> Aspect {
             if let result = aspects.first(where: { $0.name.lowercased() == dynamicMember.lowercased() }) {
@@ -49,5 +50,7 @@ extension Structure {
         var allAspects: [Aspect] {
             aspects.asSet.union(roles.flatMap { $0.allAspects }).asArray
         }
+
+   
     }
 }

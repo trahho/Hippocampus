@@ -31,5 +31,9 @@ extension Structure {
         subscript(_ item: Information.Item) -> ValueStorage? {
             item[id]
         }
+        
+        subscript(_ item: Information.Particle) -> ValueStorage? {
+            item[id]
+        }
     }
 }

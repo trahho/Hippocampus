@@ -12,132 +12,42 @@ struct RoleEditView: View {
     @Environment(Document.self) var document
     @State var role: Structure.Role
     @State var expanded: SectionExpansions = .init()
+    @State var representation: Structure.Role.Representation?
 
     var conformation: [Structure.Role] {
         role.roles.sorted(by: { $0.name.localized($0.isStatic) < $1.name.localized($1.isStatic) })
     }
 
-//    func sourceCode(_ aspect: Structure.Aspect) -> String {
-//        """
-//                {
-//                    let aspect = Aspect(id: "\(aspect.id)".uuid)
-//                    aspect.name = "\(aspect.name)"
-//                    aspect.kind = .\(aspect.kind)
-//                    aspect.computed = \(aspect.computed)
-//                    return aspect
-//                }()
-//        """
-//    }
-//
-//    func sourceCode(_ aspects: [Structure.Aspect]) -> String {
-//        if !aspects.isEmpty {
-//            """
-//            [
-//            \(role.aspects.map { sourceCode($0) }.joined(separator: ",\n"))
-//                ]
-//            """
-//        } else { "" }
-//    }
-//
-//    func sourceCode(_ particle: Structure.Particle) -> String {
-//        """
-//                {
-//                    let particle = Particle(id: "\(particle.id)".uuid)
-//                    particle.name = "\(particle.name)"
-//                    return particle
-//                }()
-//        """
-//    }
-//
-//    func sourceCode(_ particles: [Structure.Particle]) -> String {
-//        if !particles.isEmpty {
-//            """
-//            role.particles = [
-//            \(role.particles.map { sourceCode($0) }.joined(separator: ",\n"))
-//                ]
-//            """
-//        } else { "" }
-//    }
-//
-//    func sourceCode(_ roles: [Structure.Role]) -> String {
-//        if !roles.isEmpty {
-//            """
-//            role.particles = [
-//            \(role.particles.map { sourceCode($0) }.joined(separator: ",\n"))
-//                ]
-//            """
-//        } else { "" }
-//    }
-//
-//    var sourceCode: String {
-//        let result =
-//            """
-//            static let \(role.name) = {
-//                var role = Role(id: "\(role.id)".uuid)
-//                role.name = "\(role.name)"
-//                \(role.roles.isEmpty ? "" : "role.roles = [" + role.roles.map { "." + $0.name }.joined(separator: ", ") + "]")
-//                role.references = [\(role.references.map { "." + $0.name }.joined(separator: ", "))]
-//                \(role.aspects.isEmpty ? "" : "role.aspects = " + sourceCode(role.aspects))
-//                return role
-//            }()
-//            """
-//
-//        return result
-//    }
-
-    var sc: String {
-        var result = ""
-        result += "static let \(role.name) = {"
-        result += "\n\t" + "var role = Role(id: \"\(role.id)\".uuid)"
-        result += "\n\t" + "role.name = \"\(role.name)\""
-        if !role.roles.isEmpty {
-            result += "\n\t" + "role.roles = [" +
-                role.roles
-                .map { ".\($0.name)" }
-                .joined(separator: ", ") +
-                "]"
-        }
-        if !role.aspects.isEmpty {
-            result += "\n\t" + "role.aspects = ["
-            for i in 0 ..< role.aspects.count {
-                let aspect = role.aspects[i]
-                if i > 0 { result += "," }
-                result += "\n\t\t" + "{"
-                result += "\n\t\t\t" + "let aspect = Aspect(id: \"\(aspect.id)\".uuid)"
-                result += "\n\t\t\t" + "aspect.name = \"\(aspect.name)\""
-                result += "\n\t\t\t" + "aspect.kind = .\(aspect.kind)"
-                result += "\n\t\t\t" + "aspect.computed = \(aspect.computed)"
-                result += "\n\t\t\t" + "return aspect"
-                result += "\n\t\t" + "}()"
-            }
-
-            result += "\n\t" + "]"
-        }
-
-        result += "\n}()"
-        return result
-    }
+ 
 
     var body: some View {
         Form {
-            Section("Title", isExpanded: $expanded) {
+            Section("Role", isExpanded: $expanded) {
                 Text("\(role.id)")
                     .font(.caption)
                 TextField("Name", text: $role.name)
+                LabeledContent {
+                    DisclosureGroup {
+                        SelectRolesSheet(role: $role)
+                    } label: {
+                        Text(role.roles.map { $0.name.localized($0.isStatic) }.joined(separator: ", "))
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                    }
+                } label: {
+                    Text("Roles")
+                }
+                LabeledContent {
+                    DisclosureGroup {
+                        SelectReferencesSheet(role: $role)
+                    } label: {
+                        Text(role.references.map { $0.name.localized($0.isStatic) }.joined(separator: ", "))
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                    }
+                } label: {
+                    Text("References")
+                }
             }
 
-//            Section("Conforms to", isExpanded: $expanded) {
-//                List(conformation) { item in
-//                    Text(item.name.localized(item.isStatic))
-//                        .actions {
-//                            Button {
-//                                role.roles.remove(item: item)
-//                            } label: {
-//                                Label("Remove", systemImage: "minus.square")
-//                            }
-//                        }
-//                }
-//            }
             Section("Aspects", isExpanded: $expanded) {
                 ListEditView($role.aspects) { aspect in
                     Text("\(aspect.id)")
@@ -160,28 +70,53 @@ struct RoleEditView: View {
                             TextField("Name", text: aspect.name)
                             EnumPicker("Kind", selection: aspect.kind)
                             Toggle("Computed", isOn: aspect.computed)
-                        } 
+                        }
                     }
-                } createItem: {
-                    document(Structure.Particle.self)
-                } deleteItem: {
-                    document.structure.delete($0)
                 }
             }
 
-            Section("Source code", isExpanded: $expanded) {
-                Text(sc)
-                    .font(.caption)
-                    .textSelection(.enabled)
+            Section("Views", isExpanded: $expanded) {
+                ListEditView($role.representations) { representation in
+                    LabeledContent("Name") { Text(representation.name.wrappedValue) }
+                    HStack {
+//                        PresentationView(presentation: representation.presentation.wrappedValue, item: Information.Item())
+//                            .id(UUID())
+                        Image(systemName: "square.and.pencil")
+                            .onTapGesture {
+                                self.representation = representation.wrappedValue
+                            }
+                    }
+                }
+                .sheet(item: $representation) { representation in
+                    EditRepresentationSheet(representation: representation)
+                }
+
+                Section("Source code", isExpanded: $expanded) {
+                    Text(role.sourceCode)
+                        .font(.caption)
+                        .textSelection(.enabled)
+                }
             }
         }
         .formStyle(.grouped)
     }
+
+    struct EditRepresentationSheet: View {
+        @State var representation: Structure.Role.Representation
+        var body: some View {
+            Form {
+                TextField("Name", text: $representation.name)
+                PresentationEditView(presentation: $representation.presentation)
+                PresentationView(presentation: representation.presentation, item: Information.Item())
+                    .id(UUID())
+            }
+            .formStyle(.grouped)
+            .frame(minWidth: 500, minHeight: 600)
+        }
+    }
 }
 
 #Preview {
-    @State var document = HippocampusApp.previewDocument()
-    document.structure.roles.forEach { $0.toggleStatic() }
-    return RoleEditView(role: Structure.Role.note)
-        .environment(document)
+    RoleEditView(role: Structure.Role.hierarchical)
+        .environment(HippocampusApp.editStaticRolesDocument)
 }

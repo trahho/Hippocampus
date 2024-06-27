@@ -11,7 +11,7 @@ import Smaug
 
 extension Structure {
     @dynamicMemberLookup
-    class Particle: Object, EditableListItem {
+    class Particle: ObjectPersistence.Object, EditableListItem {
         @Property var name = ""
         @Property var aspects: [Aspect] = []
 

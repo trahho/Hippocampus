@@ -10,7 +10,7 @@ import Smaug
 
 class Structure: ObjectStore {
     @Objects var roles: Set<Role>
-    @Objects var particles: Set<Particle>
+//    @Objects var particles: Set<Particle>
 //    @Objects var aspects: Set<Aspect>
     @Objects var filters: Set<Filter>
 

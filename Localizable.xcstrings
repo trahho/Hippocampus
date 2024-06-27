@@ -36,7 +36,31 @@
     "%lld" : {
 
     },
+    "A" : {
+
+    },
+    "Add" : {
+
+    },
+    "Add children" : {
+
+    },
     "Aspects" : {
+
+    },
+    "B" : {
+
+    },
+    "Background" : {
+
+    },
+    "C" : {
+
+    },
+    "Change to" : {
+
+    },
+    "Color" : {
 
     },
     "Computed" : {
@@ -52,6 +76,9 @@
         }
       }
     },
+    "create" : {
+
+    },
     "Edit Role" : {
       "localizations" : {
         "de" : {
@@ -62,7 +89,25 @@
         }
       }
     },
+    "Foreground" : {
+
+    },
+    "Group" : {
+
+    },
+    "Grouped" : {
+
+    },
+    "Hallo" : {
+
+    },
     "Hello, World!" : {
+
+    },
+    "Horizontal" : {
+
+    },
+    "Label" : {
 
     },
     "Name" : {
@@ -86,8 +131,10 @@
         }
       }
     },
+    "References" : {
+
+    },
     "Remove" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -96,6 +143,18 @@
           }
         }
       }
+    },
+    "Roles" : {
+
+    },
+    "Simple" : {
+
+    },
+    "Source View" : {
+
+    },
+    "Vertical" : {
+
     }
   },
   "version" : "1.0"

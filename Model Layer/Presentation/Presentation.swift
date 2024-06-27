@@ -6,11 +6,10 @@
 //
 
 import Foundation
+import Grisu
 import SwiftUI
 
-indirect enum Presentation: Structure.PersistentValue {
-  
-
+indirect enum Presentation: Structure.PersistentValue,  Hashable {
     enum Appearance: Structure.PersistentValue {
         case icon, small, full, normal, line
     }
@@ -61,15 +60,30 @@ indirect enum Presentation: Structure.PersistentValue {
     case empty
     case undefined
     case label(String)
-    case aspect(Structure.Aspect.ID, appearance: Appearance = .normal, editable: Bool = true)
-    case horizontal([Space], alignment: Alignment = Alignment.top)
-    case vertical([Space], alignment: Alignment = Alignment.leading)
-    case sequence([Sequence], layout: Layout)
-//    case exclosing(Presentation, header: Presentation? = nil)
-    case named(String, Presentation, [Layout], [Appearance])
-    case indirect([Structure.Role.ID])
-    case present(Structure.Role.ID)
-    case reference(Sequence)
+    case horizontal([Presentation], alignment: Alignment)
+    case vertical([Presentation], alignment: Alignment)
+    case color([Presentation], color: Color)
+    case background([Presentation], color: Color)
+    case check([Presentation])
+    case grouped([Presentation])
+
+    static func color(_ presentation: Presentation, color: Color) -> Presentation {
+        .color([presentation], color: color)
+    }
+
+    static func background(_ presentation: Presentation, color: Color) -> Presentation {
+        .background([presentation], color: color)
+    }
+
+//    case aspect(Structure.Aspect.ID, appearance: Appearance = .normal, editable: Bool = true)
+//    case horizontal([Space], alignment: Alignment = Alignment.top)
+//    case vertical([Space], alignment: Alignment = Alignment.leading)
+//    case sequence([Sequence], layout: Layout)
+    ////    case exclosing(Presentation, header: Presentation? = nil)
+//    case named(String, Presentation, [Layout], [Appearance])
+//    case indirect([Structure.Role.ID])
+//    case present(Structure.Role.ID)
+//    case reference(Sequence)
 
 //    var roles: [Structure.Role.ID] {
 //        switch self {
@@ -90,30 +104,30 @@ indirect enum Presentation: Structure.PersistentValue {
 //        }
 //    }
 
-    var containsSequence: Bool {
-        switch self {
-        case .horizontal(let spaces, let alignment), .vertical(let spaces, let alignment):
-            return spaces.first { $0.presentation.containsSequence } != nil ? true : false
-        case .sequence(_, _):
-            return true
-        case .reference(_):
-            return true
-//        case .exclosing(let presentation, let header):
-//            return presentation.containsSequence 
-        case .named(_, let presentation, _, _):
-            return presentation.containsSequence
-        default:
-            return false
-        }
-    }
-
-    init(_ name: String, layout: [Layout], appearance: [Appearance], _ presentation: Presentation) {
-        self = .named(name, presentation, layout, appearance)
-    }
-
-    init(_ aspectId: String, appearance: Appearance = .normal, editable: Bool = true) {
-        self = .aspect(UUID(uuidString: aspectId)!, appearance: appearance, editable: editable)
-    }
+//    var containsSequence: Bool {
+//        switch self {
+//        case .horizontal(let spaces, let alignment), .vertical(let spaces, let alignment):
+//            return spaces.first { $0.presentation.containsSequence } != nil ? true : false
+//        case .sequence(_, _):
+//            return true
+//        case .reference(_):
+//            return true
+    ////        case .exclosing(let presentation, let header):
+    ////            return presentation.containsSequence
+//        case .named(_, let presentation, _, _):
+//            return presentation.containsSequence
+//        default:
+//            return false
+//        }
+//    }
+//
+//    init(_ name: String, layout: [Layout], appearance: [Appearance], _ presentation: Presentation) {
+//        self = .named(name, presentation, layout, appearance)
+//    }
+//
+//    init(_ aspectId: String, appearance: Appearance = .normal, editable: Bool = true) {
+//        self = .aspect(UUID(uuidString: aspectId)!, appearance: appearance, editable: editable)
+//    }
 
     //        @ViewBuilder
     //        func view(for item: Information.Item, editable: Bool = false) -> some View {
@@ -141,9 +155,9 @@ indirect enum Presentation: Structure.PersistentValue {
 //            .aspect(UUID(uuidString: aspect)!, form: form, editable: editable)
 //        }
 
-    static func vertical(_ children: Space..., alignment: Alignment = .leading) -> Presentation {
-        .vertical(children, alignment: alignment)
-    }
+//    static func vertical(_ children: Space..., alignment: Alignment = .leading) -> Presentation {
+//        .vertical(children, alignment: alignment)
+//    }
 }
 
 //    struct AspectView: View {

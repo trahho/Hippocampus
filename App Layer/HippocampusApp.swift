@@ -22,6 +22,14 @@ struct HippocampusApp: App {
         return result
     }
 
+    static var editStaticRolesDocument: Document {
+        let containerURL = URL.virtual
+        let url = containerURL.appendingPathComponent("Preview\(HippocampusApp.memoryExtension)")
+        let document = Document(url: url)
+        document.structure.roles.forEach { $0.toggleStatic() }
+        return document
+    }
+
     static func previewDocument() -> Document {
         let containerURL = URL.virtual
         let url = containerURL.appendingPathComponent("Preview\(HippocampusApp.memoryExtension)")
@@ -93,7 +101,7 @@ struct HippocampusApp: App {
 
     var body: some Scene {
         WindowGroup {
-           EmptyView()
+            EmptyView()
         }
         Window("Edit Role", id: "whatever") {
 //            TestView()
@@ -102,11 +110,8 @@ struct HippocampusApp: App {
 //                }
 //            Design_Localization()
             RolesView()
-                .environment({
-                    let document = HippocampusApp.previewDocument()
-                    document.structure.roles.forEach { $0.toggleStatic() }
-                    return document
-                }())
+//            PresentationView(presentation: Structure.Role.hierarchical.representations[0].presentation, item: Information.Item())
+                .environment(HippocampusApp.editStaticRolesDocument)
 //            DocumentView(document: document)
 //                .environment(navigation)
             // Design_NavigationView()
