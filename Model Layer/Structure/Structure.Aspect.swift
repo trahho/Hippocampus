@@ -11,10 +11,15 @@ import Smaug
 import SwiftUI
 
 extension Structure {
-    class Aspect: ObjectPersistence.Object, EditableListItem {
+    class Aspect: ObjectPersistence.Object, EditableListItem, Pickable {
+        var description: String {
+            name
+        }
+        
         @Property var name: String = ""
         @Property var kind: Kind = .text
         @Property var computed = false
+        @Property var presentation:[Presentation] = [.normal, .icon]
 
 //        @Relation(\Role.aspects) var role: Role!
 

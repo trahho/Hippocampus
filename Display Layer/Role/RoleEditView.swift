@@ -88,7 +88,7 @@ struct RoleEditView: View {
                     }
                 }
                 .sheet(item: $representation) { representation in
-                    EditRepresentationSheet(representation: representation)
+                    EditRepresentationSheet(role: role, representation: representation)
                 }
 
                 Section("Source code", isExpanded: $expanded) {
@@ -102,11 +102,12 @@ struct RoleEditView: View {
     }
 
     struct EditRepresentationSheet: View {
+        @State var role: Structure.Role
         @State var representation: Structure.Role.Representation
         var body: some View {
             Form {
                 TextField("Name", text: $representation.name)
-                PresentationEditView(presentation: $representation.presentation)
+                PresentationEditView(role: role, presentation: $representation.presentation)
                 PresentationView(presentation: representation.presentation, item: Information.Item())
                     .id(UUID())
             }

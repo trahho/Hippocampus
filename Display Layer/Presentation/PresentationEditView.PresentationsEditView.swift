@@ -7,48 +7,69 @@
 
 import SwiftUI
 
-class DragDropCache: Observable, DropDelegate {
-    func performDrop(info: DropInfo) -> Bool {
-        guard let source, let index, let presentation else { return false }
-        return true
-    }
+class DragDropCache: Observable {
+//    func performDrop(info: DropInfo) -> Bool {
+//        guard let source, let index, let presentation else { return false }
+//        return true
+//    }
 
     let id = UUID()
 
-    private var source: Binding<[Presentation]>?
-    private var index: Int?
-    private var presentation: Presentation?
-
-    func drag(presentation: Presentation, source: Binding<[Presentation]>, index: Int) -> NSItemProvider {
-        self.presentation = presentation
-        self.index = index
-        self.source = source
-        return NSItemProvider()
+    struct CacheItem {
+        let source: Binding<[Presentation]>
+        let index: Int
+        let presentation: Presentation
     }
 
-    func insert(target: Binding<[Presentation]>, at: Int) {
-        guard let source, let index, let presentation else { return }
-        target.wrappedValue.insert(presentation, at: at)
+//    var cache: [Presentation: CacheItem] = [:]
+    var cache: CacheItem?
+
+    func drag(presentation: Presentation, source: Binding<[Presentation]>, index: Int) -> Presentation {
+        cache = CacheItem(source: source, index: index, presentation: presentation)
+        print("Dragging \(presentation)")
         source.wrappedValue.remove(at: index)
+        return presentation
+    }
+
+    func drop(presentation: Presentation, target: Binding<[Presentation]>, at: Int) -> Bool {
+        guard let cache else { return false }
+        print("Dropping \(presentation)")
+
+//        print("\(cache.source.wrappedValue.count) -> \(target.wrappedValue.count) ")
+//        cache.source.wrappedValue.remove(at: cache.index)
+//        print("\(cache.source.wrappedValue.count) -> \(target.wrappedValue.count) ")
+
+        target.wrappedValue.insert(presentation, at: at)
+//        print("\(cache.source.wrappedValue.count) -> \(target.wrappedValue.count) ")
+
+        self.cache = nil
+        return true
     }
 }
 
 extension PresentationEditView {
     struct PresentationsEditView: View {
         @Environment(DragDropCache.self) var dragDropCache: DragDropCache
+       
         @Binding var presentations: [Presentation]
+        @State var role: Structure.Role
 
         var body: some View {
             if presentations.isEmpty {
                 Text("Add children")
             } else {
                 ForEach(0 ..< presentations.count, id: \.self) { i in
-                    ItemEditView(presentation: $presentations[i], array: $presentations, index: i)
+                    ItemEditView(presentation: $presentations[i], role: role, array: $presentations)
+                        .draggable(dragDropCache.drag(presentation: presentations[i], source: $presentations, index: i))
                 }
-                .onInsert(of: [.plainText], perform: { index, items in
-                    guard items.count == 1 else { return }
-                    dragDropCache.insert(target: $presentations, at: index)
-                })
+//                .dropDestination(for: String.self) { items, at in
+                ////                    guard items.count == 1, items.first ?? "" == "$" else { return false }
+//                    dragDropCache.drop( target: $presentations, at: at)
+//                }
+//                .onInsert(of: [.plainText], perform: { index, items in
+//                    guard items.count == 1 else { return }
+//                    dragDropCache.insert(target: $presentations, at: index)
+//                })
             }
         }
     }

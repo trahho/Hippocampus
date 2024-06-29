@@ -12,7 +12,6 @@ extension PresentationEditView.ItemEditView {
     struct ContextMenu: View {
         @Binding var presentation: Presentation
         @Binding var array: [Presentation]
-        @State var index: Int
 
         func add(item: Presentation) {
             switch presentation {
@@ -26,7 +25,7 @@ extension PresentationEditView.ItemEditView {
         }
 
         func remove() {
-            guard index > .min else { return }
+            guard let index = array.firstIndex(of: presentation) else { return }
             switch presentation {
             case .horizontal(let children, let alignment), .vertical(let children, let alignment):
                 array.replaceSubrange(index ... index, with: children)
@@ -47,13 +46,12 @@ extension PresentationEditView.ItemEditView {
         }
 
         var body: some View {
-            if index > .min {
-                Button {
-                    remove()
-                } label: {
-                    Label("Remove", systemImage: "trash")
-                }
+            Button {
+                remove()
+            } label: {
+                Label("Remove", systemImage: "trash")
             }
+
             switch presentation {
             case .label:
                 EmptyView()

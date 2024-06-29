@@ -6,10 +6,31 @@
 //
 
 import Foundation
-import SwiftUI
 import Grisu
+import SwiftUI
 
 extension Structure.Aspect {
+    enum Presentation: Structure.PersistentValue, PickableEnum {
+        case icon, small, normal, firstParagraph, full, edit
+        
+        var description: String {
+            switch self {
+            case .icon:
+                "icon"
+            case .small:
+                "small"
+            case .normal:
+                "normal"
+            case .firstParagraph:
+                "firstParagraph"
+            case .full:
+                "full"
+            case .edit:
+                "edit"
+            }
+        }
+    }
+
     enum Kind: Structure.PersistentValue, PickableEnum {
         case text, drawing, date
 
@@ -23,15 +44,6 @@ extension Structure.Aspect {
                 "date"
             }
         }
-//        enum Form {
-        ////            case icon, small, normal, firstParagraph, editFull, edit
-//            static let icon = "_form-Icon"
-//            static let small = "_form-Small"
-//            static let normal = "_form-Normal"
-//            static let firstParagraph = "_form-FirstParagraph"
-//            static let edit = "_form-Edit"
-//
-//        }
 
         var defaultValue: (any Structure.PersistentValue)? {
             switch self {
@@ -41,7 +53,7 @@ extension Structure.Aspect {
                 return nil
             }
         }
-        
+
         var type: Any.Type {
             switch self {
             case .text:

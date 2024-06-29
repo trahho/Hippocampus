@@ -9,7 +9,14 @@ import Foundation
 import Grisu
 import SwiftUI
 
-indirect enum Presentation: Structure.PersistentValue,  Hashable {
+
+
+indirect enum Presentation: Structure.PersistentValue, Hashable, Transferable {
+   
+    static var transferRepresentation: some TransferRepresentation {
+        CodableRepresentation(for: Presentation.self, contentType: .text)
+    }
+    
     enum Appearance: Structure.PersistentValue {
         case icon, small, full, normal, line
     }
@@ -60,6 +67,7 @@ indirect enum Presentation: Structure.PersistentValue,  Hashable {
     case empty
     case undefined
     case label(String)
+    case aspect(Structure.Aspect.ID, presentation: Structure.Aspect.Presentation)
     case horizontal([Presentation], alignment: Alignment)
     case vertical([Presentation], alignment: Alignment)
     case color([Presentation], color: Color)

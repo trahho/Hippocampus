@@ -85,31 +85,33 @@ extension Structure.Role {
     fileprivate func presentationItemSourceCode(presentation: Presentation, tab i: Int) -> String {
         switch presentation {
         case .empty:
-            ".empty"
+            tab(i) + ".empty"
         case .undefined:
-            ".undefined"
+            tab(i) + ".undefined"
         case .label(let string):
             tab(i) + ".label(\"\(string)\")"
+        case .aspect(let aspectId, let presentation):
+            tab(i) + ".aspect(\"\(aspectId)\".uuid, presentation: .\(presentation))"
+        case .grouped(let children):
+            tab(i) + ".grouped(["
+               /* + tab(i + 1)*/ + children.map { presentationItemSourceCode(presentation: $0, tab: i + 1) }.joined(separator: ", ")
+                + tab(i) + "])"
         case .horizontal(let children, let alignment):
-            ".horizontal(["
-                + tab(i + 1) + children.map { presentationItemSourceCode(presentation: $0, tab: i + 1) }.joined(separator: ", ")
+            tab(i) + ".horizontal(["
+               /* + tab(i + 1)*/ + children.map { presentationItemSourceCode(presentation: $0, tab: i + 1) }.joined(separator: ", ")
                 + tab(i) + "], alignment: .\(alignment))"
         case .vertical(let children, let alignment):
-            ".vertical(["
-                + tab(i + 1) + children.map { presentationItemSourceCode(presentation: $0, tab: i + 1) }.joined(separator: ", ")
+            tab(i) + ".vertical(["
+              /*  + tab(i + 1) */+ children.map { presentationItemSourceCode(presentation: $0, tab: i + 1) }.joined(separator: ", ")
                 + tab(i) + "], alignment: .\(alignment))"
         case .background(let children, let color):
-            if children.isEmpty { "" } else {
-                ".background("
-                + presentationItemSourceCode(presentation: children.first!, tab: i + 1)
-                + tab(i) + ", color: Color(hex: \".\(color.toHex!)\"))"
-            }
+            tab(i) + ".background(["
+               /* + tab(i + 1)*/ + children.map { presentationItemSourceCode(presentation: $0, tab: i + 1) }.joined(separator: ", ")
+                + tab(i) + "], color: Color(hex: \"\(color.toHex!)\"))"
         case .color(let children, let color):
-            if children.isEmpty { "" } else {
-                ".color("
-                + presentationItemSourceCode(presentation: children.first!, tab: i + 1)
-                + tab(i) + ", color: Color(hex: \".\(color.toHex!)\"))"
-            }
+            tab(i) + ".color(["
+                /* + tab(i + 1) */ + children.map { presentationItemSourceCode(presentation: $0, tab: i + 1) }.joined(separator: ", ")
+                + tab(i) + "], color: Color(hex: \"\(color.toHex!)\"))"
         default:
             ""
         }

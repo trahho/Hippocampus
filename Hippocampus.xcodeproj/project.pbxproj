@@ -188,6 +188,9 @@
 		C56965D82C05154200AA46B3 /* Structure.Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56965D72C05154200AA46B3 /* Structure.Filter.swift */; };
 		C56965D92C05154200AA46B3 /* Structure.Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56965D72C05154200AA46B3 /* Structure.Filter.swift */; };
 		C56965DA2C05154200AA46B3 /* Structure.Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56965D72C05154200AA46B3 /* Structure.Filter.swift */; };
+		C56F85352C2E1C40007DC75D /* Design.DragDropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F85342C2E1C40007DC75D /* Design.DragDropView.swift */; };
+		C56F85362C2E1C40007DC75D /* Design.DragDropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F85342C2E1C40007DC75D /* Design.DragDropView.swift */; };
+		C56F85372C2E1C40007DC75D /* Design.DragDropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F85342C2E1C40007DC75D /* Design.DragDropView.swift */; };
 		C5728D362A2935EC004968D3 /* IndexedCallable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5728D332A2935EC004968D3 /* IndexedCallable.swift */; };
 		C5728D372A2935EC004968D3 /* IndexedCallable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5728D332A2935EC004968D3 /* IndexedCallable.swift */; };
 		C5728D382A2935EC004968D3 /* IndexedCallable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5728D332A2935EC004968D3 /* IndexedCallable.swift */; };
@@ -481,6 +484,7 @@
 		C56965D32C03B8D700AA46B3 /* LayoutItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutItemView.swift; sourceTree = "<group>"; };
 		C56965D72C05154200AA46B3 /* Structure.Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structure.Filter.swift; sourceTree = "<group>"; };
 		C56965DB2C052DF300AA46B3 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		C56F85342C2E1C40007DC75D /* Design.DragDropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Design.DragDropView.swift; sourceTree = "<group>"; };
 		C5708D1F29E32F9800F4D4E1 /* Notizen.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Notizen.md; sourceTree = "<group>"; };
 		C5728D332A2935EC004968D3 /* IndexedCallable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexedCallable.swift; sourceTree = "<group>"; };
 		C5728D342A2935EC004968D3 /* ArrayBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayBuilder.swift; sourceTree = "<group>"; };
@@ -689,6 +693,7 @@
 				C5E8B4632C20A87200304347 /* Design.Localization.swift */,
 				C57B70BA2C243138007A5105 /* Design.ViewEditView.swift */,
 				C555381A2C277B6E00EC0911 /* Design.PickerKatastropheView.swift */,
+				C56F85342C2E1C40007DC75D /* Design.DragDropView.swift */,
 			);
 			path = Design;
 			sourceTree = "<group>";
@@ -1453,6 +1458,7 @@
 				C55538092C271ADB00EC0911 /* PresentationEditView.PresentationsEditView.swift in Sources */,
 				C5BE4F7229FEDE6E00B27B48 /* DatabaseDocumentTests.swift in Sources */,
 				C59B3CE8295CCE950053DE7D /* CaseIterable+StringConversion.swift in Sources */,
+				C56F85372C2E1C40007DC75D /* Design.DragDropView.swift in Sources */,
 				C5E7F9302A0F928E00FE1F0F /* SidebarView.QueriesView.swift in Sources */,
 				C57B70B92C235674007A5105 /* Structure.Role+static.swift in Sources */,
 				C55AC5D0295A34F900F09326 /* Document.swift in Sources */,
@@ -1560,6 +1566,7 @@
 				C54BE53C289591950060A066 /* NSPredicate+operators.swift in Sources */,
 				C56965C82C028F8E00AA46B3 /* HorizontalLayoutView.swift in Sources */,
 				C5D07F542C21DC7D0080559E /* RoleEditView.swift in Sources */,
+				C56F85352C2E1C40007DC75D /* Design.DragDropView.swift in Sources */,
 				C56965CC2C028FBF00AA46B3 /* VerticalLayoutView.swift in Sources */,
 				C5E350E72C1CECF900FD153D /* RolesView.swift in Sources */,
 				C5A7929E29A4078400637C6C /* DrawingView.swift in Sources */,
@@ -1702,6 +1709,7 @@
 				C55538082C271ADB00EC0911 /* PresentationEditView.PresentationsEditView.swift in Sources */,
 				C504036C290DDE8D0083AC41 /* CaseIterable+StringConversion.swift in Sources */,
 				C54BE500289591440060A066 /* CGPoint+Operators.swift in Sources */,
+				C56F85362C2E1C40007DC75D /* Design.DragDropView.swift in Sources */,
 				C5AAA0E029BD1355000DA6C3 /* DrawingView.ImageView.swift in Sources */,
 				C57B70B82C235673007A5105 /* Structure.Role+static.swift in Sources */,
 				C56965CD2C028FBF00AA46B3 /* VerticalLayoutView.swift in Sources */,

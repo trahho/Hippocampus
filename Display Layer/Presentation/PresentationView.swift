@@ -50,7 +50,6 @@ struct PresentationView: View {
     init(presentation: Presentation, item: Information.Item) {
         self.presentation = presentation
         self.item = item
-        print("\(presentation)")
     }
 
     struct ArrayView: View {
@@ -71,7 +70,6 @@ struct PresentationView: View {
         switch presentation {
         case .check(let child):
             ArrayView(array: child, item: item)
-
         case .label(let string):
             Text(string).id(UUID())
         case .background(let children, let color):
@@ -94,7 +92,7 @@ struct PresentationView: View {
             VStack(alignment: alignment.horizontal) {
                 ArrayView(array: children, item: item)
             }
-        case let .grouped(children):
+        case .grouped(let children):
             ArrayView(array: children, item: item).padding()
         default:
             EmptyView()

@@ -109,6 +109,7 @@ struct HippocampusApp: App {
 //                    Self.locationService.start()
 //                }
 //            Design_Localization()
+//            Design_DragDropView()
             RolesView()
 //            PresentationView(presentation: Structure.Role.hierarchical.representations[0].presentation, item: Information.Item())
                 .environment(HippocampusApp.editStaticRolesDocument)
