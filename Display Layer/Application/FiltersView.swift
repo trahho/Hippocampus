@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Grisu
 
 // extension Structure.Filter {
 //    var children: [Structure.Filter]? {
@@ -16,7 +17,7 @@ import SwiftUI
 
 struct FiltersView: View {
     @Environment(Structure.self) var structure
-    @Binding var expansions: [Structure.Filter.ID: Bool]
+    @Binding var expansions: Expansions
     @Binding var selection: Structure.Filter?
 
     var filters: [Structure.Filter] {

@@ -10,26 +10,26 @@ import Grisu
 import SwiftUI
 
 extension Structure.Aspect {
-    enum Presentation: Structure.PersistentValue, PickableEnum {
-        case icon, small, normal, firstParagraph, full, edit
-        
-        var description: String {
-            switch self {
-            case .icon:
-                "icon"
-            case .small:
-                "small"
-            case .normal:
-                "normal"
-            case .firstParagraph:
-                "firstParagraph"
-            case .full:
-                "full"
-            case .edit:
-                "edit"
-            }
-        }
-    }
+//    enum Appearance: Structure.PersistentValue, PickableEnum {
+//        case icon, small, normal, firstParagraph, full, edit
+//        
+//        var description: String {
+//            switch self {
+//            case .icon:
+//                "icon"
+//            case .small:
+//                "small"
+//            case .normal:
+//                "normal"
+//            case .firstParagraph:
+//                "firstParagraph"
+//            case .full:
+//                "full"
+//            case .edit:
+//                "edit"
+//            }
+//        }
+//    }
 
     enum Kind: Structure.PersistentValue, PickableEnum {
         case text, drawing, date

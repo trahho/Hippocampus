@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-@Observable class Navigation_ {
+@Observable class Navigation {
     var filter: Structure.Filter?
     {
         didSet {

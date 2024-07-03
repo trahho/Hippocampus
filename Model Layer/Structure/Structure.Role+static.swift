@@ -28,10 +28,9 @@ extension Structure.Role
         role.name = "drawing"
         role.aspects = [
             {
-                let aspect = Aspect(id: "6247260E-624C-48A1-985C-CDEDDFA5D3AD".uuid)
+                let aspect = Aspect(id: "F5DC22EC-A54E-428E-8C2A-99A543521AA5".uuid)
                 aspect.name = "drawing"
                 aspect.kind = .drawing
-                aspect.computed = false
                 return aspect
             }()
         ]
@@ -51,7 +50,7 @@ extension Structure.Role
                         .horizontal([
                             .color([
                                 
-                                .aspect("6247260E-624C-48A1-985C-CDEDDFA5D3AD".uuid, presentation: .normal),
+                                .aspect("6247260E-624C-48A1-985C-CDEDDFA5D3AD".uuid, appearance: .normal),
                                 .label("Hallo")
                             ], color: Color(hex: "8F0F8F")),
                             .label("Welt")
@@ -72,7 +71,6 @@ extension Structure.Role
                 let aspect = Aspect(id: "6247260E-624C-48A1-985C-CDEDDFA5D3AD".uuid)
                 aspect.name = "name"
                 aspect.kind = .text
-                aspect.computed = false
                 return aspect
             }()
         ]
@@ -94,7 +92,6 @@ extension Structure.Role
                 let aspect = Aspect(id: "F0C2B7D0-E71A-4296-9190-8EF2D540338F".uuid)
                 aspect.name = "text"
                 aspect.kind = .text
-                aspect.computed = false
                 return aspect
             }()
         ]
@@ -111,7 +108,6 @@ extension Structure.Role
                 let aspect = Aspect(id: "B945443A-32D6-4FE7-A63F-65436CAAA3CA".uuid)
                 aspect.name = "titel"
                 aspect.kind = .text
-                aspect.computed = false
                 return aspect
             }()
         ]
@@ -126,7 +122,6 @@ extension Structure.Role
                 let aspect = Aspect(id: "E851210E-7CCC-4D09-87C1-A7E75E04D7F4".uuid)
                 aspect.name = "created"
                 aspect.kind = .date
-                aspect.computed = false
                 return aspect
             }()
         ]

@@ -12,7 +12,7 @@ import Smaug
 
 extension Document {
     class Drawing: DatabaseDocument {
-//        @Content var drawing = Drawing()
+        @Content var drawing = Drawing()
 //        @Content var properties = Properties()
     }
 }

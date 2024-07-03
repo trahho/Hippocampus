@@ -11,7 +11,7 @@ import SwiftUI
 struct RoleEditView: View {
     @Environment(Document.self) var document
     @State var role: Structure.Role
-    @State var expanded: SectionExpansions = .init()
+    @State var expanded: Expansions = .init()
     @State var representation: Structure.Role.Representation?
 
     var conformation: [Structure.Role] {
@@ -79,8 +79,8 @@ struct RoleEditView: View {
                 ListEditView($role.representations) { representation in
                     LabeledContent("Name") { Text(representation.name.wrappedValue) }
                     HStack {
-//                        PresentationView(presentation: representation.presentation.wrappedValue, item: Information.Item())
-//                            .id(UUID())
+                        PresentationView(presentation: representation.presentation.wrappedValue, item: nil)
+                            .id(UUID())
                         Image(systemName: "square.and.pencil")
                             .onTapGesture {
                                 self.representation = representation.wrappedValue

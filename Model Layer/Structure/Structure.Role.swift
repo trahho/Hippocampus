@@ -15,7 +15,7 @@ extension Structure {
     class Role: Object, EditableListItem {
         @Property var name = ""
         @Objects var roles: [Role]
-        @Property var aspects: [Aspect] = []
+        @Objects(deleteReferences: true) var aspects: [Aspect] 
         @Property var particles: [Particle] = []
 
         @Relations(\Role.roles) var compatible: [Role]

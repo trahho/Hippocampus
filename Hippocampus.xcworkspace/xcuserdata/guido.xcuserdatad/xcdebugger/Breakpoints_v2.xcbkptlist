@@ -7,97 +7,95 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C8436DC8-B31A-4519-8270-A6B337939CB5"
+            uuid = "A46CA294-C1E2-41EA-ACCF-06053FA44581"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Display Layer/Presentation/PresentationEditView.PresentationsEditView.swift"
+            filePath = "Display Layer/Presentation/PresentationView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "drop(presentation:target:at:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "50DED4AC-7BA1-47E7-8AC1-154618B52758"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Display Layer/Presentation/PresentationEditView.ItemEditView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "aspects"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E0179C8E-C4C9-420D-8429-93D2CBCCAE26"
+            uuid = "2CC78161-A928-4BB6-9B20-A3787C0E9A0A"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Display Layer/Presentation/PresentationEditView.ItemEditView.swift"
+            filePath = "Display Layer/Application/FilterResultView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
-            landmarkName = "aspects"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "8B7F5E8C-15CC-4796-BEC4-1031C0701833"
+            uuid = "FC51584D-9377-49FA-A393-313D7DB3540D"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Model Layer/Structure/Structure.Role+sourceCode.swift"
+            filePath = "Display Layer/Application/FilterResultView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
-            landmarkName = "presentationSourceCode(presentation:tab:inline:)"
-            landmarkType = "7">
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "body"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "6AAEA383-8953-48EF-B595-A7E95800D1C7"
+            uuid = "49E349C3-7C6C-428F-B8D1-7BDE9693971B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Model Layer/Structure/Structure.Role+sourceCode.swift"
+            filePath = "Display Layer/Application/FilterResultView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
-            landmarkName = "presentationItemSourceCode(presentation:tab:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "7441CD8E-8260-42F2-A727-4212E30671AB"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Model Layer/Structure/Structure.Role+sourceCode.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
-            landmarkName = "presentationItemSourceCode(presentation:tab:)"
-            landmarkType = "7">
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "49E349C3-7C6C-428F-B8D1-7BDE9693971B - 5f345448e3937f1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; Swift.Optional&lt;SwiftUI.ForEach&lt;Swift.Array&lt;Hippocampus.Information.Item&gt;, Foundation.UUID, Hippocampus.ListRowView&gt;&gt; in Hippocampus.ListRowView.body.getter : some"
+                  moduleName = "Hippocampus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/guido/Development/App/Hippocampus/Display%20Layer/Application/FilterResultView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "68"
+                  endingLineNumber = "68">
+               </Location>
+               <Location
+                  uuid = "49E349C3-7C6C-428F-B8D1-7BDE9693971B - b79caeab468ee1ab"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Hippocampus.Information.Item) -&gt; Hippocampus.ListRowView in closure #1 () -&gt; Swift.Optional&lt;SwiftUI.ForEach&lt;Swift.Array&lt;Hippocampus.Information.Item&gt;, Foundation.UUID, Hippocampus.ListRowView&gt;&gt; in Hippocampus.ListRowView.body.getter : some"
+                  moduleName = "Hippocampus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/guido/Development/App/Hippocampus/Display%20Layer/Application/FilterResultView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "69"
+                  endingLineNumber = "69">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

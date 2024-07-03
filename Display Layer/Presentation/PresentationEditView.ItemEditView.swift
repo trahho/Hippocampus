@@ -42,12 +42,12 @@ extension PresentationEditView {
         }
 
         func aspectName(id: Structure.Aspect.ID) -> String {
-            guard let aspect = role.allAspects.first(where: { $0.id == id }) else { return "unknown" }
+            guard let aspect = aspect(id: id) else { return "unknown" }
             return aspect.name
         }
 
         func aspect(id: Structure.Aspect.ID) -> Structure.Aspect? {
-            guard let aspect = role.allAspects.first(where: { $0.id == id }) else { return nil }
+            guard let aspect = document[Structure.Aspect.self, id] else { return nil }
             return aspect
         }
 
@@ -72,16 +72,16 @@ extension PresentationEditView {
                     .contextMenu { contextMenu }
                     .draggable(draggable)
                     .dropDestination { items, _ in array.insert(item: items.first!, after: presentation); return true }
-                case .aspect(let aspectId, let showAs):
+                case .aspect(let aspectId, let appearance):
                     HStack(alignment: .center) {
                         ValuePicker("", data: aspects, selection: Binding<Structure.Aspect?>(get: { aspect(id: aspectId) }, set: { aspect in
                             guard let aspect else { return }
-                            presentation = .aspect(aspect.id, presentation: showAs)
+                            presentation = .aspect(aspect.id, appearance: appearance)
                         }), unkown: "unknown")
-                        Picker("", selection: Binding(get :{ showAs}, set: { presentation = .aspect(aspectId, presentation: $0)})){
-                            ForEach( aspect(id: aspectId)?.presentation ?? []) { presentation in
+                        Picker("", selection: Binding(get: { appearance }, set: { presentation = .aspect(aspectId, appearance: $0) })) {
+                            ForEach(aspect(id: aspectId)?.presentation ?? []) { presentation in
                                 Text("\(presentation)")
-                                    .tag (presentation)
+                                    .tag(presentation)
                             }
                         }
                         Spacer()

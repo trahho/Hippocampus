@@ -43,18 +43,14 @@ import SwiftUI
 // }
 
 struct PresentationView: View {
+    @Environment(Document.self) var document
     @State var presentation: Presentation
-    @State var item: Information.Item
+    @State var item: Information.Item?
     @State var id = UUID()
-
-    init(presentation: Presentation, item: Information.Item) {
-        self.presentation = presentation
-        self.item = item
-    }
 
     struct ArrayView: View {
         @State var array: [Presentation]
-        @State var item: Information.Item
+        @State var item: Information.Item?
 
         var body: some View {
             ForEach(array, id: \.self) { presentation in
@@ -65,25 +61,19 @@ struct PresentationView: View {
     }
 
     var body: some View {
-//        presentation.presentation(for: item)
-//        Group {
         switch presentation {
-        case .check(let child):
-            ArrayView(array: child, item: item)
         case .label(let string):
             Text(string).id(UUID())
+        case .aspect(let aspectId, let appearance):
+            if let aspect = document[Structure.Aspect.self, aspectId] {
+                AspectView(aspect: aspect, appearance: appearance, editable: false)
+            }
         case .background(let children, let color):
             ArrayView(array: children, item: item)
                 .background(color)
         case .color(let children, let color):
             ArrayView(array: children, item: item)
-
-                //                Rectangle()
                 .foregroundStyle(color)
-        //                    .foregroundStyle(color)
-        //            case .background(let child, let color):
-        //                PresentationView(presentation: child, item: item)
-        //                    .backgroundStyle(color)
         case .horizontal(let children, alignment: let alignment):
             HStack(alignment: alignment.vertical) {
                 ArrayView(array: children, item: item)
@@ -97,13 +87,22 @@ struct PresentationView: View {
         default:
             EmptyView()
         }
-        //                .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/)
-//        }
-//        .id(UUID())
+    }
+    
+    struct Preview: View {
+        let presentation: Presentation =
+            .vertical([
+                    .aspect("6247260E-624C-48A1-985C-CDEDDFA5D3AD".uuid, appearance: .normal),
+                    .aspect("F0C2B7D0-E71A-4296-9190-8EF2D540338F".uuid, appearance: .normal),
+                    .aspect("F0C2B7D0-E71A-4296-9190-8EF2D540338F".uuid, appearance: .normal)
+            ], alignment: .center)
+        var body: some View {
+            PresentationView(presentation: presentation, item: nil)
+               .environment(HippocampusApp.editStaticRolesDocument)
+        }
     }
 }
 
 #Preview {
-//    @State var document = HippocampusApp.editStaticRolesDocument
-    PresentationView(presentation: Structure.Role.hierarchical.representations[0].presentation, item: Information.Item())
+    PresentationView.Preview()
 }

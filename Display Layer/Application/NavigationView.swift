@@ -5,6 +5,7 @@
 //  Created by Guido Kühn on 27.12.22.
 //
 
+import Grisu
 import SwiftUI
 
 struct NavigationView: View {
@@ -12,15 +13,15 @@ struct NavigationView: View {
     @Environment(Information.self) var information
 //    @Bindable var navigation: Navigation
     @State var cv: NavigationSplitViewVisibility = .automatic
-    @State var expansions: [Structure.Filter.ID: Bool] = [:]
+    @State var expansions = Expansions()
     @State var filter: Structure.Filter?
     @State var index: Int = 0
     @State var path = NavigationPath()
 
     var twoColumn: Bool {
-        return if let filter = filter, let role = filter.role, filter.layouts.contains(.list) { true } else { false }
+        return if let filter = filter, let _ = filter.role, filter.layouts.contains(.list) { true } else { false }
     }
-    
+
     var filterId: UUID {
         filter?.id ?? Structure.Role.same.id
     }
@@ -31,7 +32,7 @@ struct NavigationView: View {
 
     @ViewBuilder var filterResultList: some View {
         if let filter = filter, let _ = filter.role, filter.layouts.contains(.list) {
-            FilterResultView(items: information.items.asArray, filter: filter, index: index)
+            FilterResultView(filter: filter)
         } else {
             EmptyView()
         }
@@ -41,8 +42,8 @@ struct NavigationView: View {
         NavigationStack(path: $path) {
             ZStack {
 //                if let filter = filter, let layout = navigation.layout, layout != .list, filter.layouts.contains(layout) {
-                if let filter {
-                    FilterResultView(items: information.items.asArray, filter: filter, index: index)
+                if !twoColumn, let filter {
+                    FilterResultView(filter: filter)
                 } else {
                     EmptyView()
                 }
@@ -70,11 +71,11 @@ struct NavigationView: View {
                 .id(filterId)
             }
         }
-        .onChange(of: filter) { oldValue, newValue in
-            print (filter?.name ?? "Nix")
-            index += 1
-        }
-          
+//        .onChange(of: filter) { _, _ in
+//            print(filter?.name ?? "Nix")
+//            index += 1
+//        }
+
 //        if let filter = navigation.listFilter {
 //        NavigationSplitView(columnVisibility: $cv) {
 //            if let filter = filter, let layout = navigation.layout, layout == .list, filter.layouts.contains(.list) {
@@ -121,7 +122,7 @@ struct NavigationView: View {
 }
 
 #Preview {
-    let document = HippocampusApp.previewDocument()
+    let document = HippocampusApp.previewDocument
 //    let navigation = Navigation()
 
     return NavigationView()

@@ -6,21 +6,23 @@
 //
 
 import Foundation
+import Grisu
 import SwiftUI
 
 struct FilterView: View {
 //    @Environment(Navigation.self) var navigation
     @State var filter: Structure.Filter
     @Binding var selected: Structure.Filter?
-    @Binding var expansions: [Structure.Filter.ID: Bool]
-
-    var expansion: Binding<Bool> {
-        Binding<Bool>(get: {
-            expansions[filter.id] ?? true
-        }, set: {
-            expansions[filter.id] = $0
-        })
-    }
+    @Binding var expansions: Expansions
+//    @Binding var expansions: [Structure.Filter.ID: Bool]
+//
+//    var expansion: Binding<Bool> {
+//        Binding<Bool>(get: {
+//            expansions[filter.id] ?? true
+//        }, set: {
+//            expansions[filter.id] = $0
+//        })
+//    }
 
     @ViewBuilder var label: some View {
         ZStack {
@@ -40,7 +42,9 @@ struct FilterView: View {
             .onTapGesture {
                 guard selected != filter else { return }
                 print("\(selected != filter)")
-                selected = filter
+                withAnimation {
+                    selected = filter
+                }
             }
         }
     }
@@ -53,8 +57,8 @@ struct FilterView: View {
         if filters.isEmpty {
             label
         } else {
-//            DisclosureGroup(isExpanded: expansion) {
-            DisclosureGroup {
+            DisclosureGroup(key: filter.id.uuidString, isExpanded: $expansions) {
+//            DisclosureGroup {
                 ForEach(filters, id: \.self) { filter in
                     FilterView(filter: filter, selected: $selected, expansions: $expansions)
                 }

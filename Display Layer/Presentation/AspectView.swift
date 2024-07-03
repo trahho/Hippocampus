@@ -8,20 +8,82 @@
 import SwiftUI
 
 struct AspectView: View {
-    @State var item: Information.Item
+    @State var item: Information.Item?
     @State var aspect: Structure.Aspect
-    @State var appearance: Presentation.Appearance
+    @State var appearance: Presentation.Appearance 
     @State var editable: Bool
+
+    var textBinding: Binding<String> {
+        if let item {
+            Binding(get: { aspect[String.self, item] ?? "Not found" }, set: { aspect[String.self, item] = $0 })
+        } else {
+            .constant("Hallo Welt")
+        }
+    }
 
     var body: some View {
         switch aspect.kind {
-        case .text:
-            TextAspectView(item: item, aspect: aspect, appearance: appearance, editable: editable)
-        case .drawing:
-            DrawingAspectView(item: item, aspect: aspect, appearance: appearance, editable: editable)
         case .date:
-            DateAspectView(item: item, aspect: aspect, appearance: appearance, editable: editable)
+            EmptyView()
+        case .drawing:
+            EmptyView()
+        case .text:
+            switch appearance {
+            case .icon:
+                Image(systemName: "text.word.spacing")
+            case .small, .normal, .full, .edit:
+                if editable {
+                    TextField("", text: textBinding)
+                } else {
+                    Text(verbatim: textBinding.wrappedValue)
+                }
+            case .firstParagraph:
+                if editable {
+                    TextField("", text: textBinding)
+                        .lineLimit(1)
+                } else {
+                    Text(verbatim: textBinding.wrappedValue)
+                        .lineLimit(1)
+                }
+       
+            }
+     
         }
+//        switch (aspect.kind, appearance) {
+//        case (let kind, .icon):
+//            switch kind {
+//            case .date:
+//                Image(systemName: "calendar")
+//            case .drawing:
+//                Image(systemName: "theatermask.and.paintbrush")
+//            case .text:
+//                Image(systemName: "text.word.spacing")
+//            }
+////        case (.text, .firstParagraph):
+////            if editable {
+////                TextField("", text: textBinding)
+////                    .lineLimit(1)
+////            } else {
+////                Text(verbatim: textBinding.wrappedValue)
+////                    .lineLimit(1)
+////            }
+//        case (.text, _):
+//            if editable {
+//                TextField("", text: textBinding)
+//            } else {
+//                Text(verbatim: textBinding.wrappedValue)
+//            }
+//        default:
+//            EmptyView()
+//        }
+//        switch aspect.kind {
+//        case .text:
+//            TextAspectView(item: item, aspect: aspect, appearance: appearance, editable: editable)
+//        case .drawing:
+//            DrawingAspectView(item: item, aspect: aspect, appearance: appearance, editable: editable)
+//        case .date:
+//            DateAspectView(item: item, aspect: aspect, appearance: appearance, editable: editable)
+//        }
     }
 }
 

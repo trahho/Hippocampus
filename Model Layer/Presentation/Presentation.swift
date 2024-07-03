@@ -17,10 +17,32 @@ indirect enum Presentation: Structure.PersistentValue, Hashable, Transferable {
         CodableRepresentation(for: Presentation.self, contentType: .text)
     }
     
-    enum Appearance: Structure.PersistentValue {
-        case icon, small, full, normal, line
-    }
+//    enum Appearance: Structure.PersistentValue {
+////        static func == (lhs: Presentation.Appearance, rhs: Presentation.Appearance) -> Bool {
+////            <#code#>
+////        }
+////        
+//        case icon, small, normal, firstParagraph, full, edit
+//        
+////        var description: String {
+////            switch self {
+////            case .icon:
+////                "icon"
+////            case .small:
+////                "small"
+////            case .normal:
+////                "normal"
+////            case .firstParagraph:
+////                "firstParagraph"
+////            case .full:
+////                "full"
+////            case .edit:
+////                "edit"
+////            }
+//    }
 
+
+    
     enum Space: Structure.PersistentValue {
         case normal(Presentation)
         case percent(Presentation, Int)
@@ -50,29 +72,28 @@ indirect enum Presentation: Structure.PersistentValue, Hashable, Transferable {
         case multiSorted([Order])
     }
 
-    enum Sequence: Structure.PersistentValue {
-        case ordered(Information.Condition, order: [Order])
-        case unordered(Information.Condition)
-
-        var roles: Set<Structure.Role.ID> {
-            switch self {
-            case .ordered(let condition, _):
-                condition.roles
-            case .unordered(let condition):
-                condition.roles
-            }
-        }
-    }
+//    enum Sequence: Structure.PersistentValue {
+//        case ordered(Information.Condition, order: [Order])
+//        case unordered(Information.Condition)
+//
+//        var roles: Set<Structure.Role.ID> {
+//            switch self {
+//            case .ordered(let condition, _):
+//                condition.roles
+//            case .unordered(let condition):
+//                condition.roles
+//            }
+//        }
+//    }
 
     case empty
     case undefined
     case label(String)
-    case aspect(Structure.Aspect.ID, presentation: Structure.Aspect.Presentation)
+    case aspect(Structure.Aspect.ID, appearance: Appearance)
     case horizontal([Presentation], alignment: Alignment)
     case vertical([Presentation], alignment: Alignment)
     case color([Presentation], color: Color)
     case background([Presentation], color: Color)
-    case check([Presentation])
     case grouped([Presentation])
 
     static func color(_ presentation: Presentation, color: Color) -> Presentation {

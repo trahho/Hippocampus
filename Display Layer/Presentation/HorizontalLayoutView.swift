@@ -13,8 +13,7 @@ struct HorizontalLayoutView: View {
     @State var elements: [Presentation.Space]
     @State var alignment: Presentation.Alignment
     @State var layout: Presentation.Layout
-   @State var appearance: Presentation.Appearance
-
+    @State var appearance: Presentation.Appearance
 
     var verticalAlignment: VerticalAlignment {
         switch alignment {
@@ -31,17 +30,17 @@ struct HorizontalLayoutView: View {
 
     var body: some View {
         HStack(alignment: verticalAlignment) {
-            ForEach(0 ..< elements.count, id: \.self) { index in
-                let space = elements[index]
-                switch space {
-                case .full(let presentation):
-                    ItemPresentationView(presentation: presentation, item: item, layout: layout, appearance: appearance)
-                case .normal(let presentation):
-                    ItemPresentationView(presentation: presentation, item: item, layout: layout, appearance: appearance)
-                case .percent(let presentation, let percent):
-                    ItemPresentationView(presentation: presentation, item: item, layout: layout, appearance: appearance)
-                }
-            }
+//            ForEach(0 ..< elements.count, id: \.self) { index in
+//                let space = elements[index]
+//                switch space {
+//                case .full(let presentation):
+//                    ItemPresentationView(presentation: presentation, item: item, layout: layout, appearance: appearance)
+//                case .normal(let presentation):
+//                    ItemPresentationView(presentation: presentation, item: item, layout: layout, appearance: appearance)
+//                case .percent(let presentation, let percent):
+//                    ItemPresentationView(presentation: presentation, item: item, layout: layout, appearance: appearance)
+//                }
+//            }
         }
     }
 }

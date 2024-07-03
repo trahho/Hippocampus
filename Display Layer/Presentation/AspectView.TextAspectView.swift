@@ -16,20 +16,20 @@ extension AspectView {
         @State var editable: Bool
 
         var textBinding: Binding<String> {
-            Binding(get: { aspect[String.self, item] ?? "Not found" }, set: { aspect[String.self, item] = $0 })
+            Binding(get: { aspect[String.self, item] ?? "Not found" }, set: { if !aspect.computed { aspect[String.self, item] = $0 }})
         }
 
         var body: some View {
             switch appearance {
             case .icon:
                 Image(systemName: "text.word.spacing")
-            case .small, .full, .normal:
+            case .small, .full, .normal, .edit:
                 if editable {
                     TextField("", text: textBinding)
                 } else {
                     Text(verbatim: textBinding.wrappedValue)
                 }
-            case .line:
+            case .firstParagraph:
                 if editable {
                     TextField("", text: textBinding)
                         .lineLimit(1)

@@ -9,6 +9,9 @@ import Foundation
 import Smaug
 
 class Information: ObjectStore {
+    typealias ValueStorage = Information.TimedValue.ValueStorage
+    typealias Value = ValueStorage.PersistentValue
+    
     @Objects var items: Set<Item>
 
 //    var items: Set<Item> {

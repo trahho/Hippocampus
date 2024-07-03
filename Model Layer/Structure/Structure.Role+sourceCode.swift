@@ -90,8 +90,8 @@ extension Structure.Role {
             tab(i) + ".undefined"
         case .label(let string):
             tab(i) + ".label(\"\(string)\")"
-        case .aspect(let aspectId, let presentation):
-            tab(i) + ".aspect(\"\(aspectId)\".uuid, presentation: .\(presentation))"
+        case .aspect(let aspectId, let appearance):
+            tab(i) + ".aspect(\"\(aspectId)\".uuid, appearance: .\(appearance))"
         case .grouped(let children):
             tab(i) + ".grouped(["
                /* + tab(i + 1)*/ + children.map { presentationItemSourceCode(presentation: $0, tab: i + 1) }.joined(separator: ", ")

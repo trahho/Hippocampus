@@ -10,24 +10,50 @@ import Smaug
 
 extension Information.Condition {
     enum Comparison: Information.PersistentValue {
-        case below(Structure.Aspect.ID, ValueStorage)
-        case above(Structure.Aspect.ID, ValueStorage)
-        case equal(Structure.Aspect.ID, ValueStorage)
-        case unequal(Structure.Aspect.ID, ValueStorage)
+        case below(Structure.Aspect.ID, Information.ValueStorage)
+        case above(Structure.Aspect.ID, Information.ValueStorage)
+        case equal(Structure.Aspect.ID, Information.ValueStorage)
+        case unequal(Structure.Aspect.ID, Information.ValueStorage)
 
-        func matches(for item: Information.Item) -> Bool {
+        func appendRole(role: Structure.Role, roles: inout [Structure.Role]) {
+            guard roles.firstIndex(of: role) == nil else { return }
+            roles.append(role)
+        }
+
+        func matches(for item: Information.Item, structure: Structure, roles: inout [Structure.Role]) -> Bool {
             switch self {
             case let .below(aspect, value):
-                guard let itemValue = item[aspect] else { return true }
+                guard let aspect = structure[Structure.Aspect.self, aspect], let itemValue = aspect[item] else { return true }
+                appendRole(role: aspect.role, roles: &roles)
                 return itemValue < value
             case let .above(aspect, value):
-                guard let itemValue = item[aspect] else { return false }
+                guard let aspect = structure[Structure.Aspect.self, aspect], let itemValue = aspect[item] else { return false }
+                appendRole(role: aspect.role, roles: &roles)
                 return itemValue > value
             case let .equal(aspect, value):
-                guard let itemValue = item[aspect] else { return false }
+                guard let aspect = structure[Structure.Aspect.self, aspect], let itemValue = aspect[item] else { return false }
+                appendRole(role: aspect.role, roles: &roles)
                 return itemValue == value
             case let .unequal(aspect, value):
-                guard let itemValue = item[aspect] else { return true }
+                guard let aspect = structure[Structure.Aspect.self, aspect], let itemValue = aspect[item] else { return true }
+                appendRole(role: aspect.role, roles: &roles)
+                return itemValue != value
+            }
+        }
+
+        func matches(for item: Information.Particle, structure: Structure, roles: inout [Structure.Role]) -> Bool {
+            switch self {
+            case let .below(aspect, value):
+                guard let aspect = structure[Structure.Aspect.self, aspect], let itemValue = aspect[item] else { return true }
+                return itemValue < value
+            case let .above(aspect, value):
+                guard let aspect = structure[Structure.Aspect.self, aspect], let itemValue = aspect[item] else { return false }
+                return itemValue > value
+            case let .equal(aspect, value):
+                guard let aspect = structure[Structure.Aspect.self, aspect], let itemValue = aspect[item] else { return false }
+                return itemValue == value
+            case let .unequal(aspect, value):
+                guard let aspect = structure[Structure.Aspect.self, aspect], let itemValue = aspect[item] else { return true }
                 return itemValue != value
             }
         }

@@ -22,9 +22,9 @@ class Document: DatabaseDocument {
     }
 
     override func setup() {
-        Structure.Role.statics.forEach {
-            self[] = $0
-        }
+        self[] = Structure.Role.statics
+        self[] = Structure.Filter.statics
+
 //        [Presentation.Query]([.general, .notes, .topics]).forEach { self[] = $0 }
 //        [Presentation.Group]([.builtIn]).forEach { self[] = $0 }
 

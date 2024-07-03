@@ -57,16 +57,19 @@ extension PresentationEditView.ItemEditView {
                 EmptyView()
             case .undefined:
                 Button("Label") { presentation = .label("") }
+                Button("Aspect") { presentation = .aspect(.nil, appearance: .normal) }
                 Button("Horizontal") { presentation = .horizontal([], alignment: .center) }
                 Button("Vertical") { presentation = .vertical([], alignment: .center) }
             default:
                 Menu("Add") {
                     Button("Label") { add(item: .label("")) }
+                    Button("Aspect") { presentation = .aspect(.nil, appearance: .normal) }
                     Button("Horizontal") { add(item: .horizontal([], alignment: .center)) }
                     Button("Vertical") { add(item: .vertical([], alignment: .center)) }
                 }
                 Menu("Change to") {
                     Button("Label") { presentation = .label("") }
+                    Button("Aspect") { presentation = .aspect(.nil, appearance: .normal) }
                     Button("Horizontal") { presentation = .horizontal(children, alignment: .center) }
                     Button("Vertical") { presentation = .vertical(children, alignment: .center) }
                 }

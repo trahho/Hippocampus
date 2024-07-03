@@ -11,7 +11,7 @@ import SwiftUI
 struct RolesView: View {
     @Environment(Document.self) var document
     @State var role: Structure.Role.ID?
-    @State var expanded: SectionExpansions = .init()
+    @State var expanded: Expansions = .init()
 
     var roles: [Structure.Role] {
         document.structure.roles
