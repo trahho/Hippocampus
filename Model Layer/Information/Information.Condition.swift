@@ -48,6 +48,7 @@ extension Information {
         case hasParticle(Structure.Particle.ID, Condition)
         case isParticle(Structure.Particle.ID)
         case isReferenced(Condition)
+        case isReferenceOfRole(Structure.Role.ID)
         case hasReference(Condition)
         case hasValue(Comparison)
         case not(Condition)
@@ -115,6 +116,11 @@ extension Information {
             }
         }
 
+        func appendRole(role: Structure.Role, roles: inout [Structure.Role]) {
+            guard roles.firstIndex(of: role) == nil else { return }
+            roles.append(role)
+        }
+
         func matches(_ item: Information.Item, sameRole: Structure.Role? = nil, structure: Structure) -> Bool {
             var roles: [Structure.Role] = []
             return matches(item, sameRole: sameRole, structure: structure, roles: &roles)
@@ -125,13 +131,21 @@ extension Information {
             case let .always(truth):
                 return truth
             case let .hasRole(roleId):
-                if roleId == Structure.Role.same.id, let sameRole { return item.conforms(to: sameRole) }
+                if roleId == Structure.Role.same.id, let sameRole { return item.conforms(to: sameRole) != nil }
                 guard let role = structure[Structure.Role.self, roleId] else { return false }
-                if roles.firstIndex(of: role) == nil {
-                    roles.append(role)
+                appendRole(role: role, roles: &roles)
+                return item.conforms(to: role) != nil
+            case let .isReferenceOfRole(roleId):
+                guard let role = structure[Structure.Role.self, roleId] else { return false }
+                for reference in role.references {
+                    let reference = if reference == Structure.Role.same { role } else { reference }
+                    if let role = item.conforms(to: reference) {
+                        appendRole(role: role, roles: &roles)
+                        return true
+                    }
                 }
-                return item.conforms(to: role)
-            case let .isParticle(particleId):
+                return false
+            case .isParticle:
                 return false
             case let .hasValue(comparison):
                 return comparison.matches(for: item, structure: structure, roles: &roles)
@@ -142,9 +156,12 @@ extension Information {
                 var blockRoles: [Structure.Role] = []
                 return item.to.contains { condition.matches($0, sameRole: sameRole, structure: structure, roles: &blockRoles) }
             case let .hasParticle(particleId, condition):
-                return item.particles.contains { condition.matches($0, structure: structure, roles: &roles) }
+                return item.particles
+                    .filter { $0.id == particleId }
+                    .contains { condition.matches($0, structure: structure, roles: &roles) }
             case let .not(condition):
-                return !condition.matches(item, sameRole: sameRole, structure: structure, roles: &roles)
+                var blockRoles: [Structure.Role] = []
+                return !condition.matches(item, sameRole: sameRole, structure: structure, roles: &blockRoles)
             case let .any(conditions):
                 return conditions.first { $0.matches(item, sameRole: sameRole, structure: structure, roles: &roles) } != nil
             case let .all(conditions):
@@ -156,7 +173,7 @@ extension Information {
             var roles: [Structure.Role] = []
             return matches(item, structure: structure, roles: &roles)
         }
-        
+
         func matches(_ item: Information.Particle, structure: Structure, roles: inout [Structure.Role]) -> Bool {
             switch self {
             case let .always(truth):
@@ -175,6 +192,8 @@ extension Information {
                 return conditions.first { $0.matches(item, structure: structure, roles: &roles) } != nil
             case let .all(conditions):
                 return conditions.first { !$0.matches(item, structure: structure, roles: &roles) } == nil
+            case .isReferenceOfRole:
+                return false
             }
         }
     }

@@ -38,30 +38,28 @@ extension Structure.Role
     }()
 
     static let hierarchical: Role = {
-            var role = Role(id: "B6D7755C-210C-484D-B79B-ACD931D581C9".uuid)
-            role.name = "hierarchical"
-            role.roles = [.named]
-            role.references = [.same]
-            role.representations = [
-                {
-                    let representation = Representation(id: "AE043B77-C4F7-454C-A530-5D8BECFAFC80".uuid)
-                    representation.name = ""
-                    representation.presentation = .background([
-                        .horizontal([
-                            .color([
-                                
-                                .aspect("6247260E-624C-48A1-985C-CDEDDFA5D3AD".uuid, appearance: .normal),
-                                .label("Hallo")
-                            ], color: Color(hex: "8F0F8F")),
-                            .label("Welt")
-                        ], alignment: .center)
-                    ], color: Color(hex: "F5F28F"))
-                    return representation
-                }()
-            ]
-            return role
-        }()
-
+        var role = Role(id: "B6D7755C-210C-484D-B79B-ACD931D581C9".uuid)
+        role.name = "hierarchical"
+        role.roles = [.named]
+        role.references = [.same]
+        role.representations = [
+            {
+                let representation = Representation(id: "AE043B77-C4F7-454C-A530-5D8BECFAFC80".uuid)
+                representation.name = ""
+                representation.presentation = .background([
+                    .horizontal([
+                        .color([
+                            .aspect("6247260E-624C-48A1-985C-CDEDDFA5D3AD".uuid, appearance: .normal),
+                            .label("Hallo")
+                        ], color: Color(hex: "8F0F8F")),
+                        .label("Welt")
+                    ], alignment: .center)
+                ], color: Color(hex: "F5F28F"))
+                return representation
+            }()
+        ]
+        return role
+    }()
 
     static let named: Role = {
         var role = Role(id: "8A81358C-2A7C-497D-A93D-306F776C217C".uuid)
@@ -102,7 +100,7 @@ extension Structure.Role
         var role = Role(id: "3B681E4A-C42A-48D5-92E2-93F4B5C7CDD0".uuid)
         role.name = "topic"
         role.roles = [.hierarchical, .named, .tracked]
-        role.references = [.same, .note]
+        role.references = [.note]
         role.aspects = [
             {
                 let aspect = Aspect(id: "B945443A-32D6-4FE7-A63F-65436CAAA3CA".uuid)

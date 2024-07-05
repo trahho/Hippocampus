@@ -9,40 +9,35 @@ import Foundation
 import Grisu
 import SwiftUI
 
-
-
 indirect enum Presentation: Structure.PersistentValue, Hashable, Transferable {
-   
     static var transferRepresentation: some TransferRepresentation {
         CodableRepresentation(for: Presentation.self, contentType: .text)
     }
-    
+
 //    enum Appearance: Structure.PersistentValue {
-////        static func == (lhs: Presentation.Appearance, rhs: Presentation.Appearance) -> Bool {
-////            <#code#>
-////        }
-////        
+    ////        static func == (lhs: Presentation.Appearance, rhs: Presentation.Appearance) -> Bool {
+    ////            <#code#>
+    ////        }
+    ////
 //        case icon, small, normal, firstParagraph, full, edit
-//        
-////        var description: String {
-////            switch self {
-////            case .icon:
-////                "icon"
-////            case .small:
-////                "small"
-////            case .normal:
-////                "normal"
-////            case .firstParagraph:
-////                "firstParagraph"
-////            case .full:
-////                "full"
-////            case .edit:
-////                "edit"
-////            }
+//
+    ////        var description: String {
+    ////            switch self {
+    ////            case .icon:
+    ////                "icon"
+    ////            case .small:
+    ////                "small"
+    ////            case .normal:
+    ////                "normal"
+    ////            case .firstParagraph:
+    ////                "firstParagraph"
+    ////            case .full:
+    ////                "full"
+    ////            case .edit:
+    ////                "edit"
+    ////            }
 //    }
 
-
-    
     enum Space: Structure.PersistentValue {
         case normal(Presentation)
         case percent(Presentation, Int)
@@ -70,6 +65,24 @@ indirect enum Presentation: Structure.PersistentValue, Hashable, Transferable {
     enum Order: Structure.PersistentValue {
         case sorted(Structure.Aspect.ID, ascending: Bool = true)
         case multiSorted([Order])
+        
+        func compare(lhs: Information.Item, rhs: Information.Item, structure: Structure) -> Bool {
+               switch self {
+               case .sorted(let aspect, let ascending):
+                   guard let aspect = structure[Structure.Aspect.self, aspect] else { return false }
+                   if ascending {
+                       return lhs[aspect] ?? .nil < rhs[aspect] ?? .nil
+                   } else {
+                       return lhs[aspect] ?? .nil > rhs[aspect] ?? .nil
+                   }
+               case .multiSorted(let sorters):
+                   for sorter in sorters {
+                       if compare(lhs: lhs, rhs: rhs, structure: structure) { return true }
+                       if compare(lhs: rhs, rhs: lhs, structure: structure) { return false }
+                   }
+                   return false
+               }
+           }
     }
 
 //    enum Sequence: Structure.PersistentValue {

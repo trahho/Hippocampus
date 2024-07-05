@@ -40,42 +40,42 @@ struct HippocampusApp: App {
             
             filter.name = "Group \(i)"
             filter.layouts = [.list]
-            filter.role = Structure.Role.named
+            filter.role = Structure.Role.note
             for j in 1 ..< 4 {
                 let subFilter = document(Structure.Filter.self)
                 document[] = subFilter
                 subFilter.filter.append(filter)
                 subFilter.layouts = [.canvas]
                 subFilter.name = "Filter \(j)"
-                subFilter.role = Structure.Role.hierarchical
+                subFilter.role = Structure.Role.topic
             }
         }
 
         for filter in document.structure.filters {
             filter.order = [.sorted(Structure.Role.named[dynamicMember: "name"].id, ascending: true)]
-            filter.roots = .always(true)
-            filter.leafs = .always(true)
+//            filter.roots = .always(true)
+//            filter.leafs = .always(true)
         }
 
         for i in 0 ..< 10 {
             let item = document(Information.Item.self)
             Structure.Role.named[dynamicMember: "name"][String.self, item] = "\(i + 1). Hallo Welt🤩"
-            item.roles.append(Structure.Role.named)
-            item.roles.append(Structure.Role.hierarchical)
+//            item.roles.append(Structure.Role.named)
+            item.roles.append(Structure.Role.topic)
             document[] = item
             for j in 0 ..< 5 {
                 let subItem = document(Information.Item.self)
                 Structure.Role.named[dynamicMember: "name"][String.self, subItem] = "\(i + 1).\(j + 1). Hallo Welt🤩"
-                subItem.roles.append(Structure.Role.named)
-                subItem.roles.append(Structure.Role.hierarchical)
+//                subItem.roles.append(Structure.Role.named)
+                subItem.roles.append(Structure.Role.topic)
 
                 subItem.from.append(item)
                 for k in 0 ..< 5 {
                     let subsubItem = document(Information.Item.self)
                     Structure.Role.named[dynamicMember: "name"][String.self, subsubItem] = "\(i + 1).\(j + 1).\(k + 1). Hallo Welt🤩"
-                    subsubItem.roles.append(Structure.Role.named)
+                    subsubItem.roles.append(Structure.Role.note)
                     subItem.to.append(subsubItem)
-//                    subsubItem.to.append(item)
+                    subsubItem.to.append(item)
                 }
             }
         }

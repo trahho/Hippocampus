@@ -17,7 +17,7 @@ import Grisu
 
 struct FiltersView: View {
     @Environment(Structure.self) var structure
-    @Binding var expansions: Expansions
+    @State var expansions = Expansions(defaultExpansion: true)
     @Binding var selection: Structure.Filter?
 
     var filters: [Structure.Filter] {

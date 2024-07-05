@@ -16,7 +16,7 @@ extension Structure {
         @Property var roots: Information.Condition? 
         @Property var leafs: Information.Condition?
 
-        @Object var role: Structure.Role?
+        @Object var role: Structure.Role!
         @Property var layouts: [Presentation.Layout] = []
         @Property var order: [Presentation.Order] = []
 

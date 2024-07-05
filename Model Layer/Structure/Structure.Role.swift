@@ -18,7 +18,7 @@ extension Structure {
         @Objects(deleteReferences: true) var aspects: [Aspect] 
         @Property var particles: [Particle] = []
 
-        @Relations(\Role.roles) var compatible: [Role]
+        @Relations(\Role.roles) var subRoles: [Role]
         @Objects var references: [Role]
         @Relations(\Role.references) var referencedBy: [Role]
         @Property var representations: [Representation] = []

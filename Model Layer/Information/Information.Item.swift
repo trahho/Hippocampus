@@ -22,8 +22,8 @@ extension Information {
 
         @Property private var values: [Structure.Aspect.ID: TimedValue] = [:]
 
-        func conforms(to role: Structure.Role) -> Bool {
-            return self.roles.first { $0.conforms(to: role) } != nil
+        func conforms(to role: Structure.Role) -> Structure.Role? {
+            return self.roles.first { $0.conforms(to: role) } 
         }
 
         private func allChildren(cache: inout Set<Item>) {

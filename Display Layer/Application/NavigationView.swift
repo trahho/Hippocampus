@@ -27,7 +27,7 @@ struct NavigationView: View {
     }
 
     @ViewBuilder var filtersList: some View {
-        FiltersView(expansions: $expansions, selection: $filter)
+        FiltersView( selection: $filter)
     }
 
     @ViewBuilder var filterResultList: some View {

@@ -21,6 +21,7 @@ extension Structure {
         @Property var kind: Kind = .text
         @Property var computed = false
         @Property var computation: Information.Computation?
+        @Property var modification: Information.Modification?
         @Property var presentation: [Presentation.Appearance] = [.normal, .icon]
 
         var information: Information {
@@ -38,7 +39,9 @@ extension Structure {
 
         subscript(_ item: Information.Item) -> Information.ValueStorage? {
             get {
-                if let computation { computation.compute(for: item, getAspect: getAspect) } else { item[id] }
+                if let computation, let structure = store as? Structure {
+                    computation.compute(for: item, structure: structure)
+                } else { item[id] }
             }
             set {
                 guard !computed else { return }
@@ -53,8 +56,9 @@ extension Structure {
 
         subscript(_ item: Information.Particle) -> Information.ValueStorage? {
             get {
-                if let computation { computation.compute(for: item, getAspect: getAspect) } else { item[id] }
-            }
+                if let computation, let structure = store as? Structure {
+                    computation.compute(for: item, structure: structure)
+                } else { item[id] }            }
             set {
                 guard !computed else { return }
                 item[id] = newValue
