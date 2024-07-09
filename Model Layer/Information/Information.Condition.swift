@@ -9,6 +9,21 @@ import Foundation
 
 extension Information {
     indirect enum Condition: PersistentValue {
+        case `nil`
+        case always(Bool)
+        case role(Structure.Role.ID)
+        case hasParticle(Structure.Particle.ID, Condition)
+        case isParticle(Structure.Particle.ID)
+        case isReferenced(Condition)
+        case isReferenceOfRole(Structure.Role.ID)
+        case hasReference(Condition)
+        case hasValue(Comparison)
+        case not(Condition)
+        case any([Condition])
+        case all([Condition])
+
+        // MARK: Internal
+
 //        static func == (lhs: Information.Condition, rhs: Information.Condition) -> Bool {
 //            switch lhs {
 //            case let .always(lhsValue):
@@ -42,18 +57,6 @@ extension Information {
 //        }
 
         typealias PersistentComparableValue = Comparable & PersistentValue
-
-        case always(Bool)
-        case hasRole(Structure.Role.ID)
-        case hasParticle(Structure.Particle.ID, Condition)
-        case isParticle(Structure.Particle.ID)
-        case isReferenced(Condition)
-        case isReferenceOfRole(Structure.Role.ID)
-        case hasReference(Condition)
-        case hasValue(Comparison)
-        case not(Condition)
-        case any([Condition])
-        case all([Condition])
 
 //        static func hasRole(_ role: Structure.Role) -> Self {
 //            .hasRole(role.id)
@@ -107,7 +110,7 @@ extension Information {
 
         var roles: Set<Structure.Role.ID> {
             switch self {
-            case let .hasRole(role):
+            case let .role(role):
                 return [role]
             case let .any(conditions), let .all(conditions):
                 return conditions.flatMap { $0.roles }.asSet
@@ -128,23 +131,43 @@ extension Information {
 
         func matches(_ item: Information.Item, sameRole: Structure.Role? = nil, structure: Structure, roles: inout [Structure.Role]) -> Bool {
             switch self {
+            case .nil:
+                return false
             case let .always(truth):
                 return truth
-            case let .hasRole(roleId):
-                if roleId == Structure.Role.same.id, let sameRole { return item.conforms(to: sameRole) != nil }
+            case let .role(roleId):
+                if roleId == Structure.Role.same.id, let sameRole, item.conforms(to: sameRole) != nil {
+                    roles.append(sameRole)
+                    return true
+                }
                 guard let role = structure[Structure.Role.self, roleId] else { return false }
-                appendRole(role: role, roles: &roles)
-                return item.conforms(to: role) != nil
-            case let .isReferenceOfRole(roleId):
-                guard let role = structure[Structure.Role.self, roleId] else { return false }
-                for reference in role.references {
-                    let reference = if reference == Structure.Role.same { role } else { reference }
-                    if let role = item.conforms(to: reference) {
-                        appendRole(role: role, roles: &roles)
-                        return true
-                    }
+                if item.conforms(to: role) != nil {
+                    appendRole(role: role, roles: &roles)
+                    return true
                 }
                 return false
+            case let .isReferenceOfRole(roleId):
+                guard let role = structure[Structure.Role.self, roleId] else { return false }
+                return role.allReferences.map { reference in
+                    Condition.role(reference.id).matches(item, sameRole: role, structure: structure, roles: &roles)
+                }
+                .reduce(false) { $0 || $1 }
+//                let conditions: [Condition] = role.allReferences.map { .role($0.id) }
+//                let result = conditions.reduce(false) { partialResult, condition in
+//                    partialResult || condition.matches(item, sameRole: role, structure: structure, roles: &roles)
+//                }
+//                print("\(roleId) \(roles.count)")
+//                return result
+//                return condition.matches(item, sameRole: role, structure: structure, roles: &roles)
+//                var matches = false
+//                for reference in role.allReferences {
+//                    let reference = if reference == Structure.Role.same { role } else { reference }
+//                    if let role = item.conforms(to: reference) {
+//                        appendRole(role: role, roles: &roles)
+//                        matches = true
+//                    }
+//                }
+//                return matches
             case .isParticle:
                 return false
             case let .hasValue(comparison):
@@ -176,9 +199,11 @@ extension Information {
 
         func matches(_ item: Information.Particle, structure: Structure, roles: inout [Structure.Role]) -> Bool {
             switch self {
+            case .nil:
+                return false
             case let .always(truth):
                 return truth
-            case .hasRole:
+            case .role:
                 return false
             case let .isParticle(particleId):
                 return item.particle == particleId

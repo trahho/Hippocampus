@@ -10,15 +10,29 @@ import Foundation
 extension Structure {
     class Filter: Object {
         @Property var name: String = ""
-        @Objects var filter: [Filter]
-        @Relations(\Self.filter) var subFilter: [Filter]
+        @Objects var superFilter: [Filter]
+        @Relations(\Self.superFilter) var subFilter: [Filter]
 
-        @Property var roots: Information.Condition? 
-        @Property var leafs: Information.Condition?
+        @Property var condition: Information.Condition = .nil
 
-        @Object var role: Structure.Role!
+        @Objects var roles: [Structure.Role]
+
         @Property var layouts: [Presentation.Layout] = []
-        @Property var order: [Presentation.Order] = []
+        @Property var orders: [Presentation.Order] = []
+        @Transient var layout: Presentation.Layout?
+        @Transient var order: Presentation.Order?
+
+        var allRoles: [Role] {
+            (roles + superFilter.flatMap { $0.allRoles }).asSet.asArray
+        }
+
+        var allLayouts: [Presentation.Layout] {
+            (layouts + superFilter.flatMap { $0.allLayouts }).asSet.asArray
+        }
+
+        var allOrders: [Presentation.Order] {
+            (orders + superFilter.flatMap { $0.allOrders }).asSet.asArray
+        }
 
 //        private var getAspect: (Aspect.ID) -> Aspect? { { self[Aspect.self, $0] }}
 
@@ -43,5 +57,10 @@ extension Structure {
 //            }
 //            return filters
 //        }
+        subscript(item: Information.Item, role: Structure.Role? = nil) -> Presentation.Properties.Properties {
+            guard let layout else { return Presentation.Properties.Properties() }
+            let properties: Presentation.Properties = self[Presentation.Properties.self, "\(id.uuidString)-\(layout.description)"]
+            return properties(item: item, role: role)
+        }
     }
 }

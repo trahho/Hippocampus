@@ -17,11 +17,11 @@ import Grisu
 
 struct FiltersView: View {
     @Environment(Structure.self) var structure
-    @State var expansions = Expansions(defaultExpansion: true)
+    @Binding var expansions: Expansions
     @Binding var selection: Structure.Filter?
 
     var filters: [Structure.Filter] {
-        structure.filters.filter { $0.filter.isEmpty }
+        structure.filters.filter { $0.superFilter.isEmpty }
             .sorted { $0.name < $1.name }
     }
 

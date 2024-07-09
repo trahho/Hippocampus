@@ -54,35 +54,82 @@ indirect enum Presentation: Structure.PersistentValue, Hashable, Transferable {
         }
     }
 
-    enum Layout: Structure.PersistentValue {
+    enum Layout: Structure.PersistentValue, PickableEnum {
+        
         case list
+        case tree
         case canvas
         case mindMap
         case miniMindMiap
         case gallery
+        
+        var description: String {
+            switch self {
+            case .list:
+                "List"
+            case .tree:
+                "Tree"
+            case .canvas:
+                "Canvas"
+            case .mindMap:
+                "MindMap"
+            case .miniMindMiap:
+                "MiniMindMiap"
+            case .gallery:
+                "Gallery"
+            }
+        }
+
+        var icon: Image {
+            let name = switch self {
+            case .list:
+                "list.bullet"
+            case .tree:
+                "list.bullet.indent"
+            case .canvas:
+                "rectangle.3.group"
+            case .mindMap:
+                "point.3.filled.connected.trianglepath.dotted"
+            case .miniMindMiap:
+                "circle.hexagongrid.fill"
+            case .gallery:
+                "square.grid.3x3.square"
+            }
+            return Image(systemName: name)
+        }
     }
 
-    enum Order: Structure.PersistentValue {
+    enum Order: Structure.PersistentValue, Hashable {
         case sorted(Structure.Aspect.ID, ascending: Bool = true)
         case multiSorted([Order])
         
+        func description(structure: Structure) -> String {
+            switch self {
+            case .sorted(let aspect, let ascending):
+                let name = structure[Structure.Aspect.self, aspect]?.description ?? "Unknown"
+                return "\(name) \(ascending ? "Ascending" : "Descending")"
+            case .multiSorted(let sorters):
+                return sorters.map({$0.description(structure: structure)}).joined(separator: ", ")
+            }
+        }
+        
         func compare(lhs: Information.Item, rhs: Information.Item, structure: Structure) -> Bool {
-               switch self {
-               case .sorted(let aspect, let ascending):
-                   guard let aspect = structure[Structure.Aspect.self, aspect] else { return false }
-                   if ascending {
-                       return lhs[aspect] ?? .nil < rhs[aspect] ?? .nil
-                   } else {
-                       return lhs[aspect] ?? .nil > rhs[aspect] ?? .nil
-                   }
-               case .multiSorted(let sorters):
-                   for sorter in sorters {
-                       if compare(lhs: lhs, rhs: rhs, structure: structure) { return true }
-                       if compare(lhs: rhs, rhs: lhs, structure: structure) { return false }
-                   }
-                   return false
-               }
-           }
+            switch self {
+            case .sorted(let aspect, let ascending):
+                guard let aspect = structure[Structure.Aspect.self, aspect] else { return false }
+                if ascending {
+                    return lhs[aspect] ?? .nil < rhs[aspect] ?? .nil
+                } else {
+                    return lhs[aspect] ?? .nil > rhs[aspect] ?? .nil
+                }
+            case .multiSorted(let sorters):
+                for sorter in sorters {
+                    if sorter.compare(lhs: lhs, rhs: rhs, structure: structure) { return true }
+                    if sorter.compare(lhs: rhs, rhs: lhs, structure: structure) { return false }
+                }
+                return false
+            }
+        }
     }
 
 //    enum Sequence: Structure.PersistentValue {

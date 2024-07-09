@@ -39,12 +39,12 @@ extension Structure {
             role == self || !roles.filter { $0.conforms(to: role) }.isEmpty
         }
 
-        var to: [Role] {
-            references.asSet.union(roles.flatMap { $0.to }.map { self.conforms(to: $0) ? self : $0 }).asArray
+        var allReferences: [Role] {
+            references.asSet.union(roles.flatMap { $0.allReferences }.map { self.conforms(to: $0) ? self : $0 }).asArray
         }
 
-        var from: [Role] {
-            referencedBy.asSet.union(roles.flatMap { $0.from }.map { self.conforms(to: $0) ? self : $0 }).asArray
+        var allReferencedBy: [Role] {
+            referencedBy.asSet.union(roles.flatMap { $0.allReferencedBy }.map { self.conforms(to: $0) ? self : $0 }).asArray
         }
 
         var allAspects: [Aspect] {

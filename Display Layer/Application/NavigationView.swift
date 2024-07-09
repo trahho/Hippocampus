@@ -19,7 +19,7 @@ struct NavigationView: View {
     @State var path = NavigationPath()
 
     var twoColumn: Bool {
-        return if let filter = filter, let _ = filter.role, filter.layouts.contains(.list) { true } else { false }
+        return if let filter = filter, !filter.roles.isEmpty, filter.layouts.contains(.list) { true } else { false }
     }
 
     var filterId: UUID {
@@ -27,11 +27,11 @@ struct NavigationView: View {
     }
 
     @ViewBuilder var filtersList: some View {
-        FiltersView( selection: $filter)
+        FiltersView(expansions: $expansions, selection: $filter)
     }
 
     @ViewBuilder var filterResultList: some View {
-        if let filter = filter, let _ = filter.role, filter.layouts.contains(.list) {
+        if let filter = filter, !filter.roles.isEmpty, filter.layouts.contains(.list) {
             FilterResultView(filter: filter)
         } else {
             EmptyView()

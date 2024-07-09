@@ -14,6 +14,7 @@ class Document: DatabaseDocument {
 //    @Data var presentation: Presentation
 //    @Transient var result: Presentation.PresentationResult
     @Cache var drawing: Document.Drawing
+    @Cache var properties: Presentation.Properties
 
     convenience init(name: String, local: Bool) {
         let containerURL = local ? HippocampusApp.localContainerUrl : HippocampusApp.iCloudContainerUrl
