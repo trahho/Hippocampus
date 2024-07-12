@@ -11,9 +11,11 @@ import SwiftUI
 
 struct FilterView: View {
 //    @Environment(Navigation.self) var navigation
+    @Environment(\.openWindow) var openWindow
     @State var filter: Structure.Filter
     @Binding var selected: Structure.Filter?
     @Binding var expansions: Expansions
+
 //    @Binding var expansions: [Structure.Filter.ID: Bool]
 //
 //    var expansion: Binding<Bool> {
@@ -33,7 +35,7 @@ struct FilterView: View {
 //                    .frame(maxWidth: .infinity, maxHeight: .infinity)
 //            }
             HStack {
-                Image(systemName: filter.subFilter.isEmpty ? "light.recessed.fill" : "light.recessed.3.fill")
+                Image(systemName: filter.subFilters.isEmpty ? "light.recessed.fill" : "light.recessed.3.fill")
                 Text("\(filter.name)")
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -46,11 +48,16 @@ struct FilterView: View {
                     selected = filter
                 }
             }
+            .contextMenu {
+                Button("Edit") {
+                    openWindow(value: filter.id)
+                }
+            }
         }
     }
 
     var filters: [Structure.Filter] {
-        filter.subFilter.sorted { $0.name < $1.name }
+        filter.subFilters.sorted { $0.name < $1.name }
     }
 
     var body: some View {

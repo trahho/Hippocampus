@@ -10,8 +10,8 @@ import Foundation
 extension Structure {
     class Filter: Object {
         @Property var name: String = ""
-        @Objects var superFilter: [Filter]
-        @Relations(\Self.superFilter) var subFilter: [Filter]
+        @Objects var superFilters: [Filter]
+        @Relations(\Self.superFilters) var subFilters: [Filter]
 
         @Property var condition: Information.Condition = .nil
 
@@ -23,15 +23,15 @@ extension Structure {
         @Transient var order: Presentation.Order?
 
         var allRoles: [Role] {
-            (roles + superFilter.flatMap { $0.allRoles }).asSet.asArray
+            (roles + superFilters.flatMap { $0.allRoles }).asSet.asArray
         }
 
         var allLayouts: [Presentation.Layout] {
-            (layouts + superFilter.flatMap { $0.allLayouts }).asSet.asArray
+            (layouts + superFilters.flatMap { $0.allLayouts }).asSet.asArray
         }
 
         var allOrders: [Presentation.Order] {
-            (orders + superFilter.flatMap { $0.allOrders }).asSet.asArray
+            (orders + superFilters.flatMap { $0.allOrders }).asSet.asArray
         }
 
 //        private var getAspect: (Aspect.ID) -> Aspect? { { self[Aspect.self, $0] }}

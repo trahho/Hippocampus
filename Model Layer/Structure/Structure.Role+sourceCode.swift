@@ -46,6 +46,7 @@ extension Structure.Role {
                         + tab(3) + "}()"
                 }
                 .joined(separator: ",")
+            + tab(2) + "]"
         }
     }
 

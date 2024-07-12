@@ -9,9 +9,11 @@ import Foundation
 
 extension Information {
     indirect enum Computation: PersistentValue {
+        case count(Condition)
         case minimum(Structure.Aspect.ID, Condition)
         case maximum(Structure.Aspect.ID, Condition)
-        case count(Condition)
+
+        // MARK: Internal
 
 //        func getValues<T: Comparable>(aspect: Structure.Aspect.ID, condition: Condition, for items: Set<Item>) -> [T] {
 //            items.filter { condition.matches($0) }.compactMap { $0[aspect]?.value as? T }

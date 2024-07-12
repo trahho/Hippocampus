@@ -39,14 +39,15 @@ struct RolesView: View {
             } label: {
                 Image(systemName: "plus")
             }
+#if os(OSX)
             Button {
                 var result = """
                 extension Structure.Role {
                     typealias Role = Structure.Role
                     typealias Aspect = Structure.Aspect
                     typealias Particle = Structure.Particle
-
-
+                
+                
                 """
                 result += "\tstatic var statics: [Role] = [.same, "
                 result += document.structure.roles
@@ -55,7 +56,7 @@ struct RolesView: View {
                     .map { ".\($0.name)" }
                     .joined(separator: ", ")
                 result += "]\n\n"
-
+                
                 result += Structure.Role.same.sourceCode + "\n"
                 for role in document.structure.roles
                     .filter({ $0 != Structure.Role.same })
@@ -70,12 +71,14 @@ struct RolesView: View {
             } label: {
                 Image(systemName: "function")
             }
+            
+#endif
         }
     }
 }
 
 #Preview {
-    @State var document = HippocampusApp.editStaticRolesDocument
+    @Previewable @State var document = HippocampusApp.editStaticRolesDocument
     return RolesView()
         .environment(document)
 }

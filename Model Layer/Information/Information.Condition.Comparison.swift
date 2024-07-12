@@ -9,11 +9,13 @@ import Foundation
 import Smaug
 
 extension Information.Condition {
-    enum Comparison: Information.PersistentValue {
+    enum Comparison: Information.PersistentValue, Hashable {
         case below(Structure.Aspect.ID, Information.ValueStorage)
         case above(Structure.Aspect.ID, Information.ValueStorage)
         case equal(Structure.Aspect.ID, Information.ValueStorage)
         case unequal(Structure.Aspect.ID, Information.ValueStorage)
+
+        // MARK: Internal
 
         func appendRole(role: Structure.Role, roles: inout [Structure.Role]) {
             guard roles.firstIndex(of: role) == nil else { return }

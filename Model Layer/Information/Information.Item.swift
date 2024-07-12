@@ -14,29 +14,23 @@ protocol Conditionable {
 
 extension Information {
     class Item: Object {
+        // MARK: Internal
+
         @Property var deleted: Bool = false
         @Objects var roles: [Structure.Role]
         @Property var particles: [Particle] = []
         @Objects var to: [Item]
         @Relations(\Self.to) var from: [Item]
 
-        @Property private var values: [Structure.Aspect.ID: TimedValue] = [:]
-
-        func conforms(to role: Structure.Role) -> Structure.Role? {
-            return self.roles.first { $0.conforms(to: role) } 
-        }
-
-        private func allChildren(cache: inout Set<Item>) {
-            guard !cache.contains(self) else { return }
-            cache = cache.union(self.to)
-            self.to.forEach { $0.allChildren(cache: &cache) }
-        }
-
         var allChildren: [Item] {
             var cache: Set<Item> = []
             allChildren(cache: &cache)
             cache.remove(self)
             return cache.asArray
+        }
+
+        func matchingRole(for role: Structure.Role) -> Structure.Role? {
+            return self.roles.first { $0.conforms(to: role) }
         }
 
         subscript(_ aspectId: Structure.Aspect.ID) -> ValueStorage? {
@@ -56,6 +50,16 @@ extension Information {
         subscript<T>(_ type: T.Type, _ aspect: Structure.Aspect) -> T? where T: Information.Value {
             get { aspect[type, self] }
             set { aspect[type, self] = newValue }
+        }
+
+        // MARK: Private
+
+        @Property private var values: [Structure.Aspect.ID: TimedValue] = [:]
+
+        private func allChildren(cache: inout Set<Item>) {
+            guard !cache.contains(self) else { return }
+            cache = cache.union(self.to)
+            self.to.forEach { $0.allChildren(cache: &cache) }
         }
     }
 }

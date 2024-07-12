@@ -12,10 +12,10 @@ import SwiftUI
 
 extension Structure {
     @dynamicMemberLookup
-    class Role: Object, EditableListItem {
+    class Role: Object, EditableListItem, Pickable {
         @Property var name = ""
         @Objects var roles: [Role]
-        @Objects(deleteReferences: true) var aspects: [Aspect] 
+        @Objects(deleteReferences: true) var aspects: [Aspect]
         @Property var particles: [Particle] = []
 
         @Relations(\Role.roles) var subRoles: [Role]
@@ -23,20 +23,12 @@ extension Structure {
         @Relations(\Role.references) var referencedBy: [Role]
         @Property var representations: [Representation] = []
 
-        subscript(dynamicMember dynamicMember: String) -> Aspect {
-            if let result = aspects.first(where: { $0.name.lowercased() == dynamicMember.lowercased() }) {
-                return result
-            } else {
-                return roles.compactMap { $0[dynamicMember: dynamicMember] }.first!
-            }
+        var description: String {
+            name.localized(isStatic)
         }
 
         var allRoles: [Role] {
             (roles.flatMap { $0.allRoles } + [self]).asSet.asArray
-        }
-
-        func conforms(to role: Role) -> Bool {
-            role == self || !roles.filter { $0.conforms(to: role) }.isEmpty
         }
 
         var allReferences: [Role] {
@@ -51,6 +43,16 @@ extension Structure {
             aspects.asSet.union(roles.flatMap { $0.allAspects }).asArray
         }
 
-   
+        subscript(dynamicMember dynamicMember: String) -> Aspect {
+            if let result = aspects.first(where: { $0.name.lowercased() == dynamicMember.lowercased() }) {
+                return result
+            } else {
+                return roles.compactMap { $0[dynamicMember: dynamicMember] }.first!
+            }
+        }
+
+        func conforms(to role: Role) -> Bool {
+            role == self || !roles.filter { $0.conforms(to: role) }.isEmpty
+        }
     }
 }

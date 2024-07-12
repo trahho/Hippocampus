@@ -9,25 +9,33 @@ import SwiftUI
 
 @main
 struct HippocampusApp: App {
+    struct TestView: View {
+        var body: some View {
+            Text("\(HippocampusApp.locationService.authorization.rawValue)")
+        }
+    }
+
     static let memoryExtension = ".memory"
     static let persistentExtension = ".persistent"
+
+    static let locationService = LocationService()
 
     static var iCloudContainerUrl: URL { URL.iCloudDirectory.appendingPathComponent("Documents") }
 
     static var localContainerUrl: URL { URL.localDirectory.appendingPathComponent("Hippocampus") }
 
-    static func documentURL(name: String, local: Bool) -> URL {
-        let containerURL = local ? HippocampusApp.localContainerUrl : HippocampusApp.iCloudContainerUrl
-        let result = containerURL.appendingPathComponent("\(name)\(HippocampusApp.memoryExtension)")
-        return result
-    }
-
     static var editStaticRolesDocument: Document {
         let containerURL = URL.virtual
-        let url = containerURL.appendingPathComponent("Preview\(HippocampusApp.memoryExtension)")
+        let url = containerURL.appendingPathComponent("Edit\(HippocampusApp.memoryExtension)")
         let document = Document(url: url)
         document.structure.roles.forEach { $0.toggleStatic() }
         return document
+    }
+
+    static var emptyDocument: Document {
+        let containerURL = URL.virtual
+        let url = containerURL.appendingPathComponent("Empty\(HippocampusApp.memoryExtension)")
+        return Document(url: url)
     }
 
     static var previewDocument: Document {
@@ -37,16 +45,18 @@ struct HippocampusApp: App {
 
         for i in 1 ..< 3 {
             let filter = document(Structure.Filter.self)
-            
+
             filter.name = "Group \(i)"
             filter.layouts = [.list]
+            filter.layout = .list
             filter.roles = [Structure.Role.note]
             for j in 1 ..< 4 {
                 let subFilter = document(Structure.Filter.self)
                 document[] = subFilter
-                subFilter.superFilter.append(filter)
+                subFilter.superFilters.append(filter)
 //                subFilter.roots = !.role(Structure.Role.topic.id)<~
-                subFilter.layouts = [.tree]
+                subFilter.layouts = [.tree, .list]
+                subFilter.layout = .tree
                 subFilter.name = "Filter \(j)"
                 subFilter.roles = [Structure.Role.topic, Structure.Role.note]
             }
@@ -55,7 +65,7 @@ struct HippocampusApp: App {
         for filter in document.structure.filters {
             filter.orders = [.sorted(Structure.Role.named[dynamicMember: "name"].id, ascending: true)]
             filter.order = filter.orders.first!
-//            filter.roots = .always(true)
+            filter.condition = .role(Structure.Role.tracked.id)
 //            filter.leafs = .always(true)
         }
 
@@ -63,7 +73,7 @@ struct HippocampusApp: App {
             let other = document(Information.Item.self)
             Structure.Role.named[dynamicMember: "name"][String.self, other] = "Hallo Welt🤩"
             other.roles.append(.note)
-            
+
             let item = document(Information.Item.self)
             Structure.Role.named[dynamicMember: "name"][String.self, item] = "\(i + 1). Hallo Welt🤩"
 //            item.roles.append(Structure.Role.named)
@@ -83,7 +93,7 @@ struct HippocampusApp: App {
 //                    subsubItem.roles.append(Structure.Role.topic)
 
                     subItem.to.append(subsubItem)
-                    subsubItem.to.append(item)
+                    subsubItem.from.append(item)
                     let other = document(Information.Item.self)
                     Structure.Role.named[dynamicMember: "name"][String.self, other] = "Hallo Welt🤩"
                 }
@@ -93,9 +103,8 @@ struct HippocampusApp: App {
         return document
     }
 
-    static let locationService = LocationService()
-
     var document: Document = previewDocument
+
     //        .preview1
 //
 //        inPreview ? Self.previewDocument() : .init(name: "Test", local: false)
@@ -121,35 +130,65 @@ struct HippocampusApp: App {
 
     var body: some Scene {
         WindowGroup {
-            DocumentView(document: document)
-                .environment(Navigation())
+//            DocumentView(document: document)
+            EmptyView()
         }
-        Window("Edit Role", id: "whatever") {
-//            TestView()
-//                .onAppear {
-//                    Self.locationService.start()
-//                }
-//            Design_Localization()
-//            Design_DragDropView()
-            RolesView()
-//            PresentationView.Preview()
-//            PresentationView(presentation: Structure.Role.hierarchical.representations[0].presentation, item: Information.Item())
-                .environment(HippocampusApp.editStaticRolesDocument)
-
-            // Design_NavigationView()
-//                .environment(Design_NavigationView.Navigation())
-//            AnchorGraphView(graph: HippocampusApp.graph)
-//            Design_ShellView()
-//            Design_ContextMenuView()
-//                .environmentObject(navigation)
-//                .onOpenURL { document = Document(url: $0) }
-        }
-        .keyboardShortcut("r", modifiers: [.command, .control, .shift, .option])
+//        WindowGroup("Filter", for: Structure.Filter.ID.self) { $filterId in
+//            if let filterId, let filter = document[Structure.Filter.self, filterId] {
+//                FilterEditView(filter: filter)
+//                    .setDocument(document)
+//            }
+//        }
+//        Window("Edit Role", id: "whatever") {
+////            TestView()
+////                .onAppear {
+////                    Self.locationService.start()
+////                }
+////            Design_Localization()
+////            Design_DragDropView()
+//            RolesView()
+////            PresentationView.Preview()
+////            PresentationView(presentation: Structure.Role.hierarchical.representations[0].presentation, item: Information.Item())
+//                .setDocument(HippocampusApp.editStaticRolesDocument)
+//
+//            // Design_NavigationView()
+////                .environment(Design_NavigationView.Navigation())
+////            AnchorGraphView(graph: HippocampusApp.graph)
+////            Design_ShellView()
+////            Design_ContextMenuView()
+////                .environmentObject(navigation)
+////                .onOpenURL { document = Document(url: $0) }
+//        }
+//        .keyboardShortcut("r", modifiers: [.command, .control, .shift, .option])
     }
 
-    struct TestView: View {
-        var body: some View {
-            Text("\(HippocampusApp.locationService.authorization.rawValue)")
-        }
+    static func documentURL(name: String, local: Bool) -> URL {
+        let containerURL = local ? HippocampusApp.localContainerUrl : HippocampusApp.iCloudContainerUrl
+        let result = containerURL.appendingPathComponent("\(name)\(HippocampusApp.memoryExtension)")
+        return result
     }
 }
+
+extension View {
+    func setDocument(_ document: Document) -> some View {
+        self
+            .environment(document)
+            .environment(document.structure)
+            .environment(document.information)
+    }
+}
+
+// extension EnvironmentValues {
+//    @Entry var navigation: Navigation = .init()
+//    @Entry var document: Document = HippocampusApp.emptyDocument
+//
+//    var information: Information {
+//        get { document.information }
+//        set {}
+//    }
+//
+//    var structure: Structure {
+//        get { document.structure }
+//        set {}
+//    }
+// }

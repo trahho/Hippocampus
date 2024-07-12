@@ -53,7 +53,7 @@ struct TreeView: View {
             ForEach(rootItems, id: \.item) { item in
 //                HStack {
 //                    Text("\(item.roles.count)")
-                    ListRowView(item: item.item, role: item.role, roles: item.roles, filter: filter, expansions: $expansions)
+                ListRowView(item: item.item, role: item.role, roles: item.roles, filter: filter, expansions: $expansions)
 //                }
             }
         }
@@ -80,7 +80,7 @@ extension TreeView {
         }
 
         var children: [Result] {
-            let condition: Information.Condition =  .isReferenceOfRole(role.id)
+            let condition: Information.Condition = .isReferenceOfRole(role.id)
 
             //        print("children: \(item.id.uuidString) expanded: \(expansions[item.id.uuidString])")
             //        let fullcondition: Information.Condition = if let leafs = filter.leafs { .all([.isReferenceOfRole(filter.role.id), leafs]) } else { .isReferenceOfRole(filter.role.id) }
@@ -102,9 +102,9 @@ extension TreeView {
         var body: some View {
             Group {
                 if children.isEmpty {
-                    AspectView(item: item, aspect: Structure.Role.named[dynamicMember: "name"], appearance: .normal, editable: false)
-                        .contextMenu{
-                            Picker("Role", selection: $role){
+                    AspectView(item: item, aspect: Structure.Role.named[dynamicMember: "name"], appearance: .normal, editable: true)
+                        .contextMenu {
+                            Picker("Role", selection: $role) {
                                 ForEach(roles) { role in
                                     Text(role.name)
                                         .tag(role)
@@ -120,25 +120,19 @@ extension TreeView {
                             }
                         }
                     } label: {
-                        HStack {                 Text("\(roles.count)")
-                            
-                            AspectView(item: item, aspect: Structure.Role.named[dynamicMember: "name"], appearance: .normal, editable: false)
-                        }
-                        .contextMenu{
-                            Picker("Role", selection: $role){
-                                ForEach(roles) { role in
-                                    Text(role.name)
-                                        .tag(role)
-                                }
-                            }
-                            Text("\(roles.count)")
-                        }
+                        AspectView(item: item, aspect: Structure.Role.named[dynamicMember: "name"], appearance: .normal, editable: true)
                     }
-                   
+                    .contextMenu {
+                        Picker("Role", selection: $role) {
+                            ForEach(roles) { role in
+                                Text(role.name)
+                                    .tag(role)
+                            }
+                        }
+                        Text("\(roles.count)")
+                    }
                 }
             }
-        
-         
         }
     }
 }

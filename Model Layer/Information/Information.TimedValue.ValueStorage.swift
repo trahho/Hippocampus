@@ -8,7 +8,7 @@
 import Foundation
 
 extension Information.TimedValue {
-    indirect enum ValueStorage: Codable & Equatable & Comparable {
+    indirect enum ValueStorage: Codable & Equatable & Comparable & Hashable {
         static func < (lhs: ValueStorage, rhs: ValueStorage) -> Bool {
             guard let lhsValue = lhs.value as? (any Comparable), let rhsValue = rhs.value as? (any Comparable) else { return false}
             return lhsValue.isBelow(rhsValue)

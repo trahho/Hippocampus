@@ -10,14 +10,13 @@ import SwiftUI
 
 struct DocumentView: View {
     @State var document: Document
+
 //    @Environment(Navigation.self) var navigation
 
     var body: some View {
 //        NavigationView(navigation: navigation)
         NavigationView()
-            .environment(document)
-            .environment(document.structure)
-            .environment(document.information)
+            .setDocument(document)
 //        NavigationView()
 //            .font(.myText)
 //            .environment(document)

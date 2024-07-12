@@ -86,10 +86,11 @@
         }
       }
     },
-    "create" : {
+    "Edit" : {
 
     },
     "Edit Role" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -98,6 +99,9 @@
           }
         }
       }
+    },
+    "Filter" : {
+
     },
     "Foreground" : {
 
@@ -141,7 +145,13 @@
         }
       }
     },
+    "No condition" : {
+
+    },
     "Padded" : {
+
+    },
+    "Parents" : {
 
     },
     "References" : {

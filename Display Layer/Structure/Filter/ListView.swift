@@ -37,9 +37,7 @@ struct ListView: View {
     var body: some View {
         List {
             ForEach(rootItems, id: \.item) { item in
-                HStack {AspectView(item: item.item, aspect: Structure.Role.named[dynamicMember: "name"], appearance: .normal, editable: false)
-                    Text("\(item.role.name)")
-                }
+                AspectView(item: item.item, aspect: Structure.Role.named[dynamicMember: "name"], appearance: .normal, editable: false)
             }
         }
     }

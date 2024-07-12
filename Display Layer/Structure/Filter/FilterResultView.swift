@@ -12,8 +12,8 @@ import SwiftUI
 struct FilterResultView: View {
 //    @State var items: [Information.Item]
     @State var filter: Structure.Filter
-    @State var order: Presentation.Order?
-    @State var layout: Presentation.Layout?
+//    @State var order: Presentation.Order?
+//    @State var layout: Presentation.Layout?
 
 //    var condition: Information.Condition { .all([filter.roots]) }
 

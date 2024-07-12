@@ -122,12 +122,12 @@ extension CGPoint {
     }
 }
 
-extension CGPoint: Hashable {
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(x)
-        hasher.combine(y)
-    }
-}
+//extension CGPoint: Hashable {
+//    public func hash(into hasher: inout Hasher) {
+//        hasher.combine(x)
+//        hasher.combine(y)
+//    }
+//}
 
 func min(_ a: CGPoint, _ b: CGPoint) -> CGPoint {
     CGPoint(x: min(a.x, b.x), y: min(a.y, b.y))

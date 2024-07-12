@@ -10,7 +10,8 @@ import SwiftUI
 struct PresentationEditView: View {
     @State var role: Structure.Role
     @Binding var presentation: Presentation
-    @State var dragDropCache = DragDropCache()
+
+//    @State var dragDropCache = DragDropCache()
 
     var body: some View {
 //        HStack {
@@ -19,7 +20,6 @@ struct PresentationEditView: View {
         ItemEditView(presentation: $presentation, role: role, array: .constant([]))
 //            }
 //        }
-            .environment(dragDropCache)
 //            }
             .formStyle(.grouped)
     }
@@ -40,9 +40,9 @@ struct PresentationEditView: View {
 }
 
 #Preview {
-    @State var document = HippocampusApp.editStaticRolesDocument
-    @State var presentation = Structure.Role.hierarchical.representations.first!.presentation
-    @State var item = document(Information.Item.self)
+    @Previewable @State var document = HippocampusApp.editStaticRolesDocument
+    @Previewable @State var presentation = Structure.Role.hierarchical.representations.first!.presentation
+    var item = document(Information.Item.self)
     return VStack {
         PresentationEditView(role: .hierarchical, presentation: $presentation)
         PresentationView(presentation: presentation, item: item)

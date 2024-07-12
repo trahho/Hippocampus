@@ -5,10 +5,11 @@
 //  Created by Guido Kühn on 05.05.23.
 //
 
+import CoreTransferable
 import Foundation
 
 extension Information {
-    indirect enum Condition: PersistentValue {
+    indirect enum Condition: PersistentValue, Hashable, Transferable {
         case `nil`
         case always(Bool)
         case role(Structure.Role.ID)
@@ -24,99 +25,10 @@ extension Information {
 
         // MARK: Internal
 
-//        static func == (lhs: Information.Condition, rhs: Information.Condition) -> Bool {
-//            switch lhs {
-//            case let .always(lhsValue):
-//                guard let .always(rhsValue) = lhs
-//            case let .hasRole(role):
-//                guard let role = item[Structure.Role.self, role] else {return false}
-//                return item.roles.contains { $0.conforms(to: role) }
-//            case let .hasValue(comparison):
-//                return comparison.calculate(for: item)
-//            case let .isReferenced(condition):
-//                return item.from.contains(where: { condition.matches(for: $0) })
-//            case let .hasReference(condition):
-//                return item.to.contains(where: { condition.matches(for: $0) })
-//            case let .not(condition):
-//                return !condition.matches(for: item)
-//            case let .any(conditions):
-//                for condition in conditions {
-//                    if condition.matches(for: item) {
-//                        return true
-//                    }
-//                }
-//                return false
-//            case let .all(conditions):
-//                for condition in conditions {
-//                    if !condition.matches(for: item) {
-//                        return false
-//                    }
-//                }
-//                return true
-//            }
-//        }
-
         typealias PersistentComparableValue = Comparable & PersistentValue
 
-//        static func hasRole(_ role: Structure.Role) -> Self {
-//            .hasRole(role.id)
-//        }
-//
-//        var roles: Set<Structure.Role.ID> {
-//            switch self {
-//            case let .hasRole(role):
-//                return [role]
-//            case let .any(conditions), let .all(conditions):
-//                return conditions.flatMap { $0.roles }.asSet
-//            default:
-//                return []
-//            }
-//        }
-
-//        func matches(for item: Item, sameRole: Structure.Role? = nil, information: Information) -> Bool {
-//            switch self {
-//            case let .always(value):
-//                return value
-//            case let .hasRole(role):
-//                if role == Structure.Role.same.id, let sameRole { return item.conforms(to: sameRole) }
-//                guard let role = information[Structure.Role.self, role] else { return false }
-//                return item.conforms(to: role)
-//            case let .hasValue(comparison):
-//                return comparison.matches(for: item, information: information)
-//            case let .isReferenced(condition):
-//                guard let item = item as? Item else { return false }
-//                return item.from.contains(where: { condition.matches(for: $0, sameRole: sameRole, information: information) })
-//            case let .hasReference(condition):
-//                guard let item = item as? Item else { return false }
-//                return item.to.contains(where: { condition.matches(for: $0, sameRole: sameRole, information: information) })
-//            case let .not(condition):
-//                return !condition.matches(for: item, sameRole: sameRole, information: information)
-//            case let .any(conditions):
-//                for condition in conditions {
-//                    if condition.matches(for: item, sameRole: sameRole, information: information) {
-//                        return true
-//                    }
-//                }
-//                return false
-//            case let .all(conditions):
-//                for condition in conditions {
-//                    if !condition.matches(for: item, sameRole: sameRole, information: information) {
-//                        return false
-//                    }
-//                }
-//                return true
-//            }
-//        }
-
-        var roles: Set<Structure.Role.ID> {
-            switch self {
-            case let .role(role):
-                return [role]
-            case let .any(conditions), let .all(conditions):
-                return conditions.flatMap { $0.roles }.asSet
-            default:
-                return []
-            }
+        static var transferRepresentation: some TransferRepresentation {
+            CodableRepresentation(for: Condition.self, contentType: .text)
         }
 
         func appendRole(role: Structure.Role, roles: inout [Structure.Role]) {
@@ -136,12 +48,12 @@ extension Information {
             case let .always(truth):
                 return truth
             case let .role(roleId):
-                if roleId == Structure.Role.same.id, let sameRole, item.conforms(to: sameRole) != nil {
+                if roleId == Structure.Role.same.id, let sameRole, item.matchingRole(for: sameRole) != nil {
                     roles.append(sameRole)
                     return true
                 }
                 guard let role = structure[Structure.Role.self, roleId] else { return false }
-                if item.conforms(to: role) != nil {
+                if let role = item.matchingRole(for: role) {
                     appendRole(role: role, roles: &roles)
                     return true
                 }
@@ -209,7 +121,7 @@ extension Information {
                 return item.particle == particleId
             case let .hasValue(comparison):
                 return comparison.matches(for: item, structure: structure, roles: &roles)
-            case .isReferenced, .hasReference, .hasParticle:
+            case .hasParticle, .hasReference, .isReferenced:
                 return false
             case let .not(condition):
                 return !condition.matches(item, structure: structure, roles: &roles)

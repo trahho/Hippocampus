@@ -98,6 +98,7 @@ struct RoleEditView: View {
                 }
             }
         }
+        .frame(maxWidth: .infinity, alignment: .topLeading)
         .formStyle(.grouped)
     }
 

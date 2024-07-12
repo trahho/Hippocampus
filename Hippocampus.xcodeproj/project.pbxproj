@@ -31,6 +31,14 @@
 		C51D5D5A29F313F30081669A /* Design.ShellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51D5D5929F313F30081669A /* Design.ShellView.swift */; };
 		C51D5D5D29F3501B0081669A /* Color+background.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51D5D5C29F3501B0081669A /* Color+background.swift */; };
 		C51D5D5E29F3501B0081669A /* Color+background.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51D5D5C29F3501B0081669A /* Color+background.swift */; };
+		C52C0BCA2C3F21F600960750 /* FilterEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52C0BC92C3F21F600960750 /* FilterEditView.swift */; };
+		C52C0BCB2C3F21F600960750 /* FilterEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52C0BC92C3F21F600960750 /* FilterEditView.swift */; };
+		C52C0BCC2C3F21F600960750 /* FilterEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52C0BC92C3F21F600960750 /* FilterEditView.swift */; };
+		C52C0BCE2C3F2B9B00960750 /* Structure.Filter+sourceCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52C0BCD2C3F2B9B00960750 /* Structure.Filter+sourceCode.swift */; };
+		C52C0BCF2C3F2B9B00960750 /* Structure.Filter+sourceCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52C0BCD2C3F2B9B00960750 /* Structure.Filter+sourceCode.swift */; };
+		C52C0BD02C3F2B9B00960750 /* Structure.Filter+sourceCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52C0BCD2C3F2B9B00960750 /* Structure.Filter+sourceCode.swift */; };
+		C52C0BD32C3F33E100960750 /* ConditionEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52C0BD22C3F33D800960750 /* ConditionEditView.swift */; };
+		C52C0BD52C3F33E100960750 /* ConditionEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52C0BD22C3F33D800960750 /* ConditionEditView.swift */; };
 		C52E724D29F55173001A5821 /* Presentation.Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52E724C29F55173001A5821 /* Presentation.Group.swift */; };
 		C52E724E29F55173001A5821 /* Presentation.Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52E724C29F55173001A5821 /* Presentation.Group.swift */; };
 		C52E725029F55509001A5821 /* Presentation.Query+statics.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52E724F29F55509001A5821 /* Presentation.Query+statics.swift */; };
@@ -62,7 +70,6 @@
 		C53755752C0C99380004064B /* Design.NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53755722C0C99370004064B /* Design.NavigationView.swift */; };
 		C537930B2A1ECAAC0085D24B /* Design.MathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C537930A2A1ECAAC0085D24B /* Design.MathView.swift */; };
 		C537930C2A1ECAAC0085D24B /* Design.MathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C537930A2A1ECAAC0085D24B /* Design.MathView.swift */; };
-		C537930D2A1ECAAC0085D24B /* Design.MathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C537930A2A1ECAAC0085D24B /* Design.MathView.swift */; };
 		C54BE4B12894866C0060A066 /* HippocampusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4A12894866A0060A066 /* HippocampusApp.swift */; };
 		C54BE4B22894866C0060A066 /* HippocampusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4A12894866A0060A066 /* HippocampusApp.swift */; };
 		C54BE4F1289591320060A066 /* ObservedChangeReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4EF289591320060A066 /* ObservedChangeReceiver.swift */; };
@@ -430,6 +437,9 @@
 		C51D5D5929F313F30081669A /* Design.ShellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Design.ShellView.swift; sourceTree = "<group>"; };
 		C51D5D5C29F3501B0081669A /* Color+background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+background.swift"; sourceTree = "<group>"; };
 		C528A18128CDE2A90027FA44 /* HippocampusTestsMacOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HippocampusTestsMacOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C52C0BC92C3F21F600960750 /* FilterEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterEditView.swift; sourceTree = "<group>"; };
+		C52C0BCD2C3F2B9B00960750 /* Structure.Filter+sourceCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Structure.Filter+sourceCode.swift"; sourceTree = "<group>"; };
+		C52C0BD22C3F33D800960750 /* ConditionEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionEditView.swift; sourceTree = "<group>"; };
 		C52E723829F49484001A5821 /* NavigationSplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationSplitView.swift; sourceTree = "<group>"; };
 		C52E723A29F4951E001A5821 /* View+toolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+toolbarItem.swift"; sourceTree = "<group>"; };
 		C52E723C29F49541001A5821 /* ToolbarItemPlacement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarItemPlacement.swift; sourceTree = "<group>"; };
@@ -700,6 +710,14 @@
 			path = HippocampusTestsMacOS;
 			sourceTree = "<group>";
 		};
+		C52C0BD12C3F33C800960750 /* Condition */ = {
+			isa = PBXGroup;
+			children = (
+				C52C0BD22C3F33D800960750 /* ConditionEditView.swift */,
+			);
+			path = Condition;
+			sourceTree = "<group>";
+		};
 		C52E723729F49474001A5821 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
@@ -967,6 +985,7 @@
 			children = (
 				C5167C4429C62BFB00323F75 /* FiltersView.swift */,
 				C53755612C08D9AA0004064B /* FilterView.swift */,
+				C52C0BC92C3F21F600960750 /* FilterEditView.swift */,
 				C53755652C08DA2C0004064B /* FilterResultView.swift */,
 				C531623D2C39D5E500A6E35E /* TreeView.swift */,
 				C53162412C39D65D00A6E35E /* ListView.swift */,
@@ -1170,6 +1189,7 @@
 		C5BE4F0E29F5DD4900B27B48 /* Information */ = {
 			isa = PBXGroup;
 			children = (
+				C52C0BD12C3F33C800960750 /* Condition */,
 				C5BEFC2529EF3B7800332347 /* Item */,
 			);
 			path = Information;
@@ -1271,6 +1291,7 @@
 				C59E2881297B2434007375D5 /* Structure.Aspect.Kind.swift */,
 				C56965D72C05154200AA46B3 /* Structure.Filter.swift */,
 				C56F85422C31A022007DC75D /* Structure.Filter+static.swift */,
+				C52C0BCD2C3F2B9B00960750 /* Structure.Filter+sourceCode.swift */,
 				C56F854E2C31A215007DC75D /* AspectStorage.swift */,
 			);
 			path = Structure;
@@ -1533,7 +1554,6 @@
 				C56965BE2C028E1600AA46B3 /* AspectView.DrawingAspectView.swift in Sources */,
 				C59B3CEA295CCE950053DE7D /* NSPredicate+operators.swift in Sources */,
 				C53755642C08D9AA0004064B /* FilterView.swift in Sources */,
-				C537930D2A1ECAAC0085D24B /* Design.MathView.swift in Sources */,
 				C582241A2A080FCF000FB877 /* FiltersView.swift in Sources */,
 				C56965B12C02347A00AA46B3 /* ItemPresentationView.swift in Sources */,
 				C53162442C39D65D00A6E35E /* ListView.swift in Sources */,
@@ -1571,10 +1591,12 @@
 				C558647B2A058A91005EA6FD /* Information.Condition+operators.swift in Sources */,
 				C5BE4F3229F8794C00B27B48 /* PropertyWrapperTests.swift in Sources */,
 				C5D273542975D19100F32EB6 /* Information.Item.swift in Sources */,
+				C52C0BCA2C3F21F600960750 /* FilterEditView.swift in Sources */,
 				C56965CA2C028F8E00AA46B3 /* HorizontalLayoutView.swift in Sources */,
 				C58224212A080FD7000FB877 /* GroupNameView.swift in Sources */,
 				C5BE4F1A29F6727B00B27B48 /* Document.Drawing.PageFormat+draw.swift in Sources */,
 				C5A792A029A4078400637C6C /* DrawingView.swift in Sources */,
+				C52C0BD02C3F2B9B00960750 /* Structure.Filter+sourceCode.swift in Sources */,
 				C5BE4F1B29F6727B00B27B48 /* Document.Drawing+image.swift in Sources */,
 				C55538192C27389900EC0911 /* Structure.Role.Representation.swift in Sources */,
 				C59B3CDE295CB9710053DE7D /* Observed.swift in Sources */,
@@ -1705,6 +1727,7 @@
 				C54BE50A289591530060A066 /* Array+asSet.swift in Sources */,
 				C54BE514289591840060A066 /* InjectedPropertyWrapper.swift in Sources */,
 				C5A84B7929D61FB10026F07E /* LocationService.swift in Sources */,
+				C52C0BCB2C3F21F600960750 /* FilterEditView.swift in Sources */,
 				C5E4FA0A2A2B4DDF00CE37C3 /* Design.TrigonometryView.swift in Sources */,
 				C5BE4F0229F5AF7600B27B48 /* SidebarView.QueryView.swift in Sources */,
 				C5C8E864295AFDCA002C7746 /* Structure.Role.Builder.swift in Sources */,
@@ -1724,6 +1747,7 @@
 				C564EB8329B5337700F3E0AC /* Document.Drawing.Drawing.swift in Sources */,
 				C55AC5DB295A4A8100F09326 /* Presentation.Query.swift in Sources */,
 				C555381F2C2850D700EC0911 /* Structure.Role+sourceCode.swift in Sources */,
+				C52C0BCE2C3F2B9B00960750 /* Structure.Filter+sourceCode.swift in Sources */,
 				C565AAD02C2321B200BC54AB /* RoleEditView+SelectReferencesSheet.swift in Sources */,
 				C5037ACC2BFF6D6300D22DC8 /* Information.TimedValue.ValueStorage.swift in Sources */,
 				C57801262C3768AC00B1B1AD /* Information.Modification.swift in Sources */,
@@ -1743,6 +1767,7 @@
 				C57B70BB2C243139007A5105 /* Design.ViewEditView.swift in Sources */,
 				C56965AF2C02347A00AA46B3 /* ItemPresentationView.swift in Sources */,
 				C5E966D629AAD47D009D81FF /* Font+Extension.swift in Sources */,
+				C52C0BD52C3F33E100960750 /* ConditionEditView.swift in Sources */,
 				C564EB8729B533FE00F3E0AC /* Document.Drawing.Properties.swift in Sources */,
 				C5BEFC2129EDFF4F00332347 /* Structure.Representation.Builder.swift in Sources */,
 				C5728D362A2935EC004968D3 /* IndexedCallable.swift in Sources */,
@@ -1832,6 +1857,7 @@
 				C5AAA0E029BD1355000DA6C3 /* DrawingView.ImageView.swift in Sources */,
 				C57B70B82C235673007A5105 /* Structure.Role+static.swift in Sources */,
 				C56965CD2C028FBF00AA46B3 /* VerticalLayoutView.swift in Sources */,
+				C52C0BD32C3F33E100960750 /* ConditionEditView.swift in Sources */,
 				C5AAA0EB29BD1F57000DA6C3 /* Document.Drawing.Background.swift in Sources */,
 				C5A84B7329CFAFC30026F07E /* Presentation.swift in Sources */,
 				C54BE4FC289591440060A066 /* CGRect+Functions.swift in Sources */,
@@ -1855,6 +1881,7 @@
 				C50CFA672ACF1912001EE17E /* Design.MiniMindMapView.swift in Sources */,
 				C59E2883297B2434007375D5 /* Structure.Aspect.Kind.swift in Sources */,
 				C52E724E29F55173001A5821 /* Presentation.Group.swift in Sources */,
+				C52C0BCF2C3F2B9B00960750 /* Structure.Filter+sourceCode.swift in Sources */,
 				C56F85502C31A215007DC75D /* AspectStorage.swift in Sources */,
 				C5A84B6F29CFA4D10026F07E /* ItemView.swift in Sources */,
 				C54BE4B22894866C0060A066 /* HippocampusApp.swift in Sources */,
@@ -1872,6 +1899,7 @@
 				C56965D92C05154200AA46B3 /* Structure.Filter.swift in Sources */,
 				C55538102C271C3200EC0911 /* PresentationEditView.ItemEditView.ContextMenu.swift in Sources */,
 				C5BEFC2229EDFF4F00332347 /* Structure.Representation.Builder.swift in Sources */,
+				C52C0BCC2C3F21F600960750 /* FilterEditView.swift in Sources */,
 				C555381C2C277B6E00EC0911 /* Design.PickerKatastropheView.swift in Sources */,
 				C5AAA0F729BD34B2000DA6C3 /* TextView.swift in Sources */,
 				C55538142C271E4A00EC0911 /* PresentationView.swift in Sources */,
@@ -2103,7 +2131,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2140,7 +2168,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2180,7 +2208,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = de.kuehnerleben.Hippocampus;
@@ -2214,7 +2242,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = de.kuehnerleben.Hippocampus;
 				PRODUCT_NAME = Hippocampus;

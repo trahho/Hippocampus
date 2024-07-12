@@ -21,7 +21,7 @@ struct FiltersView: View {
     @Binding var selection: Structure.Filter?
 
     var filters: [Structure.Filter] {
-        structure.filters.filter { $0.superFilter.isEmpty }
+        structure.filters.filter { $0.superFilters.isEmpty }
             .sorted { $0.name < $1.name }
     }
 

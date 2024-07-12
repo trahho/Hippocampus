@@ -9,7 +9,7 @@ import Foundation
 import Grisu
 import SwiftUI
 
-extension Array where Element == Presentation {
+extension Array where Element: Equatable {
     mutating func remove(item: Element) {
         guard let index = firstIndex(of: item) else { return }
         remove(at: index)
@@ -23,7 +23,7 @@ extension Array where Element == Presentation {
 
 extension PresentationEditView {
     struct ItemEditView: View {
-        @Environment(DragDropCache.self) var dragDropCache
+//        @Environment(DragDropCache<Presentation>.self) var dragDropCache
         @Environment(Document.self) var document
 
         @Binding var presentation: Presentation
@@ -58,10 +58,10 @@ extension PresentationEditView {
         var body: some View {
             Group {
                 switch presentation {
-                case .undefined:
-                    Text("create")
-                        .font(.footnote)
-                        .contextMenu { contextMenu }
+//                case .undefined:
+//                    Text("create")
+//                        .font(.footnote)
+//                        .contextMenu { contextMenu }
                 case .label(let string):
                     HStack(alignment: .firstTextBaseline) {
                         TextField(text: Binding(get: { string }, set: { presentation = .label($0) }), prompt: Text("Required")) { EmptyView() }

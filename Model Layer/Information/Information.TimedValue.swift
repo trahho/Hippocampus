@@ -15,7 +15,7 @@ extension Information {
     }
 }
 
-extension [Structure.Aspect.ID: Information.TimedValue]: Mergeable {
+extension [Structure.Aspect.ID: Information.TimedValue]: @retroactive Mergeable {
     public mutating func merge(other: any Mergeable) throws {
         guard let other = other as? Self else { return }
         for key in Set(self.keys).intersection(Set(other.keys)) {
