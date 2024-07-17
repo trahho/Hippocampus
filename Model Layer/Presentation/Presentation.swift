@@ -9,152 +9,26 @@ import Foundation
 import Grisu
 import SwiftUI
 
-indirect enum Presentation: Structure.PersistentValue, Hashable, Transferable {
+indirect enum Presentation: Structure.PersistentValue, Hashable, Transferable, SourceCodeGenerator {
+    case empty
+    case undefined
+    case label(String)
+    case icon(String)
+    case aspect(Structure.Aspect.ID, appearance: Appearance)
+    case horizontal([Presentation], alignment: Alignment)
+    case vertical([Presentation], alignment: Alignment)
+    case spaced([Presentation], horizontal: Space, vertical: Space)
+    case color([Presentation], color: Color)
+    case background([Presentation], color: Color)
+    case grouped([Presentation])
+
+    // MARK: Static Computed Properties
+
     static var transferRepresentation: some TransferRepresentation {
         CodableRepresentation(for: Presentation.self, contentType: .text)
     }
 
-//    enum Appearance: Structure.PersistentValue {
-    ////        static func == (lhs: Presentation.Appearance, rhs: Presentation.Appearance) -> Bool {
-    ////            <#code#>
-    ////        }
-    ////
-//        case icon, small, normal, firstParagraph, full, edit
-//
-    ////        var description: String {
-    ////            switch self {
-    ////            case .icon:
-    ////                "icon"
-    ////            case .small:
-    ////                "small"
-    ////            case .normal:
-    ////                "normal"
-    ////            case .firstParagraph:
-    ////                "firstParagraph"
-    ////            case .full:
-    ////                "full"
-    ////            case .edit:
-    ////                "edit"
-    ////            }
-//    }
-
-    enum Space: Structure.PersistentValue {
-        case normal(Presentation)
-        case percent(Presentation, Int)
-        case full(Presentation)
-
-        var presentation: Presentation {
-            switch self {
-            case .normal(let presentation),
-                 .full(let presentation):
-                presentation
-            case .percent(let presentation, _):
-                presentation
-            }
-        }
-    }
-
-    enum Layout: Structure.PersistentValue, PickableEnum {
-        
-        case list
-        case tree
-        case canvas
-        case mindMap
-        case miniMindMiap
-        case gallery
-        
-        var description: String {
-            switch self {
-            case .list:
-                "List"
-            case .tree:
-                "Tree"
-            case .canvas:
-                "Canvas"
-            case .mindMap:
-                "MindMap"
-            case .miniMindMiap:
-                "MiniMindMiap"
-            case .gallery:
-                "Gallery"
-            }
-        }
-
-        var icon: Image {
-            let name = switch self {
-            case .list:
-                "list.bullet"
-            case .tree:
-                "list.bullet.indent"
-            case .canvas:
-                "rectangle.3.group"
-            case .mindMap:
-                "point.3.filled.connected.trianglepath.dotted"
-            case .miniMindMiap:
-                "circle.hexagongrid.fill"
-            case .gallery:
-                "square.grid.3x3.square"
-            }
-            return Image(systemName: name)
-        }
-    }
-
-    enum Order: Structure.PersistentValue, Hashable {
-        case sorted(Structure.Aspect.ID, ascending: Bool = true)
-        case multiSorted([Order])
-        
-        func description(structure: Structure) -> String {
-            switch self {
-            case .sorted(let aspect, let ascending):
-                let name = structure[Structure.Aspect.self, aspect]?.description ?? "Unknown"
-                return "\(name) \(ascending ? "Ascending" : "Descending")"
-            case .multiSorted(let sorters):
-                return sorters.map({$0.description(structure: structure)}).joined(separator: ", ")
-            }
-        }
-        
-        func compare(lhs: Information.Item, rhs: Information.Item, structure: Structure) -> Bool {
-            switch self {
-            case .sorted(let aspect, let ascending):
-                guard let aspect = structure[Structure.Aspect.self, aspect] else { return false }
-                if ascending {
-                    return lhs[aspect] ?? .nil < rhs[aspect] ?? .nil
-                } else {
-                    return lhs[aspect] ?? .nil > rhs[aspect] ?? .nil
-                }
-            case .multiSorted(let sorters):
-                for sorter in sorters {
-                    if sorter.compare(lhs: lhs, rhs: rhs, structure: structure) { return true }
-                    if sorter.compare(lhs: rhs, rhs: lhs, structure: structure) { return false }
-                }
-                return false
-            }
-        }
-    }
-
-//    enum Sequence: Structure.PersistentValue {
-//        case ordered(Information.Condition, order: [Order])
-//        case unordered(Information.Condition)
-//
-//        var roles: Set<Structure.Role.ID> {
-//            switch self {
-//            case .ordered(let condition, _):
-//                condition.roles
-//            case .unordered(let condition):
-//                condition.roles
-//            }
-//        }
-//    }
-
-    case empty
-    case undefined
-    case label(String)
-    case aspect(Structure.Aspect.ID, appearance: Appearance)
-    case horizontal([Presentation], alignment: Alignment)
-    case vertical([Presentation], alignment: Alignment)
-    case color([Presentation], color: Color)
-    case background([Presentation], color: Color)
-    case grouped([Presentation])
+    // MARK: Static Functions
 
     static func color(_ presentation: Presentation, color: Color) -> Presentation {
         .color([presentation], color: color)
@@ -163,174 +37,54 @@ indirect enum Presentation: Structure.PersistentValue, Hashable, Transferable {
     static func background(_ presentation: Presentation, color: Color) -> Presentation {
         .background([presentation], color: color)
     }
+    
+    static func ascpect(_ aspect: Structure.Aspect, appearance: Appearance) -> Presentation {
+        .aspect(aspect.id, appearance: appearance)
+    }
 
-//    case aspect(Structure.Aspect.ID, appearance: Appearance = .normal, editable: Bool = true)
-//    case horizontal([Space], alignment: Alignment = Alignment.top)
-//    case vertical([Space], alignment: Alignment = Alignment.leading)
-//    case sequence([Sequence], layout: Layout)
-    ////    case exclosing(Presentation, header: Presentation? = nil)
-//    case named(String, Presentation, [Layout], [Appearance])
-//    case indirect([Structure.Role.ID])
-//    case present(Structure.Role.ID)
-//    case reference(Sequence)
+    // MARK: Functions
 
-//    var roles: [Structure.Role.ID] {
-//        switch self {
-//        case .horizontal(let spaces, _), .vertical(let spaces, _):
-//            return spaces.flatMap { $0.presentation.roles }
-//        case .sequence(let sequences, _):
-//            return sequences.flatMap { $0.roles }
-//        case .exclosing(_, let header):
-//            return header.roles
-//        case .named(_, let presentation, _):
-//            return presentation.roles
-//        case .indirect(let roles):
-//            return roles
-//        case .present(let role):
-//            return [role]
-//        default:
-//            return []
-//        }
-//    }
-
-//    var containsSequence: Bool {
-//        switch self {
-//        case .horizontal(let spaces, let alignment), .vertical(let spaces, let alignment):
-//            return spaces.first { $0.presentation.containsSequence } != nil ? true : false
-//        case .sequence(_, _):
-//            return true
-//        case .reference(_):
-//            return true
-    ////        case .exclosing(let presentation, let header):
-    ////            return presentation.containsSequence
-//        case .named(_, let presentation, _, _):
-//            return presentation.containsSequence
-//        default:
-//            return false
-//        }
-//    }
-//
-//    init(_ name: String, layout: [Layout], appearance: [Appearance], _ presentation: Presentation) {
-//        self = .named(name, presentation, layout, appearance)
-//    }
-//
-//    init(_ aspectId: String, appearance: Appearance = .normal, editable: Bool = true) {
-//        self = .aspect(UUID(uuidString: aspectId)!, appearance: appearance, editable: editable)
-//    }
-
-    //        @ViewBuilder
-    //        func view(for item: Information.Item, editable: Bool = false) -> some View {
-    //            switch self {
-    //            case .empty:
-    //                EmptyView()
-    //            case .undefined:
-    //                Image(systemName: "checkerboard.rectangle")
-    //            case let .label(label):
-    //                Text(label)
-    //            case let .horizontal(children, alignment):
-    //                HorizontalView(item: item, children: children, alignment: alignment, editable: editable)
-    //            case let .vertical(children, alignment):
-    //                VerticalView(item: item, children: children, alignment: alignment, editable: editable)
-    //            case let .aspect(aspectId, form, isEditable):
-    //                AspectView(item: item, aspectId: aspectId, form: form, editable: isEditable && editable)
-    //            }
-    //        }
-
-//        static func aspect(_ aspect: Structure.Aspect, appearance: Appearance, editable: Bool = true) -> Presentation {
-//            .aspect(aspect.id, appearance: appearance, editable: editable)
-//        }
-//
-//        static func aspect(_ aspect: String, form: String, editable: Bool = true) -> Presentation {
-//            .aspect(UUID(uuidString: aspect)!, form: form, editable: editable)
-//        }
-
-//    static func vertical(_ children: Space..., alignment: Alignment = .leading) -> Presentation {
-//        .vertical(children, alignment: alignment)
-//    }
-}
-
-//    struct AspectView: View {
-//        @State var structure: Structure
-//        @State var item: Information.Item
-//        var aspectId: Structure.Aspect.ID
-//        var form: String
-//        var editable = false
-//
-//        var body: some View {
-//            if let aspect = structure[Aspect.self , aspectId] {
-//                aspect.view(for: item, as: form, editable: editable)
+    func sourceCode(tab i: Int, inline: Bool, document: Document) -> String {
+        let start = inline ? "" : tab(i)
+        switch self {
+        case .empty:
+            return start + ".empty"
+        case .undefined:
+            return start + ".undefined"
+        case let .label(text):
+            return start + ".label(\"\(text)\")"
+        case let .icon(text):
+            return start + ".icon(\"\(text)\")"
+        case let .aspect(id, appearance):
+//            if let aspect = document[Structure.Aspect.self, id] {
+//                return start + ".aspect(Structure.Role.\(aspect.role.name).\(aspect.name), appearance: \(appearance.sourceCode(tab: 0, inline: true, document: document)))"
 //            } else {
-//                EmptyView()
+                return start + ".aspect(\"\(id)\".uuid, appearance: \(appearance.sourceCode(tab: 0, inline: true, document: document)))"
 //            }
-//        }
-//    }
-//
-//    struct HorizontalView: View {
-//        @ObservedObject var item: Information.Item
-//        var children: [Presentation]
-//        var alignment: Presentation.Alignment
-//        var editable: Bool
-//
-//        var verticalAlignment: VerticalAlignment {
-//            switch alignment {
-//            case .leading:
-//                return .top
-//            case .center:
-//                return .center
-//            case .trailing:
-//                return .bottom
-//            default:
-//                return .center
-//            }
-//        }
-//
-//        var body: some View {
-//            HStack(alignment: verticalAlignment) {
-//                ForEach(0 ..< children.count, id: \.self) { index in
-//                    children[index].view(for: item, editable: editable)
-//                }
-//            }
-//        }
-//    }
-//
-//    struct VerticalView: View {
-//        @ObservedObject var item: Information.Item
-//        var children: [Presentation]
-//        var alignment: Presentation.Alignment
-//        var editable: Bool
-//
-//        var horizontalAlignment: HorizontalAlignment {
-//            switch alignment {
-//            case .leading:
-//                return .leading
-//            case .center:
-//                return .center
-//            case .trailing:
-//                return .trailing
-//            default:
-//                return .center
-//            }
-//        }
-//
-//        var body: some View {
-//            VStack(alignment: horizontalAlignment) {
-//                ForEach(0 ..< children.count, id: \.self) { index in
-//                    children[index].view(for: item, editable: editable)
-//                }
-//            }
-//        }
-//    }
-// }
-
-// extension Structure.Role.Representation: Identifiable {
-//    var id: Int {
-//        switch self {
-//        case .aspect:
-//            return 1
-//        case .horizontal:
-//            return 2
-//        case .vertical:
-//            return 3
-//        }
-//    }
-// }
+        case let .horizontal(presentations, alignment: alignment):
+            return start + ".horizontal(["
+                + presentations.map { $0.sourceCode(tab: i + 1, inline: false, document: document) }.joined(separator: ", ")
+                + tab(i ) + "], alignment: \(alignment.sourceCode(tab: 0, inline: true, document: document)))"
+        case let .vertical(presentations, alignment: alignment):
+            return start + ".vertical(["
+                + presentations.map { $0.sourceCode(tab: i + 1, inline: false, document: document) }.joined(separator: ", ")
+            + tab(i ) + "], alignment: \(alignment.sourceCode(tab: 0, inline: true, document: document)))"
+        case let .spaced(presentations, horizontal, vertical):
+            return start + ".spaced(["
+                + presentations.map { $0.sourceCode(tab: i + 1, inline: false, document: document) }.joined(separator: ", ")
+            + tab(i ) + "], horizontal: \(horizontal.sourceCode(tab: 0, inline: true, document: document)), vertical: \(vertical.sourceCode(tab: 0, inline: true, document: document)))"
+        case let .grouped(children):
+            return start + ".grouped(["
+                + children.map { $0.sourceCode(tab: i + 1, inline: false, document: document) }.joined(separator: ", ")
+                + tab(i) + "])"
+        case let .background(children, color):
+            return start + ".background(["
+                + children.map { $0.sourceCode(tab: i + 1, inline: false, document: document) }.joined(separator: ", ")
+                + tab(i) + "], color: Color(hex: \"\(color.toHex!)\"))"
+        case let .color(children, color):
+            return start + ".color(["
+                + children.map { $0.sourceCode(tab: i + 1, inline: false, document: document) }.joined(separator: ", ")
+                + tab(i) + "], color: Color(hex: \"\(color.toHex!)\"))"
+        }
+    }
+}

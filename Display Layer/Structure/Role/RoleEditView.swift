@@ -9,16 +9,66 @@ import Grisu
 import SwiftUI
 
 struct RoleEditView: View {
-    @Environment(Document.self) var document
+    // MARK: Nested Types
+
+    struct EditRepresentationSheet: View {
+        // MARK: Properties
+
+        @Environment(\.document) var document
+        @State var role: Structure.Role
+        @State var representation: Structure.Role.Representation
+
+        // MARK: Content
+
+        var body: some View {
+            VStack(alignment: .leading) {
+//                Form {
+                TextField("Name", text: $representation.name)
+//                }
+//                .formStyle(.grouped)
+//                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 100, maximum: 300))], spacing: 10) {
+                    ForEach(Presentation.Layout.allCases, id: \.self) { layout in
+                        Text(layout.description)
+                            .background{
+                                RoundedRectangle(cornerRadius: 4)
+                                    .foregroundStyle(representation.layouts.contains(layout) ? Color.accentColor : Color.clear)
+                            }
+                            .onTapGesture {
+                                if representation.layouts.contains(layout) {
+                                    representation.layouts.remove(item: layout)
+                                } else {
+                                    representation.layouts.append(layout)
+                                }
+                            }
+                    }
+                }
+               
+                PresentationEditView(role: role, presentation: $representation.presentation)
+                PresentationView(presentation: representation.presentation, item: Information.Item())
+                    .id(UUID())
+                Spacer()
+            }
+            .padding()
+//            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .frame(minWidth: 1500, minHeight: 900)
+        }
+    }
+
+    // MARK: Properties
+
+    @Environment(\.document) var document
     @State var role: Structure.Role
     @State var expanded: Expansions = .init()
     @State var representation: Structure.Role.Representation?
+
+    // MARK: Computed Properties
 
     var conformation: [Structure.Role] {
         role.roles.sorted(by: { $0.name.localized($0.isStatic) < $1.name.localized($1.isStatic) })
     }
 
- 
+    // MARK: Content
 
     var body: some View {
         Form {
@@ -90,31 +140,16 @@ struct RoleEditView: View {
                 .sheet(item: $representation) { representation in
                     EditRepresentationSheet(role: role, representation: representation)
                 }
+            }
 
-                Section("Source code", isExpanded: $expanded) {
-                    Text(role.sourceCode)
-                        .font(.caption)
-                        .textSelection(.enabled)
-                }
+            Section("Source code", isExpanded: $expanded) {
+                Text(role.sourceCode(tab: 0, inline: false, document: document))
+                    .font(.caption)
+                    .textSelection(.enabled)
             }
         }
         .frame(maxWidth: .infinity, alignment: .topLeading)
         .formStyle(.grouped)
-    }
-
-    struct EditRepresentationSheet: View {
-        @State var role: Structure.Role
-        @State var representation: Structure.Role.Representation
-        var body: some View {
-            Form {
-                TextField("Name", text: $representation.name)
-                PresentationEditView(role: role, presentation: $representation.presentation)
-                PresentationView(presentation: representation.presentation, item: Information.Item())
-                    .id(UUID())
-            }
-            .formStyle(.grouped)
-            .frame(minWidth: 500, minHeight: 600)
-        }
     }
 }
 

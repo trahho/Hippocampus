@@ -7,15 +7,33 @@
 
 import Foundation
 
-extension Structure.Role {
-    fileprivate var cr: String { "\n" }
-    fileprivate var tab: (Int) -> String {
-        { "\n" + String(repeating: "\t", count: $0) }
+// extension Array: SourceCodeGenerator where Element : SourceCodeGenerator {
+//    func sourceCode(tab i: Int, inline: Bool, document: Document) -> String {
+//        if isEmpty { "" } else {
+//
+//        }
+//    }
+//
+//
+// }
+
+extension Structure.Role: SourceCodeGenerator {
+    func sourceCode(tab i: Int, inline _: Bool, document: Document) -> String {
+        tab(i + 1) + "static let \(name): Role = {"
+            + tab(i + 2) + "var role = Role(id: \"\(id)\".uuid)"
+            + tab(i + 2) + "role.name = \"\(name)\""
+            + rolesSourceCode(tab: i + 2)
+            + referencesSourceCode(tab: i + 2)
+            + aspectsSourceCode(tab: i + 2)
+            + particlesSourceCode
+            + representationsSourceCode(tab: i + 2, document: document)
+            + tab(2) + "return role"
+            + tab(1) + "}()" + cr
     }
 
-    fileprivate var rolesSourceCode: String {
+    fileprivate func rolesSourceCode(tab i: Int) -> String {
         if roles.isEmpty { "" } else {
-            tab(2) + "role.roles = ["
+            tab(i) + "role.roles = ["
                 + roles
                 .map { ".\($0.name)" }
                 .joined(separator: ", ")
@@ -23,9 +41,9 @@ extension Structure.Role {
         }
     }
 
-    fileprivate var referencesSourceCode: String {
+    fileprivate func referencesSourceCode(tab i: Int) -> String {
         if references.isEmpty { "" } else {
-            tab(2) + "role.references = ["
+            tab(i) + "role.references = ["
                 + references
                 .map { ".\($0.name)" }
                 .joined(separator: ", ")
@@ -33,20 +51,20 @@ extension Structure.Role {
         }
     }
 
-    fileprivate var aspectsSourceCode: String {
+    fileprivate func aspectsSourceCode(tab i: Int) -> String {
         if aspects.isEmpty { "" } else {
-            tab(2) + "role.aspects = ["
+            tab(i) + "role.aspects = ["
                 + aspects.map { aspect in
-                    tab(3) + "{"
-                        + tab(4) + "let aspect = Aspect(id: \"\(aspect.id)\".uuid)"
-                        + tab(4) + "aspect.name = \"\(aspect.name)\""
-                        + tab(4) + "aspect.kind = .\(aspect.kind)"
-                        + tab(4) + "aspect.computed = \(aspect.computed)"
-                        + tab(4) + "return aspect"
-                        + tab(3) + "}()"
+                    tab(i + 1) + "{"
+                        + tab(i + 2) + "let aspect = Aspect(id: \"\(aspect.id)\".uuid)"
+                        + tab(i + 2) + "aspect.name = \"\(aspect.name)\""
+                        + tab(i + 2) + "aspect.kind = .\(aspect.kind)"
+                        + tab(i + 2) + "aspect.computed = \(aspect.computed)"
+                        + tab(i + 2) + "return aspect"
+                        + tab(i + 1) + "}()"
                 }
                 .joined(separator: ",")
-            + tab(2) + "]"
+                + tab(i) + "]"
         }
     }
 
@@ -83,75 +101,23 @@ extension Structure.Role {
         }
     }
 
-    fileprivate func presentationItemSourceCode(presentation: Presentation, tab i: Int) -> String {
-        switch presentation {
-        case .empty:
-            tab(i) + ".empty"
-        case .undefined:
-            tab(i) + ".undefined"
-        case .label(let string):
-            tab(i) + ".label(\"\(string)\")"
-        case .aspect(let aspectId, let appearance):
-            tab(i) + ".aspect(\"\(aspectId)\".uuid, appearance: .\(appearance))"
-        case .grouped(let children):
-            tab(i) + ".grouped(["
-               /* + tab(i + 1)*/ + children.map { presentationItemSourceCode(presentation: $0, tab: i + 1) }.joined(separator: ", ")
-                + tab(i) + "])"
-        case .horizontal(let children, let alignment):
-            tab(i) + ".horizontal(["
-               /* + tab(i + 1)*/ + children.map { presentationItemSourceCode(presentation: $0, tab: i + 1) }.joined(separator: ", ")
-                + tab(i) + "], alignment: .\(alignment))"
-        case .vertical(let children, let alignment):
-            tab(i) + ".vertical(["
-              /*  + tab(i + 1) */+ children.map { presentationItemSourceCode(presentation: $0, tab: i + 1) }.joined(separator: ", ")
-                + tab(i) + "], alignment: .\(alignment))"
-        case .background(let children, let color):
-            tab(i) + ".background(["
-               /* + tab(i + 1)*/ + children.map { presentationItemSourceCode(presentation: $0, tab: i + 1) }.joined(separator: ", ")
-                + tab(i) + "], color: Color(hex: \"\(color.toHex!)\"))"
-        case .color(let children, let color):
-            tab(i) + ".color(["
-                /* + tab(i + 1) */ + children.map { presentationItemSourceCode(presentation: $0, tab: i + 1) }.joined(separator: ", ")
-                + tab(i) + "], color: Color(hex: \"\(color.toHex!)\"))"
-        default:
-            ""
-        }
-    }
-
-    fileprivate func presentationSourceCode(presentation: Presentation, tab i: Int, inline: Bool = false) -> String {
-        if inline {
-            presentationItemSourceCode(presentation: presentation, tab: i)
-        } else {
-            tab(i) + presentationItemSourceCode(presentation: presentation, tab: i)
-        }
-    }
-
-    fileprivate var representationsSourceCode: String {
+    fileprivate func representationsSourceCode(tab i: Int, document: Document) -> String {
         if representations.isEmpty { "" } else {
-            tab(2) + "role.representations = ["
+            tab(i) + "role.representations = ["
                 + representations.map { representation in
-                    tab(3) + "{"
-                        + tab(4) + "let representation = Representation(id: \"\(representation.id)\".uuid)"
-                        + tab(4) + "representation.name = \"\(representation.name)\""
-                        + tab(4) + "representation.presentation = " + presentationSourceCode(presentation: representation.presentation, tab: 4, inline: true)
-                        + tab(4) + "return representation"
-                        + tab(3) + "}()"
+                    tab(i + 1) + "{"
+                        + tab(i + 2) + "let representation = Representation(id: \"\(representation.id)\".uuid)"
+                        + tab(i + 2) + "representation.name = \"\(representation.name)\""
+                        + tab(i + 2) + "representation.layouts = ["
+                        + representation.layouts.map { ".\($0.description)" }.joined(separator: ",")
+                        + "]"
+
+                        + tab(i + 2) + "representation.presentation = " + representation.presentation.sourceCode(tab: 4, inline: true, document: document)
+                        + tab(i + 2) + "return representation"
+                        + tab(i + 1) + "}()"
                 }
                 .joined(separator: ",")
-                + tab(2) + "]"
+                + tab(i + 1) + "]"
         }
-    }
-
-    var sourceCode: String {
-        tab(1) + "static let \(name): Role = {"
-            + tab(2) + "var role = Role(id: \"\(id)\".uuid)"
-            + tab(2) + "role.name = \"\(name)\""
-            + rolesSourceCode
-            + referencesSourceCode
-            + aspectsSourceCode
-            + particlesSourceCode
-            + representationsSourceCode
-            + tab(2) + "return role"
-            + tab(1) + "}()" + cr
     }
 }

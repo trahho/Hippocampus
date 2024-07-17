@@ -9,8 +9,7 @@ import Foundation
 import Grisu
 import SwiftUI
 
-extension Structure.Role
-{
+extension Structure.Role {
     typealias Role = Structure.Role
     typealias Aspect = Structure.Aspect
     typealias Particle = Structure.Particle
@@ -18,7 +17,7 @@ extension Structure.Role
     static var statics: [Role] = [.same, .drawing, .hierarchical, .named, .note, .text, .topic, .tracked]
 
     static let same: Role = {
-        var role = Role(id: "00000000-0000-0000-0000-000000000000".uuid)
+        var role = Role(id: "00000000-0000-0000-0000-000000000001".uuid)
         role.name = "same"
         return role
     }()
@@ -33,22 +32,23 @@ extension Structure.Role
                 aspect.kind = .drawing
                 aspect.computed = false
                 return aspect
-            }()
+            }(),
         ]
         return role
     }()
 
+ 
     static let hierarchical: Role = {
-        var role = Role(id: "B6D7755C-210C-484D-B79B-ACD931D581C9".uuid)
-        role.name = "hierarchical"
-        role.roles = [.named]
-        role.references = [.same]
-        role.representations = [
-            {
-                let representation = Representation(id: "AE043B77-C4F7-454C-A530-5D8BECFAFC80".uuid)
-                representation.name = ""
-                representation.presentation =
-                    .background([
+            var role = Role(id: "B6D7755C-210C-484D-B79B-ACD931D581C9".uuid)
+            role.name = "hierarchical"
+            role.roles = [.named]
+            role.references = [.same]
+            role.representations = [
+                {
+                    let representation = Representation(id: "AE043B77-C4F7-454C-A530-5D8BECFAFC80".uuid)
+                    representation.name = ""
+                    representation.layouts = []
+                    representation.presentation = .background([
                         .horizontal([
                             .color([
                                 .aspect("6247260E-624C-48A1-985C-CDEDDFA5D3AD".uuid, appearance: .normal),
@@ -57,11 +57,23 @@ extension Structure.Role
                             .label("Welt")
                         ], alignment: .center)
                     ], color: Color(hex: "F5F28F"))
-                return representation
-            }()
-        ]
-        return role
-    }()
+                    return representation
+                }(),
+                {
+                    let representation = Representation(id: "7D49DC1F-AC7E-45B6-97D4-BE37093018F3".uuid)
+                    representation.name = ""
+                    representation.layouts = [.tree]
+                    representation.presentation = .horizontal([
+                        .icon("bookmark.slash"),
+                        .aspect("6247260E-624C-48A1-985C-CDEDDFA5D3AD".uuid, appearance: .normal)
+                    ], alignment: .center)
+                    return representation
+                }()
+                ]
+            return role
+        }()
+
+
 
     static let named: Role = {
         var role = Role(id: "8A81358C-2A7C-497D-A93D-306F776C217C".uuid)
@@ -69,11 +81,25 @@ extension Structure.Role
         role.aspects = [
             {
                 let aspect = Aspect(id: "6247260E-624C-48A1-985C-CDEDDFA5D3AD".uuid)
-                aspect.name = "name"
+                aspect.name = "text"
                 aspect.kind = .text
                 aspect.computed = false
                 return aspect
-            }()
+            }(),
+        ]
+        role.representations = [
+            {
+                let representation = Representation(id: "7B8DDE7F-F331-41C9-BD64-B097E2050A1D".uuid)
+                representation.name = ""
+                representation.layouts = [.list, .tree]
+                representation.presentation = .horizontal([
+                    .color([
+                        .aspect("6247260E-624C-48A1-985C-CDEDDFA5D3AD".uuid, appearance: .icon),
+                    ], color: Color(hex: "FF0019")),
+                    .aspect("6247260E-624C-48A1-985C-CDEDDFA5D3AD".uuid, appearance: .normal),
+                ], alignment: .center)
+                return representation
+            }(),
         ]
         return role
     }()
@@ -95,7 +121,7 @@ extension Structure.Role
                 aspect.kind = .text
                 aspect.computed = false
                 return aspect
-            }()
+            }(),
         ]
         return role
     }()
@@ -112,7 +138,7 @@ extension Structure.Role
                 aspect.kind = .text
                 aspect.computed = false
                 return aspect
-            }()
+            }(),
         ]
         return role
     }()
@@ -127,7 +153,14 @@ extension Structure.Role
                 aspect.kind = .date
                 aspect.computed = false
                 return aspect
-            }()
+            }(),
+        ]
+        role.particles = [
+            {
+                let particle = Particle(id: "00000000-0000-0000-0000-000500000000".uuid)
+                particle.name = "whatever"
+                return particle
+            }(),
         ]
         return role
     }()

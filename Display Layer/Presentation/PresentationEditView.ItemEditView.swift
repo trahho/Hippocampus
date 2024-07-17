@@ -9,28 +9,18 @@ import Foundation
 import Grisu
 import SwiftUI
 
-extension Array where Element: Equatable {
-    mutating func remove(item: Element) {
-        guard let index = firstIndex(of: item) else { return }
-        remove(at: index)
-    }
-
-    mutating func insert(item: Element, after: Element) {
-        guard let index = firstIndex(of: after) else { return }
-        insert(item, at: index + 1)
-    }
-}
-
 extension PresentationEditView {
     struct ItemEditView: View {
 //        @Environment(DragDropCache<Presentation>.self) var dragDropCache
-        @Environment(Document.self) var document
+        @Environment(\.document) var document
 
         @Binding var presentation: Presentation
         @State var role: Structure.Role
 
         @Binding var array: [Presentation]
         @State var al: Presentation.Alignment = .leading
+
+        @State var text: String?
 
         var contextMenu: some View {
             ContextMenu(presentation: $presentation, array: $array)
@@ -41,16 +31,6 @@ extension PresentationEditView {
             return presentation
         }
 
-        func aspectName(id: Structure.Aspect.ID) -> String {
-            guard let aspect = aspect(id: id) else { return "unknown" }
-            return aspect.name
-        }
-
-        func aspect(id: Structure.Aspect.ID) -> Structure.Aspect? {
-            guard let aspect = document[Structure.Aspect.self, id] else { return nil }
-            return aspect
-        }
-
         var aspects: [Structure.Aspect] {
             role.allAspects.sorted { $0.name < $1.name }
         }
@@ -58,10 +38,10 @@ extension PresentationEditView {
         var body: some View {
             Group {
                 switch presentation {
-//                case .undefined:
-//                    Text("create")
-//                        .font(.footnote)
-//                        .contextMenu { contextMenu }
+                case .undefined:
+                    Text("create")
+                        .font(.footnote)
+                        .contextMenu { contextMenu }
                 case .label(let string):
                     HStack(alignment: .firstTextBaseline) {
                         TextField(text: Binding(get: { string }, set: { presentation = .label($0) }), prompt: Text("Required")) { EmptyView() }
@@ -72,6 +52,22 @@ extension PresentationEditView {
                     .contextMenu { contextMenu }
                     .draggable(draggable)
                     .dropDestination { items, _ in array.insert(item: items.first!, after: presentation); return true }
+                case .icon(let string):
+                    HStack(alignment: .firstTextBaseline) {
+                        if !string.isEmpty {
+                            Image(systemName: string)
+                        } else {
+                            Image(systemName: "")
+                        }
+                        TextField(text: Binding(get: { string }, set: { presentation = .icon($0) }), prompt: Text("SFSymbol")) { EmptyView() }
+                        Spacer()
+                        Image(systemName: "line.3.horizontal")
+                    }
+                    .frame(maxWidth: .infinity)
+                    .contextMenu { contextMenu }
+                    .draggable(draggable)
+                    .dropDestination { items, _ in array.insert(item: items.first!, after: presentation); return true }
+//                    }
                 case .aspect(let aspectId, let appearance):
                     HStack(alignment: .center) {
                         ValuePicker("", data: aspects, selection: Binding<Structure.Aspect?>(get: { aspect(id: aspectId) }, set: { aspect in
@@ -107,6 +103,85 @@ extension PresentationEditView {
                             .dropDestination { items, _ in presentation = .background(items + children, color: color); return true }
 
                         PresentationEditView.PresentationsEditView(presentations: Binding(get: { children }, set: { presentation = .background($0, color: color) }), role: role)
+                    }
+                case .spaced(let children, let horizontal, let vertical):
+                    VStack(alignment: .leading) {
+                        VStack(alignment: .leading) {
+                            EnumPicker("Horizontal", selection: Binding(get: { horizontal }, set: { presentation = .spaced(children, horizontal: $0, vertical: vertical) }))
+                                .contextMenu { contextMenu }
+                                .draggable(draggable)
+                                .dropDestination { items, _ in presentation = .spaced(items + children, horizontal: horizontal, vertical: vertical); return true }
+//                            Spacer()
+                            switch horizontal {
+                            case .full(let alignment):
+                                Picker("", selection: Binding(get: { alignment }, set: { presentation = .spaced(children, horizontal: .full(alignment: $0), vertical: vertical) })) {
+                                    Image(systemName: "align.horizontal.left")
+                                        .tag(Presentation.Alignment.leading)
+                                    Image(systemName: "align.horizontal.center")
+                                        .tag(Presentation.Alignment.center)
+                                    Image(systemName: "align.horizontal.right")
+                                        .tag(Presentation.Alignment.trailing)
+                                }
+                                .pickerStyle(SegmentedPickerStyle())
+                            case .normal:
+                                EmptyView()
+                            case .percent(let percent, let alignment):
+                                TextField("%", text: Binding(get: {
+                                    String(percent)
+                                }, set: {
+                                    guard let percent = Double($0) else { return }
+                                    presentation = .spaced(children, horizontal: .percent(percent, alignment: alignment), vertical: vertical)
+                                }))
+                                Picker("", selection: Binding(get: { alignment }, set: { presentation = .spaced(children, horizontal: .percent(percent, alignment: $0),vertical: vertical) })) {
+                                    Image(systemName: "align.horizontal.left")
+                                        .tag(Presentation.Alignment.leading)
+                                    Image(systemName: "align.horizontal.center")
+                                        .tag(Presentation.Alignment.center)
+                                    Image(systemName: "align.horizontal.right")
+                                        .tag(Presentation.Alignment.trailing)
+                                }
+                                .pickerStyle(SegmentedPickerStyle())
+                            }
+                        }
+                        VStack(alignment: .leading) {
+                            EnumPicker("Vertical", selection: Binding(get: { vertical }, set: { presentation = .spaced(children, horizontal: horizontal, vertical: $0) }))
+                                .contextMenu { contextMenu }
+                                .draggable(draggable)
+                                .dropDestination { items, _ in presentation = .spaced(items + children, horizontal: horizontal, vertical: vertical); return true }
+//                            Spacer()
+                            switch vertical {
+                            case .full(let alignment):
+                                Picker("", selection: Binding(get: { alignment }, set: { presentation = .spaced(children, horizontal: horizontal, vertical: .full(alignment: $0)) })) {
+                                    Image(systemName: "align.vertical.top")
+                                        .tag(Presentation.Alignment.leading)
+                                    Image(systemName: "align.vertical.center")
+                                        .tag(Presentation.Alignment.center)
+                                    Image(systemName: "align.vertical.bottom")
+                                        .tag(Presentation.Alignment.trailing)
+                                }
+                                .pickerStyle(SegmentedPickerStyle())
+                            case .normal:
+                                EmptyView()
+                            case .percent(let percent, let alignment):
+                                TextField("%", text: Binding(get: {
+                                    String(percent)
+                                }, set: {
+                                    guard let percent = Double($0) else { return }
+                                    presentation = .spaced(children, horizontal: horizontal, vertical: .percent(percent, alignment: alignment))
+                                }))
+                                Picker("", selection: Binding(get: { alignment }, set: { presentation = .spaced(children, horizontal: horizontal, vertical: .percent(percent, alignment: $0)) })) {
+                                    Image(systemName: "align.vertical.top")
+                                        .tag(Presentation.Alignment.leading)
+                                    Image(systemName: "align.vertical.center")
+                                        .tag(Presentation.Alignment.center)
+                                    Image(systemName: "align.vertical.bottom")
+                                        .tag(Presentation.Alignment.trailing)
+                                }
+                                .pickerStyle(SegmentedPickerStyle())
+                            }
+                        }
+
+                        PresentationEditView.PresentationsEditView(presentations: Binding(get: { children }, set: { presentation = .spaced($0, horizontal: horizontal, vertical: horizontal) }), role: role)
                     }
                 case .grouped(let children):
                     VStack(alignment: .leading) {
@@ -179,7 +254,17 @@ extension PresentationEditView {
                 RoundedRectangle(cornerRadius: 6)
                     .stroke(.primary, lineWidth: 1)
             }
-            .id(UUID())
+//            .id(UUID())
+        }
+
+        func aspectName(id: Structure.Aspect.ID) -> String {
+            guard let aspect = aspect(id: id) else { return "unknown" }
+            return aspect.name
+        }
+
+        func aspect(id: Structure.Aspect.ID) -> Structure.Aspect? {
+            guard let aspect = document[Structure.Aspect.self, id] else { return nil }
+            return aspect
         }
     }
 }

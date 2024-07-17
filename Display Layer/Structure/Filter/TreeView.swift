@@ -20,12 +20,18 @@ extension Array where Element == Structure.Role {
 }
 
 struct TreeView: View {
+    // MARK: Nested Types
+
     typealias Result = (item: Information.Item, role: Structure.Role, roles: [Structure.Role])
 
-    @Environment(Information.self) var information
-    @Environment(Structure.self) var structure
+    // MARK: Properties
+
+    @Environment(\.information) var information
+    @Environment(\.structure) var structure
     @State var filter: Structure.Filter
     @State var expansions = Expansions(defaultExpansion: false)
+
+    // MARK: Computed Properties
 
     var rootItems: [Result] {
         var notReferenced: Information.Condition = .nil
@@ -48,6 +54,8 @@ struct TreeView: View {
         }
     }
 
+    // MARK: Content
+
     var body: some View {
         List {
             ForEach(rootItems, id: \.item) { item in
@@ -62,14 +70,18 @@ struct TreeView: View {
 
 extension TreeView {
     struct ListRowView: View {
-        @Environment(Information.self) var information
-        @Environment(Structure.self) var structure
+        // MARK: Properties
+
+        @Environment(\.information) var information
+        @Environment(\.structure) var structure
         @State var item: Information.Item
         @State var role: Structure.Role!
         @State var roles: [Structure.Role]
         @State var filter: Structure.Filter
         @Binding var expansions: Expansions
         @State var level: Int = 0
+
+        // MARK: Computed Properties
 
 //        var condition: Information.Condition? {
 //            filter.leafs ?? filter.roots
@@ -99,10 +111,12 @@ extension TreeView {
             }
         }
 
+        // MARK: Content
+
         var body: some View {
             Group {
                 if children.isEmpty {
-                    AspectView(item: item, aspect: Structure.Role.named[dynamicMember: "name"], appearance: .normal, editable: true)
+                    PresentationView(presentation: role.presentation(layout: .tree), item: item)
                         .contextMenu {
                             Picker("Role", selection: $role) {
                                 ForEach(roles) { role in
@@ -110,7 +124,6 @@ extension TreeView {
                                         .tag(role)
                                 }
                             }
-                            Text("\(roles.count)")
                         }
                 } else {
                     DisclosureGroup(key: key, isExpanded: $expansions) {
@@ -120,7 +133,7 @@ extension TreeView {
                             }
                         }
                     } label: {
-                        AspectView(item: item, aspect: Structure.Role.named[dynamicMember: "name"], appearance: .normal, editable: true)
+                        PresentationView(presentation: role.presentation(layout: .tree), item: item)
                     }
                     .contextMenu {
                         Picker("Role", selection: $role) {
@@ -129,7 +142,6 @@ extension TreeView {
                                     .tag(role)
                             }
                         }
-                        Text("\(roles.count)")
                     }
                 }
             }

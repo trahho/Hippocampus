@@ -10,7 +10,7 @@ import SwiftUI
 
 struct NavigationView: View {
 //    @State var document: Document
-    @Environment(Information.self) var information
+    @Environment(\.information) var information
 //    @Bindable var navigation: Navigation
     @State var cv: NavigationSplitViewVisibility = .automatic
     @State var expansions = Expansions()

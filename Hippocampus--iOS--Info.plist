@@ -40,9 +40,7 @@
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
-		<false/>
-		<key>UISceneConfigurations</key>
-		<dict/>
+		<true/>
 	</dict>
 	<key>UTExportedTypeDeclarations</key>
 	<array>

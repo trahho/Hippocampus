@@ -7,17 +7,26 @@
 
 import Foundation
 
-extension Structure.Filter {
-    fileprivate var cr: String { "\n" }
-    fileprivate var tab: (Int) -> String {
-        { "\n" + String(repeating: "\t", count: $0) }
+extension Structure.Filter: SourceCodeGenerator {
+    func sourceCode(tab i: Int, inline _: Bool, document: Document) -> String {
+        tab(i) + "static let \(name.replacingOccurrences(of: " ", with: "_")): Filter = {"
+            + tab(i + 1) + "var filter = Filter(id: \"\(id)\".uuid)"
+            + tab(i + 1) + "filter.name = \"\(name)\""
+            + superFiltersSourceCode(tab: i + 1)
+            //            + referencesSourceCode
+            //            + aspectsSourceCode
+            //            + particlesSourceCode
+            //            + representationsSourceCode
+            + tab(i + 1) + "filter.condition = " + condition.sourceCode(tab: i + 2, inline: true, document: document)
+            + tab(i + 1) + "return filter"
+            + tab(i) + "}()" + cr
     }
 
-    fileprivate var superFiltersSourceCode: String {
+    fileprivate func superFiltersSourceCode(tab i: Int) -> String {
         if superFilters.isEmpty { "" } else {
-            tab(2) + "filter.superFilters = ["
+            tab(i) + "filter.superFilters = ["
                 + superFilters
-                .map { ".\($0.name)" }
+                .map { ".\($0.name.replacingOccurrences(of: " ", with: "_"))" }
                 .joined(separator: ", ")
                 + "]"
         }
@@ -83,48 +92,6 @@ extension Structure.Filter {
 //        }
 //    }
 //
-//    fileprivate func presentationItemSourceCode(presentation: Presentation, tab i: Int) -> String {
-//        switch presentation {
-//        case .empty:
-//            tab(i) + ".empty"
-//        case .undefined:
-//            tab(i) + ".undefined"
-//        case .label(let string):
-//            tab(i) + ".label(\"\(string)\")"
-//        case .aspect(let aspectId, let appearance):
-//            tab(i) + ".aspect(\"\(aspectId)\".uuid, appearance: .\(appearance))"
-//        case .grouped(let children):
-//            tab(i) + ".grouped(["
-//               /* + tab(i + 1)*/ + children.map { presentationItemSourceCode(presentation: $0, tab: i + 1) }.joined(separator: ", ")
-//                + tab(i) + "])"
-//        case .horizontal(let children, let alignment):
-//            tab(i) + ".horizontal(["
-//               /* + tab(i + 1)*/ + children.map { presentationItemSourceCode(presentation: $0, tab: i + 1) }.joined(separator: ", ")
-//                + tab(i) + "], alignment: .\(alignment))"
-//        case .vertical(let children, let alignment):
-//            tab(i) + ".vertical(["
-//              /*  + tab(i + 1) */+ children.map { presentationItemSourceCode(presentation: $0, tab: i + 1) }.joined(separator: ", ")
-//                + tab(i) + "], alignment: .\(alignment))"
-//        case .background(let children, let color):
-//            tab(i) + ".background(["
-//               /* + tab(i + 1)*/ + children.map { presentationItemSourceCode(presentation: $0, tab: i + 1) }.joined(separator: ", ")
-//                + tab(i) + "], color: Color(hex: \"\(color.toHex!)\"))"
-//        case .color(let children, let color):
-//            tab(i) + ".color(["
-//                /* + tab(i + 1) */ + children.map { presentationItemSourceCode(presentation: $0, tab: i + 1) }.joined(separator: ", ")
-//                + tab(i) + "], color: Color(hex: \"\(color.toHex!)\"))"
-//        default:
-//            ""
-//        }
-//    }
-//
-//    fileprivate func presentationSourceCode(presentation: Presentation, tab i: Int, inline: Bool = false) -> String {
-//        if inline {
-//            presentationItemSourceCode(presentation: presentation, tab: i)
-//        } else {
-//            tab(i) + presentationItemSourceCode(presentation: presentation, tab: i)
-//        }
-//    }
 //
 //    fileprivate var representationsSourceCode: String {
 //        if representations.isEmpty { "" } else {
@@ -142,16 +109,17 @@ extension Structure.Filter {
 //        }
 //    }
 
-    var sourceCode: String {
-        tab(1) + "static let \(name): Filter = {"
-            + tab(2) + "var filter = Filter(id: \"\(id)\".uuid)"
-            + tab(2) + "filter.name = \"\(name)\""
-            + superFiltersSourceCode
-//            + referencesSourceCode
-//            + aspectsSourceCode
-//            + particlesSourceCode
-//            + representationsSourceCode
-            + tab(2) + "return filter"
-            + tab(1) + "}()" + cr
-    }
+//    func sourceCode(
+//
+//        tab(1) + "static let \(name): Filter = {"
+//            + tab(2) + "var filter = Filter(id: \"\(id)\".uuid)"
+//            + tab(2) + "filter.name = \"\(name)\""
+//            + superFiltersSourceCode
+    ////            + referencesSourceCode
+    ////            + aspectsSourceCode
+    ////            + particlesSourceCode
+    ////            + representationsSourceCode
+//            + tab(2) + "return filter"
+//            + tab(1) + "}()" + cr
+//    }
 }

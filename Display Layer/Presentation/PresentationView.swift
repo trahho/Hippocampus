@@ -43,11 +43,6 @@ import SwiftUI
 // }
 
 struct PresentationView: View {
-    @Environment(Document.self) var document
-    @State var presentation: Presentation
-    @State var item: Information.Item?
-    @State var id = UUID()
-
     struct ArrayView: View {
         @State var array: [Presentation]
         @State var item: Information.Item?
@@ -60,46 +55,118 @@ struct PresentationView: View {
         }
     }
 
-    var body: some View {
-        switch presentation {
-        case .label(let string):
-            Text(string).id(UUID())
-        case .aspect(let aspectId, let appearance):
-            if let aspect = document[Structure.Aspect.self, aspectId] {
-                AspectView(aspect: aspect, appearance: appearance, editable: false)
-            }
-        case .background(let children, let color):
-            ArrayView(array: children, item: item)
-                .background(color)
-        case .color(let children, let color):
-            ArrayView(array: children, item: item)
-                .foregroundStyle(color)
-        case .horizontal(let children, alignment: let alignment):
-            HStack(alignment: alignment.vertical) {
-                ArrayView(array: children, item: item)
-            }
-        case .vertical(let children, alignment: let alignment):
-            VStack(alignment: alignment.horizontal) {
-                ArrayView(array: children, item: item)
-            }
-        case .grouped(let children):
-            ArrayView(array: children, item: item).padding()
-        default:
-            EmptyView()
-        }
-    }
-    
     struct Preview: View {
         let presentation: Presentation =
             .vertical([
-                    .aspect("6247260E-624C-48A1-985C-CDEDDFA5D3AD".uuid, appearance: .normal),
-                    .aspect("F0C2B7D0-E71A-4296-9190-8EF2D540338F".uuid, appearance: .normal),
-                    .aspect("F0C2B7D0-E71A-4296-9190-8EF2D540338F".uuid, appearance: .normal)
+                .aspect("6247260E-624C-48A1-985C-CDEDDFA5D3AD".uuid, appearance: .normal),
+                .aspect("F0C2B7D0-E71A-4296-9190-8EF2D540338F".uuid, appearance: .normal),
+                .aspect("F0C2B7D0-E71A-4296-9190-8EF2D540338F".uuid, appearance: .normal)
             ], alignment: .center)
+
         var body: some View {
             PresentationView(presentation: presentation, item: nil)
-               .environment(HippocampusApp.editStaticRolesDocument)
+                .environment(HippocampusApp.editStaticRolesDocument)
         }
+    }
+
+    @Environment(\.document) var document
+    @State var presentation: Presentation
+    @State var item: Information.Item?
+    @State var id = UUID()
+
+    var body: some View {
+        Group {
+            switch presentation {
+            case .label(let string):
+                Text(string).id(UUID())
+            case .icon(let iconId):
+                Image(systemName: iconId)
+            case .aspect(let aspectId, let appearance):
+                if let aspect = document[Structure.Aspect.self, aspectId] {
+                    AspectView(aspect: aspect, appearance: appearance, editable: false)
+                }
+            case .background(let children, let color):
+                ArrayView(array: children, item: item)
+                    .background(color)
+            case .color(let children, let color):
+                ArrayView(array: children, item: item)
+                    .foregroundStyle(color)
+            case .horizontal(let children, alignment: let alignment):
+                HStack(alignment: alignment.vertical) {
+                    ArrayView(array: children, item: item)
+                }
+            case .vertical(let children, alignment: let alignment):
+                VStack(alignment: alignment.horizontal) {
+                    ArrayView(array: children, item: item)
+                }
+            case .grouped(let children):
+                ArrayView(array: children, item: item).padding()
+            case .spaced(let children, let horizontal, let vertical):
+                ArrayView(array: children, item: item)
+                    .containerRelativeFrame([.horizontal,.vertical], alignment: Alignment(horizontal: horizontal.alignment.horizontal, vertical: vertical.alignment.vertical)) { size, axis in
+                        if axis == .horizontal {
+                            return size * horizontal.factor
+                        } else {
+                            return size * vertical.factor
+                        }
+                    }
+                //            switch horizontal {
+                //            case .full(let horizontal):
+                //                switch vertical {
+                //                case .full(let vertical):
+                //                    ArrayView(array: children, item: item)
+                //                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .init(horizontal: horizontal.horizontal, vertical: vertical.vertical))
+                //                case .normal:
+                //                    ArrayView(array: children, item: item)
+                //                        .frame(maxWidth: .infinity, alignment: .init(horizontal: horizontal.horizontal, vertical: .center))
+                //                case .percent(let percent, let vertical):
+                //                    ArrayView(array: children, item: item)
+                //                        .frame(maxWidth: .infinity)
+                //                        .containerRelativeFrame(.vertical) { height, _ in
+                //                            height * CGFloat(percent)
+                //                        }
+                //                }
+                //
+                //            case .normal:
+                //                switch vertical {
+                //                case .full(let vertical):
+                //                    ArrayView(array: children, item: item)
+                //                        .frame(maxHeight: .infinity, alignment: .init(horizontal: .center, vertical: vertical.vertical))
+                //                case .normal:
+                //                    ArrayView(array: children, item: item)
+                //                case .percent(let percent, let vertical):
+                //                    ArrayView(array: children, item: item)
+                //                        .containerRelativeFrame(.vertical) { height, _ in
+                //                            height * CGFloat(percent)
+                //                        }
+                //                }
+                //
+                //            case .percent(let horizontalPercent, let horizontal):
+                //                switch vertical {
+                //                case .full(let vertical):
+                //                    ArrayView(array: children, item: item)
+                //                        .frame(maxHeight: .infinity, alignment: .init(horizontal: horizontal.horizontal, vertical: vertical.vertical))
+                //                        .containerRelativeFrame(.horizontal) { width, _ in width * CGFloat(horizontalPercent) }
+                //                case .normal:
+                //                    ArrayView(array: children, item: item)
+                //                        .frame(alignment: .init(horizontal: horizontal.horizontal, vertical: .center))
+                //                        .containerRelativeFrame(.horizontal) { width, _ in width * CGFloat(horizontalPercent) }
+                //                case .percent(let verticalPercent, let vertical):
+                //                    ArrayView(array: children, item: item)
+                //                        .containerRelativeFrame([.horizontal, .vertical]) { size, axis in
+                //                            if axis == .vertical {
+                //                                return size * CGFloat(verticalPercent)
+                //                            } else {
+                //                                return size * CGFloat(horizontalPercent)
+                //                            }
+                //                        }
+                //                }
+                //            }
+            default:
+                EmptyView()
+            }
+        }
+        .id(UUID())
     }
 }
 

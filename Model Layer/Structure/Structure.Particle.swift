@@ -11,9 +11,14 @@ import Smaug
 
 extension Structure {
     @dynamicMemberLookup
-    class Particle: ObjectPersistence.Object, EditableListItem {
+    class Particle: Object, EditableListItem, Pickable {
         @Property var name = ""
         @Property var aspects: [Aspect] = []
+        @Relation(\.particles) var role: Structure.Role!
+
+        var description: String {
+            name
+        }
 
         subscript(dynamicMember dynamicMember: String) -> Aspect {
             aspects.first(where: { $0.name.lowercased() == dynamicMember.lowercased() })!

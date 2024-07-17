@@ -93,7 +93,7 @@ extension Information {
             case let .hasParticle(particleId, condition):
                 return item.particles
                     .filter { $0.id == particleId }
-                    .contains { condition.matches($0, structure: structure, roles: &roles) }
+                    .contains {condition == .nil ? true : condition.matches($0, structure: structure, roles: &roles) }
             case let .not(condition):
                 var blockRoles: [Structure.Role] = []
                 return !condition.matches(item, sameRole: sameRole, structure: structure, roles: &blockRoles)

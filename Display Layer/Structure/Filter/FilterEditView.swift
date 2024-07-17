@@ -9,10 +9,18 @@ import Grisu
 import SwiftUI
 
 struct FilterEditView: View {
+    // MARK: Nested Types
+
     struct SelectFiltersSheet: View {
+        // MARK: Nested Types
+
         struct Entry: Identifiable, Hashable {
+            // MARK: Properties
+
             let item: Structure.Filter
             let filter: Structure.Filter
+
+            // MARK: Computed Properties
 
             var id: Structure.Filter.ID { filter.id }
             var text: String { filter.name.localized(filter.isStatic) }
@@ -26,8 +34,12 @@ struct FilterEditView: View {
             }
         }
 
-        @Environment(Document.self) var document
+        // MARK: Properties
+
+        @Environment(\.document) var document
         @Binding var filter: Structure.Filter
+
+        // MARK: Computed Properties
 
         var roots: [Entry] {
             document.structure.filters
@@ -35,6 +47,8 @@ struct FilterEditView: View {
                 .sorted(by: { $0.name.localized($0.isStatic) < $1.name.localized($1.isStatic) })
                 .map { Entry(item: filter, filter: $0) }
         }
+
+        // MARK: Content
 
         var body: some View {
             List(roots, children: \.children) { entry in
@@ -63,10 +77,13 @@ struct FilterEditView: View {
         }
     }
 
-   
-    @Environment(Document.self) var document
+    // MARK: Properties
+
+    @Environment(\.document) var document
     @State var filter: Structure.Filter
     @State var expanded: Expansions = .init()
+
+    // MARK: Content
 
 //    @State var representation: Structure.Role.Representation?
 
@@ -94,9 +111,7 @@ struct FilterEditView: View {
             Section("Condition", isExpanded: $expanded) {
                 ConditionEditView(condition: $filter.condition)
             }
-            .onChange(of: filter.condition) { oldValue, newValue in
-                print("\(filter.condition)")
-            }
+
             //                LabeledContent {
             //                    DisclosureGroup {
             //                        SelectReferencesSheet(role: $role)
@@ -153,7 +168,7 @@ struct FilterEditView: View {
             //                }
             //
             Section("Source code", isExpanded: $expanded) {
-                Text(filter.sourceCode)
+                Text(filter.sourceCode(tab: 0, inline: false, document: document))
                     .font(.caption)
                     .textSelection(.enabled)
             }
@@ -161,8 +176,6 @@ struct FilterEditView: View {
         }
         .formStyle(.grouped)
     }
-    
-  
 }
 
 // #Preview {

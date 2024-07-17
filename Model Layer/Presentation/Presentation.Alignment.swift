@@ -10,9 +10,10 @@ import Grisu
 import SwiftUI
 
 extension Presentation {
-    enum Alignment: Structure.PersistentValue {
-
+    enum Alignment: Structure.PersistentValue, SourceCodeGenerator {
         case leading, center, trailing
+
+        // MARK: Computed Properties
 
         var horizontal: HorizontalAlignment {
             switch self {
@@ -33,6 +34,19 @@ extension Presentation {
                 .center
             case .trailing:
                 .bottom
+            }
+        }
+
+        // MARK: Functions
+
+        func sourceCode(tab _: Int, inline _: Bool, document _: Document) -> String {
+            switch self {
+            case .leading:
+                return ".leading"
+            case .center:
+                return ".center"
+            case .trailing:
+                return ".trailing"
             }
         }
     }

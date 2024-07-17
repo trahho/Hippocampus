@@ -10,7 +10,7 @@ import SwiftUI
 
 extension RoleEditView {
     struct SelectReferencesSheet: View {
-        @Environment(Document.self) var document
+        @Environment(\.document) var document
         @Binding var role: Structure.Role
         
         struct Entry: Identifiable, Hashable {

@@ -18,3 +18,15 @@ extension Array where Element: Hashable {
         }
     }
 }
+
+extension Array where Element: Equatable {
+    mutating func remove(item: Element) {
+        guard let index = firstIndex(of: item) else { return }
+        remove(at: index)
+    }
+
+    mutating func insert(item: Element, after: Element) {
+        guard let index = firstIndex(of: after) else { return }
+        insert(item, at: index + 1)
+    }
+}

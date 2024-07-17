@@ -10,6 +10,7 @@ import Smaug
 
 extension Information.Condition {
     enum Comparison: Information.PersistentValue, Hashable {
+        case `nil`
         case below(Structure.Aspect.ID, Information.ValueStorage)
         case above(Structure.Aspect.ID, Information.ValueStorage)
         case equal(Structure.Aspect.ID, Information.ValueStorage)
@@ -24,6 +25,8 @@ extension Information.Condition {
 
         func matches(for item: Information.Item, structure: Structure, roles: inout [Structure.Role]) -> Bool {
             switch self {
+            case .nil:
+                return false
             case let .below(aspect, value):
                 guard let aspect = structure[Structure.Aspect.self, aspect], let itemValue = aspect[item] else { return true }
                 appendRole(role: aspect.role, roles: &roles)
@@ -45,6 +48,8 @@ extension Information.Condition {
 
         func matches(for item: Information.Particle, structure: Structure, roles: inout [Structure.Role]) -> Bool {
             switch self {
+            case .nil:
+                return false
             case let .below(aspect, value):
                 guard let aspect = structure[Structure.Aspect.self, aspect], let itemValue = aspect[item] else { return true }
                 return itemValue < value

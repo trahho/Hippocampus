@@ -65,7 +65,6 @@ struct FilterView: View {
             label
         } else {
             DisclosureGroup(key: filter.id.uuidString, isExpanded: $expansions) {
-//            DisclosureGroup {
                 ForEach(filters, id: \.self) { filter in
                     FilterView(filter: filter, selected: $selected, expansions: $expansions)
                 }

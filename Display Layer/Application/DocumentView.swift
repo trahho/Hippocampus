@@ -16,7 +16,7 @@ struct DocumentView: View {
     var body: some View {
 //        NavigationView(navigation: navigation)
         NavigationView()
-            .setDocument(document)
+            .environment(\.document,document)
 //        NavigationView()
 //            .font(.myText)
 //            .environment(document)

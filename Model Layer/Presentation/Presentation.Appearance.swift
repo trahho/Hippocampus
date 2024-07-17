@@ -9,7 +9,11 @@ import Foundation
 import Grisu
 
 extension Presentation {
-    enum Appearance: Structure.PersistentValue, PickableEnum {
+    enum Appearance: Structure.PersistentValue, PickableEnum, SourceCodeGenerator {
+        func sourceCode(tab i: Int, inline: Bool, document: Document) -> String {
+            ".\(self.description)"
+        }
+        
         case icon, small, normal, firstParagraph, full, edit
 
         var description: String {

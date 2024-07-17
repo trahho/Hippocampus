@@ -14,6 +14,9 @@
         }
       }
     },
+    "%" : {
+
+    },
     "%@" : {
 
     },
@@ -55,6 +58,21 @@
     "Add children" : {
 
     },
+    "All" : {
+
+    },
+    "All matching" : {
+
+    },
+    "Always" : {
+
+    },
+    "Any" : {
+
+    },
+    "Any matching" : {
+
+    },
     "Aspect" : {
 
     },
@@ -76,6 +94,9 @@
     "Computed" : {
 
     },
+    "Condition" : {
+
+    },
     "Count: %lld" : {
       "localizations" : {
         "de" : {
@@ -86,11 +107,13 @@
         }
       }
     },
+    "create" : {
+
+    },
     "Edit" : {
 
     },
     "Edit Role" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -100,7 +123,13 @@
         }
       }
     },
+    "filter" : {
+
+    },
     "Filter" : {
+
+    },
+    "For Particle" : {
 
     },
     "Foreground" : {
@@ -115,10 +144,43 @@
     "Hallo Welt" : {
 
     },
+    "Has Particle" : {
+
+    },
+    "Has Reference" : {
+
+    },
+    "Has Reference to" : {
+
+    },
+    "Has Role (%@)" : {
+
+    },
+    "Has Value" : {
+
+    },
     "Hello, World!" : {
 
     },
     "Horizontal" : {
+
+    },
+    "Icon" : {
+
+    },
+    "Is Particle" : {
+
+    },
+    "Is Particle (%@)" : {
+
+    },
+    "Is Reference of Role" : {
+
+    },
+    "Is Reference of Role (%@)" : {
+
+    },
+    "Is Referenced by" : {
 
     },
     "Label" : {
@@ -145,13 +207,19 @@
         }
       }
     },
-    "No condition" : {
+    "Nil" : {
+
+    },
+    "Not" : {
 
     },
     "Padded" : {
 
     },
     "Parents" : {
+
+    },
+    "Particle" : {
 
     },
     "References" : {
@@ -176,10 +244,22 @@
     "Roles" : {
 
     },
+    "SFSymbol" : {
+
+    },
     "Simple" : {
 
     },
+    "Size" : {
+
+    },
+    "Some" : {
+
+    },
     "Vertical" : {
+
+    },
+    "Wrap in" : {
 
     }
   },

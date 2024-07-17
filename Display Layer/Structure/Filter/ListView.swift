@@ -12,8 +12,8 @@ import SwiftUI
 struct ListView: View {
     typealias Result = (item: Information.Item, role: Structure.Role, roles: [Structure.Role])
 
-    @Environment(Information.self) var information
-    @Environment(Structure.self) var structure
+    @Environment(\.information) var information
+    @Environment(\.structure) var structure
     @State var filter: Structure.Filter
     @State var expansions = Expansions(defaultExpansion: false)
 
@@ -37,7 +37,7 @@ struct ListView: View {
     var body: some View {
         List {
             ForEach(rootItems, id: \.item) { item in
-                AspectView(item: item.item, aspect: Structure.Role.named[dynamicMember: "name"], appearance: .normal, editable: false)
+                AspectView(item: item.item, aspect: Structure.Role.named.text, appearance: .normal, editable: false)
             }
         }
     }

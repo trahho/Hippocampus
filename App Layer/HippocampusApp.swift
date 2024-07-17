@@ -8,17 +8,23 @@
 import SwiftUI
 
 @main
-struct HippocampusApp: App {
+struct HippocampusApp {
+    // MARK: Nested Types
+
     struct TestView: View {
         var body: some View {
             Text("\(HippocampusApp.locationService.authorization.rawValue)")
         }
     }
 
+    // MARK: Static Properties
+
     static let memoryExtension = ".memory"
     static let persistentExtension = ".persistent"
 
     static let locationService = LocationService()
+
+    // MARK: Static Computed Properties
 
     static var iCloudContainerUrl: URL { URL.iCloudDirectory.appendingPathComponent("Documents") }
 
@@ -63,7 +69,8 @@ struct HippocampusApp: App {
         }
 
         for filter in document.structure.filters {
-            filter.orders = [.sorted(Structure.Role.named[dynamicMember: "name"].id, ascending: true)]
+            let aspect: Structure.Aspect = Structure.Role.named.text
+            filter.orders = [.sorted(aspect.id, ascending: true)]
             filter.order = filter.orders.first!
             filter.condition = .role(Structure.Role.tracked.id)
 //            filter.leafs = .always(true)
@@ -71,16 +78,16 @@ struct HippocampusApp: App {
 
         for i in 0 ..< 10 {
             let other = document(Information.Item.self)
-            Structure.Role.named[dynamicMember: "name"][String.self, other] = "Hallo Welt🤩"
+            Structure.Role.named.text[String.self, other] = "Hallo Welt🤩"
             other.roles.append(.note)
 
             let item = document(Information.Item.self)
-            Structure.Role.named[dynamicMember: "name"][String.self, item] = "\(i + 1). Hallo Welt🤩"
+            Structure.Role.named.text[String.self, item] = "\(i + 1). Hallo Welt🤩"
 //            item.roles.append(Structure.Role.named)
             item.roles.append(Structure.Role.topic)
             for j in 0 ..< 5 {
                 let subItem = document(Information.Item.self)
-                Structure.Role.named[dynamicMember: "name"][String.self, subItem] = "\(i + 1).\(j + 1). Hallo Welt🤩"
+                Structure.Role.named.text[String.self, subItem] = "\(i + 1).\(j + 1). Hallo Welt🤩"
 //                subItem.roles.append(Structure.Role.named)
                 subItem.roles.append(Structure.Role.topic)
                 subItem.roles.append(Structure.Role.note)
@@ -88,14 +95,14 @@ struct HippocampusApp: App {
                 subItem.from.append(item)
                 for k in 0 ..< 5 {
                     let subsubItem = document(Information.Item.self)
-                    Structure.Role.named[dynamicMember: "name"][String.self, subsubItem] = "\(i + 1).\(j + 1).\(k + 1). Hallo Welt🤩"
+                    Structure.Role.named.text[String.self, subsubItem] = "\(i + 1).\(j + 1).\(k + 1). Hallo Welt🤩"
                     subsubItem.roles.append(Structure.Role.note)
 //                    subsubItem.roles.append(Structure.Role.topic)
 
                     subItem.to.append(subsubItem)
                     subsubItem.from.append(item)
                     let other = document(Information.Item.self)
-                    Structure.Role.named[dynamicMember: "name"][String.self, other] = "Hallo Welt🤩"
+                    Structure.Role.named.text[String.self, other] = "Hallo Welt🤩"
                 }
             }
         }
@@ -103,7 +110,11 @@ struct HippocampusApp: App {
         return document
     }
 
+    // MARK: Properties
+
     var document: Document = previewDocument
+
+    // MARK: Static Functions
 
     //        .preview1
 //
@@ -128,40 +139,6 @@ struct HippocampusApp: App {
 
 //    let navigation = Navigation()
 
-    var body: some Scene {
-        WindowGroup {
-//            DocumentView(document: document)
-            EmptyView()
-        }
-//        WindowGroup("Filter", for: Structure.Filter.ID.self) { $filterId in
-//            if let filterId, let filter = document[Structure.Filter.self, filterId] {
-//                FilterEditView(filter: filter)
-//                    .setDocument(document)
-//            }
-//        }
-//        Window("Edit Role", id: "whatever") {
-////            TestView()
-////                .onAppear {
-////                    Self.locationService.start()
-////                }
-////            Design_Localization()
-////            Design_DragDropView()
-//            RolesView()
-////            PresentationView.Preview()
-////            PresentationView(presentation: Structure.Role.hierarchical.representations[0].presentation, item: Information.Item())
-//                .setDocument(HippocampusApp.editStaticRolesDocument)
-//
-//            // Design_NavigationView()
-////                .environment(Design_NavigationView.Navigation())
-////            AnchorGraphView(graph: HippocampusApp.graph)
-////            Design_ShellView()
-////            Design_ContextMenuView()
-////                .environmentObject(navigation)
-////                .onOpenURL { document = Document(url: $0) }
-//        }
-//        .keyboardShortcut("r", modifiers: [.command, .control, .shift, .option])
-    }
-
     static func documentURL(name: String, local: Bool) -> URL {
         let containerURL = local ? HippocampusApp.localContainerUrl : HippocampusApp.iCloudContainerUrl
         let result = containerURL.appendingPathComponent("\(name)\(HippocampusApp.memoryExtension)")
@@ -171,24 +148,17 @@ struct HippocampusApp: App {
 
 extension View {
     func setDocument(_ document: Document) -> some View {
-        self
-            .environment(document)
+        environment(document)
             .environment(document.structure)
             .environment(document.information)
     }
 }
 
-// extension EnvironmentValues {
-//    @Entry var navigation: Navigation = .init()
-//    @Entry var document: Document = HippocampusApp.emptyDocument
-//
-//    var information: Information {
-//        get { document.information }
-//        set {}
-//    }
-//
-//    var structure: Structure {
-//        get { document.structure }
-//        set {}
-//    }
-// }
+extension EnvironmentValues {
+    @Entry var navigation: Navigation = .init()
+    @Entry var document: Document = HippocampusApp.emptyDocument
+
+    var information: Information { document.information }
+
+    var structure: Structure { document.structure }
+}
