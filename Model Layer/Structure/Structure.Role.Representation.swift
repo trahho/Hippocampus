@@ -6,12 +6,12 @@
 //
 
 import Foundation
-import Smaug
 import Grisu
+import Smaug
 
 extension Structure.Role {
-    class Representation: ObjectPersistence.Object,  EditableListItem {
-        @Property var presentation: Presentation = .undefined
+    class Representation: ObjectPersistence.Object, EditableListItem {
+        @Property/*(logChanges: true)*/ var presentation: Presentation = .undefined
         @Property var name: String = ""
         @Property var layouts: [Presentation.Layout] = []
     }

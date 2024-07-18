@@ -70,6 +70,28 @@ struct TreeView: View {
 
 extension TreeView {
     struct ListRowView: View {
+        // MARK: Nested Types
+
+        struct RepresentationView: View {
+            // MARK: Properties
+
+            @State var item: Information.Item
+            @State var representation: Structure.Role.Representation?
+
+            // MARK: Content
+
+            var body: some View {
+                Group {
+                    if let representation {
+                        PresentationView(presentation: representation.presentation, item: item)
+                    } else {
+                        Image(systemName: "questionmark.square.dashed")
+                    }
+                }
+                .id(UUID())
+            }
+        }
+
         // MARK: Properties
 
         @Environment(\.information) var information
@@ -111,12 +133,16 @@ extension TreeView {
             }
         }
 
+        var presentation: Presentation {
+            role.representation(layout: .list)?.presentation ?? .empty
+        }
+
         // MARK: Content
 
         var body: some View {
             Group {
                 if children.isEmpty {
-                    PresentationView(presentation: role.presentation(layout: .tree), item: item)
+                    RepresentationView(item: item, representation: role.representation(layout: .tree))
                         .contextMenu {
                             Picker("Role", selection: $role) {
                                 ForEach(roles) { role in
@@ -133,7 +159,7 @@ extension TreeView {
                             }
                         }
                     } label: {
-                        PresentationView(presentation: role.presentation(layout: .tree), item: item)
+                        RepresentationView(item: item, representation: role.representation(layout: .tree))
                     }
                     .contextMenu {
                         Picker("Role", selection: $role) {

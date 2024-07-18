@@ -65,15 +65,40 @@ extension Structure {
             }
         }
 
-        func presentation(layout: Presentation.Layout, name: String? = nil) -> Presentation {
-            allRoles
-                .finalsFirst
-                .flatMap {
-                    $0.representations.filter {
-                        $0.layouts.contains(layout) && $0.name == name ?? $0.name
+        func representation(layout: Presentation.Layout, name: String? = nil) -> Representation? {
+//            print("Checking for \(self.name)")
+            if let result = representations.first(where: { $0.layouts.contains(layout) && $0.name == name ?? $0.name }) {
+//                print("Found it!")
+                return result
+            }
+            var roles = self.roles
+            while !roles.isEmpty {
+                var nextRoles = [Role]()
+//                print("Next roles: \(roles.map { $0.name }.joined(separator: ", "))")
+                for role in roles {
+//                    print("Checking for \(role.name)")
+                    if let result = role.representations.first(where: { $0.layouts.contains(layout) && $0.name == name ?? $0.name }) {
+//                        print("Found it!")
+                        return result
+                    }
+                    for role in role.roles {
+                        if !nextRoles.contains(role) {
+                            nextRoles.append(role)
+                        }
                     }
                 }
-                .first?.presentation ?? .empty
+                roles = nextRoles
+                nextRoles = []
+            }
+            return nil
+//            allRoles
+//                .finalsFirst
+//                .flatMap {
+//                    $0.representations.filter {
+//                        $0.layouts.contains(layout) && $0.name == name ?? $0.name
+//                    }
+//                }
+//                .first
         }
 
 //            if let representation = representations.first(where: { $0.layouts.contains(layout) && $0.name == name ?? $0.name }) {
