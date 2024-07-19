@@ -9,52 +9,6 @@ import Grisu
 import SwiftUI
 
 struct RoleEditView: View {
-    // MARK: Nested Types
-
-    struct EditRepresentationSheet: View {
-        // MARK: Properties
-
-        @Environment(\.document) var document
-        @State var role: Structure.Role
-        @State var representation: Structure.Role.Representation
-
-        // MARK: Content
-
-        var body: some View {
-            VStack(alignment: .leading) {
-//                Form {
-                TextField("Name", text: $representation.name)
-//                }
-//                .formStyle(.grouped)
-//                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 100, maximum: 300))], spacing: 10) {
-                    ForEach(Presentation.Layout.allCases, id: \.self) { layout in
-                        Text(layout.description)
-                            .background{
-                                RoundedRectangle(cornerRadius: 4)
-                                    .foregroundStyle(representation.layouts.contains(layout) ? Color.accentColor : Color.clear)
-                            }
-                            .onTapGesture {
-                                if representation.layouts.contains(layout) {
-                                    representation.layouts.remove(item: layout)
-                                } else {
-                                    representation.layouts.append(layout)
-                                }
-                            }
-                    }
-                }
-               
-                PresentationEditView(role: role, presentation: $representation.presentation)
-                PresentationView(presentation: representation.presentation, item: Information.Item())
-                    .id(UUID())
-                Spacer()
-            }
-            .padding()
-//            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .frame(minWidth: 1500, minHeight: 900)
-        }
-    }
-
     // MARK: Properties
 
     @Environment(\.document) var document
@@ -130,7 +84,7 @@ struct RoleEditView: View {
                     LabeledContent("Name") { Text(representation.name.wrappedValue) }
                     HStack {
                         PresentationView(presentation: representation.presentation.wrappedValue, item: nil)
-                            .id(UUID())
+                            .sensitive
                         Image(systemName: "square.and.pencil")
                             .onTapGesture {
                                 self.representation = representation.wrappedValue

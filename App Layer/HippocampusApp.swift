@@ -68,7 +68,7 @@ struct HippocampusApp {
             }
         }
 
-        for filter in document.structure.filters {
+        for filter in document.structure.filters.filter({!$0.isStatic}) {
             let aspect: Structure.Aspect = Structure.Role.named.text
             filter.orders = [.sorted(aspect.id, ascending: true)]
             filter.order = filter.orders.first!

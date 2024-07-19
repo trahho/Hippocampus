@@ -1,50 +1,55 @@
 //
-//  RoleEditView+SelectRolesSheet.swift
+//  FilterEditView.SelectRolesSheet.swift
 //  Hippocampus
 //
-//  Created by Guido Kühn on 19.06.24.
+//  Created by Guido Kühn on 19.07.24.
 //
 
-import Foundation
-import Grisu
-import Smaug
 import SwiftUI
 
-extension RoleEditView {
+extension FilterEditView {
     struct SelectRolesSheet: View {
-        @Environment(\.document) var document
-        @Binding var role: Structure.Role
+        // MARK: Nested Types
 
         struct Entry: Identifiable, Hashable {
-            let item: Structure.Role
+            // MARK: Properties
+
+//            let item: Structure.Role
             let role: Structure.Role
+
+            // MARK: Computed Properties
+
             var id: Structure.Role.ID { role.id }
             var text: String { role.name.localized(role.isStatic) }
 
             var children: [Entry]? {
                 let result = role.subRoles
-                    .filter { !$0.conforms(to: item) }
                     .sorted(by: { $0.name.localized($0.isStatic) < $1.name.localized($1.isStatic) })
-                    .map { Entry(item: item, role: $0) }
+                    .map { Entry(role: $0) }
                 return result.isEmpty ? nil : result
             }
         }
 
+        // MARK: Properties
+
+        @Environment(\.document) var document
+        @Binding var filter: Structure.Filter
+
+        // MARK: Computed Properties
+
         var roots: [Entry] {
             document.structure.roles
-                .filter { $0.roles.isEmpty && $0 != Structure.Role.same && $0 != role }
+                .filter { $0 != Structure.Role.same }
                 .sorted(by: { $0.name.localized($0.isStatic) < $1.name.localized($1.isStatic) })
-                .map { Entry(item: role, role: $0) }
+                .map { Entry(role: $0) }
         }
+
+        // MARK: Content
 
         var body: some View {
             List(roots, children: \.children) { entry in
                 HStack {
-                    if role == entry.role {
-                        Image(systemName: "circle.circle")
-                    } else if role.subRoles.contains(entry.role) {
-                        Image(systemName: "xmark.circle")
-                    } else if role.roles.contains(entry.role) {
+                    if filter.roles.contains(entry.role) {
                         Image(systemName: "checkmark.circle")
                     } else {
                         Image(systemName: "circle")
@@ -53,11 +58,10 @@ extension RoleEditView {
                 }
                 .contentShape(Rectangle())
                 .onTapGesture {
-                    guard role != entry.role, !role.subRoles.contains(entry.role) else { return }
-                    if role.roles.contains(entry.role) {
-                        role.roles.removeAll(where: { $0 == entry.role })
+                    if filter.roles.contains(entry.role) {
+                        filter.roles.removeAll(where: { $0 == entry.role })
                     } else {
-                        role.roles.append(entry.role)
+                        filter.roles.append(entry.role)
                     }
                 }
             }

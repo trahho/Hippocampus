@@ -31,7 +31,7 @@ struct Design_ViewEditView: View {
             }
             .formStyle(.grouped)
             DisplayView(data: data)
-                .id(UUID())
+                .sensitive
         }
     }
 

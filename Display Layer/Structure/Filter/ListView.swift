@@ -37,7 +37,7 @@ struct ListView: View {
     var body: some View {
         List {
             ForEach(rootItems, id: \.item) { item in
-                AspectView(item: item.item, aspect: Structure.Role.named.text, appearance: .normal, editable: false)
+                PresentationView(presentation: item.role.representation(layout: .list)?.presentation ?? .empty, item: item.item)
             }
         }
     }

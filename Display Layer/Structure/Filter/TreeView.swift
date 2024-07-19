@@ -88,7 +88,7 @@ extension TreeView {
                         Image(systemName: "questionmark.square.dashed")
                     }
                 }
-                .id(UUID())
+                .sensitive
             }
         }
 

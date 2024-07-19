@@ -61,7 +61,7 @@ extension ConditionEditView {
                             guard let role else { return }
                             condition = .role(role.id)
                         }), unkown: "unknown")
-                        .id(UUID())
+                        .sensitive
                     }
                 case let .hasParticle(particleId, child):
                     VStack(alignment: .leading) {

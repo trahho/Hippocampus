@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct PresentationEditView: View {
-    @State var role: Structure.Role
     @Binding var presentation: Presentation
 
 //    @State var dragDropCache = DragDropCache()
@@ -17,11 +16,11 @@ struct PresentationEditView: View {
 //        HStack {
 //        Form {
 //            List {
-        ItemEditView(presentation: $presentation, role: role, array: .constant([]))
+        ItemEditView(presentation: $presentation, array: .constant([]))
 //            }
 //        }
 //            }
-            .formStyle(.grouped)
+//            .formStyle(.grouped)
     }
 
 //    struct HorizontalEditView: View {
@@ -43,8 +42,8 @@ struct PresentationEditView: View {
     @Previewable @State var document = HippocampusApp.editStaticRolesDocument
     @Previewable @State var presentation = Structure.Role.hierarchical.representations.first!.presentation
     var item = document(Information.Item.self)
-    return VStack {
-        PresentationEditView(role: .hierarchical, presentation: $presentation)
+    VStack {
+        PresentationEditView(presentation: $presentation)
         PresentationView(presentation: presentation, item: item)
     }
 }

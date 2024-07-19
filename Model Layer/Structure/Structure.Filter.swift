@@ -9,6 +9,8 @@ import Foundation
 
 extension Structure {
     class Filter: Object {
+        // MARK: Properties
+
         @Property var name: String = ""
         @Objects var superFilters: [Filter]
         @Relations(\Self.superFilters) var subFilters: [Filter]
@@ -17,10 +19,13 @@ extension Structure {
 
         @Objects var roles: [Structure.Role]
 
+        @Property var representations: [Representation] = []
         @Property var layouts: [Presentation.Layout] = []
         @Property var orders: [Presentation.Order] = []
         @Transient var layout: Presentation.Layout?
         @Transient var order: Presentation.Order?
+
+        // MARK: Computed Properties
 
         var allRoles: [Role] {
             (roles + superFilters.flatMap { $0.allRoles }).asSet.asArray
@@ -33,6 +38,8 @@ extension Structure {
         var allOrders: [Presentation.Order] {
             (orders + superFilters.flatMap { $0.allOrders }).asSet.asArray
         }
+
+        // MARK: Functions
 
 //        private var getAspect: (Aspect.ID) -> Aspect? { { self[Aspect.self, $0] }}
 

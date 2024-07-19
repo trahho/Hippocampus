@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-//class DragDropCache<Content>: Observable where Content: Transferable {
+// class DragDropCache<Content>: Observable where Content: Transferable {
 //    struct CacheItem {
 //        let source: Binding<[Content]>
 //        let index: Int
@@ -38,27 +38,24 @@ import SwiftUI
 //        self.cache = nil
 //        return true
 //    }
-//}
+// }
 
 extension PresentationEditView {
     struct PresentationsEditView: View {
+        // MARK: Properties
+
 //        @Environment(DragDropCache.self) var dragDropCache: DragDropCache
 
         @Binding var presentations: [Presentation]
-        @State var role: Structure.Role
-        
-        func draggable(index: Int) -> Presentation {
-            let result = presentations[index]
-            presentations.remove(at: index)
-            return result
-        }
+
+        // MARK: Content
 
         var body: some View {
-            if self.presentations.isEmpty {
+            if presentations.isEmpty {
                 Text("Add children")
             } else {
-                ForEach(0 ..< self.presentations.count, id: \.self) { i in
-                    ItemEditView(presentation: self.$presentations[i], role: self.role, array: self.$presentations)
+                ForEach(0 ..< presentations.count, id: \.self) { i in
+                    ItemEditView(presentation: self.$presentations[i], array: self.$presentations)
                         .draggable(draggable(index: i))
                 }
 //                .dropDestination(for: String.self) { items, at in
@@ -70,6 +67,14 @@ extension PresentationEditView {
 //                    dragDropCache.insert(target: $presentations, at: index)
 //                })
             }
+        }
+
+        // MARK: Functions
+
+        func draggable(index: Int) -> Presentation {
+            let result = presentations[index]
+            presentations.remove(at: index)
+            return result
         }
     }
 }

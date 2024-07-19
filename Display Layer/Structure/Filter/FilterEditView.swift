@@ -9,87 +9,14 @@ import Grisu
 import SwiftUI
 
 struct FilterEditView: View {
-    // MARK: Nested Types
-
-    struct SelectFiltersSheet: View {
-        // MARK: Nested Types
-
-        struct Entry: Identifiable, Hashable {
-            // MARK: Properties
-
-            let item: Structure.Filter
-            let filter: Structure.Filter
-
-            // MARK: Computed Properties
-
-            var id: Structure.Filter.ID { filter.id }
-            var text: String { filter.name.localized(filter.isStatic) }
-
-            var children: [Entry]? {
-                let result = filter.subFilters
-//                    .filter { !$0.conforms(to: item) }
-                    .sorted(by: { $0.name.localized($0.isStatic) < $1.name.localized($1.isStatic) })
-                    .map { Entry(item: item, filter: $0) }
-                return result.isEmpty ? nil : result
-            }
-        }
-
-        // MARK: Properties
-
-        @Environment(\.document) var document
-        @Binding var filter: Structure.Filter
-
-        // MARK: Computed Properties
-
-        var roots: [Entry] {
-            document.structure.filters
-                .filter { $0.superFilters.isEmpty && $0 != filter }
-                .sorted(by: { $0.name.localized($0.isStatic) < $1.name.localized($1.isStatic) })
-                .map { Entry(item: filter, filter: $0) }
-        }
-
-        // MARK: Content
-
-        var body: some View {
-            List(roots, children: \.children) { entry in
-                HStack {
-                    if filter == entry.filter {
-                        Image(systemName: "circle.circle")
-                    } else if filter.subFilters.contains(entry.filter) {
-                        Image(systemName: "xmark.circle")
-                    } else if filter.superFilters.contains(entry.filter) {
-                        Image(systemName: "checkmark.circle")
-                    } else {
-                        Image(systemName: "circle")
-                    }
-                    Text(entry.text)
-                }
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    guard filter != entry.filter, !filter.subFilters.contains(entry.filter) else { return }
-                    if filter.superFilters.contains(entry.filter) {
-                        filter.superFilters.removeAll(where: { $0 == entry.filter })
-                    } else {
-                        filter.superFilters.append(entry.filter)
-                    }
-                }
-            }
-        }
-    }
-
     // MARK: Properties
 
     @Environment(\.document) var document
     @State var filter: Structure.Filter
     @State var expanded: Expansions = .init()
+    @State var representation: Structure.Filter.Representation?
 
     // MARK: Content
-
-//    @State var representation: Structure.Role.Representation?
-
-//    var conformation: [Structure.Role] {
-//        role.roles.sorted(by: { $0.name.localized($0.isStatic) < $1.name.localized($1.isStatic) })
-//    }
 
     var body: some View {
         Form {
@@ -107,9 +34,46 @@ struct FilterEditView: View {
                 } label: {
                     Text("Parents")
                 }
+                LazyHGrid(rows: [GridItem(.flexible())], spacing: 10) {
+                    ForEach(Presentation.Layout.allCases, id: \.self) { layout in
+                        Text(layout.description)
+                            .padding()
+                            .background {
+                                RoundedRectangle(cornerRadius: 4)
+                                    .foregroundStyle(filter.layouts.contains(layout) ? Color.accentColor : Color.clear)
+                            }
+                            .onTapGesture {
+                                if filter.layouts.contains(layout) {
+                                    filter.layouts.remove(item: layout)
+                                } else {
+                                    filter.layouts.append(layout)
+                                }
+                            }
+                    }
+                }
             }
+            
+            Section("Roles", isExpanded: $expanded) {
+                SelectRolesSheet(filter: $filter)
+            }
+
             Section("Condition", isExpanded: $expanded) {
                 ConditionEditView(condition: $filter.condition)
+            }
+
+            Section("Views", isExpanded: $expanded) {
+                ListEditView($filter.representations) { representation in
+                    HStack {
+                        Text(representation.condition.wrappedValue.sourceCode(tab: 0, inline: true, document: document))
+                        Image(systemName: "square.and.pencil")
+                            .onTapGesture {
+                                self.representation = representation.wrappedValue
+                            }
+                    }
+                }
+                .sheet(item: $representation) { representation in
+                    EditRepresentationSheet(representation: representation)
+                }
             }
 
             //                LabeledContent {
@@ -173,6 +137,11 @@ struct FilterEditView: View {
                     .textSelection(.enabled)
             }
             //            }
+        }
+        .onAppear {
+            if filter.isStatic {
+                filter.toggleStatic()
+            }
         }
         .formStyle(.grouped)
     }

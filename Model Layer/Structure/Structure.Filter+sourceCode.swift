@@ -12,14 +12,34 @@ extension Structure.Filter: SourceCodeGenerator {
         tab(i) + "static let \(name.replacingOccurrences(of: " ", with: "_")): Filter = {"
             + tab(i + 1) + "var filter = Filter(id: \"\(id)\".uuid)"
             + tab(i + 1) + "filter.name = \"\(name)\""
+        + tab(i + 1) + "filter.layouts = [" + layouts.map { "." + $0.description }.joined(separator: ",") + "]"
+        + tab(i + 1) + "filter.roles = [" + roles.map { "Structure.Role." + $0.name.replacingOccurrences(of: " ", with: "_").lowercased() }.joined(separator: ", ") + "]"
             + superFiltersSourceCode(tab: i + 1)
             //            + referencesSourceCode
             //            + aspectsSourceCode
             //            + particlesSourceCode
             //            + representationsSourceCode
             + tab(i + 1) + "filter.condition = " + condition.sourceCode(tab: i + 2, inline: true, document: document)
+            + representationsSourceCode(tab: i + 1, document: document)
             + tab(i + 1) + "return filter"
             + tab(i) + "}()" + cr
+    }
+
+    fileprivate func representationsSourceCode(tab i: Int, document: Document) -> String {
+        if representations.isEmpty { "" } else {
+            tab(i) + "filter.representations = ["
+                + representations
+                .map {
+                    tab(i + 1) + "{"
+                        + tab(i + 2) + "let representation = Representation()"
+                        + tab(i + 2) + "representation.condition = " + $0.condition.sourceCode(tab: i + 3, inline: true, document: document)
+                        + tab(i + 2) + "representation.presentation = " + $0.presentation.sourceCode(tab: i + 3, inline: true, document: document)
+                        + tab(i + 2) + "return representation"
+                        + tab(i + 1) + "}()"
+                        + tab(i + 1) + "]"
+                }
+                .joined(separator: ",")
+        }
     }
 
     fileprivate func superFiltersSourceCode(tab i: Int) -> String {
