@@ -9,33 +9,39 @@ import SwiftUI
 
 extension ConditionEditView {
     struct ContextMenu: View {
+        // MARK: Properties
+
         @Binding var condition: Information.Condition
         @Binding var array: [Information.Condition]
-        
+
+        // MARK: Computed Properties
+
         var children: [Information.Condition] {
             switch condition {
-            case .all(let children), .any(let children):
+            case let .all(children), let .any(children):
                 children
-            case .hasParticle(_, let child):
+            case let .hasParticle(_, child):
                 [child]
-            case .hasReference(let child):
+            case let .hasReference(child):
                 [child]
-            case .isReferenced(let child):
+            case let .isReferenced(child):
                 [child]
-            case .not(let child):
+            case let .not(child):
                 [child]
             default:
                 []
             }
         }
-        
+
+        // MARK: Content
+
         var body: some View {
             Button {
                 remove()
             } label: {
                 Label("Remove", systemImage: "trash")
             }
-            
+
             switch condition {
             case .all, .any:
                 Menu("Add") {
@@ -50,15 +56,16 @@ extension ConditionEditView {
                     Button("Has Value") { add(item: .hasValue(.nil)) }
                 }
                 Menu("Change to") {
-                    if case .all(let children) = condition {
+                    if case let .all(children) = condition {
                         Button("Some") { condition = .any(children) }
                     }
-                    if case .any(let children) = condition {
+                    if case let .any(children) = condition {
                         Button("All") { condition = .all(children) }
                     }
                 }
             default:
                 Menu("Change to") {
+                    Button("Nil") { condition = .nil }
                     Button("Not") { condition = .not(.nil) }
                     Button("Always") { condition = .always(true) }
                     Button("Role") { condition = .role(.nil) }
@@ -79,22 +86,24 @@ extension ConditionEditView {
                 Button("Is Referenced by") { condition = .isReferenced(condition) }
             }
         }
-        
+
+        // MARK: Functions
+
         func add(item: Information.Condition) {
             switch condition {
-            case .all(let children):
+            case let .all(children):
                 condition = .all(children + [item])
-            case .any(let children):
+            case let .any(children):
                 condition = .all(children + [item])
             default:
                 break
             }
         }
-        
+
         func remove() {
             guard let index = array.firstIndex(of: condition) else { return }
             switch condition {
-            case .all(let children), .any(let children):
+            case let .all(children), let .any(children):
                 guard !children.isEmpty else { return }
                 array[index] = children.first!
             default:

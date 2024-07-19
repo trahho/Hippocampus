@@ -9,16 +9,6 @@ import Foundation
 import Grisu
 import SwiftUI
 
-extension Array where Element == Structure.Role {
-    var referencingFirst: [Structure.Role] {
-        sorted(by: { $0.allReferences.contains($1) })
-    }
-
-    var finalsFirst: [Structure.Role] {
-        sorted(by: { $0.conforms(to: $1) })
-    }
-}
-
 struct TreeView: View {
     // MARK: Nested Types
 
@@ -72,18 +62,18 @@ extension TreeView {
     struct ListRowView: View {
         // MARK: Nested Types
 
-        struct RepresentationView: View {
+        struct ItemPresentationView: View {
             // MARK: Properties
 
             @State var item: Information.Item
-            @State var representation: Structure.Role.Representation?
+            @State var presentation: Presentation?
 
             // MARK: Content
 
             var body: some View {
                 Group {
-                    if let representation {
-                        PresentationView(presentation: representation.presentation, item: item)
+                    if let presentation {
+                        PresentationView(presentation: presentation, item: item)
                     } else {
                         Image(systemName: "questionmark.square.dashed")
                     }
@@ -132,9 +122,17 @@ extension TreeView {
                 return items
             }
         }
+        
+        var filterPresentation: Presentation? {
+            filter.representations.filter { $0.condition.matches(item, sameRole: role, structure: structure) }.first?.presentation
+        }
 
-        var presentation: Presentation {
-            role.representation(layout: .list)?.presentation ?? .empty
+        var rolePresentation: Presentation? {
+                role.representation(layout: .tree)?.presentation
+        }
+        
+        var presentation: Presentation? {
+            filterPresentation ?? rolePresentation
         }
 
         // MARK: Content
@@ -142,7 +140,7 @@ extension TreeView {
         var body: some View {
             Group {
                 if children.isEmpty {
-                    RepresentationView(item: item, representation: role.representation(layout: .tree))
+                    ItemPresentationView(item: item, presentation: presentation).sensitive
                         .contextMenu {
                             Picker("Role", selection: $role) {
                                 ForEach(roles) { role in
@@ -159,7 +157,7 @@ extension TreeView {
                             }
                         }
                     } label: {
-                        RepresentationView(item: item, representation: role.representation(layout: .tree))
+                        ItemPresentationView(item: item, presentation: presentation).sensitive
                     }
                     .contextMenu {
                         Picker("Role", selection: $role) {

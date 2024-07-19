@@ -104,6 +104,9 @@
 		C55215972C49EB3700A47323 /* FilterEditView.SelectRolesSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55215962C49EB2B00A47323 /* FilterEditView.SelectRolesSheet.swift */; };
 		C55215982C49EB3700A47323 /* FilterEditView.SelectRolesSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55215962C49EB2B00A47323 /* FilterEditView.SelectRolesSheet.swift */; };
 		C55215992C49EB3700A47323 /* FilterEditView.SelectRolesSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55215962C49EB2B00A47323 /* FilterEditView.SelectRolesSheet.swift */; };
+		C552159B2C4A790300A47323 /* Structure.Role+ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C552159A2C4A78ED00A47323 /* Structure.Role+ArrayExtension.swift */; };
+		C552159C2C4A790300A47323 /* Structure.Role+ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C552159A2C4A78ED00A47323 /* Structure.Role+ArrayExtension.swift */; };
+		C552159D2C4A790300A47323 /* Structure.Role+ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C552159A2C4A78ED00A47323 /* Structure.Role+ArrayExtension.swift */; };
 		C55538032C2719BC00EC0911 /* PresentationEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55538022C2719BC00EC0911 /* PresentationEditView.swift */; };
 		C55538042C2719BC00EC0911 /* PresentationEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55538022C2719BC00EC0911 /* PresentationEditView.swift */; };
 		C55538052C2719BC00EC0911 /* PresentationEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55538022C2719BC00EC0911 /* PresentationEditView.swift */; };
@@ -484,6 +487,7 @@
 		C54BE559289698990060A066 /* View+If.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+If.swift"; sourceTree = "<group>"; };
 		C55215912C49D58D00A47323 /* Presentation+sourceCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Presentation+sourceCode.swift"; sourceTree = "<group>"; };
 		C55215962C49EB2B00A47323 /* FilterEditView.SelectRolesSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterEditView.SelectRolesSheet.swift; sourceTree = "<group>"; };
+		C552159A2C4A78ED00A47323 /* Structure.Role+ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Structure.Role+ArrayExtension.swift"; sourceTree = "<group>"; };
 		C55538022C2719BC00EC0911 /* PresentationEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationEditView.swift; sourceTree = "<group>"; };
 		C55538062C271ADB00EC0911 /* PresentationEditView.PresentationsEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationEditView.PresentationsEditView.swift; sourceTree = "<group>"; };
 		C555380A2C271B3200EC0911 /* PresentationEditView.ItemEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationEditView.ItemEditView.swift; sourceTree = "<group>"; };
@@ -695,10 +699,10 @@
 		C52C0BD12C3F33C800960750 /* Condition */ = {
 			isa = PBXGroup;
 			children = (
+				C52C0BD22C3F33D800960750 /* ConditionEditView.swift */,
 				C5E67E0A2C41D9B600F55058 /* ConditionEditView.ArrayEditView.swift */,
 				C5E67E042C41D8FB00F55058 /* ConditionEditView.ContextMenu.swift */,
 				C5E67E072C41D96C00F55058 /* ConditionEditView.ItemEditView.swift */,
-				C52C0BD22C3F33D800960750 /* ConditionEditView.swift */,
 				C5CB48292C41F761003B4D85 /* ConditionEditView.ParticlePicker.swift */,
 			);
 			path = Condition;
@@ -1273,6 +1277,7 @@
 				C55AC5D6295A4A5F00F09326 /* Structure.swift */,
 				C59E287B2978A992007375D5 /* Building */,
 				C5C8E85D295AFD4E002C7746 /* Structure.Role.swift */,
+				C552159A2C4A78ED00A47323 /* Structure.Role+ArrayExtension.swift */,
 				C55538162C27389900EC0911 /* Structure.Role.Representation.swift */,
 				C555381E2C2850D700EC0911 /* Structure.Role+sourceCode.swift */,
 				C5D07F4F2C21DA0E0080559E /* Structure.Particle.swift */,
@@ -1629,6 +1634,7 @@
 				C5BE4F2129F6736B00B27B48 /* TextView.swift in Sources */,
 				C564EB8129B5326A00F3E0AC /* Document.Drawing.swift in Sources */,
 				C555380D2C271B3200EC0911 /* PresentationEditView.ItemEditView.swift in Sources */,
+				C552159D2C4A790300A47323 /* Structure.Role+ArrayExtension.swift in Sources */,
 				C565AACE2C23212D00BC54AB /* RoleEditView.SelectRolesSheet.swift in Sources */,
 				C59B3CED295CCE9A0053DE7D /* CGFloat+Operators.swift in Sources */,
 				C564EB8529B5337700F3E0AC /* Document.Drawing.Drawing.swift in Sources */,
@@ -1697,6 +1703,7 @@
 				C55864752A058A67005EA6FD /* Information.Condition.Comparison.swift in Sources */,
 				C52E724D29F55173001A5821 /* Presentation.Group.swift in Sources */,
 				C56F85472C31A111007DC75D /* Information.TimedValue.swift in Sources */,
+				C552159B2C4A790300A47323 /* Structure.Role+ArrayExtension.swift in Sources */,
 				C5E966C029AAB6D8009D81FF /* Document.Drawing.Background+draw.swift in Sources */,
 				C564EB7F29B5326A00F3E0AC /* Document.Drawing.swift in Sources */,
 				C5B4DB192A0FFCAA00A80F5A /* SidebarView.RolesView.swift in Sources */,
@@ -1859,6 +1866,7 @@
 				C5167C3C29C5002900323F75 /* Navigation.swift in Sources */,
 				C5E8B4652C20A87200304347 /* Design.Localization.swift in Sources */,
 				C5AAA10229BE7F69000DA6C3 /* Document.Drawing.Background+draw.swift in Sources */,
+				C552159C2C4A790300A47323 /* Structure.Role+ArrayExtension.swift in Sources */,
 				C5C8E865295AFDCA002C7746 /* Structure.Role.Builder.swift in Sources */,
 				C564EB8429B5337700F3E0AC /* Document.Drawing.Drawing.swift in Sources */,
 				C54BE509289591530060A066 /* Set+asArray.swift in Sources */,

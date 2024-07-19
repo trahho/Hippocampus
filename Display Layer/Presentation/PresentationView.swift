@@ -98,9 +98,9 @@ struct PresentationView: View {
             case let .role(roleId, layout, name):
                 if let role = document[Structure.Role.self, roleId],
                    let role = item?.matchingRole(for: role),
-                   let representation = role.representation(layout: layout, name: name)?.presentation
+                   let presentation = role.representation(layout: layout, name: name)?.presentation
                 {
-                    ArrayView(array: [representation])
+                    ArrayView(array: [presentation], item: item)
                 }
             case let .aspect(aspectId, appearance):
                 if let aspect = document[Structure.Aspect.self, aspectId] {

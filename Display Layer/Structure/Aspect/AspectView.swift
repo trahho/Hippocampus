@@ -8,10 +8,14 @@
 import SwiftUI
 
 struct AspectView: View {
+    // MARK: Properties
+
     @State var item: Information.Item?
     @State var aspect: Structure.Aspect
-    @State var appearance: Presentation.Appearance 
+    @State var appearance: Presentation.Appearance
     @State var editable: Bool
+
+    // MARK: Computed Properties
 
     var textBinding: Binding<String> {
         if let item {
@@ -20,6 +24,8 @@ struct AspectView: View {
             .constant("Hallo Welt")
         }
     }
+
+    // MARK: Content
 
     var body: some View {
         switch aspect.kind {
@@ -31,23 +37,21 @@ struct AspectView: View {
             switch appearance {
             case .icon:
                 Image(systemName: "text.word.spacing")
-            case .small, .normal, .full, .edit:
+            case .edit, .full, .normal, .small:
                 if editable {
                     TextField("", text: textBinding)
                 } else {
-                    Text(verbatim: textBinding.wrappedValue)
+                    Text(textBinding.wrappedValue)
                 }
             case .firstParagraph:
                 if editable {
                     TextField("", text: textBinding)
                         .lineLimit(1)
                 } else {
-                    Text(verbatim: textBinding.wrappedValue)
+                    Text(textBinding.wrappedValue)
                         .lineLimit(1)
                 }
-       
             }
-     
         }
 //        switch (aspect.kind, appearance) {
 //        case (let kind, .icon):
@@ -59,14 +63,14 @@ struct AspectView: View {
 //            case .text:
 //                Image(systemName: "text.word.spacing")
 //            }
-////        case (.text, .firstParagraph):
-////            if editable {
-////                TextField("", text: textBinding)
-////                    .lineLimit(1)
-////            } else {
-////                Text(verbatim: textBinding.wrappedValue)
-////                    .lineLimit(1)
-////            }
+        ////        case (.text, .firstParagraph):
+        ////            if editable {
+        ////                TextField("", text: textBinding)
+        ////                    .lineLimit(1)
+        ////            } else {
+        ////                Text(verbatim: textBinding.wrappedValue)
+        ////                    .lineLimit(1)
+        ////            }
 //        case (.text, _):
 //            if editable {
 //                TextField("", text: textBinding)
