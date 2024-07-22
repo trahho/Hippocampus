@@ -19,7 +19,11 @@ extension HippocampusApp: App {
                     .environment(\.document, document)
             }
         }
-        Window("Edit Role", id: "whatever") {
+        Window("Export SourceCode", id: "exportSourceCode"){
+            ExportSourceCodeView()
+                .environment(\.document, document)
+        }
+        Window("Edit Role", id: "roleEditor") {
 //            TestView()
 //                .onAppear {
 //                    Self.locationService.start()

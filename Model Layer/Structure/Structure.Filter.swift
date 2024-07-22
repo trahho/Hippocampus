@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import Grisu
 
 extension Structure {
-    class Filter: Object {
+    class Filter: Object, Pickable {
         // MARK: Properties
 
         @Property var name: String = ""
@@ -26,6 +27,10 @@ extension Structure {
         @Transient var order: Presentation.Order?
 
         // MARK: Computed Properties
+
+        var description: String {
+            name.localized(isStatic)
+        }
 
         var allRoles: [Role] {
             (roles + superFilters.flatMap { $0.allRoles }).asSet.asArray

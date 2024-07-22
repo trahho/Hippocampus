@@ -9,11 +9,11 @@ import Foundation
 
 extension Structure.Filter: SourceCodeGenerator {
     func sourceCode(tab i: Int, inline _: Bool, document: Document) -> String {
-        tab(i) + "static let \(name.replacingOccurrences(of: " ", with: "_")): Filter = {"
+        tab(i) + "static let \(name.sourceCode): Filter = {"
             + tab(i + 1) + "var filter = Filter(id: \"\(id)\".uuid)"
             + tab(i + 1) + "filter.name = \"\(name)\""
-        + tab(i + 1) + "filter.layouts = [" + layouts.map { "." + $0.description }.joined(separator: ",") + "]"
-        + tab(i + 1) + "filter.roles = [" + roles.map { "Structure.Role." + $0.name.replacingOccurrences(of: " ", with: "_").lowercased() }.joined(separator: ", ") + "]"
+            + tab(i + 1) + "filter.layouts = [" + layouts.map { "." + $0.description }.joined(separator: ",") + "]"
+            + tab(i + 1) + "filter.roles = [" + roles.map { "." + $0.name.sourceCode }.joined(separator: ", ") + "]"
             + superFiltersSourceCode(tab: i + 1)
             //            + referencesSourceCode
             //            + aspectsSourceCode
@@ -46,7 +46,7 @@ extension Structure.Filter: SourceCodeGenerator {
         if superFilters.isEmpty { "" } else {
             tab(i) + "filter.superFilters = ["
                 + superFilters
-                .map { ".\($0.name.replacingOccurrences(of: " ", with: "_"))" }
+                .map { ".\($0.name.sourceCode)" }
                 .joined(separator: ", ")
                 + "]"
         }

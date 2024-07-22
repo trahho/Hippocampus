@@ -6,8 +6,8 @@
 //
 
 import Foundation
-import Grisu
 import SwiftUI
+import Grisu
 
 extension Structure.Role {
     typealias Role = Structure.Role

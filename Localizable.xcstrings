@@ -110,6 +110,9 @@
     "create" : {
 
     },
+    "Delete" : {
+
+    },
     "Edit" : {
 
     },
@@ -123,10 +126,19 @@
         }
       }
     },
+    "Export" : {
+
+    },
+    "Export SourceCode" : {
+
+    },
     "filter" : {
 
     },
     "Filter" : {
+
+    },
+    "Filters" : {
 
     },
     "For Particle" : {

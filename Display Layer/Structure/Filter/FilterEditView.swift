@@ -15,6 +15,8 @@ struct FilterEditView: View {
     @State var filter: Structure.Filter
     @State var expanded: Expansions = .init()
     @State var representation: Structure.Filter.Representation?
+    @State var isStatic: Bool = false
+    
 
     // MARK: Content
 
@@ -140,7 +142,13 @@ struct FilterEditView: View {
         }
         .onAppear {
             if filter.isStatic {
-                filter.toggleStatic()
+                filter.toggleStatic(to: false)
+                isStatic = true
+            }
+        }
+        .onDisappear {
+            if isStatic {
+                filter.toggleStatic(to: true)
             }
         }
         .formStyle(.grouped)

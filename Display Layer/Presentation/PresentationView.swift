@@ -88,6 +88,20 @@ struct PresentationView: View {
 
     // MARK: Content
 
+//    @ViewBuilder
+//    func horizontalSizing(view: some View, horizontal: Presentation.Space) -> some View {
+//        switch horizontal {
+//        case .normal:
+//            view
+//        case let .full(alignment):
+//            HStack(alignment: horizontal.alignment.vertical) { view }
+//                .frame(maxWidth: .infinity)
+//        case let .percent(percentage, alignment):
+//            view
+//                .containerRelativeFrame(.horizontal, alignment: horizontal.alignment.vertical, <#T##length: (CGFloat, Axis) -> CGFloat##(CGFloat, Axis) -> CGFloat#>)
+//        }
+//    }
+
     var body: some View {
         Group {
             switch presentation {

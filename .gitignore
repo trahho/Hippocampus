@@ -1,4 +1,37 @@
+# Xcode
+#
+# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
-Hippocampus.xcworkspace/xcuserdata/guido.xcuserdatad/UserInterfaceState.xcuserstate
+## Build generated
+build/
+DerivedData/
+
+## Various settings
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+
+## Other
+*.moved-aside
+*.xccheckout
 *.xcuserstate
-/Hippocampus.xcodeproj/xcuserdata
+*.xcbkptlist
+
+# Ignore Mac DS_Store files
+.DS_Store
+**/.DS_Store
+
+## Obj-C/Swift specific
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+.DS_Store
+.DS_Store
+*.xcbkptlist

@@ -15,6 +15,7 @@ struct RolesView: View {
     @State var role: Structure.Role.ID?
     @State var expanded: Expansions = .init()
 
+
     // MARK: Computed Properties
 
     var roles: [Structure.Role] {
@@ -39,12 +40,12 @@ struct RolesView: View {
             }
         }
         .onAppear {
-            document.structure.roles.forEach { $0.toggleStatic() }
-            document.structure.aspects.forEach { $0.toggleStatic() }
+            document.structure.roles.forEach { $0.toggleStatic(to: false) }
+            document.structure.aspects.forEach { $0.toggleStatic(to: false) }
         }
         .onDisappear {
-            document.structure.roles.forEach { $0.toggleStatic() }
-            document.structure.aspects.forEach { $0.toggleStatic() }
+            document.structure.roles.forEach { $0.toggleStatic(to: true) }
+            document.structure.aspects.forEach { $0.toggleStatic(to: true) }
         }
         .toolbar {
             Button {

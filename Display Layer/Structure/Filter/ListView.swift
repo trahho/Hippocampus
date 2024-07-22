@@ -33,11 +33,14 @@ struct ListView: View {
             return items
         }
     }
+    
+
+    
 
     var body: some View {
         List {
             ForEach(rootItems, id: \.item) { item in
-                PresentationView(presentation: item.role.representation(layout: .list)?.presentation ?? .empty, item: item.item)
+                RowView(item: item.item, role: item.role, roles: item.roles, filter: filter)
             }
         }
     }
