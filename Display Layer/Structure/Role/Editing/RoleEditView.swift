@@ -27,8 +27,6 @@ struct RoleEditView: View {
     var body: some View {
         Form {
             Section("Role", isExpanded: $expanded) {
-                Text("\(role.id)")
-                    .font(.caption)
                 TextField("Name", text: $role.name)
                 LabeledContent {
                     DisclosureGroup {

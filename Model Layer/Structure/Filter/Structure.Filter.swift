@@ -24,9 +24,25 @@ extension Structure {
         @Property var layouts: [Presentation.Layout] = []
         @Property var orders: [Presentation.Order] = []
         @Transient var layout: Presentation.Layout?
-        @Transient var order: Presentation.Order?
+        @Transient var orderIndex: Int?
 
         // MARK: Computed Properties
+
+        var order: Presentation.Order? {
+            get {
+                guard let orderIndex else {
+                    return nil
+                }
+                return orders[orderIndex]
+            }
+            set {
+                guard let newValue, let index = orders.firstIndex(of: newValue) else  {
+                    orderIndex = nil
+                    return
+                }
+                orderIndex = index
+            }
+        }
 
         var description: String {
             name.localized(isStatic)

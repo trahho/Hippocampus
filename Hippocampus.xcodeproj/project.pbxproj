@@ -272,9 +272,7 @@
 		C59B3CED295CCE9A0053DE7D /* CGFloat+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4FA289591440060A066 /* CGFloat+Operators.swift */; };
 		C59B3CEE295CCE9A0053DE7D /* View+offset.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4F7289591440060A066 /* View+offset.swift */; };
 		C59B3CEF295CCE9A0053DE7D /* CGPoint+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4F8289591440060A066 /* CGPoint+Operators.swift */; };
-		C59B3CF1295CCEC80053DE7D /* Structure.Role.Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E863295AFDCA002C7746 /* Structure.Role.Builder.swift */; };
 		C59B3CF2295CCEC80053DE7D /* Presentation.Predicate.Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E86A295B041E002C7746 /* Presentation.Predicate.Builder.swift */; };
-		C59B3CF3295CCEC80053DE7D /* Structure.Aspect.Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E866295AFDEB002C7746 /* Structure.Aspect.Builder.swift */; };
 		C59B3CF8295CCEFF0053DE7D /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E856295A652B002C7746 /* NavigationView.swift */; };
 		C59E2882297B2434007375D5 /* Structure.Aspect.Kind.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59E2881297B2434007375D5 /* Structure.Aspect.Kind.swift */; };
 		C59E2883297B2434007375D5 /* Structure.Aspect.Kind.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59E2881297B2434007375D5 /* Structure.Aspect.Kind.swift */; };
@@ -341,9 +339,9 @@
 		C5BE4F4129FC433300B27B48 /* PersistentDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE4F4029FC433300B27B48 /* PersistentDataTests.swift */; };
 		C5BE4F6829FDDE9C00B27B48 /* SerialisationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A12A2942701100FF9AB8 /* SerialisationTests.swift */; };
 		C5BE4F7229FEDE6E00B27B48 /* DatabaseDocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE4F7129FEDE6E00B27B48 /* DatabaseDocumentTests.swift */; };
-		C5BEFC2129EDFF4F00332347 /* Structure.Representation.Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BEFC2029EDFF4F00332347 /* Structure.Representation.Builder.swift */; };
-		C5BEFC2229EDFF4F00332347 /* Structure.Representation.Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BEFC2029EDFF4F00332347 /* Structure.Representation.Builder.swift */; };
-		C5BEFC2329EDFF4F00332347 /* Structure.Representation.Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BEFC2029EDFF4F00332347 /* Structure.Representation.Builder.swift */; };
+		C5BF40CB2C4EC28100469EF2 /* FilterEditView.SortingAspectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BF40CA2C4EC26900469EF2 /* FilterEditView.SortingAspectView.swift */; };
+		C5BF40CC2C4EC28100469EF2 /* FilterEditView.SortingAspectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BF40CA2C4EC26900469EF2 /* FilterEditView.SortingAspectView.swift */; };
+		C5BF40CD2C4EC28100469EF2 /* FilterEditView.SortingAspectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BF40CA2C4EC26900469EF2 /* FilterEditView.SortingAspectView.swift */; };
 		C5C4A113293B9FC400FF9AB8 /* ObservedChangeReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4EF289591320060A066 /* ObservedChangeReceiver.swift */; };
 		C5C6C7162C49CBD700EDC15A /* FilterEditView.SelectFiltersSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C6C7152C49CBD100EDC15A /* FilterEditView.SelectFiltersSheet.swift */; };
 		C5C6C7172C49CBD700EDC15A /* FilterEditView.SelectFiltersSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C6C7152C49CBD100EDC15A /* FilterEditView.SelectFiltersSheet.swift */; };
@@ -356,10 +354,6 @@
 		C5C8E85F295AFD4E002C7746 /* Structure.Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E85D295AFD4E002C7746 /* Structure.Role.swift */; };
 		C5C8E861295AFD8E002C7746 /* Structure.Aspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E860295AFD8E002C7746 /* Structure.Aspect.swift */; };
 		C5C8E862295AFD8E002C7746 /* Structure.Aspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E860295AFD8E002C7746 /* Structure.Aspect.swift */; };
-		C5C8E864295AFDCA002C7746 /* Structure.Role.Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E863295AFDCA002C7746 /* Structure.Role.Builder.swift */; };
-		C5C8E865295AFDCA002C7746 /* Structure.Role.Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E863295AFDCA002C7746 /* Structure.Role.Builder.swift */; };
-		C5C8E867295AFDEB002C7746 /* Structure.Aspect.Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E866295AFDEB002C7746 /* Structure.Aspect.Builder.swift */; };
-		C5C8E868295AFDEB002C7746 /* Structure.Aspect.Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E866295AFDEB002C7746 /* Structure.Aspect.Builder.swift */; };
 		C5C8E86B295B041E002C7746 /* Presentation.Predicate.Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E86A295B041E002C7746 /* Presentation.Predicate.Builder.swift */; };
 		C5C8E86C295B041E002C7746 /* Presentation.Predicate.Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E86A295B041E002C7746 /* Presentation.Predicate.Builder.swift */; };
 		C5CB482A2C41F76F003B4D85 /* ConditionEditView.ParticlePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CB48292C41F761003B4D85 /* ConditionEditView.ParticlePicker.swift */; };
@@ -606,15 +600,13 @@
 		C5BE89FB2A09687800CE601F /* Icon1024-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon1024-128.png"; sourceTree = "<group>"; };
 		C5BE89FC2A09687800CE601F /* Icon1024-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon1024-512.png"; sourceTree = "<group>"; };
 		C5BE89FD2A096A5400CE601F /* IconMac.vectornator */ = {isa = PBXFileReference; lastKnownFileType = file; path = IconMac.vectornator; sourceTree = "<group>"; };
-		C5BEFC2029EDFF4F00332347 /* Structure.Representation.Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structure.Representation.Builder.swift; sourceTree = "<group>"; };
+		C5BF40CA2C4EC26900469EF2 /* FilterEditView.SortingAspectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterEditView.SortingAspectView.swift; sourceTree = "<group>"; };
 		C5C4A12A2942701100FF9AB8 /* SerialisationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialisationTests.swift; sourceTree = "<group>"; };
 		C5C6C7152C49CBD100EDC15A /* FilterEditView.SelectFiltersSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterEditView.SelectFiltersSheet.swift; sourceTree = "<group>"; };
 		C5C6C7192C49CCBD00EDC15A /* FilterEditView.EditRepresentationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterEditView.EditRepresentationSheet.swift; sourceTree = "<group>"; };
 		C5C8E856295A652B002C7746 /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
 		C5C8E85D295AFD4E002C7746 /* Structure.Role.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structure.Role.swift; sourceTree = "<group>"; };
 		C5C8E860295AFD8E002C7746 /* Structure.Aspect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structure.Aspect.swift; sourceTree = "<group>"; };
-		C5C8E863295AFDCA002C7746 /* Structure.Role.Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structure.Role.Builder.swift; sourceTree = "<group>"; };
-		C5C8E866295AFDEB002C7746 /* Structure.Aspect.Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structure.Aspect.Builder.swift; sourceTree = "<group>"; };
 		C5C8E86A295B041E002C7746 /* Presentation.Predicate.Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presentation.Predicate.Builder.swift; sourceTree = "<group>"; };
 		C5CB48292C41F761003B4D85 /* ConditionEditView.ParticlePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionEditView.ParticlePicker.swift; sourceTree = "<group>"; };
 		C5CB482C2C43398D003B4D85 /* Information.Condition+sourceCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Information.Condition+sourceCode.swift"; sourceTree = "<group>"; };
@@ -1000,12 +992,9 @@
 		C57801292C376A7800B1B1AD /* Filter */ = {
 			isa = PBXGroup;
 			children = (
+				C5BF40C62C4E900600469EF2 /* Editing */,
 				C5167C4429C62BFB00323F75 /* FiltersView.swift */,
 				C53755612C08D9AA0004064B /* FilterView.swift */,
-				C52C0BC92C3F21F600960750 /* FilterEditView.swift */,
-				C55215962C49EB2B00A47323 /* FilterEditView.SelectRolesSheet.swift */,
-				C5C6C7192C49CCBD00EDC15A /* FilterEditView.EditRepresentationSheet.swift */,
-				C5C6C7152C49CBD100EDC15A /* FilterEditView.SelectFiltersSheet.swift */,
 				C53755652C08DA2C0004064B /* FilterResultView.swift */,
 				C55215A22C4A909E00A47323 /* FilterResultView.ItemPresentationView.swift */,
 				C531623D2C39D5E500A6E35E /* TreeView.swift */,
@@ -1061,16 +1050,6 @@
 				C55538062C271ADB00EC0911 /* PresentationEditView.PresentationsEditView.swift */,
 			);
 			path = Editing;
-			sourceTree = "<group>";
-		};
-		C59E287B2978A992007375D5 /* Building */ = {
-			isa = PBXGroup;
-			children = (
-				C5C8E863295AFDCA002C7746 /* Structure.Role.Builder.swift */,
-				C5C8E866295AFDEB002C7746 /* Structure.Aspect.Builder.swift */,
-				C5BEFC2029EDFF4F00332347 /* Structure.Representation.Builder.swift */,
-			);
-			path = Building;
 			sourceTree = "<group>";
 		};
 		C59E287C2978AA9C007375D5 /* Building */ = {
@@ -1278,6 +1257,44 @@
 			path = Item;
 			sourceTree = "<group>";
 		};
+		C5BF40C62C4E900600469EF2 /* Editing */ = {
+			isa = PBXGroup;
+			children = (
+				C52C0BC92C3F21F600960750 /* FilterEditView.swift */,
+				C5BF40CA2C4EC26900469EF2 /* FilterEditView.SortingAspectView.swift */,
+				C55215962C49EB2B00A47323 /* FilterEditView.SelectRolesSheet.swift */,
+				C5C6C7192C49CCBD00EDC15A /* FilterEditView.EditRepresentationSheet.swift */,
+				C5C6C7152C49CBD100EDC15A /* FilterEditView.SelectFiltersSheet.swift */,
+			);
+			path = Editing;
+			sourceTree = "<group>";
+		};
+		C5BF40C82C4E9B2100469EF2 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				C56965D72C05154200AA46B3 /* Structure.Filter.swift */,
+				C59627B42C49BC7C0057ED9B /* Structure.Filter.Representation.swift */,
+				C56F85422C31A022007DC75D /* Structure.Filter+static.swift */,
+				C51330752C4B23D200E8BA3C /* Structure.Filter+static+test.swift */,
+				C52C0BCD2C3F2B9B00960750 /* Structure.Filter+sourceCode.swift */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
+		C5BF40C92C4E9B6600469EF2 /* Role */ = {
+			isa = PBXGroup;
+			children = (
+				C5C8E85D295AFD4E002C7746 /* Structure.Role.swift */,
+				C552159A2C4A78ED00A47323 /* Structure.Role+ArrayExtension.swift */,
+				C55538162C27389900EC0911 /* Structure.Role.Representation.swift */,
+				C555381E2C2850D700EC0911 /* Structure.Role+sourceCode.swift */,
+				C5EECF6A29E0A9B1008608E4 /* Structure.Role+statics.swift */,
+				C57B70AA2C235395007A5105 /* Structure.Role+static.swift */,
+				C5DBE9AB2C4B0C2700BD56CE /* Structure.Role+static+test.swift */,
+			);
+			path = Role;
+			sourceTree = "<group>";
+		};
 		C5C8E859295A6559002C7746 /* App Layer */ = {
 			isa = PBXGroup;
 			children = (
@@ -1307,22 +1324,11 @@
 			isa = PBXGroup;
 			children = (
 				C55AC5D6295A4A5F00F09326 /* Structure.swift */,
-				C59E287B2978A992007375D5 /* Building */,
-				C5C8E85D295AFD4E002C7746 /* Structure.Role.swift */,
-				C552159A2C4A78ED00A47323 /* Structure.Role+ArrayExtension.swift */,
-				C55538162C27389900EC0911 /* Structure.Role.Representation.swift */,
-				C555381E2C2850D700EC0911 /* Structure.Role+sourceCode.swift */,
-				C5D07F4F2C21DA0E0080559E /* Structure.Particle.swift */,
-				C5EECF6A29E0A9B1008608E4 /* Structure.Role+statics.swift */,
-				C57B70AA2C235395007A5105 /* Structure.Role+static.swift */,
-				C5DBE9AB2C4B0C2700BD56CE /* Structure.Role+static+test.swift */,
+				C5BF40C82C4E9B2100469EF2 /* Filter */,
+				C5BF40C92C4E9B6600469EF2 /* Role */,
 				C5C8E860295AFD8E002C7746 /* Structure.Aspect.swift */,
 				C59E2881297B2434007375D5 /* Structure.Aspect.Kind.swift */,
-				C56965D72C05154200AA46B3 /* Structure.Filter.swift */,
-				C59627B42C49BC7C0057ED9B /* Structure.Filter.Representation.swift */,
-				C56F85422C31A022007DC75D /* Structure.Filter+static.swift */,
-				C51330752C4B23D200E8BA3C /* Structure.Filter+static+test.swift */,
-				C52C0BCD2C3F2B9B00960750 /* Structure.Filter+sourceCode.swift */,
+				C5D07F4F2C21DA0E0080559E /* Structure.Particle.swift */,
 				C56F854E2C31A215007DC75D /* AspectStorage.swift */,
 			);
 			path = Structure;
@@ -1561,12 +1567,10 @@
 				C56F85492C31A111007DC75D /* Information.TimedValue.swift in Sources */,
 				C58224232A080FF9000FB877 /* ItemView.swift in Sources */,
 				C5728D3B2A2935EC004968D3 /* ArrayBuilder.swift in Sources */,
-				C59B3CF1295CCEC80053DE7D /* Structure.Role.Builder.swift in Sources */,
 				C56D5C2F2C49C9D800E081CD /* RoleEditView.EditRepresentationSheet.swift in Sources */,
 				C582241B2A080FCF000FB877 /* SidebarView.GroupView.swift in Sources */,
 				C5E4FA0C2A2B4DDF00CE37C3 /* Design.TrigonometryView.swift in Sources */,
 				C55215922C49D59500A47323 /* Presentation+sourceCode.swift in Sources */,
-				C5BEFC2329EDFF4F00332347 /* Structure.Representation.Builder.swift in Sources */,
 				C5BE4F1C29F6727B00B27B48 /* DrawingView.ImageView.swift in Sources */,
 				C5BE4F4129FC433300B27B48 /* PersistentDataTests.swift in Sources */,
 				C59B3CF2295CCEC80053DE7D /* Presentation.Predicate.Builder.swift in Sources */,
@@ -1641,7 +1645,6 @@
 				C55AC5D9295A4A5F00F09326 /* Structure.swift in Sources */,
 				C5C6C71B2C49CCC700EDC15A /* FilterEditView.EditRepresentationSheet.swift in Sources */,
 				C56965B62C028CE000AA46B3 /* AspectView.swift in Sources */,
-				C59B3CF3295CCEC80053DE7D /* Structure.Aspect.Builder.swift in Sources */,
 				C5E67E032C418FA200F55058 /* HippocampusApp_macOS.swift in Sources */,
 				C57B70BD2C243139007A5105 /* Design.ViewEditView.swift in Sources */,
 				C50B2D382C4B1D3500CDDCD5 /* ExportSourceCodeView.ExportFiltersView.swift in Sources */,
@@ -1664,6 +1667,7 @@
 				C56F85452C31A022007DC75D /* Structure.Filter+static.swift in Sources */,
 				C59B3CF8295CCEFF0053DE7D /* NavigationView.swift in Sources */,
 				C5BE4F1729F670A200B27B48 /* Presentation.Group.swift in Sources */,
+				C5BF40CD2C4EC28100469EF2 /* FilterEditView.SortingAspectView.swift in Sources */,
 				C59B3CE0295CB9E30053DE7D /* Injector.swift in Sources */,
 				C55215A42C4A90A900A47323 /* FilterResultView.ItemPresentationView.swift in Sources */,
 				C53755752C0C99380004064B /* Design.NavigationView.swift in Sources */,
@@ -1762,7 +1766,6 @@
 				C52C0BCB2C3F21F600960750 /* FilterEditView.swift in Sources */,
 				C5E4FA0A2A2B4DDF00CE37C3 /* Design.TrigonometryView.swift in Sources */,
 				C5BE4F0229F5AF7600B27B48 /* SidebarView.QueryView.swift in Sources */,
-				C5C8E864295AFDCA002C7746 /* Structure.Role.Builder.swift in Sources */,
 				C5C8E857295A652B002C7746 /* NavigationView.swift in Sources */,
 				C50CFA662ACF1912001EE17E /* Design.MiniMindMapView.swift in Sources */,
 				C50B2D322C4B1CD200CDDCD5 /* ExportSourceCodeView.ExportRolesView.swift in Sources */,
@@ -1779,7 +1782,6 @@
 				C5BE4EFF29F5AF3100B27B48 /* SidebarView.GroupView.swift in Sources */,
 				C5E966BC29AAB465009D81FF /* PencilCanvasView.ScrollIndicatorView.swift in Sources */,
 				C54BE4B12894866C0060A066 /* HippocampusApp.swift in Sources */,
-				C5C8E867295AFDEB002C7746 /* Structure.Aspect.Builder.swift in Sources */,
 				C5E966C829AAC23E009D81FF /* PencilCanvasView.BackgroundView.swift in Sources */,
 				C564EB8329B5337700F3E0AC /* Document.Drawing.Drawing.swift in Sources */,
 				C5E67E0C2C41D9BF00F55058 /* ConditionEditView.ArrayEditView.swift in Sources */,
@@ -1792,6 +1794,7 @@
 				C5AAA0E329BD1D47000DA6C3 /* Document.Drawing.PageFormat.swift in Sources */,
 				C54BE501289591440060A066 /* CGSize+Operators.swift in Sources */,
 				C5AAA0EA29BD1F57000DA6C3 /* Document.Drawing.Background.swift in Sources */,
+				C5BF40CC2C4EC28100469EF2 /* FilterEditView.SortingAspectView.swift in Sources */,
 				C5D2735C2975E08400F32EB6 /* DocumentView.swift in Sources */,
 				C531AE8629ECA61C00585073 /* Design.NestedListView.swift in Sources */,
 				C5C6C7182C49CBD700EDC15A /* FilterEditView.SelectFiltersSheet.swift in Sources */,
@@ -1808,7 +1811,6 @@
 				C5E966D629AAD47D009D81FF /* Font+Extension.swift in Sources */,
 				C52C0BD52C3F33E100960750 /* ConditionEditView.swift in Sources */,
 				C564EB8729B533FE00F3E0AC /* Document.Drawing.Properties.swift in Sources */,
-				C5BEFC2129EDFF4F00332347 /* Structure.Representation.Builder.swift in Sources */,
 				C5728D362A2935EC004968D3 /* IndexedCallable.swift in Sources */,
 				C564EB9C29B544CA00F3E0AC /* PencilCanvasView.Controller.swift in Sources */,
 				C5E67E052C41D91100F55058 /* ConditionEditView.ContextMenu.swift in Sources */,
@@ -1881,6 +1883,7 @@
 				C55538042C2719BC00EC0911 /* PresentationEditView.swift in Sources */,
 				C5AAA0EE29BD27DC000DA6C3 /* NSImage+scale.swift in Sources */,
 				C5B3AD5E2C47001E0024F7B0 /* Presentation.Order.swift in Sources */,
+				C5BF40CB2C4EC28100469EF2 /* FilterEditView.SortingAspectView.swift in Sources */,
 				C531AE8729ECA61C00585073 /* Design.NestedListView.swift in Sources */,
 				C5728D372A2935EC004968D3 /* IndexedCallable.swift in Sources */,
 				C54BE50F289591700060A066 /* MeasureSizeModifier.swift in Sources */,
@@ -1915,7 +1918,6 @@
 				C5AAA10229BE7F69000DA6C3 /* Document.Drawing.Background+draw.swift in Sources */,
 				C552159C2C4A790300A47323 /* Structure.Role+ArrayExtension.swift in Sources */,
 				C55215A12C4A908E00A47323 /* TreeView.RowView.swift in Sources */,
-				C5C8E865295AFDCA002C7746 /* Structure.Role.Builder.swift in Sources */,
 				C564EB8429B5337700F3E0AC /* Document.Drawing.Drawing.swift in Sources */,
 				C54BE509289591530060A066 /* Set+asArray.swift in Sources */,
 				C5C8E86C295B041E002C7746 /* Presentation.Predicate.Builder.swift in Sources */,
@@ -1934,7 +1936,6 @@
 				C54BE4B22894866C0060A066 /* HippocampusApp.swift in Sources */,
 				C56965B52C028CE000AA46B3 /* AspectView.swift in Sources */,
 				C57B70BC2C243139007A5105 /* Design.ViewEditView.swift in Sources */,
-				C5C8E868295AFDEB002C7746 /* Structure.Aspect.Builder.swift in Sources */,
 				C55AC5DC295A4A8100F09326 /* Presentation.Query.swift in Sources */,
 				C57801272C3768AC00B1B1AD /* Information.Modification.swift in Sources */,
 				C55215932C49D59500A47323 /* Presentation+sourceCode.swift in Sources */,
@@ -1946,7 +1947,6 @@
 				C56965D92C05154200AA46B3 /* Structure.Filter.swift in Sources */,
 				C55538102C271C3200EC0911 /* PresentationEditView.ContextMenu.swift in Sources */,
 				C5E67E0B2C41D9BF00F55058 /* ConditionEditView.ArrayEditView.swift in Sources */,
-				C5BEFC2229EDFF4F00332347 /* Structure.Representation.Builder.swift in Sources */,
 				C52C0BCC2C3F21F600960750 /* FilterEditView.swift in Sources */,
 				C555381C2C277B6E00EC0911 /* Design.PickerKatastropheView.swift in Sources */,
 				C5AAA0F729BD34B2000DA6C3 /* TextView.swift in Sources */,

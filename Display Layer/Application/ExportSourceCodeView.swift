@@ -18,7 +18,7 @@ struct ExportSourceCodeView: View {
                 }
             ExportFiltersView()
                 .tabItem {
-                    Image(systemName: "filter")
+                    Image(systemName: "camera.filters")
                     Text("Filters")
                 }
         }

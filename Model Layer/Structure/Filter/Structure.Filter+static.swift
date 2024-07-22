@@ -15,15 +15,7 @@ extension Structure.Filter {
     typealias Particle = Structure.Particle
     typealias Filter = Structure.Filter
 
-    static var statics: [Filter] = [.test, .Filter_1]
-
-    static let Filter_1: Filter = {
-        var filter = Filter(id: "7BE4B482-DED6-48AD-BCD8-EC09EAF20432".uuid)
-        filter.name = "Test 1"
-        filter.layouts = [.tree, .list]
-        filter.condition = .role("D7812874-085B-4161-9ABB-C82D4A145634".uuid)
-        return filter
-    }()
+    static var statics: [Filter] = [.test]
 
     static let test: Filter = {
         var filter = Filter()
@@ -32,7 +24,7 @@ extension Structure.Filter {
         filter.layouts = [.list, .tree]
         filter.roles = [Structure.Role.note, Structure.Role.topic]
         filter.layout = .tree
-        filter.orders = [.sorted("6247260E-624C-48A1-985C-CDEDDFA5D3AD".uuid, ascending: true)]
+        filter.orders = [.sorted("6247260E-624C-48A1-985C-CDEDDFA5D3AD".uuid, ascending: false)]
         filter.order = filter.orders.first!
         filter.representations = [
             {

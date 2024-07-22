@@ -5,20 +5,36 @@
 //  Created by Guido Kühn on 16.07.24.
 //
 
+import Grisu
+
 extension Presentation {
-    enum Order: Structure.PersistentValue, Hashable {
+    enum Order: Structure.PersistentValue, Hashable, EditableListItem {
         case sorted(Structure.Aspect.ID, ascending: Bool = true)
         case multiSorted([Order])
 
+        var id: String {
+            switch self {
+            case let .sorted(aspectId, ascending):
+                return "\(aspectId)\(ascending)"
+            case let .multiSorted(sorters):
+                return "/\(sorters.map { $0.id }.joined(separator: "/"))"
+            }
+        }
+        
+        // MARK: Lifecycle
+
+        init() {
+            self = .sorted(.nil)
+        }
+
         // MARK: Functions
 
-        func description(structure: Structure) -> String {
+        func description(structure _: Structure) -> String {
             switch self {
-            case let .sorted(aspect, ascending):
-                let name = structure[Structure.Aspect.self, aspect]?.description ?? "Unknown"
-                return "\(name) \(ascending ? "Ascending" : "Descending")"
-            case let .multiSorted(sorters):
-                return sorters.map { $0.description(structure: structure) }.joined(separator: ", ")
+            case .sorted:
+                return "sorted"
+            case .multiSorted:
+                return "mutiSorted"
             }
         }
 
@@ -38,6 +54,18 @@ extension Presentation {
                 }
                 return false
             }
+        }
+    }
+}
+
+extension Presentation.Order: SourceCodeGenerator {
+    func sourceCode(tab i: Int, inline: Bool, document: Document) -> String {
+        let start = inline ? "" : tab(i)
+        switch self {
+        case let .sorted(aspectId, ascending):
+            return ".sorted(\"\(aspectId)\".uuid, ascending: \(ascending))"
+        case let .multiSorted(sorters):
+            return ".multiSorted([\(sorters.map { $0.sourceCode(tab: i + 1, inline: inline, document: document) }.joined(separator: ", "))])"
         }
     }
 }

@@ -5,8 +5,8 @@
 //  Created by Guido Kühn on 20.07.24.
 //
 
-import SwiftUI
 import Grisu
+import SwiftUI
 
 extension ExportSourceCodeView {
     struct ExportRolesView: View {
@@ -17,6 +17,7 @@ extension ExportSourceCodeView {
         @State var selectedRoles: [Structure.Role] = []
         @State var importFile = false
         @State var showExportConfirmation = false
+        @State var showDeleteConfirmation = false
 
         let formatter: DateFormatter = {
             let formatter = DateFormatter()
@@ -78,50 +79,78 @@ extension ExportSourceCodeView {
         // MARK: Content
 
         var body: some View {
-            Form {
-                Text(fileUrl?.path ?? "No file selected")
-                    .onTapGesture {
-                        importFile.toggle()
+            VStack(alignment: .leading) {
+                Form {
+                    Text(fileUrl?.path ?? "No file selected")
+                        .onTapGesture {
+                            importFile.toggle()
+                        }
+                        .fileImporter(
+                            isPresented: $importFile,
+                            allowedContentTypes: [.swiftSource],
+                            allowsMultipleSelection: false
+                        ) { result in
+                            switch result {
+                            case let .success(files):
+                                let file = files.first!
+                                let gotAccess = file.startAccessingSecurityScopedResource()
+                                if !gotAccess { return }
+                                analyzeFile(file)
+                                file.stopAccessingSecurityScopedResource()
+                            case let .failure(error):
+                                // handle error
+                                print(error)
+                            }
+                        }
+                    SelectorView(data: roles, selection: $selectedRoles) { Text($0.description) }
+                    Text(rolesSourceCode)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                        .font(.system(size: 8))
+                }
+                .formStyle(.grouped)
+
+                HStack {
+                    Button("Create static role") {
+                        let role = Structure.Role()
+                        role.name = "Static Role"
+                        try! document.$structure.addStaticObject(item: role)
                     }
-                    .fileImporter(
-                        isPresented: $importFile,
-                        allowedContentTypes: [.swiftSource],
-                        allowsMultipleSelection: false
-                    ) { result in
-                        switch result {
-                        case let .success(files):
-                            let file = files.first!
-                            let gotAccess = file.startAccessingSecurityScopedResource()
-                            if !gotAccess { return }
-                            analyzeFile(file)
-                            file.stopAccessingSecurityScopedResource()
-                        case let .failure(error):
-                            // handle error
-                            print(error)
+
+                    Button("Export") {
+                        showExportConfirmation.toggle()
+                    }
+                    .disabled(selectedRoles.isEmpty || fileUrl == nil)
+                    .confirmationDialog("Export", isPresented: $showExportConfirmation) {
+                        Button("Export") {
+                            Task {
+                                guard let fileUrl, fileUrl.startAccessingSecurityScopedResource() else { return }
+                                try! rolesSourceCode.write(to: fileUrl, atomically: true, encoding: .utf8)
+                                fileUrl.stopAccessingSecurityScopedResource()
+                                selectedRoles
+                                    .filter { !$0.isStatic }
+                                    .forEach {
+                                        do {
+                                            try document.$structure.makeObjectStatic(item: $0)
+                                        } catch {}
+                                    }
+                                showDeleteConfirmation = selectedRoles.contains(where: { !$0.isStatic })
+                            }
                         }
                     }
-                SelectorView(data: roles, selection: $selectedRoles) { Text($0.description) }
-                Text(rolesSourceCode)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                    .font(.system(size: 8))
-            }
-            .formStyle(.grouped)
-
-            if let fileUrl {
-                Button("Export") {
-                    showExportConfirmation.toggle()
+                    .confirmationDialog("Delete", isPresented: $showDeleteConfirmation) {
+                        Button("Delete") {
+                            Task {
+                                selectedRoles
+                                    .filter { !$0.isStatic }
+                                    .forEach {
+                                        document.delete($0)
+                                    }
+                            }
+                        }
+                    }
                 }
                 .padding()
                 .frame(maxWidth: .infinity, alignment: .trailing)
-                .confirmationDialog("Export", isPresented: $showExportConfirmation) {
-                    Button("Export") {
-                        Task {
-                            guard fileUrl.startAccessingSecurityScopedResource() else { return }
-                            try! rolesSourceCode.write(to: fileUrl, atomically: true, encoding: .utf8)
-                            fileUrl.stopAccessingSecurityScopedResource()
-                        }
-                    }
-                }
             }
         }
 

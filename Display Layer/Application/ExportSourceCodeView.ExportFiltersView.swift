@@ -50,11 +50,11 @@ extension ExportSourceCodeView {
             import Grisu
 
             extension Structure.Filter {
-                typealias Filter = Structure.Filter
-                typealias Aspect = Structure.Aspect
-                typealias Particle = Structure.Particle
+            \ttypealias Filter = Structure.Filter
+            \ttypealias Aspect = Structure.Aspect
+            \ttypealias Particle = Structure.Particle
 
-
+            
             """
             result += "\tstatic var statics: [Filter] = ["
             result += selectedFilters
@@ -64,7 +64,7 @@ extension ExportSourceCodeView {
             result += "]\n\n"
 
             for filter in selectedFilters.sorted(by: { $0.name < $1.name }) {
-                result += filter.sourceCode(tab: 0, inline: false, document: document) + "\n"
+                result += filter.sourceCode(tab: 1, inline: false, document: document) + "\n"
             }
             result += "}"
             return result
@@ -103,33 +103,48 @@ extension ExportSourceCodeView {
                 }
                 .formStyle(.grouped)
 
-                Button("Export") {
-                    showExportConfirmation.toggle()
+                HStack {
+                    Button("Create static filter") {
+                        let filter = Structure.Filter()
+                        filter.name = "Static Filter"
+                        try! document.$structure.addStaticObject(item: filter)
+                    }
+
+                    Button("Export") {
+                        showExportConfirmation.toggle()
+                    }
+                    .disabled(selectedFilters.isEmpty || fileUrl == nil)
+                    .confirmationDialog("Export", isPresented: $showExportConfirmation) {
+                        Button("Export") {
+                            Task {
+                                guard let fileUrl, fileUrl.startAccessingSecurityScopedResource() else { return }
+                                try! filtersSourceCode.write(to: fileUrl, atomically: true, encoding: .utf8)
+                                fileUrl.stopAccessingSecurityScopedResource()
+                                selectedFilters
+                                    .filter { !$0.isStatic }
+                                    .forEach {
+                                        do {
+                                            try document.$structure.makeObjectStatic(item: $0)
+                                        } catch {}
+                                    }
+                                showDeleteConfirmation = selectedFilters.contains(where: { !$0.isStatic })
+                            }
+                        }
+                    }
+                    .confirmationDialog("Delete", isPresented: $showDeleteConfirmation) {
+                        Button("Delete") {
+                            Task {
+                                selectedFilters
+                                    .filter { !$0.isStatic }
+                                    .forEach {
+                                        document.delete($0)
+                                    }
+                            }
+                        }
+                    }
                 }
-                .disabled(selectedFilters.isEmpty || fileUrl == nil)
                 .padding()
                 .frame(maxWidth: .infinity, alignment: .trailing)
-                .confirmationDialog("Export", isPresented: $showExportConfirmation) {
-                    Button("Export") {
-                        Task {
-                            guard let fileUrl, fileUrl.startAccessingSecurityScopedResource() else { return }
-                            try! filtersSourceCode.write(to: fileUrl, atomically: true, encoding: .utf8)
-                            fileUrl.stopAccessingSecurityScopedResource()
-                            showDeleteConfirmation = selectedFilters.contains(where: { !$0.isStatic })
-                        }
-                    }
-                }
-                .confirmationDialog("Delete", isPresented: $showDeleteConfirmation) {
-                    Button("Delete") {
-                        Task {
-                            selectedFilters
-                                .filter { !$0.isStatic }
-                                .forEach {
-                                    document.delete($0)
-                                }
-                        }
-                    }
-                }
             }
         }
 

@@ -23,18 +23,19 @@ extension Information {
         case any([Condition])
         case all([Condition])
 
+        // MARK: Nested Types
+
         // MARK: Internal
 
         typealias PersistentComparableValue = Comparable & PersistentValue
+
+        // MARK: Static Computed Properties
 
         static var transferRepresentation: some TransferRepresentation {
             CodableRepresentation(for: Condition.self, contentType: .text)
         }
 
-        func appendRole(role: Structure.Role, roles: inout [Structure.Role]) {
-            guard roles.firstIndex(of: role) == nil else { return }
-            roles.append(role)
-        }
+        // MARK: Functions
 
         func matches(_ item: Information.Item, sameRole: Structure.Role? = nil, structure: Structure) -> Bool {
             var roles: [Structure.Role] = []
@@ -93,7 +94,7 @@ extension Information {
             case let .hasParticle(particleId, condition):
                 return item.particles
                     .filter { $0.id == particleId }
-                    .contains {condition == .nil ? true : condition.matches($0, structure: structure, roles: &roles) }
+                    .contains { condition == .nil ? true : condition.matches($0, structure: structure, roles: &roles) }
             case let .not(condition):
                 var blockRoles: [Structure.Role] = []
                 return !condition.matches(item, sameRole: sameRole, structure: structure, roles: &blockRoles)
@@ -104,7 +105,7 @@ extension Information {
             }
         }
 
-        func matches(_ item: Information.Particle, sameRole: Structure.Role? = nil, structure: Structure) -> Bool {
+        func matches(_ item: Information.Particle, sameRole _: Structure.Role? = nil, structure: Structure) -> Bool {
             var roles: [Structure.Role] = []
             return matches(item, structure: structure, roles: &roles)
         }
@@ -132,6 +133,11 @@ extension Information {
             case .isReferenceOfRole:
                 return false
             }
+        }
+
+        fileprivate func appendRole(role: Structure.Role, roles: inout [Structure.Role]) {
+            guard roles.firstIndex(of: role) == nil else { return }
+            roles.append(role)
         }
     }
 }
