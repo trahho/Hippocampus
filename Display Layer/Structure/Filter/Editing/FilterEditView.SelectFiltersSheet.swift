@@ -19,12 +19,12 @@ struct SelectFiltersSheet: View {
         // MARK: Computed Properties
 
         var id: Structure.Filter.ID { filter.id }
-        var text: String { filter.name.localized(filter.isStatic) }
+        var text: String { filter.name.localized(filter.isLocked) }
 
         var children: [Entry]? {
             let result = filter.subFilters
 //                    .filter { !$0.conforms(to: item) }
-                .sorted(by: { $0.name.localized($0.isStatic) < $1.name.localized($1.isStatic) })
+                .sorted(by: { $0.name.localized($0.isLocked) < $1.name.localized($1.isLocked) })
                 .map { Entry(item: item, filter: $0) }
             return result.isEmpty ? nil : result
         }
@@ -40,7 +40,7 @@ struct SelectFiltersSheet: View {
     var roots: [Entry] {
         document.structure.filters
             .filter { $0.superFilters.isEmpty && $0 != filter }
-            .sorted(by: { $0.name.localized($0.isStatic) < $1.name.localized($1.isStatic) })
+            .sorted(by: { $0.name.localized($0.isLocked) < $1.name.localized($1.isLocked) })
             .map { Entry(item: filter, filter: $0) }
     }
 

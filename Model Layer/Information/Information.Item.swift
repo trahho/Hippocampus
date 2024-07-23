@@ -14,6 +14,8 @@ protocol Conditionable {
 
 extension Information {
     class Item: Object {
+        // MARK: Properties
+
         // MARK: Internal
 
         @Property var deleted: Bool = false
@@ -22,6 +24,12 @@ extension Information {
         @Objects var to: [Item]
         @Relations(\Self.to) var from: [Item]
 
+        // MARK: Private
+
+        @Property private var values: [Structure.Aspect.ID: TimedValue] = [:]
+
+        // MARK: Computed Properties
+
         var allChildren: [Item] {
             var cache: Set<Item> = []
             allChildren(cache: &cache)
@@ -29,16 +37,18 @@ extension Information {
             return cache.asArray
         }
 
+        // MARK: Functions
+
         func matchingRole(for role: Structure.Role) -> Structure.Role? {
-            return self.roles.first { $0.conforms(to: role) }
+            return roles.first { $0.conforms(to: role) }
         }
 
         subscript(_ aspectId: Structure.Aspect.ID) -> ValueStorage? {
             get {
-                self.values[aspectId]?.value
+                values[aspectId]?.value
             }
             set {
-                self.values[aspectId] = TimedValue(date: writingTimestamp, value: newValue ?? .nil)
+                values[aspectId] = TimedValue(date: writingTimestamp, value: newValue ?? .nil)
             }
         }
 
@@ -47,19 +57,15 @@ extension Information {
             set { aspect[self] = newValue }
         }
 
-        subscript<T>(_ type: T.Type, _ aspect: Structure.Aspect) -> T? where T: Information.Value {
+        subscript<T>(_ aspect: Structure.Aspect, _ type: T.Type) -> T? where T: Information.Value {
             get { aspect[type, self] }
             set { aspect[type, self] = newValue }
         }
 
-        // MARK: Private
-
-        @Property private var values: [Structure.Aspect.ID: TimedValue] = [:]
-
         private func allChildren(cache: inout Set<Item>) {
             guard !cache.contains(self) else { return }
-            cache = cache.union(self.to)
-            self.to.forEach { $0.allChildren(cache: &cache) }
+            cache = cache.union(to)
+            to.forEach { $0.allChildren(cache: &cache) }
         }
     }
 }

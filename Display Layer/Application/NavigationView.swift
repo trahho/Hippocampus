@@ -55,7 +55,7 @@ struct NavigationView: View {
     var body: some View {
         Group {
             if twoColumn {
-                NavigationSplitView(columnVisibility: $cv) {
+                NavigationSplitView {
                     filtersList
                 } content: {
                     filterResultList
@@ -63,13 +63,15 @@ struct NavigationView: View {
                     detailView
                 }
                 .id(filterId)
+                .debugPrint("twoColumn")
             } else {
-                NavigationSplitView(columnVisibility: $cv) {
+                NavigationSplitView {
                     filtersList
                 } detail: {
                     detailView
                 }
                 .id(filterId)
+                .debugPrint("oneColumn")
             }
         }
 //        .onChange(of: filter) { _, _ in
@@ -131,4 +133,11 @@ struct NavigationView: View {
         .environment(document)
         .environment(document.information)
         .environment(document.structure)
+}
+
+extension View {
+    func debugPrint(_ text: String) -> some View {
+        print(text)
+        return self
+    }
 }

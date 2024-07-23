@@ -18,7 +18,7 @@ extension Presentation: SourceCodeGenerator {
         case let .icon(text):
             return start + ".icon(\"\(text)\")"
         case let .role(id, layout, name):
-            if let role = document[Structure.Role.self, id], role.isStatic {
+            if let role = document[Structure.Role.self, id], role.isLocked {
                 return start + ".role(Structure.Role.\(role.name).id, layout: .\(layout.description), name: \(name ?? "nil"))"
             } else {
                 return start + ".role(\"\(id)\".uuid, layout: \(layout.description), name: \(name ?? "nil"))"

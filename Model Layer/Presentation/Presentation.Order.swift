@@ -12,6 +12,8 @@ extension Presentation {
         case sorted(Structure.Aspect.ID, ascending: Bool = true)
         case multiSorted([Order])
 
+        // MARK: Computed Properties
+
         var id: String {
             switch self {
             case let .sorted(aspectId, ascending):
@@ -20,7 +22,7 @@ extension Presentation {
                 return "/\(sorters.map { $0.id }.joined(separator: "/"))"
             }
         }
-        
+
         // MARK: Lifecycle
 
         init() {
@@ -35,6 +37,15 @@ extension Presentation {
                 return "sorted"
             case .multiSorted:
                 return "mutiSorted"
+            }
+        }
+
+        func textDescription(structure: Structure) -> String {
+            switch self {
+            case let .sorted(aspectId, ascending):
+                return (structure[Structure.Aspect.self, aspectId]?.description ?? "<no aspect>") + (ascending ? " 􀄨" : " 􀄩")
+            case let .multiSorted(sorters):
+                return sorters.map { $0.textDescription(structure: structure) }.joined(separator: " ")
             }
         }
 

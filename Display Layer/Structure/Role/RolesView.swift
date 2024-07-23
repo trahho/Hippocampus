@@ -21,7 +21,7 @@ struct RolesView: View {
     var roles: [Structure.Role] {
         document.structure.roles
             .filter { $0 != Structure.Role.same }
-            .sorted(by: { $0.name.localized($0.isStatic) < $1.name.localized($1.isStatic) })
+            .sorted(by: { $0.name.localized($0.isLocked) < $1.name.localized($1.isLocked) })
     }
 
     // MARK: Content
@@ -29,7 +29,7 @@ struct RolesView: View {
     var body: some View {
         NavigationSplitView {
             List(roles, selection: $role) { role in
-                Text(role.name.localized(role.isStatic))
+                Text(role.name.localized(role.isLocked))
             }
         } detail: {
             if let id = role, let role = document[Structure.Role.self, id] {
@@ -38,14 +38,6 @@ struct RolesView: View {
             } else {
                 EmptyView()
             }
-        }
-        .onAppear {
-            document.structure.roles.forEach { $0.toggleStatic(to: false) }
-            document.structure.aspects.forEach { $0.toggleStatic(to: false) }
-        }
-        .onDisappear {
-            document.structure.roles.forEach { $0.toggleStatic(to: true) }
-            document.structure.aspects.forEach { $0.toggleStatic(to: true) }
         }
         .toolbar {
             Button {
@@ -93,7 +85,7 @@ struct RolesView: View {
 }
 
 #Preview {
-    @Previewable @State var document = HippocampusApp.editStaticRolesDocument
+    @Previewable @State var document = HippocampusApp.previewDocument
     return RolesView()
         .environment(document)
 }

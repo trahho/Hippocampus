@@ -29,7 +29,7 @@ struct FilterEditView: View {
                     DisclosureGroup {
                         SelectFiltersSheet(filter: $filter)
                     } label: {
-                        Text(filter.superFilters.map { $0.name.localized($0.isStatic) }.joined(separator: ", "))
+                        Text(filter.superFilters.map { $0.name.localized($0.isLocked) }.joined(separator: ", "))
                             .frame(maxWidth: .infinity, alignment: .trailing)
                     }
                 } label: {
@@ -121,13 +121,12 @@ struct FilterEditView: View {
         }
         .onAppear {
             if filter.isStatic {
-                filter.toggleStatic(to: false)
-                isStatic = true
+                filter.isLocked = false
             }
         }
         .onDisappear {
-            if isStatic {
-                filter.toggleStatic(to: true)
+            if filter.isStatic {
+                filter.isLocked = true
             }
         }
         .formStyle(.grouped)

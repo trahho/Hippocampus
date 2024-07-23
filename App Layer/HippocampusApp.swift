@@ -30,13 +30,7 @@ struct HippocampusApp {
 
     static var localContainerUrl: URL { URL.localDirectory.appendingPathComponent("Hippocampus") }
 
-    static var editStaticRolesDocument: Document {
-        let containerURL = URL.virtual
-        let url = containerURL.appendingPathComponent("Edit\(HippocampusApp.memoryExtension)")
-        let document = Document(url: url)
-        document.structure.roles.forEach { $0.toggleStatic() }
-        return document
-    }
+ 
 
     static var emptyDocument: Document {
         let containerURL = URL.virtual

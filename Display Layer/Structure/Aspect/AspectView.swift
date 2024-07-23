@@ -14,14 +14,15 @@ struct AspectView: View {
     @State var aspect: Structure.Aspect
     @State var appearance: Presentation.Appearance
     @State var editable: Bool
+    @State var text: String = "Empty"
 
     // MARK: Computed Properties
 
     var textBinding: Binding<String> {
         if let item {
-            Binding(get: { aspect[String.self, item] ?? "Not found" }, set: { aspect[String.self, item] = $0 })
+            Binding(get: { item[aspect, String.self] ?? "" }, set: { item[aspect, String.self] = $0 })
         } else {
-            .constant("Hallo Welt")
+            $text
         }
     }
 

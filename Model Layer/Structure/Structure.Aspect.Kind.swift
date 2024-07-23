@@ -32,6 +32,7 @@ extension Structure.Aspect {
 //    }
 
     enum Kind: Structure.PersistentValue, PickableEnum {
+        
         case text, drawing, date
 
         var description: String {
@@ -65,16 +66,12 @@ extension Structure.Aspect {
             }
         }
 
-//        @ViewBuilder
-//        func view(for item: Information.Item, in aspect: Structure.Aspect, as form: String, editable: Bool) -> some View {
-//            switch self {
-//            case .text:
-//                TextView(item: item, aspect: aspect, form: form, editable: editable)
-//            case .drawing:
-//                DrawingView(item: item, aspect: aspect, form: form, editable: editable)
-//            case .date:
-//                HStack { EmptyView() }
-//            }
-//        }
+        var formats: [Format] {
+            switch self {
+            case .date: [ .full, .date, .time, .short]
+            default: []
+            }
+        }
+        
     }
 }

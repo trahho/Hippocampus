@@ -8,77 +8,7 @@
 import Foundation
 import SwiftUI
 
-// extension Presentation {
-//    @ViewBuilder func presentation(for item: Information.Item) -> some View {
-//        switch self {
-//        case .label(let string):
-//            Text(verbatim: string)
-////            case .color(let child, let color):
-////                child.presentation(for: item)
-////                    //                Rectangle()
-////                    .foregroundStyle(color)
-////            //                    .foregroundStyle(color)
-////            //            case .background(let child, let color):
-////            //                PresentationView(presentation: child, item: item)
-////            //                    .backgroundStyle(color)
-//        case .horizontal(let children, alignment: let alignment):
-//            HStack(alignment: alignment.vertical) {
-//                ForEach(0 ..< children.count, id: \.self) { i in
-//                    children[i].presentation(for: item)
-//                }
-////                    ForEach(children, id:\.self) {child in
-////                        child.presentation(for: item)
-////                    }
-//            }
-//        case .vertical(let children, alignment: let alignment):
-//            VStack(alignment: alignment.horizontal) {
-//                ForEach(0 ..< children.count, id: \.self) { i in
-//                    children[i].presentation(for: item)
-//                }
-//            }
-//        default:
-//            EmptyView()
-//        }
-//    }
-// }
-
 struct PresentationView: View {
-    // MARK: Nested Types
-
-    struct ArrayView: View {
-        // MARK: Properties
-
-        @State var array: [Presentation]
-        @State var item: Information.Item?
-
-        // MARK: Content
-
-        var body: some View {
-            ForEach(array, id: \.self) { presentation in
-//            if let presentation = array.first{
-                PresentationView(presentation: presentation, item: item) // .id(UUID())
-            }
-        }
-    }
-
-    struct Preview: View {
-        // MARK: Properties
-
-        let presentation: Presentation =
-            .vertical([
-                .aspect("6247260E-624C-48A1-985C-CDEDDFA5D3AD".uuid, appearance: .normal),
-                .aspect("F0C2B7D0-E71A-4296-9190-8EF2D540338F".uuid, appearance: .normal),
-                .aspect("F0C2B7D0-E71A-4296-9190-8EF2D540338F".uuid, appearance: .normal),
-            ], alignment: .center)
-
-        // MARK: Content
-
-        var body: some View {
-            PresentationView(presentation: presentation, item: nil)
-                .environment(HippocampusApp.editStaticRolesDocument)
-        }
-    }
-
     // MARK: Properties
 
     @Environment(\.document) var document
@@ -87,20 +17,6 @@ struct PresentationView: View {
     @State var id = UUID()
 
     // MARK: Content
-
-//    @ViewBuilder
-//    func horizontalSizing(view: some View, horizontal: Presentation.Space) -> some View {
-//        switch horizontal {
-//        case .normal:
-//            view
-//        case let .full(alignment):
-//            HStack(alignment: horizontal.alignment.vertical) { view }
-//                .frame(maxWidth: .infinity)
-//        case let .percent(percentage, alignment):
-//            view
-//                .containerRelativeFrame(.horizontal, alignment: horizontal.alignment.vertical, <#T##length: (CGFloat, Axis) -> CGFloat##(CGFloat, Axis) -> CGFloat#>)
-//        }
-//    }
 
     var body: some View {
         Group {
@@ -145,66 +61,10 @@ struct PresentationView: View {
                             return size * vertical.factor
                         }
                     }
-            //            switch horizontal {
-            //            case .full(let horizontal):
-            //                switch vertical {
-            //                case .full(let vertical):
-            //                    ArrayView(array: children, item: item)
-            //                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .init(horizontal: horizontal.horizontal, vertical: vertical.vertical))
-            //                case .normal:
-            //                    ArrayView(array: children, item: item)
-            //                        .frame(maxWidth: .infinity, alignment: .init(horizontal: horizontal.horizontal, vertical: .center))
-            //                case .percent(let percent, let vertical):
-            //                    ArrayView(array: children, item: item)
-            //                        .frame(maxWidth: .infinity)
-            //                        .containerRelativeFrame(.vertical) { height, _ in
-            //                            height * CGFloat(percent)
-            //                        }
-            //                }
-            //
-            //            case .normal:
-            //                switch vertical {
-            //                case .full(let vertical):
-            //                    ArrayView(array: children, item: item)
-            //                        .frame(maxHeight: .infinity, alignment: .init(horizontal: .center, vertical: vertical.vertical))
-            //                case .normal:
-            //                    ArrayView(array: children, item: item)
-            //                case .percent(let percent, let vertical):
-            //                    ArrayView(array: children, item: item)
-            //                        .containerRelativeFrame(.vertical) { height, _ in
-            //                            height * CGFloat(percent)
-            //                        }
-            //                }
-            //
-            //            case .percent(let horizontalPercent, let horizontal):
-            //                switch vertical {
-            //                case .full(let vertical):
-            //                    ArrayView(array: children, item: item)
-            //                        .frame(maxHeight: .infinity, alignment: .init(horizontal: horizontal.horizontal, vertical: vertical.vertical))
-            //                        .containerRelativeFrame(.horizontal) { width, _ in width * CGFloat(horizontalPercent) }
-            //                case .normal:
-            //                    ArrayView(array: children, item: item)
-            //                        .frame(alignment: .init(horizontal: horizontal.horizontal, vertical: .center))
-            //                        .containerRelativeFrame(.horizontal) { width, _ in width * CGFloat(horizontalPercent) }
-            //                case .percent(let verticalPercent, let vertical):
-            //                    ArrayView(array: children, item: item)
-            //                        .containerRelativeFrame([.horizontal, .vertical]) { size, axis in
-            //                            if axis == .vertical {
-            //                                return size * CGFloat(verticalPercent)
-            //                            } else {
-            //                                return size * CGFloat(horizontalPercent)
-            //                            }
-            //                        }
-            //                }
-            //            }
             default:
                 EmptyView()
             }
         }
         .sensitive
     }
-}
-
-#Preview {
-    PresentationView.Preview()
 }

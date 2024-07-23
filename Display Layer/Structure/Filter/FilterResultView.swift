@@ -10,20 +10,9 @@ import Grisu
 import SwiftUI
 
 struct FilterResultView: View {
-//    @State var items: [Information.Item]
+    @Environment(\.structure) var structure
     @State var filter: Structure.Filter
-//    @State var order: Presentation.Order?
-//    @State var layout: Presentation.Layout?
 
-//    var condition: Information.Condition { .all([filter.roots]) }
-
-//    var sequence: [Presentation.Sequence] {
-//        if let order = order ?? orders.first {
-//            return [.ordered(condition, order: [order])]
-//        } else {
-//            return [.unordered(condition)]
-//        }
-//    }
 
     var test: Structure.Filter {
         print("\(filter.name) Result")
@@ -62,6 +51,14 @@ struct FilterResultView: View {
                 }
             } label: {
                 filter.layout?.icon ?? Image(systemName: "map")
+            }
+            Picker(selection: $filter.order) {
+                ForEach(filter.orders, id:\.self) { order in
+                    Text(order.textDescription(structure: structure))
+                        .tag(order)
+                }
+            } label: {
+                Text(filter.order?.textDescription(structure: structure) ?? "select order")
             }
 
         }

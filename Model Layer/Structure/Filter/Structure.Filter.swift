@@ -45,7 +45,7 @@ extension Structure {
         }
 
         var description: String {
-            name.localized(isStatic)
+            name.localized(isLocked)
         }
 
         var allRoles: [Role] {

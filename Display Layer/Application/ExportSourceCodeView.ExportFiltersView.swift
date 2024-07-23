@@ -29,7 +29,7 @@ extension ExportSourceCodeView {
 
         var filters: [Structure.Filter] {
             document.structure.filters
-                .sorted(by: { $0.name.localized($0.isStatic) < $1.name.localized($1.isStatic) })
+                .sorted(by: { $0.name.localized($0.isLocked) < $1.name.localized($1.isLocked) })
         }
 
         var filtersSourceCode: String {

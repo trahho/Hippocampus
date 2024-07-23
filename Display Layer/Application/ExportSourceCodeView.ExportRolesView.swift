@@ -30,7 +30,7 @@ extension ExportSourceCodeView {
         var roles: [Structure.Role] {
             document.structure.roles
                 .filter { $0 != Structure.Role.same }
-                .sorted(by: { $0.name.localized($0.isStatic) < $1.name.localized($1.isStatic) })
+                .sorted(by: { $0.name.localized($0.isLocked) < $1.name.localized($1.isLocked) })
         }
 
         var rolesSourceCode: String {

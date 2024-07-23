@@ -46,10 +46,8 @@
             filePath = "Display Layer/Presentation/PresentationView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
-            landmarkName = "body"
-            landmarkType = "24">
+            startingLineNumber = "73"
+            endingLineNumber = "73">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -62,10 +60,10 @@
             filePath = "../../Library/Smaug/Sources/Smaug/DatabaseDocument/DatabaseDocument.Data.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
-            landmarkName = "makeObjectStatic(item:)"
-            landmarkType = "7">
+            startingLineNumber = "149"
+            endingLineNumber = "149"
+            landmarkName = "Data"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

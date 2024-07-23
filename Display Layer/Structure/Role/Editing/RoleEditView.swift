@@ -19,7 +19,7 @@ struct RoleEditView: View {
     // MARK: Computed Properties
 
     var conformation: [Structure.Role] {
-        role.roles.sorted(by: { $0.name.localized($0.isStatic) < $1.name.localized($1.isStatic) })
+        role.roles.sorted(by: { $0.name.localized($0.isLocked) < $1.name.localized($1.isLocked) })
     }
 
     // MARK: Content
@@ -32,7 +32,7 @@ struct RoleEditView: View {
                     DisclosureGroup {
                         SelectRolesSheet(role: $role)
                     } label: {
-                        Text(role.roles.map { $0.name.localized($0.isStatic) }.joined(separator: ", "))
+                        Text(role.roles.map { $0.name.localized($0.isLocked) }.joined(separator: ", "))
                             .frame(maxWidth: .infinity, alignment: .trailing)
                     }
                 } label: {
@@ -42,7 +42,7 @@ struct RoleEditView: View {
                     DisclosureGroup {
                         SelectReferencesSheet(role: $role)
                     } label: {
-                        Text(role.references.map { $0.name.localized($0.isStatic) }.joined(separator: ", "))
+                        Text(role.references.map { $0.name.localized($0.isLocked) }.joined(separator: ", "))
                             .frame(maxWidth: .infinity, alignment: .trailing)
                     }
                 } label: {
@@ -102,10 +102,22 @@ struct RoleEditView: View {
         }
         .frame(maxWidth: .infinity, alignment: .topLeading)
         .formStyle(.grouped)
+        .onAppear {
+            if role.isStatic {
+                role.isLocked = false
+                role.aspects.forEach { $0.isLocked = false }
+            }
+        }
+        .onDisappear {
+            if role.isStatic {
+                role.isLocked = true
+                role.aspects.forEach { $0.isLocked = true }
+            }
+        }
     }
 }
 
 #Preview {
     RoleEditView(role: Structure.Role.hierarchical)
-        .environment(HippocampusApp.editStaticRolesDocument)
+        .environment(HippocampusApp.previewDocument)
 }

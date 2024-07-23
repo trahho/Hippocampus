@@ -39,7 +39,7 @@ struct PresentationEditView: View {
 }
 
 #Preview {
-    @Previewable @State var document = HippocampusApp.editStaticRolesDocument
+    @Previewable @State var document = HippocampusApp.previewDocument
     @Previewable @State var presentation = Structure.Role.hierarchical.representations.first!.presentation
     var item = document(Information.Item.self)
     VStack {

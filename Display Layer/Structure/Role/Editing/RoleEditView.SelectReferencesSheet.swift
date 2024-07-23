@@ -17,11 +17,11 @@ extension RoleEditView {
             let item: Structure.Role
             let role: Structure.Role
             var id: Structure.Role.ID { role.id }
-            var text: String { role.name.localized(role.isStatic) }
+            var text: String { role.name.localized(role.isLocked) }
             var children: [Entry]? {
                 let result = role.roles
                     .filter { $0 != item }
-                    .sorted(by: { $0.name.localized($0.isStatic) < $1.name.localized($1.isStatic) })
+                    .sorted(by: { $0.name.localized($0.isLocked) < $1.name.localized($1.isLocked) })
                     .map { Entry(item: item, role: $0) }
                 return result.isEmpty ? nil : result
             }
@@ -30,7 +30,7 @@ extension RoleEditView {
         var roots: [Entry] {
             document.structure.roles
                 .filter { $0.subRoles.isEmpty && $0 != role }
-                .sorted(by: { $0.name.localized($0.isStatic) < $1.name.localized($1.isStatic) })
+                .sorted(by: { $0.name.localized($0.isLocked) < $1.name.localized($1.isLocked) })
                 .map { Entry(item: role, role: $0) }
         }
         

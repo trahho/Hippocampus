@@ -20,11 +20,11 @@ extension FilterEditView {
             // MARK: Computed Properties
 
             var id: Structure.Role.ID { role.id }
-            var text: String { role.name.localized(role.isStatic) }
+            var text: String { role.name.localized(role.isLocked) }
 
             var children: [Entry]? {
                 let result = role.subRoles
-                    .sorted(by: { $0.name.localized($0.isStatic) < $1.name.localized($1.isStatic) })
+                    .sorted(by: { $0.name.localized($0.isLocked) < $1.name.localized($1.isLocked) })
                     .map { Entry(role: $0) }
                 return result.isEmpty ? nil : result
             }
@@ -40,7 +40,7 @@ extension FilterEditView {
         var roots: [Entry] {
             document.structure.roles
                 .filter { $0 != Structure.Role.same }
-                .sorted(by: { $0.name.localized($0.isStatic) < $1.name.localized($1.isStatic) })
+                .sorted(by: { $0.name.localized($0.isLocked) < $1.name.localized($1.isLocked) })
                 .map { Entry(role: $0) }
         }
 
