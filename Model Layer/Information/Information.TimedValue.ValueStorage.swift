@@ -22,6 +22,7 @@ extension Information.TimedValue {
         case c(String)
         case d(Date)
         case g(UUID)
+        case drawing(Document.Drawing.Content)
         
         public init?(_ value: (any PersistentValue)?) {
             if value == nil { return nil }
@@ -30,7 +31,8 @@ extension Information.TimedValue {
             else if let value = value as? String { self = .c(value) }
             else if let value = value as? Date { self = .d(value) }
             
-            else if let uuid = value as? UUID { self = .g(uuid) }
+            else if let value = value as? UUID { self = .g(value) }
+            else if let value = value as? Document.Drawing.Content { self = .drawing(value)}
             //        else { return nil }
             else { fatalError("Storage for \(value?.typeName ?? "Hä?") not available") }
         }
@@ -43,6 +45,7 @@ extension Information.TimedValue {
             case let .c(value): return value
             case let .d(value): return value
             case let .g(value): return value
+            case let .drawing(value): return value
             }
         }
     }

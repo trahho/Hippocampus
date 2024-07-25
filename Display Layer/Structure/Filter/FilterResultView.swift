@@ -52,6 +52,15 @@ struct FilterResultView: View {
             } label: {
                 filter.layout?.icon ?? Image(systemName: "map")
             }
+            Menu("", systemImage: "arrow.up.arrow.down") {
+                ForEach(filter.orders, id:\.self) { order in
+                    Button {
+                        filter.order = order
+                    } label: {
+                        Text(order.textDescription(structure: structure))
+                    }
+                }
+            }
             Picker(selection: $filter.order) {
                 ForEach(filter.orders, id:\.self) { order in
                     Text(order.textDescription(structure: structure))

@@ -59,7 +59,10 @@ extension Structure.Role: SourceCodeGenerator {
                         + tab(i + 2) + "let aspect = Aspect(id: \"\(aspect.id)\".uuid)"
                         + tab(i + 2) + "aspect.name = \"\(aspect.name)\""
                         + tab(i + 2) + "aspect.kind = .\(aspect.kind)"
-                        + tab(i + 2) + "aspect.computed = \(aspect.computed)"
+                        + (aspect.exportCodedComputed ? (
+                            tab(i + 2) + "aspect.codedComputation = Aspect.Code." + "\(aspect.role!.name) \(aspect.name)".sourceCode
+                                + tab(i + 2) + "aspect.isComputed = true"
+                        ) : "")
                         + tab(i + 2) + "return aspect"
                         + tab(i + 1) + "}()"
                 }
@@ -76,7 +79,10 @@ extension Structure.Role: SourceCodeGenerator {
                         + tab(6) + "let aspect = Aspect(id: \"\(aspect.id)\".uuid)"
                         + tab(6) + "aspect.name = \"\(aspect.name)\""
                         + tab(6) + "aspect.kind = .\(aspect.kind)"
-                        + tab(6) + "aspect.computed = \(aspect.computed)"
+                        + (aspect.exportCodedComputed ? (
+                            tab(6) + "aspect.codedComputation = Aspect.Code." + "\(aspect.role!.name) \(aspect.name)".sourceCode
+                                + tab(6) + "aspect.isComputed = true"
+                        ) : "")
                         + tab(6) + "return aspect"
                         + tab(5) + "}()"
                 }

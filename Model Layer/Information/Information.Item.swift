@@ -13,7 +13,7 @@ protocol Conditionable {
 }
 
 extension Information {
-    class Item: Object {
+    class Item: Object, Aspectable {
         // MARK: Properties
 
         // MARK: Internal
@@ -43,16 +43,16 @@ extension Information {
             return roles.first { $0.conforms(to: role) }
         }
 
-        subscript(_ aspectId: Structure.Aspect.ID) -> ValueStorage? {
+        subscript(_ aspectId: Structure.Aspect.ID) -> Structure.Aspect.Value? {
             get {
-                values[aspectId]?.value
+                Structure.Aspect.Value(values[aspectId]?.value)
             }
             set {
-                values[aspectId] = TimedValue(date: writingTimestamp, value: newValue ?? .nil)
+                values[aspectId] = TimedValue(date: writingTimestamp, value: newValue?.valueStorage ?? .nil)
             }
         }
 
-        subscript(_ aspect: Structure.Aspect) -> ValueStorage? {
+        subscript(_ aspect: Structure.Aspect) -> Structure.Aspect.Value? {
             get { aspect[self] }
             set { aspect[self] = newValue }
         }

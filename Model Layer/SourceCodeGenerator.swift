@@ -18,9 +18,17 @@ extension SourceCodeGenerator {
 
 extension String {
     var sourceCode: String {
-        let parts = self.trimmingCharacters(in: .whitespacesAndNewlines).split(separator: " ")
-        guard let first = parts.first  else { return self }
+        let parts = trimmingCharacters(in: .whitespacesAndNewlines).split(separator: " ")
+        guard let first = parts.first else { return self }
         let rest = parts.dropFirst()
-        return first.lowercased() + rest.map { $0.uppercased() }.reduce("", +)
+        return first.lowercased() + rest.map { String($0).capitalizingFirstLetter() }.reduce("", +)
+    }
+
+    func capitalizingFirstLetter() -> String {
+        return prefix(1).uppercased() + lowercased().dropFirst()
+    }
+
+    mutating func capitalizeFirstLetter() {
+        self = capitalizingFirstLetter()
     }
 }

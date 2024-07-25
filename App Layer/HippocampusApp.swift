@@ -150,9 +150,9 @@ extension View {
 
 extension EnvironmentValues {
     @Entry var navigation: Navigation = .init()
-    @Entry var document: Document = HippocampusApp.emptyDocument
+    @Entry var currentDocument: Document?
 
+    var document: Document { currentDocument! }
     var information: Information { document.information }
-
     var structure: Structure { document.structure }
 }

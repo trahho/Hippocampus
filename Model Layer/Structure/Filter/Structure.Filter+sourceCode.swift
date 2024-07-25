@@ -14,12 +14,19 @@ extension Structure.Filter: SourceCodeGenerator {
             + tab(i + 1) + "filter.name = \"\(name)\""
             + superFiltersSourceCode(tab: i + 1)
             + tab(i + 1) + "filter.roles = [" + roles.map { "." + $0.name.sourceCode }.joined(separator: ", ") + "]"
-            + tab(i + 1) + "filter.layouts = [" + layouts.map { "." + $0.description }.joined(separator: ",") + "]"
+            + tab(i + 1) + layoutsSourceCode(tab: i + 1, document: document)
             + tab(i + 1) + "filter.condition = " + condition.sourceCode(tab: i + 2, inline: true, document: document)
             + ordersSourceCode(tab: i + 1, document: document)
             + representationsSourceCode(tab: i + 1, document: document)
             + tab(i + 1) + "return filter"
             + tab(i) + "}()" + cr
+    }
+
+    fileprivate func layoutsSourceCode(tab i: Int, document _: Document) -> String {
+        if layouts.isEmpty { "" } else {
+            tab(i) + "filter.layouts = [" + layouts.map { "." + $0.description }.joined(separator: ", ") + "]"
+                + tab(i) + "filter.layout = ." + (layout?.description ?? layouts.first!.description)
+        }
     }
 
     fileprivate func representationsSourceCode(tab i: Int, document: Document) -> String {
@@ -46,7 +53,9 @@ extension Structure.Filter: SourceCodeGenerator {
                 .map {
                     $0.sourceCode(tab: i + 1, inline: false, document: document)
                 }
-                .joined(separator: ",")
+                .joined(separator: ", ")
+                + "]"
+                + tab(i) + "filter.orderIndex = \(orderIndex ?? 0)"
         }
     }
 

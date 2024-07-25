@@ -54,9 +54,9 @@ extension Presentation {
             case let .sorted(aspect, ascending):
                 guard let aspect = structure[Structure.Aspect.self, aspect] else { return false }
                 if ascending {
-                    return lhs[aspect] ?? .nil < rhs[aspect] ?? .nil
+                    return lhs[aspect]?.valueStorage ?? .nil < rhs[aspect]?.valueStorage ?? .nil
                 } else {
-                    return lhs[aspect] ?? .nil > rhs[aspect] ?? .nil
+                    return lhs[aspect]?.valueStorage ?? .nil > rhs[aspect]?.valueStorage ?? .nil
                 }
             case let .multiSorted(sorters):
                 for sorter in sorters {
@@ -74,9 +74,9 @@ extension Presentation.Order: SourceCodeGenerator {
         let start = inline ? "" : tab(i)
         switch self {
         case let .sorted(aspectId, ascending):
-            return ".sorted(\"\(aspectId)\".uuid, ascending: \(ascending))"
+            return start + ".sorted(\"\(aspectId)\".uuid, ascending: \(ascending))"
         case let .multiSorted(sorters):
-            return ".multiSorted([\(sorters.map { $0.sourceCode(tab: i + 1, inline: inline, document: document) }.joined(separator: ", "))])"
+            return start + ".multiSorted([\(sorters.map { $0.sourceCode(tab: i + 1, inline: inline, document: document) }.joined(separator: ", "))])"
         }
     }
 }

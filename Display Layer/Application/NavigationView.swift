@@ -9,6 +9,8 @@ import Grisu
 import SwiftUI
 
 struct NavigationView: View {
+    // MARK: Properties
+
 //    @State var document: Document
     @Environment(\.information) var information
 //    @Bindable var navigation: Navigation
@@ -18,6 +20,8 @@ struct NavigationView: View {
     @State var index: Int = 0
     @State var path = NavigationPath()
 
+    // MARK: Computed Properties
+
     var twoColumn: Bool {
         guard let filter = filter, !filter.roles.isEmpty else { return false }
         return [.list, .tree].contains(filter.layout)
@@ -26,6 +30,8 @@ struct NavigationView: View {
     var filterId: UUID {
         filter?.id ?? Structure.Role.same.id
     }
+
+    // MARK: Content
 
     @ViewBuilder var filtersList: some View {
         FiltersView(expansions: $expansions, selection: $filter)
@@ -63,7 +69,6 @@ struct NavigationView: View {
                     detailView
                 }
                 .id(filterId)
-                .debugPrint("twoColumn")
             } else {
                 NavigationSplitView {
                     filtersList
@@ -71,68 +76,18 @@ struct NavigationView: View {
                     detailView
                 }
                 .id(filterId)
-                .debugPrint("oneColumn")
             }
         }
-//        .onChange(of: filter) { _, _ in
-//            print(filter?.name ?? "Nix")
-//            index += 1
-//        }
-
-//        if let filter = navigation.listFilter {
-//        NavigationSplitView(columnVisibility: $cv) {
-//            if let filter = filter, let layout = navigation.layout, layout == .list, filter.layouts.contains(.list) {
-//                FiltersView(expansions: $expansions)
-//            } else {
-//                EmptyView()
-//            }
-//        } content: {
-//            if let filter = filter, let layout = navigation.layout, layout == .list, filter.layouts.contains(.list) {
-//                FilterResultView(items: information.items.asArray, filter: navigation.filter!)
-//            } else {
-//                FiltersView(expansions: $expansions)
-//            }
-//        } detail: {}
-//            .onAppear {
-//                cv = .automatic
-//            }
-//            .onChange(of: navigation.filter) { _, _ in
-//                print("Selected \(navigation.filter?.name ?? "None")")
-//                filter = navigation.filter
-//            }
-//
-        ////        } else {
-//            NavigationSplitView {
-//                SidebarView(navigation: navigation)
-//            } detail: {
-//                Color.green
-//                DetailView(navigation: navigation)
-//            }
-//            .onAppear{
-//                cv = .all
-//            }
-//        }
-//        #if os(iOS)
-//        NavigationSplitView<SidebarView, ContentView, <#Detail: View#>> {
-//            SidebarView(presentation: document.presentation)
-//        } content: {
-//            ContentView()
-//        }
-//        #else
-//        EmptyView()
-//        #endif
     }
 }
 
 #Preview {
-    let document = HippocampusApp.previewDocument
+    var document = HippocampusApp.previewDocument
 //    let navigation = Navigation()
 
-    return NavigationView()
-//        .environment(navigation)
-        .environment(document)
-        .environment(document.information)
-        .environment(document.structure)
+     NavigationView()
+        .environment(\.currentDocument, document)
+ 
 }
 
 extension View {

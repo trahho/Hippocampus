@@ -16,7 +16,7 @@ extension AspectView {
         @State var editable: Bool
 
         var textBinding: Binding<String> {
-            Binding(get: { aspect[String.self, item] ?? "Not found" }, set: { if !aspect.computed { aspect[String.self, item] = $0 }})
+            Binding(get: { aspect[String.self, item] ?? "Not found" }, set: {  aspect[String.self, item] = $0 })
         }
 
         var body: some View {

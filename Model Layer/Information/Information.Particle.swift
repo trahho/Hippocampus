@@ -9,27 +9,34 @@ import Foundation
 import Smaug
 
 extension Information {
-    class Particle: ObjectPersistence.Object {
+    class Particle: ObjectPersistence.Object, Aspectable {
+        // MARK: Nested Types
+
         typealias Value = ValueStorage.PersistentValue
 
+        // MARK: Properties
+
         @Property var particle: Structure.Particle.ID!
+
         @Property private var values: [Structure.Aspect.ID: TimedValue] = [:]
 
-        subscript(_ aspectId: Structure.Aspect.ID) -> ValueStorage? {
+        // MARK: Functions
+
+        subscript(_ aspectId: Structure.Aspect.ID) -> Structure.Aspect.Value? {
             get {
-                self.values[aspectId]?.value
+                Structure.Aspect.Value(values[aspectId]?.value)
             }
             set {
-                self.values[aspectId] = TimedValue(date: .now, value: newValue ?? .nil)
+                values[aspectId] = TimedValue(date: .now, value: newValue?.valueStorage ?? .nil)
             }
         }
 
-        subscript(_ aspect: Structure.Aspect) -> ValueStorage? {
+        subscript(_ aspect: Structure.Aspect) -> Structure.Aspect.Value? {
             get { aspect[self] }
             set { aspect[self] = newValue }
         }
 
-        subscript<T>(_ type: T.Type, _ aspect: Structure.Aspect) -> T? where T: Information.Value {
+        subscript<T>(_ aspect: Structure.Aspect, _ type: T.Type) -> T? where T: Information.Value {
             get { aspect[type, self] }
             set { aspect[type, self] = newValue }
         }

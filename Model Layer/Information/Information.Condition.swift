@@ -37,12 +37,20 @@ extension Information {
 
         // MARK: Functions
 
-        func matches(_ item: Information.Item, sameRole: Structure.Role? = nil, structure: Structure) -> Bool {
+        func matches(_ item: Aspectable, sameRole: Structure.Role? = nil, structure: Structure) -> Bool {
             var roles: [Structure.Role] = []
             return matches(item, sameRole: sameRole, structure: structure, roles: &roles)
         }
 
-        func matches(_ item: Information.Item, sameRole: Structure.Role? = nil, structure: Structure, roles: inout [Structure.Role]) -> Bool {
+        func matches(_ item: Aspectable, sameRole: Structure.Role? = nil, structure: Structure, roles: inout [Structure.Role]) -> Bool {
+            if let item = item as? Item {
+                return itemMatches(item, sameRole: sameRole, structure: structure, roles: &roles)
+            } else if let particle = item as? Particle {
+                return particleMatches(particle, structure: structure, roles: &roles)
+            } else { return false }
+        }
+
+        func itemMatches(_ item: Information.Item, sameRole: Structure.Role? = nil, structure: Structure, roles: inout [Structure.Role]) -> Bool {
             switch self {
             case .nil:
                 return false
@@ -65,22 +73,6 @@ extension Information {
                     Condition.role(reference.id).matches(item, sameRole: role, structure: structure, roles: &roles)
                 }
                 .reduce(false) { $0 || $1 }
-//                let conditions: [Condition] = role.allReferences.map { .role($0.id) }
-//                let result = conditions.reduce(false) { partialResult, condition in
-//                    partialResult || condition.matches(item, sameRole: role, structure: structure, roles: &roles)
-//                }
-//                print("\(roleId) \(roles.count)")
-//                return result
-//                return condition.matches(item, sameRole: role, structure: structure, roles: &roles)
-//                var matches = false
-//                for reference in role.allReferences {
-//                    let reference = if reference == Structure.Role.same { role } else { reference }
-//                    if let role = item.conforms(to: reference) {
-//                        appendRole(role: role, roles: &roles)
-//                        matches = true
-//                    }
-//                }
-//                return matches
             case .isParticle:
                 return false
             case let .hasValue(comparison):
@@ -105,12 +97,7 @@ extension Information {
             }
         }
 
-        func matches(_ item: Information.Particle, sameRole _: Structure.Role? = nil, structure: Structure) -> Bool {
-            var roles: [Structure.Role] = []
-            return matches(item, structure: structure, roles: &roles)
-        }
-
-        func matches(_ item: Information.Particle, structure: Structure, roles: inout [Structure.Role]) -> Bool {
+        func particleMatches(_ item: Information.Particle, structure: Structure, roles: inout [Structure.Role]) -> Bool {
             switch self {
             case .nil:
                 return false

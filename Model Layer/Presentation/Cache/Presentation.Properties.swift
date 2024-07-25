@@ -9,7 +9,7 @@ import Foundation
 import Smaug
 
 extension Presentation {
-    class Properties: DatabaseDocument {
+    class Properties: CacheDatabaseDocument {
         typealias Properties = PropertiesStore.Properties
         // MARK: Internal
 

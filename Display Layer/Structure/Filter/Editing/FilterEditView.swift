@@ -24,6 +24,7 @@ struct FilterEditView: View {
             Section("Filter", isExpanded: $expanded) {
                 Text("\(filter.id)")
                     .font(.caption)
+                Toggle("Is locked", isOn: $filter.isLocked)
                 TextField("Name", text: $filter.name)
                 LabeledContent {
                     DisclosureGroup {

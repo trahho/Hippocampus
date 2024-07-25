@@ -11,8 +11,21 @@ import PencilKit
 import Smaug
 
 extension Document {
-    class Drawing: DatabaseDocument {
-        @Content var drawing = Drawing()
-//        @Content var properties = Properties()
+    class Drawing: CacheDatabaseDocument, Hashable {
+        // MARK: Properties
+
+        @Property var content: Content = .init()
+
+        // MARK: Static Functions
+
+        static func == (lhs: Document.Drawing, rhs: Document.Drawing) -> Bool {
+            lhs.id == rhs.id
+        }
+
+        // MARK: Functions
+
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(id)
+        }
     }
 }

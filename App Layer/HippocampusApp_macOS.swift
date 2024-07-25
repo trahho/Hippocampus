@@ -16,12 +16,12 @@ extension HippocampusApp: App {
         WindowGroup("filter", for: Structure.Filter.ID.self) { $filterId in
             if let filterId, let filter = document[Structure.Filter.self, filterId] {
                 FilterEditView(filter: filter)
-                    .environment(\.document, document)
+                    .environment(\.currentDocument, document)
             }
         }
         Window("Export SourceCode", id: "exportSourceCode"){
             ExportSourceCodeView()
-                .environment(\.document, document)
+                .environment(\.currentDocument, document)
         }
         Window("Edit Role", id: "roleEditor") {
 //            TestView()
@@ -33,7 +33,7 @@ extension HippocampusApp: App {
             RolesView()
 //            PresentationView.Preview()
 //            PresentationView(presentation: Structure.Role.hierarchical.representations[0].presentation, item: Information.Item())
-                .environment(\.document, document)
+                .environment(\.currentDocument, document)
 
             // Design_NavigationView()
 //                .environment(Design_NavigationView.Navigation())

@@ -97,7 +97,7 @@ extension PresentationEditView {
         func remove() {
             guard let index = array.firstIndex(of: presentation) else { return }
             switch presentation {
-            case let .horizontal(children, alignment), let .vertical(children, alignment):
+            case let .horizontal(children, _), let .vertical(children, _):
                 array.replaceSubrange(index ... index, with: children)
 //            case .color(let presentation, let color), .background(let presentation, let color):
 //                array[index] = presentation//.first!
