@@ -15,6 +15,7 @@ struct ListView: View {
     @Environment(\.information) var information
     @Environment(\.structure) var structure
     @State var filter: Structure.Filter
+    @Binding var selectedItem: Information.Item?
     @State var expansions = Expansions(defaultExpansion: false)
 
     var rootItems: [Result] {
@@ -40,8 +41,10 @@ struct ListView: View {
     var body: some View {
         List {
             ForEach(rootItems, id: \.item) { item in
-                RowView(item: item.item, role: item.role, roles: item.roles, filter: filter)
+                RowView(item: item.item, selectedItem: $selectedItem, role: item.role, roles: item.roles, filter: filter)
             }
+            .listRowBackground(Color.clear)
+            .listRowSeparator(.hidden)
         }
     }
 }

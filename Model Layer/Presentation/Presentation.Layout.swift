@@ -16,6 +16,7 @@ extension Presentation {
         case mindMap
         case miniMindMiap
         case gallery
+        case item
 
         // MARK: Computed Properties
 
@@ -33,6 +34,8 @@ extension Presentation {
                 "miniMindMiap"
             case .gallery:
                 "gallery"
+            case .item:
+                "item"
             }
         }
 
@@ -50,6 +53,8 @@ extension Presentation {
                 "circle.hexagongrid.fill"
             case .gallery:
                 "square.grid.3x3.square"
+            case .item:
+                "magnifyingglass"
             }
             return Image(systemName: name)
         }

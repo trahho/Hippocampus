@@ -15,6 +15,7 @@ extension TreeView {
         @Environment(\.information) var information
         @Environment(\.structure) var structure
         @State var item: Information.Item
+        @Binding var selectedItem: Information.Item?
         @State var role: Structure.Role!
         @State var roles: [Structure.Role]
         @State var filter: Structure.Filter
@@ -56,16 +57,24 @@ extension TreeView {
         var body: some View {
             Group {
                 if children.isEmpty {
-                    FilterResultView.ItemPresentationView(item: item, role: $role, roles: roles, filter: filter)
+                    FilterResultView.ItemView(item: item, filter: filter, role: $role, roles: roles, layout: .tree)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            selectedItem = item
+                        }
                 } else {
                     DisclosureGroup(key: key, isExpanded: $expansions) {
                         if expansions[key] {
                             ForEach(children, id: \.item) { item in
-                                RowView(item: item.item, role: item.role, roles: item.roles, filter: filter, expansions: $expansions, level: level + 1)
+                                RowView(item: item.item, selectedItem: $selectedItem, role: item.role, roles: item.roles, filter: filter, expansions: $expansions, level: level + 1)
                             }
                         }
                     } label: {
-                        FilterResultView.ItemPresentationView(item: item, role: $role, roles: roles, filter: filter)
+                        FilterResultView.ItemView(item: item, filter: filter, role: $role, roles: roles, layout: .tree)
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                selectedItem = item
+                            }
                     }
                 }
             }

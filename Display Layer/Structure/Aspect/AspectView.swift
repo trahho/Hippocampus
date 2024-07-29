@@ -38,19 +38,16 @@ struct AspectView: View {
             switch appearance {
             case .icon:
                 Image(systemName: "text.word.spacing")
-            case .edit, .full, .normal, .small:
-                if editable {
-                    TextField("", text: textBinding)
-                } else {
-                    Text(textBinding.wrappedValue)
-                }
+            case .full, .normal, .small:
+                Text(textBinding.wrappedValue)
             case .firstParagraph:
-                if editable {
-                    TextField("", text: textBinding)
-                        .lineLimit(1)
-                } else {
-                    Text(textBinding.wrappedValue)
-                        .lineLimit(1)
+                Text(textBinding.wrappedValue)
+                    .lineLimit(1)
+            case .edit:
+                LabeledContent {
+                    TextField(aspect.name, text: textBinding)
+                } label: {
+                    Text(aspect.name)
                 }
             }
         }

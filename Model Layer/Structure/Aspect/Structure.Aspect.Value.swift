@@ -6,41 +6,50 @@
 //
 
 extension Structure.Aspect {
-    struct Value/*: Equatable & Comparable & Hashable*/ {
+    struct Value /*: Equatable & Comparable & Hashable */ {
         // MARK: Properties
 
-        let valueStorage: Information.ValueStorage?
-        let drawing: Document.Drawing?
+        let storage: Information.ValueStorage?
+        let drawing: Document.Drawing.Content?
+        var value: (any Information.ValueStorage.PersistentValue)? {
+            storage?.value
+        }
+        var isNil: Bool {
+            storage == nil && drawing == nil
+        }
 
         // MARK: Lifecycle
 
         init(_ valueStorage: Information.ValueStorage?) {
             drawing = nil
-            self.valueStorage = valueStorage
+            storage = valueStorage
         }
 
         init(_ value: (any Information.Value)?) {
             drawing = nil
-            valueStorage = Information.ValueStorage(value)
+            self.storage = Information.ValueStorage(value)
         }
 
-        init(_ drawing: Document.Drawing?) {
+        init(_ drawing: Document.Drawing.Content?) {
             self.drawing = drawing
-            valueStorage = nil
+            storage = nil
         }
 
-       
+        init() {
+            storage = nil
+            drawing = nil
+        }
 
         // MARK: Functions
 
-        func `as`<T>(_: T.Type) -> T? {
-            if let valueStorage {
-                return valueStorage.value as? T
-            } else if let drawing {
-                return drawing as? T
-            } else {
-                return nil
-            }
-        }
+//        func `as`<T>(_: T.Type) -> T? {
+//            if let valueStorage {
+//                return valueStorage.value as? T
+//            } else if let drawing {
+//                return drawing as? T
+//            } else {
+//                return nil
+//            }
+//        }
     }
 }

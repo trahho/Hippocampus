@@ -54,9 +54,9 @@ extension Presentation {
             case let .sorted(aspect, ascending):
                 guard let aspect = structure[Structure.Aspect.self, aspect] else { return false }
                 if ascending {
-                    return lhs[aspect]?.valueStorage ?? .nil < rhs[aspect]?.valueStorage ?? .nil
+                    return lhs[aspect].storage ?? .nil < rhs[aspect].storage ?? .nil
                 } else {
-                    return lhs[aspect]?.valueStorage ?? .nil > rhs[aspect]?.valueStorage ?? .nil
+                    return lhs[aspect].storage ?? .nil > rhs[aspect].storage ?? .nil
                 }
             case let .multiSorted(sorters):
                 for sorter in sorters {

@@ -173,6 +173,6 @@ extension ExportSourceCodeView {
 
     #Preview {
         ExportSourceCodeView()
-            .environment(\.currentDocument, HippocampusApp.previewDocument)
+            .environment(\.doc, HippocampusApp.previewDocument)
     }
 }

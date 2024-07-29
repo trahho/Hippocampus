@@ -46,40 +46,40 @@ struct RolesView: View {
             } label: {
                 Image(systemName: "plus")
             }
-            #if os(OSX)
-                Button {
-                    var result = """
-                    extension Structure.Role {
-                        typealias Role = Structure.Role
-                        typealias Aspect = Structure.Aspect
-                        typealias Particle = Structure.Particle
-
-
-                    """
-                    result += "\tstatic var statics: [Role] = [.same, "
-                    result += document.structure.roles
-                        .filter { $0 != Structure.Role.same }
-                        .sorted(by: { $0.name < $1.name })
-                        .map { ".\($0.name)" }
-                        .joined(separator: ", ")
-                    result += "]\n\n"
-
-                    result += Structure.Role.same.sourceCode(tab: 0, inline: false, document: document) + "\n"
-                    for role in document.structure.roles
-                        .filter({ $0 != Structure.Role.same })
-                        .sorted(by: { $0.name < $1.name })
-                    {
-                        result += role.sourceCode(tab: 0, inline: false, document: document) + "\n"
-                    }
-                    result += "}"
-                    let pasteboard = NSPasteboard.general
-                    pasteboard.clearContents()
-                    pasteboard.setString(result, forType: .string)
-                } label: {
-                    Image(systemName: "function")
-                }
-
-            #endif
+//            #if os(OSX)
+//                Button {
+//                    var result = """
+//                    extension Structure.Role {
+//                        typealias Role = Structure.Role
+//                        typealias Aspect = Structure.Aspect
+//                        typealias Particle = Structure.Particle
+//
+//
+//                    """
+//                    result += "\tstatic var statics: [Role] = [.same, "
+//                    result += document.structure.roles
+//                        .filter { $0 != Structure.Role.same }
+//                        .sorted(by: { $0.name < $1.name })
+//                        .map { ".\($0.name)" }
+//                        .joined(separator: ", ")
+//                    result += "]\n\n"
+//
+//                    result += Structure.Role.same.sourceCode(tab: 0, inline: false, document: document) + "\n"
+//                    for role in document.structure.roles
+//                        .filter({ $0 != Structure.Role.same })
+//                        .sorted(by: { $0.name < $1.name })
+//                    {
+//                        result += role.sourceCode(tab: 0, inline: false, document: document) + "\n"
+//                    }
+//                    result += "}"
+//                    let pasteboard = NSPasteboard.general
+//                    pasteboard.clearContents()
+//                    pasteboard.setString(result, forType: .string)
+//                } label: {
+//                    Image(systemName: "function")
+//                }
+//
+//            #endif
         }
     }
 }

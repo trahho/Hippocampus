@@ -38,20 +38,20 @@ extension Information {
 //            }
 //        }
 
-        func compute(for items: [Aspectable], structure: Structure) -> Value? {
+        func compute(for items: [Aspectable], structure: Structure) -> Value {
             switch self {
             case let .minimum(aspect, condition):
-                guard let aspect = structure[Structure.Aspect.self, aspect] else { return nil }
-                return Value(items.filter { condition.matches($0, structure: structure) }.compactMap { aspect[$0]?.valueStorage }.min())
+                guard let aspect = structure[Structure.Aspect.self, aspect] else { return Value() }
+                return Value(items.filter { condition.matches($0, structure: structure) }.compactMap { aspect[$0].storage }.min())
             case let .maximum(aspect, condition):
-                guard let aspect = structure[Structure.Aspect.self, aspect] else { return nil }
-                return Value(items.filter { condition.matches($0, structure: structure) }.compactMap { aspect[$0]?.valueStorage }.max())
+                guard let aspect = structure[Structure.Aspect.self, aspect] else { return Value() }
+                return Value(items.filter { condition.matches($0, structure: structure) }.compactMap { aspect[$0].storage }.max())
             case let .count(condition):
                 return Value(ValueStorage(items.filter { condition.matches($0, structure: structure) }.count))
             }
         }
 
-        func compute(for item: Aspectable, structure: Structure) -> Value? {
+        func compute(for item: Aspectable, structure: Structure) -> Value {
             compute(for: [item], structure: structure)
         }
     }

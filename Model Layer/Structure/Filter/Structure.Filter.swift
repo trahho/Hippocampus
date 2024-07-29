@@ -11,6 +11,8 @@ import Grisu
 extension Structure {
     class Filter: Object, Pickable {
         // MARK: Properties
+        
+        static let empty = Filter()
 
         @Property var name: String = ""
         @Objects var superFilters: [Filter]

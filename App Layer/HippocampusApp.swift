@@ -9,28 +9,24 @@ import SwiftUI
 
 @main
 struct HippocampusApp {
-    // MARK: Nested Types
-
-    struct TestView: View {
-        var body: some View {
-            Text("\(HippocampusApp.locationService.authorization.rawValue)")
-        }
-    }
-
     // MARK: Static Properties
+
+//    struct TestView: View {
+//        var body: some View {
+//            Text("\(HippocampusApp.locationService.authorization.rawValue)")
+//        }
+//    }
 
     static let memoryExtension = ".memory"
     static let persistentExtension = ".persistent"
 
-    static let locationService = LocationService()
+//    static let locationService = LocationService()
 
     // MARK: Static Computed Properties
 
     static var iCloudContainerUrl: URL { URL.iCloudDirectory.appendingPathComponent("Documents") }
 
     static var localContainerUrl: URL { URL.localDirectory.appendingPathComponent("Hippocampus") }
-
- 
 
     static var emptyDocument: Document {
         let containerURL = URL.virtual
@@ -42,6 +38,9 @@ struct HippocampusApp {
         let containerURL = URL.virtual
         let url = containerURL.appendingPathComponent("Preview\(HippocampusApp.memoryExtension)")
         let document = Document(url: url)
+        
+        let aspect: Structure.Aspect = Structure.Role.named[dynamicMember: "name"]
+
 
         for i in 1 ..< 3 {
             let filter = document(Structure.Filter.self)
@@ -62,8 +61,7 @@ struct HippocampusApp {
             }
         }
 
-        for filter in document.structure.filters.filter({!$0.isStatic}) {
-            let aspect: Structure.Aspect = Structure.Role.named.text
+        for filter in document.structure.filters.filter({ !$0.isStatic }) {
             filter.orders = [.sorted(aspect.id, ascending: true)]
             filter.order = filter.orders.first!
             filter.condition = .role(Structure.Role.tracked.id)
@@ -72,16 +70,16 @@ struct HippocampusApp {
 
         for i in 0 ..< 10 {
             let other = document(Information.Item.self)
-            Structure.Role.named.text[String.self, other] = "Hallo Welt🤩"
+            aspect[String.self, other] = "Hallo Welt🤩"
             other.roles.append(.note)
 
             let item = document(Information.Item.self)
-            Structure.Role.named.text[String.self, item] = "\(i + 1). Hallo Welt🤩"
+            aspect[String.self, item] = "\(i + 1). Hallo Welt🤩"
 //            item.roles.append(Structure.Role.named)
             item.roles.append(Structure.Role.topic)
             for j in 0 ..< 5 {
                 let subItem = document(Information.Item.self)
-                Structure.Role.named.text[String.self, subItem] = "\(i + 1).\(j + 1). Hallo Welt🤩"
+                aspect[String.self, subItem] = "\(i + 1).\(j + 1). Hallo Welt🤩"
 //                subItem.roles.append(Structure.Role.named)
                 subItem.roles.append(Structure.Role.topic)
                 subItem.roles.append(Structure.Role.note)
@@ -89,14 +87,14 @@ struct HippocampusApp {
                 subItem.from.append(item)
                 for k in 0 ..< 5 {
                     let subsubItem = document(Information.Item.self)
-                    Structure.Role.named.text[String.self, subsubItem] = "\(i + 1).\(j + 1).\(k + 1). Hallo Welt🤩"
+                    aspect[String.self, subsubItem] = "\(i + 1).\(j + 1).\(k + 1). Hallo Welt🤩"
                     subsubItem.roles.append(Structure.Role.note)
 //                    subsubItem.roles.append(Structure.Role.topic)
 
                     subItem.to.append(subsubItem)
                     subsubItem.from.append(item)
                     let other = document(Information.Item.self)
-                    Structure.Role.named.text[String.self, other] = "Hallo Welt🤩"
+                    aspect[String.self, other] = "Hallo Welt🤩"
                 }
             }
         }
@@ -105,6 +103,8 @@ struct HippocampusApp {
     }
 
     // MARK: Properties
+
+    @Environment(\.openWindow) var openWindow
 
     var document: Document = previewDocument
 
@@ -140,19 +140,19 @@ struct HippocampusApp {
     }
 }
 
-extension View {
-    func setDocument(_ document: Document) -> some View {
-        environment(document)
-            .environment(document.structure)
-            .environment(document.information)
-    }
-}
+//extension View {
+//    func setDocument(_ document: Document) -> some View {
+//        environment(document)
+//            .environment(document.structure)
+//            .environment(document.information)
+//    }
+//}
 
 extension EnvironmentValues {
     @Entry var navigation: Navigation = .init()
-    @Entry var currentDocument: Document?
+    @Entry var doc: Document?
 
-    var document: Document { currentDocument! }
+    var document: Document { doc! }
     var information: Information { document.information }
     var structure: Structure { document.structure }
 }

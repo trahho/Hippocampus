@@ -17,7 +17,6 @@ extension Structure.Filter {
 
 	static var statics: [Filter] = [.test]
 
-
 	static let test: Filter = {
 		var filter = Filter(id: "6FD00BE8-2B48-47E7-9EBB-C86F65C3AA7A".uuid)
 		filter.name = "Test"

@@ -22,16 +22,16 @@ extension Information {
 
         // MARK: Functions
 
-        subscript(_ aspectId: Structure.Aspect.ID) -> Structure.Aspect.Value? {
+        subscript(_ aspectId: Structure.Aspect.ID) -> Structure.Aspect.Value {
             get {
                 Structure.Aspect.Value(values[aspectId]?.value)
             }
             set {
-                values[aspectId] = TimedValue(date: .now, value: newValue?.valueStorage ?? .nil)
+                values[aspectId] = TimedValue(date: .now, value: newValue.storage ?? .nil)
             }
         }
 
-        subscript(_ aspect: Structure.Aspect) -> Structure.Aspect.Value? {
+        subscript(_ aspect: Structure.Aspect) -> Structure.Aspect.Value {
             get { aspect[self] }
             set { aspect[self] = newValue }
         }

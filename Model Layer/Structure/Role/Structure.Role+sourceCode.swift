@@ -19,8 +19,8 @@ import Foundation
 
 extension Structure.Role: SourceCodeGenerator {
     func sourceCode(tab i: Int, inline _: Bool, document: Document) -> String {
-        tab(i + 1) + "static let \(name): Role = {"
-            + tab(i + 2) + "var role = Role(id: \"\(id)\".uuid)"
+        tab(i + 1) + "static let \(name.sourceCode): Role = {"
+        + tab(i + 2) + "var role = Role(id: \"\(id)\".uuid)"
             + tab(i + 2) + "role.name = \"\(name)\""
             + rolesSourceCode(tab: i + 2)
             + referencesSourceCode(tab: i + 2)
@@ -35,7 +35,7 @@ extension Structure.Role: SourceCodeGenerator {
         if roles.isEmpty { "" } else {
             tab(i) + "role.roles = ["
                 + roles
-                .map { ".\($0.name)" }
+                .map { ".\($0.name.sourceCode)" }
                 .joined(separator: ", ")
                 + "]"
         }
@@ -45,7 +45,7 @@ extension Structure.Role: SourceCodeGenerator {
         if references.isEmpty { "" } else {
             tab(i) + "role.references = ["
                 + references
-                .map { ".\($0.name)" }
+                .map { ".\($0.name.sourceCode)" }
                 .joined(separator: ", ")
                 + "]"
         }
@@ -57,7 +57,7 @@ extension Structure.Role: SourceCodeGenerator {
                 + aspects.map { aspect in
                     tab(i + 1) + "{"
                         + tab(i + 2) + "let aspect = Aspect(id: \"\(aspect.id)\".uuid)"
-                        + tab(i + 2) + "aspect.name = \"\(aspect.name)\""
+                    + tab(i + 2) + "aspect.name = \"\(aspect.name)\""
                         + tab(i + 2) + "aspect.kind = .\(aspect.kind)"
                         + (aspect.exportCodedComputed ? (
                             tab(i + 2) + "aspect.codedComputation = Aspect.Code." + "\(aspect.role!.name) \(aspect.name)".sourceCode
@@ -77,7 +77,7 @@ extension Structure.Role: SourceCodeGenerator {
                 + particle.aspects.map { aspect in
                     tab(5) + "{"
                         + tab(6) + "let aspect = Aspect(id: \"\(aspect.id)\".uuid)"
-                        + tab(6) + "aspect.name = \"\(aspect.name)\""
+                    + tab(6) + "aspect.name = \"\(aspect.name)\""
                         + tab(6) + "aspect.kind = .\(aspect.kind)"
                         + (aspect.exportCodedComputed ? (
                             tab(6) + "aspect.codedComputation = Aspect.Code." + "\(aspect.role!.name) \(aspect.name)".sourceCode

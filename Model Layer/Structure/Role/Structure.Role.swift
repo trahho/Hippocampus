@@ -44,7 +44,16 @@ extension Structure {
         }
 
         var allAspects: [Aspect] {
-            aspects.asSet.union(roles.flatMap { $0.allAspects }).asArray
+            var result: [Aspect] = []
+            for role in roles {
+                for aspect in role.allAspects {
+                    if !result.contains(aspect) {
+                        result.append(aspect)
+                    }
+                }
+            }
+            result.append(contentsOf: aspects)
+            return result
         }
 
         // MARK: Functions

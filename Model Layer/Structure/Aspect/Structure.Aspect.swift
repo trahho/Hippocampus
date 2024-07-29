@@ -34,7 +34,7 @@ extension Structure {
         var information: Information {
             store as! Information
         }
-        
+
         var isComputed: Bool {
             codedComputation != nil || computation != nil
         }
@@ -46,18 +46,18 @@ extension Structure {
 //        @Relation(\Role.aspects) var role: Role!
 
         subscript<T>(_: T.Type, _ item: Aspectable) -> T? where T: Information.Value {
-            get { self[item]?.as(T.self) }
+            get { self[item].value as? T }
             set { self[item] = Value(newValue) }
         }
 
-        subscript(_ item: Aspectable) -> Value? {
+        subscript(_ item: Aspectable) -> Value {
             get {
                 if let codedComputation {
                     return codedComputation.get(item, self)
                 } else if let computation, let structure = store as? Structure {
                     return computation.compute(for: item, structure: structure)
                 } else {
-                    return item[id]
+                    return item[id] ?? Value()
                 }
             }
             set {

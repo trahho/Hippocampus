@@ -122,10 +122,14 @@
     "Delete" : {
 
     },
+    "Design" : {
+
+    },
     "Edit" : {
 
     },
     "Edit Role" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -135,13 +139,13 @@
         }
       }
     },
+    "Edit Roles" : {
+
+    },
     "Export" : {
 
     },
     "Export SourceCode" : {
-
-    },
-    "filter" : {
 
     },
     "Filter" : {
@@ -230,6 +234,12 @@
           }
         }
       }
+    },
+    "New Filter" : {
+
+    },
+    "New Role" : {
+
     },
     "Nil" : {
 

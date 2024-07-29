@@ -22,6 +22,7 @@ indirect enum Presentation: Structure.PersistentValue, Hashable, Transferable {
     case background([Presentation], color: Color)
     case grouped([Presentation])
     case role(Structure.Role.ID, layout: Layout, name: String? = nil)
+//    case tap([Presentation])
 
     // MARK: Static Computed Properties
 

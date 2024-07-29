@@ -31,7 +31,7 @@ struct FilterView: View {
                 Image(systemName: filter.subFilters.isEmpty ? "light.recessed.fill" : "light.recessed.3.fill")
                 Text("\(filter.name)")
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
+//            .frame(maxWidth: .infinity, alignment: .leading)
             .padding(3)
             .background {
                 if selected == filter {

@@ -15,6 +15,7 @@ extension ListView {
         @Environment(\.information) var information
         @Environment(\.structure) var structure
         @State var item: Information.Item
+        @Binding var selectedItem: Information.Item?
         @State var role: Structure.Role!
         @State var roles: [Structure.Role]
         @State var filter: Structure.Filter
@@ -22,7 +23,11 @@ extension ListView {
         // MARK: Content
 
         var body: some View {
-            FilterResultView.ItemPresentationView(item: item, role: $role, roles: roles, filter: filter).sensitive
+            FilterResultView.ItemView(item: item, filter: filter, role: $role, roles: roles, layout: .tree)
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    selectedItem = item
+                }
         }
     }
 }

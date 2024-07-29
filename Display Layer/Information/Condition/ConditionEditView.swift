@@ -22,6 +22,6 @@ struct ConditionEditView: View {
 #Preview {
     @Previewable @State var condition: Information.Condition = .role(Structure.Role.drawing.id)
     ConditionEditView(condition: $condition)
-        .setDocument(HippocampusApp.previewDocument)
-//        .environment(\.document, HippocampusApp.previewDocument)
+//        .setDocument(HippocampusApp.previewDocument)
+        .environment(\.doc, HippocampusApp.previewDocument)
 }

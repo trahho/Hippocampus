@@ -24,7 +24,9 @@ struct FilterEditView: View {
             Section("Filter", isExpanded: $expanded) {
                 Text("\(filter.id)")
                     .font(.caption)
-                Toggle("Is locked", isOn: $filter.isLocked)
+                if filter.isLocked {
+                    Toggle("Is locked", isOn: $filter.isLocked)
+                }
                 TextField("Name", text: $filter.name)
                 LabeledContent {
                     DisclosureGroup {
@@ -36,7 +38,7 @@ struct FilterEditView: View {
                 } label: {
                     Text("Parents")
                 }
-                
+
                 SelectorView(data: Presentation.Layout.allCases, selection: $filter.layouts) { Text($0.description) }
 //                LazyHGrid(rows: [GridItem(.flexible())], spacing: 10) {
 //                    ForEach(Presentation.Layout.allCases, id: \.self) { layout in
