@@ -8,7 +8,6 @@
 import SwiftUI
 
 extension HippocampusApp: App {
-    
     var body: some Scene {
         Group {
             WindowGroup {
@@ -37,6 +36,14 @@ extension HippocampusApp: App {
         }
         .commandsRemoved()
         .commands {
+            CommandGroup(after: .appInfo) {
+                Button(action: {
+                    NSApplication.shared.terminate(self)
+                }) {
+                    Text("Quit MyApp")
+                }
+                .keyboardShortcut("q", modifiers: .command)
+            }
             CommandMenu("Design") {
                 Button("New Filter") {
                     let filter = document(Structure.Filter.self)

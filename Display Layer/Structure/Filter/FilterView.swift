@@ -32,22 +32,22 @@ struct FilterView: View {
                 Text("\(filter.name)")
             }
 //            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(3)
-            .background {
-                if selected == filter {
-                    RoundedRectangle(cornerRadius: 6)
-                        .foregroundColor(.accentColor)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                }
-            }
-            .contentShape(Rectangle())
-            .onTapGesture {
-                guard selected != filter else { return }
-//                print("\(selected != filter)")
-//                withAnimation {
-                selected = filter
+//            .padding(3)
+//            .background {
+//                if selected == filter {
+//                    RoundedRectangle(cornerRadius: 6)
+//                        .foregroundColor(.accentColor)
+//                        .frame(maxWidth: .infinity, maxHeight: .infinity)
 //                }
-            }
+//            }
+//            .contentShape(Rectangle())
+//            .onTapGesture {
+//                guard selected != filter else { return }
+////                print("\(selected != filter)")
+////                withAnimation {
+//                selected = filter
+////                }
+//            }
             .contextMenu {
                 Button("Edit") {
                     openWindow(value: filter.id)

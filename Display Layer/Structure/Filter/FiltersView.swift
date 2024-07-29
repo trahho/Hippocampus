@@ -18,7 +18,7 @@ import Grisu
 struct FiltersView: View {
     @Environment(\.structure) var structure
     @Binding var expansions: Expansions
-    @Binding var selection: Structure.Filter?
+    @Binding var selection: Structure.Filter.ID?
 
     var filters: [Structure.Filter] {
         structure.filters.filter { $0.superFilters.isEmpty }
@@ -26,8 +26,8 @@ struct FiltersView: View {
     }
 
     var body: some View {
-        List(filters) { filter in
-            FilterView(filter: filter, selected: $selection, expansions: $expansions)
+        List(filters, selection: $selection) { filter in
+            FilterView(filter: filter, selected: .constant(Structure.Filter.empty), expansions: $expansions)
                 .listRowSeparator(.hidden)
         }
         .listStyle(.sidebar)

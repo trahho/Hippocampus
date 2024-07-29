@@ -106,7 +106,8 @@ struct HippocampusApp {
 
     @Environment(\.openWindow) var openWindow
 
-    var document: Document = previewDocument
+//    var document: Document = previewDocument
+    var document: Document = Document(name: "Test", local: false)
 
     // MARK: Static Functions
 

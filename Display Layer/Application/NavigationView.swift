@@ -41,12 +41,13 @@ struct NavigationView: View {
 
 //    @State var document: Document
     @Environment(\.dismiss) var dismiss
+    @Environment(\.document) var document
     @Environment(\.information) var information
 //    @Bindable var navigation: Navigation
     @State var cv: NavigationSplitViewVisibility = .automatic
     @State var expansions = Expansions()
     @State var inspectorExpansions = Expansions()
-    @State var filter: Structure.Filter?
+    @State var filterId: Structure.Filter.ID?
     @State var selectedItem: Information.Item?
     @State var index: Int = 0
     @State var path = NavigationPath()
@@ -63,8 +64,9 @@ struct NavigationView: View {
         return [.list, .tree].contains(filter.layout)
     }
 
-    var filterId: UUID {
-        filter?.id ?? Structure.Role.same.id
+    var filter: Structure.Filter? {
+        guard let filterId else { return nil}
+        return document[Structure.Filter.self, filterId]
     }
 
     var dragListWidth: some Gesture {
@@ -82,7 +84,7 @@ struct NavigationView: View {
     // MARK: Content
 
     @ViewBuilder var filtersList: some View {
-        FiltersView(expansions: $expansions, selection: $filter)
+        FiltersView(expansions: $expansions, selection: $filterId)
     }
 
     @ViewBuilder var filterResultList: some View {
@@ -127,6 +129,13 @@ struct NavigationView: View {
                     RoleSelectionPopoverView()
                 } label: {
                     Image(systemName: "plus.circle.fill")
+                }
+            }
+            ToolbarItemGroup(placement: .primaryAction) {
+                Button {
+                    document.structure.migration += 1
+                } label: {
+                    Text("\(document.structure.migration)")
                 }
             }
         }
