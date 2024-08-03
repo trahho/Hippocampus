@@ -14,14 +14,12 @@ struct FilterResultView: View {
 
     @Environment(\.structure) var structure
     @State var filter: Structure.Filter
-    @Binding var selectedItem: Information.Item?
     @State var showAddPopover = false
 
     // MARK: Computed Properties
 
-    var test: Structure.Filter {
-        print("\(filter.name) Result")
-        return filter
+    var result: Structure.Filter.Result {
+        return filter.result
     }
 
     // MARK: Content
@@ -34,19 +32,19 @@ struct FilterResultView: View {
                 if let layout = filter.layout {
                     switch layout {
                     case .list:
-                        ListView(filter: filter, selectedItem: $selectedItem)
+                        ListView(result: result)
                     case .tree:
-                        TreeView(filter: filter, selectedItem: $selectedItem)
+                        TreeView(result: result)
                     default:
-                        EmptyView()
+                        Text("Layout not implemented")
                     }
                 } else {
-                    EmptyView()
+                    Text("Select layout")
                 }
             }
         }
         .toolbar {
-            ToolbarItemGroup(placement: .automatic) {
+            ToolbarItemGroup(placement: .secondaryAction) {
                 PopoverMenu {
                     ForEach(Presentation.Layout.allCases.filter { filter.allLayouts.contains($0) }, id: \.self) { layout in
                         HStack {

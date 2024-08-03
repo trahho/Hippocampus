@@ -27,6 +27,19 @@ extension Structure {
         @Property var orders: [Presentation.Order] = []
         @Transient var layout: Presentation.Layout?
         @Transient var orderIndex: Int?
+        @Transient var selectedItem: Result.Item?
+        
+//        var selectedItemId: Information.Item.ID? {
+//            get { selectedItem?.item.id }
+//            set {
+//                if let newValue {
+//                    selectedItem = result.first(where: { $0.id == newValue })
+//                } else {
+//                    selectedItem = nil
+//                }
+//            }
+//        }
+        
 
         // MARK: Computed Properties
 
@@ -47,7 +60,7 @@ extension Structure {
         }
 
         var description: String {
-            name.localized(isLocked)
+            name.localized(isStatic)
         }
 
         var allRoles: [Role] {

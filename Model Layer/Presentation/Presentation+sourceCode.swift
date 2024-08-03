@@ -18,17 +18,20 @@ extension Presentation: SourceCodeGenerator {
         case let .icon(text):
             return start + ".icon(\"\(text)\")"
         case let .role(id, layout, name):
-            if let role = document[Structure.Role.self, id], role.isLocked {
-                return start + ".role(Structure.Role.\(role.name).id, layout: .\(layout.description), name: \(name ?? "nil"))"
-            } else {
-                return start + ".role(\"\(id)\".uuid, layout: \(layout.description), name: \(name ?? "nil"))"
-            }
+//            if let role = document[Structure.Role.self, id], role.isStatic {
+//                return start + ".role(Structure.Role.\(role.name.sourceCode).id, layout: .\(layout.description), name: \(name ?? "nil"))"
+//            } else {
+            return start + ".role(\"\(id)\".uuid, layout: .\(layout.description), name: \(name ?? "nil"))"
+//            }
         case let .aspect(id, appearance):
             //            if let aspect = document[Structure.Aspect.self, id] {
             //                return start + ".aspect(Structure.Role.\(aspect.role.name).\(aspect.name), appearance: \(appearance.sourceCode(tab: 0, inline: true, document: document)))"
             //            } else {
-            let aspect = document[Structure.Aspect.self, id]!
-            return start + ".aspect(\"\(id)\".uuid /*\(aspect.role?.name ?? aspect.particle?.name ?? "unknown").\(aspect.name)*/, appearance: \(appearance.sourceCode(tab: 0, inline: true, document: document)))"
+            if let aspect = document[Structure.Aspect.self, id] {
+                return start + ".aspect(\"\(id)\".uuid /*\(aspect.role?.name ?? aspect.particle?.name ?? "unknown").\(aspect.name)*/, appearance: \(appearance.sourceCode(tab: 0, inline: true, document: document)))"
+            } else {
+                return "Error: No Aspect"
+            }
         //            }
         case let .horizontal(presentations, alignment: alignment):
             return start + ".horizontal(["

@@ -38,12 +38,12 @@ struct PresentationEditView: View {
 //    }
 }
 
-#Preview {
-    @Previewable @State var document = HippocampusApp.previewDocument
-    @Previewable @State var presentation = Structure.Role.hierarchical.representations.first!.presentation
-    var item = document(Information.Item.self)
-    VStack {
-        PresentationEditView(presentation: $presentation)
-        PresentationView(presentation: presentation, item: item)
-    }
-}
+//#Preview {
+//    @Previewable @State var document = HippocampusApp.previewDocument
+//    @Previewable @State var presentation = Structure.Role.hierarchical.representations.first!.presentation
+//    let item = document(Information.Item.self)
+//    VStack {
+//        PresentationEditView(presentation: $presentation)
+//        PresentationView(presentation: presentation, item: item)
+//    }
+//}

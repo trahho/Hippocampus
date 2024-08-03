@@ -19,7 +19,8 @@ struct RoleEditView: View {
     // MARK: Computed Properties
 
     var conformation: [Structure.Role] {
-        role.roles.sorted(by: { $0.name.localized($0.isLocked) < $1.name.localized($1.isLocked) })
+        role.roles
+            .sorted(by: { $0.description < $1.description })
     }
 
     // MARK: Content
@@ -32,7 +33,7 @@ struct RoleEditView: View {
                     DisclosureGroup {
                         SelectRolesSheet(role: $role)
                     } label: {
-                        Text(role.roles.map { $0.name.localized($0.isLocked) }.joined(separator: ", "))
+                        Text(role.roles.map { $0.description}.joined(separator: ", "))
                             .frame(maxWidth: .infinity, alignment: .trailing)
                     }
                 } label: {
@@ -42,7 +43,7 @@ struct RoleEditView: View {
                     DisclosureGroup {
                         SelectReferencesSheet(role: $role)
                     } label: {
-                        Text(role.references.map { $0.name.localized($0.isLocked) }.joined(separator: ", "))
+                        Text(role.references.map { $0.description }.joined(separator: ", "))
                             .frame(maxWidth: .infinity, alignment: .trailing)
                     }
                 } label: {
@@ -119,8 +120,8 @@ struct RoleEditView: View {
         }
     }
 }
-
-#Preview {
-    RoleEditView(role: Structure.Role.hierarchical)
-        .environment(HippocampusApp.previewDocument)
-}
+//
+//#Preview {
+//    RoleEditView(role: Structure.Role.hierarchical)
+//        .environment(HippocampusApp.previewDocument)
+//}

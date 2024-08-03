@@ -14,20 +14,23 @@ extension ListView {
 
         @Environment(\.information) var information
         @Environment(\.structure) var structure
-        @State var item: Information.Item
-        @Binding var selectedItem: Information.Item?
-        @State var role: Structure.Role!
-        @State var roles: [Structure.Role]
-        @State var filter: Structure.Filter
+        @State var item: Structure.Filter.Result.Item
 
         // MARK: Content
 
-        var body: some View {
-            FilterResultView.ItemView(item: item, filter: filter, role: $role, roles: roles, layout: .tree)
+        @ViewBuilder var label: some View {
+            FilterResultView.ItemView(item: item,  layout: .list)
+                .padding(2)
                 .contentShape(Rectangle())
                 .onTapGesture {
-                    selectedItem = item
+                    item.isSelected.toggle()
                 }
+                .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.accentColor, lineWidth: 2).hidden(!item.isSelected))
+        }
+
+        
+        var body: some View {
+            label
         }
     }
 }

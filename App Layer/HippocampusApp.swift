@@ -22,25 +22,12 @@ struct HippocampusApp {
 
 //    static let locationService = LocationService()
 
-    // MARK: Static Computed Properties
-
-    static var iCloudContainerUrl: URL { URL.iCloudDirectory.appendingPathComponent("Documents") }
-
-    static var localContainerUrl: URL { URL.localDirectory.appendingPathComponent("Hippocampus") }
-
-    static var emptyDocument: Document {
-        let containerURL = URL.virtual
-        let url = containerURL.appendingPathComponent("Empty\(HippocampusApp.memoryExtension)")
-        return Document(url: url)
-    }
-
-    static var previewDocument: Document {
+    static var previewDocument: Document = {
         let containerURL = URL.virtual
         let url = containerURL.appendingPathComponent("Preview\(HippocampusApp.memoryExtension)")
         let document = Document(url: url)
-        
-        let aspect: Structure.Aspect = Structure.Role.named[dynamicMember: "name"]
 
+        let aspect: Structure.Aspect = document[Structure.Aspect.self, "6247260E-624C-48A1-985C-CDEDDFA5D3AD".uuid]!
 
         for i in 1 ..< 3 {
             let filter = document(Structure.Filter.self)
@@ -48,7 +35,7 @@ struct HippocampusApp {
             filter.name = "Group \(i)"
             filter.layouts = [.list]
             filter.layout = .list
-            filter.roles = [Structure.Role.note]
+            filter.roles = [Structure.Role.Statics.note]
             for j in 1 ..< 4 {
                 let subFilter = document(Structure.Filter.self)
                 document[] = subFilter
@@ -57,38 +44,38 @@ struct HippocampusApp {
                 subFilter.layouts = [.tree, .list]
                 subFilter.layout = .tree
                 subFilter.name = "Filter \(j)"
-                subFilter.roles = [Structure.Role.topic, Structure.Role.note]
+                subFilter.roles = [Structure.Role.Statics.topic, Structure.Role.Statics.note]
             }
         }
 
         for filter in document.structure.filters.filter({ !$0.isStatic }) {
             filter.orders = [.sorted(aspect.id, ascending: true)]
             filter.order = filter.orders.first!
-            filter.condition = .role(Structure.Role.tracked.id)
+            filter.condition = .role(Structure.Role.Statics.tracked.id)
 //            filter.leafs = .always(true)
         }
 
         for i in 0 ..< 10 {
             let other = document(Information.Item.self)
             aspect[String.self, other] = "Hallo Welt🤩"
-            other.roles.append(.note)
+            other.roles.append(Structure.Role.Statics.note)
 
             let item = document(Information.Item.self)
             aspect[String.self, item] = "\(i + 1). Hallo Welt🤩"
 //            item.roles.append(Structure.Role.named)
-            item.roles.append(Structure.Role.topic)
+            item.roles.append(Structure.Role.Statics.topic)
             for j in 0 ..< 5 {
                 let subItem = document(Information.Item.self)
                 aspect[String.self, subItem] = "\(i + 1).\(j + 1). Hallo Welt🤩"
 //                subItem.roles.append(Structure.Role.named)
-                subItem.roles.append(Structure.Role.topic)
-                subItem.roles.append(Structure.Role.note)
+                subItem.roles.append(Structure.Role.Statics.topic)
+                subItem.roles.append(Structure.Role.Statics.note)
 
                 subItem.from.append(item)
                 for k in 0 ..< 5 {
                     let subsubItem = document(Information.Item.self)
                     aspect[String.self, subsubItem] = "\(i + 1).\(j + 1).\(k + 1). Hallo Welt🤩"
-                    subsubItem.roles.append(Structure.Role.note)
+                    subsubItem.roles.append(Structure.Role.Statics.note)
 //                    subsubItem.roles.append(Structure.Role.topic)
 
                     subItem.to.append(subsubItem)
@@ -100,14 +87,28 @@ struct HippocampusApp {
         }
 
         return document
-    }
+    }()
+
+    // MARK: Static Computed Properties
+
+    static var iCloudContainerUrl: URL { URL.iCloudDirectory.appendingPathComponent("Documents") }
+
+    static var localContainerUrl: URL { URL.localDirectory.appendingPathComponent("Hippocampus") }
+
+    static var emptyDocument: Document = {
+        let containerURL = URL.virtual
+        let url = containerURL.appendingPathComponent("Empty\(HippocampusApp.memoryExtension)")
+        let result =  Document(url: url)
+        return result
+    }()
 
     // MARK: Properties
 
     @Environment(\.openWindow) var openWindow
 
 //    var document: Document = previewDocument
-    var document: Document = Document(name: "Test", local: false)
+    var document: Document = .init(name: "Test", local: false)
+//    var document: Document = emptyDocument
 
     // MARK: Static Functions
 
@@ -141,19 +142,21 @@ struct HippocampusApp {
     }
 }
 
-//extension View {
+// extension View {
 //    func setDocument(_ document: Document) -> some View {
 //        environment(document)
 //            .environment(document.structure)
 //            .environment(document.information)
 //    }
-//}
+// }
 
 extension EnvironmentValues {
     @Entry var navigation: Navigation = .init()
-    @Entry var doc: Document?
+    @Entry var _document: Document?
 
-    var document: Document { doc! }
+    var document: Document {
+        _document!
+    }
     var information: Information { document.information }
     var structure: Structure { document.structure }
 }

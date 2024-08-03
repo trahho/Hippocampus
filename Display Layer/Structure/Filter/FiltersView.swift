@@ -6,8 +6,8 @@
 //
 
 import Foundation
-import SwiftUI
 import Grisu
+import SwiftUI
 
 // extension Structure.Filter {
 //    var children: [Structure.Filter]? {
@@ -16,25 +16,50 @@ import Grisu
 // }
 
 struct FiltersView: View {
-    @Environment(\.structure) var structure
+    // MARK: Properties
+
+//    @Environment(\.structure) var structure
+    @State var structure: Structure
+    @Environment(\.openWindow) var openWindow
     @Binding var expansions: Expansions
-    @Binding var selection: Structure.Filter.ID?
+
+    // MARK: Computed Properties
 
     var filters: [Structure.Filter] {
-        structure.filters.filter { $0.superFilters.isEmpty }
-            .sorted { $0.name < $1.name }
+        let structure = self.structure
+        let filters = structure.filters
+        let result = filters.filter { $0.superFilters.isEmpty }
+            .sorted { $0.description < $1.description }
+        return result
     }
 
+    // MARK: Content
+
     var body: some View {
-        List(filters, selection: $selection) { filter in
-            FilterView(filter: filter, selected: .constant(Structure.Filter.empty), expansions: $expansions)
-                .listRowSeparator(.hidden)
+        @Bindable var structure = structure
+        NestedList(data: filters, selection: $structure.selectedFilterId) { filter in
+            HStack {
+//                Image(systemName: filter.subFilters.isEmpty ? "light.recessed.fill" : "light.recessed.3.fill")
+                Text("\(filter.description)")
+            }
+        } children: { filter in
+            guard !filter.subFilters.isEmpty else { return nil }
+            return filter.subFilters.sorted { $0.description < $1.description }
         }
         .listStyle(.sidebar)
+        .contextMenu(forSelectionType: Structure.Filter.ID.self) { items in
+            if items.isEmpty {
+                EmptyView()
+            } else {
+                Button("Edit") {
+                    openWindow(value: items.first!)
+                }
+            }
+        }
     }
 }
 
-//struct FilterDetailView: View {
+// struct FilterDetailView: View {
 //    @Environment(Structure.self) var structure
 //    @Binding var expansions: [Structure.Filter.ID: Bool]
 //
@@ -49,7 +74,7 @@ struct FiltersView: View {
 //        }
 //        .listRowSeparator(.hidden)
 //    }
-//}
+// }
 
 // #Preview {
 //    let document = HippocampusApp.previewDocument()

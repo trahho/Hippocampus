@@ -44,8 +44,12 @@ struct AspectView: View {
                 Text(textBinding.wrappedValue)
                     .lineLimit(1)
             case .edit:
+                TextEditor(text: textBinding)
+            case .inspector:
                 LabeledContent {
-                    TextField(aspect.name, text: textBinding)
+//                    TextField("", text: textBinding)
+//                        .frame(maxHeight: .infinity)
+                    TextEditor(text: textBinding)
                 } label: {
                     Text(aspect.name)
                 }

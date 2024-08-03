@@ -9,16 +9,24 @@ import Foundation
 import Smaug
 
 class Structure: ObjectStore {
+    // MARK: Properties
+
     @Objects var roles: Set<Role>
     @Objects var particles: Set<Particle>
     @Objects var aspects: Set<Aspect>
     @Objects var filters: Set<Filter>
-    @Property var migration: Int = 0
+    @Transient var selectedFilter: Filter?
 
-    //    override func setup() {
-//        let roles: [Role] = [.global, .drawing, .text, .topic, .note]
-//        roles.forEach {
-//            self.add($0)
-//        }
-//    }
+    // MARK: Computed Properties
+
+    var selectedFilterId: Structure.Filter.ID? {
+        get { selectedFilter?.id }
+        set {
+            if let newValue {
+                selectedFilter = self[Filter.self, newValue]
+            } else {
+                selectedFilter = nil
+            }
+        }
+    }
 }

@@ -19,23 +19,23 @@ import Foundation
 
 extension Structure.Role: SourceCodeGenerator {
     func sourceCode(tab i: Int, inline _: Bool, document: Document) -> String {
-        tab(i + 1) + "static let \(name.sourceCode): Role = {"
-        + tab(i + 2) + "var role = Role(id: \"\(id)\".uuid)"
-            + tab(i + 2) + "role.name = \"\(name)\""
-            + rolesSourceCode(tab: i + 2)
-            + referencesSourceCode(tab: i + 2)
-            + aspectsSourceCode(tab: i + 2)
-            + particlesSourceCode
-            + representationsSourceCode(tab: i + 2, document: document)
-            + tab(2) + "return role"
-            + tab(1) + "}()" + cr
+        tab(i) + "static var \(name.sourceCode): Role {"
+            + tab(i + 1) + "let role = Role(id: \"\(id)\".uuid)"
+            + tab(i + 1) + "role.name = \"\(name)\""
+            + rolesSourceCode(tab: i + 1)
+            + referencesSourceCode(tab: i + 1)
+            + aspectsSourceCode(tab: i + 1)
+            + particlesSourceCode(tab: i + 1, document: document)
+            + representationsSourceCode(tab: i + 1, document: document)
+            + tab(i + 1) + "return role"
+            + tab(i) + "}"
     }
 
     fileprivate func rolesSourceCode(tab i: Int) -> String {
         if roles.isEmpty { "" } else {
             tab(i) + "role.roles = ["
                 + roles
-                .map { ".\($0.name.sourceCode)" }
+                .map { "\($0.name.sourceCode)" }
                 .joined(separator: ", ")
                 + "]"
         }
@@ -45,7 +45,7 @@ extension Structure.Role: SourceCodeGenerator {
         if references.isEmpty { "" } else {
             tab(i) + "role.references = ["
                 + references
-                .map { ".\($0.name.sourceCode)" }
+                .map { "\($0.name.sourceCode)" }
                 .joined(separator: ", ")
                 + "]"
         }
@@ -57,7 +57,7 @@ extension Structure.Role: SourceCodeGenerator {
                 + aspects.map { aspect in
                     tab(i + 1) + "{"
                         + tab(i + 2) + "let aspect = Aspect(id: \"\(aspect.id)\".uuid)"
-                    + tab(i + 2) + "aspect.name = \"\(aspect.name)\""
+                        + tab(i + 2) + "aspect.name = \"\(aspect.name)\""
                         + tab(i + 2) + "aspect.kind = .\(aspect.kind)"
                         + (aspect.exportCodedComputed ? (
                             tab(i + 2) + "aspect.codedComputation = Aspect.Code." + "\(aspect.role!.name) \(aspect.name)".sourceCode
@@ -77,7 +77,7 @@ extension Structure.Role: SourceCodeGenerator {
                 + particle.aspects.map { aspect in
                     tab(5) + "{"
                         + tab(6) + "let aspect = Aspect(id: \"\(aspect.id)\".uuid)"
-                    + tab(6) + "aspect.name = \"\(aspect.name)\""
+                        + tab(6) + "aspect.name = \"\(aspect.name)\""
                         + tab(6) + "aspect.kind = .\(aspect.kind)"
                         + (aspect.exportCodedComputed ? (
                             tab(6) + "aspect.codedComputation = Aspect.Code." + "\(aspect.role!.name) \(aspect.name)".sourceCode
@@ -91,19 +91,19 @@ extension Structure.Role: SourceCodeGenerator {
         }
     }
 
-    fileprivate var particlesSourceCode: String {
+    fileprivate func particlesSourceCode(tab i: Int, document _: Document) -> String {
         if particles.isEmpty { "" } else {
-            tab(2) + "role.particles = ["
+            tab(i) + "role.particles = ["
                 + particles.map { particle in
-                    tab(3) + "{"
-                        + tab(4) + "let particle = Particle(id: \"\(particle.id)\".uuid)"
-                        + tab(4) + "particle.name = \"\(particle.name)\""
+                    tab(i + 1) + "{"
+                        + tab(i + 2) + "let particle = Particle(id: \"\(particle.id)\".uuid)"
+                        + tab(i + 2) + "particle.name = \"\(particle.name)\""
                         + particleAspectsSourceCode(particle: particle)
-                        + tab(4) + "return particle"
-                        + tab(3) + "}()"
+                        + tab(i + 2) + "return particle"
+                        + tab(i + 1) + "}()"
                 }
                 .joined(separator: ",")
-                + tab(2) + "]"
+                + tab(i) + "]"
         }
     }
 

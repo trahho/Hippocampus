@@ -23,12 +23,12 @@ extension RoleEditView {
             // MARK: Computed Properties
 
             var id: Structure.Role.ID { role.id }
-            var text: String { role.name.localized(role.isLocked) }
+            var text: String { role.description }
 
             var children: [Entry]? {
                 let result = role.subRoles
                     .filter { !$0.conforms(to: item) }
-                    .sorted(by: { $0.name.localized($0.isLocked) < $1.name.localized($1.isLocked) })
+                    .sorted(by: { $0.description < $1.description })
                     .map { Entry(item: item, role: $0) }
                 return result.isEmpty ? nil : result
             }
@@ -43,8 +43,8 @@ extension RoleEditView {
 
         var roots: [Entry] {
             document.structure.roles
-                .filter { $0.roles.isEmpty && $0 != Structure.Role.same && $0 != role }
-                .sorted(by: { $0.name.localized($0.isLocked) < $1.name.localized($1.isLocked) })
+                .filter { $0.roles.isEmpty && $0 != Structure.Role.Statics.same && $0 != role }
+                .sorted(by: { $0.description < $1.description })
                 .map { Entry(item: role, role: $0) }
         }
 

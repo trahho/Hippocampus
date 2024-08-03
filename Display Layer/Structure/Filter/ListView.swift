@@ -10,41 +10,42 @@ import Grisu
 import SwiftUI
 
 struct ListView: View {
-    typealias Result = (item: Information.Item, role: Structure.Role, roles: [Structure.Role])
+    // MARK: Properties
 
     @Environment(\.information) var information
     @Environment(\.structure) var structure
-    @State var filter: Structure.Filter
-    @Binding var selectedItem: Information.Item?
+    @Bindable var result: Structure.Filter.Result
     @State var expansions = Expansions(defaultExpansion: false)
 
-    var rootItems: [Result] {
-        guard !filter.roles.isEmpty else { return [] }
-        let allRoles: Information.Condition = filter.roles.reduce(.nil) { partialResult, role in
-            partialResult || .role(role.id)
-        }
-        let rootCondition = allRoles && filter.condition
-        let items = information.items.compactMap {
-            var roles: [Structure.Role] = []
-            return rootCondition.matches($0, structure: structure, roles: &roles) ? Result(item: $0, roles.finalsFirst.first!, roles: roles) : nil
-        }
-        if let order = filter.order {
-            return items.sorted(by: { order.compare(lhs: $0.item, rhs: $1.item, structure: structure) })
+    // MARK: Computed Properties
+
+    var rootItems: [Structure.Filter.Result.Item] {
+//        guard !filter.roles.isEmpty else { return [] }
+//        let allRoles: Information.Condition = filter.roles.reduce(.nil) { partialResult, role in
+//            partialResult || .role(role.id)
+//        }
+//        let rootCondition = allRoles
+//        let items = filter.filter(items: information.items.asArray, additionalCondition: rootCondition)
+        if let order = result.filter.order {
+            return result.items.sorted(by: { order.compare(lhs: $0.item, rhs: $1.item, structure: structure) })
         } else {
-            return items
+            return result.items
         }
     }
-    
 
-    
+    // MARK: Content
 
     var body: some View {
-        List {
-            ForEach(rootItems, id: \.item) { item in
-                RowView(item: item.item, selectedItem: $selectedItem, role: item.role, roles: item.roles, filter: filter)
-            }
-            .listRowBackground(Color.clear)
-            .listRowSeparator(.hidden)
+        List(result.items) { item in
+            FilterResultView.ItemView(item: item, layout: .list)
+                .padding(2)
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    item.isSelected = true
+                }
+                .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.accentColor, lineWidth: 2).hidden(!item.isSelected))
+                .listRowBackground(Color.clear)
+                .listRowSeparator(.hidden)
         }
     }
 }

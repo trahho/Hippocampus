@@ -64,9 +64,6 @@
 		C53162492C3C894000A6E35E /* Presentation.Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53162462C3C894000A6E35E /* Presentation.Properties.swift */; };
 		C531AE8629ECA61C00585073 /* Design.NestedListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C531AE8529ECA61C00585073 /* Design.NestedListView.swift */; };
 		C531AE8729ECA61C00585073 /* Design.NestedListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C531AE8529ECA61C00585073 /* Design.NestedListView.swift */; };
-		C53755622C08D9AA0004064B /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53755612C08D9AA0004064B /* FilterView.swift */; };
-		C53755632C08D9AA0004064B /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53755612C08D9AA0004064B /* FilterView.swift */; };
-		C53755642C08D9AA0004064B /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53755612C08D9AA0004064B /* FilterView.swift */; };
 		C53755662C08DA2C0004064B /* FilterResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53755652C08DA2C0004064B /* FilterResultView.swift */; };
 		C53755672C08DA2C0004064B /* FilterResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53755652C08DA2C0004064B /* FilterResultView.swift */; };
 		C53755682C08DA2C0004064B /* FilterResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53755652C08DA2C0004064B /* FilterResultView.swift */; };
@@ -194,9 +191,32 @@
 		C564EB9429B5442200F3E0AC /* PencilCanvasView.Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C564EB9329B5442200F3E0AC /* PencilCanvasView.Coordinator.swift */; };
 		C564EB9829B5446600F3E0AC /* PencilCanvasView.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C564EB9729B5446600F3E0AC /* PencilCanvasView.View.swift */; };
 		C564EB9C29B544CA00F3E0AC /* PencilCanvasView.Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = C564EB9B29B544CA00F3E0AC /* PencilCanvasView.Controller.swift */; };
-		C56595762C56FB9500047A26 /* FilterResultViewItemPresentationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56595752C56FB9500047A26 /* FilterResultViewItemPresentationView.swift */; };
-		C56595772C56FB9500047A26 /* FilterResultViewItemPresentationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56595752C56FB9500047A26 /* FilterResultViewItemPresentationView.swift */; };
-		C56595782C56FB9500047A26 /* FilterResultViewItemPresentationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56595752C56FB9500047A26 /* FilterResultViewItemPresentationView.swift */; };
+		C56595762C56FB9500047A26 /* FilterResultView.ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56595752C56FB9500047A26 /* FilterResultView.ItemView.swift */; };
+		C56595772C56FB9500047A26 /* FilterResultView.ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56595752C56FB9500047A26 /* FilterResultView.ItemView.swift */; };
+		C56595782C56FB9500047A26 /* FilterResultView.ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56595752C56FB9500047A26 /* FilterResultView.ItemView.swift */; };
+		C565957A2C5957BA00047A26 /* Design.Aqua.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56595792C5957B200047A26 /* Design.Aqua.swift */; };
+		C565957B2C5957BA00047A26 /* Design.Aqua.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56595792C5957B200047A26 /* Design.Aqua.swift */; };
+		C565957C2C5957BA00047A26 /* Design.Aqua.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56595792C5957B200047A26 /* Design.Aqua.swift */; };
+		C565957E2C598DFF00047A26 /* NestedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C565957D2C598DEA00047A26 /* NestedList.swift */; };
+		C565957F2C598DFF00047A26 /* NestedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C565957D2C598DEA00047A26 /* NestedList.swift */; };
+		C56595802C598DFF00047A26 /* NestedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C565957D2C598DEA00047A26 /* NestedList.swift */; };
+		C56595822C5A717E00047A26 /* Design.ToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56595812C5A716500047A26 /* Design.ToolbarItem.swift */; };
+		C56595832C5A717E00047A26 /* Design.ToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56595812C5A716500047A26 /* Design.ToolbarItem.swift */; };
+		C56595842C5A717E00047A26 /* Design.ToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56595812C5A716500047A26 /* Design.ToolbarItem.swift */; };
+		C56595882C5A94A200047A26 /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56595852C5A94A200047A26 /* NavigationView.swift */; };
+		C56595892C5A9CEA00047A26 /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56595852C5A94A200047A26 /* NavigationView.swift */; };
+		C565958A2C5A9CEA00047A26 /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56595852C5A94A200047A26 /* NavigationView.swift */; };
+		C565958C2C5BCA4400047A26 /* Structure.Filter.Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = C565958B2C5BCA4400047A26 /* Structure.Filter.Result.swift */; };
+		C565958D2C5BCA4400047A26 /* Structure.Filter.Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = C565958B2C5BCA4400047A26 /* Structure.Filter.Result.swift */; };
+		C565958E2C5BCA4400047A26 /* Structure.Filter.Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = C565958B2C5BCA4400047A26 /* Structure.Filter.Result.swift */; };
+		C56595902C5C36D800047A26 /* Structure.Filter.Result.Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = C565958F2C5C36D800047A26 /* Structure.Filter.Result.Item.swift */; };
+		C56595912C5C36D800047A26 /* Structure.Filter.Result.Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = C565958F2C5C36D800047A26 /* Structure.Filter.Result.Item.swift */; };
+		C56595922C5C36D800047A26 /* Structure.Filter.Result.Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = C565958F2C5C36D800047A26 /* Structure.Filter.Result.Item.swift */; };
+		C56595982C5C45DA00047A26 /* Design.Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56595972C5C45DA00047A26 /* Design.Environment.swift */; };
+		C56595992C5C45DA00047A26 /* Design.Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56595972C5C45DA00047A26 /* Design.Environment.swift */; };
+		C565959A2C5C45DA00047A26 /* Design.Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56595972C5C45DA00047A26 /* Design.Environment.swift */; };
+		C565959F2C5DC07D00047A26 /* Structure.Role+static.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57B70AA2C235395007A5105 /* Structure.Role+static.swift */; };
+		C56595A02C5DC0F100047A26 /* Structure.Filter+static.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F85422C31A022007DC75D /* Structure.Filter+static.swift */; };
 		C565AACC2C23212D00BC54AB /* RoleEditView.SelectRolesSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C565AACB2C23212D00BC54AB /* RoleEditView.SelectRolesSheet.swift */; };
 		C565AACD2C23212D00BC54AB /* RoleEditView.SelectRolesSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C565AACB2C23212D00BC54AB /* RoleEditView.SelectRolesSheet.swift */; };
 		C565AACE2C23212D00BC54AB /* RoleEditView.SelectRolesSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C565AACB2C23212D00BC54AB /* RoleEditView.SelectRolesSheet.swift */; };
@@ -229,7 +249,6 @@
 		C56F853C2C30E98F007DC75D /* Presentation.Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F85392C30E98F007DC75D /* Presentation.Appearance.swift */; };
 		C56F853E2C31716C007DC75D /* SwitchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F853D2C31716C007DC75D /* SwitchTests.swift */; };
 		C56F85432C31A022007DC75D /* Structure.Filter+static.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F85422C31A022007DC75D /* Structure.Filter+static.swift */; };
-		C56F85442C31A022007DC75D /* Structure.Filter+static.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F85422C31A022007DC75D /* Structure.Filter+static.swift */; };
 		C56F85452C31A022007DC75D /* Structure.Filter+static.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F85422C31A022007DC75D /* Structure.Filter+static.swift */; };
 		C56F85472C31A111007DC75D /* Information.TimedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F85462C31A111007DC75D /* Information.TimedValue.swift */; };
 		C56F85482C31A111007DC75D /* Information.TimedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F85462C31A111007DC75D /* Information.TimedValue.swift */; };
@@ -250,7 +269,6 @@
 		C57801272C3768AC00B1B1AD /* Information.Modification.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57801252C3768AC00B1B1AD /* Information.Modification.swift */; };
 		C57801282C3768AC00B1B1AD /* Information.Modification.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57801252C3768AC00B1B1AD /* Information.Modification.swift */; };
 		C57B70B72C235672007A5105 /* Structure.Role+static.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57B70AA2C235395007A5105 /* Structure.Role+static.swift */; };
-		C57B70B82C235673007A5105 /* Structure.Role+static.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57B70AA2C235395007A5105 /* Structure.Role+static.swift */; };
 		C57B70B92C235674007A5105 /* Structure.Role+static.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57B70AA2C235395007A5105 /* Structure.Role+static.swift */; };
 		C57B70BB2C243139007A5105 /* Design.ViewEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57B70BA2C243138007A5105 /* Design.ViewEditView.swift */; };
 		C57B70BC2C243139007A5105 /* Design.ViewEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57B70BA2C243138007A5105 /* Design.ViewEditView.swift */; };
@@ -294,7 +312,6 @@
 		C59B3CEE295CCE9A0053DE7D /* View+offset.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4F7289591440060A066 /* View+offset.swift */; };
 		C59B3CEF295CCE9A0053DE7D /* CGPoint+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4F8289591440060A066 /* CGPoint+Operators.swift */; };
 		C59B3CF2295CCEC80053DE7D /* Presentation.Predicate.Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E86A295B041E002C7746 /* Presentation.Predicate.Builder.swift */; };
-		C59B3CF8295CCEFF0053DE7D /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E856295A652B002C7746 /* NavigationView.swift */; };
 		C59E2882297B2434007375D5 /* Structure.Aspect.Kind.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59E2881297B2434007375D5 /* Structure.Aspect.Kind.swift */; };
 		C59E2883297B2434007375D5 /* Structure.Aspect.Kind.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59E2881297B2434007375D5 /* Structure.Aspect.Kind.swift */; };
 		C59E2884297B2434007375D5 /* Structure.Aspect.Kind.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59E2881297B2434007375D5 /* Structure.Aspect.Kind.swift */; };
@@ -370,7 +387,6 @@
 		C5C6C71A2C49CCC700EDC15A /* FilterEditView.EditRepresentationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C6C7192C49CCBD00EDC15A /* FilterEditView.EditRepresentationSheet.swift */; };
 		C5C6C71B2C49CCC700EDC15A /* FilterEditView.EditRepresentationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C6C7192C49CCBD00EDC15A /* FilterEditView.EditRepresentationSheet.swift */; };
 		C5C6C71C2C49CCC700EDC15A /* FilterEditView.EditRepresentationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C6C7192C49CCBD00EDC15A /* FilterEditView.EditRepresentationSheet.swift */; };
-		C5C8E857295A652B002C7746 /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E856295A652B002C7746 /* NavigationView.swift */; };
 		C5C8E85E295AFD4E002C7746 /* Structure.Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E85D295AFD4E002C7746 /* Structure.Role.swift */; };
 		C5C8E85F295AFD4E002C7746 /* Structure.Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E85D295AFD4E002C7746 /* Structure.Role.swift */; };
 		C5C8E861295AFD8E002C7746 /* Structure.Aspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E860295AFD8E002C7746 /* Structure.Aspect.swift */; };
@@ -401,7 +417,6 @@
 		C5D2735C2975E08400F32EB6 /* DocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D2735B2975E08400F32EB6 /* DocumentView.swift */; };
 		C5D2735D2975E08400F32EB6 /* DocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D2735B2975E08400F32EB6 /* DocumentView.swift */; };
 		C5D2735E2975E08400F32EB6 /* DocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D2735B2975E08400F32EB6 /* DocumentView.swift */; };
-		C5D273602975E5C100F32EB6 /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C8E856295A652B002C7746 /* NavigationView.swift */; };
 		C5E350E72C1CECF900FD153D /* RolesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E350E62C1CECF900FD153D /* RolesView.swift */; };
 		C5E350E82C1CECF900FD153D /* RolesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E350E62C1CECF900FD153D /* RolesView.swift */; };
 		C5E350EC2C1DACCD00FD153D /* Grisu in Frameworks */ = {isa = PBXBuildFile; productRef = C5E350EB2C1DACCD00FD153D /* Grisu */; };
@@ -488,7 +503,6 @@
 		C53162412C39D65D00A6E35E /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		C53162462C3C894000A6E35E /* Presentation.Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presentation.Properties.swift; sourceTree = "<group>"; };
 		C531AE8529ECA61C00585073 /* Design.NestedListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Design.NestedListView.swift; sourceTree = "<group>"; };
-		C53755612C08D9AA0004064B /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		C53755652C08DA2C0004064B /* FilterResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterResultView.swift; sourceTree = "<group>"; };
 		C537556A2C0A76F40004064B /* Presentation.Alignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presentation.Alignment.swift; sourceTree = "<group>"; };
 		C537556E2C0B35360004064B /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
@@ -553,7 +567,14 @@
 		C564EB9329B5442200F3E0AC /* PencilCanvasView.Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilCanvasView.Coordinator.swift; sourceTree = "<group>"; };
 		C564EB9729B5446600F3E0AC /* PencilCanvasView.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilCanvasView.View.swift; sourceTree = "<group>"; };
 		C564EB9B29B544CA00F3E0AC /* PencilCanvasView.Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilCanvasView.Controller.swift; sourceTree = "<group>"; };
-		C56595752C56FB9500047A26 /* FilterResultViewItemPresentationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterResultViewItemPresentationView.swift; sourceTree = "<group>"; };
+		C56595752C56FB9500047A26 /* FilterResultView.ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterResultView.ItemView.swift; sourceTree = "<group>"; };
+		C56595792C5957B200047A26 /* Design.Aqua.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Design.Aqua.swift; sourceTree = "<group>"; };
+		C565957D2C598DEA00047A26 /* NestedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedList.swift; sourceTree = "<group>"; };
+		C56595812C5A716500047A26 /* Design.ToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Design.ToolbarItem.swift; sourceTree = "<group>"; };
+		C56595852C5A94A200047A26 /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
+		C565958B2C5BCA4400047A26 /* Structure.Filter.Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structure.Filter.Result.swift; sourceTree = "<group>"; };
+		C565958F2C5C36D800047A26 /* Structure.Filter.Result.Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structure.Filter.Result.Item.swift; sourceTree = "<group>"; };
+		C56595972C5C45DA00047A26 /* Design.Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Design.Environment.swift; sourceTree = "<group>"; };
 		C565AACB2C23212D00BC54AB /* RoleEditView.SelectRolesSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleEditView.SelectRolesSheet.swift; sourceTree = "<group>"; };
 		C565AACF2C2321B200BC54AB /* RoleEditView.SelectReferencesSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleEditView.SelectReferencesSheet.swift; sourceTree = "<group>"; };
 		C56965AA2BFFEE4E00AA46B3 /* Information.Computation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Information.Computation.swift; sourceTree = "<group>"; };
@@ -632,7 +653,7 @@
 		C5C4A12A2942701100FF9AB8 /* SerialisationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialisationTests.swift; sourceTree = "<group>"; };
 		C5C6C7152C49CBD100EDC15A /* FilterEditView.SelectFiltersSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterEditView.SelectFiltersSheet.swift; sourceTree = "<group>"; };
 		C5C6C7192C49CCBD00EDC15A /* FilterEditView.EditRepresentationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterEditView.EditRepresentationSheet.swift; sourceTree = "<group>"; };
-		C5C8E856295A652B002C7746 /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
+		C5C8E856295A652B002C7746 /* NavigationView_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView_macOS.swift; sourceTree = "<group>"; };
 		C5C8E85D295AFD4E002C7746 /* Structure.Role.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structure.Role.swift; sourceTree = "<group>"; };
 		C5C8E860295AFD8E002C7746 /* Structure.Aspect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structure.Aspect.swift; sourceTree = "<group>"; };
 		C5C8E86A295B041E002C7746 /* Presentation.Predicate.Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presentation.Predicate.Builder.swift; sourceTree = "<group>"; };
@@ -677,7 +698,6 @@
 		C5E966CE29AAD47D009D81FF /* Font+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Font+Extension.swift"; sourceTree = "<group>"; };
 		C5E966CF29AAD47D009D81FF /* Raleway-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Italic.ttf"; sourceTree = "<group>"; };
 		C5E966E029AD41AF009D81FF /* DataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTests.swift; sourceTree = "<group>"; };
-		C5EECF6A29E0A9B1008608E4 /* Structure.Role+statics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Structure.Role+statics.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -722,8 +742,7 @@
 			children = (
 				C56F85522C334E85007DC75D /* Obsolete */,
 				C5D2735B2975E08400F32EB6 /* DocumentView.swift */,
-				C5C8E856295A652B002C7746 /* NavigationView.swift */,
-				C5BE4EFD29F5AF0900B27B48 /* SideBar */,
+				C56595852C5A94A200047A26 /* NavigationView.swift */,
 				C55215AA2C4AE21500A47323 /* ExportSourceCodeView.swift */,
 				C50B2D312C4B1CD200CDDCD5 /* ExportSourceCodeView.ExportRolesView.swift */,
 				C50B2D352C4B1D3500CDDCD5 /* ExportSourceCodeView.ExportFiltersView.swift */,
@@ -780,6 +799,8 @@
 		C531AE8429ECA5F700585073 /* Design */ = {
 			isa = PBXGroup;
 			children = (
+				C56595812C5A716500047A26 /* Design.ToolbarItem.swift */,
+				C56595792C5957B200047A26 /* Design.Aqua.swift */,
 				C537930A2A1ECAAC0085D24B /* Design.MathView.swift */,
 				C5E4FA092A2B4DDF00CE37C3 /* Design.TrigonometryView.swift */,
 				C531AE8529ECA61C00585073 /* Design.NestedListView.swift */,
@@ -793,6 +814,7 @@
 				C57B70BA2C243138007A5105 /* Design.ViewEditView.swift */,
 				C555381A2C277B6E00EC0911 /* Design.PickerKatastropheView.swift */,
 				C56F85342C2E1C40007DC75D /* Design.DragDropView.swift */,
+				C56595972C5C45DA00047A26 /* Design.Environment.swift */,
 			);
 			path = Design;
 			sourceTree = "<group>";
@@ -809,8 +831,8 @@
 				C5E966CB29AAD47D009D81FF /* Fonts */,
 				C5E8B4602C20A3B800304347 /* Localizable.xcstrings */,
 				C54BE4BF28958F470060A066 /* Framework */,
-				C54BE5482895DCD50060A066 /* App Layer */,
 				C55AC5D1295A4A0000F09326 /* Model Layer */,
+				C54BE5482895DCD50060A066 /* App Layer */,
 				C5AAA0D029BBC261000DA6C3 /* Display Layer */,
 				C54BE4AF2894866C0060A066 /* macOS */,
 				C58FB450291EF2AB00D0B713 /* iOS */,
@@ -1001,6 +1023,8 @@
 		C56F85522C334E85007DC75D /* Obsolete */ = {
 			isa = PBXGroup;
 			children = (
+				C5BE4EFD29F5AF0900B27B48 /* SideBar */,
+				C5C8E856295A652B002C7746 /* NavigationView_macOS.swift */,
 				C537556E2C0B35360004064B /* SidebarView.swift */,
 				C56965DB2C052DF300AA46B3 /* DetailView.swift */,
 				C52E724929F54B31001A5821 /* ContentView.swift */,
@@ -1021,10 +1045,11 @@
 		C57801292C376A7800B1B1AD /* Filter */ = {
 			isa = PBXGroup;
 			children = (
+				C565957D2C598DEA00047A26 /* NestedList.swift */,
 				C5BF40C62C4E900600469EF2 /* Editing */,
 				C5167C4429C62BFB00323F75 /* FiltersView.swift */,
-				C53755612C08D9AA0004064B /* FilterView.swift */,
 				C53755652C08DA2C0004064B /* FilterResultView.swift */,
+				C56595752C56FB9500047A26 /* FilterResultView.ItemView.swift */,
 				C531623D2C39D5E500A6E35E /* TreeView.swift */,
 				C552159E2C4A908600A47323 /* TreeView.RowView.swift */,
 				C53162412C39D65D00A6E35E /* ListView.swift */,
@@ -1296,7 +1321,6 @@
 			children = (
 				C5706A092C55D5F200912337 /* ItemInspectorView.swift */,
 				C55215A22C4A909E00A47323 /* ItemPresentationView.swift */,
-				C56595752C56FB9500047A26 /* FilterResultViewItemPresentationView.swift */,
 				C5A84B6D29CFA4D10026F07E /* ItemView.swift */,
 			);
 			path = Item;
@@ -1319,9 +1343,11 @@
 			children = (
 				C56965D72C05154200AA46B3 /* Structure.Filter.swift */,
 				C59627B42C49BC7C0057ED9B /* Structure.Filter.Representation.swift */,
+				C565958B2C5BCA4400047A26 /* Structure.Filter.Result.swift */,
+				C565958F2C5C36D800047A26 /* Structure.Filter.Result.Item.swift */,
+				C52C0BCD2C3F2B9B00960750 /* Structure.Filter+sourceCode.swift */,
 				C56F85422C31A022007DC75D /* Structure.Filter+static.swift */,
 				C51330752C4B23D200E8BA3C /* Structure.Filter+static+test.swift */,
-				C52C0BCD2C3F2B9B00960750 /* Structure.Filter+sourceCode.swift */,
 			);
 			path = Filter;
 			sourceTree = "<group>";
@@ -1333,7 +1359,6 @@
 				C552159A2C4A78ED00A47323 /* Structure.Role+ArrayExtension.swift */,
 				C55538162C27389900EC0911 /* Structure.Role.Representation.swift */,
 				C555381E2C2850D700EC0911 /* Structure.Role+sourceCode.swift */,
-				C5EECF6A29E0A9B1008608E4 /* Structure.Role+statics.swift */,
 				C57B70AA2C235395007A5105 /* Structure.Role+static.swift */,
 				C5DBE9AB2C4B0C2700BD56CE /* Structure.Role+static+test.swift */,
 			);
@@ -1631,7 +1656,6 @@
 				C56965BE2C028E1600AA46B3 /* AspectView.DrawingAspectView.swift in Sources */,
 				C59B3CEA295CCE950053DE7D /* NSPredicate+operators.swift in Sources */,
 				C58214982C52E06E008A444D /* Structure.Aspect.Value.swift in Sources */,
-				C53755642C08D9AA0004064B /* FilterView.swift in Sources */,
 				C582241A2A080FCF000FB877 /* FiltersView.swift in Sources */,
 				C53162442C39D65D00A6E35E /* ListView.swift in Sources */,
 				C565AAD22C2321B200BC54AB /* RoleEditView.SelectReferencesSheet.swift in Sources */,
@@ -1663,6 +1687,7 @@
 				C5706A0A2C55D5F200912337 /* ItemInspectorView.swift in Sources */,
 				C5E7F9302A0F928E00FE1F0F /* SidebarView.QueriesView.swift in Sources */,
 				C57B70B92C235674007A5105 /* Structure.Role+static.swift in Sources */,
+				C56595922C5C36D800047A26 /* Structure.Filter.Result.Item.swift in Sources */,
 				C55215972C49EB3700A47323 /* FilterEditView.SelectRolesSheet.swift in Sources */,
 				C55AC5D0295A34F900F09326 /* Document.swift in Sources */,
 				C5CB48322C4339E2003B4D85 /* SourceCodeGenerator.swift in Sources */,
@@ -1677,8 +1702,9 @@
 				C5A792A029A4078400637C6C /* DrawingView.swift in Sources */,
 				C52C0BD02C3F2B9B00960750 /* Structure.Filter+sourceCode.swift in Sources */,
 				C5BE4F1B29F6727B00B27B48 /* Document.Drawing+image.swift in Sources */,
-				C56595772C56FB9500047A26 /* FilterResultViewItemPresentationView.swift in Sources */,
+				C56595772C56FB9500047A26 /* FilterResultView.ItemView.swift in Sources */,
 				C55538192C27389900EC0911 /* Structure.Role.Representation.swift in Sources */,
+				C565958E2C5BCA4400047A26 /* Structure.Filter.Result.swift in Sources */,
 				C59B3CDE295CB9710053DE7D /* Observed.swift in Sources */,
 				C5BE4F1E29F672D400B27B48 /* Document.Drawing.PageFormat.swift in Sources */,
 				C59B3CE2295CBA1A0053DE7D /* InjectionKey.swift in Sources */,
@@ -1708,16 +1734,19 @@
 				C55538112C271C3200EC0911 /* PresentationEditView.ContextMenu.swift in Sources */,
 				C59B3CEB295CCE9A0053DE7D /* CGSize+Operators.swift in Sources */,
 				C555381D2C277B6E00EC0911 /* Design.PickerKatastropheView.swift in Sources */,
+				C56595842C5A717E00047A26 /* Design.ToolbarItem.swift in Sources */,
+				C565958A2C5A9CEA00047A26 /* NavigationView.swift in Sources */,
+				C565959A2C5C45DA00047A26 /* Design.Environment.swift in Sources */,
 				C5BE4F6829FDDE9C00B27B48 /* SerialisationTests.swift in Sources */,
 				C5C6C7172C49CBD700EDC15A /* FilterEditView.SelectFiltersSheet.swift in Sources */,
 				C55538152C271E4A00EC0911 /* PresentationView.swift in Sources */,
 				C55AC5DD295A4A8100F09326 /* Presentation.Query.swift in Sources */,
 				C59627B52C49BC7C0057ED9B /* Structure.Filter.Representation.swift in Sources */,
 				C56F85452C31A022007DC75D /* Structure.Filter+static.swift in Sources */,
-				C59B3CF8295CCEFF0053DE7D /* NavigationView.swift in Sources */,
 				C5BE4F1729F670A200B27B48 /* Presentation.Group.swift in Sources */,
 				C5BF40CD2C4EC28100469EF2 /* FilterEditView.SortingAspectView.swift in Sources */,
 				C59B3CE0295CB9E30053DE7D /* Injector.swift in Sources */,
+				C565957E2C598DFF00047A26 /* NestedList.swift in Sources */,
 				C55215A42C4A90A900A47323 /* ItemPresentationView.swift in Sources */,
 				C53755752C0C99380004064B /* Design.NavigationView.swift in Sources */,
 				C59B3CEE295CCE9A0053DE7D /* View+offset.swift in Sources */,
@@ -1735,6 +1764,7 @@
 				C56F854D2C31A186007DC75D /* Information.Particle.swift in Sources */,
 				C5AAA0DC29BD12B1000DA6C3 /* DrawingView.CanvasView.swift in Sources */,
 				C55215AD2C4AE21500A47323 /* ExportSourceCodeView.swift in Sources */,
+				C565957A2C5957BA00047A26 /* Design.Aqua.swift in Sources */,
 				C50B2D332C4B1CD200CDDCD5 /* ExportSourceCodeView.ExportRolesView.swift in Sources */,
 				C582148D2C51C74E008A444D /* Aspectable.swift in Sources */,
 				C59B3CE4295CCE8F0053DE7D /* View+If.swift in Sources */,
@@ -1768,7 +1798,6 @@
 				C5AAA0F029BD2B64000DA6C3 /* UIImage+scale.swift in Sources */,
 				C53755732C0C99380004064B /* Design.NavigationView.swift in Sources */,
 				C531623F2C39D5E500A6E35E /* TreeView.swift in Sources */,
-				C53755622C08D9AA0004064B /* FilterView.swift in Sources */,
 				C5167C3B29C5002900323F75 /* Navigation.swift in Sources */,
 				C51D5D5A29F313F30081669A /* Design.ShellView.swift in Sources */,
 				C56965B82C028D9E00AA46B3 /* AspectView.TextAspectView.swift in Sources */,
@@ -1792,9 +1821,10 @@
 				C54BE50E289591700060A066 /* MeasureSizeModifier.swift in Sources */,
 				C5C8E85E295AFD4E002C7746 /* Structure.Role.swift in Sources */,
 				C504036B290DDE8D0083AC41 /* CaseIterable+StringConversion.swift in Sources */,
+				C565957C2C5957BA00047A26 /* Design.Aqua.swift in Sources */,
 				C54BE4FF289591440060A066 /* CGPoint+Operators.swift in Sources */,
 				C5636AE92C46FFC1006826BF /* Presentation.Layout.swift in Sources */,
-				C56595762C56FB9500047A26 /* FilterResultViewItemPresentationView.swift in Sources */,
+				C56595762C56FB9500047A26 /* FilterResultView.ItemView.swift in Sources */,
 				C53162422C39D65D00A6E35E /* ListView.swift in Sources */,
 				C55864752A058A67005EA6FD /* Information.Condition.Comparison.swift in Sources */,
 				C5706A0C2C55D5F200912337 /* ItemInspectorView.swift in Sources */,
@@ -1804,12 +1834,15 @@
 				C5E966C029AAB6D8009D81FF /* Document.Drawing.Background+draw.swift in Sources */,
 				C564EB7F29B5326A00F3E0AC /* Document.Drawing.swift in Sources */,
 				C5B4DB192A0FFCAA00A80F5A /* SidebarView.RolesView.swift in Sources */,
+				C56595882C5A94A200047A26 /* NavigationView.swift in Sources */,
 				C555381B2C277B6E00EC0911 /* Design.PickerKatastropheView.swift in Sources */,
 				C56965B42C028CE000AA46B3 /* AspectView.swift in Sources */,
 				C50B2D362C4B1D3500CDDCD5 /* ExportSourceCodeView.ExportFiltersView.swift in Sources */,
 				C54BE4FB289591440060A066 /* CGRect+Functions.swift in Sources */,
+				C565958D2C5BCA4400047A26 /* Structure.Filter.Result.swift in Sources */,
 				C5BE4F1229F5E71100B27B48 /* SidebarView.QueryEditView.swift in Sources */,
 				C5167C4529C62BFB00323F75 /* FiltersView.swift in Sources */,
+				C565957F2C598DFF00047A26 /* NestedList.swift in Sources */,
 				C55538172C27389900EC0911 /* Structure.Role.Representation.swift in Sources */,
 				C54BE50A289591530060A066 /* Array+asSet.swift in Sources */,
 				C54BE514289591840060A066 /* InjectedPropertyWrapper.swift in Sources */,
@@ -1817,13 +1850,13 @@
 				C52C0BCB2C3F21F600960750 /* FilterEditView.swift in Sources */,
 				C5E4FA0A2A2B4DDF00CE37C3 /* Design.TrigonometryView.swift in Sources */,
 				C5BE4F0229F5AF7600B27B48 /* SidebarView.QueryView.swift in Sources */,
-				C5C8E857295A652B002C7746 /* NavigationView.swift in Sources */,
 				C50CFA662ACF1912001EE17E /* Design.MiniMindMapView.swift in Sources */,
 				C50B2D322C4B1CD200CDDCD5 /* ExportSourceCodeView.ExportRolesView.swift in Sources */,
 				C54BE508289591530060A066 /* Set+asArray.swift in Sources */,
 				C537556B2C0A76F40004064B /* Presentation.Alignment.swift in Sources */,
 				C55215992C49EB3700A47323 /* FilterEditView.SelectRolesSheet.swift in Sources */,
 				C56D5C2E2C49C9D800E081CD /* RoleEditView.EditRepresentationSheet.swift in Sources */,
+				C56595992C5C45DA00047A26 /* Design.Environment.swift in Sources */,
 				C5B3AD5D2C47001E0024F7B0 /* Presentation.Order.swift in Sources */,
 				C565AACC2C23212D00BC54AB /* RoleEditView.SelectRolesSheet.swift in Sources */,
 				C5C8E86B295B041E002C7746 /* Presentation.Predicate.Builder.swift in Sources */,
@@ -1834,6 +1867,7 @@
 				C5E966BC29AAB465009D81FF /* PencilCanvasView.ScrollIndicatorView.swift in Sources */,
 				C54BE4B12894866C0060A066 /* HippocampusApp.swift in Sources */,
 				C5E966C829AAC23E009D81FF /* PencilCanvasView.BackgroundView.swift in Sources */,
+				C56595822C5A717E00047A26 /* Design.ToolbarItem.swift in Sources */,
 				C564EB8329B5337700F3E0AC /* Document.Drawing.Drawing.swift in Sources */,
 				C5E67E0C2C41D9BF00F55058 /* ConditionEditView.ArrayEditView.swift in Sources */,
 				C55AC5DB295A4A8100F09326 /* Presentation.Query.swift in Sources */,
@@ -1871,6 +1905,7 @@
 				C5E966C429AAB7A0009D81FF /* Document.Drawing.PageFormat+draw.swift in Sources */,
 				C564EB9829B5446600F3E0AC /* PencilCanvasView.View.swift in Sources */,
 				C55AC5CE295A34F900F09326 /* Document.swift in Sources */,
+				C56595902C5C36D800047A26 /* Structure.Filter.Result.Item.swift in Sources */,
 				C58214902C52B9D0008A444D /* Document.Drawing.Content.swift in Sources */,
 				C52E725029F55509001A5821 /* Presentation.Query+statics.swift in Sources */,
 				C54BE4FD289591440060A066 /* View+offset.swift in Sources */,
@@ -1915,18 +1950,17 @@
 				C5D07F552C21DC7D0080559E /* RoleEditView.swift in Sources */,
 				C56965B92C028D9E00AA46B3 /* AspectView.TextAspectView.swift in Sources */,
 				C5E350E82C1CECF900FD153D /* RolesView.swift in Sources */,
-				C56F85442C31A022007DC75D /* Structure.Filter+static.swift in Sources */,
 				C54BE4F2289591320060A066 /* ObservedChangeReceiver.swift in Sources */,
 				C54BE504289591440060A066 /* CGFloat+Operators.swift in Sources */,
 				C55538202C2850D700EC0911 /* Structure.Role+sourceCode.swift in Sources */,
 				C5AAA0DB29BD12B1000DA6C3 /* DrawingView.CanvasView.swift in Sources */,
 				C56965AC2BFFEE4E00AA46B3 /* Information.Computation.swift in Sources */,
+				C56595892C5A9CEA00047A26 /* NavigationView.swift in Sources */,
 				C5C6C71A2C49CCC700EDC15A /* FilterEditView.EditRepresentationSheet.swift in Sources */,
 				C5BE4F0329F5AF7600B27B48 /* SidebarView.QueryView.swift in Sources */,
 				C56965BD2C028E1600AA46B3 /* AspectView.DrawingAspectView.swift in Sources */,
 				C56D5C302C49C9D800E081CD /* RoleEditView.EditRepresentationSheet.swift in Sources */,
 				C54BE53D289591950060A066 /* NSPredicate+operators.swift in Sources */,
-				C53755632C08D9AA0004064B /* FilterView.swift in Sources */,
 				C565AAD12C2321B200BC54AB /* RoleEditView.SelectReferencesSheet.swift in Sources */,
 				C537930C2A1ECAAC0085D24B /* Design.MathView.swift in Sources */,
 				C564EB8029B5326A00F3E0AC /* Document.Drawing.swift in Sources */,
@@ -1937,6 +1971,7 @@
 				C5E67E082C41D97400F55058 /* ConditionEditView.ItemEditView.swift in Sources */,
 				C5636AE82C46FFC0006826BF /* Presentation.Layout.swift in Sources */,
 				C5CB48372C441334003B4D85 /* Presentation.Space.swift in Sources */,
+				C56595A02C5DC0F100047A26 /* Structure.Filter+static.swift in Sources */,
 				C5A7929F29A4078400637C6C /* DrawingView.swift in Sources */,
 				C5B4DB272A1026DA00A80F5A /* inPreview.swift in Sources */,
 				C55538042C2719BC00EC0911 /* PresentationEditView.swift in Sources */,
@@ -1944,6 +1979,7 @@
 				C5B3AD5E2C47001E0024F7B0 /* Presentation.Order.swift in Sources */,
 				C5BF40CB2C4EC28100469EF2 /* FilterEditView.SortingAspectView.swift in Sources */,
 				C531AE8729ECA61C00585073 /* Design.NestedListView.swift in Sources */,
+				C56595832C5A717E00047A26 /* Design.ToolbarItem.swift in Sources */,
 				C5728D372A2935EC004968D3 /* IndexedCallable.swift in Sources */,
 				C54BE50F289591700060A066 /* MeasureSizeModifier.swift in Sources */,
 				C5B4DB2B2A11525900A80F5A /* Design.BorderPointView.swift in Sources */,
@@ -1958,7 +1994,7 @@
 				C582149A2C52E06E008A444D /* Structure.Aspect.Value.swift in Sources */,
 				C56F85362C2E1C40007DC75D /* Design.DragDropView.swift in Sources */,
 				C5AAA0E029BD1355000DA6C3 /* DrawingView.ImageView.swift in Sources */,
-				C57B70B82C235673007A5105 /* Structure.Role+static.swift in Sources */,
+				C56595982C5C45DA00047A26 /* Design.Environment.swift in Sources */,
 				C52C0BD32C3F33E100960750 /* ConditionEditView.swift in Sources */,
 				C5AAA0EB29BD1F57000DA6C3 /* Document.Drawing.Background.swift in Sources */,
 				C5706A0B2C55D5F200912337 /* ItemInspectorView.swift in Sources */,
@@ -1976,7 +2012,7 @@
 				C55538182C27389900EC0911 /* Structure.Role.Representation.swift in Sources */,
 				C5167C3C29C5002900323F75 /* Navigation.swift in Sources */,
 				C5E8B4652C20A87200304347 /* Design.Localization.swift in Sources */,
-				C56595782C56FB9500047A26 /* FilterResultViewItemPresentationView.swift in Sources */,
+				C56595782C56FB9500047A26 /* FilterResultView.ItemView.swift in Sources */,
 				C5AAA10229BE7F69000DA6C3 /* Document.Drawing.Background+draw.swift in Sources */,
 				C552159C2C4A790300A47323 /* Structure.Role+ArrayExtension.swift in Sources */,
 				C55215A12C4A908E00A47323 /* TreeView.RowView.swift in Sources */,
@@ -1995,9 +2031,11 @@
 				C52C0BCF2C3F2B9B00960750 /* Structure.Filter+sourceCode.swift in Sources */,
 				C55215A82C4A91D100A47323 /* ListView.RowView.swift in Sources */,
 				C5A84B6F29CFA4D10026F07E /* ItemView.swift in Sources */,
+				C565958C2C5BCA4400047A26 /* Structure.Filter.Result.swift in Sources */,
 				C54BE4B22894866C0060A066 /* HippocampusApp.swift in Sources */,
 				C56965B52C028CE000AA46B3 /* AspectView.swift in Sources */,
 				C57B70BC2C243139007A5105 /* Design.ViewEditView.swift in Sources */,
+				C565957B2C5957BA00047A26 /* Design.Aqua.swift in Sources */,
 				C55AC5DC295A4A8100F09326 /* Presentation.Query.swift in Sources */,
 				C57801272C3768AC00B1B1AD /* Information.Modification.swift in Sources */,
 				C55215932C49D59500A47323 /* Presentation+sourceCode.swift in Sources */,
@@ -2005,9 +2043,11 @@
 				C537556C2C0A76F40004064B /* Presentation.Alignment.swift in Sources */,
 				C56F85482C31A111007DC75D /* Information.TimedValue.swift in Sources */,
 				C54BE502289591440060A066 /* CGSize+Operators.swift in Sources */,
+				C565959F2C5DC07D00047A26 /* Structure.Role+static.swift in Sources */,
 				C5D2735D2975E08400F32EB6 /* DocumentView.swift in Sources */,
 				C56965D92C05154200AA46B3 /* Structure.Filter.swift in Sources */,
 				C55538102C271C3200EC0911 /* PresentationEditView.ContextMenu.swift in Sources */,
+				C56595912C5C36D800047A26 /* Structure.Filter.Result.Item.swift in Sources */,
 				C5E67E0B2C41D9BF00F55058 /* ConditionEditView.ArrayEditView.swift in Sources */,
 				C52C0BCC2C3F21F600960750 /* FilterEditView.swift in Sources */,
 				C555381C2C277B6E00EC0911 /* Design.PickerKatastropheView.swift in Sources */,
@@ -2016,7 +2056,6 @@
 				C55864762A058A67005EA6FD /* Information.Condition.Comparison.swift in Sources */,
 				C5C8E862295AFD8E002C7746 /* Structure.Aspect.swift in Sources */,
 				C5BE4F1329F5E71100B27B48 /* SidebarView.QueryEditView.swift in Sources */,
-				C5D273602975E5C100F32EB6 /* NavigationView.swift in Sources */,
 				C59627B62C49BC7C0057ED9B /* Structure.Filter.Representation.swift in Sources */,
 				C5BE4F0029F5AF3100B27B48 /* SidebarView.GroupView.swift in Sources */,
 				C5E966D729AAD47D009D81FF /* Font+Extension.swift in Sources */,
@@ -2024,6 +2063,7 @@
 				C55215982C49EB3700A47323 /* FilterEditView.SelectRolesSheet.swift in Sources */,
 				C53755742C0C99380004064B /* Design.NavigationView.swift in Sources */,
 				C55215AC2C4AE21500A47323 /* ExportSourceCodeView.swift in Sources */,
+				C56595802C598DFF00047A26 /* NestedList.swift in Sources */,
 				C55AC5CF295A34F900F09326 /* Document.swift in Sources */,
 				C555380C2C271B3200EC0911 /* PresentationEditView.ItemEditView.swift in Sources */,
 				C53755672C08DA2C0004064B /* FilterResultView.swift in Sources */,

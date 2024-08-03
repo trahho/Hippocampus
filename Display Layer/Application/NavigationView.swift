@@ -1,224 +1,72 @@
 //
-//  NavigationView.swift
-//  Hippocampus
+//  NavigationView_iOS.swift
+//  Hippocampus (iOS)
 //
-//  Created by Guido Kühn on 27.12.22.
+//  Created by Guido Kühn on 31.07.24.
 //
 
 import Grisu
 import SwiftUI
 
 struct NavigationView: View {
-    // MARK: Nested Types
+    @Environment(\.document) private var document
+    @Environment(\.structure) private var structure
 
-    struct RoleSelectionPopoverView: View {
-        // MARK: Properties
-
-        @Environment(\.document) var document
-        @Environment(\.dismiss) var dismiss
-
-        // MARK: Computed Properties
-
-        var roles: [Structure.Role] {
-            document[Structure.Role.self].filter { $0.subRoles.isEmpty && $0 != .same }.sorted { $0.description < $1.description }
-        }
-
-        // MARK: Content
-
-        var body: some View {
-            List(roles) { role in
-                Button(role.description) {
-                    let item = document(Information.Item.self)
-                    item.roles.append(role)
-                    dismiss()
-                }
-                .buttonStyle(.plain)
-            }
-        }
-    }
-
-    // MARK: Properties
-
-//    @State var document: Document
-    @Environment(\.dismiss) var dismiss
-    @Environment(\.document) var document
-    @Environment(\.information) var information
-//    @Bindable var navigation: Navigation
-    @State var cv: NavigationSplitViewVisibility = .automatic
-    @State var expansions = Expansions()
-    @State var inspectorExpansions = Expansions()
-    @State var filterId: Structure.Filter.ID?
-    @State var selectedItem: Information.Item?
-    @State var index: Int = 0
-    @State var path = NavigationPath()
-
-    @State var listWidth: CGFloat = 200
-    @State var listWidthOffset: CGFloat = 0
-
-    @State var listDragging = false
-
-    // MARK: Computed Properties
-
-    var showList: Bool {
-        guard let filter = filter, !filter.roles.isEmpty else { return false }
-        return [.list, .tree].contains(filter.layout)
-    }
-
-    var filter: Structure.Filter? {
-        guard let filterId else { return nil}
-        return document[Structure.Filter.self, filterId]
-    }
-
-    var dragListWidth: some Gesture {
-        DragGesture(coordinateSpace: .named("list"))
-            .onChanged { value in
-                listDragging = true
-                listWidth = min(max(value.location.x, 150), 400)
-            }
-            .onEnded { _ in
-//                listWidth = value.location.x
-                listDragging = false
-            }
-    }
-
-    // MARK: Content
-
-    @ViewBuilder var filtersList: some View {
-        FiltersView(expansions: $expansions, selection: $filterId)
-    }
-
-    @ViewBuilder var filterResultList: some View {
-        if let filter = filter, !filter.roles.isEmpty {
-            FilterResultView(filter: filter, selectedItem: $selectedItem)
-        } else {
-            EmptyView()
-        }
-    }
-
-    @ViewBuilder var inspector: some View {
-        if let selectedItem {
-            ForEach(sections:
-                ItemInspectorView(item: selectedItem)
-                    .sensitive)
-            { item in
-                DisclosureGroup(key: "\(item.id)", isExpanded: $inspectorExpansions) {
-                    item.content
-                } label: {
-                    item.header
-                }
-            }
-        }
-    }
-
-    @ViewBuilder var detailView: some View {
-//        NavigationStack(path: $path) {
-        ZStack(alignment: .topLeading) {
-//                if let filter = filter, let layout = navigation.layout, layout != .list, filter.layouts.contains(layout) {
-            if !showList, let filter {
-                FilterResultView(filter: filter, selectedItem: $selectedItem)
-                // TODO: Hier später den Inspektor rechts ausklappbar zeigen.
-            } else {
-//                List {
-                inspector
-//                }
-            }
-        }
-        .toolbar {
-            ToolbarItemGroup(placement: .primaryAction) {
-                PopoverMenu {
-                    RoleSelectionPopoverView()
-                } label: {
-                    Image(systemName: "plus.circle.fill")
-                }
-            }
-            ToolbarItemGroup(placement: .primaryAction) {
-                Button {
-                    document.structure.migration += 1
-                } label: {
-                    Text("\(document.structure.migration)")
-                }
-            }
-        }
-//        }
-    }
+    @State var showInspector: Bool = false
+    @State var expansions: Expansions = .init()
 
     var body: some View {
-        Group {
-//            if twoColumn {
-//                NavigationSplitView {
-//                    filtersList
-//                } content: {
-//                    filterResultList
-//                } detail: {
-//                    detailView
-//                }
-//                .id(filterId)
-//            } else {
-            NavigationSplitView {
-                filtersList
-            } detail: {
-                if showList {
-                    HStack(alignment: .top, spacing: 0) {
-                        filterResultList
-                            .frame(width: listWidth + listWidthOffset)
-                        Divider()
-                            .overlay(Divider()
-                                .padding(3)
-                                .contentShape(Rectangle())
-                                .cursor(.columnResize)
-                                .gesture(dragListWidth)
-                            )
-                        detailView
+        NavigationSplitView {
+            FiltersView(structure: document.structure, expansions: $expansions)
+        } detail: {
+            if let filter = structure.selectedFilter {
+                FilterResultView(filter: filter)
+                    .id(filter.id)
+//                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationTitle(filter.name)
+                    .toolbar {
+                        ToolbarItem(placement: .primaryAction) {
+                            Button {
+                                showInspector.toggle()
+                            } label: {
+                                Image(systemName: "sidebar.right")
+                            }
+                            .hidden(structure.selectedFilter?.selectedItem == nil)
+                        }
                     }
-                    .frame(maxWidth: .infinity, alignment: .topLeading)
-                    .coordinateSpace(.named("list"))
-                } else {
-                    detailView
-                }
+                    .onChange(of: filter.selectedItem) { oldValue, _ in
+                        if oldValue == nil { showInspector = true }
+                    }
             }
-            .id(filterId)
         }
-//        }
+        .inspector(isPresented: Binding(get: { structure.selectedFilter?.selectedItem != nil && showInspector }, set: { showInspector = $0 }), content: {
+            if let item = structure.selectedFilter?.selectedItem {
+                InspectorView(item: item)
+                    .sensitive
+            }
+        })
     }
 }
 
 #Preview {
-    var document = HippocampusApp.previewDocument
-//    let navigation = Navigation()
-
     NavigationView()
-        .environment(\.doc, document)
+        .environment(\._document, HippocampusApp.previewDocument)
 }
 
-public extension View {
-    func cursor(_ cursor: NSCursor, disabled: Bool = false) -> some View {
-        if #available(macOS 13.0, *) {
-            return self.onContinuousHover { phase in
-                guard !disabled else { return }
-                switch phase {
-                case .active:
-                    guard NSCursor.current != cursor else { return }
-                    cursor.push()
-                case .ended:
-                    NSCursor.pop()
-                }
+extension NavigationView {
+    struct InspectorView: View {
+        // MARK: Properties
+
+        @State var item: Structure.Filter.Result.Item
+
+        // MARK: Content
+
+        var body: some View {
+            Form {
+                ItemInspectorView(item: item.item, role: item.role)
+                    .id(item.id)
             }
-        } else {
-            return onHover { inside in
-                guard !disabled else { return }
-                if inside {
-                    cursor.push()
-                } else {
-                    NSCursor.pop()
-                }
-            }
+            .formStyle(.grouped)
         }
-    }
-}
-
-extension View {
-    func debugPrint(_ text: String) -> some View {
-        print(text)
-        return self
     }
 }

@@ -27,7 +27,9 @@ class Document: DatabaseDocument {
     // MARK: Overridden Functions
 
     override func setup() {
-        self[] = Structure.Role.statics
+//        self[] = Structure.Filter.Statics().statics
+//        Structure.Filter.setup(in: self)
         self[] = Structure.Filter.statics
+        self[] = Structure.Role.statics
     }
 }

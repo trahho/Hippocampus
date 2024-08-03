@@ -27,6 +27,7 @@ struct FilterEditView: View {
                 if filter.isLocked {
                     Toggle("Is locked", isOn: $filter.isLocked)
                 }
+                Text("Is static \(filter.isStatic ? "yes" : "no")")
                 TextField("Name", text: $filter.name)
                 LabeledContent {
                     DisclosureGroup {

@@ -9,17 +9,17 @@ import Foundation
 
 extension Structure.Filter: SourceCodeGenerator {
     func sourceCode(tab i: Int, inline _: Bool, document: Document) -> String {
-        tab(i) + "static let \(name.sourceCode): Filter = {"
-            + tab(i + 1) + "var filter = Filter(id: \"\(id)\".uuid)"
+        tab(i) + "static var \(name.sourceCode): Filter {"
+            + tab(i + 1) + "let filter = Filter(id: \"\(id)\".uuid)"
             + tab(i + 1) + "filter.name = \"\(name)\""
             + superFiltersSourceCode(tab: i + 1)
-            + tab(i + 1) + "filter.roles = [" + roles.map { "." + $0.name.sourceCode }.joined(separator: ", ") + "]"
+            + tab(i + 1) + "filter.roles = [" + roles.map { "Structure.Role.Statics." + $0.name.sourceCode }.joined(separator: ", ") + "]"
             + tab(i + 1) + layoutsSourceCode(tab: i + 1, document: document)
             + tab(i + 1) + "filter.condition = " + condition.sourceCode(tab: i + 2, inline: true, document: document)
             + ordersSourceCode(tab: i + 1, document: document)
             + representationsSourceCode(tab: i + 1, document: document)
             + tab(i + 1) + "return filter"
-            + tab(i) + "}()" + cr
+            + tab(i) + "}"
     }
 
     fileprivate func layoutsSourceCode(tab i: Int, document _: Document) -> String {
@@ -63,7 +63,7 @@ extension Structure.Filter: SourceCodeGenerator {
         if superFilters.isEmpty { "" } else {
             tab(i) + "filter.superFilters = ["
                 + superFilters
-                .map { ".\($0.name.sourceCode)" }
+                .map { "\($0.name.sourceCode)" }
                 .joined(separator: ", ")
                 + "]"
         }

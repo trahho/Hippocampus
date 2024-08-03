@@ -14,7 +14,7 @@ extension Presentation {
             ".\(self.description)"
         }
         
-        case icon, small, normal, firstParagraph, full, edit
+        case icon, small, normal, firstParagraph, full, edit, inspector
 
         var description: String {
             switch self {
@@ -30,6 +30,8 @@ extension Presentation {
                 "full"
             case .edit:
                 "edit"
+            case .inspector:
+                "inspector"
             }
         }
     }

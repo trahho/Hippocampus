@@ -18,7 +18,7 @@ struct SortingAspectView: View {
     // MARK: Computed Properties
 
     var roles: [Structure.Role] {
-        document.structure.roles.filter { $0 != Structure.Role.same }.sorted { $0.description < $1.description }
+        document.structure.roles.filter { $0 != Structure.Role.Statics.same }.sorted { $0.description < $1.description }
     }
 
     var aspects: [Structure.Aspect] {

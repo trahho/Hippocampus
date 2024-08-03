@@ -29,13 +29,10 @@ extension ExportSourceCodeView {
 
         var filters: [Structure.Filter] {
             document.structure.filters
-                .sorted(by: { $0.name.localized($0.isLocked) < $1.name.localized($1.isLocked) })
+                .sorted(by: { $0.description < $1.description })
         }
 
         var filtersSourceCode: String {
-            //        let selectedFilters = selectedFilters
-            //            .compactMap { document[Structure.Filter.self, $0] }
-
             var result = """
             //
             //  Structure.Filter+static.swift
@@ -54,19 +51,21 @@ extension ExportSourceCodeView {
             \ttypealias Aspect = Structure.Aspect
             \ttypealias Particle = Structure.Particle
 
-            
-            """
-            result += "\tstatic var statics: [Filter] = ["
-            result += selectedFilters
-                .sorted(by: { $0.name < $1.name })
-                .map { ".\($0.name.sourceCode)" }
-                .joined(separator: ", ")
-            result += "]\n\n"
 
-            for filter in selectedFilters.sorted(by: { $0.name < $1.name }) {
-                result += filter.sourceCode(tab: 1, inline: false, document: document) + "\n"
-            }
-            result += "}"
+            """
+            result += "\tstatic var statics: [Filter] { ["
+                + selectedFilters.sorted(by: { $0.name < $1.name })
+                .map { "Statics." + $0.name.sourceCode }
+                .joined(separator: ", ")
+                + "] }\n\n"
+
+            result += "\tenum Statics {"
+                + selectedFilters
+                .sorted(by: { $0.name < $1.name })
+                .map { $0.sourceCode(tab: 3, inline: false, document: document) }
+                .joined(separator: "\n") + "\n"
+                + "\t}\n}\n"
+
             return result
         }
 
@@ -152,11 +151,14 @@ extension ExportSourceCodeView {
 
         func analyzeFile(_ file: URL) {
             let text = try! String(contentsOf: file, encoding: .utf8)
-            let regex = /static var statics: \[Filter\] = \[(.*)\]/
-            guard
-                let line = text.split(separator: "\n").first(where: { $0.contains(regex) }),
-                let match = try? regex.firstMatch(in: line)?.1
-            else {
+            let regex = /let filter = Filter\(id: "(.*)".uuid\)/
+            let declarations = text.split(separator: "\n")
+                .compactMap { try? regex.firstMatch(in: $0) }
+                .map { String($0.1).uuid }
+                .compactMap { document[Structure.Filter.self, $0] }
+
+            guard !declarations.isEmpty else {
+                // Hier wird der Text auf ein leeres File gecheckt, das dann gefüllt wird.
                 var text = text
                 text.removeAll(where: { $0.isWhitespace })
                 if text.isEmpty {
@@ -164,9 +166,8 @@ extension ExportSourceCodeView {
                 }
                 return
             }
-            selectedFilters = match.split(separator: ", ")
-                .map { String($0.dropFirst()) }
-                .compactMap { name in document.structure.filters.first(where: { $0.name.sourceCode == name }) }
+            
+            selectedFilters = declarations
             fileUrl = file
         }
     }

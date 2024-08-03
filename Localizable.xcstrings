@@ -119,6 +119,9 @@
     "Create static role" : {
 
     },
+    "D" : {
+
+    },
     "Delete" : {
 
     },
@@ -211,7 +214,16 @@
     "Is Referenced by" : {
 
     },
+    "Is static %@" : {
+
+    },
     "Label" : {
+
+    },
+    "Layout not implemented" : {
+
+    },
+    "Main" : {
 
     },
     "Name" : {
@@ -235,16 +247,25 @@
         }
       }
     },
+    "Navigation Title" : {
+
+    },
     "New Filter" : {
 
     },
     "New Role" : {
 
     },
+    "New Window" : {
+
+    },
     "Nil" : {
 
     },
     "Not" : {
+
+    },
+    "nv" : {
 
     },
     "Padded" : {
@@ -256,7 +277,13 @@
     "Particle" : {
 
     },
-    "Quit MyApp" : {
+    "pc" : {
+
+    },
+    "pr" : {
+
+    },
+    "Quit Hippocampus" : {
 
     },
     "References" : {
@@ -284,7 +311,19 @@
     "Roles" : {
 
     },
+    "S" : {
+
+    },
+    "sc" : {
+
+    },
+    "Select layout" : {
+
+    },
     "SFSymbol" : {
+
+    },
+    "Show Design" : {
 
     },
     "Simple" : {
@@ -294,6 +333,12 @@
 
     },
     "Vertical" : {
+
+    },
+    "What are you talking about?" : {
+
+    },
+    "What are you talking about?\nblub on more\nlines" : {
 
     },
     "Wrap in" : {

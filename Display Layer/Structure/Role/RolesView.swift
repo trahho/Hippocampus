@@ -20,7 +20,7 @@ struct RolesView: View {
 
     var roles: [Structure.Role] {
         document.structure.roles
-            .filter { $0 != Structure.Role.same }
+            .filter { $0 != Structure.Role.Statics.same }
             .sorted(by: { $0.name.localized($0.isLocked) < $1.name.localized($1.isLocked) })
     }
 

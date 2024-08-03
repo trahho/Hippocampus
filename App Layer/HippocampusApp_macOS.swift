@@ -10,28 +10,36 @@ import SwiftUI
 extension HippocampusApp: App {
     var body: some Scene {
         Group {
-            WindowGroup {
+            WindowGroup(id: "Main") {
                 DocumentView(document: document)
+                    .environment(\._document, document)
             }
+//            .windowStyle(.hiddenTitleBar)
+//            .windowToolbarStyle(.expanded)
             WindowGroup("Filter", for: Structure.Filter.ID.self) { $filterId in
                 if let filterId, let filter = document[Structure.Filter.self, filterId] {
                     FilterEditView(filter: filter)
-                        .environment(\.doc, document)
+                        .environment(\._document, document)
                 }
             }
             WindowGroup("Role", for: Structure.Role.ID.self) { $id in
                 if let id, let role = document[Structure.Role.self, id] {
                     RoleEditView(role: role)
-                        .environment(\.doc, document)
+                        .environment(\._document, document)
                 }
             }
             Window("Export SourceCode", id: "exportSourceCode") {
                 ExportSourceCodeView()
-                    .environment(\.doc, document)
+                    .environment(\._document, document)
             }
             Window("Edit Roles", id: "editRoles") {
                 RolesView()
-                    .environment(\.doc, document)
+                    .environment(\._document, document)
+            }
+            Window("Design", id: "design") {
+                DocumentView(document: HippocampusApp.previewDocument)
+//                DocumentView(document: HippocampusApp.previewDocument)
+//                    .environment(\._document, HippocampusApp.previewDocument)
             }
         }
         .commandsRemoved()
@@ -40,9 +48,14 @@ extension HippocampusApp: App {
                 Button(action: {
                     NSApplication.shared.terminate(self)
                 }) {
-                    Text("Quit MyApp")
+                    Text("Quit Hippocampus")
                 }
                 .keyboardShortcut("q", modifiers: .command)
+            }
+            CommandGroup(before: .windowArrangement) {
+                Button("New Window") {
+                    openWindow(id: "Main")
+                }
             }
             CommandMenu("Design") {
                 Button("New Filter") {
@@ -60,6 +73,11 @@ extension HippocampusApp: App {
                 Button("Edit Roles") {
                     openWindow(id: "editRoles")
                 }
+                Divider()
+                Button("Show Design") {
+                    openWindow(id: "design")
+                }
+                .keyboardShortcut("d", modifiers: [.command, .shift])
             }
         }
     }

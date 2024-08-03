@@ -135,8 +135,6 @@ extension ConditionEditView {
                             .dropDestination { items, _ in condition = .all(items + children); return true }
                         ArrayEditView(array: Binding(get: { children }, set: { condition = .all($0) }))
                     }
-                //            case .all(let array):
-                //                <#code#>
                 default:
                     EmptyView()
                 }

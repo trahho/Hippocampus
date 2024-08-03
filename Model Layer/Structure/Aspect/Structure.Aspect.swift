@@ -57,7 +57,7 @@ extension Structure {
                 } else if let computation, let structure = store as? Structure {
                     return computation.compute(for: item, structure: structure)
                 } else {
-                    return item[id] ?? Value()
+                    return item[id]
                 }
             }
             set {

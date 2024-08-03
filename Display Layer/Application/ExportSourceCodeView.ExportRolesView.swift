@@ -28,14 +28,17 @@ extension ExportSourceCodeView {
         // MARK: Computed Properties
 
         var roles: [Structure.Role] {
-            document.structure.roles
-                .filter { $0 != Structure.Role.same }
-                .sorted(by: { $0.name.localized($0.isLocked) < $1.name.localized($1.isLocked) })
+            document.structure.roles.asArray
+                .filter { $0 != Structure.Role.Statics.same }
+                .sorted(by: { $0.description < $1.description })
         }
 
         var rolesSourceCode: String {
             //        let selectedRoles = selectedRoles
             //            .compactMap { document[Structure.Role.self, $0] }
+
+            let sameRole = Structure.Role(id: "00000000-0000-0000-0000-000000000001".uuid)
+            sameRole.name = "same"
 
             var result = """
             //
@@ -57,22 +60,21 @@ extension ExportSourceCodeView {
 
 
             """
-            result += "\tstatic var statics: [Role] = [.same, "
-            result += selectedRoles
-                .filter { $0 != Structure.Role.same }
-                .sorted(by: { $0.name < $1.name })
-                .map { ".\($0.name.sourceCode)" }
+            result += "\tstatic var statics: [Role] { ["
+                + selectedRoles.sorted(by: { $0.name < $1.name })
+                .map { "Statics." + $0.name.sourceCode }
                 .joined(separator: ", ")
-            result += "]\n\n"
+                + "] }\n\n"
 
-            result += Structure.Role.same.sourceCode(tab: 0, inline: false, document: document) + "\n"
-            for role in selectedRoles
-                .filter({ $0 != Structure.Role.same })
-                .sorted(by: { $0.name < $1.name })
-            {
-                result += role.sourceCode(tab: 0, inline: false, document: document) + "\n"
-            }
-            result += "}"
+            let selectedRoles = selectedRoles.sorted(by: { $0.name < $1.name })
+            let roles = [sameRole] + selectedRoles
+
+            result += "\tenum Statics {"
+                + roles
+                .map { $0.sourceCode(tab: 2, inline: false, document: document) }
+                .joined(separator: "\n") + "\n"
+                + "\t}\n}\n"
+
             return result
         }
 
@@ -158,21 +160,30 @@ extension ExportSourceCodeView {
 
         func analyzeFile(_ file: URL) {
             let text = try! String(contentsOf: file, encoding: .utf8)
-            let regex = /static var statics: \[Role\] = \[(.*)\]/
-            guard
-                let line = text.split(separator: "\n").first(where: { $0.contains(regex) }),
-                let match = try? regex.firstMatch(in: line)?.1
-            else { return }
-            selectedRoles = match.split(separator: ", ")
-                .map { String($0.dropFirst()) }
-                .compactMap { name in document.structure.roles.first(where: { $0.name.sourceCode == name }) }
-                .filter { $0 != Structure.Role.same }
+            let regex = /let role = Role\(id: "(.*)".uuid\)/
+            let declarations = text.split(separator: "\n")
+                .compactMap { try? regex.firstMatch(in: $0) }
+                .map { String($0.1).uuid }
+                .compactMap { document[Structure.Role.self, $0] }
+                .filter { $0 != Structure.Role.Statics.same }
+
+            guard !declarations.isEmpty else {
+                // Hier wird der Text auf ein leeres File gecheckt, das dann gefüllt wird.
+                var text = text
+                text.removeAll(where: { $0.isWhitespace })
+                if text.isEmpty {
+                    fileUrl = file
+                }
+                return
+            }
+
+            selectedRoles = declarations
             fileUrl = file
         }
     }
 
     #Preview {
         ExportSourceCodeView()
-            .environment(\.doc, HippocampusApp.previewDocument)
+            .environment(\._document, HippocampusApp.previewDocument)
     }
 }

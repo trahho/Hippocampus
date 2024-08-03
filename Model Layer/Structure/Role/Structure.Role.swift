@@ -11,7 +11,7 @@ import Smaug
 import SwiftUI
 
 extension Structure {
-    @dynamicMemberLookup
+//    @dynamicMemberLookup
     class Role: Object, EditableListItem, Pickable {
         // MARK: Properties
 
@@ -28,7 +28,7 @@ extension Structure {
         // MARK: Computed Properties
 
         var description: String {
-            name.localized(isLocked)
+            name.localized(isStatic)
         }
 
         var allRoles: [Role] {
@@ -58,21 +58,21 @@ extension Structure {
 
         // MARK: Functions
 
-        subscript(dynamicMember dynamicMember: String) -> Aspect {
-            if let result = aspects.first(where: { $0.name.lowercased() == dynamicMember.lowercased() }) {
-                return result
-            } else {
-                return roles.compactMap { $0[dynamicMember: dynamicMember] }.first!
-            }
-        }
-
-        subscript(dynamicMember dynamicMember: String) -> Particle {
-            if let result = particles.first(where: { $0.name.lowercased() == dynamicMember.lowercased() }) {
-                return result
-            } else {
-                return roles.compactMap { $0[dynamicMember: dynamicMember] }.first!
-            }
-        }
+//        subscript(dynamicMember dynamicMember: String) -> Aspect {
+//            if let result = aspects.first(where: { $0.name.lowercased() == dynamicMember.lowercased() }) {
+//                return result
+//            } else {
+//                return roles.compactMap { $0[dynamicMember: dynamicMember] }.first!
+//            }
+//        }
+//
+//        subscript(dynamicMember dynamicMember: String) -> Particle {
+//            if let result = particles.first(where: { $0.name.lowercased() == dynamicMember.lowercased() }) {
+//                return result
+//            } else {
+//                return roles.compactMap { $0[dynamicMember: dynamicMember] }.first!
+//            }
+//        }
 
         func representation(layout: Presentation.Layout, name: String? = nil) -> Representation? {
 //            print("Checking for \(self.name)")

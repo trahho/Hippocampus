@@ -57,7 +57,7 @@ extension Information {
             case let .always(truth):
                 return truth
             case let .role(roleId):
-                if roleId == Structure.Role.same.id, let sameRole, item.matchingRole(for: sameRole) != nil {
+                if roleId == Structure.Role.Statics.same.id, let sameRole, item.matchingRole(for: sameRole) != nil {
                     roles.append(sameRole)
                     return true
                 }

@@ -17,12 +17,13 @@ extension Information.Condition: SourceCodeGenerator {
         case .nil:
             return ".nil"
         case .role(let roleId):
-            guard let role = document[Structure.Role.self, roleId], role.isLocked else { return ".role(\"\(roleId.uuidString)\".uuid)"}
-            return ".role(Structure.Role.\(role.name).id)"
+//            guard let role = document[Structure.Role.self, roleId], role.isStatic else {
+            return ".role(\"\(roleId.uuidString)\".uuid)"
+//            return ".role(Structure.Role.\(role.name.sourceCode).id)"
         case .hasParticle(let particleId, let condition):
             let condition = condition.sourceCode(tab: 0, inline: true, document: document)
             guard let particle = document[Structure.Particle.self, particleId], particle.isLocked else { return ".hasParticle(\"\(particleId.uuidString)\".uuid, \(condition))"}
-            return ".hasParticle(Structure.Role.\(particle.role.name).\(particle.name).id, \(condition))"
+            return ".hasParticle(Structure.Role.\(particle.role.name.sourceCode).\(particle.name.sourceCode).id, \(condition))"
         case .isParticle(let particleId):
             return ".isParticle(\"\(particleId.uuidString)\".uuid)"
         case .isReferenced(let condition):
