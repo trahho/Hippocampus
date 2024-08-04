@@ -7,24 +7,12 @@
 
 import SwiftUI
 
-struct AspectView: View {
+struct AspectItemView: View {
     // MARK: Properties
 
-    @State var item: Information.Item?
+    @State var item: Information.Item
     @State var aspect: Structure.Aspect
     @State var appearance: Presentation.Appearance
-    @State var editable: Bool
-    @State var text: String = "Empty"
-
-    // MARK: Computed Properties
-
-    var textBinding: Binding<String> {
-        if let item {
-            Binding(get: { item[aspect, String.self] ?? "" }, set: { item[aspect, String.self] = $0 })
-        } else {
-            $text
-        }
-    }
 
     // MARK: Content
 
@@ -35,24 +23,17 @@ struct AspectView: View {
         case .drawing:
             EmptyView()
         case .text:
+            let binding = Binding(get: { aspect[String.self, item] ?? "" }, set: { aspect[String.self, item] = $0 })
+            
             switch appearance {
-            case .icon:
-                Image(systemName: "text.word.spacing")
-            case .full, .normal, .small:
-                Text(textBinding.wrappedValue)
-            case .firstParagraph:
-                Text(textBinding.wrappedValue)
-                    .lineLimit(1)
-            case .edit:
-                TextEditor(text: textBinding)
             case .inspector:
                 LabeledContent {
-//                    TextField("", text: textBinding)
-//                        .frame(maxHeight: .infinity)
-                    TextEditor(text: textBinding)
+                    TextAspectView(text: binding, appearance: appearance)
                 } label: {
                     Text(aspect.name)
                 }
+            default:
+                TextAspectView(text: binding, appearance: appearance)
             }
         }
 //        switch (aspect.kind, appearance) {

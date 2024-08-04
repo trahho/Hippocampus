@@ -31,7 +31,7 @@ struct ItemPresentationView: View {
         Group {
             if let presentation = presentation ?? rolePresentation {
                 PresentationView(presentation: presentation, item: item)
-                    .sensitive
+//                    .sensitive
             } else {
                 Image(systemName: "questionmark.square.dashed")
             }

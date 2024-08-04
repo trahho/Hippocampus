@@ -217,6 +217,9 @@
 		C565959A2C5C45DA00047A26 /* Design.Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56595972C5C45DA00047A26 /* Design.Environment.swift */; };
 		C565959F2C5DC07D00047A26 /* Structure.Role+static.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57B70AA2C235395007A5105 /* Structure.Role+static.swift */; };
 		C56595A02C5DC0F100047A26 /* Structure.Filter+static.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F85422C31A022007DC75D /* Structure.Filter+static.swift */; };
+		C56595A22C5EC9F700047A26 /* AspectValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56595A12C5EC9F700047A26 /* AspectValueView.swift */; };
+		C56595A32C5EC9F700047A26 /* AspectValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56595A12C5EC9F700047A26 /* AspectValueView.swift */; };
+		C56595A42C5EC9F700047A26 /* AspectValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56595A12C5EC9F700047A26 /* AspectValueView.swift */; };
 		C565AACC2C23212D00BC54AB /* RoleEditView.SelectRolesSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C565AACB2C23212D00BC54AB /* RoleEditView.SelectRolesSheet.swift */; };
 		C565AACD2C23212D00BC54AB /* RoleEditView.SelectRolesSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C565AACB2C23212D00BC54AB /* RoleEditView.SelectRolesSheet.swift */; };
 		C565AACE2C23212D00BC54AB /* RoleEditView.SelectRolesSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C565AACB2C23212D00BC54AB /* RoleEditView.SelectRolesSheet.swift */; };
@@ -226,15 +229,15 @@
 		C56965AB2BFFEE4E00AA46B3 /* Information.Computation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56965AA2BFFEE4E00AA46B3 /* Information.Computation.swift */; };
 		C56965AC2BFFEE4E00AA46B3 /* Information.Computation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56965AA2BFFEE4E00AA46B3 /* Information.Computation.swift */; };
 		C56965AD2BFFEE4E00AA46B3 /* Information.Computation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56965AA2BFFEE4E00AA46B3 /* Information.Computation.swift */; };
-		C56965B42C028CE000AA46B3 /* AspectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56965B32C028CE000AA46B3 /* AspectView.swift */; };
-		C56965B52C028CE000AA46B3 /* AspectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56965B32C028CE000AA46B3 /* AspectView.swift */; };
-		C56965B62C028CE000AA46B3 /* AspectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56965B32C028CE000AA46B3 /* AspectView.swift */; };
-		C56965B82C028D9E00AA46B3 /* AspectView.TextAspectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56965B72C028D9E00AA46B3 /* AspectView.TextAspectView.swift */; };
-		C56965B92C028D9E00AA46B3 /* AspectView.TextAspectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56965B72C028D9E00AA46B3 /* AspectView.TextAspectView.swift */; };
-		C56965BA2C028D9E00AA46B3 /* AspectView.TextAspectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56965B72C028D9E00AA46B3 /* AspectView.TextAspectView.swift */; };
-		C56965BC2C028E1600AA46B3 /* AspectView.DrawingAspectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56965BB2C028E1600AA46B3 /* AspectView.DrawingAspectView.swift */; };
-		C56965BD2C028E1600AA46B3 /* AspectView.DrawingAspectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56965BB2C028E1600AA46B3 /* AspectView.DrawingAspectView.swift */; };
-		C56965BE2C028E1600AA46B3 /* AspectView.DrawingAspectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56965BB2C028E1600AA46B3 /* AspectView.DrawingAspectView.swift */; };
+		C56965B42C028CE000AA46B3 /* AspectItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56965B32C028CE000AA46B3 /* AspectItemView.swift */; };
+		C56965B52C028CE000AA46B3 /* AspectItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56965B32C028CE000AA46B3 /* AspectItemView.swift */; };
+		C56965B62C028CE000AA46B3 /* AspectItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56965B32C028CE000AA46B3 /* AspectItemView.swift */; };
+		C56965B82C028D9E00AA46B3 /* TextAspectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56965B72C028D9E00AA46B3 /* TextAspectView.swift */; };
+		C56965B92C028D9E00AA46B3 /* TextAspectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56965B72C028D9E00AA46B3 /* TextAspectView.swift */; };
+		C56965BA2C028D9E00AA46B3 /* TextAspectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56965B72C028D9E00AA46B3 /* TextAspectView.swift */; };
+		C56965BC2C028E1600AA46B3 /* DrawingAspectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56965BB2C028E1600AA46B3 /* DrawingAspectView.swift */; };
+		C56965BD2C028E1600AA46B3 /* DrawingAspectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56965BB2C028E1600AA46B3 /* DrawingAspectView.swift */; };
+		C56965BE2C028E1600AA46B3 /* DrawingAspectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56965BB2C028E1600AA46B3 /* DrawingAspectView.swift */; };
 		C56965D82C05154200AA46B3 /* Structure.Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56965D72C05154200AA46B3 /* Structure.Filter.swift */; };
 		C56965D92C05154200AA46B3 /* Structure.Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56965D72C05154200AA46B3 /* Structure.Filter.swift */; };
 		C56965DA2C05154200AA46B3 /* Structure.Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56965D72C05154200AA46B3 /* Structure.Filter.swift */; };
@@ -377,9 +380,9 @@
 		C5BE4F4129FC433300B27B48 /* PersistentDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE4F4029FC433300B27B48 /* PersistentDataTests.swift */; };
 		C5BE4F6829FDDE9C00B27B48 /* SerialisationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4A12A2942701100FF9AB8 /* SerialisationTests.swift */; };
 		C5BE4F7229FEDE6E00B27B48 /* DatabaseDocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BE4F7129FEDE6E00B27B48 /* DatabaseDocumentTests.swift */; };
-		C5BF40CB2C4EC28100469EF2 /* FilterEditView.SortingAspectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BF40CA2C4EC26900469EF2 /* FilterEditView.SortingAspectView.swift */; };
-		C5BF40CC2C4EC28100469EF2 /* FilterEditView.SortingAspectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BF40CA2C4EC26900469EF2 /* FilterEditView.SortingAspectView.swift */; };
-		C5BF40CD2C4EC28100469EF2 /* FilterEditView.SortingAspectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BF40CA2C4EC26900469EF2 /* FilterEditView.SortingAspectView.swift */; };
+		C5BF40CB2C4EC28100469EF2 /* AspectSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BF40CA2C4EC26900469EF2 /* AspectSelector.swift */; };
+		C5BF40CC2C4EC28100469EF2 /* AspectSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BF40CA2C4EC26900469EF2 /* AspectSelector.swift */; };
+		C5BF40CD2C4EC28100469EF2 /* AspectSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5BF40CA2C4EC26900469EF2 /* AspectSelector.swift */; };
 		C5C4A113293B9FC400FF9AB8 /* ObservedChangeReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54BE4EF289591320060A066 /* ObservedChangeReceiver.swift */; };
 		C5C6C7162C49CBD700EDC15A /* FilterEditView.SelectFiltersSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C6C7152C49CBD100EDC15A /* FilterEditView.SelectFiltersSheet.swift */; };
 		C5C6C7172C49CBD700EDC15A /* FilterEditView.SelectFiltersSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C6C7152C49CBD100EDC15A /* FilterEditView.SelectFiltersSheet.swift */; };
@@ -575,12 +578,13 @@
 		C565958B2C5BCA4400047A26 /* Structure.Filter.Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structure.Filter.Result.swift; sourceTree = "<group>"; };
 		C565958F2C5C36D800047A26 /* Structure.Filter.Result.Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structure.Filter.Result.Item.swift; sourceTree = "<group>"; };
 		C56595972C5C45DA00047A26 /* Design.Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Design.Environment.swift; sourceTree = "<group>"; };
+		C56595A12C5EC9F700047A26 /* AspectValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectValueView.swift; sourceTree = "<group>"; };
 		C565AACB2C23212D00BC54AB /* RoleEditView.SelectRolesSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleEditView.SelectRolesSheet.swift; sourceTree = "<group>"; };
 		C565AACF2C2321B200BC54AB /* RoleEditView.SelectReferencesSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleEditView.SelectReferencesSheet.swift; sourceTree = "<group>"; };
 		C56965AA2BFFEE4E00AA46B3 /* Information.Computation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Information.Computation.swift; sourceTree = "<group>"; };
-		C56965B32C028CE000AA46B3 /* AspectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectView.swift; sourceTree = "<group>"; };
-		C56965B72C028D9E00AA46B3 /* AspectView.TextAspectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectView.TextAspectView.swift; sourceTree = "<group>"; };
-		C56965BB2C028E1600AA46B3 /* AspectView.DrawingAspectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectView.DrawingAspectView.swift; sourceTree = "<group>"; };
+		C56965B32C028CE000AA46B3 /* AspectItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectItemView.swift; sourceTree = "<group>"; };
+		C56965B72C028D9E00AA46B3 /* TextAspectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAspectView.swift; sourceTree = "<group>"; };
+		C56965BB2C028E1600AA46B3 /* DrawingAspectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingAspectView.swift; sourceTree = "<group>"; };
 		C56965D72C05154200AA46B3 /* Structure.Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structure.Filter.swift; sourceTree = "<group>"; };
 		C56965DB2C052DF300AA46B3 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		C56D5C2D2C49C9D100E081CD /* RoleEditView.EditRepresentationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleEditView.EditRepresentationSheet.swift; sourceTree = "<group>"; };
@@ -649,7 +653,7 @@
 		C5BE89FB2A09687800CE601F /* Icon1024-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon1024-128.png"; sourceTree = "<group>"; };
 		C5BE89FC2A09687800CE601F /* Icon1024-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon1024-512.png"; sourceTree = "<group>"; };
 		C5BE89FD2A096A5400CE601F /* IconMac.vectornator */ = {isa = PBXFileReference; lastKnownFileType = file; path = IconMac.vectornator; sourceTree = "<group>"; };
-		C5BF40CA2C4EC26900469EF2 /* FilterEditView.SortingAspectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterEditView.SortingAspectView.swift; sourceTree = "<group>"; };
+		C5BF40CA2C4EC26900469EF2 /* AspectSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectSelector.swift; sourceTree = "<group>"; };
 		C5C4A12A2942701100FF9AB8 /* SerialisationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialisationTests.swift; sourceTree = "<group>"; };
 		C5C6C7152C49CBD100EDC15A /* FilterEditView.SelectFiltersSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterEditView.SelectFiltersSheet.swift; sourceTree = "<group>"; };
 		C5C6C7192C49CCBD00EDC15A /* FilterEditView.EditRepresentationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterEditView.EditRepresentationSheet.swift; sourceTree = "<group>"; };
@@ -1071,9 +1075,11 @@
 		C578012B2C376AD100B1B1AD /* Aspect */ = {
 			isa = PBXGroup;
 			children = (
-				C56965B32C028CE000AA46B3 /* AspectView.swift */,
-				C56965BB2C028E1600AA46B3 /* AspectView.DrawingAspectView.swift */,
-				C56965B72C028D9E00AA46B3 /* AspectView.TextAspectView.swift */,
+				C56965B32C028CE000AA46B3 /* AspectItemView.swift */,
+				C56595A12C5EC9F700047A26 /* AspectValueView.swift */,
+				C56965BB2C028E1600AA46B3 /* DrawingAspectView.swift */,
+				C56965B72C028D9E00AA46B3 /* TextAspectView.swift */,
+				C5BF40CA2C4EC26900469EF2 /* AspectSelector.swift */,
 			);
 			path = Aspect;
 			sourceTree = "<group>";
@@ -1330,7 +1336,6 @@
 			isa = PBXGroup;
 			children = (
 				C52C0BC92C3F21F600960750 /* FilterEditView.swift */,
-				C5BF40CA2C4EC26900469EF2 /* FilterEditView.SortingAspectView.swift */,
 				C55215962C49EB2B00A47323 /* FilterEditView.SelectRolesSheet.swift */,
 				C5C6C7192C49CCBD00EDC15A /* FilterEditView.EditRepresentationSheet.swift */,
 				C5C6C7152C49CBD100EDC15A /* FilterEditView.SelectFiltersSheet.swift */,
@@ -1631,6 +1636,7 @@
 				C5C4A113293B9FC400FF9AB8 /* ObservedChangeReceiver.swift in Sources */,
 				C5D07F522C21DA0E0080559E /* Structure.Particle.swift in Sources */,
 				C5BE4F1F29F672D800B27B48 /* Document.Drawing.Background.swift in Sources */,
+				C56595A22C5EC9F700047A26 /* AspectValueView.swift in Sources */,
 				C5CB482F2C43399B003B4D85 /* Information.Condition+sourceCode.swift in Sources */,
 				C56F85492C31A111007DC75D /* Information.TimedValue.swift in Sources */,
 				C58224232A080FF9000FB877 /* ItemView.swift in Sources */,
@@ -1643,7 +1649,7 @@
 				C5BE4F4129FC433300B27B48 /* PersistentDataTests.swift in Sources */,
 				C59B3CF2295CCEC80053DE7D /* Presentation.Predicate.Builder.swift in Sources */,
 				C55864772A058A67005EA6FD /* Information.Condition.Comparison.swift in Sources */,
-				C56965BA2C028D9E00AA46B3 /* AspectView.TextAspectView.swift in Sources */,
+				C56965BA2C028D9E00AA46B3 /* TextAspectView.swift in Sources */,
 				C5D07F562C21DC7D0080559E /* RoleEditView.swift in Sources */,
 				C59B3CDC295CB9540053DE7D /* Structure.Role.swift in Sources */,
 				C5CB48362C441334003B4D85 /* Presentation.Space.swift in Sources */,
@@ -1653,7 +1659,7 @@
 				C5E966D829AAD47D009D81FF /* Font+Extension.swift in Sources */,
 				C531623E2C39D5E500A6E35E /* TreeView.swift in Sources */,
 				C55538212C2850D700EC0911 /* Structure.Role+sourceCode.swift in Sources */,
-				C56965BE2C028E1600AA46B3 /* AspectView.DrawingAspectView.swift in Sources */,
+				C56965BE2C028E1600AA46B3 /* DrawingAspectView.swift in Sources */,
 				C59B3CEA295CCE950053DE7D /* NSPredicate+operators.swift in Sources */,
 				C58214982C52E06E008A444D /* Structure.Aspect.Value.swift in Sources */,
 				C582241A2A080FCF000FB877 /* FiltersView.swift in Sources */,
@@ -1719,7 +1725,7 @@
 				C55864732A0588D0005EA6FD /* Information.Condition.swift in Sources */,
 				C55AC5D9295A4A5F00F09326 /* Structure.swift in Sources */,
 				C5C6C71B2C49CCC700EDC15A /* FilterEditView.EditRepresentationSheet.swift in Sources */,
-				C56965B62C028CE000AA46B3 /* AspectView.swift in Sources */,
+				C56965B62C028CE000AA46B3 /* AspectItemView.swift in Sources */,
 				C5E67E032C418FA200F55058 /* HippocampusApp_macOS.swift in Sources */,
 				C57B70BD2C243139007A5105 /* Design.ViewEditView.swift in Sources */,
 				C50B2D382C4B1D3500CDDCD5 /* ExportSourceCodeView.ExportFiltersView.swift in Sources */,
@@ -1744,7 +1750,7 @@
 				C59627B52C49BC7C0057ED9B /* Structure.Filter.Representation.swift in Sources */,
 				C56F85452C31A022007DC75D /* Structure.Filter+static.swift in Sources */,
 				C5BE4F1729F670A200B27B48 /* Presentation.Group.swift in Sources */,
-				C5BF40CD2C4EC28100469EF2 /* FilterEditView.SortingAspectView.swift in Sources */,
+				C5BF40CD2C4EC28100469EF2 /* AspectSelector.swift in Sources */,
 				C59B3CE0295CB9E30053DE7D /* Injector.swift in Sources */,
 				C565957E2C598DFF00047A26 /* NestedList.swift in Sources */,
 				C55215A42C4A90A900A47323 /* ItemPresentationView.swift in Sources */,
@@ -1791,7 +1797,7 @@
 				C5E966B429AAA931009D81FF /* PencilCanvasView.swift in Sources */,
 				C5AAA0DE29BD12F1000DA6C3 /* DrawingView.ImageView.swift in Sources */,
 				C5D273522975D19100F32EB6 /* Information.Item.swift in Sources */,
-				C56965BC2C028E1600AA46B3 /* AspectView.DrawingAspectView.swift in Sources */,
+				C56965BC2C028E1600AA46B3 /* DrawingAspectView.swift in Sources */,
 				C54BE503289591440060A066 /* CGFloat+Operators.swift in Sources */,
 				C5E8B4642C20A87200304347 /* Design.Localization.swift in Sources */,
 				C5CB482D2C43399B003B4D85 /* Information.Condition+sourceCode.swift in Sources */,
@@ -1800,13 +1806,14 @@
 				C531623F2C39D5E500A6E35E /* TreeView.swift in Sources */,
 				C5167C3B29C5002900323F75 /* Navigation.swift in Sources */,
 				C51D5D5A29F313F30081669A /* Design.ShellView.swift in Sources */,
-				C56965B82C028D9E00AA46B3 /* AspectView.TextAspectView.swift in Sources */,
+				C56965B82C028D9E00AA46B3 /* TextAspectView.swift in Sources */,
 				C555380B2C271B3200EC0911 /* PresentationEditView.ItemEditView.swift in Sources */,
 				C537930B2A1ECAAC0085D24B /* Design.MathView.swift in Sources */,
 				C5E67E092C41D97400F55058 /* ConditionEditView.ItemEditView.swift in Sources */,
 				C52E725329F56AB2001A5821 /* Design.ListView.swift in Sources */,
 				C5AAA0E729BD1E3B000DA6C3 /* PkDrawing+strokesIn.swift in Sources */,
 				C5728D392A2935EC004968D3 /* ArrayBuilder.swift in Sources */,
+				C56595A42C5EC9F700047A26 /* AspectValueView.swift in Sources */,
 				C54BE53C289591950060A066 /* NSPredicate+operators.swift in Sources */,
 				C5D07F542C21DC7D0080559E /* RoleEditView.swift in Sources */,
 				C5E67E002C418F4E00F55058 /* HippocampusApp_iOS.swift in Sources */,
@@ -1836,7 +1843,7 @@
 				C5B4DB192A0FFCAA00A80F5A /* SidebarView.RolesView.swift in Sources */,
 				C56595882C5A94A200047A26 /* NavigationView.swift in Sources */,
 				C555381B2C277B6E00EC0911 /* Design.PickerKatastropheView.swift in Sources */,
-				C56965B42C028CE000AA46B3 /* AspectView.swift in Sources */,
+				C56965B42C028CE000AA46B3 /* AspectItemView.swift in Sources */,
 				C50B2D362C4B1D3500CDDCD5 /* ExportSourceCodeView.ExportFiltersView.swift in Sources */,
 				C54BE4FB289591440060A066 /* CGRect+Functions.swift in Sources */,
 				C565958D2C5BCA4400047A26 /* Structure.Filter.Result.swift in Sources */,
@@ -1880,7 +1887,7 @@
 				C5AAA0E329BD1D47000DA6C3 /* Document.Drawing.PageFormat.swift in Sources */,
 				C54BE501289591440060A066 /* CGSize+Operators.swift in Sources */,
 				C5AAA0EA29BD1F57000DA6C3 /* Document.Drawing.Background.swift in Sources */,
-				C5BF40CC2C4EC28100469EF2 /* FilterEditView.SortingAspectView.swift in Sources */,
+				C5BF40CC2C4EC28100469EF2 /* AspectSelector.swift in Sources */,
 				C5D2735C2975E08400F32EB6 /* DocumentView.swift in Sources */,
 				C531AE8629ECA61C00585073 /* Design.NestedListView.swift in Sources */,
 				C5C6C7182C49CBD700EDC15A /* FilterEditView.SelectFiltersSheet.swift in Sources */,
@@ -1947,8 +1954,9 @@
 				C55AC5D4295A4A3400F09326 /* Information.swift in Sources */,
 				C5AAA0E829BD1E3B000DA6C3 /* PkDrawing+strokesIn.swift in Sources */,
 				C5D273532975D19100F32EB6 /* Information.Item.swift in Sources */,
+				C56595A32C5EC9F700047A26 /* AspectValueView.swift in Sources */,
 				C5D07F552C21DC7D0080559E /* RoleEditView.swift in Sources */,
-				C56965B92C028D9E00AA46B3 /* AspectView.TextAspectView.swift in Sources */,
+				C56965B92C028D9E00AA46B3 /* TextAspectView.swift in Sources */,
 				C5E350E82C1CECF900FD153D /* RolesView.swift in Sources */,
 				C54BE4F2289591320060A066 /* ObservedChangeReceiver.swift in Sources */,
 				C54BE504289591440060A066 /* CGFloat+Operators.swift in Sources */,
@@ -1958,7 +1966,7 @@
 				C56595892C5A9CEA00047A26 /* NavigationView.swift in Sources */,
 				C5C6C71A2C49CCC700EDC15A /* FilterEditView.EditRepresentationSheet.swift in Sources */,
 				C5BE4F0329F5AF7600B27B48 /* SidebarView.QueryView.swift in Sources */,
-				C56965BD2C028E1600AA46B3 /* AspectView.DrawingAspectView.swift in Sources */,
+				C56965BD2C028E1600AA46B3 /* DrawingAspectView.swift in Sources */,
 				C56D5C302C49C9D800E081CD /* RoleEditView.EditRepresentationSheet.swift in Sources */,
 				C54BE53D289591950060A066 /* NSPredicate+operators.swift in Sources */,
 				C565AAD12C2321B200BC54AB /* RoleEditView.SelectReferencesSheet.swift in Sources */,
@@ -1977,7 +1985,7 @@
 				C55538042C2719BC00EC0911 /* PresentationEditView.swift in Sources */,
 				C5AAA0EE29BD27DC000DA6C3 /* NSImage+scale.swift in Sources */,
 				C5B3AD5E2C47001E0024F7B0 /* Presentation.Order.swift in Sources */,
-				C5BF40CB2C4EC28100469EF2 /* FilterEditView.SortingAspectView.swift in Sources */,
+				C5BF40CB2C4EC28100469EF2 /* AspectSelector.swift in Sources */,
 				C531AE8729ECA61C00585073 /* Design.NestedListView.swift in Sources */,
 				C56595832C5A717E00047A26 /* Design.ToolbarItem.swift in Sources */,
 				C5728D372A2935EC004968D3 /* IndexedCallable.swift in Sources */,
@@ -2033,7 +2041,7 @@
 				C5A84B6F29CFA4D10026F07E /* ItemView.swift in Sources */,
 				C565958C2C5BCA4400047A26 /* Structure.Filter.Result.swift in Sources */,
 				C54BE4B22894866C0060A066 /* HippocampusApp.swift in Sources */,
-				C56965B52C028CE000AA46B3 /* AspectView.swift in Sources */,
+				C56965B52C028CE000AA46B3 /* AspectItemView.swift in Sources */,
 				C57B70BC2C243139007A5105 /* Design.ViewEditView.swift in Sources */,
 				C565957B2C5957BA00047A26 /* Design.Aqua.swift in Sources */,
 				C55AC5DC295A4A8100F09326 /* Presentation.Query.swift in Sources */,

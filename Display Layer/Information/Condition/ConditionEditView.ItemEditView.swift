@@ -61,7 +61,7 @@ extension ConditionEditView {
                             guard let role else { return }
                             condition = .role(role.id)
                         }), unkown: "unknown")
-                        .sensitive
+                            .sensitive
                     }
                 case let .hasParticle(particleId, child):
                     VStack(alignment: .leading) {
@@ -110,8 +110,13 @@ extension ConditionEditView {
                             condition = .isReferenceOfRole(role.id)
                         }), unkown: "unknown")
                     }
-                //            case .hasValue(let comparison):
-                //                <#code#>
+                case let .hasValue(comparison):
+                    VStack(alignment: .leading) {
+                        Label("Has value", systemImage: "number.circle")
+                            .contextMenu { contextMenu }
+                            .draggable(draggable)
+                        ComparisonEditView(comparison: Binding(get: { comparison }, set: { condition = .hasValue($0) }))
+                    }
                 case let .not(child):
                     VStack(alignment: .leading) {
                         Label("Not", systemImage: "exclamationmark")
@@ -135,8 +140,6 @@ extension ConditionEditView {
                             .dropDestination { items, _ in condition = .all(items + children); return true }
                         ArrayEditView(array: Binding(get: { children }, set: { condition = .all($0) }))
                     }
-                default:
-                    EmptyView()
                 }
             }
             .padding(6)
@@ -149,13 +152,70 @@ extension ConditionEditView {
         // MARK: Functions
 
         func role(id: Structure.Role.ID) -> Structure.Role? {
-            guard let role = structure[Structure.Role.self, id] else { return nil }
-            return role
+            structure[Structure.Role.self, id]
+        }
+
+        func aspect(id: Structure.Aspect.ID) -> Structure.Aspect? {
+            structure[Structure.Aspect.self, id]
         }
 
         func particle(id: Structure.Particle.ID) -> Structure.Particle? {
             guard let particle = structure[Structure.Particle.self, id] else { return nil }
             return particle
+        }
+    }
+
+    struct ComparisonEditView: View {
+        // MARK: Properties
+
+        @Environment(\.document) var document
+        @Binding var comparison: Information.Condition.Comparison
+
+        // MARK: Content
+
+        var body: some View {
+            Group {
+                switch comparison {
+                case let .equal(aspectId, value):
+                    VStack(alignment: .leading) {
+                        Label("Is equal ", systemImage: "equal.square")
+                        //                        .contextMenu { contextMenu }
+                        AspectSelector(aspectId: Binding(get: { aspectId }, set: { comparison = .equal($0, value) }))
+                        if let aspect = document[Structure.Aspect.self, aspectId] {
+                            AspectValueView(aspect: aspect, value: Binding(get: { value }, set: { comparison = .equal(aspectId, $0) }), appearance: .edit)
+                        } else {
+                            Text("No aspect found.")
+                        }
+                    }
+                case let .below(aspectId, value):
+                    VStack(alignment: .leading) {
+                        Label("Is below ", systemImage: "equal.square")
+                        //                        .contextMenu { contextMenu }
+                        AspectSelector(aspectId: Binding(get: { aspectId }, set: { comparison = .below($0, value) }))
+                    }
+                case let .above(aspectId, value):
+                    VStack(alignment: .leading) {
+                        Label("Is above ", systemImage: "equal.square")
+                        //                        .contextMenu { contextMenu }
+                        AspectSelector(aspectId: Binding(get: { aspectId }, set: { comparison = .above($0, value) }))
+                    }
+                case let .unequal(aspectId, value):
+                    VStack(alignment: .leading) {
+                        Label("Is unequal ", systemImage: "equal.square")
+                        //                        .contextMenu { contextMenu }
+                        AspectSelector(aspectId: Binding(get: { aspectId }, set: { comparison = .unequal($0, value) }))
+                    }
+                case let .anyValue(aspectId):
+                    VStack(alignment: .leading) {
+                        Label("Has any valuel ", systemImage: "equal.square")
+                        //                        .contextMenu { contextMenu }
+                        AspectSelector(aspectId: Binding(get: { aspectId }, set: { comparison = .anyValue($0) }))
+                    }
+                case .nil:
+                    Label("Nothing", systemImage: "equal.square")
+                }
+            }
+            .padding(6)
         }
     }
 }

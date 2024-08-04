@@ -32,7 +32,7 @@ extension FilterResultView{
         
         var body: some View {
             ItemPresentationView(item: item.item, role: item.role, presentation: filterPresentation, layout: layout)
-                .sensitive
+//                .sensitive
                 .popoverMenu {
                     ForEach(item.roles) { role in
                         Text(role.name)

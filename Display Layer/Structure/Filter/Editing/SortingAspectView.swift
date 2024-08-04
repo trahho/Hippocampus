@@ -8,12 +8,13 @@
 import Grisu
 import SwiftUI
 
-struct SortingAspectView: View {
+struct AspectSelector: View {
     // MARK: Properties
+
+    @Binding var aspectId: Structure.Aspect.ID
 
     @Environment(\.document) private var document
     @State private var role: Structure.Role?
-    @Binding var aspectId: Structure.Aspect.ID
 
     // MARK: Computed Properties
 
@@ -25,20 +26,21 @@ struct SortingAspectView: View {
         role?.allAspects.sorted { $0.name < $1.name } ?? []
     }
 
+    // MARK: Lifecycle
+
+   
+
     // MARK: Content
 
     var body: some View {
         HStack {
-            ValuePicker("", data: roles, selection: Binding(get: { role }, set: { role = $0 }), unkown: "unknown")
+            ValuePicker("", data: roles, selection: Binding(get: { role ?? aspect(id: aspectId)?.role }, set: { role = $0 }), unkown: "unknown")
                 .sensitive
             ValuePicker("", data: aspects, selection: Binding<Structure.Aspect?>(get: { aspect(id: aspectId) }, set: { aspect in
                 guard let aspect else { return }
                 aspectId = aspect.id
             }), unkown: "unknown")
                 .sensitive
-        }
-        .onAppear {
-            role = aspect(id: aspectId)?.role
         }
     }
 

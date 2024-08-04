@@ -41,10 +41,6 @@ import SwiftUI
 // }
 
 extension Structure.Filter {
-    var result: Result {
-        Result(filter: self, items: structure[Information.Item.self].asArray)
-    }
-
     var structure: Structure {
         store as! Structure
     }
@@ -54,39 +50,49 @@ extension Structure.Filter {
 
         let filter: Structure.Filter
 
-        var storage: [Information.Item.ID: Item] = [:]
+        @ObservationIgnored var storage: [Information.Item.ID: Item] = [:]
+
+        var items: [Item] = []
 
         // MARK: Computed Properties
 
-        var items: [Item] {
+        var sorted: [Item] {
             if let order = filter.order {
-                return  storage.values.sorted(by: { order.compare(lhs: $0.item, rhs: $1.item, structure: filter.structure) })
+                return storage.values.sorted(by: { order.compare(lhs: $0.item, rhs: $1.item, structure: filter.structure) })
             } else {
-                return  storage.values.sorted(by: { $0.item.id < $1.item.id })
+                return storage.values.sorted(by: { $0.item.id < $1.item.id })
             }
         }
 
         // MARK: Lifecycle
 
-        init(filter: Structure.Filter, items: [Information.Item]) {
+        init(filter: Structure.Filter) {
             self.filter = filter
-            refresh(by: items)
+            refresh()
         }
 
         // MARK: Functions
 
-        func refresh(by items: [Information.Item]) {
+        func refresh() {
             let condition = filter.condition && filter.roles.reduce(.nil) { partialResult, role in partialResult || .role(role.id) }
-            for item in items {
-                var roles: [Structure.Role] = []
-                if condition.matches(item, structure: filter.structure, roles: &roles) {
-                    if storage[item.id] == nil {
-                        storage[item.id] = Item(result: self, item: item, role: roles.finalsFirst.first!, roles: roles)
+            withObservationTracking {
+                for item in filter[Information.Item.self] {
+                    var roles: [Structure.Role] = []
+                    if condition.matches(item, structure: filter.structure, roles: &roles) {
+                        if storage[item.id] == nil {
+                            storage[item.id] = Item(result: self, item: item, role: roles.finalsFirst.first!, roles: roles)
+                        }
+                    } else {
+                        if storage[item.id] != nil {
+                            storage.removeValue(forKey: item.id)
+                        }
                     }
-                } else {
-                    if storage[item.id] != nil {
-                        storage.removeValue(forKey: item.id)
-                    }
+                }
+                items = sorted
+            } onChange: {
+                let dispatchQueue = DispatchQueue.global(qos: .userInteractive)
+                dispatchQueue.async {
+                    self.refresh()
                 }
             }
         }

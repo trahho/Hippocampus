@@ -89,25 +89,25 @@ struct HippocampusApp {
         return document
     }()
 
+    static var emptyDocument: Document = {
+        let containerURL = URL.virtual
+        let url = containerURL.appendingPathComponent("Empty\(HippocampusApp.memoryExtension)")
+        let result = Document(url: url)
+        return result
+    }()
+
     // MARK: Static Computed Properties
 
     static var iCloudContainerUrl: URL { URL.iCloudDirectory.appendingPathComponent("Documents") }
 
     static var localContainerUrl: URL { URL.localDirectory.appendingPathComponent("Hippocampus") }
 
-    static var emptyDocument: Document = {
-        let containerURL = URL.virtual
-        let url = containerURL.appendingPathComponent("Empty\(HippocampusApp.memoryExtension)")
-        let result =  Document(url: url)
-        return result
-    }()
-
     // MARK: Properties
 
     @Environment(\.openWindow) var openWindow
 
-//    var document: Document = previewDocument
-    var document: Document = .init(name: "Test", local: false)
+    var document: Document = previewDocument
+//    var document: Document = .init(name: "Test", local: false)
 //    var document: Document = emptyDocument
 
     // MARK: Static Functions
@@ -152,11 +152,8 @@ struct HippocampusApp {
 
 extension EnvironmentValues {
     @Entry var navigation: Navigation = .init()
-    @Entry var _document: Document?
+    @Entry var document: Document = HippocampusApp.emptyDocument
 
-    var document: Document {
-        _document!
-    }
     var information: Information { document.information }
     var structure: Structure { document.structure }
 }

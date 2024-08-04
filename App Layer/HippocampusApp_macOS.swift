@@ -12,29 +12,29 @@ extension HippocampusApp: App {
         Group {
             WindowGroup(id: "Main") {
                 DocumentView(document: document)
-                    .environment(\._document, document)
+                    .environment(\.document, document)
             }
 //            .windowStyle(.hiddenTitleBar)
 //            .windowToolbarStyle(.expanded)
             WindowGroup("Filter", for: Structure.Filter.ID.self) { $filterId in
                 if let filterId, let filter = document[Structure.Filter.self, filterId] {
                     FilterEditView(filter: filter)
-                        .environment(\._document, document)
+                        .environment(\.document, document)
                 }
             }
             WindowGroup("Role", for: Structure.Role.ID.self) { $id in
                 if let id, let role = document[Structure.Role.self, id] {
                     RoleEditView(role: role)
-                        .environment(\._document, document)
+                        .environment(\.document, document)
                 }
             }
             Window("Export SourceCode", id: "exportSourceCode") {
                 ExportSourceCodeView()
-                    .environment(\._document, document)
+                    .environment(\.document, document)
             }
             Window("Edit Roles", id: "editRoles") {
                 RolesView()
-                    .environment(\._document, document)
+                    .environment(\.document, document)
             }
             Window("Design", id: "design") {
                 DocumentView(document: HippocampusApp.previewDocument)

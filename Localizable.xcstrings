@@ -172,6 +172,9 @@
     "Hallo Welt" : {
 
     },
+    "Has any valuel " : {
+
+    },
     "Has Particle" : {
 
     },
@@ -184,6 +187,9 @@
     "Has Role (%@)" : {
 
     },
+    "Has value" : {
+
+    },
     "Has Value" : {
 
     },
@@ -194,6 +200,15 @@
 
     },
     "Icon" : {
+
+    },
+    "Is above " : {
+
+    },
+    "Is below " : {
+
+    },
+    "Is equal " : {
 
     },
     "Is locked" : {
@@ -215,6 +230,9 @@
 
     },
     "Is static %@" : {
+
+    },
+    "Is unequal " : {
 
     },
     "Label" : {
@@ -262,7 +280,13 @@
     "Nil" : {
 
     },
+    "No aspect found." : {
+
+    },
     "Not" : {
+
+    },
+    "Nothing" : {
 
     },
     "nv" : {

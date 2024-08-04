@@ -33,8 +33,8 @@ struct PresentationView: View {
                     ArrayView(array: [presentation], item: item)
                 }
             case let .aspect(aspectId, appearance):
-                if let aspect = document[Structure.Aspect.self, aspectId] {
-                    AspectView(item: item, aspect: aspect, appearance: appearance, editable: false)
+                if let aspect = document[Structure.Aspect.self, aspectId], let item {
+                    AspectItemView(item: item, aspect: aspect, appearance: appearance)
                 }
             case let .background(children, color):
                 ArrayView(array: children, item: item)
@@ -65,6 +65,6 @@ struct PresentationView: View {
                 EmptyView()
             }
         }
-        .sensitive
+//        .sensitive
     }
 }

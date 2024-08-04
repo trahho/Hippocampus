@@ -85,7 +85,7 @@ struct FilterEditView: View {
                     })) { $order in
                         HStack(alignment: .center) {
                             if case let .sorted(aspectId, ascending) = order {
-                                SortingAspectView(aspectId: Binding(get: { aspectId }, set: { order = .sorted($0, ascending: ascending) }))
+                                AspectSelector(aspectId: Binding(get: { aspectId }, set: { order = .sorted($0, ascending: ascending) }))
                                 Toggle(isOn: Binding(get: { ascending }, set: { order = .sorted(aspectId, ascending: $0) })) {
                                     Text("Ascending")
                                 }

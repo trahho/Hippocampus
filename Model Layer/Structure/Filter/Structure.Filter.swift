@@ -10,9 +10,11 @@ import Grisu
 
 extension Structure {
     class Filter: Object, Pickable {
-        // MARK: Properties
-        
+        // MARK: Static Properties
+
         static let empty = Filter()
+
+        // MARK: Properties
 
         @Property var name: String = ""
         @Objects var superFilters: [Filter]
@@ -28,7 +30,7 @@ extension Structure {
         @Transient var layout: Presentation.Layout?
         @Transient var orderIndex: Int?
         @Transient var selectedItem: Result.Item?
-        
+
 //        var selectedItemId: Information.Item.ID? {
 //            get { selectedItem?.item.id }
 //            set {
@@ -39,7 +41,8 @@ extension Structure {
 //                }
 //            }
 //        }
-        
+
+        var _result: Result?
 
         // MARK: Computed Properties
 
@@ -51,7 +54,7 @@ extension Structure {
                 return orders[orderIndex]
             }
             set {
-                guard let newValue, let index = orders.firstIndex(of: newValue) else  {
+                guard let newValue, let index = orders.firstIndex(of: newValue) else {
                     orderIndex = nil
                     return
                 }
@@ -73,6 +76,14 @@ extension Structure {
 
         var allOrders: [Presentation.Order] {
             (orders + superFilters.flatMap { $0.allOrders }).asSet.asArray
+        }
+
+        var result: Result {
+            if let _result {
+                return _result
+            }
+            _result = Result(filter: self)
+            return _result!
         }
 
         // MARK: Functions
