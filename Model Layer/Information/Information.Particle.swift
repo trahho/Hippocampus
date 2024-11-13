@@ -31,14 +31,14 @@ extension Information {
             }
         }
 
-        subscript(_ aspect: Structure.Aspect) -> Structure.Aspect.Value {
-            get { aspect[self] }
-            set { aspect[self] = newValue }
+        subscript(_ aspect: Structure.Aspect, form: Structure.Aspect.Kind.Form?) -> Structure.Aspect.Value {
+            get { aspect[self, form] }
+            set { aspect[self, form] = newValue }
         }
 
-        subscript<T>(_ aspect: Structure.Aspect, _ type: T.Type) -> T? where T: Information.Value {
-            get { aspect[type, self] }
-            set { aspect[type, self] = newValue }
+        subscript<T>(_ aspect: Structure.Aspect, _ type: T.Type, form: Structure.Aspect.Kind.Form? = nil) -> T? where T: Information.Value {
+            get { aspect[type, self, form] }
+            set { aspect[type, self, form] = newValue }
         }
     }
 }

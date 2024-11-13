@@ -45,16 +45,16 @@ extension Information.Condition.Comparison: SourceCodeGenerator {
         switch self {
         case .nil:
             ".nil"
-        case let .below(aspectId, value):
-            ".below(\"\(aspectId)\".uuid, \(value.sourceCode(tab: tab, inline: true, document: document)))"
-        case let .above(aspectId, value):
-            ".above(\"\(aspectId)\".uuid, \(value.sourceCode(tab: tab, inline: true, document: document)))"
-        case let .equal(aspectId, value):
-            ".equal(\"\(aspectId)\".uuid, \(value.sourceCode(tab: tab, inline: true, document: document)))"
-        case let .unequal(aspectId, value):
-            ".unequal(\"\(aspectId)\".uuid, \(value.sourceCode(tab: tab, inline: true, document: document)))"
-        case let .anyValue(aspectId):
-            ".anyValue(\"\(aspectId)\".uuid)"
+        case let .below(aspect, form, value):
+            ".below(\"\(aspect)\".uuid, \(value.sourceCode(tab: tab, inline: true, document: document)))"
+        case let .above(aspect, form, value):
+            ".above(\"\(aspect)\".uuid, \(value.sourceCode(tab: tab, inline: true, document: document)))"
+        case let .equal(aspect, value, form):
+            ".equal(\"\(aspect)\".uuid, \(value.sourceCode(tab: tab, inline: true, document: document)))"
+        case let .unequal(aspect, form, value):
+            ".unequal(\"\(aspect)\".uuid, \(value.sourceCode(tab: tab, inline: true, document: document)))"
+        case let .anyValue(aspect):
+            ".anyValue(\"\(aspect)\".uuid)"
         }
     }
 }

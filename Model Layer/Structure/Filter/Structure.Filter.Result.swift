@@ -89,6 +89,7 @@ extension Structure.Filter {
                     }
                 }
                 items = sorted
+
             } onChange: {
                 let dispatchQueue = DispatchQueue.global(qos: .userInteractive)
                 dispatchQueue.async {

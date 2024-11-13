@@ -12,7 +12,7 @@ import SwiftUI
 extension Structure.Aspect {
 //    enum Appearance: Structure.PersistentValue, PickableEnum {
 //        case icon, small, normal, firstParagraph, full, edit
-//        
+//
 //        var description: String {
 //            switch self {
 //            case .icon:
@@ -32,8 +32,9 @@ extension Structure.Aspect {
 //    }
 
     enum Kind: Structure.PersistentValue, PickableEnum {
-        
         case text, drawing, date
+
+        // MARK: Computed Properties
 
         var description: String {
             switch self {
@@ -66,12 +67,11 @@ extension Structure.Aspect {
             }
         }
 
-        var formats: [Format] {
+        var forms: [Form]? {
             switch self {
-            case .date: [ .full, .date, .time, .short]
-            default: []
+            case .date: [.date, .time, .weekday]
+            default: nil
             }
         }
-        
     }
 }

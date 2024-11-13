@@ -57,8 +57,8 @@ struct RoleEditView: View {
                         .font(.caption)
                     TextField("Name", text: aspect.name)
                     EnumPicker("Kind", selection: aspect.kind)
-                    Toggle("Computed", isOn: aspect.exportCodedComputed)
-                        .disabled(aspect.codedComputation.wrappedValue != nil)
+//                    Toggle("Computed", isOn: aspect.exportCodedComputed)
+//                        .disabled(aspect.codedComputation.wrappedValue != nil)
                 }
             }
 
@@ -73,8 +73,8 @@ struct RoleEditView: View {
                                 .font(.caption)
                             TextField("Name", text: aspect.name)
                             EnumPicker("Kind", selection: aspect.kind)
-                            Toggle("Computed", isOn: aspect.exportCodedComputed)
-                                .disabled(aspect.codedComputation.wrappedValue != nil)
+//                            Toggle("Computed", isOn: aspect.exportCodedComputed)
+//                                .disabled(aspect.codedComputation.wrappedValue != nil)
 
                         }
                     }

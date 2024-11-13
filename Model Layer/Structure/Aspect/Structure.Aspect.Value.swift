@@ -7,13 +7,23 @@
 
 extension Structure.Aspect {
     struct Value /*: Equatable & Comparable & Hashable */ {
+        // MARK: Static Computed Properties
+
+        static var `nil`: Value {
+            Value()
+        }
+
         // MARK: Properties
 
         let storage: Information.ValueStorage?
         let drawing: Document.Drawing.Content?
+
+        // MARK: Computed Properties
+
         var value: (any Information.ValueStorage.PersistentValue)? {
             storage?.value
         }
+
         var isNil: Bool {
             storage == nil && drawing == nil
         }
@@ -27,7 +37,7 @@ extension Structure.Aspect {
 
         init(_ value: (any Information.Value)?) {
             drawing = nil
-            self.storage = Information.ValueStorage(value)
+            storage = Information.ValueStorage(value)
         }
 
         init(_ drawing: Document.Drawing.Content?) {

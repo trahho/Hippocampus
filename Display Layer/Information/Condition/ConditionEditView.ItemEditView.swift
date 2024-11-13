@@ -176,40 +176,40 @@ extension ConditionEditView {
         var body: some View {
             Group {
                 switch comparison {
-                case let .equal(aspectId, value):
+                case let .equal(aspectId, value, form):
                     VStack(alignment: .leading) {
                         Label("Is equal ", systemImage: "equal.square")
                         //                        .contextMenu { contextMenu }
-                        AspectSelector(aspectId: Binding(get: { aspectId }, set: { comparison = .equal($0, value) }))
-                        if let aspect = document[Structure.Aspect.self, aspectId] {
-                            AspectValueView(aspect: aspect, value: Binding(get: { value }, set: { comparison = .equal(aspectId, $0) }), appearance: .edit)
-                        } else {
-                            Text("No aspect found.")
-                        }
+                        AspectSelector(schräg: Binding(get: { (aspect: aspectId, form: form) }, set: { comparison = .equal($0.aspect, value, $0.form) }))
+//                        if let aspect = document[Structure.Aspect.self, aspectId] {
+//                            AspectValueView(aspect: aspect, value: Binding(get: { value }, set: { comparison = .equal(aspectId, form, .constant($0) }), appearance: .edit)
+//                        } else {
+//                            Text("No aspect found.")
+//                        }
                     }
-                case let .below(aspectId, value):
+                case let .below(aspectId, form, value):
                     VStack(alignment: .leading) {
                         Label("Is below ", systemImage: "equal.square")
                         //                        .contextMenu { contextMenu }
-                        AspectSelector(aspectId: Binding(get: { aspectId }, set: { comparison = .below($0, value) }))
+//                        AspectSelector(schräg: Binding(get: { (aspect: aspectId, form: form) }, set: { comparison = .below($0.aspect, $0.form, value) }))
                     }
-                case let .above(aspectId, value):
+                case let .above(aspectId, form, value):
                     VStack(alignment: .leading) {
                         Label("Is above ", systemImage: "equal.square")
                         //                        .contextMenu { contextMenu }
-                        AspectSelector(aspectId: Binding(get: { aspectId }, set: { comparison = .above($0, value) }))
+//                        AspectSelector(schräg: Binding(get: { (aspect: aspectId, form: form) }, set: { comparison = .above($0.aspect, $0.form, value) }))
                     }
-                case let .unequal(aspectId, value):
+                case let .unequal(aspectId, form, value):
                     VStack(alignment: .leading) {
                         Label("Is unequal ", systemImage: "equal.square")
                         //                        .contextMenu { contextMenu }
-                        AspectSelector(aspectId: Binding(get: { aspectId }, set: { comparison = .unequal($0, value) }))
+//                        AspectSelector(schräg: Binding(get: { (aspect: aspectId, form: form) }, set: { comparison = .unequal($0.aspect, $0.form, value) }))
                     }
                 case let .anyValue(aspectId):
                     VStack(alignment: .leading) {
                         Label("Has any valuel ", systemImage: "equal.square")
                         //                        .contextMenu { contextMenu }
-                        AspectSelector(aspectId: Binding(get: { aspectId }, set: { comparison = .anyValue($0) }))
+//                        AspectSelector(aspectId: Binding(get: { aspectId }, set: { comparison = .anyValue($0) }))
                     }
                 case .nil:
                     Label("Nothing", systemImage: "equal.square")

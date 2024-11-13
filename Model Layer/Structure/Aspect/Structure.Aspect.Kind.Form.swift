@@ -1,15 +1,15 @@
 //
-//  Structure.Aspect.Kind.Format.swift
+//  Format.swift
 //  Hippocampus
 //
-//  Created by Guido Kühn on 23.07.24.
+//  Created by Guido Kühn on 06.08.24.
 //
 
 import Grisu
 
 extension Structure.Aspect.Kind {
-    enum Format: Structure.PersistentValue, PickableEnum {
-        case full, date, time, short
+    enum Form: Structure.PersistentValue, PickableEnum {
+        case date, weekday, time
 
         // MARK: Computed Properties
 
@@ -17,10 +17,8 @@ extension Structure.Aspect.Kind {
             switch self {
             case .date:
                 "date"
-            case .full:
-                "full"
-            case .short:
-                "short"
+            case .weekday:
+                "weekday"
             case .time:
                 "time"
             }

@@ -10,11 +10,12 @@ import Foundation
 extension Information.TimedValue {
     indirect enum ValueStorage: Codable & Equatable & Comparable & Hashable & SourceCodeGenerator {
         case `nil`
-        case a(Int)
-        case b(Bool)
-        case c(String)
-        case d(Date)
-        case g(UUID)
+        case b(v: Bool)
+        case d(v: Date)
+        case i(v: Int)
+        case n(v: Double)
+        case s(v: String)
+        case u(v: UUID)
 
         // MARK: Nested Types
 
@@ -25,11 +26,12 @@ extension Information.TimedValue {
         public var value: (any PersistentValue)? {
             switch self {
             case .nil: nil
-            case let .a(value): value
             case let .b(value): value
-            case let .c(value): value
             case let .d(value): value
-            case let .g(value): value
+            case let .i(value): value
+            case let .n(value): value
+            case let .s(value): value
+            case let .u(value): value
             }
         }
 
@@ -37,12 +39,12 @@ extension Information.TimedValue {
 
         public init?(_ value: (any PersistentValue)?) {
             if value == nil { return nil }
-            else if let value = value as? Int { self = .a(value) }
-            else if let value = value as? Bool { self = .b(value) }
-            else if let value = value as? String { self = .c(value) }
-            else if let value = value as? Date { self = .d(value) }
-
-            else if let value = value as? UUID { self = .g(value) }
+            else if let value = value as? Bool { self = .b(v: value) }
+            else if let value = value as? Date { self = .d(v: value) }
+            else if let value = value as? Int { self = .i(v: value) }
+            else if let value = value as? Double { self = .n(v: value) }
+            else if let value = value as? String { self = .s(v: value) }
+            else if let value = value as? UUID { self = .u(v: value) }
             //        else { return nil }
             else { fatalError("Storage for \(value?.typeName ?? "Hä?") not available") }
         }
@@ -65,11 +67,12 @@ extension Information.TimedValue {
         func sourceCode(tab _: Int, inline _: Bool, document _: Document) -> String {
             switch self {
             case .nil: ".nil"
-            case let .a(value): ".init(\(value))!"
             case let .b(value): ".init(\(value))!"
-            case let .c(value): ".init(\"\(value)\")!"
             case let .d(value): ".init(Date(\"\(value)\"))!"
-            case let .g(value): ".init(\"\(value)\".uuid)!"
+            case let .i(value): ".init(\(value))!"
+            case let .n(value): ".init(\(value))!"
+            case let .s(value): ".init(\"\(value)\")!"
+            case let .u(value): ".init(\"\(value)\".uuid)!"
             }
         }
     }

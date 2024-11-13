@@ -7,6 +7,7 @@
 
 import PencilKit
 import Smaug
+import Grisu
 
 extension Document.Drawing {
     final class Content: PropertyStore {

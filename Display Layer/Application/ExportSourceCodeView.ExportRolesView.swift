@@ -42,7 +42,7 @@ extension ExportSourceCodeView {
 
             var result = """
             //
-            //  Structure.Role+static.swift
+            //  \(fileUrl?.lastPathComponent ?? "No file selected")
             //  Hippocampus
             //
             //  Created by Guido Kühn on 19.06.24.
@@ -182,8 +182,8 @@ extension ExportSourceCodeView {
         }
     }
 
-    #Preview {
-        ExportSourceCodeView()
-            .environment(\.document, HippocampusApp.previewDocument)
-    }
+//    #Preview {
+//        ExportSourceCodeView()
+//            .environment(\.document, HippocampusApp.previewDocument)
+//    }
 }

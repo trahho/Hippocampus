@@ -42,16 +42,16 @@ struct NavigationView: View {
         .inspector(isPresented: Binding(get: { structure.selectedFilter?.selectedItem != nil && showInspector }, set: { showInspector = $0 }), content: {
             if let item = structure.selectedFilter?.selectedItem {
                 InspectorView(item: item)
-//                    .sensitive
+                    .sensitive
             }
         })
     }
 }
 
-#Preview {
-    NavigationView()
-        .environment(\.document, HippocampusApp.previewDocument)
-}
+//#Preview {
+//    NavigationView()
+//        .environment(\.document, HippocampusApp.previewDocument)
+//}
 
 extension NavigationView {
     struct InspectorView: View {
@@ -64,7 +64,6 @@ extension NavigationView {
         var body: some View {
             VStack(alignment: .leading) {
                 ItemInspectorView(item: item.item, role: item.role)
-//                    .id(item.id)
             }
             .frame(alignment: .topLeading)
             .formStyle(.grouped)

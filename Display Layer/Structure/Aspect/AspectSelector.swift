@@ -11,7 +11,8 @@ import SwiftUI
 struct AspectSelector: View {
     // MARK: Properties
 
-    @Binding var aspectId: Structure.Aspect.ID
+//    @Binding var aspectId: Structure.Aspect.ID
+    @Binding var schräg: (aspect: Structure.Aspect.ID, form: Structure.Aspect.Kind.Form?)
 
     @Environment(\.document) private var document
     @State private var role: Structure.Role?
@@ -34,13 +35,16 @@ struct AspectSelector: View {
 
     var body: some View {
         HStack {
-            ValuePicker("", data: roles, selection: Binding(get: { role ?? aspect(id: aspectId)?.role }, set: { role = $0 }), unkown: "unknown")
+            ValuePicker("", data: roles, selection: Binding(get: { role ?? aspect(id: schräg.aspect)?.role }, set: { role = $0 }), unkown: "unknown")
                 .sensitive
-            ValuePicker("", data: aspects, selection: Binding<Structure.Aspect?>(get: { aspect(id: aspectId) }, set: { aspect in
+            ValuePicker("", data: aspects, selection: Binding<Structure.Aspect?>(get: { aspect(id: schräg.aspect) }, set: { aspect in
                 guard let aspect else { return }
-                aspectId = aspect.id
+                schräg.aspect = aspect.id
             }), unkown: "unknown")
                 .sensitive
+            if let aspect = aspect(id: schräg.aspect), let forms = aspect.kind.forms {
+                ValuePicker("", data: forms, selection: Binding(get: { schräg.form }, set: { schräg.form = $0}), unkown: "unknown")
+            }
             Spacer()
         }
     }

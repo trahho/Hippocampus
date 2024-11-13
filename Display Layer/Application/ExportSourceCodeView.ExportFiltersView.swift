@@ -35,7 +35,7 @@ extension ExportSourceCodeView {
         var filtersSourceCode: String {
             var result = """
             //
-            //  Structure.Filter+static.swift
+            //  \(fileUrl?.lastPathComponent ?? "No file selected")
             //  Hippocampus
             //
             //  Created by Guido Kühn on 19.06.24.

@@ -9,18 +9,19 @@ import Foundation
 import Smaug
 
 extension Information.Condition {
-    enum Comparison: Information.PersistentValue, Hashable {
+    indirect enum Comparison: Information.PersistentValue, Hashable {
         case `nil`
-        case below(ID, Value)
-        case above(ID, Value)
-        case equal(ID, Value)
-        case unequal(ID, Value)
+        case below(ID, Form? = nil, Value)
+        case above(ID, Form? = nil, Value)
+        case equal(ID, Value, Form? = nil)
+        case unequal(ID, Form? = nil, Value)
         case anyValue(ID)
 
         // MARK: Nested Types
 
-        typealias Value = Information.ValueStorage
+        typealias Value = Information.Computation
         typealias ID = Structure.Aspect.ID
+        typealias Form = Structure.Aspect.Kind.Form
 
         // MARK: Functions
 
@@ -35,27 +36,27 @@ extension Information.Condition {
             switch self {
             case .nil:
                 return false
-            case let .below(aspect, value):
-                guard let aspect = structure[Structure.Aspect.self, aspect], let itemValue = aspect[item].storage else { return true }
+            case let .below(aspect, form, value):
+                guard let aspect = structure[Structure.Aspect.self, aspect], let itemValue = aspect[item, form].storage else { return true }
                 appendRole(role: aspect.role, roles: &roles)
-                return itemValue < value
-            case let .above(aspect, value):
-                guard let aspect = structure[Structure.Aspect.self, aspect], let itemValue = aspect[item].storage else { return false }
+                return itemValue < value.compute(for: [item], structure: structure).storage ?? .nil
+            case let .above(aspect, form, value):
+                guard let aspect = structure[Structure.Aspect.self, aspect], let itemValue = aspect[item, form].storage else { return false }
                 appendRole(role: aspect.role, roles: &roles)
-                return itemValue > value
-            case let .equal(aspect, value):
-                guard let aspect = structure[Structure.Aspect.self, aspect], let itemValue = aspect[item].storage else { return false }
+                return itemValue > value.compute(for: [item], structure: structure).storage ?? .nil
+            case let .equal(aspect, value, form):
+                guard let aspect = structure[Structure.Aspect.self, aspect], let itemValue = aspect[item, form].storage else { return false }
                 appendRole(role: aspect.role, roles: &roles)
-                return itemValue == value
-            case let .unequal(aspect, value):
-                guard let aspect = structure[Structure.Aspect.self, aspect], let itemValue = aspect[item].storage else { return true }
+                return itemValue == value.compute(for: [item], structure: structure).storage ?? .nil
+            case let .unequal(aspect, form, value):
+                guard let aspect = structure[Structure.Aspect.self, aspect], let itemValue = aspect[item, form].storage else { return true }
                 appendRole(role: aspect.role, roles: &roles)
-                return itemValue != value
+                return itemValue != value.compute(for: [item], structure: structure).storage ?? .nil
             case let .anyValue(aspect):
                 guard let aspect = structure[Structure.Aspect.self, aspect] else { return false }
                 appendRole(role: aspect.role, roles: &roles)
                 if aspect.isComputed {
-                    return aspect[item].isNil == false
+                    return aspect[item, nil].isNil == false
                 } else {
                     return item[aspect.id].isNil == false
                 }

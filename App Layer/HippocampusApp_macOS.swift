@@ -8,6 +8,12 @@
 import SwiftUI
 
 extension HippocampusApp: App {
+//    var body: some Scene {
+//        WindowGroup {
+//            Design_BorderPointView()
+//        }
+//    }
+
     var body: some Scene {
         Group {
             WindowGroup(id: "Main") {
@@ -37,13 +43,19 @@ extension HippocampusApp: App {
                     .environment(\.document, document)
             }
             Window("Design", id: "design") {
-                DocumentView(document: HippocampusApp.previewDocument)
+                Design_Background()
+
 //                DocumentView(document: HippocampusApp.previewDocument)
 //                    .environment(\._document, HippocampusApp.previewDocument)
             }
         }
         .commandsRemoved()
+//        .commandsReplaced(content: {
+//            CommandGroup(replacing: ., addition: <#T##() -> View#>)
+//        })
         .commands {
+            TextEditingCommands()
+
             CommandGroup(after: .appInfo) {
                 Button(action: {
                     NSApplication.shared.terminate(self)
