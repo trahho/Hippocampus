@@ -59,48 +59,48 @@ struct HippocampusApp {
 //            filter.name = "Group \(i)"
 //            filter.layouts = [.list]
 //            filter.layout = .list
-//            filter.roles = [Structure.Role.Statics.note]
+//            filter.perspectives = [Structure.Perspective.Statics.note]
 //            for j in 1 ..< 4 {
 //                let subFilter = document(Structure.Filter.self)
 //                document[] = subFilter
 //                subFilter.superFilters.append(filter)
-////                subFilter.roots = !.role(Structure.Role.topic.id)<~
+////                subFilter.roots = !.perspective(Structure.Perspective.topic.id)<~
 //                subFilter.layouts = [.tree, .list]
 //                subFilter.layout = .tree
 //                subFilter.name = "Filter \(j)"
-//                subFilter.roles = [Structure.Role.Statics.topic, Structure.Role.Statics.note]
+//                subFilter.perspectives = [Structure.Perspective.Statics.topic, Structure.Perspective.Statics.note]
 //            }
 //        }
 //
 //        for filter in document.structure.filters.filter({ !$0.isStatic }) {
 //            filter.orders = [.sorted(aspect.id, ascending: true)]
 //            filter.order = filter.orders.first!
-//            filter.condition = .role(Structure.Role.Statics.tracked.id)
+//            filter.condition = .perspective(Structure.Perspective.Statics.tracked.id)
 ////            filter.leafs = .always(true)
 //        }
 //
 //        for i in 0 ..< 10 {
 //            let other = document(Information.Item.self)
 //            aspect[String.self, other] = "Hallo Welt🤩"
-//            other.roles.append(Structure.Role.Statics.note)
+//            other.perspectives.append(Structure.Perspective.Statics.note)
 //
 //            let item = document(Information.Item.self)
 //            aspect[String.self, item] = "\(i + 1). Hallo Welt🤩"
-////            item.roles.append(Structure.Role.named)
-//            item.roles.append(Structure.Role.Statics.topic)
+////            item.perspectives.append(Structure.Perspective.named)
+//            item.perspectives.append(Structure.Perspective.Statics.topic)
 //            for j in 0 ..< 5 {
 //                let subItem = document(Information.Item.self)
 //                aspect[String.self, subItem] = "\(i + 1).\(j + 1). Hallo Welt🤩"
-////                subItem.roles.append(Structure.Role.named)
-//                subItem.roles.append(Structure.Role.Statics.topic)
-//                subItem.roles.append(Structure.Role.Statics.note)
+////                subItem.perspectives.append(Structure.Perspective.named)
+//                subItem.perspectives.append(Structure.Perspective.Statics.topic)
+//                subItem.perspectives.append(Structure.Perspective.Statics.note)
 //
 //                subItem.from.append(item)
 //                for k in 0 ..< 5 {
 //                    let subsubItem = document(Information.Item.self)
 //                    aspect[String.self, subsubItem] = "\(i + 1).\(j + 1).\(k + 1). Hallo Welt🤩"
-//                    subsubItem.roles.append(Structure.Role.Statics.note)
-////                    subsubItem.roles.append(Structure.Role.topic)
+//                    subsubItem.perspectives.append(Structure.Perspective.Statics.note)
+////                    subsubItem.perspectives.append(Structure.Perspective.topic)
 //
 //                    subItem.to.append(subsubItem)
 //                    subsubItem.from.append(item)

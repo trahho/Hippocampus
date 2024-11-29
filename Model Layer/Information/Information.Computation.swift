@@ -29,16 +29,16 @@ extension Information {
 //            items.filter { condition.matches($0) }.compactMap { $0[aspect]?.value as? T }
 //        }
 
-//        func matches(_ item: Aspectable, sameRole: Structure.Role? = nil, structure: Structure) -> Bool {
-//            var roles: [Structure.Role] = []
-//            return matches(item, sameRole: sameRole, structure: structure, roles: &roles)
+//        func matches(_ item: Aspectable, samePerspective: Structure.Perspective? = nil, structure: Structure) -> Bool {
+//            var perspectives: [Structure.Perspective] = []
+//            return matches(item, samePerspective: samePerspective, structure: structure, perspectives: &perspectives)
 //        }
 //
-//        func matches(_ item: Aspectable, sameRole: Structure.Role? = nil, structure: Structure, roles: inout [Structure.Role]) -> Bool {
+//        func matches(_ item: Aspectable, samePerspective: Structure.Perspective? = nil, structure: Structure, perspectives: inout [Structure.Perspective]) -> Bool {
 //            if let item = item as? Item {
-//                return itemMatches(item, sameRole: sameRole, structure: structure, roles: &roles)
+//                return itemMatches(item, samePerspective: samePerspective, structure: structure, perspectives: &perspectives)
 //            } else if let particle = item as? Particle {
-//                return particleMatches(particle, structure: structure, roles: &roles)
+//                return particleMatches(particle, structure: structure, perspectives: &perspectives)
 //            }
 //        }
 

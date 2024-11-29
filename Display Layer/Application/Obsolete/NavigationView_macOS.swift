@@ -11,7 +11,7 @@
 //struct NavigationView: View {
 //    // MARK: Nested Types
 //
-//    struct RoleSelectionPopoverView: View {
+//    struct PerspectiveSelectionPopoverView: View {
 //        // MARK: Properties
 //
 //        @Environment(\.document) var document
@@ -19,17 +19,17 @@
 //
 //        // MARK: Computed Properties
 //
-//        var roles: [Structure.Role] {
-//            document[Structure.Role.self].filter { $0.subRoles.isEmpty && $0 != .same }.sorted { $0.description < $1.description }
+//        var perspectives: [Structure.Perspective] {
+//            document[Structure.Perspective.self].filter { $0.subPerspectives.isEmpty && $0 != .same }.sorted { $0.description < $1.description }
 //        }
 //
 //        // MARK: Content
 //
 //        var body: some View {
-//            List(roles) { role in
-//                Button(role.description) {
+//            List(perspectives) { perspective in
+//                Button(perspective.description) {
 //                    let item = document(Information.Item.self)
-//                    item.roles.append(role)
+//                    item.perspectives.append(perspective)
 //                    dismiss()
 //                }
 //                .buttonStyle(.plain)
@@ -58,7 +58,7 @@
 //    // MARK: Computed Properties
 //
 //    var showList: Bool {
-//        guard let filter = structure.selectedFilter, !filter.roles.isEmpty else { return false }
+//        guard let filter = structure.selectedFilter, !filter.perspectives.isEmpty else { return false }
 //        return [.list /* .tree */ ].contains(filter.layout)
 //    }
 //
@@ -83,7 +83,7 @@
 //    }
 //
 //    @ViewBuilder var filterResultList: some View {
-//        if let filter = structure.selectedFilter, !filter.roles.isEmpty {
+//        if let filter = structure.selectedFilter, !filter.perspectives.isEmpty {
 //            FilterResultView(filter: filter)
 //                .navigationTitle(filter.name)
 //                .id(filter.id)
@@ -152,7 +152,7 @@
 //
 ////            ToolbarItemGroup(placement: .automatic) {
 ////                PopoverMenu {
-////                    RoleSelectionPopoverView()
+////                    PerspectiveSelectionPopoverView()
 ////                } label: {
 ////                    Image(systemName: "plus.circle.fill")
 ////                }

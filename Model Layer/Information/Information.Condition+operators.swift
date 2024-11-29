@@ -35,8 +35,8 @@ extension Information.Condition {
         .isReferenced(lhs)
     }
 
-//    static postfix func <~ (lhs: Structure.Role) -> Information.Condition {
-//        .isReferenced(.role(lhs.id))
+//    static postfix func <~ (lhs: Structure.Perspective) -> Information.Condition {
+//        .isReferenced(.perspective(lhs.id))
 //    }
 
     static func && (lhs: Information.Condition, rhs: Information.Condition) -> Information.Condition {

@@ -27,34 +27,34 @@ extension Information.Condition {
 
         // MARK: Internal
 
-        func appendRole(role: Structure.Role?, roles: inout [Structure.Role]) {
-            guard let role, roles.firstIndex(of: role) == nil else { return }
-            roles.append(role)
+        func appendPerspective(perspective: Structure.Perspective?, perspectives: inout [Structure.Perspective]) {
+            guard let perspective, perspectives.firstIndex(of: perspective) == nil else { return }
+            perspectives.append(perspective)
         }
 
-        func matches(for item: Aspectable, structure: Structure, roles: inout [Structure.Role]) -> Bool {
+        func matches(for item: Aspectable, structure: Structure, perspectives: inout [Structure.Perspective]) -> Bool {
             switch self {
             case .nil:
                 return false
             case let .below(aspect, form, value):
                 guard let aspect = structure[Structure.Aspect.self, aspect], let itemValue = aspect[item, form].storage else { return true }
-                appendRole(role: aspect.role, roles: &roles)
+                appendPerspective(perspective: aspect.perspective, perspectives: &perspectives)
                 return itemValue < value.compute(for: [item], structure: structure).storage ?? .nil
             case let .above(aspect, form, value):
                 guard let aspect = structure[Structure.Aspect.self, aspect], let itemValue = aspect[item, form].storage else { return false }
-                appendRole(role: aspect.role, roles: &roles)
+                appendPerspective(perspective: aspect.perspective, perspectives: &perspectives)
                 return itemValue > value.compute(for: [item], structure: structure).storage ?? .nil
             case let .equal(aspect, value, form):
                 guard let aspect = structure[Structure.Aspect.self, aspect], let itemValue = aspect[item, form].storage else { return false }
-                appendRole(role: aspect.role, roles: &roles)
+                appendPerspective(perspective: aspect.perspective, perspectives: &perspectives)
                 return itemValue == value.compute(for: [item], structure: structure).storage ?? .nil
             case let .unequal(aspect, form, value):
                 guard let aspect = structure[Structure.Aspect.self, aspect], let itemValue = aspect[item, form].storage else { return true }
-                appendRole(role: aspect.role, roles: &roles)
+                appendPerspective(perspective: aspect.perspective, perspectives: &perspectives)
                 return itemValue != value.compute(for: [item], structure: structure).storage ?? .nil
             case let .anyValue(aspect):
                 guard let aspect = structure[Structure.Aspect.self, aspect] else { return false }
-                appendRole(role: aspect.role, roles: &roles)
+                appendPerspective(perspective: aspect.perspective, perspectives: &perspectives)
                 if aspect.isComputed {
                     return aspect[item, nil].isNil == false
                 } else {

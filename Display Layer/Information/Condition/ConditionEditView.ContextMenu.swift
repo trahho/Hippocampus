@@ -47,12 +47,12 @@ extension ConditionEditView {
                 Menu("Add") {
                     Button("Not") { add(item: .not(.nil)) }
                     Button("Always") { add(item: .always(true)) }
-                    Button("Role") { add(item: .role(.nil)) }
+                    Button("Perspective") { add(item: .perspective(.nil)) }
                     Button("Is Particle") { add(item: .isParticle(.nil)) }
                     Button("Has Particle") { add(item: .hasParticle(.nil, .nil)) }
                     Button("Has Reference") { add(item: .hasReference(.nil)) }
                     Button("Is Referenced by") { add(item: .isReferenced(.nil)) }
-                    Button("Is Reference of Role") { add(item: .isReferenceOfRole(.nil)) }
+                    Button("Is Reference of Perspective") { add(item: .isReferenceOfPerspective(.nil)) }
                     Button("Has Value") { add(item: .hasValue(.nil)) }
                 }
                 Menu("Change to") {
@@ -68,12 +68,12 @@ extension ConditionEditView {
                     Button("Nil") { condition = .nil }
                     Button("Not") { condition = .not(.nil) }
                     Button("Always") { condition = .always(true) }
-                    Button("Role") { condition = .role(.nil) }
+                    Button("Perspective") { condition = .perspective(.nil) }
                     Button("Is Particle") { condition = .isParticle(.nil) }
                     Button("Has Particle") { condition = .hasParticle(.nil, .nil) }
                     Button("Has Reference") { condition = .hasReference(.nil) }
                     Button("Is Referenced by") { condition = .isReferenced(.nil) }
-                    Button("Is Reference of Role") { condition = .isReferenceOfRole(.nil) }
+                    Button("Is Reference of Perspective") { condition = .isReferenceOfPerspective(.nil) }
                     Button("Has Value") { condition = .hasValue(.nil) }
                 }
             }

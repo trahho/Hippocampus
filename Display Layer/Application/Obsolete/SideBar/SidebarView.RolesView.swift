@@ -1,5 +1,5 @@
 ////
-////  SidebarView.RolesView.swift
+////  SidebarView.PerspectivesView.swift
 ////  Hippocampus
 ////
 ////  Created by Guido Kühn on 13.05.23.
@@ -8,28 +8,28 @@
 //import SwiftUI
 //
 //extension SidebarView {
-//    struct RolesView: View {
+//    struct PerspectivesView: View {
 //        @EnvironmentObject var navigation: Navigation
 //        @EnvironmentObject var document: Document
 //
-//        var roles: [Structure.Role] {
-//            document.structure.roles
-//                .sorted { $0.roleDescription < $1.roleDescription }
+//        var perspectives: [Structure.Perspective] {
+//            document.structure.perspectives
+//                .sorted { $0.perspectiveDescription < $1.perspectiveDescription }
 //        }
 //
 //        var body: some View {
-//            List(roles, id: \.self, selection: $navigation.role) { role in
-//                Text(role.roleDescription)
+//            List(perspectives, id: \.self, selection: $navigation.perspective) { perspective in
+//                Text(perspective.perspectiveDescription)
 //            }
 //        }
 //    }
 //}
 //
-//struct RolesView_Previews: PreviewProvider {
+//struct PerspectivesView_Previews: PreviewProvider {
 //    static let document = HippocampusApp.previewDocument()
 //    static let navigation = Navigation()
 //    static var previews: some View {
-//        SidebarView.RolesView()
+//        SidebarView.PerspectivesView()
 //            .environmentObject(document)
 //            .environmentObject(navigation)
 //    }

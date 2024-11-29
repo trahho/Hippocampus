@@ -24,8 +24,8 @@ extension ConditionEditView {
             return condition
         }
 
-        var roles: [Structure.Role] {
-            structure.roles.sorted { $0.description < $1.description }
+        var perspectives: [Structure.Perspective] {
+            structure.perspectives.sorted { $0.description < $1.description }
         }
 
         var sourceCode: String {
@@ -52,26 +52,26 @@ extension ConditionEditView {
                         Toggle("\(bool)", isOn: Binding(get: { bool }, set: { condition = .always($0) }))
                             .toggleStyle(.button)
                     }
-                case let .role(roleId):
+                case let .perspective(perspectiveId):
                     HStack {
-                        Label("Has Role (\(role(id: roleId)?.name ?? "unknown"))", systemImage: "theatermasks")
+                        Label("Has Perspective (\(perspective(id: perspectiveId)?.name ?? "unknown"))", systemImage: "theatermasks")
                             .contextMenu { contextMenu }
                             .draggable(draggable)
-                        ValuePicker("", data: roles, selection: Binding<Structure.Role?>(get: { role(id: roleId) }, set: { role in
-                            guard let role else { return }
-                            condition = .role(role.id)
+                        ValuePicker("", data: perspectives, selection: Binding<Structure.Perspective?>(get: { perspective(id: perspectiveId) }, set: { perspective in
+                            guard let perspective else { return }
+                            condition = .perspective(perspective.id)
                         }), unkown: "unknown")
                             .sensitive
                     }
                 case let .hasParticle(particleId, child):
                     VStack(alignment: .leading) {
-                        Label("Has Role (\(particle(id: particleId)?.name ?? "unknown"))", systemImage: "circle.hexagongrid.circle")
+                        Label("Has Perspective (\(particle(id: particleId)?.name ?? "unknown"))", systemImage: "circle.hexagongrid.circle")
                             .contextMenu { contextMenu }
                             .draggable(draggable)
                         ParticlePicker(particle: Binding<Structure.Particle?>(get: { particle(id: particleId) }, set: { particle in
                             guard let particle else { return }
                             condition = .hasParticle(particle.id, child)
-                        }), role: particle(id: particleId)?.role)
+                        }), perspective: particle(id: particleId)?.perspective)
                         Text("Condition")
                             .dropDestination { items, _ in condition = .hasParticle(particleId, items.first! && child); return true }
                         ArrayEditView(array: Binding(get: { [child] }, set: { condition = .hasParticle(particleId, $0.first ?? .nil) }))
@@ -84,7 +84,7 @@ extension ConditionEditView {
                         ParticlePicker(particle: Binding<Structure.Particle?>(get: { particle(id: particleId) }, set: { particle in
                             guard let particle else { return }
                             condition = .isParticle(particle.id)
-                        }), role: particle(id: particleId)?.role)
+                        }), perspective: particle(id: particleId)?.perspective)
                     }
                 case let .isReferenced(child):
                     VStack(alignment: .leading) {
@@ -100,14 +100,14 @@ extension ConditionEditView {
                             .draggable(draggable)
                         ArrayEditView(array: Binding(get: { [child] }, set: { condition = .hasReference($0.first ?? .nil) }))
                     }
-                case let .isReferenceOfRole(roleId):
+                case let .isReferenceOfPerspective(perspectiveId):
                     VStack(alignment: .leading) {
-                        Label("Is Reference of Role (\(role(id: roleId)?.name ?? "unknown"))", systemImage: "theatermasks.circle")
+                        Label("Is Reference of Perspective (\(perspective(id: perspectiveId)?.name ?? "unknown"))", systemImage: "theatermasks.circle")
                             .contextMenu { contextMenu }
                             .draggable(draggable)
-                        ValuePicker("", data: roles.filter { !$0.references.isEmpty }, selection: Binding<Structure.Role?>(get: { role(id: roleId) }, set: { role in
-                            guard let role else { return }
-                            condition = .isReferenceOfRole(role.id)
+                        ValuePicker("", data: perspectives.filter { !$0.references.isEmpty }, selection: Binding<Structure.Perspective?>(get: { perspective(id: perspectiveId) }, set: { perspective in
+                            guard let perspective else { return }
+                            condition = .isReferenceOfPerspective(perspective.id)
                         }), unkown: "unknown")
                     }
                 case let .hasValue(comparison):
@@ -151,8 +151,8 @@ extension ConditionEditView {
 
         // MARK: Functions
 
-        func role(id: Structure.Role.ID) -> Structure.Role? {
-            structure[Structure.Role.self, id]
+        func perspective(id: Structure.Perspective.ID) -> Structure.Perspective? {
+            structure[Structure.Perspective.self, id]
         }
 
         func aspect(id: Structure.Aspect.ID) -> Structure.Aspect? {

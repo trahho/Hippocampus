@@ -18,7 +18,7 @@
 //
 //    @ViewBuilder
 //    var editView: some View {
-//        if aspect.role.isStatic {
+//        if aspect.perspective.isStatic {
 //            VStack(alignment: .leading) {
 //                if let value = item[String.self, aspect], value != "" {
 //                    Text(LocalizedStringKey(aspect.name))
@@ -43,7 +43,7 @@
 //    var labelView: some View {
 //        if let value = item[String.self, aspect] {
 //            Text(value)
-//        } else if aspect.role.isStatic {
+//        } else if aspect.perspective.isStatic {
 //            Text(LocalizedStringKey(aspect.name))
 //        } else {
 //            Text(aspect.name)

@@ -16,19 +16,19 @@
 //        }
 //    }
 //
-//    convenience init(_ roles: [Structure.Role], _ condition: Information.Condition) {
+//    convenience init(_ perspectives: [Structure.Perspective], _ condition: Information.Condition) {
 //        self.init()
 //        self.condition = condition
-//        self.roles = roles.asSet
+//        self.perspectives = perspectives.asSet
 //    }
 //}
 //
-//extension Presentation.RoleRepresentation {
+//extension Presentation.PerspectiveRepresentation {
 //    @resultBuilder
 //    enum Builder {
-//        static func buildBlock() -> [Presentation.RoleRepresentation] { [] }
+//        static func buildBlock() -> [Presentation.PerspectiveRepresentation] { [] }
 //
-//        static func buildBlock(_ predicates: Presentation.RoleRepresentation...) -> [Presentation.RoleRepresentation] {
+//        static func buildBlock(_ predicates: Presentation.PerspectiveRepresentation...) -> [Presentation.PerspectiveRepresentation] {
 //            predicates
 //        }
 //    }
@@ -38,7 +38,7 @@
 //    convenience init(_ id: String,
 //                     _ name: String,
 //                     @Presentation.Predicate.Builder predicates: () -> [Presentation.Predicate] = { [] },
-//                     @Presentation.RoleRepresentation.Builder representations: () -> [Presentation.RoleRepresentation] = { [] })
+//                     @Presentation.PerspectiveRepresentation.Builder representations: () -> [Presentation.PerspectiveRepresentation] = { [] })
 //    {
 //        self.init()
 //        self.id = UUID(uuidString: id)!
@@ -46,6 +46,6 @@
 //        let predicates = predicates()
 //        self.predicates = predicates.asSet
 //        let representations = representations()
-//        roleRepresentations = representations.asSet
+//        perspectiveRepresentations = representations.asSet
 //    }
 //}

@@ -25,10 +25,10 @@ struct PresentationView: View {
                 Text(string).sensitive
             case let .icon(iconId):
                 Image(systemName: iconId)
-            case let .role(roleId, layout, name):
-                if let role = document[Structure.Role.self, roleId],
-                   let role = item?.matchingRole(for: role),
-                   let presentation = role.representation(layout: layout, name: name)?.presentation
+            case let .perspective(perspectiveId, layout, name):
+                if let perspective = document[Structure.Perspective.self, perspectiveId],
+                   let perspective = item?.matchingPerspective(for: perspective),
+                   let presentation = perspective.representation(layout: layout, name: name)?.presentation
                 {
                     ArrayView(array: [presentation], item: item)
                 }

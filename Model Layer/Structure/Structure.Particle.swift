@@ -14,7 +14,7 @@ extension Structure {
     class Particle: Object, EditableListItem, Pickable {
         @Property var name = ""
         @Property var aspects: [Aspect] = []
-        @Relation(\.particles) var role: Structure.Role!
+        @Relation(\.particles) var perspective: Structure.Perspective!
 
         var description: String {
             name

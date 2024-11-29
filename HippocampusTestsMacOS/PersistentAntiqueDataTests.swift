@@ -27,27 +27,27 @@
 //        print("juhu")
 //    }
 //
-//    func testRoleCondition() throws {
-//        let condition = PersistentData.Condition.hasRole(role: "Hallo")
-//        if case let .hasRole(role) = condition {
-//            XCTAssert(role == "Hallo")
+//    func testPerspectiveCondition() throws {
+//        let condition = PersistentData.Condition.hasPerspective(perspective: "Hallo")
+//        if case let .hasPerspective(perspective) = condition {
+//            XCTAssert(perspective == "Hallo")
 //        }
 //    }
 //
-//    func testRoleSet() throws {
+//    func testPerspectiveSet() throws {
 //        let data = TestData()
-//        data[role: "Test"] = true
-//        data[role: "Hallo"] = true
+//        data[perspective: "Test"] = true
+//        data[perspective: "Hallo"] = true
 //        data.text = "Hallo Welt"
-//        XCTAssert(data[role: "Test"] == true)
-//        XCTAssert(data[role: "Hallo"] == true)
+//        XCTAssert(data[perspective: "Test"] == true)
+//        XCTAssert(data[perspective: "Hallo"] == true)
 //        XCTAssert(data.text == "Hallo Welt")
 //
 //        var newdata = TestData()
 //        newdata.id = data.id
 //        newdata.merge(other: data)
-//        XCTAssert(newdata[role: "Test"] == true)
-//        XCTAssert(newdata[role: "Hallo"] == true)
+//        XCTAssert(newdata[perspective: "Test"] == true)
+//        XCTAssert(newdata[perspective: "Hallo"] == true)
 //        XCTAssert(newdata.text == "Hallo Welt")
 //
 //        let flattened = try! CyclicEncoder().flatten(data)
@@ -60,8 +60,8 @@
 //
 //        newdata = decodedflattened
 //
-//        XCTAssert(newdata[role: "Test"] == true)
-//        XCTAssert(newdata[role: "Hallo"] == true)
+//        XCTAssert(newdata[perspective: "Test"] == true)
+//        XCTAssert(newdata[perspective: "Hallo"] == true)
 //        XCTAssert(newdata.text == "Hallo Welt")
 //    }
 //
@@ -203,8 +203,8 @@
 ////
 ////        newdata = decodedjson
 ////
-////        XCTAssert(newdata[role: "Test"] == true)
-////        XCTAssert(newdata[role: "Hallo"] == true)
+////        XCTAssert(newdata[perspective: "Test"] == true)
+////        XCTAssert(newdata[perspective: "Hallo"] == true)
 ////        XCTAssert(newdata.text == "Hallo Welt")
 ////    }
 //

@@ -60,8 +60,8 @@ struct FilterEditView: View {
 //                }
             }
 
-            Section("Roles", isExpanded: $expanded) {
-                SelectRolesSheet(filter: $filter)
+            Section("Perspectives", isExpanded: $expanded) {
+                SelectPerspectivesSheet(filter: $filter)
             }
 
             Section("Condition", isExpanded: $expanded) {
@@ -138,6 +138,6 @@ struct FilterEditView: View {
 }
 
 // #Preview {
-//    FilterEditView(role: Structure.Filter.)
-//        .environment(HippocampusApp.editStaticRolesDocument)
+//    FilterEditView(perspective: Structure.Filter.)
+//        .environment(HippocampusApp.editStaticPerspectivesDocument)
 // }

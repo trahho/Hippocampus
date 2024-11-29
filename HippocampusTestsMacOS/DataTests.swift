@@ -81,23 +81,23 @@
 //        let node1 = Information.Node()
 //        let node2 = Information.Node()
 //        let edge = Information.Edge(from: node1, to: node2)
-//        let role1 = UUID()
-//        let role2 = UUID()
-//        edge[role: role1,timestamp: Date()] = true
+//        let perspective1 = UUID()
+//        let perspective2 = UUID()
+//        edge[perspective: perspective1,timestamp: Date()] = true
 //        store.add(edge)
 //        
 //        XCTAssert(store.nodeStorage.count == 2)
 //        XCTAssert(store.edgeStorage.count == 1)
 //        
 //        let edge2 = Information.Edge(from: node1, to: node2)
-//        edge2[role: role2,timestamp: Date()] = true
+//        edge2[perspective: perspective2,timestamp: Date()] = true
 //        let result = store.add(edge2)
 //        
 //        XCTAssert(store.nodeStorage.count == 2)
 //        XCTAssert(store.edgeStorage.count == 1)
 //        
-//        XCTAssert(result[role: role1] == true)
-//        XCTAssert(result[role: role2] == true)
+//        XCTAssert(result[perspective: perspective1] == true)
+//        XCTAssert(result[perspective: perspective2] == true)
 //    }
 //    
 //    func testSerializationPresentation() throws {
@@ -115,9 +115,9 @@
 //    
 //    func testSerializationStructure() throws {
 //        let store = Structure()
-//        let node1 = Structure.Role()
+//        let node1 = Structure.Perspective()
 //        let node2 = Structure.Aspect()
-//        node2.role = node1
+//        node2.perspective = node1
 //        store.add(node1)
 //        XCTAssert(store.nodeStorage.count == 2)
 //        XCTAssert(store.edgeStorage.count == 1)
@@ -127,12 +127,12 @@
 //    
 //    func testSerializationStructure2() throws {
 //        let store = Structure()
-//        let node1 = Structure.Role()
+//        let node1 = Structure.Perspective()
 //        let node2 = Structure.Aspect()
 //        let node3 = Structure.Aspect()
 //
-////        node2.role = node1
-////        node3.role = node1
+////        node2.perspective = node1
+////        node3.perspective = node1
 //        let edge1 = Structure.Edge(from: node2, to: node1)
 //        let edge2 = Structure.Edge(from: node3, to: node1)
 //        

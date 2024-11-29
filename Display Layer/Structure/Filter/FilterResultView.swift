@@ -26,7 +26,7 @@ struct FilterResultView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            if filter.allRoles.isEmpty {
+            if filter.allPerspectives.isEmpty {
                 EmptyView()
             } else {
                 if let layout = filter.layout {
@@ -118,15 +118,15 @@ struct FilterResultView: View {
 
     // MARK: Functions
 
-    func create(role: Structure.Role) {
+    func create(perspective: Structure.Perspective) {
         let item = structure(Information.Item.self)
-        item.roles.append(role)
+        item.perspectives.append(perspective)
     }
 }
 
 // extension FilterResultView {
 //    struct Item{
 //        let item: Information.Item
-//        let role: Structure.Role
+//        let perspective: Structure.Perspective
 //    }
 // }

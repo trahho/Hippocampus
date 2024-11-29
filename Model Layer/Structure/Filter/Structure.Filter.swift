@@ -22,7 +22,7 @@ extension Structure {
 
         @Property var condition: Information.Condition = .nil
 
-        @Objects var roles: [Structure.Role]
+        @Objects var perspectives: [Structure.Perspective]
 
         @Property var representations: [Representation] = []
         @Property var layouts: [Presentation.Layout] = []
@@ -66,8 +66,8 @@ extension Structure {
             name.localized(isStatic)
         }
 
-        var allRoles: [Role] {
-            (roles + superFilters.flatMap { $0.allRoles }).asSet.asArray
+        var allPerspectives: [Perspective] {
+            (perspectives + superFilters.flatMap { $0.allPerspectives }).asSet.asArray
         }
 
         var allLayouts: [Presentation.Layout] {
@@ -106,15 +106,15 @@ extension Structure {
 //            if let roots {
 //                filters += [roots]
 //            }
-//            if let role {
-//                filters += [.hasRole(role.id)]
+//            if let perspective {
+//                filters += [.hasPerspective(perspective.id)]
 //            }
 //            return filters
 //        }
-        subscript(item: Information.Item, role: Structure.Role? = nil) -> Presentation.Properties.Properties {
+        subscript(item: Information.Item, perspective: Structure.Perspective? = nil) -> Presentation.Properties.Properties {
             guard let layout else { return Presentation.Properties.Properties() }
             let properties: Presentation.Properties = self[Presentation.Properties.self, "\(id.uuidString)-\(layout.description)"]
-            return properties(item: item, role: role)
+            return properties(item: item, perspective: perspective)
         }
     }
 }

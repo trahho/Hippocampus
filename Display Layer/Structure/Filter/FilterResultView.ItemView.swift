@@ -25,19 +25,19 @@ extension FilterResultView{
         // MARK: Computed Properties
         
         var filterPresentation: Presentation? {
-            item.filter.representations.filter { $0.condition.matches(item.item, sameRole: item.role, structure: structure) }.first?.presentation
+            item.filter.representations.filter { $0.condition.matches(item.item, samePerspective: item.perspective, structure: structure) }.first?.presentation
         }
         
         // MARK: Content
         
         var body: some View {
-            ItemPresentationView(item: item.item, role: item.role, presentation: filterPresentation, layout: layout)
+            ItemPresentationView(item: item.item, perspective: item.perspective, presentation: filterPresentation, layout: layout)
 //                .sensitive
                 .popoverMenu {
-                    ForEach(item.roles) { role in
-                        Text(role.name)
+                    ForEach(item.perspectives) { perspective in
+                        Text(perspective.name)
                             .onTapGesture {
-                                item.role = role
+                                item.perspective = perspective
                             }
                     }
                 }

@@ -1,5 +1,5 @@
 //
-//  Structure.Role+sourceCode.swift
+//  Structure.Perspective+sourceCode.swift
 //  Hippocampus
 //
 //  Created by Guido Kühn on 23.06.24.
@@ -17,24 +17,24 @@ import Foundation
 //
 // }
 
-extension Structure.Role: SourceCodeGenerator {
+extension Structure.Perspective: SourceCodeGenerator {
     func sourceCode(tab i: Int, inline _: Bool, document: Document) -> String {
-        tab(i) + "static var \(name.sourceCode): Role {"
-            + tab(i + 1) + "let role = Role(id: \"\(id)\".uuid)"
-            + tab(i + 1) + "role.name = \"\(name)\""
-            + rolesSourceCode(tab: i + 1)
+        tab(i) + "static var \(name.sourceCode): Perspective {"
+            + tab(i + 1) + "let perspective = Perspective(id: \"\(id)\".uuid)"
+            + tab(i + 1) + "perspective.name = \"\(name)\""
+            + perspectivesSourceCode(tab: i + 1)
             + referencesSourceCode(tab: i + 1)
             + aspectsSourceCode(tab: i + 1)
             + particlesSourceCode(tab: i + 1, document: document)
             + representationsSourceCode(tab: i + 1, document: document)
-            + tab(i + 1) + "return role"
+            + tab(i + 1) + "return perspective"
             + tab(i) + "}"
     }
 
-    fileprivate func rolesSourceCode(tab i: Int) -> String {
-        if roles.isEmpty { "" } else {
-            tab(i) + "role.roles = ["
-                + roles
+    fileprivate func perspectivesSourceCode(tab i: Int) -> String {
+        if perspectives.isEmpty { "" } else {
+            tab(i) + "perspective.perspectives = ["
+                + perspectives
                 .map { "\($0.name.sourceCode)" }
                 .joined(separator: ", ")
                 + "]"
@@ -43,7 +43,7 @@ extension Structure.Role: SourceCodeGenerator {
 
     fileprivate func referencesSourceCode(tab i: Int) -> String {
         if references.isEmpty { "" } else {
-            tab(i) + "role.references = ["
+            tab(i) + "perspective.references = ["
                 + references
                 .map { "\($0.name.sourceCode)" }
                 .joined(separator: ", ")
@@ -53,14 +53,14 @@ extension Structure.Role: SourceCodeGenerator {
 
     fileprivate func aspectsSourceCode(tab i: Int) -> String {
         if aspects.isEmpty { "" } else {
-            tab(i) + "role.aspects = ["
+            tab(i) + "perspective.aspects = ["
                 + aspects.map { aspect in
                     tab(i + 1) + "{"
                         + tab(i + 2) + "let aspect = Aspect(id: \"\(aspect.id)\".uuid)"
                         + tab(i + 2) + "aspect.name = \"\(aspect.name)\""
                         + tab(i + 2) + "aspect.kind = .\(aspect.kind)"
 //                        + (aspect.exportCodedComputed ? (
-//                            tab(i + 2) + "aspect.codedComputation = Aspect.Code." + "\(aspect.role!.name) \(aspect.name)".sourceCode
+//                            tab(i + 2) + "aspect.codedComputation = Aspect.Code." + "\(aspect.perspective!.name) \(aspect.name)".sourceCode
 //                                + tab(i + 2) + "aspect.isComputed = true"
 //                        ) : "")
                         + tab(i + 2) + "return aspect"
@@ -80,7 +80,7 @@ extension Structure.Role: SourceCodeGenerator {
                         + tab(6) + "aspect.name = \"\(aspect.name)\""
                         + tab(6) + "aspect.kind = .\(aspect.kind)"
 //                        + (aspect.exportCodedComputed ? (
-//                            tab(6) + "aspect.codedComputation = Aspect.Code." + "\(aspect.role!.name) \(aspect.name)".sourceCode
+//                            tab(6) + "aspect.codedComputation = Aspect.Code." + "\(aspect.perspective!.name) \(aspect.name)".sourceCode
 //                                + tab(6) + "aspect.isComputed = true"
 //                        ) : "")
                         + tab(6) + "return aspect"
@@ -93,7 +93,7 @@ extension Structure.Role: SourceCodeGenerator {
 
     fileprivate func particlesSourceCode(tab i: Int, document _: Document) -> String {
         if particles.isEmpty { "" } else {
-            tab(i) + "role.particles = ["
+            tab(i) + "perspective.particles = ["
                 + particles.map { particle in
                     tab(i + 1) + "{"
                         + tab(i + 2) + "let particle = Particle(id: \"\(particle.id)\".uuid)"
@@ -109,7 +109,7 @@ extension Structure.Role: SourceCodeGenerator {
 
     fileprivate func representationsSourceCode(tab i: Int, document: Document) -> String {
         if representations.isEmpty { "" } else {
-            tab(i) + "role.representations = ["
+            tab(i) + "perspective.representations = ["
                 + representations.map { representation in
                     tab(i + 1) + "{"
                         + tab(i + 2) + "let representation = Representation(id: \"\(representation.id)\".uuid)"

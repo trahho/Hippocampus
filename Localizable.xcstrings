@@ -113,7 +113,7 @@
     "Create static filter" : {
 
     },
-    "Create static role" : {
+    "Create static perspective" : {
 
     },
     "D" : {
@@ -128,18 +128,7 @@
     "Edit" : {
 
     },
-    "Edit Role" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rolle bearbeiten"
-          }
-        }
-      }
-    },
-    "Edit Roles" : {
+    "Edit Perspectives" : {
 
     },
     "Enter Markup Text" : {
@@ -178,13 +167,13 @@
     "Has Particle" : {
 
     },
+    "Has Perspective (%@)" : {
+
+    },
     "Has Reference" : {
 
     },
     "Has Reference to" : {
-
-    },
-    "Has Role (%@)" : {
 
     },
     "Has value" : {
@@ -220,10 +209,10 @@
     "Is Particle (%@)" : {
 
     },
-    "Is Reference of Role" : {
+    "Is Reference of Perspective" : {
 
     },
-    "Is Reference of Role (%@)" : {
+    "Is Reference of Perspective (%@)" : {
 
     },
     "Is Referenced by" : {
@@ -268,7 +257,7 @@
     "New Filter" : {
 
     },
-    "New Role" : {
+    "New Perspective" : {
 
     },
     "New Window" : {
@@ -298,6 +287,15 @@
     "pc" : {
 
     },
+    "Perspective" : {
+
+    },
+    "Perspective presentation" : {
+
+    },
+    "Perspectives" : {
+
+    },
     "pr" : {
 
     },
@@ -318,15 +316,6 @@
       }
     },
     "Required" : {
-
-    },
-    "Role" : {
-
-    },
-    "Role presentation" : {
-
-    },
-    "Roles" : {
 
     },
     "S" : {

@@ -19,11 +19,11 @@ class Information: ObjectStore {
 //    }
 //
 
-//    func createNode(roles: [Structure.Role] = [], timestamp: Date? = nil) -> Node {
+//    func createNode(perspectives: [Structure.Perspective] = [], timestamp: Date? = nil) -> Node {
 //        let timestamp = timestamp ?? Date()
 //        let node = Node()
-//        node[Date.self, Structure.Role.global.created.id, timestamp: timestamp] = timestamp
-//        roles.forEach { node[role: $0, timestamp: timestamp] = true }
+//        node[Date.self, Structure.Perspective.global.created.id, timestamp: timestamp] = timestamp
+//        perspectives.forEach { node[perspective: $0, timestamp: timestamp] = true }
 //        add(node, timestamp: timestamp)
 //        return node
 //    }

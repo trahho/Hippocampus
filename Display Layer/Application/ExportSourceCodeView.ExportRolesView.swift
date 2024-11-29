@@ -1,5 +1,5 @@
 //
-//  ExportRolesView.swift
+//  ExportPerspectivesView.swift
 //  Hippocampus
 //
 //  Created by Guido Kühn on 20.07.24.
@@ -9,12 +9,12 @@ import Grisu
 import SwiftUI
 
 extension ExportSourceCodeView {
-    struct ExportRolesView: View {
+    struct ExportPerspectivesView: View {
         // MARK: Properties
 
         @Environment(\.document) var document
         @State var fileUrl: URL?
-        @State var selectedRoles: [Structure.Role] = []
+        @State var selectedPerspectives: [Structure.Perspective] = []
         @State var importFile = false
         @State var showExportConfirmation = false
         @State var showDeleteConfirmation = false
@@ -27,18 +27,18 @@ extension ExportSourceCodeView {
 
         // MARK: Computed Properties
 
-        var roles: [Structure.Role] {
-            document.structure.roles.asArray
-                .filter { $0 != Structure.Role.Statics.same }
+        var perspectives: [Structure.Perspective] {
+            document.structure.perspectives.asArray
+                .filter { $0 != Structure.Perspective.Statics.same }
                 .sorted(by: { $0.description < $1.description })
         }
 
-        var rolesSourceCode: String {
-            //        let selectedRoles = selectedRoles
-            //            .compactMap { document[Structure.Role.self, $0] }
+        var perspectivesSourceCode: String {
+            //        let selectedPerspectives = selectedPerspectives
+            //            .compactMap { document[Structure.Perspective.self, $0] }
 
-            let sameRole = Structure.Role(id: "00000000-0000-0000-0000-000000000001".uuid)
-            sameRole.name = "same"
+            let samePerspective = Structure.Perspective(id: "00000000-0000-0000-0000-000000000001".uuid)
+            samePerspective.name = "same"
 
             var result = """
             //
@@ -53,24 +53,24 @@ extension ExportSourceCodeView {
             import SwiftUI
             import Grisu
 
-            extension Structure.Role {
-                typealias Role = Structure.Role
+            extension Structure.Perspective {
+                typealias Perspective = Structure.Perspective
                 typealias Aspect = Structure.Aspect
                 typealias Particle = Structure.Particle
 
 
             """
-            result += "\tstatic var statics: [Role] { ["
-                + selectedRoles.sorted(by: { $0.name < $1.name })
+            result += "\tstatic var statics: [Perspective] { ["
+                + selectedPerspectives.sorted(by: { $0.name < $1.name })
                 .map { "Statics." + $0.name.sourceCode }
                 .joined(separator: ", ")
                 + "] }\n\n"
 
-            let selectedRoles = selectedRoles.sorted(by: { $0.name < $1.name })
-            let roles = [sameRole] + selectedRoles
+            let selectedPerspectives = selectedPerspectives.sorted(by: { $0.name < $1.name })
+            let perspectives = [samePerspective] + selectedPerspectives
 
             result += "\tenum Statics {"
-                + roles
+                + perspectives
                 .map { $0.sourceCode(tab: 2, inline: false, document: document) }
                 .joined(separator: "\n") + "\n"
                 + "\t}\n}\n"
@@ -104,45 +104,45 @@ extension ExportSourceCodeView {
                                 print(error)
                             }
                         }
-                    SelectorView(data: roles, selection: $selectedRoles) { Text($0.description) }
-                    Text(rolesSourceCode)
+                    SelectorView(data: perspectives, selection: $selectedPerspectives) { Text($0.description) }
+                    Text(perspectivesSourceCode)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                         .font(.system(size: 8))
                 }
                 .formStyle(.grouped)
 
                 HStack {
-                    Button("Create static role") {
-                        let role = Structure.Role()
-                        role.name = "Static Role"
-                        try! document.$structure.addStaticObject(item: role)
+                    Button("Create static perspective") {
+                        let perspective = Structure.Perspective()
+                        perspective.name = "Static Perspective"
+                        try! document.$structure.addStaticObject(item: perspective)
                     }
 
                     Button("Export") {
                         showExportConfirmation.toggle()
                     }
-                    .disabled(selectedRoles.isEmpty || fileUrl == nil)
+                    .disabled(selectedPerspectives.isEmpty || fileUrl == nil)
                     .confirmationDialog("Export", isPresented: $showExportConfirmation) {
                         Button("Export") {
                             Task {
                                 guard let fileUrl, fileUrl.startAccessingSecurityScopedResource() else { return }
-                                try! rolesSourceCode.write(to: fileUrl, atomically: true, encoding: .utf8)
+                                try! perspectivesSourceCode.write(to: fileUrl, atomically: true, encoding: .utf8)
                                 fileUrl.stopAccessingSecurityScopedResource()
-                                selectedRoles
+                                selectedPerspectives
                                     .filter { !$0.isStatic }
                                     .forEach {
                                         do {
                                             try document.$structure.makeObjectStatic(item: $0)
                                         } catch {}
                                     }
-                                showDeleteConfirmation = selectedRoles.contains(where: { !$0.isStatic })
+                                showDeleteConfirmation = selectedPerspectives.contains(where: { !$0.isStatic })
                             }
                         }
                     }
                     .confirmationDialog("Delete", isPresented: $showDeleteConfirmation) {
                         Button("Delete") {
                             Task {
-                                selectedRoles
+                                selectedPerspectives
                                     .filter { !$0.isStatic }
                                     .forEach {
                                         document.delete($0)
@@ -160,12 +160,12 @@ extension ExportSourceCodeView {
 
         func analyzeFile(_ file: URL) {
             let text = try! String(contentsOf: file, encoding: .utf8)
-            let regex = /let role = Role\(id: "(.*)".uuid\)/
+            let regex = /let perspective = Perspective\(id: "(.*)".uuid\)/
             let declarations = text.split(separator: "\n")
                 .compactMap { try? regex.firstMatch(in: $0) }
                 .map { String($0.1).uuid }
-                .compactMap { document[Structure.Role.self, $0] }
-                .filter { $0 != Structure.Role.Statics.same }
+                .compactMap { document[Structure.Perspective.self, $0] }
+                .filter { $0 != Structure.Perspective.Statics.same }
 
             guard !declarations.isEmpty else {
                 // Hier wird der Text auf ein leeres File gecheckt, das dann gefüllt wird.
@@ -177,7 +177,7 @@ extension ExportSourceCodeView {
                 return
             }
 
-            selectedRoles = declarations
+            selectedPerspectives = declarations
             fileUrl = file
         }
     }

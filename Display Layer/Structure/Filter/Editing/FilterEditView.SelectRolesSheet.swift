@@ -1,5 +1,5 @@
 //
-//  FilterEditView.SelectRolesSheet.swift
+//  FilterEditView.SelectPerspectivesSheet.swift
 //  Hippocampus
 //
 //  Created by Guido Kühn on 19.07.24.
@@ -8,24 +8,24 @@
 import SwiftUI
 
 extension FilterEditView {
-    struct SelectRolesSheet: View {
+    struct SelectPerspectivesSheet: View {
         // MARK: Nested Types
 
         struct Entry: Identifiable, Hashable {
             // MARK: Properties
 
-//            let item: Structure.Role
-            let role: Structure.Role
+//            let item: Structure.Perspective
+            let perspective: Structure.Perspective
 
             // MARK: Computed Properties
 
-            var id: Structure.Role.ID { role.id }
-            var text: String { role.name.localized(role.isStatic) }
+            var id: Structure.Perspective.ID { perspective.id }
+            var text: String { perspective.name.localized(perspective.isStatic) }
 
             var children: [Entry]? {
-                let result = role.subRoles
+                let result = perspective.subPerspectives
                     .sorted(by: { $0.name.localized($0.isStatic) < $1.name.localized($1.isStatic) })
-                    .map { Entry(role: $0) }
+                    .map { Entry(perspective: $0) }
                 return result.isEmpty ? nil : result
             }
         }
@@ -38,10 +38,10 @@ extension FilterEditView {
         // MARK: Computed Properties
 
         var roots: [Entry] {
-            document.structure.roles
-                .filter { $0 != Structure.Role.Statics.same }
+            document.structure.perspectives
+                .filter { $0 != Structure.Perspective.Statics.same }
                 .sorted(by: { $0.name.localized($0.isStatic) < $1.name.localized($1.isStatic) })
-                .map { Entry(role: $0) }
+                .map { Entry(perspective: $0) }
         }
 
         // MARK: Content
@@ -49,7 +49,7 @@ extension FilterEditView {
         var body: some View {
             List(roots, children: \.children) { entry in
                 HStack {
-                    if filter.roles.contains(entry.role) {
+                    if filter.perspectives.contains(entry.perspective) {
                         Image(systemName: "checkmark.circle")
                     } else {
                         Image(systemName: "circle")
@@ -58,10 +58,10 @@ extension FilterEditView {
                 }
                 .contentShape(Rectangle())
                 .onTapGesture {
-                    if filter.roles.contains(entry.role) {
-                        filter.roles.removeAll(where: { $0 == entry.role })
+                    if filter.perspectives.contains(entry.perspective) {
+                        filter.perspectives.removeAll(where: { $0 == entry.perspective })
                     } else {
-                        filter.roles.append(entry.role)
+                        filter.perspectives.append(entry.perspective)
                     }
                 }
             }

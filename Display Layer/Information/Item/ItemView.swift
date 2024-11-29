@@ -11,18 +11,18 @@
 //struct ItemView: View {
 //    @EnvironmentObject var document: Document
 //    @ObservedObject var item: Information.Item
-//    var roles: [Structure.Role]
-//    @State var showAllRoles = false
+//    var perspectives: [Structure.Perspective]
+//    @State var showAllPerspectives = false
 //
-//    var sortedRoles: [Structure.Role] {
-//        let roles = showAllRoles ? document.structure.roles.filter { item[role: $0] } : roles
-//        return roles.sorted { a, b in
-//            a.roleDescription < b.roleDescription
+//    var sortedPerspectives: [Structure.Perspective] {
+//        let perspectives = showAllPerspectives ? document.structure.perspectives.filter { item[perspective: $0] } : perspectives
+//        return perspectives.sorted { a, b in
+//            a.perspectiveDescription < b.perspectiveDescription
 //        }
 //    }
 //
-//    func aspects(_ role: Structure.Role) -> [Structure.Aspect] {
-//        role.allAspects.sorted { a, b in
+//    func aspects(_ perspective: Structure.Perspective) -> [Structure.Aspect] {
+//        perspective.allAspects.sorted { a, b in
 //            (a.index, a.name) < (b.index, b.name)
 //        }
 //    }
@@ -33,9 +33,9 @@
 //
 //    var body: some View {
 //        //        ScrollView {
-//        //            ForEach(sortedRoles) { role in
-//        //                DisclosureGroup(LocalizedStringKey(role.roleDescription)) {
-//        //                    role.representation(for: "_Edit")
+//        //            ForEach(sortedPerspectives) { perspective in
+//        //                DisclosureGroup(LocalizedStringKey(perspective.perspectiveDescription)) {
+//        //                    perspective.representation(for: "_Edit")
 //        //                        .view(for: item, editable: true)
 //        //                }
 //        //            }
@@ -43,13 +43,13 @@
 //        //        }
 //        //        .padding()
 //        TabView {
-//            ForEach(sortedRoles) { role in
+//            ForEach(sortedPerspectives) { perspective in
 //                VStack {
-//                    role.representation(for: "_Edit")
+//                    perspective.representation(for: "_Edit")
 //                        .view(for: item, editable: true)
 //                }
 //                .tabItem {
-//                    Text(LocalizedStringKey(role.roleDescription))
+//                    Text(LocalizedStringKey(perspective.perspectiveDescription))
 //                }
 //            }
 //        }

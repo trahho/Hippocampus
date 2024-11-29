@@ -7,7 +7,7 @@
 		<dict>
 			<key>CFBundleTypeName</key>
 			<string>Hippocampus Memory</string>
-			<key>CFBundleTypeRole</key>
+			<key>CFBundleTypePerspective</key>
 			<string>Editor</string>
 			<key>LSHandlerRank</key>
 			<string>Default</string>

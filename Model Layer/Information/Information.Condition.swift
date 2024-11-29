@@ -12,11 +12,11 @@ extension Information {
     indirect enum Condition: PersistentValue, Hashable, Transferable {
         case `nil`
         case always(Bool)
-        case role(Structure.Role.ID)
+        case perspective(Structure.Perspective.ID)
         case hasParticle(Structure.Particle.ID, Condition)
         case isParticle(Structure.Particle.ID)
         case isReferenced(Condition)
-        case isReferenceOfRole(Structure.Role.ID)
+        case isReferenceOfPerspective(Structure.Perspective.ID)
         case hasReference(Condition)
         case hasValue(Comparison)
         case not(Condition)
@@ -37,94 +37,94 @@ extension Information {
 
         // MARK: Functions
 
-        func matches(_ item: Aspectable, sameRole: Structure.Role? = nil, structure: Structure) -> Bool {
-            var roles: [Structure.Role] = []
-            return matches(item, sameRole: sameRole, structure: structure, roles: &roles)
+        func matches(_ item: Aspectable, samePerspective: Structure.Perspective? = nil, structure: Structure) -> Bool {
+            var perspectives: [Structure.Perspective] = []
+            return matches(item, samePerspective: samePerspective, structure: structure, perspectives: &perspectives)
         }
 
-        func matches(_ item: Aspectable, sameRole: Structure.Role? = nil, structure: Structure, roles: inout [Structure.Role]) -> Bool {
+        func matches(_ item: Aspectable, samePerspective: Structure.Perspective? = nil, structure: Structure, perspectives: inout [Structure.Perspective]) -> Bool {
             if let item = item as? Item {
-                return itemMatches(item, sameRole: sameRole, structure: structure, roles: &roles)
+                return itemMatches(item, samePerspective: samePerspective, structure: structure, perspectives: &perspectives)
             } else if let particle = item as? Particle {
-                return particleMatches(particle, structure: structure, roles: &roles)
+                return particleMatches(particle, structure: structure, perspectives: &perspectives)
             } else { return false }
         }
 
-        func itemMatches(_ item: Information.Item, sameRole: Structure.Role? = nil, structure: Structure, roles: inout [Structure.Role]) -> Bool {
+        func itemMatches(_ item: Information.Item, samePerspective: Structure.Perspective? = nil, structure: Structure, perspectives: inout [Structure.Perspective]) -> Bool {
             switch self {
             case .nil:
                 return false
             case let .always(truth):
                 return truth
-            case let .role(roleId):
-                if roleId == Structure.Role.Statics.same.id, let sameRole, item.matchingRole(for: sameRole) != nil {
-                    roles.append(sameRole)
+            case let .perspective(perspectiveId):
+                if perspectiveId == Structure.Perspective.Statics.same.id, let samePerspective, item.matchingPerspective(for: samePerspective) != nil {
+                    perspectives.append(samePerspective)
                     return true
                 }
-                guard let role = structure[Structure.Role.self, roleId] else { return false }
-                if let role = item.matchingRole(for: role) {
-                    appendRole(role: role, roles: &roles)
+                guard let perspective = structure[Structure.Perspective.self, perspectiveId] else { return false }
+                if let perspective = item.matchingPerspective(for: perspective) {
+                    appendPerspective(perspective: perspective, perspectives: &perspectives)
                     return true
                 }
                 return false
-            case let .isReferenceOfRole(roleId):
-                guard let role = structure[Structure.Role.self, roleId] else { return false }
-                return role.allReferences.map { reference in
-                    Condition.role(reference.id).matches(item, sameRole: role, structure: structure, roles: &roles)
+            case let .isReferenceOfPerspective(perspectiveId):
+                guard let perspective = structure[Structure.Perspective.self, perspectiveId] else { return false }
+                return perspective.allReferences.map { reference in
+                    Condition.perspective(reference.id).matches(item, samePerspective: perspective, structure: structure, perspectives: &perspectives)
                 }
                 .reduce(false) { $0 || $1 }
             case .isParticle:
                 return false
             case let .hasValue(comparison):
-                return comparison.matches(for: item, structure: structure, roles: &roles)
+                return comparison.matches(for: item, structure: structure, perspectives: &perspectives)
             case let .isReferenced(condition):
-                var blockRoles: [Structure.Role] = []
-                return item.from.contains { condition.matches($0, sameRole: sameRole, structure: structure, roles: &blockRoles) }
+                var blockPerspectives: [Structure.Perspective] = []
+                return item.from.contains { condition.matches($0, samePerspective: samePerspective, structure: structure, perspectives: &blockPerspectives) }
             case let .hasReference(condition):
-                var blockRoles: [Structure.Role] = []
-                return item.to.contains { condition.matches($0, sameRole: sameRole, structure: structure, roles: &blockRoles) }
+                var blockPerspectives: [Structure.Perspective] = []
+                return item.to.contains { condition.matches($0, samePerspective: samePerspective, structure: structure, perspectives: &blockPerspectives) }
             case let .hasParticle(particleId, condition):
                 return item.particles
                     .filter { $0.id == particleId }
-                    .contains { condition == .nil ? true : condition.matches($0, structure: structure, roles: &roles) }
+                    .contains { condition == .nil ? true : condition.matches($0, structure: structure, perspectives: &perspectives) }
             case let .not(condition):
-                var blockRoles: [Structure.Role] = []
-                return !condition.matches(item, sameRole: sameRole, structure: structure, roles: &blockRoles)
+                var blockPerspectives: [Structure.Perspective] = []
+                return !condition.matches(item, samePerspective: samePerspective, structure: structure, perspectives: &blockPerspectives)
             case let .any(conditions):
-                return conditions.first { $0.matches(item, sameRole: sameRole, structure: structure, roles: &roles) } != nil
+                return conditions.first { $0.matches(item, samePerspective: samePerspective, structure: structure, perspectives: &perspectives) } != nil
             case let .all(conditions):
-                return conditions.first { !$0.matches(item, sameRole: sameRole, structure: structure, roles: &roles) } == nil
+                return conditions.first { !$0.matches(item, samePerspective: samePerspective, structure: structure, perspectives: &perspectives) } == nil
             }
         }
 
-        func particleMatches(_ item: Information.Particle, structure: Structure, roles: inout [Structure.Role]) -> Bool {
+        func particleMatches(_ item: Information.Particle, structure: Structure, perspectives: inout [Structure.Perspective]) -> Bool {
             switch self {
             case .nil:
                 return false
             case let .always(truth):
                 return truth
-            case .role:
+            case .perspective:
                 return false
             case let .isParticle(particleId):
                 return item.particle == particleId
             case let .hasValue(comparison):
-                return comparison.matches(for: item, structure: structure, roles: &roles)
+                return comparison.matches(for: item, structure: structure, perspectives: &perspectives)
             case .hasParticle, .hasReference, .isReferenced:
                 return false
             case let .not(condition):
-                return !condition.matches(item, structure: structure, roles: &roles)
+                return !condition.matches(item, structure: structure, perspectives: &perspectives)
             case let .any(conditions):
-                return conditions.first { $0.matches(item, structure: structure, roles: &roles) } != nil
+                return conditions.first { $0.matches(item, structure: structure, perspectives: &perspectives) } != nil
             case let .all(conditions):
-                return conditions.first { !$0.matches(item, structure: structure, roles: &roles) } == nil
-            case .isReferenceOfRole:
+                return conditions.first { !$0.matches(item, structure: structure, perspectives: &perspectives) } == nil
+            case .isReferenceOfPerspective:
                 return false
             }
         }
 
-        fileprivate func appendRole(role: Structure.Role, roles: inout [Structure.Role]) {
-            guard roles.firstIndex(of: role) == nil else { return }
-            roles.append(role)
+        fileprivate func appendPerspective(perspective: Structure.Perspective, perspectives: inout [Structure.Perspective]) {
+            guard perspectives.firstIndex(of: perspective) == nil else { return }
+            perspectives.append(perspective)
         }
     }
 }

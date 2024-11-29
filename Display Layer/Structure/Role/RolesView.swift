@@ -1,5 +1,5 @@
 //
-//  RoleEditView.swift
+//  PerspectiveEditView.swift
 //  Hippocampus
 //
 //  Created by Guido Kühn on 14.06.24.
@@ -8,19 +8,19 @@
 import Grisu
 import SwiftUI
 
-struct RolesView: View {
+struct PerspectivesView: View {
     // MARK: Properties
 
     @Environment(\.document) var document
-    @State var role: Structure.Role.ID?
+    @State var perspective: Structure.Perspective.ID?
     @State var expanded: Expansions = .init()
 
 
     // MARK: Computed Properties
 
-    var roles: [Structure.Role] {
-        document.structure.roles
-            .filter { $0 != Structure.Role.Statics.same }
+    var perspectives: [Structure.Perspective] {
+        document.structure.perspectives
+            .filter { $0 != Structure.Perspective.Statics.same }
             .sorted(by: { $0.name.localized($0.isLocked) < $1.name.localized($1.isLocked) })
     }
 
@@ -28,12 +28,12 @@ struct RolesView: View {
 
     var body: some View {
         NavigationSplitView {
-            List(roles, selection: $role) { role in
-                Text(role.name.localized(role.isLocked))
+            List(perspectives, selection: $perspective) { perspective in
+                Text(perspective.name.localized(perspective.isLocked))
             }
         } detail: {
-            if let id = role, let role = document[Structure.Role.self, id] {
-                RoleEditView(role: role)
+            if let id = perspective, let perspective = document[Structure.Perspective.self, id] {
+                PerspectiveEditView(perspective: perspective)
                     .id(id)
             } else {
                 EmptyView()
@@ -41,35 +41,35 @@ struct RolesView: View {
         }
         .toolbar {
             Button {
-                let role = document(Structure.Role.self)
-                self.role = role.id
+                let perspective = document(Structure.Perspective.self)
+                self.perspective = perspective.id
             } label: {
                 Image(systemName: "plus")
             }
 //            #if os(OSX)
 //                Button {
 //                    var result = """
-//                    extension Structure.Role {
-//                        typealias Role = Structure.Role
+//                    extension Structure.Perspective {
+//                        typealias Perspective = Structure.Perspective
 //                        typealias Aspect = Structure.Aspect
 //                        typealias Particle = Structure.Particle
 //
 //
 //                    """
-//                    result += "\tstatic var statics: [Role] = [.same, "
-//                    result += document.structure.roles
-//                        .filter { $0 != Structure.Role.same }
+//                    result += "\tstatic var statics: [Perspective] = [.same, "
+//                    result += document.structure.perspectives
+//                        .filter { $0 != Structure.Perspective.same }
 //                        .sorted(by: { $0.name < $1.name })
 //                        .map { ".\($0.name)" }
 //                        .joined(separator: ", ")
 //                    result += "]\n\n"
 //
-//                    result += Structure.Role.same.sourceCode(tab: 0, inline: false, document: document) + "\n"
-//                    for role in document.structure.roles
-//                        .filter({ $0 != Structure.Role.same })
+//                    result += Structure.Perspective.same.sourceCode(tab: 0, inline: false, document: document) + "\n"
+//                    for perspective in document.structure.perspectives
+//                        .filter({ $0 != Structure.Perspective.same })
 //                        .sorted(by: { $0.name < $1.name })
 //                    {
-//                        result += role.sourceCode(tab: 0, inline: false, document: document) + "\n"
+//                        result += perspective.sourceCode(tab: 0, inline: false, document: document) + "\n"
 //                    }
 //                    result += "}"
 //                    let pasteboard = NSPasteboard.general
@@ -86,6 +86,6 @@ struct RolesView: View {
 
 //#Preview {
 //    @Previewable @State var document = HippocampusApp.previewDocument
-//    return RolesView()
+//    return PerspectivesView()
 //        .environment(document)
 //}

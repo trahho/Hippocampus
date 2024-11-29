@@ -1,5 +1,5 @@
 //
-//  RoleEditView.EditRepresentationSheet.swift
+//  PerspectiveEditView.EditRepresentationSheet.swift
 //  Hippocampus
 //
 //  Created by Guido Kühn on 19.07.24.
@@ -11,8 +11,8 @@ struct EditRepresentationSheet: View {
     // MARK: Properties
 
     @Environment(\.document) var document
-    @State var role: Structure.Role
-    @State var representation: Structure.Role.Representation
+    @State var perspective: Structure.Perspective
+    @State var representation: Structure.Perspective.Representation
 
     // MARK: Content
 

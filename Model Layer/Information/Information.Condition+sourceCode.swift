@@ -16,20 +16,20 @@ extension Information.Condition: SourceCodeGenerator {
             return ".always(\(bool))"
         case .nil:
             return ".nil"
-        case let .role(roleId):
-//            guard let role = document[Structure.Role.self, roleId], role.isStatic else {
-            return ".role(\"\(roleId.uuidString)\".uuid)"
-//            return ".role(Structure.Role.\(role.name.sourceCode).id)"
+        case let .perspective(perspectiveId):
+//            guard let perspective = document[Structure.Perspective.self, perspectiveId], perspective.isStatic else {
+            return ".perspective(\"\(perspectiveId.uuidString)\".uuid)"
+//            return ".perspective(Structure.Perspective.\(perspective.name.sourceCode).id)"
         case let .hasParticle(particleId, condition):
             let condition = condition.sourceCode(tab: 0, inline: true, document: document)
             guard let particle = document[Structure.Particle.self, particleId], particle.isLocked else { return ".hasParticle(\"\(particleId.uuidString)\".uuid, \(condition))" }
-            return ".hasParticle(Structure.Role.\(particle.role.name.sourceCode).\(particle.name.sourceCode).id, \(condition))"
+            return ".hasParticle(Structure.Perspective.\(particle.perspective.name.sourceCode).\(particle.name.sourceCode).id, \(condition))"
         case let .isParticle(particleId):
             return ".isParticle(\"\(particleId.uuidString)\".uuid)"
         case let .isReferenced(condition):
             return "(\(condition.sourceCode(tab: 0, inline: true, document: document)))<~"
-        case let .isReferenceOfRole(roleId):
-            return ".isReferenceOfRole(\"\(roleId.uuidString)\".uuid)"
+        case let .isReferenceOfPerspective(perspectiveId):
+            return ".isReferenceOfPerspective(\"\(perspectiveId.uuidString)\".uuid)"
         case let .hasReference(condition):
             return "~>(\(condition.sourceCode(tab: 0, inline: true, document: document))))"
         case let .hasValue(comparison):

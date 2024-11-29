@@ -28,9 +28,9 @@ extension HippocampusApp: App {
                         .environment(\.document, document)
                 }
             }
-            WindowGroup("Role", for: Structure.Role.ID.self) { $id in
-                if let id, let role = document[Structure.Role.self, id] {
-                    RoleEditView(role: role)
+            WindowGroup("Perspective", for: Structure.Perspective.ID.self) { $id in
+                if let id, let perspective = document[Structure.Perspective.self, id] {
+                    PerspectiveEditView(perspective: perspective)
                         .environment(\.document, document)
                 }
             }
@@ -38,8 +38,8 @@ extension HippocampusApp: App {
                 ExportSourceCodeView()
                     .environment(\.document, document)
             }
-            Window("Edit Roles", id: "editRoles") {
-                RolesView()
+            Window("Edit Perspectives", id: "editPerspectives") {
+                PerspectivesView()
                     .environment(\.document, document)
             }
             Window("Design", id: "design") {
@@ -74,16 +74,16 @@ extension HippocampusApp: App {
                     let filter = document(Structure.Filter.self)
                     openWindow(value: filter.id)
                 }
-                Button("New Role") {
-                    let role = document(Structure.Role.self)
-                    openWindow(value: role.id)
+                Button("New Perspective") {
+                    let perspective = document(Structure.Perspective.self)
+                    openWindow(value: perspective.id)
                 }
                 Divider()
                 Button("Export SourceCode") {
                     openWindow(id: "exportSourceCode")
                 }
-                Button("Edit Roles") {
-                    openWindow(id: "editRoles")
+                Button("Edit Perspectives") {
+                    openWindow(id: "editPerspectives")
                 }
                 Divider()
                 Button("Show Design") {
@@ -112,16 +112,16 @@ extension HippocampusApp: App {
 ////                ExportSourceCodeView()
 ////                    .environment(\.currentDocument, document)
 ////            }
-////            Window("Edit Role", id: "roleEditor") {
+////            Window("Edit Perspective", id: "perspectiveEditor") {
 ////                //            TestView()
 ////                //                .onAppear {
 ////                //                    Self.locationService.start()
 ////                //                }
 ////                //            Design_Localization()
 ////                //            Design_DragDropView()
-////                RolesView()
+////                PerspectivesView()
 ////                    //            PresentationView.Preview()
-////                    //            PresentationView(presentation: Structure.Role.hierarchical.representations[0].presentation, item: Information.Item())
+////                    //            PresentationView(presentation: Structure.Perspective.hierarchical.representations[0].presentation, item: Information.Item())
 ////                    .environment(\.currentDocument, document)
 ////
 ////                // Design_NavigationView()

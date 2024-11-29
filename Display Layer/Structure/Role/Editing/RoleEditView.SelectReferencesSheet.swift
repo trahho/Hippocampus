@@ -1,5 +1,5 @@
 //
-//  RoleEditView+SelectReferencesSheet.swift
+//  PerspectiveEditView+SelectReferencesSheet.swift
 //  Hippocampus
 //
 //  Created by Guido Kühn on 19.06.24.
@@ -8,40 +8,40 @@
 import Foundation
 import SwiftUI
 
-extension RoleEditView {
+extension PerspectiveEditView {
     struct SelectReferencesSheet: View {
         @Environment(\.document) var document
-        @Binding var role: Structure.Role
+        @Binding var perspective: Structure.Perspective
         
         struct Entry: Identifiable, Hashable {
-            let item: Structure.Role
-            let role: Structure.Role
-            var id: Structure.Role.ID { role.id }
-            var text: String { role.description }
+            let item: Structure.Perspective
+            let perspective: Structure.Perspective
+            var id: Structure.Perspective.ID { perspective.id }
+            var text: String { perspective.description }
             var children: [Entry]? {
-                let result = role.roles
+                let result = perspective.perspectives
                     .filter { $0 != item }
                     .sorted(by: { $0.description < $1.description })
-                    .map { Entry(item: item, role: $0) }
+                    .map { Entry(item: item, perspective: $0) }
                 return result.isEmpty ? nil : result
             }
         }
         
         var roots: [Entry] {
-            document.structure.roles
-                .filter { $0.subRoles.isEmpty && $0 != role }
+            document.structure.perspectives
+                .filter { $0.subPerspectives.isEmpty && $0 != perspective }
                 .sorted(by: { $0.description < $1.description })
-                .map { Entry(item: role, role: $0) }
+                .map { Entry(item: perspective, perspective: $0) }
         }
         
         var body: some View {
             List(roots, children: \.children) { entry in
                 HStack {
-                    if role == entry.role {
+                    if perspective == entry.perspective {
                         Image(systemName: "circle.circle")
-                    } else if role.referencedBy.contains(entry.role) {
+                    } else if perspective.referencedBy.contains(entry.perspective) {
                         Image(systemName: "xmark.circle")
-                    } else if role.references.contains(entry.role) {
+                    } else if perspective.references.contains(entry.perspective) {
                         Image(systemName: "checkmark.circle")
                     } else {
                         Image(systemName: "circle")
@@ -50,11 +50,11 @@ extension RoleEditView {
                 }
                 .contentShape(Rectangle())
                 .onTapGesture {
-                    guard role != entry.role, !role.referencedBy.contains(entry.role) else { return }
-                    if role.references.contains(entry.role) {
-                        role.references.removeAll(where: { $0 == entry.role })
+                    guard perspective != entry.perspective, !perspective.referencedBy.contains(entry.perspective) else { return }
+                    if perspective.references.contains(entry.perspective) {
+                        perspective.references.removeAll(where: { $0 == entry.perspective })
                     } else {
-                        role.references.append(entry.role)
+                        perspective.references.append(entry.perspective)
                     }
                 }
             }

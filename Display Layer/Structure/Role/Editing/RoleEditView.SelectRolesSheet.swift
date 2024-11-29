@@ -1,5 +1,5 @@
 //
-//  RoleEditView+SelectRolesSheet.swift
+//  PerspectiveEditView+SelectPerspectivesSheet.swift
 //  Hippocampus
 //
 //  Created by Guido Kühn on 19.06.24.
@@ -10,26 +10,26 @@ import Grisu
 import Smaug
 import SwiftUI
 
-extension RoleEditView {
-    struct SelectRolesSheet: View {
+extension PerspectiveEditView {
+    struct SelectPerspectivesSheet: View {
         // MARK: Nested Types
 
         struct Entry: Identifiable, Hashable {
             // MARK: Properties
 
-            let item: Structure.Role
-            let role: Structure.Role
+            let item: Structure.Perspective
+            let perspective: Structure.Perspective
 
             // MARK: Computed Properties
 
-            var id: Structure.Role.ID { role.id }
-            var text: String { role.description }
+            var id: Structure.Perspective.ID { perspective.id }
+            var text: String { perspective.description }
 
             var children: [Entry]? {
-                let result = role.subRoles
+                let result = perspective.subPerspectives
                     .filter { !$0.conforms(to: item) }
                     .sorted(by: { $0.description < $1.description })
-                    .map { Entry(item: item, role: $0) }
+                    .map { Entry(item: item, perspective: $0) }
                 return result.isEmpty ? nil : result
             }
         }
@@ -37,15 +37,15 @@ extension RoleEditView {
         // MARK: Properties
 
         @Environment(\.document) var document
-        @Binding var role: Structure.Role
+        @Binding var perspective: Structure.Perspective
 
         // MARK: Computed Properties
 
         var roots: [Entry] {
-            document.structure.roles
-                .filter { $0.roles.isEmpty && $0 != Structure.Role.Statics.same && $0 != role }
+            document.structure.perspectives
+                .filter { $0.perspectives.isEmpty && $0 != Structure.Perspective.Statics.same && $0 != perspective }
                 .sorted(by: { $0.description < $1.description })
-                .map { Entry(item: role, role: $0) }
+                .map { Entry(item: perspective, perspective: $0) }
         }
 
         // MARK: Content
@@ -53,11 +53,11 @@ extension RoleEditView {
         var body: some View {
             List(roots, children: \.children) { entry in
                 HStack {
-                    if role == entry.role {
+                    if perspective == entry.perspective {
                         Image(systemName: "circle.circle")
-                    } else if role.subRoles.contains(entry.role) {
+                    } else if perspective.subPerspectives.contains(entry.perspective) {
                         Image(systemName: "xmark.circle")
-                    } else if role.roles.contains(entry.role) {
+                    } else if perspective.perspectives.contains(entry.perspective) {
                         Image(systemName: "checkmark.circle")
                     } else {
                         Image(systemName: "circle")
@@ -66,11 +66,11 @@ extension RoleEditView {
                 }
                 .contentShape(Rectangle())
                 .onTapGesture {
-                    guard role != entry.role, !role.subRoles.contains(entry.role) else { return }
-                    if role.roles.contains(entry.role) {
-                        role.roles.removeAll(where: { $0 == entry.role })
+                    guard perspective != entry.perspective, !perspective.subPerspectives.contains(entry.perspective) else { return }
+                    if perspective.perspectives.contains(entry.perspective) {
+                        perspective.perspectives.removeAll(where: { $0 == entry.perspective })
                     } else {
-                        role.roles.append(entry.role)
+                        perspective.perspectives.append(entry.perspective)
                     }
                 }
             }

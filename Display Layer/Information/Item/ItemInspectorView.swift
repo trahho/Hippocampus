@@ -13,14 +13,14 @@ struct ItemInspectorView: View {
 
     @Environment(\.document) var document
     @Bindable var item: Information.Item
-    @State var role: Structure.Role
+    @State var perspective: Structure.Perspective
 
     // MARK: Computed Properties
 
     // TODO: Später mal nachschauen, wie die neue Funktion zur Formattierung der ChildrenViews genutzt werden kann, um den Inspektor als Liste mit DisclosureGroups oder als TabView oder in einem eigenen mit Rollen Vertikal rechts.
 
     var defaultPresentation: Presentation {
-        Presentation.vertical(role.allAspects.map { aspect in
+        Presentation.vertical(perspective.allAspects.map { aspect in
             if aspect.kind == .drawing {
                 Presentation.aspect(aspect.id, appearance: .normal)
             } else {
@@ -29,15 +29,15 @@ struct ItemInspectorView: View {
         }, alignment: .leading)
     }
 
-    var rolePresentation: Presentation? {
-        role.representation(layout: .item)?.presentation
+    var perspectivePresentation: Presentation? {
+        perspective.representation(layout: .item)?.presentation
     }
 
     // MARK: Content
 
     var body: some View {
-        Section(header: Text(role.description)) {
-            PresentationView(presentation: rolePresentation ?? defaultPresentation, item: item)
+        Section(header: Text(perspective.description)) {
+            PresentationView(presentation: perspectivePresentation ?? defaultPresentation, item: item)
         }
     }
 }

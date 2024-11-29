@@ -13,8 +13,8 @@ import SwiftUI
 //        // MARK: Properties
 //
 //        let item: Information.Item
-//        var role: Structure.Role
-//        let roles: [Structure.Role]
+//        var perspective: Structure.Perspective
+//        let perspectives: [Structure.Perspective]
 //
 //        // MARK: Computed Properties
 //
@@ -25,18 +25,18 @@ import SwiftUI
 //        store as! Structure
 //    }
 //
-//    func filter(items: [Information.Item], additionalCondition: Information.Condition? = nil, sameRole _: Structure.Role? = nil) -> [ResultItem] {
+//    func filter(items: [Information.Item], additionalCondition: Information.Condition? = nil, samePerspective _: Structure.Perspective? = nil) -> [ResultItem] {
 //        let condition = if let additionalCondition { additionalCondition && self.condition } else { self.condition }
 //
 //        return items
 //            .compactMap { item in
-//                var roles: [Structure.Role] = []
-//                return condition.matches(item, structure: structure, roles: &roles) ? ResultItem(item: item, role: roles.finalsFirst.first!, roles: roles) : nil
+//                var perspectives: [Structure.Perspective] = []
+//                return condition.matches(item, structure: structure, perspectives: &perspectives) ? ResultItem(item: item, perspective: perspectives.finalsFirst.first!, perspectives: perspectives) : nil
 //            }
 //    }
 //
-//    func filter(items: [ResultItem], additionalCondition: Information.Condition? = nil, sameRole: Structure.Role? = nil) -> [ResultItem] {
-//        filter(items: items.map { $0.item }, additionalCondition: additionalCondition, sameRole: sameRole)
+//    func filter(items: [ResultItem], additionalCondition: Information.Condition? = nil, samePerspective: Structure.Perspective? = nil) -> [ResultItem] {
+//        filter(items: items.map { $0.item }, additionalCondition: additionalCondition, samePerspective: samePerspective)
 //    }
 // }
 
@@ -74,13 +74,13 @@ extension Structure.Filter {
         // MARK: Functions
 
         func refresh() {
-            let condition = filter.condition && filter.roles.reduce(.nil) { partialResult, role in partialResult || .role(role.id) }
+            let condition = filter.condition && filter.perspectives.reduce(.nil) { partialResult, perspective in partialResult || .perspective(perspective.id) }
             withObservationTracking {
                 for item in filter[Information.Item.self] {
-                    var roles: [Structure.Role] = []
-                    if condition.matches(item, structure: filter.structure, roles: &roles) {
+                    var perspectives: [Structure.Perspective] = []
+                    if condition.matches(item, structure: filter.structure, perspectives: &perspectives) {
                         if storage[item.id] == nil {
-                            storage[item.id] = Item(result: self, item: item, role: roles.finalsFirst.first!, roles: roles)
+                            storage[item.id] = Item(result: self, item: item, perspective: perspectives.finalsFirst.first!, perspectives: perspectives)
                         }
                     } else {
                         if storage[item.id] != nil {

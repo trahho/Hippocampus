@@ -19,7 +19,7 @@ extension Information {
         // MARK: Internal
 
         @Property var deleted: Bool = false
-        @Objects var roles: [Structure.Role]
+        @Objects var perspectives: [Structure.Perspective]
         @Property var particles: [Particle] = []
         @Objects var to: [Item]
         @Relations(\Self.to) var from: [Item]
@@ -39,8 +39,8 @@ extension Information {
 
         // MARK: Functions
 
-        func matchingRole(for role: Structure.Role) -> Structure.Role? {
-            return roles.first { $0.conforms(to: role) }
+        func matchingPerspective(for perspective: Structure.Perspective) -> Structure.Perspective? {
+            return perspectives.first { $0.conforms(to: perspective) }
         }
 
         subscript(_ aspectId: Structure.Aspect.ID) -> Structure.Aspect.Value {

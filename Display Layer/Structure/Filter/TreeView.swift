@@ -21,10 +21,10 @@ struct TreeView: View {
 
     var rootItems: [Structure.Filter.Result.Item] {
 //        var notReferenced: Information.Condition = .nil
-//        return filter.roles.referencingFirst.flatMap { role in
-//            let rootCondition: Information.Condition = .role(role.id)
-//            notReferenced = notReferenced && !.role(role.id)<~ // .not(.isReferenced(.hasRole(filter.role.id)))
-        ////            notReferenced = !.role(role.id)<~
+//        return filter.perspectives.referencingFirst.flatMap { perspective in
+//            let rootCondition: Information.Condition = .perspective(perspective.id)
+//            notReferenced = notReferenced && !.perspective(perspective.id)<~ // .not(.isReferenced(.hasPerspective(filter.perspective.id)))
+        ////            notReferenced = !.perspective(perspective.id)<~
 //            let fullCondition = rootCondition && notReferenced
 //            let items = filter.filter(items: information.items.asArray, additionalCondition: fullCondition)
 //                //            .filter { notReferenced.matches($0, structure: structure) }

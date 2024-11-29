@@ -14,8 +14,8 @@ extension Structure.Filter.Result {
 
         let result: Structure.Filter.Result
         let item: Information.Item
-        var role: Structure.Role
-        let roles: [Structure.Role]
+        var perspective: Structure.Perspective
+        let perspectives: [Structure.Perspective]
 
         // MARK: Computed Properties
 

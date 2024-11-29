@@ -19,9 +19,9 @@ extension HippocampusApp: App {
 //                    .environment(\.document, document)
 //            }
 //        }
-//        WindowGroup("Role", for: Structure.Role.ID.self) { $id in
-//            if let id, let role = document[Structure.Role.self, id] {
-//                RoleEditView(role: role)
+//        WindowGroup("Perspective", for: Structure.Perspective.ID.self) { $id in
+//            if let id, let perspective = document[Structure.Perspective.self, id] {
+//                PerspectiveEditView(perspective: perspective)
 //                    .environment(\.document, document)
 //            }
 //        }

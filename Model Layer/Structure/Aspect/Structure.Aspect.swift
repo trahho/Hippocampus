@@ -14,7 +14,7 @@ extension Structure {
     class Aspect: Structure.Object, EditableListItem, Pickable {
         // MARK: Properties
 
-        @Relation(\Structure.Role.aspects) var role: Structure.Role?
+        @Relation(\Structure.Perspective.aspects) var perspective: Structure.Perspective?
         @Relation(\Structure.Particle.aspects) var particle: Structure.Particle?
 
         @Property var name: String = ""
@@ -41,7 +41,7 @@ extension Structure {
 
         // MARK: Functions
 
-//        @Relation(\Role.aspects) var role: Role!
+//        @Relation(\Perspective.aspects) var perspective: Perspective!
 
         subscript<T>(_: T.Type, _ item: Aspectable, form: Structure.Aspect.Kind.Form? = nil) -> T? where T: Information.Value {
             get { self[item, form].value as? T }

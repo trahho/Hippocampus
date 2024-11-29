@@ -17,7 +17,7 @@ extension PresentationEditView {
         @Environment(\.document) var document
 
         @Binding var presentation: Presentation
-        @State var role: Structure.Role? = nil
+        @State var perspective: Structure.Perspective? = nil
 
         @Binding var array: [Presentation]
         @State var al: Presentation.Alignment = .leading
@@ -32,11 +32,11 @@ extension PresentationEditView {
         }
 
         var aspects: [Structure.Aspect] {
-            role?.allAspects.sorted { $0.name < $1.name } ?? []
+            perspective?.allAspects.sorted { $0.name < $1.name } ?? []
         }
 
-        var roles: [Structure.Role] {
-            document.structure.roles.filter { $0 != Structure.Role.Statics.same }.sorted { $0.description < $1.description }
+        var perspectives: [Structure.Perspective] {
+            document.structure.perspectives.filter { $0 != Structure.Perspective.Statics.same }.sorted { $0.description < $1.description }
         }
 
         // MARK: Content
@@ -78,19 +78,19 @@ extension PresentationEditView {
                     .draggable(draggable)
                     .dropDestination { items, _ in array.insert(item: items.first!, after: presentation); return true }
 //                    }
-                case let .role(roleId, layout, name):
+                case let .perspective(perspectiveId, layout, name):
                     HStack(alignment: .center) {
-                        ValuePicker("", data: roles, selection: Binding<Structure.Role?>(get: { role(id: roleId) }, set: { role in
-                            guard let role else { return }
-                            presentation = .role(role.id, layout: layout, name: name)
+                        ValuePicker("", data: perspectives, selection: Binding<Structure.Perspective?>(get: { perspective(id: perspectiveId) }, set: { perspective in
+                            guard let perspective else { return }
+                            presentation = .perspective(perspective.id, layout: layout, name: name)
                         }), unkown: "unknown")
                             .sensitive
-                        EnumPicker("Layout", selection: Binding<Presentation.Layout>(get: { layout }, set: { presentation = .role(roleId, layout: $0, name: name) }))
-                        TextField("Name", text: Binding(get: { name ?? "" }, set: { presentation = .role(roleId, layout: layout, name: $0.isEmpty ? nil : $0) }))
+                        EnumPicker("Layout", selection: Binding<Presentation.Layout>(get: { layout }, set: { presentation = .perspective(perspectiveId, layout: $0, name: name) }))
+                        TextField("Name", text: Binding(get: { name ?? "" }, set: { presentation = .perspective(perspectiveId, layout: layout, name: $0.isEmpty ? nil : $0) }))
                     }
                 case let .aspect(aspectId, appearance):
                     HStack(alignment: .center) {
-                        ValuePicker("", data: roles, selection: $role, unkown: "unknown")
+                        ValuePicker("", data: perspectives, selection: $perspective, unkown: "unknown")
                         ValuePicker("", data: aspects, selection: Binding<Structure.Aspect?>(get: { aspect(id: aspectId) }, set: { aspect in
                             guard let aspect else { return }
                             presentation = .aspect(aspect.id, appearance: appearance)
@@ -106,7 +106,7 @@ extension PresentationEditView {
                         Image(systemName: "line.3.horizontal")
                     }
                     .onAppear {
-                        role = aspect(id: aspectId)?.role
+                        perspective = aspect(id: aspectId)?.perspective
                     }
                     .frame(maxWidth: .infinity)
                     .contextMenu { contextMenu }
@@ -284,9 +284,9 @@ extension PresentationEditView {
 
         // MARK: Functions
 
-        func role(id: Structure.Role.ID) -> Structure.Role? {
-            guard let role = document[Structure.Role.self, id] else { return nil }
-            return role
+        func perspective(id: Structure.Perspective.ID) -> Structure.Perspective? {
+            guard let perspective = document[Structure.Perspective.self, id] else { return nil }
+            return perspective
         }
 
         func aspectName(id: Structure.Aspect.ID) -> String {

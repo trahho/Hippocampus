@@ -30,6 +30,6 @@ class Document: DatabaseDocument {
 //        self[] = Structure.Filter.Statics().statics
 //        Structure.Filter.setup(in: self)
         self[] = Structure.Filter.statics
-        self[] = Structure.Role.statics
+        self[] = Structure.Perspective.statics
     }
 }

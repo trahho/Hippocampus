@@ -63,7 +63,7 @@ extension NavigationView {
 
         var body: some View {
             VStack(alignment: .leading) {
-                ItemInspectorView(item: item.item, role: item.role)
+                ItemInspectorView(item: item.item, perspective: item.perspective)
             }
             .frame(alignment: .topLeading)
             .formStyle(.grouped)

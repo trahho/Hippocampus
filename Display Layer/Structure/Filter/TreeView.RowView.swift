@@ -29,14 +29,14 @@
 //        }
 //
 //        var children: [Structure.Filter.Result.Item] {
-////            let condition: Information.Condition = .isReferenceOfRole(item.role.id)
+////            let condition: Information.Condition = .isReferenceOfPerspective(item.perspective.id)
 //
 //            //        print("children: \(item.id.uuidString) expanded: \(expansions[item.id.uuidString])")
-//            //        let fullcondition: Information.Condition = if let leafs = filter.leafs { .all([.isReferenceOfRole(filter.role.id), leafs]) } else { .isReferenceOfRole(filter.role.id) }
+//            //        let fullcondition: Information.Condition = if let leafs = filter.leafs { .all([.isReferenceOfPerspective(filter.perspective.id), leafs]) } else { .isReferenceOfPerspective(filter.perspective.id) }
 //            //        guard expansions[item.id.uuidString] else { return [] }
 //            //        return item.to.filter { fullcondition.matches($0, structure: structure) }
-////            filter.allRoles
-////                .filter { $0.conforms(to: filter.roles) != nil }
+////            filter.allPerspectives
+////                .filter { $0.conforms(to: filter.perspectives) != nil }
 //        let items = item.filter.filter(items: item.item.to)
 //            if let order = filter.order {
 //                return items.sorted(by: { order.compare(lhs: $0.item, rhs: $1.item, structure: structure) })

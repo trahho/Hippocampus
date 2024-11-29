@@ -15,21 +15,21 @@ struct ItemPresentationView: View {
 
     @Environment(\.structure) var structure
     @State var item: Information.Item
-    @State var role: Structure.Role
+    @State var perspective: Structure.Perspective
     @State var presentation: Presentation?
     @State var layout: Presentation.Layout
 
     // MARK: Computed Properties
 
-    var rolePresentation: Presentation? {
-        role.representation(layout: layout)?.presentation
+    var perspectivePresentation: Presentation? {
+        perspective.representation(layout: layout)?.presentation
     }
 
     // MARK: Content
 
     var body: some View {
         Group {
-            if let presentation = presentation ?? rolePresentation {
+            if let presentation = presentation ?? perspectivePresentation {
                 PresentationView(presentation: presentation, item: item)
 //                    .sensitive
             } else {

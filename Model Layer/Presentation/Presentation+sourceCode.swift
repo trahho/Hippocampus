@@ -17,18 +17,18 @@ extension Presentation: SourceCodeGenerator {
             return start + ".label(\"\(text)\")"
         case let .icon(text):
             return start + ".icon(\"\(text)\")"
-        case let .role(id, layout, name):
-//            if let role = document[Structure.Role.self, id], role.isStatic {
-//                return start + ".role(Structure.Role.\(role.name.sourceCode).id, layout: .\(layout.description), name: \(name ?? "nil"))"
+        case let .perspective(id, layout, name):
+//            if let perspective = document[Structure.Perspective.self, id], perspective.isStatic {
+//                return start + ".perspective(Structure.Perspective.\(perspective.name.sourceCode).id, layout: .\(layout.description), name: \(name ?? "nil"))"
 //            } else {
-            return start + ".role(\"\(id)\".uuid, layout: .\(layout.description), name: \(name ?? "nil"))"
+            return start + ".perspective(\"\(id)\".uuid, layout: .\(layout.description), name: \(name ?? "nil"))"
 //            }
         case let .aspect(id, appearance):
             //            if let aspect = document[Structure.Aspect.self, id] {
-            //                return start + ".aspect(Structure.Role.\(aspect.role.name).\(aspect.name), appearance: \(appearance.sourceCode(tab: 0, inline: true, document: document)))"
+            //                return start + ".aspect(Structure.Perspective.\(aspect.perspective.name).\(aspect.name), appearance: \(appearance.sourceCode(tab: 0, inline: true, document: document)))"
             //            } else {
             if let aspect = document[Structure.Aspect.self, id] {
-                return start + ".aspect(\"\(id)\".uuid /*\(aspect.role?.name ?? aspect.particle?.name ?? "unknown").\(aspect.name)*/, appearance: \(appearance.sourceCode(tab: 0, inline: true, document: document)))"
+                return start + ".aspect(\"\(id)\".uuid /*\(aspect.perspective?.name ?? aspect.particle?.name ?? "unknown").\(aspect.name)*/, appearance: \(appearance.sourceCode(tab: 0, inline: true, document: document)))"
             } else {
                 return "Error: No Aspect"
             }

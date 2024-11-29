@@ -22,7 +22,7 @@ extension Structure.Filter {
         static var malSehen: Filter {
             let filter = Filter(id: "B9BFBC68-44ED-4F3E-8F80-5A20F78E7EC5".uuid)
             filter.name = "Mal sehen"
-            filter.roles = [Structure.Role.Statics.note]
+            filter.perspectives = [Structure.Perspective.Statics.note]
 
             filter.layouts = [.list, .tree]
             filter.layout = .list
@@ -37,11 +37,11 @@ extension Structure.Filter {
         static var test: Filter {
             let filter = Filter(id: "6FD00BE8-2B48-47E7-9EBB-C86F65C3AA7A".uuid)
             filter.name = "Test"
-            filter.roles = [Structure.Role.Statics.note, Structure.Role.Statics.topic]
+            filter.perspectives = [Structure.Perspective.Statics.note, Structure.Perspective.Statics.topic]
 
             filter.layouts = [.list, .tree]
             filter.layout = .tree
-            filter.condition = .role("D7812874-085B-4161-9ABB-C82D4A145634".uuid)
+            filter.condition = .perspective("D7812874-085B-4161-9ABB-C82D4A145634".uuid)
             filter.orders = [
                 .sorted("6247260E-624C-48A1-985C-CDEDDFA5D3AD".uuid, ascending: true),
                 .sorted("6247260E-624C-48A1-985C-CDEDDFA5D3AD".uuid, ascending: false),
@@ -50,14 +50,14 @@ extension Structure.Filter {
             filter.representations = [
                 {
                     let representation = Representation()
-                    representation.condition = .role("8A81358C-2A7C-497D-A93D-306F776C217C".uuid)
+                    representation.condition = .perspective("8A81358C-2A7C-497D-A93D-306F776C217C".uuid)
                     representation.presentation = .vertical([
                         .horizontal([
                             .color([
                                 .icon("star.fill"),
                             ], color: Color(hex: "F71DC9")),
                         ], alignment: .center),
-                        .role("8A81358C-2A7C-497D-A93D-306F776C217C".uuid, layout: .list, name: nil),
+                        .perspective("8A81358C-2A7C-497D-A93D-306F776C217C".uuid, layout: .list, name: nil),
                     ], alignment: .leading)
                     return representation
                 }(),

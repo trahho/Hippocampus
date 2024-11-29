@@ -11,7 +11,7 @@ import Smaug
 class Structure: ObjectStore {
     // MARK: Properties
 
-    @Objects var roles: Set<Role>
+    @Objects var perspectives: Set<Perspective>
     @Objects var particles: Set<Particle>
     @Objects var aspects: Set<Aspect>
     @Objects var filters: Set<Filter>

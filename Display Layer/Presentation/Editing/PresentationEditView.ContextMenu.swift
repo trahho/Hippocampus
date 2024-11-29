@@ -50,7 +50,7 @@ extension PresentationEditView {
                     Button("Aspect") { add(item: .aspect(.nil, appearance: .normal)) }
                     Button("Horizontal") { add(item: .horizontal([], alignment: .center)) }
                     Button("Vertical") { add(item: .vertical([], alignment: .center)) }
-                    Button("Role presentation") { add(item: .role(.nil, layout: .list, name: nil)) }
+                    Button("Perspective presentation") { add(item: .perspective(.nil, layout: .list, name: nil)) }
                 }
             case .undefined:
                 Button("Label") { presentation = .label("") }
@@ -58,7 +58,7 @@ extension PresentationEditView {
                 Button("Aspect") { presentation = .aspect(.nil, appearance: .normal) }
                 Button("Horizontal") { presentation = .horizontal([], alignment: .center) }
                 Button("Vertical") { presentation = .vertical([], alignment: .center) }
-                Button("Role presentation") { presentation = .role(.nil, layout: .list, name: nil) }
+                Button("Perspective presentation") { presentation = .perspective(.nil, layout: .list, name: nil) }
             default:
                 EmptyView()
                

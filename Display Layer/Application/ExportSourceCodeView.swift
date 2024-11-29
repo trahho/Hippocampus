@@ -11,10 +11,10 @@ import SwiftUI
 struct ExportSourceCodeView: View {
     var body: some View {
         TabView {
-            ExportRolesView()
+            ExportPerspectivesView()
                 .tabItem {
                     Image(systemName: "list.bullet")
-                    Text("Roles")
+                    Text("Perspectives")
                 }
             ExportFiltersView()
                 .tabItem {

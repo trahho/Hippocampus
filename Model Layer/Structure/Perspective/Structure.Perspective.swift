@@ -1,5 +1,5 @@
 //
-//  Role.swift
+//  Perspective.swift
 //  Hippocampus
 //
 //  Created by Guido Kühn on 27.12.22.
@@ -12,17 +12,17 @@ import SwiftUI
 
 extension Structure {
 //    @dynamicMemberLookup
-    class Role: Object, EditableListItem, Pickable {
+    class Perspective: Object, EditableListItem, Pickable {
         // MARK: Properties
 
         @Property var name = ""
-        @Objects var roles: [Role]
+        @Objects var perspectives: [Perspective]
         @Objects(deleteReferences: true) var aspects: [Aspect]
         @Objects(deleteReferences: true) var particles: [Particle]
 
-        @Relations(\Role.roles) var subRoles: [Role]
-        @Objects var references: [Role]
-        @Relations(\Role.references) var referencedBy: [Role]
+        @Relations(\Perspective.perspectives) var subPerspectives: [Perspective]
+        @Objects var references: [Perspective]
+        @Relations(\Perspective.references) var referencedBy: [Perspective]
         @Property var representations: [Representation] = []
 
         // MARK: Computed Properties
@@ -31,22 +31,22 @@ extension Structure {
             name.localized(isStatic)
         }
 
-        var allRoles: [Role] {
-            (roles.flatMap { $0.allRoles } + [self]).asSet.asArray
+        var allPerspectives: [Perspective] {
+            (perspectives.flatMap { $0.allPerspectives } + [self]).asSet.asArray
         }
 
-        var allReferences: [Role] {
-            references.asSet.union(roles.flatMap { $0.allReferences }.map { self.conforms(to: $0) ? self : $0 }).asArray
+        var allReferences: [Perspective] {
+            references.asSet.union(perspectives.flatMap { $0.allReferences }.map { self.conforms(to: $0) ? self : $0 }).asArray
         }
 
-        var allReferencedBy: [Role] {
-            referencedBy.asSet.union(roles.flatMap { $0.allReferencedBy }.map { self.conforms(to: $0) ? self : $0 }).asArray
+        var allReferencedBy: [Perspective] {
+            referencedBy.asSet.union(perspectives.flatMap { $0.allReferencedBy }.map { self.conforms(to: $0) ? self : $0 }).asArray
         }
 
         var allAspects: [Aspect] {
             var result: [Aspect] = []
-            for role in roles {
-                for aspect in role.allAspects {
+            for perspective in perspectives {
+                for aspect in perspective.allAspects {
                     if !result.contains(aspect) {
                         result.append(aspect)
                     }
@@ -62,7 +62,7 @@ extension Structure {
 //            if let result = aspects.first(where: { $0.name.lowercased() == dynamicMember.lowercased() }) {
 //                return result
 //            } else {
-//                return roles.compactMap { $0[dynamicMember: dynamicMember] }.first!
+//                return perspectives.compactMap { $0[dynamicMember: dynamicMember] }.first!
 //            }
 //        }
 //
@@ -70,7 +70,7 @@ extension Structure {
 //            if let result = particles.first(where: { $0.name.lowercased() == dynamicMember.lowercased() }) {
 //                return result
 //            } else {
-//                return roles.compactMap { $0[dynamicMember: dynamicMember] }.first!
+//                return perspectives.compactMap { $0[dynamicMember: dynamicMember] }.first!
 //            }
 //        }
 
@@ -80,27 +80,27 @@ extension Structure {
 //                print("Found it!")
                 return result
             }
-            var roles = self.roles
-            while !roles.isEmpty {
-                var nextRoles = [Role]()
-//                print("Next roles: \(roles.map { $0.name }.joined(separator: ", "))")
-                for role in roles {
-//                    print("Checking for \(role.name)")
-                    if let result = role.representations.first(where: { $0.layouts.contains(layout) && $0.name == name ?? $0.name }) {
+            var perspectives = self.perspectives
+            while !perspectives.isEmpty {
+                var nextPerspectives = [Perspective]()
+//                print("Next perspectives: \(perspectives.map { $0.name }.joined(separator: ", "))")
+                for perspective in perspectives {
+//                    print("Checking for \(perspective.name)")
+                    if let result = perspective.representations.first(where: { $0.layouts.contains(layout) && $0.name == name ?? $0.name }) {
 //                        print("Found it!")
                         return result
                     }
-                    for role in role.roles {
-                        if !nextRoles.contains(role) {
-                            nextRoles.append(role)
+                    for perspective in perspective.perspectives {
+                        if !nextPerspectives.contains(perspective) {
+                            nextPerspectives.append(perspective)
                         }
                     }
                 }
-                roles = nextRoles
-                nextRoles = []
+                perspectives = nextPerspectives
+                nextPerspectives = []
             }
             return nil
-//            allRoles
+//            allPerspectives
 //                .finalsFirst
 //                .flatMap {
 //                    $0.representations.filter {
@@ -113,16 +113,16 @@ extension Structure {
 //            if let representation = representations.first(where: { $0.layouts.contains(layout) && $0.name == name ?? $0.name }) {
 //                return representation.presentation
 //            } else {
-//                return allRoles.filter { $0.conforms(to: role) }
+//                return allPerspectives.filter { $0.conforms(to: perspective) }
 //                    .finalsFirst
-//                    .compactMap { $0.presentation(for: role, layout: layout, name: name)}
+//                    .compactMap { $0.presentation(for: perspective, layout: layout, name: name)}
 //                    .first!
 //            }
 //
 //        }
 
-        func conforms(to role: Role) -> Bool {
-            role == self || !roles.filter { $0.conforms(to: role) }.isEmpty
+        func conforms(to perspective: Perspective) -> Bool {
+            perspective == self || !perspectives.filter { $0.conforms(to: perspective) }.isEmpty
         }
     }
 }

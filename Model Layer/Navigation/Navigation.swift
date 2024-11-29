@@ -17,7 +17,7 @@ import SwiftUI
     }
 //    {
 //        didSet {
-//            if let selectedFilter, let role = selectedFilter.role {
+//            if let selectedFilter, let perspective = selectedFilter.perspective {
 //                if selectedFilter.layouts.contains(.list) {
 //                    path.removeLast(path.count)
 ////                    path = NavigationPath()
@@ -45,8 +45,8 @@ import SwiftUI
 
 // class Navigation: ObservableObject {
 //
-//    @Published var sidebarMode: SidebarMode = .roles
-//    @Published var role: Structure.Role?
+//    @Published var sidebarMode: SidebarMode = .perspectives
+//    @Published var perspective: Structure.Perspective?
 //    @Published var query: Presentation.Query?
 //    @Published var path = NavigationPath()
 //
@@ -77,7 +77,7 @@ import SwiftUI
 //            content
 //                .contentShape(Rectangle())
 //                .onTapGesture {
-//                    navigation.showItem(item: item.item, roles: item.roles)
+//                    navigation.showItem(item: item.item, perspectives: item.perspectives)
 //                }
 //        }
 //    }

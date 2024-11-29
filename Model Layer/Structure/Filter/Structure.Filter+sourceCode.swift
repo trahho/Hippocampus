@@ -13,7 +13,7 @@ extension Structure.Filter: SourceCodeGenerator {
             + tab(i + 1) + "let filter = Filter(id: \"\(id)\".uuid)"
             + tab(i + 1) + "filter.name = \"\(name)\""
             + superFiltersSourceCode(tab: i + 1)
-            + tab(i + 1) + "filter.roles = [" + roles.map { "Structure.Role.Statics." + $0.name.sourceCode }.joined(separator: ", ") + "]"
+            + tab(i + 1) + "filter.perspectives = [" + perspectives.map { "Structure.Perspective.Statics." + $0.name.sourceCode }.joined(separator: ", ") + "]"
             + tab(i + 1) + layoutsSourceCode(tab: i + 1, document: document)
             + tab(i + 1) + "filter.condition = " + condition.sourceCode(tab: i + 2, inline: true, document: document)
             + ordersSourceCode(tab: i + 1, document: document)

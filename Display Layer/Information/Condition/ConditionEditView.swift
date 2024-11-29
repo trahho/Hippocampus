@@ -20,7 +20,7 @@ struct ConditionEditView: View {
 }
 
 //#Preview {
-//    @Previewable @State var condition: Information.Condition = .role(Structure.Role.drawing.id)
+//    @Previewable @State var condition: Information.Condition = .perspective(Structure.Perspective.drawing.id)
 //    ConditionEditView(condition: $condition)
 ////        .setDocument(HippocampusApp.previewDocument)
 //        .environment(\._document, HippocampusApp.previewDocument)

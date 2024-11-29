@@ -15,16 +15,16 @@ extension Presentation {
 
         class PropertiesStore: PropertyStore {
             class Properties: ObjectPersistence.Object {
-                @Property var role: Structure.Role.ID?
+                @Property var perspective: Structure.Perspective.ID?
             }
 
             @Property var properties: [Information.Item.ID: Properties] = [:]
         }
 
-        func callAsFunction(item: Information.Item, role: Structure.Role? = nil) -> PropertiesStore.Properties {
+        func callAsFunction(item: Information.Item, perspective: Structure.Perspective? = nil) -> PropertiesStore.Properties {
             if let result = properties.properties[item.id] { return result }
             let result = PropertiesStore.Properties()
-            result.role = role?.id
+            result.perspective = perspective?.id
             properties.properties[item.id] = result
             return result
         }
